@@ -14,8 +14,8 @@ ENV DEBIAN_FRONTEND=noninteractive
 
 # Install packages
 RUN apt-get -q update && \
-    apt-get -y -qq upgrade && \
-    apt-get install -y -qq \
+	apt-get -y -qq upgrade && \
+	apt-get install -y -qq \
 		bash \
 		bash-completion \
 		bc \
@@ -76,15 +76,9 @@ RUN apt-get -q update && \
 	&& apt-get clean \
 	&& rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* /var/log/*
 
-# TESTING - Install kernel deps
-#RUN apt-get -q update && \
-#	apt-get -y -qq upgrade && \
-#	apt-get install -y -qq \
-#	crda gettext-base iw libasprintf0v5 libfuse2 libnl-3-200 libnl-genl-3-200 linux-firmware os-prober
-
 # Configure locales
-RUN locale-gen en_US.UTF-8 && \
-    dpkg-reconfigure locales
+RUN locale-gen en_US.UTF-8 \
+	&& dpkg-reconfigure locales
 
 # Fix permissions
 RUN chown root:syslog /var/log \

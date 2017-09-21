@@ -7,8 +7,8 @@ ENV DEBIAN_FRONTEND=noninteractive
 
 # Install packages
 RUN apt-get -q update && \
-    apt-get -y -qq upgrade && \
-    apt-get install -y -qq \
+	apt-get -y -qq upgrade && \
+	apt-get install -y -qq \
 		apt-transport-https \
 		bash \
 		bash-completion \
@@ -81,12 +81,12 @@ RUN systemctl set-default multi-user
 RUN rm -f /etc/motd && ln -s /var/run/motd /etc/motd
 
 # Configure locale
-RUN echo "Etc/UTC" > /etc/timezone && \
-    dpkg-reconfigure -f noninteractive tzdata && \
-    sed -i -e 's/# en_US.UTF-8 UTF-8/en_US.UTF-8 UTF-8/' /etc/locale.gen && \
-    echo 'LANG="en_US.UTF-8"'>/etc/default/locale && \
-    dpkg-reconfigure --frontend=noninteractive locales && \
-    update-locale LANG=en_US.UTF-8
+RUN echo "Etc/UTC" > /etc/timezone \
+	&& dpkg-reconfigure -f noninteractive tzdata \
+	&& sed -i -e 's/# en_US.UTF-8 UTF-8/en_US.UTF-8 UTF-8/' /etc/locale.gen \
+	&& echo 'LANG="en_US.UTF-8"'>/etc/default/locale \
+	&& dpkg-reconfigure --frontend=noninteractive locales \
+	&& update-locale LANG=en_US.UTF-8
 
 # Configure Systemd
 RUN systemctl disable \

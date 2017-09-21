@@ -5,8 +5,6 @@ LABEL Version="2017.04.13.00"
 
 ADD qemu-aarch64-static /usr/bin/qemu-aarch64-static
 
-#RUN curl https://gist.githubusercontent.com/dlaube/722dff81744fa9f2f17d2f634317a3be/raw/d3b8fa3e511487ae390997a26cc3dfd2db1f14d9/centos7-arm-aarch64-yum-repo > /etc/yum.repos.d/CentOS-Base.repo
-
 # Replace systemd so everything else actually works
 RUN yum clean all && yum swap -y systemd-container-libs systemd-libs
 

@@ -14,8 +14,8 @@ ENV DEBIAN_FRONTEND=noninteractive
 
 # Install packages
 RUN apt-get -q update && \
-    apt-get -y -qq upgrade && \
-    apt-get install -y -qq \
+	apt-get -y -qq upgrade && \
+	apt-get install -y -qq \
 		bash \
 		bash-completion \
 		bc \
@@ -77,15 +77,9 @@ RUN apt-get -q update && \
 	&& apt-get clean \
 	&& rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* /var/log/*
 
-# Install a specific kernel
-RUN apt-get -q update && \
-	apt-get -y -qq upgrade && \
-	apt-get install -y -qq \
-	linux-image-4.10.0-24-generic
-
 # Configure locales
-RUN locale-gen en_US.UTF-8 && \
-    dpkg-reconfigure locales
+RUN locale-gen en_US.UTF-8 \
+	&& dpkg-reconfigure locales
 
 # Fix permissions
 RUN chown root:syslog /var/log \
