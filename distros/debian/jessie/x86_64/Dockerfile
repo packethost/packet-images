@@ -1,6 +1,12 @@
 FROM debian:jessie
-MAINTAINER David Laube <dlaube@packet.net>
-LABEL Description="Packet's Debian Jessie OS base image" Vendor="Packet.net" Version="1.0"
+
+ARG BUILDDATE
+RUN if [ -z "$BUILDDATE" ]; then \
+		echo "empty build arg: BUILDDATE"; \
+		exit 1; \
+	else \
+		printf "BUILDDATE=$BUILDDATE\nDESCRIPTION='Packet Ubuntu 17.04 x86_64 base image'\n" >/etc/packet-build-info; \
+	fi
 
 # Setup the environment
 ENV DEBIAN_FRONTEND=noninteractive

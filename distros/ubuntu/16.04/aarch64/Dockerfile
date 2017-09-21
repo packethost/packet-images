@@ -1,13 +1,14 @@
 FROM scratch
-MAINTAINER David Laube <dlaube@packet.net>
-ADD qemu-aarch64-static /usr/bin/qemu-aarch64-static
 ADD rootfs.tar.gz /
+ADD qemu-aarch64-static /usr/bin/qemu-aarch64-static
 
-LABEL name="Ubuntu Canonical Base Image" \
-    vendor="Ubuntu" \
-    license="GPLv2" \
-    build-date="20170508"
-
+ARG BUILDDATE
+RUN if [ -z "$BUILDDATE" ]; then \
+		echo "empty build arg: BUILDDATE"; \
+		exit 1; \
+	else \
+		printf "BUILDDATE=$BUILDDATE\nDESCRIPTION='Packet Ubuntu 17.04 x86_64 base image'\n" >/etc/packet-build-info; \
+	fi
 
 # Setup the environment
 ENV DEBIAN_FRONTEND=noninteractive

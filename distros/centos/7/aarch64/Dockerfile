@@ -1,9 +1,13 @@
 FROM project31/aarch64-centos:7
-MAINTAINER David Laube <dlaube@packet.net>
-LABEL Description="Packet's CentOS 7 OS base image" Vendor="Packet.net"
-LABEL Version="2017.04.13.00"
-
 ADD qemu-aarch64-static /usr/bin/qemu-aarch64-static
+
+ARG BUILDDATE
+RUN if [ -z "$BUILDDATE" ]; then \
+		echo "empty build arg: BUILDDATE"; \
+		exit 1; \
+	else \
+		printf "BUILDDATE=$BUILDDATE\nDESCRIPTION='Packet Ubuntu 17.04 x86_64 base image'\n" >/etc/packet-build-info; \
+	fi
 
 # Replace systemd so everything else actually works
 RUN yum clean all && yum swap -y systemd-container-libs systemd-libs

@@ -1,12 +1,13 @@
 FROM scratch
-MAINTAINER David Laube <dlaube@packet.net>
 ADD xenial-base-amd64.tar.gz /
 
-LABEL name="Ubuntu Canonical Base Image" \
-    vendor="Ubuntu" \
-    license="GPLv2" \
-    build-date="20170508"
-
+ARG BUILDDATE
+RUN if [ -z "$BUILDDATE" ]; then \
+		echo "empty build arg: BUILDDATE"; \
+		exit 1; \
+	else \
+		printf "BUILDDATE=$BUILDDATE\nDESCRIPTION='Packet Ubuntu 17.04 x86_64 base image'\n" >/etc/packet-build-info; \
+	fi
 
 # Setup the environment
 ENV DEBIAN_FRONTEND=noninteractive

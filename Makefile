@@ -8,6 +8,8 @@ images += distros/ubuntu/16.04/aarch64/image-rootfs.tar.gz
 images += distros/ubuntu/16.04/x86_64/image-rootfs.tar.gz
 images += distros/ubuntu/17.04/x86_64/image-rootfs.tar.gz
 
+dt := $(shell date -u -Iseconds)
+
 FILTER = $(foreach v,$(2),$(if $(findstring $(1),$(v)),$(v),))
 ubuntu_rootfses := $(subst image-,,$(strip $(call FILTER,ubuntu,${images})))
 
@@ -27,7 +29,7 @@ fetch: $(ubuntu_rootfses)
 $(images):
 	$(E)"BUILD  $@"
 	$(Q)cd $(@D) && \
-	docker build -q -t $(subst /,-,$@) . >/dev/null && \
+	docker build -q -t $(subst /,-,$@) --build-arg BUILDDATE=$(dt) . >/dev/null && \
 	docker save $(subst /,-,$@) | $(CURDIR)/tools/packet-save2image >$(@F).tmp && \
 	mv $(@F).tmp $(@F)
 
