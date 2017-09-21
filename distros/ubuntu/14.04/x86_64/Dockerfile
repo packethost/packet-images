@@ -16,7 +16,8 @@ ENV DEBIAN_FRONTEND=noninteractive
 RUN sed -i '/^#\s*deb .* universe/ s|^#||' /etc/apt/sources.list
 
 # Install packages
-RUN apt-get -q update && \
+RUN sed -i '/### END INIT INFO/ s|$|\nexit 0 # REMOVE ME LATER|' /etc/init.d/udev && \
+	apt-get -q update && \
 	apt-get -y -qq dist-upgrade && \
 	apt-get install -y -qq \
 		bash \
@@ -66,7 +67,8 @@ RUN apt-get -q update && \
 		vim \
 		wget \
 	&& apt-get clean \
-	&& rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* /var/log/* 
+	&& rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* /var/log/* \
+	&& sed -i '/# REMOVE ME LATER$/ d' /etc/init.d/udev
 
 # Configure locales
 RUN locale-gen en_US.UTF-8 \
