@@ -29,6 +29,7 @@ RUN sed -i '/### END INIT INFO/ s|$|\nexit 0 # REMOVE ME LATER|' /etc/init.d/ude
 		cron \
 		curl \
 		file \
+		grub-pc \
 		ifenslave \
 		iptables \
 		iputils-ping \
@@ -62,6 +63,7 @@ RUN sed -i '/### END INIT INFO/ s|$|\nexit 0 # REMOVE ME LATER|' /etc/init.d/ude
 		tar \
 		tcpdump \
 		tmux \
+		udev \
 		unattended-upgrades \
 		uuid-runtime \
 		vim \

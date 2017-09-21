@@ -18,6 +18,7 @@ RUN yum update  ${YUM_OPTS} -y && \
 	curl \
 	device-mapper-multipath \
 	ethstatus \
+	grub2 \
 	ioping \
 	iotop \
 	iperf \

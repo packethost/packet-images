@@ -27,6 +27,7 @@ RUN apt-get -q update && \
 		dialog \
 		dstat \
 		ethstatus \
+		grub-pc \
 		file \
 		fio \
 		haveged \

@@ -30,6 +30,7 @@ RUN yum update  ${YUM_OPTS} -y && \
 	device-mapper-multipath \
 	dosfstools \
 	e2fsprogs \
+	grub2 \
 	iscsi-initiator-utils \
 	libselinux-python \
 	make \

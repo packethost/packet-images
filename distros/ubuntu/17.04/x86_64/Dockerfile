@@ -27,6 +27,7 @@ RUN apt-get -q update && \
 		dbus \
 		dstat \
 		ethstatus \
+		grub-pc \
 		file \
 		fio \
 		htop \
