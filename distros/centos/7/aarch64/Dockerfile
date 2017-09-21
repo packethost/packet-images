@@ -9,6 +9,14 @@ RUN if [ -z "$BUILDDATE" ]; then \
 		printf "BUILDDATE=$BUILDDATE\nDESCRIPTION='Packet Ubuntu 17.04 x86_64 base image'\n" >/etc/packet-build-info; \
 	fi
 
+# !!!!!!!!!! README !!!!!!!!!!
+#
+# This build will likely fail on aufs/overlay storage drivers. It's been
+# verified to work on zfs, btrfs may work also. The error shows up when using
+# yum and manifests as corrupt rpmdb or checksums
+#
+# !!!!!!!!!! README !!!!!!!!!!
+
 # Replace systemd so everything else actually works
 RUN yum clean all && yum swap -y systemd-container-libs systemd-libs
 
