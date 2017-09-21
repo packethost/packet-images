@@ -7,6 +7,7 @@ images += distros/ubuntu/14.04/x86_64/image-rootfs.tar.gz
 images += distros/ubuntu/16.04/aarch64/image-rootfs.tar.gz
 images += distros/ubuntu/16.04/x86_64/image-rootfs.tar.gz
 images += distros/ubuntu/17.04/x86_64/image-rootfs.tar.gz
+images += distros/ubuntu/17.04/aarch64/image-rootfs.tar.gz
 
 dt := $(shell date -u -Iseconds)
 
@@ -42,6 +43,9 @@ distros/ubuntu/16.04/aarch64/rootfs.tar.gz:
 distros/ubuntu/16.04/x86_64/rootfs.tar.gz:
 	$(E)"GET    $@"
 	$(Q)tools/get-ubuntu-image xenial amd64 $(@D)
+distros/ubuntu/17.04/aarch64/rootfs.tar.gz:
+	$(E)"GET    $@"
+	$(Q)tools/get-ubuntu-image zesty arm64 $(@D)
 distros/ubuntu/17.04/x86_64/rootfs.tar.gz:
 	$(E)"GET    $@"
 	$(Q)tools/get-ubuntu-image zesty amd64 $(@D)
@@ -49,9 +53,11 @@ distros/ubuntu/17.04/x86_64/rootfs.tar.gz:
 # aarch64 needs qemu-aarch64-static
 distros/centos/7/aarch64/image-rootfs.tar.gz: distros/centos/7/aarch64/qemu-aarch64-static
 distros/ubuntu/16.04/aarch64/image-rootfs.tar.gz: distros/ubuntu/16.04/aarch64/qemu-aarch64-static
+distros/ubuntu/17.04/aarch64/image-rootfs.tar.gz: distros/ubuntu/17.04/aarch64/qemu-aarch64-static
 
 # aarch64 cloud images
 distros/ubuntu/16.04/aarch64/image-rootfs.tar.gz: distros/ubuntu/16.04/aarch64/rootfs.tar.gz
+distros/ubuntu/17.04/aarch64/image-rootfs.tar.gz: distros/ubuntu/17.04/aarch64/rootfs.tar.gz
 
 # x86_64 cloud images
 distros/ubuntu/14.04/x86_64/image-rootfs.tar.gz: distros/ubuntu/14.04/x86_64/rootfs.tar.gz
@@ -63,10 +69,10 @@ qemu-aarch64-static: /proc/sys/fs/binfmt_misc/aarch64
 	$(Q)wget -qN https://github.com/multiarch/qemu-user-static/releases/download/v2.9.1/$@.tar.gz && \
 	tar -zxf $@.tar.gz && touch $@
 
-distros/ubuntu/16.04/aarch64/qemu-aarch64-static: qemu-aarch64-static
-	$(Q)install -m 755 $^ $@
-
-distros/centos/7/aarch64/qemu-aarch64-static: qemu-aarch64-static
+distros/centos/7/aarch64/qemu-aarch64-static \
+distros/ubuntu/16.04/aarch64/qemu-aarch64-static \
+distros/ubuntu/17.04/aarch64/qemu-aarch64-static \
+: qemu-aarch64-static
 	$(Q)install -m 755 $^ $@
 
 /proc/sys/fs/binfmt_misc/aarch64:

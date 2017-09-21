@@ -1,5 +1,6 @@
 FROM scratch
-ADD xenial-base-amd64.tar.gz /
+ADD rootfs.tar.gz /
+ADD qemu-aarch64-static /usr/bin/qemu-aarch64-static
 
 ARG BUILDDATE
 RUN if [ -z "$BUILDDATE" ]; then \
@@ -19,7 +20,6 @@ RUN apt-get -q update && \
 		bash \
 		bash-completion \
 		bc \
-		biosdevname \
 		ca-certificates \
 		cloud-init \
 		cron \
@@ -88,4 +88,5 @@ RUN chown root:syslog /var/log \
 # Fix cloud-init EC2 warning
 RUN touch /root/.cloud-warnings.skip
 
+RUN rm /usr/bin/qemu-aarch64-static
 # vim: set tabstop=4 shiftwidth=4:
