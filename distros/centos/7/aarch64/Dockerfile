@@ -1,4 +1,4 @@
-FROM project31/aarch64-centos:7
+FROM centos/aarch64:7
 ADD qemu-aarch64-static /usr/bin/qemu-aarch64-static
 
 ARG BUILDDATE
