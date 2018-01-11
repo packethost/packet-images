@@ -1,14 +1,20 @@
 FROM debian:jessie
-MAINTAINER David Laube <dlaube@packet.net>
-LABEL Description="Packet's Debian Jessie OS base image" Vendor="Packet.net" Version="1.0"
+
+ARG BUILDDATE
+RUN if [ -z "$BUILDDATE" ]; then \
+		echo "empty build arg: BUILDDATE"; \
+		exit 1; \
+	else \
+		printf "BUILDDATE=$BUILDDATE\nDESCRIPTION='Packet Ubuntu 17.04 x86_64 base image'\n" >/etc/packet-build-info; \
+	fi
 
 # Setup the environment
 ENV DEBIAN_FRONTEND=noninteractive
 
 # Install packages
 RUN apt-get -q update && \
-    apt-get -y -qq upgrade && \
-    apt-get install -y -qq \
+	apt-get -y -qq upgrade && \
+	apt-get install -y -qq \
 		apt-transport-https \
 		bash \
 		bash-completion \
@@ -21,6 +27,7 @@ RUN apt-get -q update && \
 		dialog \
 		dstat \
 		ethstatus \
+		grub-pc \
 		file \
 		fio \
 		haveged \
@@ -81,12 +88,12 @@ RUN systemctl set-default multi-user
 RUN rm -f /etc/motd && ln -s /var/run/motd /etc/motd
 
 # Configure locale
-RUN echo "Etc/UTC" > /etc/timezone && \
-    dpkg-reconfigure -f noninteractive tzdata && \
-    sed -i -e 's/# en_US.UTF-8 UTF-8/en_US.UTF-8 UTF-8/' /etc/locale.gen && \
-    echo 'LANG="en_US.UTF-8"'>/etc/default/locale && \
-    dpkg-reconfigure --frontend=noninteractive locales && \
-    update-locale LANG=en_US.UTF-8
+RUN echo "Etc/UTC" > /etc/timezone \
+	&& dpkg-reconfigure -f noninteractive tzdata \
+	&& sed -i -e 's/# en_US.UTF-8 UTF-8/en_US.UTF-8 UTF-8/' /etc/locale.gen \
+	&& echo 'LANG="en_US.UTF-8"'>/etc/default/locale \
+	&& dpkg-reconfigure --frontend=noninteractive locales \
+	&& update-locale LANG=en_US.UTF-8
 
 # Configure Systemd
 RUN systemctl disable \

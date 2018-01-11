@@ -1,11 +1,21 @@
-FROM project31/aarch64-centos:7
-MAINTAINER David Laube <dlaube@packet.net>
-LABEL Description="Packet's CentOS 7 OS base image" Vendor="Packet.net"
-LABEL Version="2017.04.13.00"
-
+FROM centos/aarch64:7
 ADD qemu-aarch64-static /usr/bin/qemu-aarch64-static
 
-#RUN curl https://gist.githubusercontent.com/dlaube/722dff81744fa9f2f17d2f634317a3be/raw/d3b8fa3e511487ae390997a26cc3dfd2db1f14d9/centos7-arm-aarch64-yum-repo > /etc/yum.repos.d/CentOS-Base.repo
+ARG BUILDDATE
+RUN if [ -z "$BUILDDATE" ]; then \
+		echo "empty build arg: BUILDDATE"; \
+		exit 1; \
+	else \
+		printf "BUILDDATE=$BUILDDATE\nDESCRIPTION='Packet Ubuntu 17.04 x86_64 base image'\n" >/etc/packet-build-info; \
+	fi
+
+# !!!!!!!!!! README !!!!!!!!!!
+#
+# This build will likely fail on aufs/overlay storage drivers. It's been
+# verified to work on zfs, btrfs may work also. The error shows up when using
+# yum and manifests as corrupt rpmdb or checksums
+#
+# !!!!!!!!!! README !!!!!!!!!!
 
 # Replace systemd so everything else actually works
 RUN yum clean all && yum swap -y systemd-container-libs systemd-libs
@@ -20,6 +30,7 @@ RUN yum update  ${YUM_OPTS} -y && \
 	device-mapper-multipath \
 	dosfstools \
 	e2fsprogs \
+	grub2 \
 	iscsi-initiator-utils \
 	libselinux-python \
 	make \

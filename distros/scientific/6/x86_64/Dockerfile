@@ -1,6 +1,12 @@
 FROM cern/slc6-base
-MAINTAINER David Laube <dlaube@packet.net>
-LABEL Description="Packet's Scientific Linux 6 OS base image" Vendor="Packet.net" Version="1.0"
+
+ARG BUILDDATE
+RUN if [ -z "$BUILDDATE" ]; then \
+		echo "empty build arg: BUILDDATE"; \
+		exit 1; \
+	else \
+		printf "BUILDDATE=$BUILDDATE\nDESCRIPTION='Packet Ubuntu 17.04 x86_64 base image'\n" >/etc/packet-build-info; \
+	fi
 
 RUN yum install ${YUM_OPTS} -y \
 	bash \
@@ -12,8 +18,6 @@ RUN yum install ${YUM_OPTS} -y \
 	dmidecode \
 	e2fsprogs \
 	ethstatus \
-	grub \
-	grubby \
 	ioping \
 	iotop \
 	iperf \

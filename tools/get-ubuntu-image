@@ -26,7 +26,8 @@ wget -qN "$path/$file" "$path/SHA256SUMS" "$path/SHA256SUMS.gpg"
 
 # verify signature and also keys used to sign
 statusf=$(mktemp -t get-ubuntu-image-keys-XXXXXX)
-gpg --quiet --verify --status-fd=3 SHA256SUMS.gpg SHA256SUMS 3>"$statusf" 2>/dev/null
+gpg=$(set +o pipefail; which gpg gpg2 2>/dev/null | grep '^/' | head -n1; set -o pipefail)
+$gpg --quiet --verify --status-fd=3 SHA256SUMS.gpg SHA256SUMS 3>"$statusf" 2>/dev/null
 grep -q 'VALIDSIG 843938DF228D22F7B3742BC0D94AA3F0EFE21092' "$statusf"
 grep -q 'VALIDSIG C5986B4F1257FFA86632CBA746181433FBB75451' "$statusf"
 rm -f "$statusf"

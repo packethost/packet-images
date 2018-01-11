@@ -1,25 +1,25 @@
 FROM scratch
-MAINTAINER David Laube <dlaube@packet.net>
-ADD xenial-base-amd64.tar.gz /
+ADD rootfs.tar.gz /
+ADD qemu-aarch64-static /usr/bin/qemu-aarch64-static
 
-LABEL name="Ubuntu Canonical Base Image" \
-    vendor="Ubuntu" \
-    license="GPLv2" \
-    build-date="20170508"
-
+ARG BUILDDATE
+RUN if [ -z "$BUILDDATE" ]; then \
+		echo "empty build arg: BUILDDATE"; \
+		exit 1; \
+	else \
+		printf "BUILDDATE=$BUILDDATE\nDESCRIPTION='Packet Ubuntu 17.04 x86_64 base image'\n" >/etc/packet-build-info; \
+	fi
 
 # Setup the environment
 ENV DEBIAN_FRONTEND=noninteractive
 
-
 # Install packages
 RUN apt-get -q update && \
-    apt-get -y -qq upgrade && \
-    apt-get install -y -qq \
+	apt-get -y -qq upgrade && \
+	apt-get install -y -qq \
 		bash \
 		bash-completion \
 		bc \
-		biosdevname \
 		ca-certificates \
 		cloud-init \
 		cron \
@@ -27,6 +27,7 @@ RUN apt-get -q update && \
 		dbus \
 		dstat \
 		ethstatus \
+		grub-efi-arm64 \
 		file \
 		fio \
 		htop \
@@ -77,10 +78,9 @@ RUN apt-get -q update && \
 	&& apt-get clean \
 	&& rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* /var/log/*
 
-
 # Configure locales
-RUN locale-gen en_US.UTF-8 && \
-    dpkg-reconfigure locales
+RUN locale-gen en_US.UTF-8 \
+	&& dpkg-reconfigure locales
 
 # Fix permissions
 RUN chown root:syslog /var/log \
@@ -89,4 +89,5 @@ RUN chown root:syslog /var/log \
 # Fix cloud-init EC2 warning
 RUN touch /root/.cloud-warnings.skip
 
+RUN rm /usr/bin/qemu-aarch64-static
 # vim: set tabstop=4 shiftwidth=4:

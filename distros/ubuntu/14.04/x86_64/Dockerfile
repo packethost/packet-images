@@ -1,12 +1,13 @@
 FROM scratch
-MAINTAINER David Laube <dlaube@packet.net>
 ADD rootfs.tar.gz /
 
-LABEL name="Ubuntu Canonical Base Image" \
-    vendor="Ubuntu" \
-    license="GPLv2" \
-    build-date="20170508"
-
+ARG BUILDDATE
+RUN if [ -z "$BUILDDATE" ]; then \
+		echo "empty build arg: BUILDDATE"; \
+		exit 1; \
+	else \
+		printf "BUILDDATE=$BUILDDATE\nDESCRIPTION='Packet Ubuntu 17.04 x86_64 base image'\n" >/etc/packet-build-info; \
+	fi
 
 # Setup the environment
 ENV DEBIAN_FRONTEND=noninteractive
@@ -15,9 +16,10 @@ ENV DEBIAN_FRONTEND=noninteractive
 RUN sed -i '/^#\s*deb .* universe/ s|^#||' /etc/apt/sources.list
 
 # Install packages
-RUN apt-get -q update && \
-    apt-get -y -qq upgrade && \
-    apt-get install -y -qq \
+RUN sed -i '/### END INIT INFO/ s|$|\nexit 0 # REMOVE ME LATER|' /etc/init.d/udev && \
+	apt-get -q update && \
+	apt-get -y -qq dist-upgrade && \
+	apt-get install -y -qq \
 		bash \
 		bash-completion \
 		bc \
@@ -27,11 +29,13 @@ RUN apt-get -q update && \
 		cron \
 		curl \
 		file \
+		grub-pc \
 		ifenslave \
 		iptables \
 		iputils-ping \
 		less \
 		libmlx5-1 \
+		linux-image-3.13.0-123-generic \
 		locales \
 		lsb-release \
 		lsof \
@@ -59,23 +63,18 @@ RUN apt-get -q update && \
 		tar \
 		tcpdump \
 		tmux \
+		udev \
 		unattended-upgrades \
 		uuid-runtime \
 		vim \
 		wget \
-		locales \
 	&& apt-get clean \
-	&& rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* /var/log/*
-
-# Install a specific kernel
-RUN apt-get -q update && \
-        apt-get -y -qq upgrade && \
-        apt-get install -y -qq \
-        linux-image-3.13.0-123-generic
+	&& rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* /var/log/* \
+	&& sed -i '/# REMOVE ME LATER$/ d' /etc/init.d/udev
 
 # Configure locales
-RUN locale-gen en_US.UTF-8 && \
-    dpkg-reconfigure locales
+RUN locale-gen en_US.UTF-8 \
+	&& dpkg-reconfigure locales
 
 # Fix permissions
 RUN chown root:syslog /var/log \
