@@ -7,11 +7,14 @@ This repository contains Dockerfiles that we use as the basis for the OSes that 
 - Debian 8
 - Debian 9
 - FreeBSD (not present)
+- OpenSUSE 42.3
 - Scientific Linux 6
+- SUSE SLES12 SP3
 - Ubuntu 14.04
 - Ubuntu 16.04
 - Ubuntu 17.04 (deprecated)
-- Ubuntu 17.10
+- Ubuntu 17.10 (deprecated)
+- Ubuntu 18.04
 - Virtuozzo (not present)
 - VMWare (not present)
 - Windows (not present)
