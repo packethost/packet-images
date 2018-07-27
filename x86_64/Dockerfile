@@ -4,6 +4,7 @@ LABEL Description="Packet's SUSE SLES12 SP3 OS base image" Vendor="Packet.net" V
 ARG REGCODE
 
 # Temporarily register on CSP and set product to 12.3
+RUN zypper ref -s
 RUN zypper --non-interactive install SUSEConnect
 RUN SUSEConnect -p SLES/12.3/x86_64 -r $REGCODE
 
@@ -22,11 +23,15 @@ RUN zypper --non-interactive install \
 	audit \
 	bash \
 	bash-completion \
+	btrfsmaintenance \
+	btrfsprogs \
 	ca-certificates \
 	cloud-init \
 	cron \
+	cryptsetup \
 	curl \
 	glibc-locale \
+	iproute2 \
 	iotop \
 	keyutils \
 	lsb-release \
@@ -44,6 +49,8 @@ RUN zypper --non-interactive install \
 	open-iscsi \
 	parted \
 	pciutils \
+	plymouth \
+	plymouth-dracut \
 	rsync \
 	rsyslog \
 	screen \
