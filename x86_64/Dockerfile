@@ -5,7 +5,7 @@ MAINTAINER David Laube <dlaube@packet.net>
 LABEL name="Ubuntu Canonical Base Image" \
     vendor="Ubuntu" \
     license="GPLv2" \
-    build-date="20180330"
+    build-date="20180826"
 
 # Setup the environment
 ENV DEBIAN_FRONTEND=noninteractive
@@ -84,8 +84,8 @@ RUN apt-get -q update && \
 	efibootmgr \
 	grub-efi \
 	linux-firmware \
-	linux-image-4.4.0-112-generic \
-	linux-image-extra-4.4.0-112-generic
+	linux-image-4.4.0-134-generic \
+	linux-image-extra-4.4.0-134-generic
 
 # Configure locales
 RUN locale-gen en_US.UTF-8 && \
