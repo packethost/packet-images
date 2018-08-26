@@ -5,7 +5,7 @@ MAINTAINER David Laube <dlaube@packet.net>
 LABEL name="Ubuntu Canonical Base Image" \
     vendor="Ubuntu" \
     license="GPLv2" \
-    build-date="20180521"
+    build-date="20180826"
 
 # Setup the environment
 ENV DEBIAN_FRONTEND=noninteractive
@@ -81,8 +81,8 @@ RUN apt-get -q update && \
 RUN apt-get -q update && \
 	apt-get -y -qq upgrade && \
 	apt-get install -y -qq \
-	linux-image-4.15.0-20-generic \
-	linux-modules-extra-4.15.0-20-generic
+	linux-image-4.15.0-33-generic \
+	linux-modules-extra-4.15.0-33-generic
 
 # Configure locales
 RUN locale-gen en_US.UTF-8 && \
