@@ -57,8 +57,7 @@ RUN yum -y update && yum -y install \
 	tuned \
 	vim \
 	wget \
-	yum-plugin-ovl \
-	&& yum clean all
+	yum-plugin-ovl
 
 # Remove default eth0 dhcp config
 RUN rm -f /etc/sysconfig/network-scripts/ifcfg-eth0
@@ -92,5 +91,8 @@ RUN dracut --filesystems="ext4 vfat" --mdadmconf --force /boot/initramfs-3.10.0-
 
 # Adjust root account
 RUN passwd -d root && passwd -l root
+
+# Clean yum cache
+RUN yum clean all
 
 # vim: set tabstop=4 shiftwidth=4:

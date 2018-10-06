@@ -59,8 +59,7 @@ RUN yum -y update && yum -y install \
 	tuned \
 	vim \
 	wget \
-	yum-plugin-ovl \
-	&& yum clean all
+	yum-plugin-ovl
 
 # Remove default eth0 dhcp config
 RUN rm -f /etc/sysconfig/network-scripts/ifcfg-eth0
@@ -88,6 +87,9 @@ RUN ln -s /usr/lib/systemd/system/setcap.service /etc/systemd/system/multi-user.
 
 # Adjust root account
 RUN passwd -d root && passwd -l root
+
+# Clean yum cache
+RUN yum clean all
 
 RUN rm /usr/bin/qemu-aarch64-static
 
