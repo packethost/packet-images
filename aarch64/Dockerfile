@@ -2,7 +2,7 @@ FROM scratch
 ADD rootfs.tar.gz /
 
 MAINTAINER David Laube <dlaube@packet.net>
-LABEL Description="Packet's CentOS 7 OS base image" Vendor="Packet.net" Version="2018.03.30.00"
+LABEL Description="Packet's CentOS 7 OS base image" Vendor="Packet.net" Version="2018.10.05.00"
 
 ADD qemu-aarch64-static /usr/bin/qemu-aarch64-static
 
@@ -59,6 +59,7 @@ RUN yum update  ${YUM_OPTS} -y && yum install ${YUM_OPTS} -y \
 	tuned \
 	vim \
 	wget \
+	yum-plugin-ovl \
 	&& yum clean all
 
 # Remove default eth0 dhcp config
