@@ -72,9 +72,7 @@ RUN apt-get -q update && \
 		unattended-upgrades \
 		uuid-runtime \
 		vim \
-		wget \
-	&& apt-get clean \
-	&& rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* /var/log/*
+		wget
 
 # Install a specific kernel
 RUN apt-get -q update && \
@@ -109,5 +107,9 @@ RUN rm -f /sbin/init \
 
 # Fix perms
 RUN chmod 755 /etc/default
+
+# Clean APT cache
+RUN apt-get clean \
+	&& rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* /var/log/*
 
 # vim: set tabstop=4 shiftwidth=4:
