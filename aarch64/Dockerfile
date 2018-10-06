@@ -1,5 +1,4 @@
-FROM scratch
-ADD rootfs.tar.gz /
+FROM centos:7
 
 MAINTAINER David Laube <dlaube@packet.net>
 LABEL Description="Packet's CentOS 7 OS base image" Vendor="Packet.net" Version="2018.10.05.00"
