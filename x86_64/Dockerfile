@@ -4,7 +4,7 @@ ADD rootfs.tar.gz /
 MAINTAINER David Laube <dlaube@packet.net>
 LABEL Description="Packet's CentOS 7 OS base image" Vendor="Packet.net" Version="2018.10.05.00"
 
-RUN yum update  ${YUM_OPTS} -y && yum install ${YUM_OPTS} -y \
+RUN yum -y update && yum -y install \
 	audit \
 	bash \
 	bash-completion \

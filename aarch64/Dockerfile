@@ -6,7 +6,7 @@ LABEL Description="Packet's CentOS 7 OS base image" Vendor="Packet.net" Version=
 
 ADD qemu-aarch64-static /usr/bin/qemu-aarch64-static
 
-RUN yum update  ${YUM_OPTS} -y && yum install ${YUM_OPTS} -y \
+RUN yum -y update && yum -y install \
 	audit \
 	bash \
 	bash-completion \
