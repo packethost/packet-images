@@ -1,0 +1,390 @@
+======================================================================
+Overview:
+======================================================================
+Image Size
+   Current: 936M
+   Previous:: 303M
+Filesystem Size
+   Current: 2.5G
+   Previous: 960M
+Packages
+   Current: 679
+   Previous: 458
+Kernel(s)
+   Current:
+      linux-image-4.15.0-33-generic4.15.0-33.36
+      linux-image-4.15.0-42-generic4.15.0-42.45
+      linux-image-generic4.15.0.42.44
+   Previous:
+      linux-image-4.15.0-20-generic4.15.0-20.21
+======================================================================
+New Packages:
+======================================================================
+accountsservice
+amd64-microcode
+apparmor
+at-spi2-core
+bind9-host
+binutils
+binutils-common:amd64
+binutils-x86-64-linux-gnu
+build-essential
+busybox-static
+command-not-found
+command-not-found-data
+cpp
+cpp-7
+dconf-gsettings-backend:amd64
+dconf-service
+dkms
+dmidecode
+dnsutils
+dosfstools
+dpkg-dev
+ed
+fakeroot
+friendly-recovery
+ftp
+fuse
+g++
+g++-7
+gcc
+gcc-7
+gcc-7-base:amd64
+geoip-database
+glib-networking:amd64
+glib-networking-common
+glib-networking-services
+gsettings-desktop-schemas
+hdparm
+info
+install-info
+intel-microcode
+iputils-tracepath
+irqbalance
+iucode-tool
+language-selector-common
+libaccountsservice0:amd64
+libalgorithm-diff-perl
+libalgorithm-diff-xs-perl
+libalgorithm-merge-perl
+libasan4:amd64
+libatk-bridge2.0-0:amd64
+libatomic1:amd64
+libatspi2.0-0:amd64
+libbind9-160:amd64
+libbinutils:amd64
+libc6-dev:amd64
+libcairo-gobject2:amd64
+libcc1-0:amd64
+libc-dev-bin
+libcilkrts5:amd64
+libcolord2:amd64
+libdbus-glib-1-2:amd64
+libdconf1:amd64
+libdns1100:amd64
+libdpkg-perl
+libdrm2:amd64
+libdrm-amdgpu1:amd64
+libdrm-common
+libdrm-intel1:amd64
+libdrm-nouveau2:amd64
+libdrm-radeon1:amd64
+libegl1:amd64
+libegl1-mesa:amd64
+libegl-mesa0:amd64
+libepoxy0:amd64
+libfakeroot:amd64
+libfile-fcntllock-perl
+libfontenc1:amd64
+libgbm1:amd64
+libgcc-7-dev:amd64
+libgeoip1:amd64
+libgl1:amd64
+libgl1-mesa-dri:amd64
+libglapi-mesa:amd64
+libglvnd0:amd64
+libglx0:amd64
+libglx-mesa0:amd64
+libgomp1:amd64
+libgtk-3-0:amd64
+libgtk-3-bin
+libgtk-3-common
+libice6:amd64
+libirs160:amd64
+libisc169:amd64
+libisccc160:amd64
+libisccfg160:amd64
+libisl19:amd64
+libitm1:amd64
+libjansson4:amd64
+libjson-glib-1.0-0:amd64
+libjson-glib-1.0-common
+liblcms2-2:amd64
+libllvm6.0:amd64
+liblsan0:amd64
+liblwres160:amd64
+libmpc3:amd64
+libmpfr6:amd64
+libmpx2:amd64
+libnih1:amd64
+libntfs-3g88
+libnuma1:amd64
+libnvidia-cfg1-415:amd64
+libnvidia-common-415
+libnvidia-compute-415:amd64
+libnvidia-decode-415:amd64
+libnvidia-encode-415:amd64
+libnvidia-fbc1-415:amd64
+libnvidia-gl-415:amd64
+libnvidia-ifr1-415:amd64
+libparted2:amd64
+libpciaccess0:amd64
+libplymouth4:amd64
+libpolkit-agent-1-0:amd64
+libpolkit-backend-1-0:amd64
+libpolkit-gobject-1-0:amd64
+libproxy1v5:amd64
+libquadmath0:amd64
+librest-0.7-0:amd64
+libsm6:amd64
+libsoup2.4-1:amd64
+libsoup-gnome2.4-1:amd64
+libstdc++-7-dev:amd64
+libtsan0:amd64
+libubsan0:amd64
+libunwind8:amd64
+libusb-1.0-0:amd64
+libvdpau1:amd64
+libwayland-client0:amd64
+libwayland-cursor0:amd64
+libwayland-egl1-mesa:amd64
+libwayland-server0:amd64
+libx11-xcb1:amd64
+libxaw7:amd64
+libxcb-dri2-0:amd64
+libxcb-dri3-0:amd64
+libxcb-glx0:amd64
+libxcb-present0:amd64
+libxcb-sync1:amd64
+libxcb-xfixes0:amd64
+libxfont2:amd64
+libxkbcommon0:amd64
+libxkbfile1:amd64
+libxmu6:amd64
+libxnvctrl0:amd64
+libxpm4:amd64
+libxshmfence1:amd64
+libxt6:amd64
+libxtst6:amd64
+libxxf86vm1:amd64
+linux-firmware
+linux-headers-4.15.0-42
+linux-headers-4.15.0-42-generic
+linux-headers-generic
+linux-image-4.15.0-33-generic
+linux-image-4.15.0-42-generic
+linux-image-generic
+linux-libc-dev:amd64
+linux-modules-4.15.0-33-generic
+linux-modules-4.15.0-42-generic
+linux-modules-extra-4.15.0-33-generic
+linux-modules-extra-4.15.0-42-generic
+lshw
+ltrace
+manpages
+manpages-dev
+mesa-vdpau-drivers:amd64
+mlocate
+mtr-tiny
+ntfs-3g
+nvidia-compute-utils-415
+nvidia-dkms-415
+nvidia-driver-415
+nvidia-kernel-common-415
+nvidia-kernel-source-415
+nvidia-prime
+nvidia-settings
+nvidia-utils-415
+parted
+patch
+pciutils
+pkg-config
+plymouth
+plymouth-theme-ubuntu-text
+policykit-1
+policykit-1-gnome
+popularity-contest
+powermgmt-base
+psmisc
+python3-commandnotfound
+python3-distro-info
+python3-distupgrade
+python3-gdbm:amd64
+python3-netifaces
+python3-update-manager
+python3-xkit
+screen-resolution-extra
+strace
+telnet
+thermald
+time
+ubuntu-release-upgrader-core
+ubuntu-standard
+ufw
+update-manager-core
+ureadahead
+usbutils
+vdpau-driver-all:amd64
+x11-common
+x11-xkb-utils
+xfonts-base
+xfonts-encodings
+xfonts-utils
+xserver-common
+xserver-xorg-core
+xserver-xorg-video-nvidia-415
+======================================================================
+Updated Packages:
+======================================================================
+apt1.6.1						      |	amd64-microcode3.20180524.1~ubuntu0.18.04.2
+apt-transport-https1.6.1				      |	apparmor2.12-4ubuntu5.1
+apt-utils1.6.1						      |	apt1.6.6
+base-files10.1ubuntu2					      |	apt-transport-https1.6.6
+bsdutils1:2.31.1-0.4ubuntu3				      |	bsdutils1:2.31.1-0.4ubuntu3.2
+cloud-init18.2-27-g6ef92c98-0ubuntu1~18.04.1		      |	cloud-init18.4-0ubuntu1~18.04.1
+console-setup1.178ubuntu2				      |	command-not-found18.04.5
+console-setup-linux1.178ubuntu2				      |	command-not-found-data18.04.5
+curl7.58.0-2ubuntu3.1					      |	curl7.58.0-2ubuntu3.5
+dirmngr2.2.4-1ubuntu1					      |	dirmngr2.2.4-1ubuntu1.1
+distro-info-data0.37ubuntu0.1				      |	distro-info-data0.37ubuntu0.2
+dpkg1.19.0.5ubuntu2					      |	dnsutils1:9.11.3+dfsg-1ubuntu1.3
+fdisk2.31.1-0.4ubuntu3					      |	fakeroot1.22-2ubuntu1
+file1:5.32-2						      |	fdisk2.31.1-0.4ubuntu3.2
+gcc-8-base:amd648-20180414-1ubuntu2			      |	friendly-recovery0.2.38ubuntu1
+gettext-base0.19.8.1-6					      |	geoip-database20180315-1
+gnupg2.2.4-1ubuntu1					      |	glib-networking:amd642.56.0-1
+gnupg-l10n2.2.4-1ubuntu1				      |	glib-networking-common2.56.0-1
+gnupg-utils2.2.4-1ubuntu1				      |	glib-networking-services2.56.0-1
+gpg2.2.4-1ubuntu1					      |	gnupg2.2.4-1ubuntu1.1
+gpg-agent2.2.4-1ubuntu1					      |	gnupg-l10n2.2.4-1ubuntu1.1
+gpgconf2.2.4-1ubuntu1					      |	gnupg-utils2.2.4-1ubuntu1.1
+gpgsm2.2.4-1ubuntu1					      |	gpg2.2.4-1ubuntu1.1
+gpgv2.2.4-1ubuntu1					      |	gpg-agent2.2.4-1ubuntu1.1
+gpg-wks-client2.2.4-1ubuntu1				      |	gpgconf2.2.4-1ubuntu1.1
+gpg-wks-server2.2.4-1ubuntu1				      |	gpgsm2.2.4-1ubuntu1.1
+grub2-common2.02-2ubuntu8				      |	grub2-common2.02-2ubuntu8.9
+grub-common2.02-2ubuntu8				      |	grub-common2.02-2ubuntu8.9
+grub-pc2.02-2ubuntu8					      |	grub-pc2.02-2ubuntu8.9
+grub-pc-bin2.02-2ubuntu8				      |	grub-pc-bin2.02-2ubuntu8.9
+ifupdown0.8.17ubuntu1					      |	ifupdown0.8.17ubuntu1.1
+initramfs-tools0.130ubuntu3				      |	initramfs-tools0.130ubuntu3.5
+initramfs-tools-bin0.130ubuntu3				      |	initramfs-tools-bin0.130ubuntu3.5
+initramfs-tools-core0.130ubuntu3			      |	initramfs-tools-core0.130ubuntu3.5
+iperf2.0.10+dfsg1-1					      |	iperf2.0.10+dfsg1-1ubuntu0.18.04.1
+keyboard-configuration1.178ubuntu2			      |	keyboard-configuration1.178ubuntu2.7
+kmod24-1ubuntu3						      |	kmod24-1ubuntu3.1
+libapparmor1:amd642.12-4ubuntu5				      |	libalgorithm-diff-perl1.19.03-1
+libapt-inst2.0:amd641.6.1				      |	libalgorithm-diff-xs-perl0.04-5
+libapt-pkg5.0:amd641.6.1				      |	libalgorithm-merge-perl0.08-3
+libavahi-client3:amd640.7-3.1ubuntu1			      |	libavahi-client3:amd640.7-3.1ubuntu1.1
+libavahi-common3:amd640.7-3.1ubuntu1			      |	libavahi-common3:amd640.7-3.1ubuntu1.1
+libavahi-common-data:amd640.7-3.1ubuntu1		      |	libavahi-common-data:amd640.7-3.1ubuntu1.1
+libblkid1:amd642.31.1-0.4ubuntu3			      |	libblkid1:amd642.31.1-0.4ubuntu3.2
+libcryptsetup12:amd642:2.0.2-1ubuntu1			      |	libcryptsetup12:amd642:2.0.2-1ubuntu1.1
+libcups2:amd642.2.7-1ubuntu2				      |	libcups2:amd642.2.7-1ubuntu2.2
+libcurl4:amd647.58.0-2ubuntu3.1				      |	libcurl4:amd647.58.0-2ubuntu3.5
+libdns-export11001:9.11.3+dfsg-1ubuntu1			      |	libdns1100:amd641:9.11.3+dfsg-1ubuntu1.3
+libfdisk1:amd642.31.1-0.4ubuntu3			      |	libfdisk1:amd642.31.1-0.4ubuntu3.2
+libgcc1:amd641:8-20180414-1ubuntu2			      |	libgbm1:amd6418.0.5-0ubuntu0~18.04.1
+libgcrypt20:amd641.8.1-4ubuntu1				      |	libgcc1:amd641:8.2.0-1ubuntu2~18.04
+libglib2.0-0:amd642.56.1-2ubuntu1			      |	libgl1:amd641.0.0-2ubuntu2.2
+libglib2.0-data2.56.1-2ubuntu1				      |	libgl1-mesa-dri:amd6418.0.5-0ubuntu0~18.04.1
+libisc-export169:amd641:9.11.3+dfsg-1ubuntu1		      |	libirs160:amd641:9.11.3+dfsg-1ubuntu1.3
+libjpeg-turbo8:amd641.5.2-0ubuntu5			      |	libjpeg-turbo8:amd641.5.2-0ubuntu5.18.04.1
+libkmod2:amd6424-1ubuntu3				      |	libkmod2:amd6424-1ubuntu3.1
+libldap-2.4-2:amd642.4.45+dfsg-1ubuntu1			      |	liblcms2-2:amd642.9-1ubuntu0.1
+libldap-common2.4.45+dfsg-1ubuntu1			      |	libldap-2.4-2:amd642.4.45+dfsg-1ubuntu1.1
+libmagic1:amd641:5.32-2					      |	libmagic1:amd641:5.32-2ubuntu0.1
+libmagic-mgc1:5.32-2					      |	libmagic-mgc1:5.32-2ubuntu0.1
+libmount1:amd642.31.1-0.4ubuntu3			      |	libmount1:amd642.31.1-0.4ubuntu3.2
+libncurses5:amd646.1-1ubuntu1				      |	libmpfr6:amd644.0.1-1
+libncursesw5:amd646.1-1ubuntu1				      |	libmpx2:amd648.2.0-1ubuntu2~18.04
+libnss-systemd:amd64237-3ubuntu10			      |	libnss-systemd:amd64237-3ubuntu10.9
+libpam-systemd:amd64237-3ubuntu10			      |	libpam-systemd:amd64237-3ubuntu10.9
+libpango-1.0-0:amd641.40.14-1				      |	libpango-1.0-0:amd641.40.14-1ubuntu0.1
+libpangocairo-1.0-0:amd641.40.14-1			      |	libpangocairo-1.0-0:amd641.40.14-1ubuntu0.1
+libpangoft2-1.0-0:amd641.40.14-1			      |	libpangoft2-1.0-0:amd641.40.14-1ubuntu0.1
+libperl5.26:amd645.26.1-6				      |	libperl5.26:amd645.26.1-6ubuntu0.3
+libpng16-16:amd641.6.34-1				      |	libplymouth4:amd640.9.3-1ubuntu7.18.04.1
+libprocps6:amd642:3.3.12-3ubuntu1			      |	libprocps6:amd642:3.3.12-3ubuntu1.1
+libpython2.7-minimal:amd642.7.15~rc1-1			      |	libpython2.7-minimal:amd642.7.15~rc1-1ubuntu0.1
+libpython2.7-stdlib:amd642.7.15~rc1-1			      |	libpython2.7-stdlib:amd642.7.15~rc1-1ubuntu0.1
+libpython3.6:amd643.6.5-3				      |	libpython3.6:amd643.6.7-1~18.04
+libpython3.6-minimal:amd643.6.5-3			      |	libpython3.6-minimal:amd643.6.7-1~18.04
+libpython3.6-stdlib:amd643.6.5-3			      |	libpython3.6-stdlib:amd643.6.7-1~18.04
+libpython3-stdlib:amd643.6.5-3				      |	libpython3-stdlib:amd643.6.7-1~18.04
+librados212.2.4-0ubuntu1				      |	libquadmath0:amd648.2.0-1ubuntu2~18.04
+librbd112.2.4-0ubuntu1					      |	librados212.2.7-0ubuntu0.18.04.1
+libsmartcols1:amd642.31.1-0.4ubuntu3			      |	libsm6:amd642:1.2.2-1
+libssl1.0.0:amd641.0.2n-1ubuntu5			      |	libssl1.0.0:amd641.0.2n-1ubuntu5.2
+libssl1.1:amd641.1.0g-2ubuntu4				      |	libssl1.1:amd641.1.0g-2ubuntu4.3
+libstdc++6:amd648-20180414-1ubuntu2			      |	libstdc++6:amd648.2.0-1ubuntu2~18.04
+libsystemd0:amd64237-3ubuntu10				      |	libstdc++-7-dev:amd647.3.0-27ubuntu1~18.04
+libtinfo5:amd646.1-1ubuntu1				      |	libtinfo5:amd646.1-1ubuntu1.18.04
+libudev1:amd64237-3ubuntu10				      |	libtsan0:amd648.2.0-1ubuntu2~18.04
+libuuid1:amd642.31.1-0.4ubuntu3				      |	libuuid1:amd642.31.1-0.4ubuntu3.2
+libx11-6:amd642:1.6.4-3					      |	libx11-6:amd642:1.6.4-3ubuntu0.1
+libx11-data2:1.6.4-3					      |	libx11-data2:1.6.4-3ubuntu0.1
+libxml2:amd642.9.4+dfsg1-6.1ubuntu1			      |	libxkbcommon0:amd640.8.0-1ubuntu0.1
+linux-image-4.15.0-20-generic4.15.0-20.21		      |	linux-firmware1.173.2
+linux-modules-4.15.0-20-generic4.15.0-20.21		      |	linux-headers-4.15.0-424.15.0-42.45
+linux-modules-extra-4.15.0-20-generic4.15.0-20.21	      |	linux-headers-4.15.0-42-generic4.15.0-42.45
+man-db2.8.3-2						      |	man-db2.8.3-2ubuntu0.1
+mdadm4.0-2ubuntu1					      |	mdadm4.1~rc1-3~ubuntu18.04.1
+mount2.31.1-0.4ubuntu3					      |	mount2.31.1-0.4ubuntu3.2
+ncurses-base6.1-1ubuntu1				      |	ncurses-base6.1-1ubuntu1.18.04
+ncurses-bin6.1-1ubuntu1					      |	ncurses-bin6.1-1ubuntu1.18.04
+ncurses-term6.1-1ubuntu1				      |	ncurses-term6.1-1ubuntu1.18.04
+netcat-openbsd1.187-1					      |	netcat-openbsd1.187-1ubuntu0.1
+netplan.io0.36.1					      |	netplan.io0.40.1~18.04.3
+networkd-dispatcher1.7-0ubuntu3				      |	networkd-dispatcher1.7-0ubuntu3.3
+nplan0.36.1						      |	nplan0.40.1~18.04.3
+ntp1:4.2.8p10+dfsg-5ubuntu7				      |	ntfs-3g1:2017.3.23-2
+ntpdate1:4.2.8p10+dfsg-5ubuntu7				      |	ntp1:4.2.8p10+dfsg-5ubuntu7.1
+open-iscsi2.0.874-5ubuntu2				      |	ntpdate1:4.2.8p10+dfsg-5ubuntu7.1
+openssh-client1:7.6p1-4					      |	nvidia-compute-utils-415415.18-0ubuntu0~gpu18.04.2
+openssh-server1:7.6p1-4					      |	nvidia-dkms-415415.18-0ubuntu0~gpu18.04.2
+openssh-sftp-server1:7.6p1-4				      |	nvidia-driver-415415.18-0ubuntu0~gpu18.04.2
+openssl1.1.0g-2ubuntu4					      |	nvidia-kernel-common-415415.18-0ubuntu0~gpu18.04.2
+perl5.26.1-6						      |	patch2.7.6-2ubuntu1
+perl-base5.26.1-6					      |	pciutils1:3.5.2-1ubuntu1
+perl-modules-5.265.26.1-6				      |	perl5.26.1-6ubuntu0.3
+procps2:3.3.12-3ubuntu1					      |	pkg-config0.29.1-0ubuntu2
+python2.72.7.15~rc1-1					      |	python2.72.7.15~rc1-1ubuntu0.1
+python2.7-minimal2.7.15~rc1-1				      |	python2.7-minimal2.7.15~rc1-1ubuntu0.1
+python33.6.5-3						      |	python33.6.7-1~18.04
+python3.63.6.5-3					      |	python3.63.6.7-1~18.04
+python3.6-minimal3.6.5-3				      |	python3.6-minimal3.6.7-1~18.04
+python3-apt1.6.0					      |	python3-apt1.6.3
+python3-cryptography2.1.4-1ubuntu1.1			      |	python3-cryptography2.1.4-1ubuntu1.2
+python3-minimal3.6.5-3					      |	python3-minimal3.6.7-1~18.04
+python3-requests2.18.4-2				      |	python3-requests2.18.4-2ubuntu0.1
+python3-software-properties0.96.24.32.2			      |	python3-software-properties0.96.24.32.6
+python-apt1.6.0						      |	python-apt1.6.3
+python-apt-common1.6.0					      |	python-apt-common1.6.3
+screen4.6.2-1						      |	screen4.6.2-1ubuntu1
+sntp1:4.2.8p10+dfsg-5ubuntu7				      |	sntp1:4.2.8p10+dfsg-5ubuntu7.1
+software-properties-common0.96.24.32.2			      |	software-properties-common0.96.24.32.6
+ssh1:7.6p1-4						      |	ssh1:7.6p1-4ubuntu0.1
+ssh-import-id5.7-0ubuntu1				      |	ssh-import-id5.7-0ubuntu1.1
+systemd237-3ubuntu10					      |	systemd237-3ubuntu10.9
+systemd-sysv237-3ubuntu10				      |	systemd-sysv237-3ubuntu10.9
+tzdata2018d-1						      |	tzdata2018g-0ubuntu0.18.04
+ubuntu-keyring2018.02.28				      |	ubuntu-keyring2018.09.18.1~18.04.0
+ubuntu-mono16.10+18.04.20180421.1-0ubuntu1		      |	ubuntu-mono16.10+18.04.20181005-0ubuntu1
+udev237-3ubuntu10					      |	udev237-3ubuntu10.9
+unattended-upgrades1.1ubuntu1				      |	ufw0.35-5
+util-linux2.31.1-0.4ubuntu3				      |	unattended-upgrades1.1ubuntu1.18.04.7
+uuid-runtime2.31.1-0.4ubuntu3				      |	update-manager-core1:18.04.11.8
+wireless-regdb2016.06.10-0ubuntu1			      |	wireless-regdb2018.05.09-0ubuntu1~18.04.1
