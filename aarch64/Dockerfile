@@ -48,7 +48,7 @@ RUN apt-get -q update && \
 		mdadm \
 		mg \
 		mosh \
-		mtr \
+		mtr-tiny \
 		multipath-tools \
 		nano \
 		net-tools \
