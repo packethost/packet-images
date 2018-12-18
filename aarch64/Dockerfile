@@ -10,6 +10,9 @@ LABEL name="Ubuntu Canonical Base Image" \
 # Setup the environment
 ENV DEBIAN_FRONTEND=noninteractive
 
+# Unminimize system
+RUN yes | unminimize
+
 # Install packages
 RUN apt-get -q update && \
     apt-get -y -qq upgrade && \
@@ -79,9 +82,6 @@ RUN apt-get -q update && \
 # Configure locales
 RUN locale-gen en_US.UTF-8 && \
     dpkg-reconfigure locales
-
-# Unminimize system
-RUN yes | unminimize && apt-get clean
 
 # Fix permissions
 RUN chown root:syslog /var/log \
