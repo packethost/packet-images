@@ -12,9 +12,9 @@ ENV FLASH_KERNEL_SKIP=1
 RUN apt-get -q update \
 	&& apt-get -y -qq upgrade \
 	&& apt-get -y -qq install \
-		linux-image-4.15.0-36-generic \
-		linux-modules-extra-4.15.0-36-generic \
-		linux-headers-4.15.0-36-generic \
+		linux-image-4.15.0-42-generic \
+		linux-modules-extra-4.15.0-42-generic \
+		linux-headers-4.15.0-42-generic \
 		linux-firmware \
 	&& apt-get clean \
 	&& rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* /var/log/*
