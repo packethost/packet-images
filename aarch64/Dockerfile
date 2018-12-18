@@ -5,7 +5,7 @@ MAINTAINER David Laube <dlaube@packet.net>
 LABEL name="Ubuntu Canonical Base Image" \
     vendor="Ubuntu" \
     license="GPLv2" \
-    build-date="20180525"
+    build-date="20181217"
 
 # Setup the environment
 ENV DEBIAN_FRONTEND=noninteractive
