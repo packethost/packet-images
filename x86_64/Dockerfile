@@ -16,7 +16,7 @@ RUN yes | unminimize
 # Install packages
 RUN apt-get -q update && \
     apt-get -y -qq upgrade && \
-    apt-get install -y -qq \
+    apt-get -y -qq install \
 		apt-transport-https \
 		bash \
 		bash-completion \
@@ -83,7 +83,7 @@ RUN apt-get -q update && \
 # Install a specific kernel
 RUN apt-get -q update && \
 	apt-get -y -qq upgrade && \
-	apt-get install -y -qq \
+	apt-get -y -qq install \
 	linux-image-4.15.0-33-generic \
 	linux-modules-extra-4.15.0-33-generic
 
