@@ -76,9 +76,7 @@ RUN apt-get -q update && \
 		unattended-upgrades \
 		uuid-runtime \
 		vim \
-		wget \
-	&& apt-get clean \
-	&& rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* /var/log/*
+		wget
 
 # Install a specific kernel
 RUN apt-get -q update && \
@@ -97,5 +95,9 @@ RUN chown root:syslog /var/log \
 
 # Fix cloud-init EC2 warning
 RUN touch /root/.cloud-warnings.skip
+
+# Clean APT cache
+RUN apt-get clean \
+	&& rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* /var/log/*
 
 # vim: set tabstop=4 shiftwidth=4:
