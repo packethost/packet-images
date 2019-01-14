@@ -8,10 +8,10 @@ LABEL Description="Packet's centos_7-c1.large.arm OS image" Vendor="Packet.net"
 RUN yum -y update
 
 # Install a specific kernel and deps
-RUN yum -y install kernel-4.14.0-49.13.1.el7a linux-firmware
+RUN yum -y install kernel-4.14.0-115.2.2.el7a linux-firmware
 
 # Adjust generic initrd
-RUN dracut --filesystems="ext4 vfat" --mdadmconf --force /boot/initramfs-4.14.0-49.13.1.el7a.aarch64.img 4.14.0-49.13.1.el7a.aarch64
+RUN dracut --filesystems="ext4 vfat" --mdadmconf --force /boot/initramfs-4.14.0-115.2.2.el7a.aarch64.img 4.14.0-115.2.2.el7a.aarch64
 
 # Clean yum cache
 RUN yum clean all
