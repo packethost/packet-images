@@ -1,0 +1,4 @@
+modules.tar.gz filter=lfs diff=lfs merge=lfs -text
+image.tar.gz filter=lfs diff=lfs merge=lfs -text
+initrd.tar.gz filter=lfs diff=lfs merge=lfs -text
+kernel.tar.gz filter=lfs diff=lfs merge=lfs -text
