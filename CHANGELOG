@@ -1,0 +1,116 @@
+OS: Ubuntu	VERSION: 18.04
+======================================================================
+Overview:
+======================================================================
+Image Size
+   Current: 422M
+   Previous:: 421M
+Filesystem Size
+   Current: 1.2G
+   Previous: 1.2G
+Packages
+   Current: 448
+   Previous: 449
+Kernel(s)
+   Current:
+      linux-image-4.15.0-50-generic4.15.0-50.54
+      linux-image-generic4.15.0.50.52
+   Previous:
+      linux-image-4.15.0-45-generic4.15.0-45.48
+      linux-image-generic4.15.0.45.47
+======================================================================
+New Packages:
+======================================================================
+linux-image-4.15.0-50-generic
+linux-modules-4.15.0-50-generic
+linux-modules-extra-4.15.0-50-generic
+======================================================================
+Updated Packages:
+======================================================================
+apt1.6.8						      |	apt1.6.10
+apt-transport-https1.6.8				      |	apt-transport-https1.6.10
+base-files10.1ubuntu2.3					      |	base-files10.1ubuntu2.4
+bash4.4.18-2ubuntu1					      |	bash4.4.18-2ubuntu1.1
+busybox-initramfs1:1.27.2-2ubuntu3			      |	busybox-initramfs1:1.27.2-2ubuntu3.2
+cloud-init18.4-0ubuntu1~18.04.1				      |	cloud-init19.1-1-gbaa47854-0ubuntu1~18.04.1
+curl7.58.0-2ubuntu3.6					      |	curl7.58.0-2ubuntu3.7
+distro-info-data0.37ubuntu0.2				      |	distro-info-data0.37ubuntu0.5
+file1:5.32-2ubuntu0.1					      |	file1:5.32-2ubuntu0.2
+gcc-8-base:amd648.2.0-1ubuntu2~18.04			      |	gcc-8-base:amd648.3.0-6ubuntu1~18.04
+gettext-base0.19.8.1-6ubuntu0.1				      |	gettext-base0.19.8.1-6ubuntu0.3
+grub2-common2.02-2ubuntu8.12				      |	grub2-common2.02-2ubuntu8.13
+grub-common2.02-2ubuntu8.12				      |	grub-common2.02-2ubuntu8.13
+grub-efi2.02-2ubuntu8.12				      |	grub-efi2.02-2ubuntu8.13
+grub-efi-amd642.02-2ubuntu8.12				      |	grub-efi-amd642.02-2ubuntu8.13
+grub-efi-amd64-bin2.02-2ubuntu8.12			      |	grub-efi-amd64-bin2.02-2ubuntu8.13
+gtk-update-icon-cache3.22.30-1ubuntu1			      |	gtk-update-icon-cache3.22.30-1ubuntu3
+initramfs-tools0.130ubuntu3.6				      |	initramfs-tools0.130ubuntu3.8
+initramfs-tools-bin0.130ubuntu3.6			      |	initramfs-tools-bin0.130ubuntu3.8
+initramfs-tools-core0.130ubuntu3.6			      |	initramfs-tools-core0.130ubuntu3.8
+intel-microcode3.20180807a.0ubuntu0.18.04.1		      |	intel-microcode3.20190514.0ubuntu0.18.04.3
+isc-dhcp-client4.3.5-3ubuntu7				      |	isc-dhcp-client4.3.5-3ubuntu7.1
+isc-dhcp-common4.3.5-3ubuntu7				      |	isc-dhcp-common4.3.5-3ubuntu7.1
+libaio1:amd640.3.110-5					      |	libaio1:amd640.3.110-5ubuntu0.1
+libapt-inst2.0:amd641.6.8				      |	libapt-inst2.0:amd641.6.10
+libapt-pkg5.0:amd641.6.8				      |	libapt-pkg5.0:amd641.6.10
+libcups2:amd642.2.7-1ubuntu2.3				      |	libcups2:amd642.2.7-1ubuntu2.5
+libcurl4:amd647.58.0-2ubuntu3.6				      |	libcurl4:amd647.58.0-2ubuntu3.7
+libdns-export11001:9.11.3+dfsg-1ubuntu1.5		      |	libdns-export11001:9.11.3+dfsg-1ubuntu1.7
+libgcc1:amd641:8.2.0-1ubuntu2~18.04			      |	libgcc1:amd641:8.3.0-6ubuntu1~18.04
+libglib2.0-0:amd642.56.3-0ubuntu0.18.04.1		      |	libglib2.0-0:amd642.56.4-0ubuntu0.18.04.2
+libglib2.0-data2.56.3-0ubuntu0.18.04.1			      |	libglib2.0-data2.56.4-0ubuntu0.18.04.2
+libidn11:amd641.33-2.1ubuntu1				      |	libidn11:amd641.33-2.1ubuntu1.2
+libisc-export169:amd641:9.11.3+dfsg-1ubuntu1.5		      |	libisc-export169:amd641:9.11.3+dfsg-1ubuntu1.7
+libldap-2.4-2:amd642.4.45+dfsg-1ubuntu1.1		      |	libldap-2.4-2:amd642.4.45+dfsg-1ubuntu1.2
+libldap-common2.4.45+dfsg-1ubuntu1.1			      |	libldap-common2.4.45+dfsg-1ubuntu1.2
+liblua5.3-0:amd645.3.3-1				      |	liblua5.3-0:amd645.3.3-1ubuntu0.18.04.1
+libmagic1:amd641:5.32-2ubuntu0.1			      |	libmagic1:amd641:5.32-2ubuntu0.2
+libmagic-mgc1:5.32-2ubuntu0.1				      |	libmagic-mgc1:5.32-2ubuntu0.2
+libnss3:amd642:3.35-2ubuntu2.1				      |	libnss3:amd642:3.35-2ubuntu2.2
+libnss-systemd:amd64237-3ubuntu10.13			      |	libnss-systemd:amd64237-3ubuntu10.21
+libpam0g:amd641.1.8-3.6ubuntu2				      |	libpam0g:amd641.1.8-3.6ubuntu2.18.04.1
+libpam-modules:amd641.1.8-3.6ubuntu2			      |	libpam-modules:amd641.1.8-3.6ubuntu2.18.04.1
+libpam-modules-bin1.1.8-3.6ubuntu2			      |	libpam-modules-bin1.1.8-3.6ubuntu2.18.04.1
+libpam-runtime1.1.8-3.6ubuntu2				      |	libpam-runtime1.1.8-3.6ubuntu2.18.04.1
+libpam-systemd:amd64237-3ubuntu10.13			      |	libpam-systemd:amd64237-3ubuntu10.21
+libpng16-16:amd641.6.34-1ubuntu0.18.04.1		      |	libpng16-16:amd641.6.34-1ubuntu0.18.04.2
+librados212.2.8-0ubuntu0.18.04.2			      |	librados212.2.11-0ubuntu0.18.04.2
+librbd112.2.8-0ubuntu0.18.04.2				      |	librbd112.2.11-0ubuntu0.18.04.2
+libseccomp2:amd642.3.1-2.1ubuntu4			      |	libseccomp2:amd642.3.1-2.1ubuntu4.1
+libssl1.0.0:amd641.0.2n-1ubuntu5.2			      |	libssl1.0.0:amd641.0.2n-1ubuntu5.3
+libstdc++6:amd648.2.0-1ubuntu2~18.04			      |	libstdc++6:amd648.3.0-6ubuntu1~18.04
+libsystemd0:amd64237-3ubuntu10.13			      |	libsystemd0:amd64237-3ubuntu10.21
+libtiff5:amd644.0.9-5ubuntu0.1				      |	libtiff5:amd644.0.9-5ubuntu0.2
+libudev1:amd64237-3ubuntu10.13				      |	libudev1:amd64237-3ubuntu10.21
+libunistring2:amd640.9.9-0ubuntu1			      |	libunistring2:amd640.9.9-0ubuntu2
+libxcb1:amd641.13-1					      |	libxcb1:amd641.13-2~ubuntu18.04
+libxcb-render0:amd641.13-1				      |	libxcb-render0:amd641.13-2~ubuntu18.04
+libxcb-shm0:amd641.13-1					      |	libxcb-shm0:amd641.13-2~ubuntu18.04
+linux-firmware1.173.3					      |	linux-firmware1.173.6
+linux-image-4.15.0-45-generic4.15.0-45.48		      |	linux-image-4.15.0-50-generic4.15.0-50.54
+linux-image-generic4.15.0.45.47				      |	linux-image-generic4.15.0.50.52
+linux-modules-4.15.0-45-generic4.15.0-45.48		      |	linux-modules-4.15.0-50-generic4.15.0-50.54
+linux-modules-extra-4.15.0-45-generic4.15.0-45.48	      |	linux-modules-extra-4.15.0-50-generic4.15.0-50.54
+login1:4.5-1ubuntu1					      |	login1:4.5-1ubuntu2
+mdadm4.1~rc1-3~ubuntu18.04.1				      |	mdadm4.1~rc1-3~ubuntu18.04.2
+netplan.io0.40.1~18.04.4				      |	netplan.io0.97-0ubuntu1~18.04.1
+nplan0.40.1~18.04.4					      <
+open-iscsi2.0.874-5ubuntu2.6				      |	open-iscsi2.0.874-5ubuntu2.7
+openssh-client1:7.6p1-4ubuntu0.2			      |	openssh-client1:7.6p1-4ubuntu0.3
+openssh-server1:7.6p1-4ubuntu0.2			      |	openssh-server1:7.6p1-4ubuntu0.3
+openssh-sftp-server1:7.6p1-4ubuntu0.2			      |	openssh-sftp-server1:7.6p1-4ubuntu0.3
+passwd1:4.5-1ubuntu1					      |	passwd1:4.5-1ubuntu2
+python3-apt1.6.3ubuntu1					      |	python3-apt1.6.4
+python3-gi3.26.1-2					      |	python3-gi3.26.1-2ubuntu1
+python3-software-properties0.96.24.32.7			      |	python3-software-properties0.96.24.32.8
+python3-urllib31.22-1					      |	python3-urllib31.22-1ubuntu0.18.04.1
+python-apt1.6.3ubuntu1					      |	python-apt1.6.4
+python-apt-common1.6.3ubuntu1				      |	python-apt-common1.6.4
+software-properties-common0.96.24.32.7			      |	software-properties-common0.96.24.32.8
+ssh1:7.6p1-4ubuntu0.2					      |	ssh1:7.6p1-4ubuntu0.3
+systemd237-3ubuntu10.13					      |	systemd237-3ubuntu10.21
+systemd-sysv237-3ubuntu10.13				      |	systemd-sysv237-3ubuntu10.21
+tzdata2018i-0ubuntu0.18.04				      |	tzdata2019a-0ubuntu0.18.04
+udev237-3ubuntu10.13					      |	udev237-3ubuntu10.21
+unattended-upgrades1.1ubuntu1.18.04.8			      |	unattended-upgrades1.1ubuntu1.18.04.11
+wget1.19.4-1ubuntu2.1					      |	wget1.19.4-1ubuntu2.2
