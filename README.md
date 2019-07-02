@@ -3,7 +3,7 @@
 This repository contains Dockerfiles that we use as the basis for the OSes that we provision. The Dockerfiles contained here are the source for the official Packet.net managed images, other semi-official images are managed by the community.
 
 ### Official Images
-- Centos7
+- CentOS 7
 - Debian 8
 - Debian 9
 - FreeBSD (not present)
