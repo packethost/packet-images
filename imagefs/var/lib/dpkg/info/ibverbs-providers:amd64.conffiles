@@ -1,0 +1,15 @@
+/etc/libibverbs.d/bnxt_re.driver
+/etc/libibverbs.d/cxgb3.driver
+/etc/libibverbs.d/cxgb4.driver
+/etc/libibverbs.d/hfi1verbs.driver
+/etc/libibverbs.d/hns.driver
+/etc/libibverbs.d/i40iw.driver
+/etc/libibverbs.d/ipathverbs.driver
+/etc/libibverbs.d/mlx4.driver
+/etc/libibverbs.d/mlx5.driver
+/etc/libibverbs.d/mthca.driver
+/etc/libibverbs.d/nes.driver
+/etc/libibverbs.d/ocrdma.driver
+/etc/libibverbs.d/qedr.driver
+/etc/libibverbs.d/rxe.driver
+/etc/libibverbs.d/vmw_pvrdma.driver

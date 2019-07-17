@@ -1,0 +1,15 @@
+/.
+/lib
+/lib/udev
+/lib/udev/rules.d
+/lib/udev/rules.d/55-scsi-sg3_id.rules
+/lib/udev/rules.d/58-scsi-sg3_symlink.rules
+/usr
+/usr/share
+/usr/share/doc
+/usr/share/doc/sg3-utils-udev
+/usr/share/doc/sg3-utils-udev/copyright
+/usr/share/initramfs-tools
+/usr/share/initramfs-tools/hooks
+/usr/share/initramfs-tools/hooks/sg3-utils
+/usr/share/doc/sg3-utils-udev/changelog.Debian.gz

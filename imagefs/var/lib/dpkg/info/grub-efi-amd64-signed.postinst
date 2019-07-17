@@ -1,0 +1,31 @@
+#! /bin/sh
+set -e
+
+config_item ()
+{
+    if [ -f /etc/default/grub ]; then
+	. /etc/default/grub || return
+	for x in /etc/default/grub.d/*.cfg; do
+	    if [ -e "$x" ]; then
+		. "$x"
+	    fi
+	done
+    fi
+    eval echo "\$$1"
+}
+
+case $1 in
+    configure)
+	bootloader_id="$(config_item GRUB_DISTRIBUTOR | tr A-Z a-z | \
+			 cut -d' ' -f1)"
+	if [ "$bootloader_id" ] && [ -d "/boot/efi/EFI/$bootloader_id" ]; then
+	    /usr/share/grub/grub-check-signatures
+	    grub-install --target=x86_64-efi --auto-nvram
+	fi
+
+	;;
+esac
+
+
+
+exit 0

@@ -1,0 +1,5 @@
+#!/bin/sh
+set -e
+# Automatically added by dh_installdeb/11.3.2ubuntu1
+dpkg-maintscript-helper rm_conffile /etc/bash_completion.d/mosh 1.2.5~ -- "$@"
+# End automatically added section

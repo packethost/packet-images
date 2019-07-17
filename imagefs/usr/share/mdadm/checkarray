@@ -1,0 +1,219 @@
+#!/bin/sh
+#
+# checkarray -- initiates a check run of an MD array's redundancy information.
+#
+# Copyright © martin f. krafft <madduck@debian.org>
+# distributed under the terms of the Artistic Licence 2.0
+#
+set -eu
+
+PROGNAME=${0##*/}
+
+about()
+{
+  echo "\
+$PROGNAME -- MD array (RAID) redundancy checker tool
+Copyright © martin f. krafft <madduck@debian.org>
+Released under the terms of the Artistic Licence 2.0"
+}
+
+usage()
+{
+  about
+  echo "
+Usage: $PROGNAME [options] [arrays]
+
+Valid options are:
+ -a|--all	check all assembled arrays (ignores arrays in command line).
+ -s|--status	print redundancy check status of devices.
+ -x|--cancel	queue a request to cancel a running redundancy check.
+ -i|--idle	perform check in a lowest scheduling class (idle)
+ -l|--slow	perform check in a lower-than-standard scheduling class
+ -f|--fast	perform check in higher-than-standard scheduling class
+ --realtime	perform check in real-time scheduling class (DANGEROUS!)
+ -c|--cron	honour AUTOCHECK setting in /etc/default/mdadm.
+ -q|--quiet	suppress informational messages
+		(use twice to suppress error messages too).
+ -h|--help	show this output.
+ -V|--version	show version information.
+
+Examples:
+ $PROGNAME --all --idle
+ $PROGNAME --quiet /dev/md[123]
+ $PROGNAME -sa
+ $PROGNAME -x --all
+
+Devices can be specified in almost any format. The following are equivalent:
+ /dev/md0, md0, /dev/md/0, /sys/block/md0
+
+You can also control the status of a check with /proc/mdstat file."
+}
+
+SHORTOPTS=achVqQsxilf
+LONGOPTS=all,cron,help,version,quiet,real-quiet,status,cancel,idle,slow,fast,realtime
+
+eval set -- $(getopt -o $SHORTOPTS -l $LONGOPTS -n $PROGNAME -- "$@")
+
+arrays=''
+cron=0
+all=0
+quiet=0
+status=0
+action=check
+ionice=
+
+for opt in $@; do
+  case "$opt" in
+    -a|--all) all=1;;
+    -s|--status) action=status;;
+    -x|--cancel) action=idle;;
+    -i|--idle) ionice=idle;;
+    -l|--slow) ionice=low;;
+    -f|--fast) ionice=high;;
+    --realtime) ionice=realtime;;
+    -c|--cron) cron=1;;
+    -q|--quiet) quiet=$(($quiet+1));;
+    -Q|--real-quiet) quiet=$(($quiet+2));;	# for compatibility
+    -h|--help) usage; exit 0;;
+    -V|--version) about; exit 0;;
+    /dev/md/*|md/*) arrays="${arrays:+$arrays }md${opt#*md/}";;
+    /dev/md*|md*) arrays="${arrays:+$arrays }${opt#/dev/}";;
+    /sys/block/md*) arrays="${arrays:+$arrays }${opt#/sys/block/}";;
+    --) :;;
+    *) echo "$PROGNAME: E: invalid option: $opt.  Try --help." >&2; exit 1;;
+  esac
+done
+
+is_true()
+{
+  case "${1:-}" in
+    [Yy]es|[Yy]|1|[Tt]rue|[Tt]) return 0;;
+    *) return 1;
+  esac
+}
+
+DEBIANCONFIG=/etc/default/mdadm
+[ -r $DEBIANCONFIG ] && . $DEBIANCONFIG
+if [ $cron = 1 ] && ! is_true ${AUTOCHECK:-false}; then
+  [ $quiet -lt 1 ] && echo "$PROGNAME: I: disabled in $DEBIANCONFIG ." >&2
+  exit 0
+fi
+
+if [ ! -f /proc/mdstat ]; then
+  [ $quiet -lt 2 ] && echo "$PROGNAME: E: MD subsystem not loaded, or /proc unavailable." >&2
+  exit 2
+fi
+
+if [ ! -d /sys/block ]; then
+  [ $quiet -lt 2 ] && echo "$PROGNAME: E: /sys filesystem not available." >&2
+  exit 7
+fi
+
+if [ -z "$(ls /sys/block/md* 2>/dev/null)" ]; then
+  if [ $quiet -lt 2 ] && [ $cron != 1 ]; then
+    echo "$PROGNAME: W: no active MD arrays found." >&2
+    echo "$PROGNAME: W: (maybe uninstall the mdadm package?)" >&2
+  fi
+  exit 0
+fi
+
+if [ -z "$(ls /sys/block/md*/md/level 2>/dev/null)" ]; then
+  [ $quiet -lt 2 ] && echo "$PROGNAME: E: kernel too old, no support for redundancy checks." >&2
+  exit 6
+fi
+
+if ! egrep -q '^raid([1456]|10)$' /sys/block/md*/md/level 2>/dev/null; then
+  [ $quiet -lt 1 ] && echo "$PROGNAME: I: no redundant arrays present; skipping checks..." >&2
+  exit 0
+fi
+
+if [ -z "$(ls /sys/block/md*/md/sync_action 2>/dev/null)" ]; then
+  [ $quiet -lt 2 ] && echo "$PROGNAME: E: no kernel support for redundancy checks." >&2
+  exit 3
+fi
+
+[ $all = 1 ] && arrays="$(ls -d1 /sys/block/md* | cut -d/ -f4)"
+
+for array in $arrays; do
+  MDBASE=/sys/block/$array/md
+
+  if [ ! -e $MDBASE/sync_action ]; then
+    [ $quiet -lt 1 ] && echo "$PROGNAME: I: skipping non-redundant array $array." >&2
+    continue
+  fi
+
+  cur_status="$(cat $MDBASE/sync_action)"
+
+  if [ $action = status ]; then
+    echo "$array: $cur_status"
+    continue
+  fi
+
+  if [ ! -w $MDBASE/sync_action ]; then
+    [ $quiet -lt 2 ] && echo "$PROGNAME: E: $MDBASE/sync_action not writeable." >&2
+    exit 4
+  fi
+
+  if [ "$(cat $MDBASE/array_state)" = 'read-auto' ]; then
+    [ $quiet -lt 1 ] && echo "$PROGNAME: W: array $array in auto-read-only state, skipping..." >&2
+    continue
+  fi
+
+  case "$action" in
+    idle)
+      echo $action > $MDBASE/sync_action
+      [ $quiet -lt 1 ] && echo "$PROGNAME: I: cancel request queued for array $array." >&2
+      ;;
+
+    check)
+      if [ "$cur_status" != idle ]; then
+        [ $quiet -lt 2 ] && echo "$PROGNAME: W: array $array not idle, skipping..." >&2
+        continue
+      fi
+
+      # check if the array created recently and skip test if it is
+      created=$(mdadm --detail /dev/$array 2>/dev/null |
+                sed -n 's/.*Creation Time *://p' )
+      if [ -n "$created" ]; then
+        created=$(date +%s -d "$created" 2>/dev/null)
+      fi
+      if [ -n "$created" ]; then
+        now=$(date +%s)
+        if [ "$created" -lt "$now" -a \
+             "$created" -gt "$(($now - 14 * 24 * 60 * 60))" ]; then
+          [ $quiet -lt 2 ] && echo "$PROGNAME: I: array $array created recently, skipping..." >&2
+          continue
+        fi
+      fi
+
+      # queue request for the array. The kernel will make sure that these requests
+      # are properly queued so as to not kill one of the array.
+      echo $action > $MDBASE/sync_action
+      [ $quiet -lt 1 ] && echo "$PROGNAME: I: check queued for array $array." >&2
+
+      case "$ionice" in
+        idle) ioarg='-c3'; renice=15;;
+        low) ioarg='-c2 -n7'; renice=5;;
+        high) ioarg='-c2 -n0'; renice=0;;
+        realtime) ioarg='-c1 -n4'; renice=-5;;
+        *) continue;;
+      esac
+
+      resync_pid= wait=5
+      while [ $wait -gt 0 ]; do
+        wait=$((wait - 1))
+        resync_pid=$(ps -ef | awk -v dev=$array 'BEGIN { pattern = "^\\[" dev "_resync]$" } $8 ~ pattern { print $2 }')
+        if [ -n "$resync_pid" ]; then
+          [ $quiet -lt 1 ] && echo "$PROGNAME: I: selecting $ionice I/O scheduling class and $renice niceness for resync of $array." >&2
+          ionice -p "$resync_pid" $ioarg 2>/dev/null || :
+          renice -n $renice -p "$resync_pid" 1>/dev/null 2>&1 || :
+          break
+        fi
+        sleep 1
+      done
+      ;;
+  esac
+
+done
+
+exit 0

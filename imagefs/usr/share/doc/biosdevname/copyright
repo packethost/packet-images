@@ -1,0 +1,18 @@
+This package was debianized by Rudy Gevaert <Rudy.Gevaert@UGent.be> on
+Wed, 16 May 2007 09:25:13 +0200.
+
+It was downloaded from http://linux.dell.com/biosdevname/
+
+Upstream Author:  Matt Domsch <Matt_Domsch@dell.com>
+
+Copyright:  2006 Dell, Inc
+
+You are free to distribute this software under the terms of
+the GNU General Public License  either version 2 of the License.
+
+On Debian systems, the complete text of the GNU General Public
+License can be found in the file `/usr/share/common-licenses/GPL-2'.
+
+The Debian packaging is (C) 2007, Rudy Gevaert <Rudy.Gevaert@UGent.be> and
+is licensed under the GPL, see `/usr/share/common-licenses/GPL'.
+

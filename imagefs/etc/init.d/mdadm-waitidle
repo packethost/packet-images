@@ -1,0 +1,56 @@
+#!/bin/sh
+# This script is not used when systemd is running
+### BEGIN INIT INFO
+# Provides:          mdadm-waitidle
+# Required-Start:
+# Required-Stop:
+# Should-Stop:       halt reboot kexec
+# X-Stop-After:      umountroot
+# Default-Start:
+# Default-Stop:      0 6
+# Short-Description: Wait for MD arrays to become idle
+# Description:       Waits until all MD arrays are in idle and synced state
+#                    before halt/reboot.
+### END INIT INFO
+#
+set -eu
+
+MDADM=/sbin/mdadm
+test -x "$MDADM" || exit 0
+test -f /proc/mdstat || exit 0
+
+. /lib/lsb/init-functions
+
+case "${1:-}" in
+
+  start|restart|force-reload)
+    # nothing, the only reason the script is here is to stop arrays
+    ;;
+
+  stop)
+    sync
+    wait=
+    for md in /sys/block/md*/md ; do
+      [ -d "$md" ] || continue
+      [ "$wait" ] || log_action_begin_msg "Waiting for MD arrays to become idle"
+      wait=y
+      [ -w $md/sync_action ] && echo idle > $md/sync_action
+    done
+    if [ "$wait" ]; then
+      # mdadm --wait-clean has a short internal timeout
+      if $MDADM --wait-clean --scan; then
+        log_action_end_msg 0
+      else
+        log_action_end_msg 1
+        sleep 1
+      fi
+    fi
+    ;;
+
+  *)
+    echo "Usage: ${0:-} stop" >&2
+    exit 1;;
+
+esac
+
+exit 0

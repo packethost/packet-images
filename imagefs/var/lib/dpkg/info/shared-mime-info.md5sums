@@ -1,0 +1,15 @@
+a6f088f9cde2d1c1aef3bc02b8b2d2f6  usr/bin/update-mime-database
+1e83e9ad31d99c797824a619d67cc0c5  usr/share/doc-base/shared-mime-info
+b549e67fee3c3674793c5385d4810c1f  usr/share/doc/shared-mime-info/NEWS.gz
+8094423e636033492da5f204bfc8166e  usr/share/doc/shared-mime-info/README
+cbeeb459ffb93cbb1db58d9ab6b5003a  usr/share/doc/shared-mime-info/changelog.Debian.gz
+67e74bb089e69c11e319bee46c1750a5  usr/share/doc/shared-mime-info/copyright
+d7bf8be1456ce5d1da7a2e5b477f8714  usr/share/doc/shared-mime-info/shared-mime-info-spec.html/b518.html
+b0b79f1add03d46b7b05b3c5b32139f7  usr/share/doc/shared-mime-info/shared-mime-info-spec.html/index.html
+7c22ce3289d8878e01a741b5fe8a5d8b  usr/share/doc/shared-mime-info/shared-mime-info-spec.html/x34.html
+efc0bacc81648a1c0c9cc1c80bf5ae2e  usr/share/doc/shared-mime-info/shared-mime-info-spec.html/x497.html
+ec87772d0ba797f23a05bd03ac473f37  usr/share/doc/shared-mime-info/shared-mime-info-spec.pdf
+e6a8988b652f4b1b7b6b509d17738d34  usr/share/doc/shared-mime-info/shared-mime-info-spec.xml.gz
+41e4f4cff38c6ed2f52f3c65414eb2bc  usr/share/man/man1/update-mime-database.1.gz
+0672087ce2b2997b04022703c4b48c51  usr/share/mime/packages/freedesktop.org.xml
+d1179768737c110247976d559c927bf8  usr/share/pkgconfig/shared-mime-info.pc

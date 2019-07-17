@@ -1,0 +1,254 @@
+
+Template: sysstat/remove_files
+Type: boolean
+Default: true
+Description: Remove old format statistics data files?
+ The format of daily data statistics files has changed in version ${s_version}
+ of sysstat and is not compatible with the previous one.
+ .
+ If you choose this option, all existing data files in the /var/log/sysstat/
+ directory will be deleted.
+ .
+ If you don't choose this option, the sar(1) command will not work properly
+ until you remove the files manually.
+Description-ca.UTF-8: Voleu suprimir els fitxers de dades estadístiques amb l'antic format?
+ El format dels fitxers de dades estadístiques diàries ha canviat en la versió ${s_version} del sysstat i no és compatible amb el format anterior.
+ .
+ Si trieu aquesta opció se suprimirà qualsevol fitxer de dades present al directori /var/log/sysstat.
+ .
+ Si no trieu aquesta opció, l'ordre sar(1) no funcionarà correctament fins que no suprimiu els fitxers manualment.
+Description-cs.UTF-8: Odstranit statistická data uložená ve starém formátu?
+ Formát denních statistických souborů se v sysstatu verze ${s_version} změnil a není kompatibilní s předchozími verzemi.
+ .
+ Odpovíte-li kladně, stávající datové soubory v adresáři /var/log/sysstat/ budou smazány.
+ .
+ Pokud tuto možnost nepovolíte, příkaz sar(1) nebude fungovat správně do doby, než soubory odstraníte ručně.
+Description-da.UTF-8: Fjern statistiske datafiler med gammelt format?
+ Formatet på daglige datastatistiske filer er blevet ændret i version ${s_version} af sysstat og er ikke kompatibel med den forrige.
+ .
+ Hvis du vælger denne indstilling vil alle eksisterende datafiler i mappen /var/log/sysstat/ blive slettet.
+ .
+ Hvis du ikke vælger denne indstilling vil kommandoen sar(1) ikke virke korrekt, før du fjerner filerne manuelt.
+Description-de.UTF-8: Daten-Statistik-Dateien im alten Format entfernen?
+ Das Format der täglichen Daten-Statistik-Dateien wurde in der Version ${s_version} von Sysstat geändert und ist zum vorherigen nicht kompatibel.
+ .
+ Falls Sie zustimmen, werden alle Daten-Dateien im Verzeichnis /var/log/sysstat/ gelöscht.
+ .
+ Falls Sie dieser Option nicht zustimmen, funktioniert der Befehl sar(1) nicht richtig bis die Dateien gelöscht werden.
+Description-es.UTF-8: ¿Desea eliminar los archivos de los datos de estadísticos con formato antiguo?
+ El formato de los archivos de los datos estadísticos diarios ha cambiado en la versión ${s_version} de sysstat y no es compatible con la versión anterior.
+ .
+ Si escoge esta opción, se borrarán todos los archivos de datos que existan en el directorio «/var/log/sysstat/».
+ .
+ Si no escoge esta opción, el programa sar(1) mostrará no funcionará adecuadamente hasta que borre manualmente los archivos.
+Description-eu.UTF-8: Kendu formatu zaharreko estatistika datu fitxategiak?
+ Eguneko datu estatistika fitxategien formatua aldatu egin da sysstat-en ${s_version} bertsioan eta ez da aurrekoekin bateragarria.
+ .
+ Aukera hau hautatuaz gero /var/log/sysstat/ direktorioko datu fitxategi guztiak ezabatuak izango dira.
+ .
+ Aukera hau hautatzen ez baduzu, sar(1) komandoak ez du behar bezala funtzionatuko fitxategi horiek eskuz ezabatu arte.
+Description-fi.UTF-8: Poistetaanko vanhanmuotoiset tietotiedostot?
+ Päivittäisten tilastotiedostojen muoto on vaihtunut sysstatin versiossa ${s_version}, eikä uusi muoto ole yhteensopiva edellisen kanssa.
+ .
+ Jos valitset tämän vaihtoehdon, kaikki hakemistossa /var/log/sysstat olevat tietotiedostot poistetaan.
+ .
+ Jos et valitse tätä, komento sar(1) ei toimi oikein ennen kuin nämä tiedostot poistetaan käsin.
+Description-fr.UTF-8: Faut-il supprimer les fichiers de statistiques qui utilisent l'ancien format ?
+ Le format des fichiers quotidiens de statistiques a changé dans la version ${s_version} de sysstat et n'est *pas* compatible avec le format antérieur.
+ .
+ Si vous choisissez cette option, tous les fichiers de données qui se trouvent dans le répertoire /var/log/sysstat seront effacés.
+ .
+ Si vous ne choisissez pas cette option, la commande sar(1) ne fonctionnera pas correctement tant que vous n'aurez pas supprimé les fichiers.
+Description-gl.UTF-8: Desexa eliminar os ficheiros vellos de datos estatísticos?
+ O formato dos ficheiros de estatísticas diarias modificouse na versión ${s_version} de sysstat e non é compatíbel co anterior.
+ .
+ Se escolle esta opción hanse borrar os ficheiros de datos que existan no directorio /var/log/sysstat.
+ .
+ Se non sinala esta opción, a orde sar(1) só ha funcionar correctamente até que elimine á man os ficheiros.
+Description-it.UTF-8: Eliminare i file con i dati statistici nel vecchio formato?
+ Il formato dei file con i dati statistici giornalieri è cambiato nella versione ${s_version} di sysstat e non è compatibile con il precedente.
+ .
+ Se si accetta, tutti i file esistenti nella directory /var/log/sysstat/ verranno eliminati.
+ .
+ Se non si accetta, il comando sar(1) non funzionerà correttamente fino a quando i file non saranno rimossi manualmente.
+Description-ja.UTF-8: 過去の形式の統計データファイルを削除しますか?
+ 日次統計データファイルの形式は sysstat バージョン ${s_version} で変更されました。これは以前のものと互換性はありません。
+ .
+ このオプションを有効にすると、 /var/log/sysstat/ ディレクトリにある現在のデータファイルは全て削除されます。
+ .
+ このオプションを有効にしない場合、sar(1) コマンドは現在の統計情報のみを表示します。
+Description-nl.UTF-8: De databestanden in oude indeling verwijderen?
+ De indeling van de bestanden met de dagelijkse data is veranderd in versie ${s_version} van sysstat en is niet compatibel met de oude indeling.
+ .
+ Als u deze optie kiest, dan zullen alle bestaande databestanden in de map /var/log/sysstat verwijderd worden.
+ .
+ Als u niet voor deze optie kiest, zal het commando sar(1) niet goed werken totdat u de bestanden handmatig verwijderd.
+Description-pl.UTF-8: Usunąć pliki ze statystykami w starym formacie?
+ Format plików zawierających dzienne statystyki został zmieniony w wersji ${s_version} programu sysstat i nie jest kompatybilny z poprzednimi wersjami programu.
+ .
+ Wybranie tej opcji spowoduje usunięcie istniejących plików z dziennymi statystykami z katalogu /var/log/sysstat/.
+ .
+ Jeżeli opcja ta nie będzie wybrana, polecenie sar(1) nie będzie działać poprawnie dopóki pliki ze statystykami nie zostaną usunięte.
+Description-pt.UTF-8: Remover ficheiros de dados estatísticos no formato antigo?
+ O formato de dados das estatísticas diárias mudou na versão ${s_version} do sysstat e não é compatível com a versão anterior.
+ .
+ Se escolher esta opção, todos os ficheiros de dados existentes no directório /var/log/sysstat serão apagados.
+ .
+ Se não escolher esta opção, o comando sar(1) não funcionará correctamente até remover esses ficheiros manualmente.
+Description-pt_BR.UTF-8: Remover arquivos de dados estatísticos em formato antigo?
+ O formato dos arquivos de estatísticas de dados diários mudou na versão ${s_version} do sysstat e não é compatível com a versão anterior.
+ .
+ Caso você escolha esta opção, todos os arquivos de dados existentes no diretório /var/log/sysstat/ serão apagados.
+ .
+ Caso você não escolha esta opção, o comando sar(1) não funcionará corretamente até que você remova os arquivos manualmente.
+Description-ru.UTF-8: Удалить файлы статистики в старом формате?
+ Формат файлов ежедневной статистики изменился в версии ${s_version} и не совместим с предыдущими версиями.
+ .
+ Если ответить утвердительно, то все существующие файлы данных в каталоге /var/log/sysstat/ будут удалены.
+ .
+ Если ответить отрицательно, то команда sar(1) будет работать неправильно до тех пор, пока вы не удалите эти файлы вручную.
+Description-sk.UTF-8: Odstrániť dátové súbory štatistík v starom formáte?
+ Vo verzii sysstat ${s_version} sa zmenil formát dátových súborov štatistík a nie je kompatibilný s predošlými verziami.
+ .
+ Ak zvolíte túto možnosť, všetky existujúce súbory v adresári /var/log/sysstat/ budú zmazané.
+ .
+ Ak nezvolíte túto možnosť, príkaz sar(1) nebude správne fungovať pokým tieto súbory manuálne neodstránite.
+Description-sv.UTF-8: Ta bort datafiler med det äldre statistikformatet?
+ Formatet på de dagliga datastatistikfilerna har ändrats i version ${s_version} av sysstat och är inte kompatibel med den tidigare.
+ .
+ Väljer du detta alternativ kommer alla datafiler i katalogen /var/log/sysstat/ att raderas.
+ .
+ Om du inte väljer detta alternativ kommer kommandot sar(1) inte fungera på ett korrekt sätt innan filerna har raderats manuellt.
+Description-vi.UTF-8: Gỡ bỏ các tập tin dữ liệu thống kê định dạng cũ ?
+ Định dạng của tập tin thống kê dữ liệu hằng ngày đã thay đổi trong phiên bản ${s_version} của sysstat, và nó không phải tương thích với định dạng trước.
+ .
+ Bật tùy chọn này thì mọi tập tin dữ liệu đều còn lại trong thư mục « /var/log/sysstat/ » sẽ bị xoá.
+ .
+ Không thì lệnh sar(1) sẽ không hoạt động đúng đến khi người dùng tự gỡ bỏ các tập tin đó.
+
+Template: sysstat/enable
+Type: boolean
+Default: false
+Description: Activate sysstat's cron job?
+ If this option is enabled the sysstat package will monitor system
+ activities and store the data in log files within /var/log/sysstat/.
+ .
+ This data allows the sar(1) command to display system statistics for the
+ whole day.
+ .
+ If you don't enable this option, the sar(1) command will only show the
+ current statistics.
+Description-ca.UTF-8: Voleu activar la tasca cron del sysstat?
+ Si activeu aquesta opció el paquet sysstat monitoritzarà les activitats del sistema i emmagatzemarà les dades en fitxers de registre a /var/log/sysstat.
+ .
+ Aquestes dades permeten que l'ordre sar(1) mostri les estadístiques del sistema per tot el dia.
+ .
+ Si no activeu aquesta opció, l'ordre sar(1) només mostrarà les estadístiques actuals.
+Description-cs.UTF-8: Aktivovat cronovou úlohu programu sysstat?
+ Je-li tato možnost povolená, bude balík sysstat sledovat aktivitu v systému a bude ji zaznamenávat ukládat v souborech v adresáři /var/log/sysstat/.
+ .
+ Z posbíraných dat může příkaz sar(1) zobrazovat denní statistiky.
+ .
+ Pokud tuto možnost nepovolíte, příkaz sar(1) bude zobrazovat pouze aktuální statistiku.
+Description-da.UTF-8: Aktiver sysstats cronjob?
+ Hvis denne indstilling er aktiveret, vil pakken sysstat overvåge systemaktiviteter og gemme dataene i logfiler i /var/log/sysstat/.
+ .
+ Disse data tillader kommandoen sar(1) at vise systemstatistik for hele dagen.
+ .
+ Hvis du ikke aktiverer denne indstilling, vil kommandoen sar(1) kun vise den aktuelle statistik.
+Description-de.UTF-8: Einen Cronjob für Sysstat einrichten?
+ Falls Sie zustimmen, wird Sysstat Systemaktivitäten überwachen und die Daten in Protokolldateien im Verzeichnis /var/log/sysstat/ ablegen.
+ .
+ Mit diesen Daten kann der Befehl sar(1) ganztägige Systemstatistiken anzeigen.
+ .
+ Falls Sie nicht zustimmen, kann der Befehl sar(1) nur die aktuellen Statistiken anzeigen.
+Description-es.UTF-8: ¿Desea activar la tarea de sysstat en cron?
+ Si se habilita esta opción, el paquete sysstat monitorizará las actividades del sistema y almacenará los datos en los archivos de registro del directorio «/var/log/sysstat/».
+ .
+ Estos datos permiten al programa sar(1) mostrar las estadísticas del sistema para un día entero.
+ .
+ Si no habilita esta opción, el programa sar(1) sólo mostrará las estadísticas actuales.
+Description-eu.UTF-8: Sysstat's cron-lana aktibatu?
+ Aukera hau gaituaz gero sysstat paketeak sistema aktibitatean monitorizatu eta datuak /var/log/sysstat/ direktorioko erregistro fitxategietan bilduko ditu.
+ .
+ Datu hauek sar(1) komandoari egun osoko sistema estatistikak bistaratzeko aukera ematen diote.
+ .
+ Aukera hau gaitzen ez baduzu, sar(1) komandoak uneko estatistikak bakarrik bistaraziko ditu.
+Description-fi.UTF-8: Otetaanko ohjelman sysstat cron-työ käyttöön?
+ Jos valitset tämän vaihtoehdon, paketti systat kerää tietoja järjestelmän toiminnasta ja tallentaa ne lokitiedostoihin hakemistoon /var/log/sysstat.
+ .
+ Komento sar(1) voi näiden tietojen avulla näyttää päivän järjestelmätilastot.
+ .
+ Jos et valitse tätä vaihtoehtoa, komento sar(1) näyttää vain tämänhetkiset tilastot.
+Description-fr.UTF-8: Faut-il activer la tâche quotidienne de cron pour sysstat ?
+ Si vous choisissez cette option, le paquet sysstat surveillera l'activité du système et conservera ces informations dans des journaux placés dans le répertoire /var/log/sysstat.
+ .
+ Ces données permettront à la commande sar(1) d'afficher des statistiques sur l'activité du système pour la journée entière.
+ .
+ Si vous ne choisissez pas cette option, la commande sar(1) n'affichera que les statistiques courantes.
+Description-gl.UTF-8: Desexa activar a tarefa de cron de sysstat?
+ Se escolle esta opción, o paquete sysstat ha vixiar a actividade do sistema e almacenará os datos en ficheiros de rexistro en /var/log/sysstat.
+ .
+ Estes datos permiten que a orde sar(1) mostre estatísticas diarias de todo o sistema.
+ .
+ Se non escolle esta opción, a orde sar(1) só ha mostrar as estatísticas actuais.
+Description-it.UTF-8: Attivare il cron job per sysstat?
+ Se questa opzione è attiva, il pacchetto sysstat raccoglierà dati sulle attività del sistema e li memorizzerà in file di log nella directory /var/log/sysstat/.
+ .
+ Questi dati permettono al comando sar(1) di mostrare le statistiche del sistema su base giornaliera.
+ .
+ Se non si attiva questa opzione, il comando sar(1) mostrerà solo le statistiche attuali.
+Description-ja.UTF-8: sysstat の cron ジョブを有効にしますか?
+ このオプションが有効にされると sysstat パッケージはシステムの可動状況を監視して、/var/log/sysstat/ ディレクトリにログファイルとして保存します。
+ .
+ このデータによって sar(1) コマンドは1日のシステム統計情報を表示できます。
+ .
+ このオプションを有効にしない場合、sar(1) コマンドは現在の統計情報のみを表示します。
+Description-nl.UTF-8: De cronjob van sysstat activeren?
+ Als deze optie geactiveerd is zal het sysstat-pakket systeemactiviteiten volgen en de data opslaan in logbestanden onder /var/log/sysstat/.
+ .
+ Met deze data kan het commando sar(1) statistieken voor de hele dag weergeven.
+ .
+ Als u deze optie niet activeert zal het commando sar(1) enkel de huidige statistieken weergeven.
+Description-pl.UTF-8: Aktywować zadanie crona pakietu sysstat?
+ Jeżeli ta opcja zostanie włączona, to pakiet sysstat będzie zbierał dane dotyczące aktywności systemu i zapisywał je w plikach logów w katalogu /var/lib/sysstat/.
+ .
+ Dane te umożliwiają poleceniu sar(1) wyświetlanie statystyk systemowych dotyczących całego dnia.
+ .
+ Niewłączenie tej opcji spowoduje, że polecenie sar(1) będzie wyświetlać tylko bieżące statystyki.
+Description-pt.UTF-8: Activar a tarefa cron de sysstat?
+ Se esta opção estiver activa o sysstat vai monitorizar a actividade do sistema e guardar os dados em ficheiros de registo no directório /var/log/sysstat.
+ .
+ Estes dados permitem que o comando sar(1) apresente estatísticas referentes a um dia completo.
+ .
+ Se não activar esta opção, o comando sar(1) só pode apresentar as estatísticas no momento.
+Description-pt_BR.UTF-8: Ativar o cron job do sysstat?
+ Caso esta opção seja habilitada, o pacote sysstat monitorará atividades do sistema e armazenará os dados em arquivos de log no diretório /var/log/sysstat/.
+ .
+ Estes dados permitem ao comando sar(1) exibir estatísticas do sistema para o dia todo.
+ .
+ Caso você não habilite esta opção, o comando sar(1) exibirá somente as estatísticas atuais.
+Description-ru.UTF-8: Добавить задание sysstat в cron?
+ При положительном ответе пакет sysstat будет отслеживать работу системы и сохранять данные в журнальные файлы в каталог /var/log/sysstat/.
+ .
+ Эти данные позволяют команде sar(1) отображать системную статистику за целый день.
+ .
+ При отрицательном ответе, команда sar(1) будет выводить только статистику на текущий момент.
+Description-sk.UTF-8: Aktivovať úlohu cron sysstat?
+ Ak zapnete túto voľbu, balík sysstat bude monitorovať aktivitu vášho systému a ukladať údaje do súborov v adresári /var/log/sysstat/.
+ .
+ Tieto údaje umožnia príkazu sar(1) zobraziť štatistiky systému za celý deň.
+ .
+ Ak nezapnete túto voľbu, príkaz sar(1) zobrazí iba aktuálnu štatistiku.
+Description-sv.UTF-8: Vill du aktivera cron-jobbet för sysstat?
+ Om detta alternativ aktiveras kommer sysstat-paketet att övervaka systemaktiviterna och lagra data i loggfiler i /var/log/systat/.
+ .
+ Dessa data gör att kommandot sar(1) visar systemstatistik för hela dagen.
+ .
+ Om du inte aktiverar detta alternativ kan kommandot sar(1) endast visa aktuell statistik.
+Description-vi.UTF-8: Kích hoạt công việc định kỳ của sysstat ?
+ Bật tùy chọn này thì gói sysstat sẽ theo dõi các hoạt động của hệ thống và cất giữ dữ liệu trong tập tin ghi lưu bên trong thư mục « /var/log/sysstat/ ».
+ .
+ Dữ liệu này cho phép lệnh sar(1) hiển thị thống kê hệ thống về toàn bộ ngày.
+ .
+ Không bật tùy chọn này thì lệnh sar(1) sẽ chỉ hiển thị thống kê hiện thời.

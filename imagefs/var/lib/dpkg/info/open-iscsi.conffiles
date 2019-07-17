@@ -1,0 +1,4 @@
+/etc/default/open-iscsi
+/etc/init.d/iscsid
+/etc/init.d/open-iscsi
+/etc/iscsi/iscsid.conf

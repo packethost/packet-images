@@ -1,0 +1,9 @@
+6829c24855959c887911ef6c89c9d5b8  lib/udev/rules.d/71-biosdevname.rules
+0b6c6f1f7594495b8403b498426d1d9b  sbin/biosdevname
+0f1a9f896144093bcc739f0eed938ccf  usr/share/doc/biosdevname/README
+b3109c6807afb2519761233aa0856676  usr/share/doc/biosdevname/README.Debian
+b55589d9d0f9c131c27f5987d2020799  usr/share/doc/biosdevname/TODO
+85a3f73669f7bf40521b10840db0e530  usr/share/doc/biosdevname/changelog.Debian.gz
+bc5b6735d26a75f7782adf0a6b4d238f  usr/share/doc/biosdevname/copyright
+181e1ee97d0b54d6ce30cf0ca8c695ba  usr/share/initramfs-tools/hooks/biosdevname
+4314206edd3b2093fcac1e5396169f6c  usr/share/man/man1/biosdevname.1.gz

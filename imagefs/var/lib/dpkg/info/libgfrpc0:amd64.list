@@ -1,0 +1,14 @@
+/.
+/usr
+/usr/lib
+/usr/lib/x86_64-linux-gnu
+/usr/lib/x86_64-linux-gnu/libgfrpc.so.0.0.1
+/usr/share
+/usr/share/doc
+/usr/share/doc/libgfrpc0
+/usr/share/doc/libgfrpc0/copyright
+/usr/share/lintian
+/usr/share/lintian/overrides
+/usr/share/lintian/overrides/libgfrpc0
+/usr/lib/x86_64-linux-gnu/libgfrpc.so.0
+/usr/share/doc/libgfrpc0/changelog.Debian.gz

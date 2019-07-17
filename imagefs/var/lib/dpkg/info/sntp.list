@@ -1,0 +1,17 @@
+/.
+/usr
+/usr/bin
+/usr/bin/sntp
+/usr/share
+/usr/share/doc
+/usr/share/doc/sntp
+/usr/share/doc/sntp/NEWS.Debian.gz
+/usr/share/doc/sntp/changelog.Debian.gz
+/usr/share/doc/sntp/copyright
+/usr/share/doc/sntp/sntp.html
+/usr/share/man
+/usr/share/man/man1
+/usr/share/man/man1/sntp.1.gz
+/var
+/var/lib
+/var/lib/sntp
