@@ -1,0 +1,112 @@
+OS: Ubuntu	VERSION: 16.04
+======================================================================
+Overview:
+======================================================================
+Image Size
+   Current: 394M
+   Previous:: 372M
+Filesystem Size
+   Current: 1.1G
+   Previous: 1007M
+Packages
+   Current: 420
+   Previous: 419
+Kernel(s)
+   Current:
+      linux-image-4.15.0-55-generic4.15.0-55.60~16.04.2
+      linux-image-generic-hwe-16.044.15.0.55.76
+   Previous:
+      linux-image-4.4.0-142-generic4.4.0-142.168
+      linux-image-extra-4.4.0-142-generic4.4.0-142.168
+      linux-image-generic4.4.0.142.148
+======================================================================
+New Packages:
+======================================================================
+linux-image-4.15.0-55-generic
+linux-image-generic-hwe-16.04
+linux-modules-4.15.0-55-generic
+linux-modules-extra-4.15.0-55-generic
+powermgmt-base
+======================================================================
+Updated Packages:
+======================================================================
+apt1.2.29ubuntu0.1					      |	apt1.2.32
+apt-transport-https1.2.29ubuntu0.1			      |	apt-transport-https1.2.32
+apt-utils1.2.29ubuntu0.1				      |	base-files9.4ubuntu4.8
+base-files9.4ubuntu4.7					      <
+bash4.3-14ubuntu1.2					      |	bash4.3-14ubuntu1.4
+bsdutils1:2.27.1-6ubuntu3.6				      |	bsdutils1:2.27.1-6ubuntu3.7
+busybox-initramfs1:1.22.0-15ubuntu1			      |	busybox-initramfs1:1.22.0-15ubuntu1.4
+cloud-init18.5-21-g8ee294d5-0ubuntu1~16.04.1		      |	cloud-init19.1-1-gbaa47854-0ubuntu1~16.04.1
+curl7.47.0-1ubuntu2.12					      |	curl7.47.0-1ubuntu2.13
+dbus1.10.6-1ubuntu3.3					      |	dbus1.10.6-1ubuntu3.4
+debconf1.5.58ubuntu1					      |	debconf1.5.58ubuntu2
+distro-info-data0.28ubuntu0.9				      |	distro-info-data0.28ubuntu0.12
+file1:5.25-2ubuntu1.1					      |	file1:5.25-2ubuntu1.2
+grub2-common2.02~beta2-36ubuntu3.20			      |	grub2-common2.02~beta2-36ubuntu3.22
+grub-common2.02~beta2-36ubuntu3.20			      |	grub-common2.02~beta2-36ubuntu3.22
+grub-efi2.02~beta2-36ubuntu3.20				      |	grub-efi2.02~beta2-36ubuntu3.22
+grub-efi-amd642.02~beta2-36ubuntu3.20			      |	grub-efi-amd642.02~beta2-36ubuntu3.22
+grub-efi-amd64-bin2.02~beta2-36ubuntu3.20		      |	grub-efi-amd64-bin2.02~beta2-36ubuntu3.22
+intel-microcode3.20180807a.0ubuntu0.16.04.1		      |	intel-microcode3.20190618.0ubuntu0.16.04.1
+iproute24.3.0-1ubuntu3.16.04.4				      |	iproute24.3.0-1ubuntu3.16.04.5
+libapparmor1:amd642.10.95-0ubuntu2.10			      |	libapparmor1:amd642.10.95-0ubuntu2.11
+libapt-inst2.0:amd641.2.29ubuntu0.1			      |	libapt-inst2.0:amd641.2.32
+libapt-pkg5.0:amd641.2.29ubuntu0.1			      |	libapt-pkg5.0:amd641.2.32
+libblkid1:amd642.27.1-6ubuntu3.6			      |	libblkid1:amd642.27.1-6ubuntu3.7
+libc6:amd642.23-0ubuntu10				      |	libc6:amd642.23-0ubuntu11
+libc-bin2.23-0ubuntu10					      |	libc-bin2.23-0ubuntu11
+libcups2:amd642.1.3-4ubuntu0.7				      |	libcups2:amd642.1.3-4ubuntu0.9
+libcurl3-gnutls:amd647.47.0-1ubuntu2.12			      |	libcurl3-gnutls:amd647.47.0-1ubuntu2.13
+libdb5.3:amd645.3.28-11ubuntu0.1			      |	libdb5.3:amd645.3.28-11ubuntu0.2
+libdbus-1-3:amd641.10.6-1ubuntu3.3			      |	libdbus-1-3:amd641.10.6-1ubuntu3.4
+libdns-export1621:9.10.3.dfsg.P4-8ubuntu1.12		      |	libdns-export1621:9.10.3.dfsg.P4-8ubuntu1.14
+libexpat1:amd642.1.0-7ubuntu0.16.04.3			      |	libexpat1:amd642.1.0-7ubuntu0.16.04.4
+libfdisk1:amd642.27.1-6ubuntu3.6			      |	libfdisk1:amd642.27.1-6ubuntu3.7
+libgdk-pixbuf2.0-0:amd642.32.2-1ubuntu1.5		      |	libgdk-pixbuf2.0-0:amd642.32.2-1ubuntu1.6
+libgdk-pixbuf2.0-common2.32.2-1ubuntu1.5		      |	libgdk-pixbuf2.0-common2.32.2-1ubuntu1.6
+libglib2.0-0:amd642.48.2-0ubuntu4.1			      |	libglib2.0-0:amd642.48.2-0ubuntu4.3
+libglib2.0-data2.48.2-0ubuntu4.1			      |	libglib2.0-data2.48.2-0ubuntu4.3
+libgnutls30:amd643.4.10-4ubuntu1.4			      |	libgnutls30:amd643.4.10-4ubuntu1.5
+libgnutls-openssl27:amd643.4.10-4ubuntu1.4		      |	libgnutls-openssl27:amd643.4.10-4ubuntu1.5
+libisc-export1601:9.10.3.dfsg.P4-8ubuntu1.12		      |	libisc-export1601:9.10.3.dfsg.P4-8ubuntu1.14
+libldap-2.4-2:amd642.4.42+dfsg-2ubuntu3.4		      |	libldap-2.4-2:amd642.4.42+dfsg-2ubuntu3.5
+libmagic1:amd641:5.25-2ubuntu1.1			      |	libmagic1:amd641:5.25-2ubuntu1.2
+libmount1:amd642.27.1-6ubuntu3.6			      |	libmount1:amd642.27.1-6ubuntu3.7
+libnss3:amd642:3.28.4-0ubuntu0.16.04.5			      |	libnss3:amd642:3.28.4-0ubuntu0.16.04.6
+libnss3-nssdb2:3.28.4-0ubuntu0.16.04.5			      |	libnss3-nssdb2:3.28.4-0ubuntu0.16.04.6
+librados210.2.11-0ubuntu0.16.04.1			      |	librados210.2.11-0ubuntu0.16.04.2
+librbd110.2.11-0ubuntu0.16.04.1				      |	librbd110.2.11-0ubuntu0.16.04.2
+libseccomp2:amd642.3.1-2.1ubuntu2~16.04.1		      |	libseccomp2:amd642.4.1-0ubuntu0.16.04.2
+libsmartcols1:amd642.27.1-6ubuntu3.6			      |	libsmartcols1:amd642.27.1-6ubuntu3.7
+libsqlite3-0:amd643.11.0-1ubuntu1.1			      |	libsqlite3-0:amd643.11.0-1ubuntu1.2
+libsystemd0:amd64229-4ubuntu21.15			      |	libsystemd0:amd64229-4ubuntu21.21
+libtiff5:amd644.0.6-1ubuntu0.5				      |	libtiff5:amd644.0.6-1ubuntu0.6
+libudev1:amd64229-4ubuntu21.16				      |	libudev1:amd64229-4ubuntu21.22
+libuuid1:amd642.27.1-6ubuntu3.6				      |	libuuid1:amd642.27.1-6ubuntu3.7
+libxslt1.1:amd641.1.28-2.1ubuntu0.1			      |	libxslt1.1:amd641.1.28-2.1ubuntu0.2
+linux-firmware1.157.21					      |	linux-firmware1.157.22
+linux-image-4.4.0-142-generic4.4.0-142.168		      |	linux-image-4.15.0-55-generic4.15.0-55.60~16.04.2
+linux-image-extra-4.4.0-142-generic4.4.0-142.168	      |	linux-image-generic-hwe-16.044.15.0.55.76
+linux-image-generic4.4.0.142.148			      |	linux-modules-4.15.0-55-generic4.15.0-55.60~16.04.2
+login1:4.2-3.1ubuntu5.3					      |	login1:4.2-3.1ubuntu5.4
+mount2.27.1-6ubuntu3.6					      |	mount2.27.1-6ubuntu3.7
+multiarch-support2.23-0ubuntu10				      |	multiarch-support2.23-0ubuntu11
+passwd1:4.2-3.1ubuntu5.3				      |	passwd1:4.2-3.1ubuntu5.4
+python3-apt1.1.0~beta1ubuntu0.16.04.2			      |	python3-apt1.1.0~beta1ubuntu0.16.04.5
+python3-jinja22.8-1					      |	python3-jinja22.8-1ubuntu0.1
+python3-urllib31.13.1-2ubuntu0.16.04.2			      |	python3-urllib31.13.1-2ubuntu0.16.04.3
+python-apt1.1.0~beta1ubuntu0.16.04.2			      |	python-apt1.1.0~beta1ubuntu0.16.04.5
+python-apt-common1.1.0~beta1ubuntu0.16.04.2		      |	python-apt-common1.1.0~beta1ubuntu0.16.04.5
+rsyslog8.16.0-1ubuntu3					      |	rsyslog8.16.0-1ubuntu3.1
+sudo1.8.16-0ubuntu1.5					      |	sudo1.8.16-0ubuntu1.7
+systemd229-4ubuntu21.15					      |	systemd229-4ubuntu21.21
+systemd-sysv229-4ubuntu21.15				      |	systemd-sysv229-4ubuntu21.21
+udev229-4ubuntu21.16					      |	udev229-4ubuntu21.22
+unattended-upgrades0.90ubuntu0.10			      |	unattended-upgrades1.1ubuntu1.18.04.7~16.04.3
+util-linux2.27.1-6ubuntu3.6				      |	util-linux2.27.1-6ubuntu3.7
+uuid-runtime2.27.1-6ubuntu3.6				      |	uuid-runtime2.27.1-6ubuntu3.7
+vim2:7.4.1689-3ubuntu1.2				      |	vim2:7.4.1689-3ubuntu1.3
+vim-common2:7.4.1689-3ubuntu1.2				      |	vim-common2:7.4.1689-3ubuntu1.3
+vim-runtime2:7.4.1689-3ubuntu1.2			      |	vim-runtime2:7.4.1689-3ubuntu1.3
+wget1.17.1-1ubuntu1.4					      |	wget1.17.1-1ubuntu1.5
