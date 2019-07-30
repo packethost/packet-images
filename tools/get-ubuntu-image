@@ -17,6 +17,7 @@ case "$version" in
 '16.04') fullversion=$version.4 ;;
 '17.10') fullversion=$version ;;
 '18.04') fullversion=$version ;;
+'19.04') fullversion=$version ;;
 *) echo "$version is not supported, sorry" && exit 1 ;;
 esac
 
