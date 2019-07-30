@@ -6,6 +6,7 @@ This repository contains Dockerfiles that we use as the basis for the OSes that 
 - CentOS 7
 - Debian 8
 - Debian 9
+- Debian 10
 - FreeBSD (not present)
 - OpenSUSE 42.3
 - Scientific Linux 6
@@ -15,6 +16,7 @@ This repository contains Dockerfiles that we use as the basis for the OSes that 
 - Ubuntu 17.04 (deprecated)
 - Ubuntu 17.10 (deprecated)
 - Ubuntu 18.04
+- Ubuntu 19.04
 - Virtuozzo (not present)
 - VMWare (not present)
 - Windows (not present)
@@ -34,7 +36,7 @@ TLDR:  Build docker image, save docker image to archive and convert the archive 
 image. The image can be used on a baremetal physical server with or without docker.
 
 ### Overview
-Branch layout consists of a primacy "base" branch for each supported operating system distro. See centos\_7-base, ubuntu\_17\_10-base, etc. The base branch contains a Dockerfile (per supported architecture) with a suffienct level of customization (stage 1) to produce a standardized operating system experience across Packet.net's hardware offering. If any hardware specific changes are to be included in a particular image, a separate branch is created for the hardware type / plan the image is customized. Any such hardware specific image is formed by using the base image as the template. For example, if we want to create a new image for ubuntu_17_10-supermachine1, the Dockerfile for this branch will use "FROM ubuntu_17_10-base" as to complete a multi-stage (stage 2) build based off the official Packet base image.
+Branch layout consists of a primacy "base" branch for each supported operating system distro. See centos\_7-base, ubuntu\_17\_10-base, etc. The base branch contains a Dockerfile (per supported architecture) with a sufficient level of customization (stage 1) to produce a standardized operating system experience across Packet.net's hardware offering. If any hardware specific changes are to be included in a particular image, a separate branch is created for the hardware type / plan the image is customized. Any such hardware specific image is formed by using the base image as the template. For example, if we want to create a new image for ubuntu_17_10-supermachine1, the Dockerfile for this branch will use "FROM ubuntu_17_10-base" as to complete a multi-stage (stage 2) build based off the official Packet base image.
 
 ### Dependencies
 There is only a small list of deps required to run image builds, but we recommend a dedicated
@@ -42,7 +44,7 @@ machine or VM for this purpose simply to keep things isolated. This repo makes u
 
  - Docker 1.1.11 and above (older version may work)
  - JQ
- - A linux docker host on top of CentOS7 / Ubuntu 16
+ - A Linux docker host on top of CentOS 7 / Ubuntu 16
  - git-lfs
 
 ### Installation
