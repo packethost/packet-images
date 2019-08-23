@@ -3,21 +3,51 @@ OS: CentOS	VERSION: 7.6.1810
 Overview:
 ======================================================================
 Image Size
-   Current: 323M
+   Current: 328M
    Previous:: 323M
 Filesystem Size
-   Current: 771M
+   Current: 784M
    Previous: 771M
 Packages
-   Current: 345
+   Current: 347
    Previous: 345
 Kernel(s)
    Current:
-      kernel-3.10.0-957.12.2.el7.x86_64
+      kernel-3.10.0-957.27.2.el7.x86_64
    Previous:
 ======================================================================
 New Packages:
 ======================================================================
+irqbalance
+numactl-libs
 ======================================================================
 Updated Packages:
 ======================================================================
+bind-libs-lite-9.9.4-73.el7_6.x86_64			      |	bind-libs-lite-9.9.4-74.el7_6.2.x86_64
+bind-license-9.9.4-73.el7_6.noarch			      |	bind-license-9.9.4-74.el7_6.2.noarch
+cloud-utils-growpart-0.29-2.el7.noarch			      |	cloud-utils-growpart-0.29-2.el7_6.2.noarch
+curl-7.29.0-51.el7.x86_64				      |	curl-7.29.0-51.el7_6.3.x86_64
+device-mapper-1.02.149-10.el7_6.7.x86_64		      |	device-mapper-1.02.149-10.el7_6.8.x86_64
+device-mapper-libs-1.02.149-10.el7_6.7.x86_64		      |	device-mapper-libs-1.02.149-10.el7_6.8.x86_64
+glib2-2.56.1-2.el7.x86_64				      |	glib2-2.56.1-4.el7_6.x86_64
+glibc-2.17-260.el7_6.5.x86_64				      |	glibc-2.17-260.el7_6.6.x86_64
+glibc-common-2.17-260.el7_6.5.x86_64			      |	glibc-common-2.17-260.el7_6.6.x86_64
+kernel-3.10.0-957.12.2.el7.x86_64			      |	kernel-3.10.0-957.27.2.el7.x86_64
+libcurl-7.29.0-51.el7.x86_64				      |	libcurl-7.29.0-51.el7_6.3.x86_64
+libssh2-1.4.3-12.el7_6.2.x86_64				      |	libssh2-1.4.3-12.el7_6.3.x86_64
+libteam-1.27-5.el7.x86_64				      |	libteam-1.27-6.el7_6.1.x86_64
+microcode_ctl-2.1-47.2.el7_6.x86_64			      |	microcode_ctl-2.1-47.5.el7_6.x86_64
+python-2.7.5-77.el7_6.x86_64				      |	python-2.7.5-80.el7_6.x86_64
+python-libs-2.7.5-77.el7_6.x86_64			      |	python-libs-2.7.5-80.el7_6.x86_64
+python-perf-3.10.0-957.12.2.el7.x86_64			      |	python-perf-3.10.0-957.27.2.el7.x86_64
+sysstat-10.1.5-17.el7.x86_64				      |	sysstat-10.1.5-17.el7_6.1.x86_64
+systemd-219-62.el7_6.6.x86_64				      |	systemd-219-62.el7_6.9.x86_64
+systemd-libs-219-62.el7_6.6.x86_64			      |	systemd-libs-219-62.el7_6.9.x86_64
+systemd-sysv-219-62.el7_6.6.x86_64			      |	systemd-sysv-219-62.el7_6.9.x86_64
+teamd-1.27-5.el7.x86_64					      |	teamd-1.27-6.el7_6.1.x86_64
+tuned-2.10.0-6.el7_6.3.noarch				      |	tuned-2.10.0-6.el7_6.4.noarch
+tzdata-2019a-1.el7.noarch				      |	tzdata-2019b-1.el7.noarch
+vim-common-7.4.160-5.el7.x86_64				      |	vim-common-7.4.160-6.el7_6.x86_64
+vim-enhanced-7.4.160-5.el7.x86_64			      |	vim-enhanced-7.4.160-6.el7_6.x86_64
+vim-filesystem-7.4.160-5.el7.x86_64			      |	vim-filesystem-7.4.160-6.el7_6.x86_64
+vim-minimal-7.4.160-5.el7.x86_64			      |	vim-minimal-7.4.160-6.el7_6.x86_64
