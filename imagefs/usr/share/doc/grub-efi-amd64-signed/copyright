@@ -1,0 +1,19 @@
+Format: http://www.debian.org/doc/packaging-manuals/copyright-format/1.0/
+Upstream-Name: GNU GRUB
+Source: http://www.gnu.org/software/grub/
+Comment:
+ This package exists to download a signed binary from the Ubuntu archive and
+ publish it in .deb format.  The actual bootloader source code may be found
+ in the grub2 source package: 'apt-get source grub2'.
+
+Files: *
+Copyright: 1999, 2000, 2001, 2002, 2003, 2004, 2005, 2006, 2007, 2008, 2009  Free Software Foundation, Inc
+License: GPL-3+
+
+Files: debian/*
+Copyright: 2012 Canonical Ltd.
+License: GPL-3+
+
+License: GPL-3+
+ On Ubuntu systems the full text of the GNU General Public License can be
+ found in the `/usr/share/common-licenses/GPL-3' file.

@@ -1,0 +1,28 @@
+#!/bin/sh
+
+prereqs()
+{
+	if [ "${BUSYBOX}" = "n" ] || [ -z "${BUSYBOXDIR}" ]; then
+		echo ''
+	else
+		# Ensure busybox installs all its commands before
+		# checking what we should provide
+		echo zz-busybox
+	fi
+}
+
+case $1 in
+# get pre-requisites
+prereqs)
+	prereqs
+	exit 0
+	;;
+esac
+
+# klibc
+cp -pnL /usr/lib/klibc/bin/* "${DESTDIR}/bin"
+cp -pL /lib/klibc-*.so "${DESTDIR}/lib"
+rm -f "${DESTDIR}"/bin/kinit*
+if [ "${BUSYBOX}" = "n" ] || [ -z "${BUSYBOXDIR}" ]; then
+	rm -f "${DESTDIR}/bin/zcat"
+fi

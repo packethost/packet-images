@@ -1,0 +1,15 @@
+#!/bin/sh
+
+CONFIG_FILE=/etc/multipath.conf
+
+exec >&3
+
+if [ -e "$CONFIG_FILE" ]; then
+    printf "Contents of $CONFIG_FILE:\n"
+    grep  -Ev "^([[:space:]]*#|$)" $CONFIG_FILE
+else
+    printf "$CONFIG_FILE does not exist.\n"
+fi
+
+printf "\n"
+

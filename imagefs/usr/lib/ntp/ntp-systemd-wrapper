@@ -1,0 +1,30 @@
+#!/bin/sh
+
+DAEMON=/usr/sbin/ntpd
+PIDFILE=/var/run/ntpd.pid
+LOCKFILE=/run/lock/ntpdate
+
+if [ -r /etc/default/ntp ]; then
+        . /etc/default/ntp
+fi
+
+if [ -e /run/ntp.conf.dhcp ]; then
+        NTPD_OPTS="$NTPD_OPTS -c /run/ntp.conf.dhcp"
+fi
+
+RUNASUSER=ntp
+UGID=$(getent passwd $RUNASUSER | cut -f 3,4 -d:) || true
+if test "$(uname -s)" = "Linux"; then
+        NTPD_OPTS="$NTPD_OPTS -u $UGID"
+fi
+
+# Protect the service startup against concurrent ntpdate ifup hooks
+(
+	if flock -w 180 9; then
+		exec $DAEMON -p $PIDFILE $NTPD_OPTS
+	else
+		echo "Timeout waiting for $LOCKFILE"
+		exit 1
+	fi
+) 9>$LOCKFILE
+

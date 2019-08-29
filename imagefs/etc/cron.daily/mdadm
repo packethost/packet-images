@@ -1,0 +1,18 @@
+#!/bin/sh
+#
+# cron.daily/mdadm -- daily check that MD devices are functional
+#
+# Copyright © 2008 Paul Slootman <paul@debian.org>
+# distributed under the terms of the Artistic Licence 2.0
+
+# As recommended by the manpage, run
+#      mdadm --monitor --scan --oneshot
+# every day to ensure that any degraded MD devices don't go unnoticed.
+# Email will go to the address specified in /etc/mdadm/mdadm.conf .
+#
+set -eu
+
+MDADM=/sbin/mdadm
+[ -x $MDADM ] || exit 0 # package may be removed but not purged
+
+exec $MDADM --monitor --scan --oneshot

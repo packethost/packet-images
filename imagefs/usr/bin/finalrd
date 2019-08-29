@@ -1,0 +1,59 @@
+#!/bin/sh
+# SPDX-License-Identifier: GPL-3.0-only
+
+set -e
+
+# for initramfs-tools hook-functions
+export DESTDIR=/run/initramfs
+# for /usr/lib/dracut/dracut-install
+export DESTROOTDIR=$DESTDIR
+
+# something already created shutdown initramfs
+# same check is done by e.g. dracut-shutdown
+# it is expected that any shutdown initramfs is good enough
+[ ! -x $DESTDIR/bin/sh ] || exit 0
+
+# /run may be mounted noexec,nosuid => fix it
+# it should be a more normal/default filesystem post-pivot
+# systemd-shutdownd pivot does not currently remount /run with these
+# options
+mount -o remount,exec /run
+
+# base dirs
+mkdir -p $DESTDIR $DESTDIR/etc
+for d in bin sbin lib lib64; do
+    mkdir -p $DESTDIR/usr/$d
+    ln -s usr/$d $DESTDIR/$d
+done
+
+# required for in_initrd() systemd detection, part of shutdown
+# spec/requirements this is equivalent to /etc/os-release
+cat > $DESTDIR/etc/initrd-release <<EOF
+NAME="FinalRD"
+VERSION="2"
+ID=finalrd
+PRETTY_NAME="Final Runtime Directory One Little Duck - Number Two"
+VERSION_ID="2"
+VERSION_CODENAME=onelittleduck
+
+EOF
+
+# our shutdown sequence is to be controled by systemd-shutdown which
+# will unmount all the things, and run our hooks
+mkdir -p $DESTDIR/lib/systemd/system-shutdown
+. /usr/share/initramfs-tools/hook-functions
+copy_exec /lib/systemd/systemd-shutdown /shutdown
+copy_exec /bin/sh
+
+for d in /usr/share/finalrd /etc/finalrd /run/finalrd
+do
+    if [ -d $d ]
+    then
+	run-parts -v --regex='^.*\.finalrd$' --arg=setup -- $d || :
+	find $d -executable -name '*.finalrd' -exec cp -- "{}" $DESTDIR/lib/systemd/system-shutdown \;
+    fi
+done
+
+# copy ld configs, and rebuild cache
+cp -Lr /etc/ld.so.conf* $DESTDIR/etc/
+ldconfig -r $DESTDIR

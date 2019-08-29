@@ -1,0 +1,25 @@
+# mdadm Debian configuration
+#
+# You can run 'dpkg-reconfigure mdadm' to modify the values in this file, if
+# you want. You can also change the values here and changes will be preserved.
+# Do note that only the values are preserved; the rest of the file is
+# rewritten.
+#
+
+# AUTOCHECK:
+#   should mdadm run periodic redundancy checks over your arrays? See
+#   /etc/cron.d/mdadm.
+AUTOCHECK=true
+
+# START_DAEMON:
+#   should mdadm start the MD monitoring daemon during boot?
+START_DAEMON=true
+
+# DAEMON_OPTIONS:
+#   additional options to pass to the daemon.
+DAEMON_OPTIONS="--syslog"
+
+# VERBOSE:
+#   if this variable is set to true, mdadm will be a little more verbose e.g.
+#   when creating the initramfs.
+VERBOSE=false

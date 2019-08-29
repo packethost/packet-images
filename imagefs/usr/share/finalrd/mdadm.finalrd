@@ -1,0 +1,16 @@
+#!/bin/sh
+# SPDX-License-Identifier: GPL-3.0-only
+set -e
+
+if [ "$1" = "setup" ]
+then
+    . /usr/share/initramfs-tools/hook-functions
+    copy_exec /sbin/mdadm
+    copy_exec /sbin/mdmon
+
+    exit 0
+fi
+
+mdmon --all --takeover
+mdadm -vv --wait-clean --scan
+mdadm -vv --stop --scan

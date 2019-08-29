@@ -1,0 +1,5 @@
+cddd35eb8ae8f57ff883efe05ed35eb8  usr/lib/x86_64-linux-gnu/ceph/libceph-common.so.0
+66dcbbc6065b71b89cabcb550a94fb09  usr/lib/x86_64-linux-gnu/librados.so.2.0.0
+b259ab84b381ab3366d4e168fef038af  usr/share/doc/librados2/changelog.Debian.gz
+23c7bc3587291bc8d0df6458569b9ac0  usr/share/doc/librados2/copyright
+75e6a87de11914b03ec3efd075dd4898  usr/share/lintian/overrides/librados2

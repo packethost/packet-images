@@ -1,0 +1,12 @@
+#!/bin/sh
+
+old_ntp_servers="unknown and invalid"
+new_ntp_servers=$DHCP4_NTP_SERVERS
+case "$2" in
+	up|vpn-up) reason=BOUND; ;;
+	down|vpn-down) reason=RELEASE; ;;
+	*) exit 0; ;;
+esac
+
+test -f /etc/dhcp/dhclient-exit-hooks.d/ntp || exit 0
+. /etc/dhcp/dhclient-exit-hooks.d/ntp

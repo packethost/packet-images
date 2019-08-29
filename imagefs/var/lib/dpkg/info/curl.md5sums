@@ -1,0 +1,4 @@
+cfad42e60dc9a9be54343e32ec0e47fd  usr/bin/curl
+5a2a3376ed6fd7f4b8f84b6c1ec33dbf  usr/share/doc/curl/copyright
+2e1cd507fb0edf2a3f66078f054ec714  usr/share/man/man1/curl.1.gz
+b26acb1546bb5f93c79ab2f210c57428  usr/share/zsh/vendor-completions/_curl

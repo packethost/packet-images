@@ -1,0 +1,2 @@
+# Deliberate choice to bundle these together
+libgdk-pixbuf2.0-0: package-name-doesnt-match-sonames libgdk-pixbuf-2.0-0 libgdk-pixbuf-xlib-2.0-0

@@ -1,0 +1,48 @@
+#!/bin/sh
+# kFreeBSD do not accept scripts as interpreters, using #!/bin/sh and sourcing.
+if [ true != "$INIT_D_SCRIPT_SOURCED" ] ; then
+    set "$0" "$@"; INIT_D_SCRIPT_SOURCED=true . /lib/init/init-d-script
+fi
+### BEGIN INIT INFO
+# Provides:          iscsid
+# Required-Start:    $network $local_fs
+# Required-Stop:     $network $local_fs sendsigs
+# Default-Start:     S
+# Default-Stop:      0 1 6
+# Short-Description: iSCSI initiator daemon (iscsid)
+# Description:       The iSCSI initiator daemon takes care of
+#                    monitoring iSCSI connections to targets. It is
+#                    also the daemon providing the interface for the
+#                    iscisadm tool to talk to when administering iSCSI
+#                    connections.
+### END INIT INFO
+
+# Author: Christian Seiler <christian@iwakd.de>
+
+DESC="iSCSI initiator daemon"
+DAEMON=/sbin/iscsid
+PIDFILE=/run/iscsid.pid
+OMITDIR=/run/sendsigs.omit.d
+
+do_start_prepare() {
+	if ! /lib/open-iscsi/startup-checks.sh ; then
+		exit 1
+	fi
+}
+
+do_start_cleanup() {
+	ln -sf $PIDFILE $OMITDIR
+}
+
+do_stop_override() {
+	# Don't stop iscsid if we're on initramfs or we had some
+	# excluded sessions. We could actually stop it, it's not
+	# required for the kernel to continue working with active
+	# sessions, but it also doesn't hurt to leave it running.
+	if [ -f /etc/iscsi/iscsi.initramfs ] ||
+		( [ -f /run/open-iscsi/shutdown-keep-sessions ] && [ -n "$(cat /run/open-iscsi/shutdown-keep-sessions)" ] )
+	then
+		return
+	fi
+	do_stop "$@"
+}

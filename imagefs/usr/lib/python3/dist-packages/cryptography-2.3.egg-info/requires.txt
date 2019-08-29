@@ -1,0 +1,27 @@
+
+[:python_version < '3']
+enum34
+ipaddress
+
+[docs]
+sphinx>=1.6.5
+sphinx_rtd_theme
+
+[docstest]
+doc8
+pyenchant>=1.6.11
+readme_renderer>=16.0
+sphinxcontrib-spelling>=4.0.1
+
+[pep8test]
+flake8
+flake8-import-order
+pep8-naming
+
+[test]
+cryptography_vectors==2.3
+hypothesis>=1.11.4
+iso8601
+pretend
+pytest!=3.3.0,>=3.2.1
+pytz

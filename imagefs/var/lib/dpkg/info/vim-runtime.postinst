@@ -1,0 +1,34 @@
+#!/bin/sh
+set -e
+
+basedir=/usr/share/vim/@VIMCUR@/doc
+
+rm_diversion() {
+  dpkg-divert --package vim-runtime --rename --remove "$1"
+}
+
+# Used to remove the previous diversion when upgrading from one major release
+# to the next
+remove_previous_diversions() {
+  for v in vim71 vim72a vim72b vim72c; do
+    oldpath="$(echo $1 | sed s/@VIMCUR@/$v/)"
+    if dpkg-divert --list 2>/dev/null | grep -q "$oldpath"; then
+      rm_diversion $oldpath
+    fi
+  done
+}
+
+# Need to run helpztags since we're overwriting /u/s/v/a/d/tags whenever
+# vim-runtime is install/upgraded which breaks the help for other vim addons
+if which helpztags >/dev/null 2>&1; then
+  helpztags /usr/share/vim/addons/doc
+fi
+
+if [ "$1" = "configure" ]; then
+  remove_previous_diversions $basedir/help.txt
+  remove_previous_diversions $basedir/tags
+fi
+
+
+
+exit 0

@@ -1,0 +1,342 @@
+
+Template: open-iscsi/remove_even_with_active_sessions
+Type: boolean
+Description: Proceed with removing open-iscsi?
+ There are currently active iSCSI sessions. If you remove open-iscsi
+ now this may lead to data loss and/or hang the system at shutdown.
+ .
+ Do not do this if this system's root filesystem is on iSCSI.
+ .
+ If you do proceed, open-iscsi will try to unmount all filesystems on
+ iSCSI and log out from current sessions. If that fails (because a
+ filesystem is still in use), the kernel will keep the current
+ iSCSI sessions open, but will not perform any recovery if there is an
+ interruption of the network connection (or if the target is rebooted).
+ .
+ If you really intend to remove open-iscsi, you should abort here and
+ then stop open-iscsi:
+ .
+   service open-iscsi stop
+ .
+ If that did not clean up everything, manually umount all filesystems
+ that are on iSCSI, manually dismantle the storage stack, and only then
+ log out from all iSCSI sessions:
+ .
+   iscsiadm -m node --logoutall=all
+ .
+ At that point, it should be safe to remove this package.
+Description-cs.UTF-8: Pokračovat v odstraňování open-iscsi?
+ V současné době existují aktivní relace iSCSI. Pokud nyní open-iscsi odstraníte, může dojít ke ztrátě dat anebo to způsobit, že při vypínání přestane systém reagovat.
+ .
+ Tuto akci neprovádějte, pokud je kořenový souborový systém na iSCSI.
+ .
+ Budete-li pokračovat, open-iscsi se pokusí odpojit všechny souborové systémy na iSCSI a odhlásit se z aktuálních relací. Pokud se toto nezdaří (protože se souborový systém stále používá), jádro ponechá současné relace iSCSI otevřené, ale v případě, že dojde k přerušení síťového připojení, nebude provádět žádnou obnovu (nebo v případě, že se cílové zařízení restartuje).
+ .
+ Pokud skutečně máte v úmyslu open-iscsi odstranit, měli byste tuto operaci přerušit a následně open-iscsi zastavit:
+ .
+   service open-iscsi stop
+ .
+ Pokud toto vše neodstraní, ručně odpojte všechny souborové systémy, které jsou na iSCSI, ručně odeberte zásobník úložiště a teprve potom odhlaste všechny relace iSCSI.
+ .
+   iscsiadm -m node --logoutall=all
+ .
+ V tomto okamžiku by mělo být bezpečné tento balíček odstranit.
+Description-da.UTF-8: Fortsæt med at fjerne open-iscsi?
+ Der er i øjeblikket aktive iSCSI-sessioner. Hvis du fjerner open-iscsi nu kan dette føre til datatab og/eller få systemet til at hænge ved nedlukning.
+ .
+ Gør ikke dette hvis systemets root-filsystem er på iSCSI.
+ .
+ Hvis du fortsætter, vil open-iscsi forsøge at afmontere alle filsystemer på iSCSI og logge ud fra de nuværende sessioner. Hvis dette mislykkes (på grund af at et filsystem stadig er i brug), så vil kernen holde de nuværende iSCSI-sessioner åbne, men vil ikke udføre gendannelse, hvis der opstår en afbrydelse af netværksforbindelsen (eller hvis målet genstartes).
+ .
+ Hvis du virkelig har tænkt dig at fjerne open-iscsi, så skal du afbryde her og så stoppe open-iscsi:
+ .
+   service open-iscsi stop
+ .
+ Hvis dette ikke ryddede alt op, så afmonter manuelt alle filsystemer, som er på iSCSI, skil manuelt lagerstakken ad og log så først ud fra alle iSCSI-sessioner:
+ .
+   iscsiadm -m node --logoutall=all
+ .
+ På dette punkt, bør det være sikkert at fjerne denne pakke.
+Description-de.UTF-8: Soll das Entfernen von Open-iscsi fortgesetzt werden?
+ Zur Zeit bestehen aktive iSCSI-Sitzungen. Falls Sie Open-iscsi nun entfernen, kann dies zu Datenverlust und/oder zum Absturz des Systems beim Herunterfahren führen.
+ .
+ Unterlassen Sie dies, wenn das Wurzeldateisystem des Systems auf iSCSI liegt.
+ .
+ Falls Sie fortfahren, wird Open-iscsi versuchen, alle Dateisysteme auf iSCSI auszuhängen und sich aus aktuellen Sitzungen abzumelden. Falls dies fehlschlägt (weil ein Dateisystem immer noch benutzt wird), wird der Kernel die aktuelle iSCSI-Sitzung geöffnet halten. Er wird allerdings keine Wiederherstellung durchführen, falls es zu einer Unterbrechung der Netzwerkverbindung kommt (oder wenn das Ziel neu gestartet wird).
+ .
+ Falls sie wirklich beabsichtigen, Open-iscsi zu entfernen, sollten Sie hier abbrechen und dann Open-iscsi stoppen:
+ .
+   service open-iscsi stop
+ .
+ Falls dadurch nicht alles aufgeräumt wurde, hängen Sie alle Dateisysteme, die auf iSCSI liegen, manuell aus. Lösen Sie den Verbund aus Speicherobjekten manuell auf und melden Sie sich von allen iSCSI-Sitzungen ab:
+ .
+   iscsiadm -m node --logoutall=all
+ .
+ Danach sollten Sie dieses Paket gefahrlos entfernen können.
+Description-es.UTF-8: ¿Desea proceder con la eliminación de open-iscsi?
+ Todavía hay sesiones iSCSI activas. Si elimina open-iscsi en este momento podría conllevar la pérdida de datos y/o dejar colgado el sistema al apagar el equipo.
+ .
+ No haga esto si el sistema de archivos raíz se encuentra sobre iSCSI.
+ .
+ Si continúa, open-iscsi intentará desmontar todos los sistemas de archivos que se encuentran sobre iSCSI y cerrará las sesiones actuales. En caso de fallo (porque el sistema de archivos se encuentre todavía en uso) el núcleo mantendrá la sesiones iSCSI actuales abiertas pero no realizará ninguna operación de recuperación si se interrumpe la conexión de red (o si se reinicia el target).
+ .
+ Si realmente desea eliminar open-iscsi, debe abortar este cuadro de diálogo y después detener open-iscsi:
+ .
+   service open-iscsi stop
+ .
+ Si eso no limpia todo, desmonte manualmente todos los sistemas de archivos que se encuentran sobre iSCSI, desmantele manualmente la pila de almacenamiento y sólo entonces cierre todas las sesiones iSCSI:
+ .
+   iscsiadm -m node --logoutall=all
+ .
+ En ese momento debe ser seguro eliminar este paquete.
+Description-fr.UTF-8: Faut-il vraiment supprimer open-iscsi ?
+ Des sessions iSCSI sont actuellement actives. Si vous supprimez open-iscsi maintenant, cela peut entraîner des pertes de données ou bloquer le système durant son arrêt.
+ .
+ Vous ne devriez pas supprimer open-iscsi si le système de fichiers racine est basé sur iSCSI.
+ .
+ Si vous continuez, open-iscsi essaiera de démonter tous les systèmes de fichiers basés sur iSCSI et interrompra toutes les sessions en cours. Si cela échoue (à cause d'un système de fichiers toujours utilisé), le noyau conservera ouvertes les sessions iSCSI courantes, mais n'effectuera aucune récupération si une coupure de la connexion réseau se produit (ou si la cible est redémarrée).
+ .
+ Si vous souhaitez réellement supprimer open-iscsi, vous devriez abandonner maintenant pour arrêter open-iscsi :
+ .
+   service open-iscsi stop
+ .
+ Si cela ne nettoie pas tout, veuillez démonter manuellement tous les systèmes de fichiers basés sur iSCSI, déconnecter la pile de stockage, et, seulement après, vous déconnecter de toutes les sessions iSCSI :
+ .
+   iscsiadm -m node --logoutall=all
+ .
+ Ensuite seulement, vous pourrez supprimer ce paquet en toute sécurité.
+Description-it.UTF-8: Procedere alla rimozione di open-iscsi?
+ Ci sono sessioni iSCSI attualmente attive. Se si rimuove open-iscsi adesso ciò potrebbe portare a perdite di dati o a blocchi del sistema al momento dello spegnimento.
+ .
+ Non farlo se il file system radice di questo sistema è su iSCSI.
+ .
+ Se si procede, open-iscsi cercherà di smontare tutti i file system su iSCSI e disconnettere le sessioni attuali. Se ciò fallisce (perché un file system è ancora in uso), il kernel manterrà le sessioni iSCSI attuali aperte, ma non effettuerà alcun ripristino in caso di interruzione della connessione di rete (o se la destinazione viene riavviata).
+ .
+ Se si desidera veramente rimuovere open-iscsi, si dovrebbe interrompere qui e poi fermare open-iscsi:
+ .
+   service open-iscsi stop
+ .
+ Se ciò non ripulisce tutto, smontare manualmente tutti i file system che sono su iSCSI, smantellare manualmente lo stack di archiviazione e solo allora fare il logout da tutte le sessioni iSCSI:
+ .
+   iscsiadm -m node --logoutall=all
+ .
+ A quel punto dovrebbe essere possibile rimuovere questo pacchetto in modo sicuro.
+Description-nl.UTF-8: Voortgaan met het verwijderen van open-iscsi?
+ Er zijn momenteel iSCSI-sessies actief. Indien u nu open-iscsi verwijdert, kan dit leiden tot verlies van gegevens en/of kan het systeem vastlopen wanneer het uitgeschakeld wordt.
+ .
+ Doe dit niet indien het basisbestandsysteem van dit systeem op ISCSI staat.
+ .
+ Indien u voortgaat, zal open-iscsi trachten alle bestandssystemen op iSCSI af te koppelen en alle actieve sessies af te sluiten. Indien dat niet lukt (omdat er nog een bestandssysteem in gebruik is), zal de kernel de actieve iSCSI-sessies open houden, maar ze niet herstellen in het geval er een netwerkonderbreking optreedt (of het doelsysteem opnieuw opgestart wordt, enz.).
+ .
+ Indien u open-iscsi werkelijk wenst te verwijderen, moet u de huidige operatie hier afbreken en vervolgens open-iscsi stoppen:
+ .
+   service open-iscsi stop
+ .
+ Indien hierdoor niet alles opgeruimd werd, moet u handmatig alle bestandssystemen die zich op iSCSI bevinden afkoppelen, handmatig de opslagstack liquideren en u pas dan afmelden bij alle iSCSI-sessies:
+ .
+   iscsiadm -m node --logoutall=all
+ .
+ Nadien zou het verwijderen van dit pakket veilig moeten kunnen gebeuren.
+Description-pt.UTF-8: Prosseguir com a remoção do open-iscsi?
+ Existem sessões actuais activas de iSCSI. Se remover o open-iscsi agora, isto pode levar a perdas de dados e/ou encravar o sistema durante o desligar.
+ .
+ Não faça isto se o sistema de ficheiros raiz deste sistema estiver em iSCSI.
+ .
+ Se prosseguir, o open-iscsi ira tentar desmontar todos os sistemas de ficheiros em iSCSI e terminar as sessões actuais, se tal falhar (porque um sistema de ficheiros está a ser usado), o kernel irá manter as sessões iSCSI actuais abertas, mas não irá executar nenhuma recuperação se existir uma interrupção na ligação de rede (ou se a máquina destino for reiniciada).
+ .
+ Se realmente pretende remover o open-iscsi, deve abortar agora aqui e depois parar o open-iscsi:
+ .
+   service open-iscsi stop
+ .
+ Se isso não limpar tudo, desmonte manualmente todos os sistemas de ficheiros que estão em iSCSI, desmonte manualmente a pilha de armazenamento, e só depois termine todas as sessões iSCSI. 
+ .
+   iscsiadm -m node --logoutall=all
+ .
+ Nessa altura, deverá ser seguro remover este pacote.
+Description-pt_BR.UTF-8: Prosseguir com a remoção do open-iscsi?
+ Existem sessões iSCSI ativas atualmente. Se você remover o open-iscsi agora, isso pode levar a perda de dados e/ou travamento do sistema ao desligá-lo.
+ .
+ Não faça isso se o sistema de arquivos root desse sistema estiver sobre iSCSI.
+ .
+ Se você prosseguir, o open-iscsi tentará desmontar todos os sistemas de arquivos sobre iSCSI e fazer "log out" das sessões atuais. Se isso falhar (porque um sistema de arquivos ainda estiver em uso), o kernel manterá as sessões iSCSI atuais abertas, mas não executará qualquer recuperação se houver uma interrupção na conexão de rede (ou se o alvo for reinicializado).
+ .
+ Se você realmente pretende remover o open-iscsi, você deve cancelar aqui e então parar o open-iscsi:
+ .
+   service open-iscsi stop
+ .
+ Se isso não tiver limpado tudo, desmonte manualmente todos os sistemas de arquivos que estejam sobre iSCSI, desfaça a pilha de armazenamento, e somente então faça "log out" de todas as sessões iSCSI:
+ .
+   iscsiadm -m node --logoutall=all
+ .
+ Nesse ponto, deve ser seguro remover esse pacote.
+Description-ru.UTF-8: Продолжить удаление open-iscsi?
+ В настоящий момент имеются активные сеансы iSCSI. Если вы удалите open-iscsi прямо сейчас, то это может привести к потере данных и/или подвисании системы при выключении.
+ .
+ Не делайте этого, если в качестве корневой файловой системы используется iSCSI.
+ .
+ При продолжении open-iscsi попытается размонтировать все файловые системы с iSCSI и отключить все текущие сеансы. Если возникнет ошибка (так как файловая система всё ещё используется), то ядро оставит текущие сеансы iSCSI открытыми, но не будет выполнять их восстановление при проблемах с сетью (или если дальний конец перезагрузится).
+ .
+ Если вы действительно намерены удалить open-iscsi, то прервите удаление прямо сейчас и остановите open-iscsi:
+ .
+   service open-iscsi stop
+ .
+ Если что-то при этом не очистилось, то вручную размонтируйте все файловые системы с iSCSI, вручную разберите стек хранения и только затем отключите все текущие сеансы iSCSI:
+ .
+   iscsiadm -m node --logoutall=all
+ .
+ После этого можно безопасно удалять этот пакет.
+
+Template: open-iscsi/upgrade_even_with_failed_sessions
+Type: boolean
+Description: Proceed with upgrading open-iscsi?
+ There are currently failed iSCSI sessions. Upgrading open-iscsi may
+ cause data loss.
+ .
+ If you do not proceed, the preinstallation script will be aborted and
+ you will have the option to manually recover the iSCSI sessions. (Note
+ that aborting an upgrade is problematic if you are dist-upgrading your
+ entire system.) You may also recover the iSCSI sessions manually while
+ keeping this prompt open and then choose to proceed. Or you may choose
+ to proceed directly, after which iscsid will be restarted and session
+ recovery will be attempted once more.
+Description-cs.UTF-8: Pokračovat v aktualizaci open-iscsi?
+ V současné době existují přerušené relace iSCSI. Aktualizace open-iscsi může způsobit ztrátu dat.
+ .
+ Pokud nebudete pokračovat, předinstalační skript se přeruší a budete mít možnost relace iSCSI obnovit ručně. (Berte prosím na vědomí, že přerušení aktualizace je v případě, že aktualizujete celý systém, problematická.) iSCSI relace můžete také ručně obnovit a zároveň ponechat tuto výzvu otevřenou a následně zvolit pokračování. Nebo můžete zvolit přímo pokračovat, načež se restartuje iscsid a ještě jednou se provede pokus o obnovení relace.
+Description-da.UTF-8: Fortsæt med at opgradere open-iscsi?
+ Der er i øjeblikket mislykkede iSCSI-sessioner. Opgradreing af open-iscsi kan medføre datatab.
+ .
+ Hvis du ikke fortsætter vil forbrænderskriptet blive afbrudt og du vil få mulighed for manuelt at gendanne iSCSI-sessionerne. (Bemærk at afbrydelse af en opgradering er problematisk, hvis du distributionsopgraderer hele dit system). Du kan også gendanne iSCSI-sessioner manuelt mens denne dialog holdes åben og så vælge at fortsætte. Eller du kan vælge at fortsætte direkte, hvorefter iscsid vil blive genstartet og sessionsgendannelse vil blive forsøgt en gang mere.
+Description-de.UTF-8: Soll das Upgrade von Open-iscsi fortgesetzt werden?
+ Derzeit gibt es fehlgeschlagene iSCSI-Sitzungen. Das Upgrade von Open-iscsi kann zu Datenverlust führen.
+ .
+ Falls Sie nicht fortfahren, wird das Vorinstallationsskript abgebrochen und Sie haben die Möglichkeit, die iSCSI-Sitzungen manuell wiederherzustellen. (Beachten Sie, dass der Abbruch eines Upgrades problematisch ist, falls Sie ein Dist-Upgrade Ihres kompletten Systems durchführen.) Sie können die iSCSI-Sitzungen auch manuell wiederherzustellen, während Sie diese Abfrage offen lassen und danach erst fortfahren. Oder Sie können direkt fortfahren, wodurch Iscsid neu gestartet und die Sitzungswiederherstellung noch einmal versucht wird.
+Description-es.UTF-8: ¿Desea proceder con la actualización de open-iscsi?
+ Todavía hay sesiones iSCSI fallidas. Actualizar open-iscsi podría conllevar una pérdida de datos.
+ .
+ Si no continúa, se abortará el script de preinstalación y tendrá la opción de recuperar manualmente las sesiones iSCSI (tenga en cuenta que abortar una actualización es problemático si está ejecutando un dist-upgrade del sistema). También puede recuperar manualmente las sesiones iSCSI si mantiene este cuadro de diálogo abierto y decide continuar. O puede elegir continuar directamente, tras lo cual se reiniciará iscsid y se intentará recuperar la sesión una vez más.
+Description-fr.UTF-8: Faut-il vraiment mettre à jour open-iscsi ?
+ Des sessions échouées iSCSI existent actuellement. Mettre à jour open-iscsi peut conduire à des pertes de données.
+ .
+ Si vous ne continuez pas, le script de pré-installation sera annulé et vous aurez la possibilité de restaurer manuellement les sessions iSCSI. Veuillez noter que l'abandon d'une procédure de mise à jour peut poser problème si vous mettez à jour le système dans sa globalité. Vous pourrez également restaurer les sessions manuellement tout en conservant cette question ouverte et ensuite choisir de continuer. Ou bien, vous pourrez choisir de poursuivre directement après qu'iscsid soit redémarré, et la restauration des sessions sera alors tentée une fois de plus.
+Description-it.UTF-8: Procedere all'aggiornamento di open-iscsi?
+ Ci sono sessioni iSCSI attualmente fallite. L'aggiornamento di open-iscsi potrebbe portare a perdita di dati.
+ .
+ Se non si procede, lo script di preinstallazione sarà terminato e si avrà l'opzione di recuperare manualmente le sessioni iSCSI. (Notare che la terminazione di un aggiornamento è problematica se si sta facendo il dist-upgrade di tutto il sistema.) Si possono anche recuperare le sessioni iSCSI manualmente mentre si tiene questo prompt aperto e poi scegliere di procedere. Oppure si può scegliere di procedere direttamente, dopo di che iscsid sarà riavviato e verrà tentato nuovamente il recupero delle sessioni.
+Description-nl.UTF-8: Voortgaan met het opwaarderen van open-iscsi?
+ Er zijn momenteel iSCSI-sessies die fouten vertonen. Het opwaarderen van open-iscsi kan tot gegevensverlies leiden.
+ .
+ Indien u niet voortgaat, zal dit script dat voor de eigenlijke installatie uitgevoerd wordt, afgebroken worden en zult u de mogelijkheid hebben om handmatig de iSCSI-sessies te herstellen. (Weet dat een opwaardering afbreken problematisch is indien u de hele distributie op uw systeem aan het opwaarderen bent.) U kunt de iSCSI-sessies ook handmatig herstellen terwijl u deze prompt open houdt en nadien kiezen om voort te gaan. U kunt ook onmiddellijk kiezen om voort te gaan. In dat geval zal iscsid opnieuw gestart worden en er zal een nieuwe poging tot sessieherstel gedaan worden.
+Description-pt.UTF-8: Prosseguir com a actualização do open-iscsi?
+ Existem sessões actuais de iSCSI com falha. Actualizar o open-iscsi pode causar perdas de dados.
+ .
+ Se não prosseguir, o script de pré-instalação será abortado e você terá a opção de recuperar manualmente as sessões iSCSI. (Note que abortar uma actualização é problemático se estiver a fazer dist-upgrade a todo o seu sistema.) Você também pode recuperar as sessões iSCSI manualmente enquanto mantêm este aviso em aberto e depois então escolher prosseguir. Ou pode escolher prosseguir directamente, onde o iscsid será reiniciado e será tentada mais uma vez a recuperação de sessão.
+Description-pt_BR.UTF-8: Prosseguir com a atualização do open-iscsi?
+ Existem sessões iSCSI falhadas atualmente. Atualizar o open-iscsi pode causar perda de dados.
+ .
+ Se você não prosseguir, o script de pré instalação será cancelado e você terá a opção de recuperar manualmente as sessões iSCSI. (Note que cancelar uma atualização é problemático se você estiver fazendo um "dist-upgrade" de seu sistema todo.) Você também pode recuperar as sessões iSCSI manualmente enquanto mantém essa tela aberta e depois escolher prosseguir. Ou você pode escolher prosseguir diretamente, após o que o iscsid reiniciará e a recuperação de sessões será tentada mais uma vez.
+Description-ru.UTF-8: Продолжить обновление open-iscsi?
+ В настоящий момент имеются сеансы iSCSI с ошибкой. Обновление open-iscsi может привести к потере данных.
+ .
+ При отказе от продолжения предустановочный сценарий будет прерван и вы можете вручную восстановить сеансы iSCSI (заметим, что прерывание обновления проблематично, если вы выполняете обновление всей системы с дистрибутива). Также вы можете восстановить сеансы iSCSI вручную оставив это окно с предложением открытым и затем выберете продолжить. Или вы можете выбрать продолжить сразу, после чего будет перезапущен iscsid и будет предпринята ещё одна попытка восстановления сеанса.
+
+Template: open-iscsi/upgrade_recovery_error
+Type: error
+Description: iSCSI recovery error on upgrade
+ The iscsid daemon was restarted, but couldn't recover all iSCSI sessions.
+ This is bad and could lead to data loss. Please check the system and kernel
+ logs to determine the cause of the issue.
+ .
+ Please do not acknowledge this note until you have fixed the problem
+ from a separate login shell.
+Description-cs.UTF-8: Chyba obnovení iSCSI při aktualizaci
+ Démon iscsid byl restartován, ale nemohl obnovit všechny relace iSCSI. To je špatné a mohlo by dojít ke ztrátě dat. Pro zjištění příčiny prosím zkontrolujte systémový protokol a protokol jádra.
+ .
+ Dokud tento problém neopravíte z oddělené konzole, nepřeskakujte prosím toto upozornění.
+Description-da.UTF-8: iSCSI-gendannelsesfejl ved opgradering
+ Dæmonen iscsid blev genstartet, men kunne ikke gendanne alle iSCSI-sessioner. Dette er ikke godt og kan medføre datatab. Kontroller venligst systemet og kernelogge for at bestemme årsagen til problemstillingen.
+ .
+ Bekræft venligst ikke denne besked før du har rettet problemet fra en separat logindskal.
+Description-de.UTF-8: iSCSI-Wiederherstellungsfehler beim Upgrade
+ Der Iscsi-Daemon wurde neu gestartet, konnte jedoch nicht alle iSCSI-Sitzungen wiederherstellen. Dies ist schlecht und könnte zu Datenverlust führen. Bitte prüfen Sie die System- und Kernelprotokolle, um die Ursache des Problems zu bestimmen.
+ .
+ Bitte bestätigen Sie diese Notiz nicht, bevor Sie das Problem in einer separaten Anmelde-Shell behoben haben.
+Description-es.UTF-8: Error de recuperación de iSCSI al actualizar
+ El demonio iscsd ha sido reiniciado pero no se han podido recuperar todas las sesiones iSCSI. Esto es malo y puede conllevar pérdida de datos. Compruebe el sistema y los registros del núcleo para determinar la causa del problema.
+ .
+ No tenga en cuenta este mensaje hasta que haya corregido el problema desde un intérprete de órdenes de inicio de sesión independiente.
+Description-fr.UTF-8: Erreur de restauration iSCSI lors de la mise à jour
+ Le démon iscsid a été redémarré, mais n'a pas pu restaurer les sessions iSCSI. Cela pourrait conduire à une perte de données. Veuillez vérifier les journaux du noyau et du système pour déterminer la cause du problème.
+ .
+ Veuillez ne pas acquitter ce message tant que vous n'avez pas réglé le problème depuis une autre console.
+Description-it.UTF-8: Errore di ripristino di iSCSI durante l'aggiornamento
+ Il demone iscsid è stato riavviato ma non ha potuto recuperare tutte le sessioni iSCSI. Ciò non è corretto e potrebbe portare a perdita di dati. Controllare i log di sistema e del kernel per determinare la causa del problema.
+ .
+ Non procedere oltre questo avvertimento fino a che non si è risolto il problema da una shell di login separata.
+Description-nl.UTF-8: Bij het opwaarderen trad een fout op tijdens een hersteloperatie van iSCSI
+ De achtergronddienst iscsid werd opnieuw gestart maar slaagde er niet in alle iSCSI-sessies te herstellen. Dit is niet goed en kan leiden tot gegevensverlies. Gelieve uw systeem- en kernellogboeken te raadplegen om de oorzaak van dit probleem te achterhalen.
+ .
+ Bevestig niet dat u deze aantekening gelezen heeft vooraleer u zich in een aparte shell aangemeld hebt en het probleem er opgelost hebt.
+Description-pt.UTF-8: Erro de recuperação do iSCSI durante a actualização
+ O daemon iscsid foi reiniciado, mas foi incapaz de recuperar todos as sessões iSCSI. Isto é mau e pode levar a perdas de dados. Por favor verifique os relatórios (logs) do sistema e do kernel para determinar a causa do problema.
+ .
+ Por favor não responda a esta nota até que tenha corrigido este problema a partir de uma linha de comandos separada.
+Description-pt_BR.UTF-8: Erro de recuperação iSCSI na atualização
+ O daemon iscsid foi reiniciado, mas não conseguiu recuperar todas as sessões iSCSI. Isso é ruim e pode levar a perda de dados. Por favor, verifique os "logs" do kernel e do sistema para descobrir a causa do problema.
+ .
+ Por favor, não confirme esse aviso até que você tenha corrigido o problema a partir de um "login shell" separado.
+Description-ru.UTF-8: Ошибка восстановления iSCSI при обновлении
+ Служба iscsid была перезапущена, но не смогла восстановить все сеансы iSCSI. Это плохо и могло привести к потере данных. Чтобы найти причину проблемы проверьте журналы системы и ядра.
+ .
+ Не игнорируйте это замечание, пока не решите проблему в другой оболочке входа в систему.
+
+Template: open-iscsi/downgrade_and_break_system
+Type: boolean
+Description: Proceed with downgrading open-iscsi?
+ You are trying to downgrade open-iscsi. Because of changes between the
+ version you are downgrading to and the version currently installed,
+ this downgrade will break the system.
+ .
+ If you really intend to downgrade, please follow the following procedure
+ instead: umount all iSCSI file systems, log out of all iSCSI sessions,
+ back up /etc/iscsi, purge open-iscsi, and reinstall the older version.
+Description-cs.UTF-8: Pokračovat v přechodu na předchozí verzi open-iscsi?
+ Pokoušíte se instalovat předchozí verzi open-iscsi. Z důvodu změn mezi dřívější verzí, na kterou chcete přejít a právě nainstalovanou verzí, přechod na tuto předchozí verzi poškodí systém.
+ .
+ Pokud skutečně máte v úmyslu přejít na předchozí verzi, postupujte prosím následovně: odpojte všechny souborové systémy na iSCSI, odhlaste všechny elace iSCSI, zazálohujte /etc/iscsi, úplně odstraňte open-iscsi a znovu nainstalujte starší verzi.
+Description-da.UTF-8: Fortsæt med at nedgradere open-iscsi?
+ Du forsøger at nedgradere open-iscsi. På grund af ændringer mellem versionen du nedgraderer til og versionen installeret, vil nedgradering ødelægge systemet.
+ .
+ Hvis du har tænkt dig at nedgradere, så følg venligst denne procedure i stedet for: Afmonter alle iSCSI-filsystemer, log ud af alle iSCSI-sessioner, lav en sikkerhedskopi af /etc/iscsi, afinstaller open-iscsi og installer den ældre version.
+Description-de.UTF-8: Soll das Downgrade von Open-iscsi fortgesetzt werden?
+ Sie versuchen, ein Downgrade von Open-iscsi durchzuführen. Aufgrund der Änderungen zwischen der Version, auf die Sie das Downgrade durchführen und der derzeit installierten Version, wird dieses Downgrade das System beschädigen.
+ .
+ Falls Sie wirklich beabsichtigen, ein Downgrade von Open-iscsi durchzuführen, gehen Sie stattdessen wie folgt vor: Hängen Sie alle iSCSI-Dateisysteme aus, melden Sie sich von allen iSCSI-Sitzungen ab, sichern Sie /etc/iscsi, entfernen Sie Open-iscsi vollständig (purge) und installieren Sie die ältere Version erneut.
+Description-es.UTF-8: ¿Desea instalar una versión anterior de open-iscsi?
+ Está intentando instalar una versión anterior de open-iscsi. Debido a los cambios entre la versión anterior y la versión que se encuentra instalada actualmente, instalar una versión anterior romperá el sistema.
+ .
+ Si realmente desea instalar una versión anterior, siga el siguiente procedimiento: desmonte todos los sistemas de archivos sobre iSCSI, cierre todas las sesiones iSCSI, realice una copia de seguridad del archivo «/etc/iscsi», purgue open-iscsi y reinstale la versión más antigua.
+Description-fr.UTF-8: Faut-il vraiment revenir à une version antérieure d'open-iscsi ?
+ Vous tentez d'installer une version antérieure d'open-iscsi. À cause des changements entre la version plus ancienne que vous tentez d'installer et la version actuellement installée, cette opération rendra le système inopérant.
+ .
+ Si vous avez réellement l'intention de revenir à une version antérieure, veuillez plutôt suivre la procédure suivante : démontez tous les systèmes de fichiers basés sur iSCSI, fermez toutes les sessions iSCSI, sauvegardez /etc/iscsi, purgez open-iscsi, et réinstallez l'ancienne version.
+Description-it.UTF-8: Procedere con la retrocessione di open-iscsi?
+ Si sta cercando di retrocedere a una versione precedente di open-iscsi. A causa di cambiamenti tra la versione a cui si sta retrocedendo e quella attualmente installata, questa retrocessione renderà il sistema non funzionante.
+ .
+ Se si ha veramente intenzione di retrocedere, seguire invece la seguente procedura: smontare tutti i file system iSCSI, fare il logout da tutte le sessioni iSCSI, fare il backup di /etc/iscsi, rimuovere completamente («purge») open-iscsi e reinstallare la versione più vecchia.
+Description-nl.UTF-8: Voortgaan met het degraderen van open-iscsi?
+ U probeert open-iscsi te degraderen. Wegens de verschillen tussen de versie waarnaar u degradeert en die welke momenteel geïnstalleerd is, zal deze degradatie uw systeem onklaar maken.
+ .
+ Indien u echt wilt degraderen, gelieve dan eerder de volgende procedure te volgen: koppel alle iSCSI-bestandssystemen af, meld u af bij alle iSCSI-sessies, maak een reservekopie van /etc/iscsi, wis open-iscsi en herinstalleer de oudere versie.
+Description-pt.UTF-8: Prosseguir com a regressão do open-iscsi?
+ Você está a tentar regredir (instalar versão anterior) o open-iscsi. Devido a alterações entre a versão que está a instalar e a que está instalada actualmente, esta regressão irá estragar o sistema.
+ .
+ Se realmente pretende regredir a versão instalada, por favor siga o seguinte procedimento: desmonte todos os sistemas de ficheiros iSCSI, termine todas as sessões iSCSI, faça cópia de salvaguarda de /etc/iscsi, purgue o open-iscsi, e depois reinstale a versão anterior.
+Description-pt_BR.UTF-8: Prosseguir com o rebaixamento de versão do open-iscsi?
+ Você está tentando rebaixar a versão do open-iscsi. Por causa de mudanças entre a versão para a qual você está rebaixando e a versão instalada atualmente, esse rebaixamento de versão quebrará o sistema.
+ .
+ Se você realmente pretende rebaixar a versão, por favor, ao invés disso siga este procedimento: desmonte todos os sistemas de arquivos iSCSI, faça "log out" de todas as sessões iSCSI, faça um cópia de /etc/iscsi, expurgue o open-iscsi, e reinstale a versão antiga.
+Description-ru.UTF-8: Продолжить установку старой версии open-iscsi?
+ Вы пытаетесь установить версию open-iscsi, которая старее имеющейся. Из-за разницы в версиях такая установка сломает систему.
+ .
+ Если вам действительно нужно установить старую версию, то делайте так: размонтируйте все файловые системы iSCSI, завершите все сеансы iSCSI, сделайте резервную копию /etc/iscsi, вычистите пакет open-iscsi и переустановите старую версию.

@@ -1,0 +1,9 @@
+d66d813b8b0b92ecda8cb6937ee9da94  usr/lib/x86_64-linux-gnu/liburcu-bp.so.6.0.0
+38f63473d33568d6303a0fff8457294f  usr/lib/x86_64-linux-gnu/liburcu-cds.so.6.0.0
+a44407352be64f84b0974087a2a6b54c  usr/lib/x86_64-linux-gnu/liburcu-common.so.6.0.0
+feef9be08a3cf55503e0bebbcabe3fa4  usr/lib/x86_64-linux-gnu/liburcu-mb.so.6.0.0
+6a244b7bd01584e65ddc1c24ee3e7257  usr/lib/x86_64-linux-gnu/liburcu-qsbr.so.6.0.0
+cba78cdba1ccaab56764ddee80cf47e5  usr/lib/x86_64-linux-gnu/liburcu-signal.so.6.0.0
+9e3fe7c84dcce92712d1b7871e15992a  usr/lib/x86_64-linux-gnu/liburcu.so.6.0.0
+eb025e6755bede8a4a5f76ed2889a98a  usr/share/doc/liburcu6/changelog.Debian.gz
+b585e92c6f667b53ed7637b3dd0c6adc  usr/share/doc/liburcu6/copyright
