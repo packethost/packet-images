@@ -5,7 +5,7 @@ MAINTAINER David Laube <dlaube@packet.net>
 LABEL name="Ubuntu Canonical Base Image" \
     vendor="Ubuntu" \
     license="GPLv2" \
-    build-date="20180330"
+    build-date="20200127"
 
 # Setup the environment
 ENV DEBIAN_FRONTEND=noninteractive
@@ -74,10 +74,7 @@ RUN apt-get -q update && \
 		unattended-upgrades \
 		uuid-runtime \
 		vim \
-		wget \
-	&& apt-get clean \
-	&& rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* /var/log/*
-
+		wget
 
 # Configure locales
 RUN locale-gen en_US.UTF-8 && \
@@ -89,6 +86,10 @@ RUN chown root:syslog /var/log \
 
 # Fix cloud-init EC2 warning
 RUN touch /root/.cloud-warnings.skip
+
+# Clean APT cache
+RUN apt-get clean \
+	&& rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* /var/log/*
 
 RUN rm -f /usr/bin/qemu-aarch64-static
 
