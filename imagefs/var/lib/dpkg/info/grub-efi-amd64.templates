@@ -1,0 +1,567 @@
+Template: grub2/linux_cmdline
+Type: string
+Description: Linux command line:
+ The following Linux command line was extracted from /etc/default/grub or the
+ `kopt' parameter in GRUB Legacy's menu.lst. Please verify that it is correct,
+ and modify it if necessary. The command line is allowed to be empty.
+Description-ast.UTF-8: Linia comandos Linux:
+ La siguiente llinia de comandu Linux salió de /etc/default/grub o del parámetru `kopt' nel menú Legacy GRUB menu.lst. Por favor, comprueba que ye correuto, y modificalo si ye necesario. La llinia de comandu puede tar erma.
+Description-be.UTF-8: Радок камандаў для ядра Linux:
+ Гэты радок камандаў для ядра Linux узяты з файла /etc/default/grub або з параметра `kopt' у файле наладак (menu.lst) папярэдняй версіі GRUB (Legacy). Калі ласка, пераканайцеся, што каманды запісаныя правільна, або папраўце іх, калі трэба. Гэты радок камандаў можа быць пустым.
+Description-bg.UTF-8: Команден ред на Линукс:
+ Следния команден ред за зареждане на Линукс беше извлечен от /etc/default/grub или от параметъра „kopt“ от файла menu.lst на стария GRUB. Проверете го и ако е нужно го коригирайте. Допустимо е командният ред да бъде празен.
+Description-ca.UTF-8: Línia d'ordres de Linux:
+ La línia d'ordres de Linux següent ha sigut extreta de /etc/default/grub o del paràmetre «kopt» del fitxer menu.lst del GRUB Legacy. Verifiqueu que és correcta, i modifiqueu-la si és necessari. La línia d'ordres pot ser buida.
+Description-cs.UTF-8: Parametry pro Linux:
+ Následující řádka s parametry pro Linux byla získána ze starého souboru menu.lst z parametru „kopt“ nebo ze souboru /etc/default/grub. Zkontrolujte prosím, zda jsou parametry v pořádku a případně je upravte do požadované podoby. Řádka s parametry může být i prázdná.
+Description-cy.UTF-8: Llinell orchymyn Linux:
+ Mae'r llinell orchymyn Linux canlynol wedi ei dynnu o /etc/default/grub neu'r paramedr 'kopt' yn ffeil menu.lst GRUB etifeddol. Gwiriwch fod hyn yn gywir a newidwch os oes angen. Caniateir i'r linell orchymyn fod yn wag.
+Description-da.UTF-8: Kommandolinje til Linux:
+ Den følgende kommandolinje i Linux blev udtrukket fra /etc/default/grub eller parameteren `kopt' i GRUB Legacys menu.lst. Verificer venligst at den er korrekt, og ændre den om nødvendigt. Kommandolinjen må være tom.
+Description-de.UTF-8: Linux-Befehlszeile:
+ Die folgende Linux-Befehlszeile wurde aus /etc/default/grub oder dem Parameter »kopt« in der Datei menu.lst von GRUB Legacy extrahiert. Bitte überprüfen Sie, ob die Befehlszeile korrekt ist und ändern Sie diese, wenn es notwendig ist. Diese Befehlszeile darf leer sein.
+Description-dz.UTF-8: ལི་ནགསི་བརྡ་བཀོད་གྲལ་ཐིག་:
+ འོག་གི་ ལི་ནགསི་བརྡ་བཀོད་གྲལཐིག་འདི་ from from /etc/default/grub or the `kopt' parameter in GRUB Legacy's menu.lst. ལས་ ཕྱིར་དོན་འབད་འབདཝ་ཨིན། འདི་ངེས་བདེན་ཨིནམ་བདེན་སྦྱོར་འབད་ཞིནམ་ལས་ དགོས་མཁོ་ཡོད་པ་ཅིན་ལེགས་བཅོས་འབད། བརྡ་བཀོད་གྲལ་ཐིག་འདི་སྟོངམ་ཨིན་རུང་བཏུབ།
+Description-el.UTF-8: Γραμμή εντολής Linux:
+ Η επόμενη γραμμή εντολών για  Linux έχει εξαχθεί από το αρχείο /etc/default/grub ή από την παράμετρο `kopt' στο αρχείο menu.lst του GRUB Legacy.  Παρακαλώ επιβεβαιώστε ότι είναι ορθή και τροποποιήστε την αν είναι απαραίτητο. Η γραμμή επιτρέπεται να είναι κενή.
+Description-eo.UTF-8: Linuksa komand-linio:
+ La jena linuksa komand-linio estas elprenita el /etc/default/grub aŭ el la parametro 'kopt' en la menu.lst de malaktuala GRUB. Bonvolu kontroli ĉu ĝi estas korekta, kaj modifu ĝin laŭ neceso. Estas permesate ke la komand-linio
+Description-es.UTF-8: Línea de órdenes de Linux:
+ La siguiente línea de órdenes de Linux se extrajo del fichero «/etc/default/grub» o del parámetro «kopt» en el fichero «menu.lst» de la versión anterior de GRUB. Compruebe que es correcta y modifíquela si es necesario. La línea de órdenes se puede dejar en blanco.
+Description-eu.UTF-8: Linux-eko komando-lerroa:
+ Linux-eko komando-lerro hau /etc/default/grub edo GRUB zaharraren menu.lst fitxategiko 'kopt' parametrotik atera da. Egiaztatu zuzena dela, eta eraldatu behar izanez gero. Komando-lerroa hutsik egotea baimenduta dago.
+Description-fa.UTF-8: خط فرمان لینوکس:
+ خط فرمان لینوکس ذیل از /etc/default/grub یا پارامتر های `kopt' در فایل menu.lst از گراب قدیمی استخراج شده است. لطفاً صحت آن را بررسی کنید، و در صورت لزوم آن را تغییردهید. این خط فرمان می‌تواند خالی باشد.
+Description-fi.UTF-8: Linuxin komentorivi:
+ GRUBin aiemman version tiedostosta menu.lst parametrista ”kopt” tai tiedostosta /etc/default/grub löydettiin seuraava Linuxin komentorivi. Varmista, että se on kunnossa ja muuta sitä tarvittaessa. Komentorivin on sallittua myös olla tyhjä.
+Description-fr.UTF-8: Ligne de commande de Linux :
+ La ligne de commande de Linux suivante a été récupérée via le fichier /etc/default/grub ou le paramètre « kopt » du fichier menu.lst utilisé par la version originelle de GRUB. Veuillez contrôler qu'elle est correcte et la modifier si nécessaire. Cette ligne de commande peut être vide.
+Description-gl.UTF-8: Liña de comando de Linux:
+ A seguinte liña de comando de Linux sacouse de /etc/default/grub ou do parámetro «kopt» no ficheiro menu.lst de GRUB Legacy. Verifique que sexa correcta e modifíquea de ser preciso. A liña de comando pódese deixar baleira.
+Description-gu.UTF-8: લિનક્સ આદેશ:
+ નીચેનાં લિનક્સ આદેશ /etc/default/grub અથવા GRUB પરંપરાગત menu.lst ના `kopt' પરિમાણમાંથી નીકાળવામાં આવ્યા છે. મહેરબાની કરી ખાતરી કરો કે એ સાચા છે, અને જરુરી હોય તો તેને બદલો. આદેશ ખાલી રાખવાનું માન્ય છે.
+Description-he.UTF-8: שורת הפקודה של Linux:
+ שורת פקודת Linux הבאה נשלפה מ-‎/etc/default/grub או מפרמטר 'kopt' ב-menu.lst הישן של GRUB. נא לוודא ששורת פקודה זו נכונה ועדכן אותה אם צריך. ניתן להשאיר שורת פקודה זו ריקה.
+Description-hr.UTF-8: Linux naredbeni redak:
+ Ovaj naredbeni redak za sam Linux kernel je izvađen iz /etc/default/grub ili iz parametra 'kopt' u GRUB Legacy datoteci menu.lst. Molim provjerite je li ispravan, i ako je potrebno uredite ga. Naredbeni redak smije biti prazan.
+Description-hu.UTF-8: Linux parancssor:
+ A következő Linux parancssor az /etc/default/grub vagy a régi GRUB menu.lst fájljában lévő `kopt' paraméterből származik. Kérlek ellenőrizd, hogy helyes-e, és módosítsd, ha szükséges. A parancssor lehet üres is.
+Description-id.UTF-8: Baris perintah Linux:
+ Baris perintah Linux berikut ini disadur dari /etc/default/grub atau parameter 'kopt' di menu.lst pada GRUB jadul. Pastikan kebenarannya dan suntinglah bila perlu. Baris perintahnya diperbolehkan dikosongi.
+Description-is.UTF-8: Linux skipanalína:
+ Eftirfarandi Linux skipanalína fannst í /etc/default/grub eða í `kopt' viðfanginu í eldri GRUB menu.lst. Gakktu úr skugga um að þetta sé rétt og breyttu því ef það er nauðsynlegt. Skipanalínan má vera auð.
+Description-it.UTF-8: Riga di comando Linux:
+ La seguente riga di comando Linux è stata estratta da /etc/default/grub oppure dal parametro "kopt" presente nel file menu.lst di GRUB Legacy. Controllare che sia corretta e modificarla se necessario. La riga di comando può essere vuota.
+Description-ja.UTF-8: Linux コマンドライン:
+ 以下の Linux のコマンドラインは /etc/default/grub か GRUB Legacy の menu.lst 上の「kopt」パラメータから取得されています。これが正しいものであるかを確認して、必要であれば修正してください。コマンドラインは空でも構いません。
+Description-kk.UTF-8: Linux командалық жолы:
+ Келесі Linux командасы /etc/default/grub ішінен не GRUB Legacy menu.lst ішіндегі `kopt' параметрінен алынды. Оның дұрыстығын тексеріп, керек болса, өзгертіңіз. Бұл командалық жол бос болса да болады.
+Description-km.UTF-8: ពាក្យ​បញ្ជា​លីនុច ៖
+ ពាក្យ​បញ្ជា​លីនុច​ដូច​ខាង​ក្រោម​ត្រូវ​បាន​ដកស្រង់​ចេញ​ពី /etc/default/grub ឬ​ប៉ារ៉ាម៉ែត្រ `kopt' នៅ​ក្នុង menu.lst ចាស់​របស់​ GRUB ។ សូម​ផ្ទៀងផ្ទាត់​ថា​តើ​វា​ត្រឹមត្រូវ​ដែរឬទេ ហើយ​កែប្រែ​វា​ប្រសិន​បើ​ចាំបាច់ ។ ពាក្យ​បញ្ជា​ត្រូវ​បាន​អនុញ្ញាត​ឲ្យ​ទទេរ ។
+Description-ko.UTF-8: 리눅스 명령어:
+ 다음 리눅스 명령어를 /etc/default/grub 파일 또는 GRUB 구버전의 menu.lst의 `kopt' 파라미터에서 뽑아냈습니다. 명령어가 올바른지 확인하고 필요하다면 수정하십시오. 명령어는 비워 둘 수도 있습니다.
+Description-lt.UTF-8: „Linux“ komandos eilutė:
+ Iš „/etc/default/grub“ failo arba senosios „GRUB“ konfigūraciniame faile „menu.lst“ nurodyto „kopt“ parametro išrinkta žemiau pateikta „Linux“ komandos eilutė. Patikrinkite, ar ji tinkama ir jei reikia, ją patikslinkite. Komandos eilutė gali būti ir tuščia.
+Description-lv.UTF-8: Linux komandrinda:
+ Sekojošā Linux komandrinda tika izvilkta no /etc/default/grub vai `kopt' parametra GRUB mantojuma menu.lst. Lūdzu, pārliecinieties, ka tā ir pareiza un, ja vajag, mainiet to. Komandrinda drīkst būt tukša.
+Description-mr.UTF-8: लिनक्स आदेश ओळ:
+ पुढील लिनक्स आदेश ओळ /etc/default/grub ग्रब लीगसीच्या menu.lst मधील `kopt' घटकमूल्यामधून मिळवली आहे. कृपया ती योग्य आहे का, याची खातरजमा करा व आवश्यकता असल्यास बदल करा. आदेश ओळ रिकामी ठेवण्याची अनुमती असते.
+Description-nb.UTF-8: Kommandolinje i Linux:
+ Den følgende Linux-kommandolinjen ble trukket ut fra /etc/default/grub eller parameteren `kopt' i GRUB Legacys menu.lst. Verifiser at den er korrekt og endre den om nødvendig. Det er lov at kommandolinjen er tom.
+Description-nl.UTF-8: Linux-commandoregel:
+ De volgende Linux-commandoregel is gebaseerd op /etc/default/grub of op de 'kopt'-parameter, gevonden in het bestand menu.lst van GRUB oude-stijl. Gelieve deze op correctheid te controleren en indien nodig aan te passen. De commandoregel mag leeg zijn.
+Description-no.UTF-8: Kommandolinje i Linux:
+ Den følgende Linux-kommandolinjen ble trukket ut fra /etc/default/grub eller parameteren `kopt' i GRUB Legacys menu.lst. Verifiser at den er korrekt og endre den om nødvendig. Det er lov at kommandolinjen er tom.
+Description-pl.UTF-8: Wiersz poleceń do Linuksa:
+ Następujące polecenie do Linuksa zostało wyodrębnione z /etc/default/grub lub z parametru "kopt" w menu.lst GRUB-a Legacy. Proszę sprawdzić czy jest właściwe i zmodyfikować go, jeśli to konieczne. Wiersz z poleceniem może być pusty.
+Description-pt.UTF-8: Linha de comandos do Linux:
+ A seguinte linha de comandos Linux foi extraída de /etc/default/grub ou do parâmetro `kopt' no menu.lst do GRUB Legacy. Por favor verifique que está correcta, e modifique se necessário. É permitido que a linha de comandos esteja vazia.
+Description-pt_BR.UTF-8: Linha de comando Linux:
+ A linha de comando Linux a seguir foi extraída de /etc/default/grub ou do parâmetro 'kopt' do menu.lst do GRUB Legado. Por favor, verifique se ela está correta, e modifique-a se necessário. A linha de comando pode ser vazia.
+Description-ro.UTF-8: Linia de comandă Linux:
+ Această linie de comandă Linux a fost extrasă din /etc/default/grub sau parametrul „kopt” din fișierul menu.lst al vechiului GRUB. Verificați corectitudinea acesteia și modificați-o, dacă este nevoie. Linia de comandă poate fi goală.
+Description-ru.UTF-8: Командная строка Linux:
+ Представленная ниже строка команд Linux была извлечена из /etc/default/grub или параметра «kopt» файла menu.lst старой версии GRUB. Проверьте, что всё правильно, или измените её, если требуется. Также командная строка может быть пустой.
+Description-si.UTF-8: Linux විධාන රේඛාව:
+ පහත Linux විධානය /etc/default/grub හෝ පැරණි GRUB හි menu.lst හි 'kopt' පරාමිතියෙන් උපුටාගන්නා ලදී. කරුණාකර එය නිවැරදි දැයි තහවුරු කරන්න, ඇවැසිනම් වෙනස්කම් කරන්න. විධාන රේඛාව හිස්ව පැවතීමට ඉඩදෙයි.
+Description-sk.UTF-8: Linuxový príkazový riadok:
+ Nasledujúci príkazový riadok Linuxu bol získaný z /etc/default/grub alebo z parametra 'kopt' z menu.lst starého GRUB (Legacy). Skontrolujte prosím jeho správnosť a prípadne ho upravte. Príkazový riadok môže byť aj prázdny.
+Description-sl.UTF-8: Ukazna vrstica Linux:
+ Sledeči ukaz za Linux je vzet iz datoteke /etc/default/grub ali iz parametra `kopt' v datoteki  menu.lst sistema GRUB Legacy.  Preverite prosim, da je točen in ga po potrebi popravite. Ukazna vrstica je lahko tudi prazna.
+Description-sq.UTF-8: Linja komanduese linux:
+ Linja komanduese në vijim u ekstraktua nga /etc/default/grub ose nga parametri 'kopt' në menu.lst në GRUB të trashëguar. Të lutem verifiko nëse është korrekte ose modifikoje nëse do jetë e nevojshme. Kjo linjë komanduese lejohet të jetë bosh.
+Description-sr.UTF-8: Linux командна линија:
+ Ова линија намењена за Linux keрнел је из /etc/default/grub (GRUB 2) или из „kopt“ параметра датотеке menu.lst (GRUB Legacy). Проверите да ли је линија исправна и ако треба поправите је. Линија иначе, може остати и празна.
+Description-sr@latin.UTF-8: Linux komandna linija:
+ Ova linija namenjena za Linux kernel je iz /etc/default/grub (GRUB 2) ili iz „kopt“ parametra datoteke menu.lst (GRUB Legacy). Proverite da li je linija ispravna i ako treba popravite je. Linija inače, može ostati i prazna.
+Description-sv.UTF-8: Kommandorad för Linux:
+ Följande Linux-kommandorad hämtades från /etc/default/grub eller "kopt"-parametern i gamla GRUB:s menu.lst. Verifiera att den är korrekt och modifiera den om nödvändigt. Kommandoraden kan vara tom.
+Description-ta.UTF-8: லீனக்ஸ் கட்டளை வரி:
+ பின் வரும் லீனக்ஸ் கட்டளை வரி /etc/default/grub இலிருந்து அல்லது க்ரப் இன் பாரம்பரிய menu.lst இன் `kopt' அளபுருவிலிருந்து பெறப்பட்டது. இது சரியா என்று சோதித்து தேவையானால் மற்றவும். இந்த கட்டளை வரி காலியாக இருக்க அனுமதி உண்டு.
+Description-th.UTF-8: พารามิเตอร์สำหรับบูตลินุกซ์:
+ พารามิเตอร์สำหรับบูตลินุกซ์ต่อไปนี้ดึงออกมาจาก /etc/default/grub หรือพารามิเตอร์ `kopt' ใน menu.lst ของ GRUB รุ่นเก่า กรุณาตรวจสอบว่าค่านี้ถูกต้องหรือไม่ และกรุณาแก้ไขถ้าจำเป็น พารามิเตอร์นี้สามารถปล่อยเป็นค่าว่างเปล่าได้
+Description-tr.UTF-8: Linux komut satırı:
+ Aşağıdaki Linux komut satırı /etc/default/grub'dan ya da eski GRUB menu.lst dosyasındaki 'kopt' parametresinden alınmıştır. Lütfen doğruluğundan emin olun ve gerekirse düzeltin. Komut satırı boş bırakılabilir.
+Description-ug.UTF-8: Linux بۇيرۇق قۇرى:
+ تۆۋەندىكى Linux بۇيرۇق قۇرى /etc/default/grub ياكى GRUB Legacy نىڭ menu.lst دىكى `kopt' پارامېتىرىدىن ئاجرىتىدۇ. ئۇنىڭ توغرىلىقىنى جەزملەپ، ئېھتىياجغا ئاساسەن ئۆزگەرتىڭ.بۇيرۇق قۇرىنىڭ بوش قالدۇرۇلۇشىغا يول قويۇلىدۇ.
+Description-uk.UTF-8: Рядок параметрів ядра Linux:
+ Наступний рядок параметрів ядра Linux було взято із /etc/default/grub чи з параметру 'kopt' в menu.lst із GRUB Legacy. Перевірте будь ласка його правильність і, за потреби, внесіть зміни. Рядок параметрів ядра може бути порожнім.
+Description-vi.UTF-8: Dòng lệnh Linux:
+ Dòng lệnh Linux theo đây đã được trích ra từ /etc/default/grub hoặc từ tham số “kopt” trong menu.lst của GRUB Cũ. Hãy kiểm tra rằng nó vẫn đúng, và sửa đổi nó nếu cần. Dòng lệnh có thể được để trống.
+Description-zh_CN.UTF-8: Linux 命令行：
+ 已从 /etc/default/grub 或 GRUB Legacy 的 menu.lst 中的 `kopt' 参数中提取如下 Linux 命令行。请检查是否正确的，并且根据需要进行修改。此命令行可以为空。
+Description-zh_TW.UTF-8: Linux 命令列：
+ 以下的 Linux 命令列是由 /etc/default/grub，或是由 GRUB Legacy 的 menu.lst 中的 `kopt' 參數所擷取出來的。請確認它是否正確，若有必要請加以修改。此命令列可以留空。
+
+Template: grub2/linux_cmdline_default
+Type: string
+Default: quiet splash
+Description: Linux default command line:
+ The following string will be used as Linux parameters for the default menu
+ entry but not for the recovery mode.
+Description-ar.UTF-8: سطر أوامر لينكس الافتراضي:
+ سيتم استخدام سلسلة الحروف التالية كمُعطيات لتشغيل النظام لمُدخل القائمة
+ الافتراضي ولكن ليس لوضع الإنقاذ.
+Description-ast.UTF-8: Linia comandos por defeutu de Linux:
+ La siguiente cadena será usada como parámetros Linux pa la entrada del menú por defeutu, pero non pal mou recuperación.
+Description-be.UTF-8: Прадвызначаны радок камандаў для ядра Linux:
+ Наступны радок будзе выкарыстаны ў якасці параметраў ядра Linux для прадвызначанага пункту меню (але не для рэжыму аднаўлення).
+Description-bg.UTF-8: Параметри на Линукс по подразбиране:
+ Следните параметри ще бъдат използвани по подразбиране при зареждане на Линукс, освен в авариен режим.
+Description-ca.UTF-8: Línia d'ordres de Linux per defecte:
+ La cadena següent serà emprada com a paràmetres del Linux per al menú d'entrada per defecte però no per al mode de recuperació.
+Description-cs.UTF-8: Výchozí parametry pro Linux:
+ Následující parametry pro Linux se použijí pro výchozí položku menu, ale ne pro záchranný režim.
+Description-cy.UTF-8: Llinell orchymyn ddiofyn Linux:
+ Defnyddir y llinyn canlynol fel paramedrau Linux ar gyfer y cofnod bwydlen diofyn ond ddim ar gyfer y modd achub.
+Description-da.UTF-8: Standardkommandolinje i Linux:
+ Den følgende streng vil blive brugt som Linuxparametre for standardmenupunktet men ikke for gendannelsestilstanden.
+Description-de.UTF-8: Standard-Befehlszeile für Linux:
+ Die folgende Zeichenkette wird als Linux-Parameter für den Standardmenüeintrag, nicht aber für den Rettungsmodus verwandt.
+Description-dz.UTF-8: ལི་ནགསི་སྔོན་སྒྲིག་བརྡ་བཀོད་གྲལ་ཐིག་:
+ འོག་གི་ཡིག་རྒྱུན་འདི་ སྔོན་སྒྲིག་དཀར་ཆག་ཐོ་བཀོད་ཀྱི་དོན་ལུ་ ལི་ནགསི་ཚད་འཛིན་སྦེ་ལག་ལེན་འཐབ་ནི་ཨིན་ དེ་འབདཝ་ད་ སླར་གསོ་ཐབས་ལམ་གྱི་དོན་ལུ་མེན།
+Description-el.UTF-8: Προκαθορισμένη γραμμή εντολών Linux:
+ Η ακόλουθη συμβολοσειρά θα χρησιμοποιηθεί για τις παραμέτρους Linux στην προκαθορισμένη είσοδο του μενού εκκίνησης αλλά όχι για την κατάσταση διάσωσης (recovery mode).
+Description-eo.UTF-8: Linuksa implicita komand-linio:
+ La jena ĉeno estos uzata kiel linuksajn parametrojn por la ordinara menuero sed ne por la restariga reĝimo.
+Description-es.UTF-8: Línea de órdenes predeterminada de Linux:
+ La siguiente cadena se utilizará como parámetros de Linux para la entrada predeterminada del menú pero no para el modo de recuperación.
+Description-eu.UTF-8: Linux-eko komando-lerro lehenetsia:
+ Honako katea menuko sarrera lehenetsiaren Linux-eko parametro gisa erabiliko da, baina ez berreskuratzeko moduan.
+Description-fa.UTF-8: خط فرمان پیش فرض لینوکس:
+ این رشته به عنوان یکی از پارامتر های لینوکس برای منوی پیش فرض استفاده خواهد شد و نه برای حالت بازیابی.
+Description-fi.UTF-8: Linuxin oletuskomentorivi:
+ Seuraavaa merkkijonoa käytetään Linuxin käynnistysvalikon oletusvalinnan parametreina, mutta ei toipumistilassa.
+Description-fr.UTF-8: Ligne de commande par défaut de Linux :
+ Les paramètres indiqués seront utilisés pour le noyau Linux de l'entrée de menu par défaut mais pas pour le mode de secours.
+Description-gl.UTF-8: Liña de comando por defecto para Linux:
+ A seguinte liña será usada como parámetros para Linux na entrada por defecto do menú, pero non no modo de recuperación.
+Description-gu.UTF-8: લિનક્સ મૂળભૂત આદેશ:
+ નીચેનું વાક્ય મૂળભૂત મેનુ રીત માટે લિનક્સ પરિમાણો માટે વાપરવામાં આવશે પણ રીકવરી સ્થિતિ માટે નહી.
+Description-he.UTF-8: ברירת מחדל לשורת הפקודה של Linux:
+ המחרוזת הבאה תשמש כפרמטרי Linux עבור ברירת המחדל בתפריט אבל לא עבור מצב recovery.
+Description-hr.UTF-8: Pretpostavljeni Linux naredbeni redak:
+ Sljedeći izraz će biti korišten kao parametar za Linux stavke u izborniku, osim za spasonosni način rada.
+Description-hu.UTF-8: Az alapértelmezett Linux parancssor:
+ A következő sort fogjuk Linux paraméternek használni az alapértelmezett (default) menüben, de a rendszervisszaállító (recovery) módban nem.
+Description-id.UTF-8: Baris perintah standar Linux:
+ String berikut ini akan digunakan sebagai parameter Linux untuk menu standar tetapi tidak digunakan untuk modus darurat.
+Description-is.UTF-8: Sjálfgefin Linux skipanalína:
+ Eftirfarandi strengur verður notaður sem Linux viðfang í sjálfgefnu valmyndarfærslunni en ekki í viðgerðarham.
+Description-it.UTF-8: Riga di comando Linux predefinita:
+ Questa stringa verrà usata come parametri per Linux nella voce di menu predefinita, ma non nella modalità di ripristino.
+Description-ja.UTF-8: Linux デフォルトコマンドライン:
+ 以下の文字列は、リカバリーモードではない通常のメニューエントリでの Linux パラメータとして使われます。
+Description-ka.UTF-8: ლინუქსის სტანდარტული ბრძანების სტრიქონი:
+ შემდეგი სტრიქონი გამოყენებულ იქნება როგორც ლინუქსის პარამეტრები მენიუს სტანდარტული შენატანისათვის, მაგრამ არა აღდგენის რეჟიმისათვის.
+Description-kk.UTF-8: Linux бастапқы командалық жолы:
+ Келесі жол Linux параметрлері бастапқы мәзірі үшін, бірақ қалпына келтіру үшін емес, қолданылатын болады.
+Description-km.UTF-8: ពាក្យ​បញ្ជា​លំនាំ​ដើម​របស់​លីនុច ៖
+ ឃ្លា​ដូច​ខាង​ក្រោម​នឹង​ត្រូវ​បាន​ប្រើ​ជា​ប៉ារ៉ាម៉ែត្រ​លីនុច​សម្រាប់​ធាតុ​ម៉ឺនុយ​លំនាំដើម ប៉ុន្តែ​មិន​សម្រាប់​របៀប​សង្គ្រោះ​ទេ ។
+Description-ko.UTF-8: 리눅스 기본 명령어:
+ 다음 문자열을 기본 메뉴 항목의 리눅스 파라미터로 사용합니다. 복구 모드에서는 사용하지 않습니다.
+Description-lt.UTF-8: Numatytoji „Linux“ komandos eilutė:
+ Ši eilutė bus naudojama kaip įprastiniai „Linux“ branduolio parametrai, bet ne pasirinkus atkūrimo veikseną.
+Description-lv.UTF-8: Linux noklusējuma komandrinda:
+ Sekojošā virkne tiks izmantota kā Linux parametri izvēlnes noklusējuma ierakstam, bet ne sistēmas atgūšanas režīmā.
+Description-mr.UTF-8: लिनक्स मूलनिर्धारीत आदेश ओळ:
+ मुलनिर्धारित मेन्यू नोंदीकरिता लिनक्स घटकमूल्ये म्हणून खालील श्रुंखला वापरली जाईल, पण रिकव्हरी मोडसाठी नाही.
+Description-nb.UTF-8: Standardkommandolinje i Linux:
+ Den følgende teksten vil bli brukt som Linux-parametre for standardmenupunktet, men ikke for gjenopprettelsesmodus.
+Description-nl.UTF-8: Standaard Linux-commandoregel:
+ De volgende regel zal, behalve in de herstelmodus, gebruikt worden voor de Linux parameters in de standaard menuoptie.
+Description-no.UTF-8: Standardkommandolinje i Linux:
+ Den følgende teksten vil bli brukt som Linux-parametre for standardmenupunktet, men ikke for gjenopprettelsesmodus.
+Description-pl.UTF-8: Domyślny wiersz poleceń do Linuksa:
+ Następujący ciąg będzie użyty jako parametry przekazywane do jądra Linux w domyślnym wpisie menu (ale nie w trybie ratunkowym).
+Description-pt.UTF-8: Linha de comandos padrão do Linux:
+ A seguinte linha será utilizada como parâmetros para o Linux na entrada predefinida do menu, mas não para o modo de recuperação.
+Description-pt_BR.UTF-8: Linha de comando padrão Linux:
+ O seguinte texto será usado como lista de parâmetros do Linux para a entrada padrão do menu, mas não para o modo de recuperação.
+Description-ro.UTF-8: Linia de comandă implicită Linux:
+ Următorul șir va fi folosit ca parametru pentru Linux pentru poziția implicită din meniu, dar nu și pentru cea de recuperare.
+Description-ru.UTF-8: Командная строка Linux по умолчанию:
+ Данная строка будет использоваться в качестве параметров Linux в пункте меню по умолчанию, кроме режима восстановления.
+Description-si.UTF-8: පෙරනිමි Linux විධාන රේඛාව:
+ පහත යෙදුම පෙරනිමි මෙනු ඇතුළත් කිරීම් සඳහා Linux පරාමිතියක් ලෙස භාවිත වන නමුත් ගැලවීම් ප්‍රකාරයට නොවේ.
+Description-sk.UTF-8: Predvolený Linuxový príkazový riadok:
+ Nasledujúci reťazec bude použitý ako Linuxové parametre predvolenej položky menu, ale nie pre záchranný režim.
+Description-sl.UTF-8: Privzeta ukazna vrstica Linux:
+ Sledeča vrstica bo uporabljena kot parameter Linuxa za privzeti vnos v meniju, ne pa za reševalni način.
+Description-sq.UTF-8: Linja komanduese fillestare linux:
+ Stringu në vijim do të përdoren si parametër Linux për menun fillaster hyrëse por jo për gjëndjen e rekuperimit.
+Description-sr.UTF-8: Linux подразумевајућа команда линија:
+ Следећи стринг ће бити употребљен као Linux параметри за подреазумевано покретање, али не и за мод за поправку.
+Description-sr@latin.UTF-8: Linux podrazumevajuća komanda linija:
+ Sledeći string će biti upotrebljen kao Linux parametri za podreazumevano pokretanje, ali ne i za mod za popravku.
+Description-sv.UTF-8: Standardkommandorad för Linux:
+ Följande sträng kommer användas som Linux-parametrar för standardmenyvalet men inte för återhämtningsläge (eng. recovery).
+Description-ta.UTF-8: லீனக்ஸ் முன்னிருப்பு கட்டளை வரி:
+ பின் வரும் சரங்கள் முன்னிருப்பு மெனு உள்ளீட்டுக்கு லீனக்ஸ் அளபுருக்களாக பயன்படுத்தப்படும்; ஆனால் மீட்டெடுப்பு பாங்குக்கு அல்ல
+Description-th.UTF-8: พารามิเตอร์สำหรับบูตลินุกซ์แบบปกติ:
+ พารามิเตอร์ต่อไปนี้จะใช้ในเมนูสำหรับบูตลินุกซ์แบบปกติ แต่จะไม่ใช้กับโหมดกู้ระบบ
+Description-tr.UTF-8: Öntanımlı Linux komut satırı:
+ Aşağıdaki dizgi öntanımlı menü girişinin Linux parametreleri olarak kullanılacak; fakat kurtarma kipi için kullanılmayacaktır.
+Description-ug.UTF-8: Linux كۆڭۈلدىكى بۇيرۇق قۇرى:
+ تۆۋەندىكى ھەرپ تىزىقى كۆڭۈلدىكى تىزىملىك تۈرىنىڭ Linux پارامېتىرىغا ئىشلىتىلىدۇ ئەمما ئەسلىگە كەلتۈرۈش ھالىتىگە قوللىنىلمايدۇ.
+Description-uk.UTF-8: Типовий рядок параметрів ядра Linux:
+ Даний рядок буде використано як параметри ядра Linux для типового пункту меню, проте не для режиму відновлення.
+Description-vi.UTF-8: Dòng lệnh Linux mặc định:
+ Chuỗi theo đây sẽ được sử dụng làm các tham số Linux cho mục nhập trình đơn mặc định, mà không phải cho chế độ phục hồi.
+Description-zh_CN.UTF-8: Linux 默认命令行：
+ 如下字符串将被用于默认菜单项的 Linux 参数，但是不会用于恢复模式。
+Description-zh_TW.UTF-8: Linux 預設命令列：
+ 以下的字串將會用在預設的選單項目中做為 Linux 參數，但不會用於回復模式。
+
+Template: grub2/no_efi_extra_removable
+Type: boolean
+Default: false
+Description: Skip extra installation to the EFI removable media path?
+ Some EFI-based systems are buggy and do not handle new bootloaders correctly.
+ If you do not make an extra installation of GRUB to the EFI removable media
+ path, this may prevent your system from booting Debian correctly in case it is
+ affected by this problem. However, it may remove the ability to boot any other
+ operating systems that also depend on this path. If so, you will need to make
+ sure that GRUB is configured successfully to be able to boot any other OS
+ installations correctly.
+
+Template: grub2/update_nvram
+Type: boolean
+Default: true
+Description: Update NVRAM variables to automatically boot into Debian?
+ GRUB can configure your platform's NVRAM variables so that it boots into
+ Debian automatically when powered on. However, you may prefer to disable
+ this behavior and avoid changes to your boot configuration. For example,
+ if your NVRAM variables have been set up such that your system contacts a
+ PXE server on every boot, this would preserve that behavior.
+Description-be.UTF-8: Абнавіць зменныя NVRAM для аўтаматычнага запуску Debian?
+ GRUB можа так сканфігураваць зменныя NVRAM вашай платформы, каб яна аўтаматычна запускала Debian пры ўключэнні. Аднак магчыма, вам спатрэбіцца адключыць гэта і не змяняць вашу канфігурацыю запуску. Напрыклад, калі вашы зменныя NVRAM настроеныя, каб ваша сістэма кантактавала сервер PXE пры кожным запуску, гэта захавае такі рэжым.
+Description-bg.UTF-8: Промяна на параметрите в NVRAM за автоматично зареждане на Дебиан?
+ GRUB може да настрои параметрите в NVRAM на системата така че при включване на захранването да се зарежда Дебиан. Ако имате специални нужди като например връзка с PXE сървър при начално зареждане може да предпочетете да не се правят промени.
+Description-ca.UTF-8: Actualitzar les variables NVRAM per arrancar automàticament Debian?
+ GRUB pot configurar les variables NVRAM de la vostra plataforma per iniciar automàticament Debian quan s'engegui. També pot ésser que desitgeu deshabilitar aquest possibilitat i evitar canvis en la configuració de l'arrencada. Per exemple, si les variables NVRAM estan configurades de manera que el vostre sistema connecta amb un servidor PXE cada vegada que arranca, això hauria de conservar aquest comportament.
+Description-cs.UTF-8: Aktualizovat proměnné v NVRAM pro automatické zvedení Debianu?
+ GRUB může nakonfigurovat NVRAM proměnné na vaší platformě tak, že se po zapnutí rovnou zavede Debian. Možná ale máte důvod toto chování nepovolit a do zavádění nezasahavat. Jedním takovým případem by mohla být situace, kdy máte NVRAM proměnné nastavené tak, aby při každém zavádění kontaktovaly PXE server.
+Description-da.UTF-8: Opdater NVRAM-variabler til automatisk at starte i Debian?
+ GRUB kan konfigurere din platforms NVRAM-variabler, så de starter i Debian automatisk når tændt. Du kan dog foretrække at deaktivere denne opførsel og undgå ændringer til din opstartskonfiguration. For eksempel hvis dine NVRAM-variabler er blevet sat sådan op, at dit system kontakter en PXE-server ved hver opstart, vil dette bevare denne opførsel.
+Description-de.UTF-8: NVRAM aktualisieren, um direkt in Debian hineinzustarten?
+ GRUB kann die Plattformvariablen Ihres NVRAMs so konfigurieren, dass es direkt beim Einschalten in Debian hineinstartet. Es könnte allerdings sein, dass Sie es vorziehen, dieses Verhalten zu deaktivieren und Änderungen an Ihrer Systemstartkonfiguration zu vermeiden. Falls beispielsweise Ihre NVRAM-Variablen so konfiguriert wurden, dass Ihr System bei jedem Systemstart mit einem PXE-Server Kontakt aufnimmt, dann würde dies dieses Verhalten beibehalten.
+Description-eo.UTF-8: Ĉu ĝisdatigi variablojn NVRAM por aŭtomate ekŝargi al Debian?
+ GRUB povas agordi la variablojn NVRAM de via platformo por ke ĝi ekŝargu al Debian aŭtomate post ŝaltiĝo. Tamen, eble vi preferos malpermesi tiun ĉi konduton kaj eviti ŝanĝojn al la ekŝarga agordo. Ekzemple, se viaj variabloj NVRAM estis agordita por ke via sistemo kontaktu servilon PXE ĉe ĉiu ekŝargo, ne ŝanĝu ilin por teni la konduton.
+Description-es.UTF-8: ¿Desea actualizar las variables NVRAM para que se carguen automáticamente en Debian?
+ GRUB puede configurar las variables NVRAM de su plataforma para que se carguen automáticamente en Debian cuando se enciende. Aún así, puede preferir desactivar este comportamiento y no realizar cambios a su configuración de arranque. Por ejemplo, si las variables NVRAM se han configurado de forma que su sistema contacta con un servidor PXE en cada arranque, esto conservaría ese comportamiento.
+Description-eu.UTF-8: Eguneratu NVRAM-eko aldagaiak automatikoki Debian abiarazteko?
+ GRUB-ek ordenagailuaren NVRAM-eko aldagaiak konfigura ditzake piztean Debian batera automatikoki abiarazteko. Hala ere, portaera hau desgaitzea nahi izan dezakezu, eta abioaren konfigurazioaren aldaketak saihestu. Adibidez, NVRAM-eko aldagaiak konfiguratu egin badira abio bakoitzean sistemak PXE zerbitzari batekin konektatzeko, honek portaera hori mantenduko luke.
+Description-fr.UTF-8: Faut-il mettre à jour les variables dans la mémoire non volatile pour démarrer Debian automatiquement ?
+ GRUB peut configurer les variables dans la mémoire non volatile (NVRAM) pour démarrer Debian automatiquement à l'allumage. Cependant, vous pourriez avoir envie de désactiver cette possibilité et ainsi éviter les changements dans la configuration de l'amorçage. Par exemple, si les variables de votre NVRAM ont été configurées pour que le système se connecte à un serveur PXE à chaque démarrage, cela conserverait ce comportement.
+Description-hr.UTF-8: Ažurirati NVRAM varijable za automatsko učitavanje Debiana?
+ GRUB može postaviti NVRAM varijable vaše platforme da se automatski učita Debian pri uključivanju. Međutim, možda će vam biti praktičnije onemogućiti ovakvo ponašanje i izbjeći promjene vaših postavki. Na primjer, ako su vaše NVRAM varijable postavljene tako da se vaš sustav povezuje s PXE poslužiteljem pri svakom učitavanju, ovo će očuvati takvo ponašanje.
+Description-it.UTF-8: Aggiornare le variabili NVRAM per avviare automaticamente Debian?
+ GRUB può configurare le variabili NVRAM della propria piattaforma in modo da avviare automaticamente Debian all'accensione. Tuttavia, si potrebbe non volere questo comportamento ed evitare modifiche alla propria configurazione d'avvio. Per esempio, se le variabili NVRAM sono state impostate in modo che il sistema contatti un server PXE a ogni avvio, è possibile preservare tale impostazione.
+Description-kk.UTF-8: Debian ішіне автожүктелу үшін NVRAM айнымалыларын жаңарту керек пе?
+ GRUB сіздің платформаңыз іске қосылған кезде Debian ішіне автожүктелетіндей етіп NVRAM айнымалыларын баптай алады. Алайда, сіз бұл өзгерісті сөндіріп, жүктелу баптауларын өзгертпеуді қалауыңыз мүмкін. Мысалы, NVRAM айнымалылары жүйеңіз әр жүктелген кезде PXE серверімен байланысатындай бапталған болса, онда осындай әрекет сақталады.
+Description-ko.UTF-8: 데비안으로 자동 부팅하도록 NVRAM 변수를 업데이트하시겠습니까?
+ GRUB에서 이 플랫폼의 NVRAM 변수를 설정해서 전원을 켰을 때 데비안으로 부팅하도록 설정할 수 있습니다. 아니면 이 기능을 사용하지 않고 부팅 설정을 바꾸지 싶지 않을 수도 있습니다. 예를 들어 부팅할 때마다 PXE 서버에 연결하도록 NVRAM 변수가 설정되어 있고, 이 기능을 사용하지 않으면 계속 그렇게 동작할 것입니다.
+Description-lt.UTF-8: Ar nustatyti NVRAM parametrus taip, kad būtų automatiškai paleidžiama „Debian“ sistema?
+ „GRUB“ paleidyklė gali nustatyti jūsų sistemos NVRAM parametrus, kad ją įjungus, būtų automatiškai paleidžiama „Debian“ sistema. Būna situacijų, kai tai nepageidautina, pavyzdžiui, jei jūsų sistemos NVRAM parametrai nustatyti taip, kad kaskart pasileisdama, ji susisiektų su PXE serveriu, ir jūs nenorite šio scenarijaus keisti.
+Description-nb.UTF-8: Oppdatere NVRAM-variabler til å automatisk starte Debian?
+ GRUB kan sette opp din platforms NVRAM-variabler slik at den automatisk starter Debian når den slås på.  Du kan dog foretrekke å koble ut denne oppførselen og hoppe over endringer i ditt oppstartoppsett.  Hvis du for eksempel har satt opp dine NVRAM-variabler slik at systemet ditt kontakter en PXE-tjener ved hver oppstart, så kan du slik beholde opprinnelig oppførsel.
+Description-nl.UTF-8: De NVRAM-variabelen aanpassen om automatisch Debian op te starten?
+ GRUB kan de NVRAM-variabelen van uw platform zo configureren dat het automatisch Debian opstart wanneer het systeem aangezet wordt. Maar misschien wenst u dat gedrag liever niet te activeren en vermijdt u liever wijzigingen aan uw opstartconfiguratie. Indien bijvoorbeeld uw NVRAM-variabelen zo ingesteld werden dat uw systeem, telkens het opgestart wordt, een PXE-server contacteert, dan blijft op die manier dit gedrag gehandhaafd.
+Description-no.UTF-8: Oppdatere NVRAM-variabler til å automatisk starte Debian?
+ GRUB kan sette opp din platforms NVRAM-variabler slik at den automatisk starter Debian når den slås på.  Du kan dog foretrekke å koble ut denne oppførselen og hoppe over endringer i ditt oppstartoppsett.  Hvis du for eksempel har satt opp dine NVRAM-variabler slik at systemet ditt kontakter en PXE-tjener ved hver oppstart, så kan du slik beholde opprinnelig oppførsel.
+Description-pl.UTF-8: Zaktualizować zmienne NVRAM, aby automatycznie ładować Debiana?
+ GRUB może skonfigurować zmienne NVRAM platformy tak, aby automatycznie ładowała Debiana po uruchomieniu. Można też wyłączyć to zachowanie i nie zmieniać konfiguracji rozruchu. To pozwala na przykład pozostawić ustawienia zmiennych NVRAM takie, że system kontaktuje się z serwerem PXE przy każdym uruchomieniu.
+Description-pt.UTF-8: Actualizar as variáveis NVRAM para arrancar automaticamente o Debian?
+ O GRUB pode configurar as variáveis NVRAM da sua plataforma de modo a que arranque o Debian automaticamente quando ligar a máquina. No entanto pode preferir desactivar este comportamento e evitar alterações à sua configuração de arranque. Por exemplo, se as suas variáveis NVRAM foram definidas de modo a que o seu sistema contacte um servidor PXE em cada arranque, isto preservará esse comportamento.
+Description-pt_BR.UTF-8: Atualizar variáveis NVRAM para inicializar automaticamente no Debian?
+ O GRUB pode configurar as variáveis NVRAM da sua plataforma de forma que ela inicialize automaticamente no Debian quando for ligada. No entanto, você pode preferir desabilitar esse comportamento e evitar mudanças na sua configuração de inicialização. Por exemplo, se as suas variáveis NVRAM tiverem sido configuradas de forma que o seu sistema contate um servidor PXE a cada inicialização, isso preservaria tal comportamento.
+Description-ro.UTF-8: Doriți modificarea variabilelor NVRAM pentru a porni Debian automat?
+ GRUP poate configura variabilelor NVRAM ale platformei dumneavoastră astfel încât să pornească automat în Debian. Este posibil să nu doriți această modificare a configurației de pornire. De exemplu în situația în care ați configurat sistemul astfel încât să contacteze un server PXE la pornire această opțiune va păstra această configurație.
+Description-ru.UTF-8: Обновить переменные NVRAM для автоматического запуска Debian?
+ GRUB может изменить переменные NVRAM на вашей платформе и Debian будет загружаться автоматически при подаче питания. Однако, иногда это нежелательно. Например, если в переменных NVRAM указаны настройки для подключению к серверу PXE при каждом запуске, то лучше ничего не менять.
+Description-sl.UTF-8: Želite posodobiti spremenljivke NVRAM za samodejni zagon v Debian?
+ GRUB lahko nastavi spremenljivke NVRAM vašega računalniškega okolja tako, da samodejno zažene Debian ob vklopu. V primeru, da tega ne želite, lahko to onemogočite in preprečite spremembo vaše zagonske konfiguracije. Na primer, če so spremenljivke NVRAM nastavljene tako, da vaš sistem ob vsakem zagonu komunicira s strežnikom PXE, bo ta nastavitev ohranjena.
+Description-sv.UTF-8: Uppdatera NVRAM-variabler för att automatiskt starta Debian?
+ Grub kan ställa in systemets NVRAM-variabler så att det kan starta Debian automatiskt. Det kan tänkas att du inte vill ha detta läge aktivt och undvika att ändra inställningarna för systemstart. Exempelvis om dina NVRAM-variabler är satta till att systemet kontaktar en PXE-server vid varje start.
+Description-th.UTF-8: ปรับข้อมูลตัวแปร NVRAM ให้บูตเข้าเดเบียนโดยอัตโนมัติหรือไม่?
+ GRUB สามารถตั้งค่าตัวแปร NVRAM ของแพลตฟอร์มของคุณเพื่อให้บูตเข้าสู่เดเบียนโดยอัตโนมัติเมื่อเปิดเครื่องได้ อย่างไรก็ดี คุณอาจต้องการปิดการกระทำนี้และไม่เปลี่ยนค่าตั้งการบูตของคุณก็ได้ ตัวอย่างเช่น ถ้าตัวแปร NVRAM ของคุณได้ถูกตั้งค่าไว้ให้ระบบติดต่อไปยังเซิร์ฟเวอร์ PXE ทุกครั้งที่บูต คุณก็อาจเลือกไม่ปรับตัวแปร NVRAM นี้ และระบบก็จะคงพฤติกรรมเดิมนั้นไว้
+Description-tr.UTF-8: NVRAM değişkenleri Debian'ı önyükleyecek şekilde güncellensin mi?
+ GRUB, platform NVRAM değişkenlerini, bilgisayarınız açıldığında otomatik olarak Debian'ı başlatacak şekilde yapılandırılabilir. Bu davranışı devre dışı bırakarak önyükleme yapılandırmasında herhangi bir değişiklik yapılmamasını sağlayabilirsiniz. Bu durumda, örneğin NVRAM değişkenleri her açılışta PXE sunucuları ile iletişim kuracak şekilde ayarlanmışsa bu davranış aynı şekilde devam edecektir.
+Description-ug.UTF-8: مەزكۇر NVRAM ئۆزگەرگۈچى قىممىتىنى يېڭىلاپ Debian گە ئۆزلۈكىدىن يېتەكلەمدۇ؟
+ مەزكۇر GRUB سۇپىڭىزنىڭ NVRAM قىممىتىنى سەپلەپ، توك چاتقاندا Debian گە ئۆزلۈكىدىن يېتەكلەشكە قولايلىق يارىتىدۇ. ئەمما يېتەكلەش سەپلىمىسىنى ئۆزگەرتىشتىن ساقلىنىش ئۈچۈن بۇ قىلمىشنى چەكلەشنى ئۈمىد قىلىشىڭىز مۇمكىن. مەسىلەن، ئەگەر سىزنىڭ NVRAM ئۆزگەرگۈچى قىممىتىڭىز سىستېما ھەر قېتىم قوزغالغاندا PXE مۇلازىمېتىر بىلەن باغلىنىدىغان قىلىپ تەڭشەلگەن بولسا، بۇ قىلمىشنى ساقلاپ قالىدۇ.
+Description-uk.UTF-8: Оновити змінні NVRAM для автоматичного завантаження Debian?
+ GRUB може налаштувати змінні NVRAM вашої платформи так, щоб завантажувати Debian автоматично відразу після увімкнення живлення. Проте ви можете заборонити це щоб уникнути змін ваших налаштувань завантаження. Для прикладу, якщо ваші змінні NVRAM налаштовані на автоматичне з'єднання системи із PXE-сервером при кожному завантаженні, то ви збережете їх.
+Description-vi.UTF-8: Cập nhật các biến NVRAM để tự động khởi động vào Debian?
+ GRUB có thể cấu hình các biến NVRAM của nền tảng vậy thì nó khởi động vào Debian một cách tự động không bật máy. Tuy nhiên, bạn có lẽ ưa thích tắt cách hành xử này và tránh thay đổi đến cấu hình khởi động của bạn. Ví dụ, nếu biến NVRAM của bạn đã được cài đặt như thế hệ thống liên lạc với máy phục vụ PXE mỗi lần khởi động, điều này sẽ ngăn ngừa cách hành xử đó.
+
+Template: grub2/kfreebsd_cmdline
+Type: string
+Description: kFreeBSD command line:
+ The following kFreeBSD command line was extracted from /etc/default/grub or the
+ `kopt' parameter in GRUB Legacy's menu.lst. Please verify that it is correct,
+ and modify it if necessary. The command line is allowed to be empty.
+Description-ast.UTF-8: Linia comandos kFreeBSD:
+ La siguiente llinia de comandu kFreeBSD salió de /etc/default/grub o del parámetru `kopt' nel menú Legacy GRUB menu.lst. Por favor, comprueba que ye correuto, y modificalo si ye necesario. La lliniea de comandu puede tar erma.
+Description-be.UTF-8: Радок камандаў для ядра kFreeBSD:
+ Гэты радок камандаў для kFreeBSD узяты з файлу /etc/default/grub або з параметру `kopt' у файле наладак (menu.lst) папярэдняй версіі GRUB (Legacy). Калі ласка, пераканайцеся, што каманды запісаныя правільна, або папраўце іх, калі трэба. Гэты радок камандаў можа быць пустым.
+Description-bg.UTF-8: Команден ред за kFreeBSD:
+ Следния команден ред за зареждане на kFreeBSD беше извлечен от /etc/default/grub или от параметъра „kopt“ от файла menu.lst на стария GRUB. Проверете го и ако е нужно го коригирайте. Допустимо е командният ред да бъде празен.
+Description-ca.UTF-8: Línia d'ordres de kFreeBSD:
+ La línia d'ordres de kFreeBSD següent ha sigut extreta de /etc/default/grub o del paràmetre «kopt» del fitxer menu.lst del GRUB Legacy. Verifiqueu que és correcta, i modifiqueu-la si és necessari. La línia d'ordres pot ser buida.
+Description-cs.UTF-8: Parametry pro kFreeBSD:
+ Následující řádka s parametry pro kFreeBSD byla získána ze starého souboru menu.lst z parametru „kopt“ nebo ze souboru /etc/default/grub. Zkontrolujte prosím, zda jsou parametry v pořádku a případně je upravte do požadované podoby. Řádka s parametry může být i prázdná.
+Description-cy.UTF-8: Llinell orchymyn kFreeBSD:
+ Mae'r llinell orchymyn kFreeBSD canlynol wedi ei dynnu o /etc/default/grub neu'r paramedr 'kopt' yn ffeil menu.lst GRUB etifeddol. Gwiriwch fod hyn yn gywir a newidwch os oes angen. Caniateir i'r linell orchymyn fod yn wag.
+Description-da.UTF-8: Kommandolinje for kFreeBSD:
+ Den følgende kommandolinje i kFreeBSD blev udtrukket fra /etc/default/grub eller fra parameteren `kopt' i GRUB Legacys menu.lst. Verificer venligst at den er korrekt, og ændre den om nødvendigt. Kommandolinjen må være tom.
+Description-de.UTF-8: Befehlszeile für kFreeBSD:
+ Die folgende kFreeBSD-Befehlszeile wurde aus /etc/default/grub oder dem Parameter »kopt« in der Datei menu.lst von GRUB Legacy extrahiert. Bitte überprüfen Sie, ob diese korrekt ist und passen Sie sie an, wenn das erforderlich ist. Diese Befehlszeile darf leer sein.
+Description-dz.UTF-8: kFreeBSD བརྡ་བཀོད་གྲལ་ཐིག་:
+ འོག་གི་  kFreeBSD བརྡ་བཀོད་གྲལ་ཐིག་འདི་ /etc/default/grub or the `kopt' parameter in GRUB Legacy's menu.lst ལས་ ཕྱིར་འདོན་འབད་འབདཝ་ཨིན། འདི་ངེས་དེན་ཨིནམ་བདེན་སྦྱོར་འབད་ཞིནམ་ལས་ དགོས་མཁོ་ཡོད་པ་ཅིན་ ལེགས་བཅོས་འབད། བརྡ་བཀོད་གྲལ་ཐིག་འདི་ སྟོངམ་ཨིན་རུང་བཏུབ།
+Description-el.UTF-8: Γραμμή εντολών kFreeBSD:
+ Η επόμενη γραμμή εντολών του kFreeBSD έχει εξαχθεί από το αρχείο /etc/default/grub ή από την παράμετρο `kopt' στο αρχείο menu.lst του GRUB Legacy.  Παρακαλώ επιβεβαιώστε ότι είναι ορθή και τροποποιήστε την αν είναι απαραίτητο. Η γραμμή επιτρέπεται να είναι κενή.
+Description-eo.UTF-8: Ordon-linio de kFreeBSD:
+ La jena linuksa komand-linio de kFreeBSD estas elprenita el /etc/default/grub aŭ el la parametro 'kopt' en la menu.lst de malaktuala GRUB. Bonvolu kontroli ĉu ĝi estas korekta, kaj modifu ĝin laŭ neceso. Estas permesate ke la komand-linio estu malplena.
+Description-es.UTF-8: Línea de órdenes de kFreeBSD:
+ La siguiente línea de órdenes de kFreeBSD se extrajo del fichero «/etc/default/grub» o del parámetro «kopt» en el fichero «menu.lst» de la versión anterior de GRUB. Compruebe que es correcta y modifíquela si es necesario. La línea de órdenes se puede dejar en blanco.
+Description-eu.UTF-8: KFreeBSD-ko komando-lerroa:
+ KFreeBSD-ko komando-lerro hau /etc/default/grub edo GRUB zaharraren menu.lst fitxategiko 'kopt' parametrotik atera da. Egiaztatu zuzena dela, eta eraldatu behar izanez gero. Komando-lerroa hutsik egotea baimenduta dago.
+Description-fa.UTF-8: خط فرمان kFreeBSD:
+ خط فرمان kFreeBSD ذیل از /etc/default/grub یا پارامتر های `kopt' در فایل menu.lst از گراب قدیمی استخراج شده است. لطفاً صحت آن را بررسی کنید، و در صورت لزوم آن را تغییردهید. این خط فرمان می‌تواند خالی باشد.
+Description-fi.UTF-8: kFreeBSD:n komentorivi:
+ GRUBin aiemman version tiedostosta menu.lst parametrista ”kopt” tai tiedostosta /etc/default/grub löydettiin seuraava kFreeBSD:n komentorivi. Varmista, että se on kunnossa ja muuta sitä tarvittaessa. Komentorivin on sallittua myös olla tyhjä.
+Description-fr.UTF-8: Ligne de commande de kFreeBSD :
+ La ligne de commande de kFreeBSD suivante a été récupérée via le fichier /etc/default/grub ou le paramètre « kopt » du fichier menu.lst utilisé par la version originelle de GRUB. Veuillez contrôler qu'elle est correcte et la modifier si nécessaire. Cette ligne de commande peut être vide.
+Description-gl.UTF-8: Liña de comando de kFreeBSD:
+ A seguinte liña de comando de kFreeBSD sacouse de /etc/default/grub, ou do parámetro «kopt» no ficheiro menu.lst de GRUB Legacy. Verifique que sexa correcta e modifíquea de ser preciso. A liña de comando pódese deixar baleira.
+Description-gu.UTF-8: kFreeBSD આદેશ:
+ નીચેનાં kFreeBSD આદેશ /etc/default/grub અથવા GRUB પરંપરાગત menu.lst ના `kopt' પરિમાણમાંથી નીકાળવામાં આવ્યા છે. મહેરબાની કરી ખાતરી કરો કે એ સાચા છે, અને જરુરી હોય તો તેને બદલો. આદેશ ખાલી રાખવાનું માન્ય છે.
+Description-he.UTF-8: שורת הפקודה של kFreeBSD:
+ שורת פקודת kFreeBSD הבאה נשלפה מ-‎/etc/default/grub או מפרמטר'kopt' ב-menu.lst הישן של GRUB. בבקשה לוודא ששורת פקודה זו נכונה ועדכן אותה אם צריך. ניתן להשאיר שורת פקודה זו ריקה.
+Description-hr.UTF-8: kFreeBSD naredbeni redak:
+ Ovaj naredbeni redak za kFreeBSD kernel je izvađen iz /etc/default/grub ili iz parametra 'kopt' u GRUB Legacy datoteci menu.lst. Molim provjerite je li ispravan, i ako je potrebno uredite ga. Naredbeni redak smije biti prazan.
+Description-hu.UTF-8: kFreeBSD parancssor:
+ A következő kFreeBSD parancssor az /etc/default/grub vagy a régi GRUB menu.lst fájljában lévő `kopt' paraméterből származik. Kérlek ellenőrizd, hogy helyes-e, és módosítsd, ha szükséges. A parancssor lehet üres is.
+Description-id.UTF-8: Baris perintah kFreeBSD:
+ Baris perintah kFreeBSD berikut ini disadur dari /etc/default/grub atau parameter 'kopt' di menu.lst pada GRUB jadul. Pastikan kebenarannya dan suntinglah bila perlu. Baris perintahnya diperbolehkan dikosongi.
+Description-is.UTF-8: kFreeBSD skipanalína:
+ Eftirfarandi kFreeBSD skipanalína fannst í /etc/default/grub eða í `kopt' viðfanginu í eldri GRUB menu.lst. Gakktu úr skugga um að þetta sé rétt og breyttu því ef það er nauðsynlegt. Skipanalínan má vera auð.
+Description-it.UTF-8: Riga di comando kFreeBSD:
+ La seguente riga di comando kFreeBSD è stata estratta da /etc/default/grub oppure dal parametro "kopt" presente nel file menu.lst di GRUB Legacy. Controllare che sia corretta e modificarla se necessario. La riga di comando può essere vuota.
+Description-ja.UTF-8: kFreeBSD コマンドライン:
+ 以下の kFreeBSD のコマンドラインは、/etc/default/grub か GRUB Legacy の menu.lst 上の「kopt」パラメータから取得されています。これが正しいものであるかを確認して、必要であれば修正してください。コマンドラインは空でも構いません。
+Description-kk.UTF-8: kFreeBSD командалық жолы:
+ Келесі kFreeBSD командасы /etc/default/grub ішінен не GRUB Legacy menu.lst ішіндегі `kopt' параметрінен алынды. Оның дұрыстығын тексеріп, керек болса, өзгертіңіз. Бұл командалық жол бос болса да болады.
+Description-km.UTF-8: ពាក្យ​បញ្ជា kFreeBSD ៖
+ ពាក្យ​បញ្ជា kFreeBSD ដូច​ខាង​ក្រោម​ត្រូវ​បាន​ដកស្រង់​ចេញ​ពី /etc/default/grub ឬ menu.lst ចាស់ៗ​នៅ​ក្នុង GRUB ។ សូម​ផ្ទៀងផ្ទាត់​ថា​វា​ត្រឹមត្រូវ ។ ពាក្យ​បញ្ជា​ត្រូវ​បាន​អនុញ្ញាត​ឲ្យ​ទទេ ។
+Description-ko.UTF-8: kFreeBSD 명령어:
+ 다음 kFreeBSD 명령어를 /etc/default/grub 파일 또는 GRUB 구버전의 menu.lst의 `kopt' 파라미터에서 뽑아냈습니다. 명령어가 올바른지 확인하고 필요하다면 수정하십시오. 명령어는 비워 둘 수도 있습니다.
+Description-lt.UTF-8: „kFreeBSD“ komandos eilutė:
+ Iš „/etc/default/grub“ failo arba senosios „GRUB“ konfigūraciniame faile „menu.lst“ nurodyto „kopt“ parametro išrinkta žemiau pateikta „kFreeBSD“ komandos eilutė. Patikrinkite, ar ji tinkama ir jei reikia, ją patikslinkite. Komandos eilutė gali būti ir tuščia.
+Description-lv.UTF-8: kFreeBSD komandrinda:
+ Sekojošā kFreeBSD komandrinda tika izvilkta no /etc/default/grub vai `kopt' parametra GRUB mantojuma menu.lst. Lūdzu, pārliecinieties, ka tā ir pareiza un, ja vajag, mainiet to. Komandrinda drīkst būt tukša.
+Description-mr.UTF-8: केफ्रीबीएसडी आदेश ओळ:
+ पुढील केफ्रीबीएसडी आदेश ओळ /etc/default/grub ग्रब लीगसीच्या menu.lst मधील `kopt' घटकमूल्यामधून मिळवली आहे. कृपया ती योग्य आहे का, याची खातरजमा करा व आवश्यकता असल्यास बदल करा. आदेश ओळ रिकामी ठेवण्याची अनुमती असते.
+Description-nb.UTF-8: Kommandolinje i kFreeBSD:
+ Den følgende kFreeBSD-kommandolinjen ble trukket ut fra /etc/default/grub eller fra parameteren `kopt' i GRUB Legacys menu.lst. Verifiser at den er korrekt, og endre den om nødvendig. Det er lov at kommandolinjen er tom.
+Description-nl.UTF-8: kFreeBSD-commandoregel:
+ De volgende kFreeBSD-commandoregel is gebaseerd op /etc/default/grub of op de 'kopt'-parameter, gevonden in het bestand menu.lst van GRUB oude-stijl. Gelieve deze op correctheid te controleren en indien nodig aan te passen. De commandoregel mag leeg zijn.
+Description-no.UTF-8: Kommandolinje i kFreeBSD:
+ Den følgende kFreeBSD-kommandolinjen ble trukket ut fra /etc/default/grub eller fra parameteren `kopt' i GRUB Legacys menu.lst. Verifiser at den er korrekt, og endre den om nødvendig. Det er lov at kommandolinjen er tom.
+Description-pl.UTF-8: Wiersz poleceń do kFreeBSD:
+ Następujące polecenie do kFreeBSD zostało wyodrębnione z /etc/default/grub lub z parametru "kopt" w menu.lst GRUB-a Legacy. Proszę sprawdzić czy jest właściwe i zmodyfikować go, jeśli to konieczne. Wiersz z poleceniem może być pusty.
+Description-pt.UTF-8: linha de comandos kFreeBSD:
+ A seguinte linha de comandos kFreeBSD foi extraída a partir de /etc/default/grub ou do parâmetro `kopt' no menu.lst do GRUB Legacy. Por favor verifique que está correcta, e modifique se necessário. É permitido que a linha esteja vazia.
+Description-pt_BR.UTF-8: Linha de comando kFreeBSD:
+ A linha de comando kFreeBSD a seguir foi extraída de /etc/default/grub ou do parâmetro 'kopt' do menu.lst do GRUB Legado. Por favor, verifique se ela está correta, e modifique-a se necessário. A linha de comando pode ser vazia.
+Description-ro.UTF-8: Linia de comandă kFreeBSD:
+ Această linie de comandă kFreeBSD a fost extrasă din /etc/default/grub sau parametrul „kopt” din fișierul menu.lst al vechiului GRUB. Verificați corectitudinea acesteia și modificați-o, dacă este nevoie. Linia de comandă poate fi goală.
+Description-ru.UTF-8: Командная строка kFreeBSD:
+ Представленная ниже строка команд kFreeBSD была извлечена из /etc/default/grub или параметра «kopt» файла menu.lst старой версии GRUB. Проверьте, что всё правильно, или измените её, если требуется. Также командная строка может быть пустой.
+Description-si.UTF-8: kFreeBSD විධාන රේඛාව:
+ පහත kFreeBSD විධානය /etc/default/grub හෝ පැරණි GRUB හි menu.lst හි 'kopt' පරාමිතියෙන් උපුටාගන්නා ලදී. කරුණාකර එය නිවැරදි දැයි තහවුරු කරන්න, ඇවැසිනම් වෙනස්කම් කරන්න. විධාන රේඛාව හිස්ව පැවතීමට ඉඩදෙයි.
+Description-sk.UTF-8: Príkazový riadok kFreeBSD:
+ Nasledujúci príkazový riadok kFreeBSD bol získaný z /etc/default/grub alebo z parametra 'kopt' z menu.lst starého GRUB (Legacy). Skontrolujte prosím jeho správnosť a prípadne ho upravte. Príkazový riadok môže byť aj prázdny.
+Description-sl.UTF-8: Ukazna vrstica kFreeBSD:
+ Sledeči ukaz za kFreeBSD je vzet iz datoteke /etc/default/grub ali iz parametra `kopt' v datoteki  menu.lst sistema GRUB Legacy.  Preverite prosim, da je točen in ga po potrebi popravite. Ukazna vrstica je lahko tudi prazna.
+Description-sq.UTF-8: Linja komanduese kFreeBSD
+ Linja komanduese kFreeBSD e mëposhtme u ekstraktua nga /etc/default/grub ose parametri `kopt'në menu.lst të GRUB të trashëguar. Të lutem verifiko që ajo është korrekte, dhe modifikoje nëse do jetë e nevojshme. Kjo linjë komanduese lejohet të jetë bosh.
+Description-sr.UTF-8: kFreeBSD командна линија:
+ Ова линија намењена кFreeBSD keрнелу је из /etc/default/grub (GRUB 2) или из „kopt“ параметра датотеке menu.lst (GRUB Legacy). Проверите да ли је линија исправна и ако треба поправите је. Линија иначе, може остати и празна.
+Description-sr@latin.UTF-8: kFreeBSD komandna linija:
+ Ova linija namenjena kFreeBSD kernelu je iz /etc/default/grub (GRUB 2) ili iz „kopt“ parametra datoteke menu.lst (GRUB Legacy). Proverite da li je linija ispravna i ako treba popravite je. Linija inače, može ostati i prazna.
+Description-sv.UTF-8: Kommandorad för kFreeBSD:
+ Följande kFreeBSD-kommandorad hämtades från /etc/default/grub eller "kopt"-parametern i gamla GRUB:s menu.lst. Verifiera att den är korrekt och modifiera den om nödvändigt. Kommandoraden kan vara tom.
+Description-ta.UTF-8: கேப்ரீபிஎஸ்டி கட்டளை வரி:
+ பின் வரும் கேப்ரீபிஎஸ்டி கட்டளை வரி /etc/default/grub இலிருந்து அல்லது க்ரப் இன் பாரம்பரிய menu.lst இன் `kopt' அளபுருவிலிருந்து பெறப்பட்டது. இது சரியா என்று சோதித்து தேவையானால் மற்றவும். இந்த கட்டளை வரி காலியாக இருக்க அனுமதி உண்டு.
+Description-th.UTF-8: พารามิเตอร์สำหรับบูต kFreeBSD:
+ พารามิเตอร์สำหรับบูต kFreeBSD ต่อไปนี้ดึงออกมาจาก /etc/default/grub หรือพารามิเตอร์ `kopt' ใน menu.lst ของ GRUB รุ่นเก่า กรุณาตรวจสอบว่าค่านี้ถูกต้องหรือไม่ และกรุณาแก้ไขถ้าจำเป็น พารามิเตอร์นี้สามารถปล่อยเป็นค่าว่างเปล่าได้
+Description-tr.UTF-8: kFreeBSD komut satırı:
+ Aşağıdaki kFreeBSD komut satırı /etc/default/grub'dan ya da eski GRUB menu.lst dosyasındaki 'kopt' parametresinden alınmıştır. Lütfen doğruluğundan emin olun ve gerekirse düzeltin. Komut satırı boş bırakılabilir.
+Description-ug.UTF-8: kFreeBSD بۇيرۇق قۇرى:
+ تۆۋەندىكى kFreeBSD بۇيرۇق قۇرى /etc/default/grub ياكى GRUB Legacy نىڭ menu.lst دىكى `kopt' پارامېتىرىدىن ئاجرىتىدۇ. ئۇنىڭ توغرىلىقىنى جەزملەپ، ئېھتىياجغا ئاساسەن ئۆزگەرتىڭ. بۇيرۇق قۇرىنىڭ بوش قالدۇرۇلۇشىغا يول قويۇلىدۇ.
+Description-uk.UTF-8: Рядок параметрів ядра kFreeBSD:
+ Наступний рядок параметрів ядра kFreeBSD було взято із /etc/default/grub чи з параметру 'kopt' в menu.lst із GRUB Legacy. Перевірте будь ласка його правильність і, за потреби, внесіть зміни.  Рядок параметрів ядра може бути порожнім.
+Description-vi.UTF-8: Dòng lệnh kFreeBSD:
+ Dòng lệnh kFreeBSD sau đây đã được trích ra từ /etc/default/grub hoặc từ tham số “kopt” trong menu.lst của GRUB Cũ. Hãy kiểm tra rằng nó vẫn đúng, và sửa đổi nó nếu cần. Dòng lệnh có thể được để trống.
+Description-zh_CN.UTF-8: kFreeBSD 参数：
+ 已从 /etc/default/grub 或者 GRUB Legacy 的 menu.lst 中的 `kopt' 参数中提取如下 kFreeBSD 命令行参数。请请检查是否正确，并且根据需要进行修改。此命令行可以为空。
+Description-zh_TW.UTF-8: kFreeBSD 命令列：
+ 以下的 kFreeBSD 命令列是由 /etc/default/grub，或是由 GRUB Legacy 的 menu.lst 中的 `kopt' 參數所擷取出來的。請確認它是否正確，若有必要請加以修改。此命令列可以留空。
+
+Template: grub2/kfreebsd_cmdline_default
+Type: string
+Default: quiet splash
+Description: kFreeBSD default command line:
+ The following string will be used as kFreeBSD parameters for the default menu
+ entry but not for the recovery mode.
+Description-ar.UTF-8: سطر أوامر KFreeBSD الافتراضي:
+ سيتم استخدام النص التالي كمُعطى KFreeBSD لمُدخل القائمة
+ الافتراضي ولكن ليس لوضع الإنقاذ.
+Description-ast.UTF-8: Llínia comandos por defeutu kFreeBSD:
+ La siguiente cadena será usada cómo parametros kFreeBSD pa la entrada del menú por defeutu, pero non pal mou recuperación.
+Description-be.UTF-8: Прадвызначаны радок камандаў для ядра kFreeBSD:
+ Наступны радок будзе выкарыстаны ў якасці параметраў ядра kFreeBSD для прадвызначанага пункту меню (але не для рэжыму аднаўлення).
+Description-bg.UTF-8: Параметри на Линукс по подразбиране:
+ Следните параметри ще бъдат използвани по подразбиране при зареждане на kFreeBSD, освен в авариен режим.
+Description-ca.UTF-8: Línia d'ordres de kFreeBSD per defecte:
+ La cadena següent serà emprada com a paràmetres del kFreeBSD per al menú d'entrada per defecte però no per al mode de recuperació.
+Description-cs.UTF-8: Výchozí parametry pro kFreeBSD:
+ Následující parametry pro kFreeBSD se použijí pro výchozí položku menu, ale ne pro záchranný režim.
+Description-cy.UTF-8: Llinell orchymyn ddiofyn kFreeBSD:
+ Defnyddir y llinyn canlynol fel paramedrau kFreeBSD ar gyfer y cofnod bwydlen diofyn ond ddim ar gyfer y modd achub.
+Description-da.UTF-8: Standardkommandolinje i kFreeBSD:
+ Den følgende streng vil blive brugt som kFreeBSD-parametre for standardmenupunktet men ikke for gendannelsestilstanden.
+Description-de.UTF-8: Standard-Befehlszeile für kFreeBSD:
+ Die folgende Zeichenkette wird als kFreeBSD-Parameter für den Standardmenüeintrag, nicht aber für den Rettungsmodus verwandt.
+Description-dz.UTF-8: kFreeBSD སྔོན་སྒྲིག་བརྡ་བཀོད་གྲལ་ཐིག་:
+ འོག་གི་ཡིག་རྒྱུན་ཚུ་ སྔོན་སྒྲིག་དཀར་ཆག་ཐོ་བཀོད་ཀྱི་དོན་ལུ་ kFreeBSD སྦེ་ལག་ལེན་འཐབ་འོང་ དེ་འབདཝད་ སླར་གསོ་ཐབས་ལམ་གྱི་དོན་ལུ་ལག་ལེན་མི་འཐབ།
+Description-el.UTF-8: Προκαθορισμένη γραμμή εντολών kFreeBSD:
+ Η ακόλουθη συμβολοσειρά θα χρησιμοποιηθεί για τις παραμέτρους kFreeBSD στην προκαθορισμένη είσοδο του μενού εκκίνησης αλλά όχι για την κατάσταση διάσωσης (recovery mode).
+Description-eo.UTF-8: Implicita komand-linio de kFreeBSD:
+ La jena ĉeno estos uzata kiel parametrojn de kFreeBSD por la ordinara menuero sed ne por la restariga reĝimo.
+Description-es.UTF-8: Línea de órdenes predeterminada de kFreeBSD:
+ La siguiente cadena se utilizará como parámetros de kFreeBSD para la entrada predeterminada del menú pero no para el modo de recuperación.
+Description-eu.UTF-8: KFreeBSD-ko komando-lerro lehenetsia:
+ Honako katea menuko sarrera lehenetsiaren KFreeBSD-ko parametro gisa erabiliko da, baina ez berreskuratzeko moduan.
+Description-fa.UTF-8: خط فرمان پیش فرض kFreeBSD:
+ این رشته به عنوان یکی از پارامتر های kFreeBSD برای منوی پیش فرض استفاده خواهد شد و نه برای حالت بازیابی.
+Description-fi.UTF-8: kFreeBSD:n oletuskomentorivi:
+ Seuraavaa merkkijonoa käytetään kFreeBSD:n käynnistysvalikon oletusvalinnan parametreina, mutta ei toipumistilassa.
+Description-fr.UTF-8: Ligne de commande par défaut de kFreeBSD :
+ Les paramètres indiqués seront utilisés pour le noyau kFreeBSD de l'entrée de menu par défaut mais pas pour le mode de secours.
+Description-gl.UTF-8: Liña de comando por defecto para kFreeBSD:
+ A seguinte cadea usarase como parámetros para kFreeBSD para a entrada por defecto do menú, pero non para o modo de recuperación.
+Description-gu.UTF-8: kFreeBSD મૂળભૂત આદેશ:
+ નીચેનું વાક્ય મૂળભૂત મેનુ રીત માટે kFreeBSD પરિમાણો માટે વાપરવામાં આવશે પણ રીકવરી સ્થિતિ માટે નહી.
+Description-he.UTF-8: ברירת מחדל לשורת הפקודה של kFreeBSD:
+ המחרוזת הבאה תשמש כפרמטרי kFreeBSD עבור ברירת המחדל בתפריט אבל לא עבור מצב recovery.
+Description-hr.UTF-8: Pretpostavljeni kFreeBSD naredbeni redak:
+ Sljedeći izraz će biti korišten kao parametar za kFreeBSD stavke u izborniku, osim za spasonosni način rada.
+Description-hu.UTF-8: Az alapértelmezett kFreeBSD parancssor:
+ A következő sort fogjuk kFreeBSD paraméternek használni az alapértelmezett (default) menüben, de a rendszervisszaállító (recovery) módban nem.
+Description-id.UTF-8: Baris perintah standar kFreeBSD:
+ String berikut ini digunakan sebagai parameter kFreeBSD untuk menu standar, tetapi tidak digunakan untuk modus darurat.
+Description-is.UTF-8: Sjálfgefin kFreeBSD skipanalína:
+ Eftirfarandi strengur verður notaður sem kFreeBSD viðfang í sjálfgefnu valmyndarfærslunni en ekki í viðgerðarham.
+Description-it.UTF-8: Riga di comando kFreeBSD predefinita:
+ Questa stringa verrà usata come parametri per kFreeBSD nella voce di menu predefinita, ma non nella modalità di ripristino.
+Description-ja.UTF-8: kFreeBSD デフォルトコマンドライン:
+ 以下の文字列はリカバリーモードではない通常のメニューエントリでの kFreeBSD パラメータとして使われます。
+Description-ka.UTF-8: kFreeBSD-ის სტანდარტული ბრძანების სტრიქონი:
+ შემდეგი სტრიქონი გამოყენებულ იქნება როგორც kFreeBSD-ს პარამეტრები მენიუს სტანდარტული შენატანისათვის, მაგრამ არა აღდგენის რეჟიმისათვის.
+Description-kk.UTF-8: kFreeBSD бастапқы командалық жолы:
+ Келесі жол kFreeBSD параметрлері бастапқы мәзірі үшін, бірақ қалпына келтіру үшін емес, қолданылатын болады.
+Description-km.UTF-8: ពាក្យ​បញ្ជា​លំនាំដើម​របស់ kFreeBSD ៖
+ ឃ្លា​ដូច​ខាង​ក្រោម​នឹង​ត្រូវ​បាន​ប្រើ​ជា​ប៉ារ៉ាម៉ែត្រ kFreeBSD សម្រាប់​ធាតុ​ម៉ឺនុយ​លំនាំដើម ប៉ុន្តែ​មិន​សម្រាប់​របៀប​សង្គ្រោះ​ទេ ។
+Description-ko.UTF-8: kFreeBSD 기본 명령어:
+ 다음 문자열을 기본 메뉴 항목의 kFreeBSD 파라미터로 사용합니다. 복구 모드에서는 사용하지 않습니다.
+Description-lt.UTF-8: Numatytoji „kFreeBSD“ komandos eilutė:
+ Ši eilutė bus naudojama kaip įprastiniai „kFreeBSD“ branduolio parametrai, bet ne pasirinkus atkūrimo veikseną.
+Description-lv.UTF-8: kFreeBSD noklusējuma komandrinda:
+ Sekojošā virkne tiks izmantota kā kFreeBSD parametri izvēlnes noklusējuma ierakstam, bet ne sistēmas atgūšanas režīmā.
+Description-mr.UTF-8: केफ्रीबीएसडी मूलनिर्धारीत आदेश ओळ:
+ मुलनिर्धारित मेन्यू नोंदीकरिता केफ्रीबीएसडी घटकमूल्ये म्हणून खालील श्रुंखला वापरली जाईल, पण रिकव्हरी मोडसाठी नाही.
+Description-nb.UTF-8: Standardkommandolinje i kFreeBSD:
+ Den følgende teksten vil bli brukt som kFreeBSD-parametre for standardmenupunktet men ikke for gjenopprettelsesmodus.
+Description-nl.UTF-8: Standaard kFreeBSD-commandoregel:
+ De volgende regel zal, behalve in de herstelmodus, gebruikt worden voor de kFreeBSD parameters in de standaard menuoptie.
+Description-no.UTF-8: Standardkommandolinje i kFreeBSD:
+ Den følgende teksten vil bli brukt som kFreeBSD-parametre for standardmenupunktet men ikke for gjenopprettelsesmodus.
+Description-pl.UTF-8: Domyślny wiersz poleceń do kFreeBSD:
+ Następujący ciąg będzie użyty jako parametry przekazywane do jądra kFreeBSD w domyślnym wpisie menu (ale nie w trybie ratunkowym).
+Description-pt.UTF-8: Linha de comandos padrão do kFreeBSD:
+ A seguinte linha será utilizada como parâmetros para o kFreeBSD para a entrada por omissão do menu, mas não para o modo de recuperação.
+Description-pt_BR.UTF-8: Linha de comando padrão kFreeBSD:
+ O seguinte texto será usado como lista de parâmetros do kFreeBSD para a entrada padrão do menu, mas não para o modo de recuperação.
+Description-ro.UTF-8: Linia de comandă implicită kFreeBSD:
+ Următorul șir va fi folosit ca parametru pentru kFreeBSD pentru poziția implicită din meniu, dar nu și pentru cea de recuperare.
+Description-ru.UTF-8: Командная строка kFreeBSD по умолчанию:
+ Данная строка будет использоваться в качестве параметров kFreeBSD в пункте меню по умолчанию, кроме режима восстановления.
+Description-si.UTF-8: kFreeBSD පෙරනිමි විධාන රේඛාව:
+ පහත යෙදුම පෙරනිමි මෙනු ඇතුළත් කිරීම් සඳහා kFreeBSD පරාමිතියක් ලෙස භාවිත වන නමුත් ගැලවීම් ප්‍රකාරයට නොවේ.
+Description-sk.UTF-8: Predvolený príkazový riadok kFreeBSD:
+ Nasledujúci reťazec bude použitý ako kFreeBSD parametre predvolenej položky menu, ale nie pre záchranný režim.
+Description-sl.UTF-8: Privzeta ukazna vrstica kFreeBSD:
+ Sledeča vrstica bo uporabljena kot parameter kFreeBSD za privzeti vnos v meniju, ne pa za reševalni način.
+Description-sq.UTF-8: Linja komanduese fillestare kFreeBSD:
+ Stringu në vijim do të përdoren si parametër kFreeBSD për menun fillaster hyrëse por jo për gjëndjen e rekuperimit.
+Description-sr.UTF-8: kFreeBSD подразумевајућа командна линија:
+ Следећи стринг ће бити употребљен као kFreeBSD параметри за подреазумевано покретање, али не и за мод за поправку.
+Description-sr@latin.UTF-8: kFreeBSD podrazumevajuća komandna linija:
+ Sledeći string će biti upotrebljen kao kFreeBSD parametri za podreazumevano pokretanje, ali ne i za mod za popravku.
+Description-sv.UTF-8: Standardkommandorad för kFreeBSD:
+ Följande sträng kommer användas som Linux-parametrar för standardmenyvalet men inte för återhämtningsläge (eng. recovery).
+Description-ta.UTF-8: கேப்ரீபிஎஸ்டி முன்னிருப்பு கட்டளை வரி:
+ பின் வரும் சரங்கள் முன்னிருப்பு மெனு உள்ளீட்டுக்கு கேப்ரீபிஎஸ்டி அளபுருக்களாக பயன்படுத்தப்படும்; ஆனால் மீட்டெடுப்பு பாங்குக்கு அல்ல
+Description-th.UTF-8: พารามิเตอร์สำหรับบูต kFreeBSD แบบปกติ:
+ พารามิเตอร์ต่อไปนี้จะใช้ในเมนูสำหรับบูต kFreeBSD แบบปกติ แต่จะไม่ใช้กับโหมดกู้ระบบ
+Description-tr.UTF-8: Öntanımlı kFreeBSD komut satırı:
+ Aşağıdaki dizgi öntanımlı menü girişinin kFreeBSD parametreleri olarak kullanılacak; fakat kurtarma kipi için kullanılmayacaktır.
+Description-ug.UTF-8: kFreeBSD كۆڭۈلدىكى بۇيرۇق قۇرى:
+ تۆۋەندىكى ھەرپ تىزىقى كۆڭۈلدىكى تىزىملىك تۈرىنىڭ kFreeBSD پارامېتىرىغا ئىشلىتىلىدۇ ئەمما ئەسلىگە كەلتۈرۈش ھالىتىگە قوللىنىلمايدۇ.
+Description-uk.UTF-8: Типовий рядок параметрів ядра kFreeBSD:
+ Даний рядок буде використано як параметри ядра kFreeBSD для типового пункту меню, проте не для режиму відновлення.
+Description-vi.UTF-8: Dòng lệnh kFreeBSD mặc định:
+ Chuỗi theo đây sẽ được sử dụng làm các tham số kFreeBSD cho mục nhập trình đơn mặc định, mà không phải cho chế độ phục hồi.
+Description-zh_CN.UTF-8: kFreeBSD 默认命令行：
+ 如下字符串将用于默认菜单项的 kFreeBSD 参数，但不会用于恢复模式。
+Description-zh_TW.UTF-8: kFreeBSD 預設命令列：
+ 以下的字串將會用在預設的選單項目中做為 kFreeBSD 參數，但不會用於回復模式。
+
+Template: grub2/unsigned_kernels_title
+Type: title
+Description: unsigned kernels
+
+Template: grub2/unsigned_kernels
+Type: note
+Description: Cannot upgrade Secure Boot enforcement policy due to unsigned kernels
+ Your system has UEFI Secure Boot enabled in firmware, and the following kernels
+ present on your system are unsigned:
+ .
+  ${unsigned_versions}
+ .
+ These kernels cannot be verified under Secure Boot.  To ensure your system
+ remains bootable, GRUB will not be upgraded on your disk until these kernels are
+ removed or replaced with signed kernels.

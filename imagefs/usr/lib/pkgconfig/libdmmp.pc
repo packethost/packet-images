@@ -1,0 +1,9 @@
+includedir=/usr/include
+libdir=//lib
+
+Name: libdmmp
+Version: 0.2.0
+Description: Device mapper multipath management library
+Requires:
+Libs: -L${libdir} -ldmmp
+Cflags: -I${includedir}

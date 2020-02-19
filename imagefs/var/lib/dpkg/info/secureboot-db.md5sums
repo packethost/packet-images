@@ -1,0 +1,5 @@
+4f8f9726524cb3253e13b21bf07a8022  lib/systemd/system/secureboot-db.service
+196f055e896d081af97e396e01ae5214  usr/share/doc/secureboot-db/README.Debian
+1913ebbd524d51b4125504468411d0db  usr/share/doc/secureboot-db/changelog.gz
+5e9d648e42f661aa4e4ed929ad624146  usr/share/doc/secureboot-db/copyright
+0d157dba3d91f8f5a12b39d68d9b4358  usr/share/secureboot/updates/dbx/MS-2016-08-08.bin

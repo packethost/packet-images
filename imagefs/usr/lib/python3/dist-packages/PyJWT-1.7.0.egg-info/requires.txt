@@ -1,0 +1,13 @@
+
+[crypto]
+cryptography>=1.4
+
+[flake8]
+flake8
+flake8-import-order
+pep8-naming
+
+[test]
+pytest-cov==2.5.1
+pytest-runner==4.2
+pytest==3.7.1

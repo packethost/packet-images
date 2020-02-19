@@ -1,0 +1,17 @@
+a986c86b62ad97781b2e59368b39a41b  usr/bin/kmodsign
+a016dd5745e7d210dad9baa02f59cf21  usr/bin/sbattach
+24af827ffd5add22ce08d4d7fb25aa73  usr/bin/sbkeysync
+ff4cda1ec5680447e377b70178d20fd9  usr/bin/sbsiglist
+3f40a29deea8df63179daca91a28235f  usr/bin/sbsign
+32508c4c054cce27d652071556c106d2  usr/bin/sbvarsign
+7be7c1dc7b10a922e322edaf01ded243  usr/bin/sbverify
+9429482b697fddf2e612e54854462366  usr/share/doc/sbsigntool/NEWS.gz
+abc8cd84e9ad114f801f3c2d08f72a11  usr/share/doc/sbsigntool/README
+2c3cbf44dedc8499eaa2cf60b6b371d6  usr/share/doc/sbsigntool/changelog.Debian.gz
+4c9abb1c491e6d3c01c0d5d233056f9c  usr/share/doc/sbsigntool/copyright
+7150eb8ba39cb3475da451de41620dda  usr/share/man/man1/kmodsign.1.gz
+695512905ba66263298ca76e5a686fca  usr/share/man/man1/sbattach.1.gz
+28ff0133beba58bb66d5ec3c98ba8a4e  usr/share/man/man1/sbsiglist.1.gz
+cdcca006a44456711381f76dc21de6fd  usr/share/man/man1/sbsign.1.gz
+f404462a3651c72fc745a4dcbb33aeea  usr/share/man/man1/sbvarsign.1.gz
+ef5d6290afdd9a430127f975b8e54f8f  usr/share/man/man1/sbverify.1.gz

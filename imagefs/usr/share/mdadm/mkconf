@@ -1,0 +1,100 @@
+#!/bin/sh
+#
+# mkconf -- outputs valid mdadm.conf contents for the local system
+#
+# Copyright © martin f. krafft <madduck@madduck.net>
+# distributed under the terms of the Artistic Licence 2.0
+#
+set -eu
+
+ME="${0##*/}"
+MDADM=/sbin/mdadm
+DEBIANCONFIG=/etc/default/mdadm
+CONFIG=/etc/mdadm/mdadm.conf
+
+# initialise config variables in case the environment leaks
+MAILADDR= DEVICE= HOMEHOST= PROGRAM=
+
+test -r $DEBIANCONFIG && . $DEBIANCONFIG
+
+if [ -n "${MDADM_MAILADDR__:-}" ]; then
+  # honour MAILADDR from the environment (from postinst)
+  MAILADDR="$MDADM_MAILADDR__"
+else
+  # preserve existing MAILADDR
+  MAILADDR="$(sed -ne 's/^MAILADDR //p' $CONFIG 2>/dev/null)" || :
+fi
+
+# save existing values as defaults
+if [ -r "$CONFIG" ]; then
+  DEVICE="$(sed -ne 's/^DEVICE //p' $CONFIG)"
+  HOMEHOST="$(sed -ne 's/^HOMEHOST //p' $CONFIG)"
+  PROGRAM="$(sed -ne 's/^PROGRAM //p' $CONFIG)"
+fi
+
+[ "${1:-}" = force-generate ] && rm -f $CONFIG
+case "${1:-}" in
+  generate|force-generate)
+    [ -n "${2:-}" ] && CONFIG=$2
+    # only barf if the config file specifies anything else than MAILADDR
+    if egrep -qv '^(MAILADDR.*|#.*|)$' $CONFIG 2>/dev/null; then
+      echo "E: $ME: $CONFIG already exists." >&2
+      exit 255
+    fi
+
+    mkdir --parent ${CONFIG%/*}
+    exec >$CONFIG
+    ;;
+esac
+
+cat <<_eof
+# mdadm.conf
+#
+# !NB! Run update-initramfs -u after updating this file.
+# !NB! This will ensure that initramfs has an uptodate copy.
+#
+# Please refer to mdadm.conf(5) for information about this file.
+#
+
+# by default (built-in), scan all partitions (/proc/partitions) and all
+# containers for MD superblocks. alternatively, specify devices to scan, using
+# wildcards if desired.
+#DEVICE ${DEVICE:-partitions containers}
+
+# automatically tag new arrays as belonging to the local system
+HOMEHOST ${HOMEHOST:-<system>}
+
+# instruct the monitoring daemon where to send mail alerts
+MAILADDR ${MAILADDR:-root}
+
+_eof
+
+if [ -n "${PROGRAM:-}" ]; then
+  cat <<-_eof
+	# program to run when mdadm monitor detects potentially interesting events
+	PROGRAM ${PROGRAM}
+
+	_eof
+fi
+
+error=0
+if [ ! -r /proc/mdstat ]; then
+  echo W: $ME: MD subsystem is not loaded, thus I cannot scan for arrays. >&2
+  error=1
+elif [ ! -r /proc/partitions ]; then
+  echo W: $ME: /proc/partitions cannot be read, thus I cannot scan for arrays. >&2
+  error=2
+else
+  echo "# definitions of existing MD arrays"
+  if ! $MDADM --examine --scan --config=partitions; then
+    error=$(($? + 128))
+    echo W: $ME: failed to scan for partitions. >&2
+    echo "### WARNING: scan failed."
+  else
+    echo
+  fi
+fi
+
+echo "# This configuration was auto-generated on $(date -R) by mkconf"
+
+exit $error

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="svg7384" width="16" height="16" style="enable-background:new" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:cc="http://creativecommons.org/ns#" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
+ <metadata id="metadata90">
+  <rdf:RDF>
+   <cc:Work rdf:about="">
+    <dc:format>image/svg+xml</dc:format>
+    <dc:type rdf:resource="http://purl.org/dc/dcmitype/StillImage"/>
+    <dc:title>Gnome Symbolic Icons</dc:title>
+    <cc:license rdf:resource="http://creativecommons.org/licenses/by-sa/4.0/"/>
+   </cc:Work>
+   <cc:License rdf:about="http://creativecommons.org/licenses/by-sa/4.0/">
+    <cc:permits rdf:resource="http://creativecommons.org/ns#Reproduction"/>
+    <cc:permits rdf:resource="http://creativecommons.org/ns#Distribution"/>
+    <cc:requires rdf:resource="http://creativecommons.org/ns#Notice"/>
+    <cc:requires rdf:resource="http://creativecommons.org/ns#Attribution"/>
+    <cc:permits rdf:resource="http://creativecommons.org/ns#DerivativeWorks"/>
+    <cc:requires rdf:resource="http://creativecommons.org/ns#ShareAlike"/>
+   </cc:License>
+  </rdf:RDF>
+ </metadata>
+ <title id="title8473">Gnome Symbolic Icons</title>
+ <g id="layer4" transform="translate(-12 -748)">
+  <path id="path4200" d="m17.969 755.97a2.9688 2.9688 0 0 1-2.9688 2.9688 2.9688 2.9688 0 0 1-2.9688-2.9688 2.9688 2.9688 0 0 1 2.9688-2.9688 2.9688 2.9688 0 0 1 2.9688 2.9688z" style="color:#000000;enable-background:new;fill:#2e3436"/>
+  <path id="path4202" d="m27.938 760.97a2.9688 2.9688 0 0 1-2.9687 2.9688 2.9688 2.9688 0 0 1-2.9688-2.9688 2.9688 2.9688 0 0 1 2.9688-2.9688 2.9688 2.9688 0 0 1 2.9687 2.9688z" style="color:#000000;enable-background:new;fill:#2e3436"/>
+  <path id="path4204" d="m27.938 750.97a2.9688 2.9688 0 0 1-2.9687 2.9688 2.9688 2.9688 0 0 1-2.9688-2.9688 2.9688 2.9688 0 0 1 2.9688-2.9688 2.9688 2.9688 0 0 1 2.9687 2.9688z" style="color:#000000;enable-background:new;fill:#2e3436"/>
+  <path id="path4206" d="m24.613 750.15-11.865 5.7774 11.854 5.9688 0.90039-1.7871-8.248-4.1504 8.2363-4.0117z" style="color-rendering:auto;color:#000000;dominant-baseline:auto;enable-background:accumulate;fill:#2e3436;font-feature-settings:normal;font-variant-alternates:normal;font-variant-caps:normal;font-variant-ligatures:normal;font-variant-numeric:normal;font-variant-position:normal;image-rendering:auto;isolation:auto;mix-blend-mode:normal;shape-padding:0;shape-rendering:auto;solid-color:#000000;text-decoration-color:#000000;text-decoration-line:none;text-decoration-style:solid;text-indent:0;text-orientation:mixed;text-transform:none;white-space:normal"/>
+ </g>
+</svg>

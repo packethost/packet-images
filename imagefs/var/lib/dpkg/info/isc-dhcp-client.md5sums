@@ -1,0 +1,14 @@
+6347fc0de6a1540368fed46311a063e4  sbin/dhclient
+5893e73596d640b2bfb7ff1444b40653  sbin/dhclient-script
+76069d63f09f6c8db381fc720f911c81  usr/lib/initramfs-tools/etc/dhcp/dhclient-enter-hooks.d/config
+18c33416370e6500f355c096d68064b7  usr/lib/initramfs-tools/etc/dhcp/dhclient.conf
+41f36a5538a2d89a66bdc35a19660562  usr/share/apport/package-hooks/isc-dhcp-client.py
+1d31badf7b6130987b9cbf529ab421fc  usr/share/doc/isc-dhcp-client/NEWS.Debian.gz
+cb681b1932275b9379a2ddebc2b182a2  usr/share/doc/isc-dhcp-client/README.gz
+b965196fc5bf49db338405561e42c537  usr/share/doc/isc-dhcp-client/changelog.Debian.gz
+c504a080721290ea20972ad2954991a9  usr/share/doc/isc-dhcp-client/copyright
+c66687c657aa6240986e25da5f03c060  usr/share/initramfs-tools/hooks/zz-dhclient
+0b1fdfedfc657d1b855578a414a2e787  usr/share/man/man5/dhclient.conf.5.gz
+0fb5547bf69d4d52cd937b42f6b8b7a0  usr/share/man/man5/dhclient.leases.5.gz
+879e13a7ba0753fc5849144de8cc26f6  usr/share/man/man8/dhclient-script.8.gz
+54871a7161648dae3af8472e5d316f5d  usr/share/man/man8/dhclient.8.gz

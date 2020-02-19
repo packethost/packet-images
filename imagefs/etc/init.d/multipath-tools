@@ -1,0 +1,109 @@
+#! /bin/sh
+### BEGIN INIT INFO
+# Provides:          multipath-tools
+# Required-Start:    udev $local_fs $remote_fs $syslog
+# Required-Stop:     udev $local_fs $remote_fs $syslog
+# Should-Start:      iscsi
+# Should-Stop:       iscsi
+# Default-Start:     2 3 4 5
+# Default-Stop:      0 1 6
+# Short-Description: multipath daemon
+# Description:
+### END INIT INFO
+
+PATH=/sbin:/bin:/usr/sbin/:/usr/bin
+DAEMON=/sbin/multipathd
+NAME=multipathd
+DESC="multipath daemon"
+syspath=/sys/block
+
+test -x $DAEMON || exit 0
+
+. /lib/lsb/init-functions
+
+if [ -f /etc/default/multipath-tools ] ; then
+	. /etc/default/multipath-tools
+fi
+
+teardown_slaves()
+{
+cd $1; 
+if [ -d "slaves" ]; then
+for slave in slaves/*;
+do
+	if [ "$slave" = "slaves/*" ]; then
+		read dev <  $1/dev
+		tablename=$(dmsetup table --target multipath | sed -n "s/\(.*\): .* $dev .*/\1/p")
+		if ! [ -z $tablename ]; then
+			log_daemon_msg "Root is on a multipathed device, multipathd can not be stopped"
+			DONT_STOP_MPATHD=1
+		fi
+	else
+		local_slave=`readlink -f $slave`;
+		teardown_slaves $local_slave;
+	fi
+	done
+		
+else
+		read dev <  $1/dev
+		tablename=$(dmsetup table --target multipath | sed -n "s/\(.*\): .* $dev .*/\1/p")
+		if ! [ -z $tablename ]; then
+			log_daemon_msg "Root is on a multipathed device, multipathd can not be stopped"
+			DONT_STOP_MPATHD=1
+		fi
+fi
+}
+
+
+case "$1" in
+  start)
+	log_daemon_msg "Starting $DESC" "$NAME"
+	modprobe -a scsi_dh_alua scsi_dh_emc scsi_dh_rdac dm-multipath 2> /dev/null || true
+	start-stop-daemon --oknodo --start --quiet --pidfile /var/run/$NAME.pid --exec $DAEMON -- $DAEMON_OPTS
+	log_end_msg $?
+	;;
+  stop)
+	DONT_STOP_MPATHD=0
+	root_dev=$(awk '{ if ($1 !~ /^[ \t]*#/ && $1 ~ /\// && $2 == "/") { print $1; }}' /etc/mtab)
+	if [ -n "$root_dev" ]; then
+		dm_num=$(dmsetup info -c --noheadings -o minor $root_dev 2>/dev/null)
+	else
+		dm_num=
+	fi
+	if [ $? -ne 0 -o -z "$dm_num" ]; then
+		# Looks like we couldn't find a device mapper root device
+		# But we shouldn't bail out here, otherwise the stop target and the
+		# upgrade processes will break. See DBUG #674733
+		:
+	else
+		root_dm_device="dm-$dm_num"
+		[ -d "$syspath/$root_dm_device" ] && teardown_slaves $syspath/$root_dm_device
+	fi
+
+	if [ x$DONT_STOP_MPATHD = x0 ]; then
+		log_daemon_msg "Stopping $DESC" "$NAME"
+		start-stop-daemon --oknodo --stop --quiet --pidfile /var/run/$NAME.pid --exec $DAEMON
+		log_end_msg $?
+	fi
+	;;
+  status)
+	status_of_proc -p /var/run/$NAME.pid $DAEMON $NAME && exit 0 || exit $?
+	;;
+  reload|force-reload)
+	log_daemon_msg "Reloading $DESC" "$NAME"
+	start-stop-daemon --stop --signal 1 --quiet --pidfile /var/run/$NAME.pid --exec $DAEMON
+	log_end_msg $?
+	;;
+  restart|force-reload)
+  	$0 stop
+	sleep 1
+	$0 start
+	;;
+  *)
+	N=/etc/init.d/multipath-tools
+	echo "Usage: $N {start|stop|status|restart|reload|force-reload}" >&2
+	exit 1
+	;;
+esac
+
+exit 0

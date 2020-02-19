@@ -1,0 +1,2 @@
+# upstart will never be fixed, so it is correct to not specify a version
+initramfs-tools: breaks-without-version upstart

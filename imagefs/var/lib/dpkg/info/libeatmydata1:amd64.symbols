@@ -1,0 +1,7 @@
+libeatmydata.so.1 libeatmydata1 #MINVER#
+ fdatasync@Base 1.1.1
+ fsync@Base 1.1.1
+ msync@Base 1.1.1
+ open64@Base 1.1.1
+ open@Base 1.1.1
+ sync@Base 1.1.1

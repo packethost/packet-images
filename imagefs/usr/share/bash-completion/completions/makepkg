@@ -1,0 +1,47 @@
+# makepkg completion                                       -*- shell-script -*-
+
+# Slackware Linux variant
+_makepkg_slackware()
+{
+    local cur prev words cword
+    _init_completion || return
+
+    case "$prev" in
+        -l|--linkadd|-c|--chown)
+            COMPREPLY=( $(compgen -W 'y n' -- "$cur") )
+            return
+            ;;
+    esac
+
+    if [[ "$cur" == -* ]]; then
+        COMPREPLY=( $(compgen -W \
+            '$1 | command sed -e "s/^options://" | _parse_help -' -- "$cur") )
+        return
+    fi
+
+    _filedir
+}
+
+_makepkg_bootstrap()
+{
+    local fname help
+
+    # Use --help to detect variant; the Slackware one starts making
+    # a package for unknown args, including --version :P
+    help=$("$1" --help 2>&1)
+    case ${help,,} in
+        *slackware*)
+            fname=_makepkg_slackware
+            ;;
+        *)
+            fname=_minimal
+            ;;
+    esac
+
+    unset -f _makepkg_bootstrap
+    complete -F $fname makepkg
+    $fname
+} &&
+complete -F _makepkg_bootstrap makepkg
+
+# ex: filetype=sh

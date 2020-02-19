@@ -1,0 +1,6 @@
+sysstat 	 /etc/default/sysstat
+rsyslog 	 /etc/rsyslog.d/50-default.conf
+openssh-server 	 /etc/ssh/sshd_config
+grub-efi-amd64 	 /etc/default/grub
+unattended-upgrades 	 /etc/apt/apt.conf.d/20auto-upgrades
+unattended-upgrades 	 /etc/apt/apt.conf.d/50unattended-upgrades

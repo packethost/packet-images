@@ -1,0 +1,29 @@
+# bash completion for mc                                   -*- shell-script -*-
+
+_mc()
+{
+    local cur prev words cword split
+    _init_completion -s || return
+
+    case $prev in
+        --edit|--view|--ftplog|--printwd|-!(-*)[evlP])
+            _filedir
+            return
+            ;;
+        --help|--help-*|--version|--colors|--debuglevel|-!(-*)[hVCD])
+            return
+            ;;
+    esac
+
+    $split && return
+
+    if [[ "$cur" == -* ]]; then
+        COMPREPLY=( $(compgen -W '$(_parse_help "$1" --help-all)' -- "$cur") )
+        [[ $COMPREPLY == *= ]] && compopt -o nospace
+    else
+        _filedir -d
+    fi
+} &&
+complete -F _mc mc
+
+# ex: filetype=sh

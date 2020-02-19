@@ -1,0 +1,9 @@
+83aa06b70bb63ad6516acab4509de12f  lib/init/init-d-script
+e8fb1c90e996b6cfec5850bf67c3d534  lib/init/vars.sh
+a190099444b04bc8e441254c7c9c3501  sbin/fstab-decode
+8ba87cc68f8d33c0adda645972b5362a  sbin/killall5
+a21e2e9281e9354d0a9c6b49616464ad  usr/share/doc/sysvinit-utils/copyright
+ca5f40e8dca8264f8084adacbc7477f9  usr/share/man/man5/init-d-script.5.gz
+480564eaaae0e44d9b163ba7e1938d56  usr/share/man/man8/fstab-decode.8.gz
+71a3f18be370f5e997d2b487a6ae2412  usr/share/man/man8/killall5.8.gz
+9f2876b537e11f2886c90ed430f50a63  usr/share/man/man8/pidof.8.gz

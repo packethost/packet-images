@@ -1,0 +1,3 @@
+libefa 1 ibverbs-providers (>= 24.0)
+libmlx4 1 ibverbs-providers (>= 24.0)
+libmlx5 1 ibverbs-providers (>= 24.0)

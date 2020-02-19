@@ -1,0 +1,2304 @@
+Package: adduser
+Architecture: all
+Version: 3.118ubuntu1
+Multi-Arch: foreign
+Priority: important
+Section: admin
+Origin: Ubuntu
+Maintainer: Ubuntu Core Developers <ubuntu-devel-discuss@lists.ubuntu.com>
+Original-Maintainer: Debian Adduser Developers <adduser@packages.debian.org>
+Bugs: https://bugs.launchpad.net/ubuntu/+filebug
+Installed-Size: 624
+Depends: passwd, debconf (>= 0.5) | debconf-2.0
+Suggests: liblocale-gettext-perl, perl, ecryptfs-utils (>= 67-1)
+Filename: pool/main/a/adduser/adduser_3.118ubuntu1_all.deb
+Size: 162656
+MD5sum: 9dc0f8ac1df250fe856c8a169fda3b07
+SHA1: a1764e090294a6b4ecd94964de4af03b543b0471
+SHA256: 369d0b3e9e8ce5eaf870c3c7b593368a3b98f5f1a8973ae40237ef7472705dc8
+Description: add and remove users and groups
+Task: minimal, ubuntu-desktop-minimal-default-languages, ubuntu-desktop-minimal-default-languages, ubuntu-desktop-minimal-default-languages, ubuntu-desktop-minimal-default-languages, ubuntu-desktop-minimal-default-languages, ubuntu-desktop-minimal-default-languages, ubuntu-desktop-minimal-default-languages, ubuntu-desktop-minimal-default-languages, ubuntu-desktop-default-languages, ubuntu-desktop-default-languages, ubuntu-desktop-default-languages, ubuntu-desktop-default-languages, ubuntu-desktop-default-languages, ubuntu-desktop-default-languages, ubuntu-desktop-default-languages, ubuntu-desktop-default-languages
+Description-md5: 0e61515c925d932d3824e3dc6af2842b
+Build-Essential: yes
+Supported: 9m
+
+Package: apt
+Architecture: amd64
+Version: 1.9.4
+Priority: important
+Section: admin
+Origin: Ubuntu
+Maintainer: Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>
+Original-Maintainer: APT Development Team <deity@lists.debian.org>
+Bugs: https://bugs.launchpad.net/ubuntu/+filebug
+Installed-Size: 4156
+Provides: apt-transport-https (= 1.9.4)
+Depends: adduser, gpgv | gpgv2 | gpgv1, libapt-pkg5.90 (>= 1.9.4), ubuntu-keyring, libc6 (>= 2.15), libgcc1 (>= 1:3.0), libgnutls30 (>= 3.6.6), libseccomp2 (>= 1.0.1), libstdc++6 (>= 9)
+Recommends: ca-certificates
+Suggests: apt-doc, aptitude | synaptic | wajig, dpkg-dev (>= 1.17.2), gnupg | gnupg2 | gnupg1, powermgmt-base
+Breaks: apt-transport-https (<< 1.5~alpha4~), apt-utils (<< 1.3~exp2~), aptitude (<< 0.8.10)
+Replaces: apt-transport-https (<< 1.5~alpha4~), apt-utils (<< 1.3~exp2~)
+Filename: pool/main/a/apt/apt_1.9.4_amd64.deb
+Size: 1279364
+MD5sum: c9bac24dc7fd2a6391b11769658cf873
+SHA1: 503bd89223e56f504fd5cc4c2b7495436a4ffa0c
+SHA256: 83630ba2388a98cf28e50dc18b9a1709c15440ace5ad81d368d5f2bafaa973c8
+Description: commandline package manager
+Task: minimal, ubuntu-desktop-minimal-default-languages, ubuntu-desktop-minimal-default-languages, ubuntu-desktop-minimal-default-languages, ubuntu-desktop-minimal-default-languages, ubuntu-desktop-minimal-default-languages, ubuntu-desktop-minimal-default-languages, ubuntu-desktop-minimal-default-languages, ubuntu-desktop-minimal-default-languages, ubuntu-desktop-default-languages, ubuntu-desktop-default-languages, ubuntu-desktop-default-languages, ubuntu-desktop-default-languages, ubuntu-desktop-default-languages, ubuntu-desktop-default-languages, ubuntu-desktop-default-languages, ubuntu-desktop-default-languages
+Description-md5: 9fb97a88cb7383934ef963352b53b4a7
+Build-Essential: yes
+Supported: 9m
+
+Package: base-files
+Architecture: amd64
+Version: 10.2ubuntu7
+Multi-Arch: foreign
+Priority: required
+Essential: yes
+Section: admin
+Origin: Ubuntu
+Maintainer: Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>
+Original-Maintainer: Santiago Vila <sanvila@debian.org>
+Bugs: https://bugs.launchpad.net/ubuntu/+filebug
+Installed-Size: 390
+Provides: base
+Pre-Depends: awk
+Depends: libc6 (>= 2.3.4)
+Breaks: initscripts (<< 2.88dsf-13.3), sendfile (<< 2.1b.20080616-5.2~)
+Replaces: base, dpkg (<= 1.15.0), miscutils
+Filename: pool/main/b/base-files/base-files_10.2ubuntu7_amd64.deb
+Size: 60584
+MD5sum: 152835bc14e53aa4bd3dbf1e8d8c294a
+SHA1: 3fc7d9b9dd5a6ce2761d43efca8a8692e0e44b3c
+SHA256: 306a8ca3d95935943be9ffcdd4057e13e5b8785aeb02775c6c0f7492112d2976
+Description: Debian base system miscellaneous files
+Task: minimal, ubuntu-desktop-minimal-default-languages, ubuntu-desktop-minimal-default-languages, ubuntu-desktop-minimal-default-languages, ubuntu-desktop-minimal-default-languages, ubuntu-desktop-minimal-default-languages, ubuntu-desktop-minimal-default-languages, ubuntu-desktop-minimal-default-languages, ubuntu-desktop-default-languages, ubuntu-desktop-default-languages, ubuntu-desktop-default-languages, ubuntu-desktop-default-languages, ubuntu-desktop-default-languages, ubuntu-desktop-default-languages, ubuntu-desktop-default-languages
+Description-md5: 6d16337f57b84c4747f56438355b2395
+Supported: 9m
+
+Package: base-passwd
+Architecture: amd64
+Version: 3.5.46
+Multi-Arch: foreign
+Priority: required
+Essential: yes
+Section: admin
+Origin: Ubuntu
+Maintainer: Colin Watson <cjwatson@debian.org>
+Bugs: https://bugs.launchpad.net/ubuntu/+filebug
+Installed-Size: 232
+Depends: libc6 (>= 2.8), libdebconfclient0 (>= 0.145)
+Recommends: debconf (>= 0.5) | debconf-2.0
+Replaces: base
+Filename: pool/main/b/base-passwd/base-passwd_3.5.46_amd64.deb
+Size: 47376
+MD5sum: 2a5fdd815e0b7fd803dc7b04a86de680
+SHA1: 0d7439c7217bd1d998bc148bcec038bd2eeae936
+SHA256: 326146f80e3617e0efbb97be642381a83ad79b3fbe616af259a9067590de2d26
+Description: Debian base system master password and group files
+Task: minimal
+Description-md5: aad0cc52ee72b2469af5552851e49f03
+Supported: 9m
+
+Package: bash
+Architecture: amd64
+Version: 5.0-4ubuntu1
+Multi-Arch: foreign
+Priority: required
+Essential: yes
+Section: shells
+Origin: Ubuntu
+Maintainer: Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>
+Original-Maintainer: Matthias Klose <doko@debian.org>
+Bugs: https://bugs.launchpad.net/ubuntu/+filebug
+Installed-Size: 1636
+Pre-Depends: libc6 (>= 2.15), libtinfo6 (>= 6)
+Depends: base-files (>= 2.1.12), debianutils (>= 2.15)
+Recommends: bash-completion (>= 20060301-0)
+Suggests: bash-doc
+Conflicts: bash-completion (<< 20060301-0)
+Replaces: bash-completion (<< 20060301-0), bash-doc (<= 2.05-1)
+Filename: pool/main/b/bash/bash_5.0-4ubuntu1_amd64.deb
+Size: 635492
+MD5sum: 1a7ca0c4ca9e85310deff27966e08da8
+SHA1: e75210892da3a6733721005ad5a82235f4e52995
+SHA256: d305879d3a622be81fa864fd6a4ac772c9925d6d1fe7dd0846926ead57689933
+Homepage: http://tiswww.case.edu/php/chet/bash/bashtop.html
+Description: GNU Bourne Again SHell
+Task: minimal, ubuntu-desktop-minimal-default-languages, ubuntu-desktop-minimal-default-languages, ubuntu-desktop-minimal-default-languages, ubuntu-desktop-minimal-default-languages, ubuntu-desktop-minimal-default-languages, ubuntu-desktop-minimal-default-languages, ubuntu-desktop-minimal-default-languages, ubuntu-desktop-default-languages, ubuntu-desktop-default-languages, ubuntu-desktop-default-languages, ubuntu-desktop-default-languages, ubuntu-desktop-default-languages, ubuntu-desktop-default-languages, ubuntu-desktop-default-languages
+Description-md5: 3522aa7b4374048d6450e348a5bb45d9
+Supported: 9m
+
+Package: bsdutils
+Architecture: amd64
+Version: 1:2.34-0.1ubuntu2
+Multi-Arch: foreign
+Priority: required
+Essential: yes
+Section: utils
+Source: util-linux (2.34-0.1ubuntu2)
+Origin: Ubuntu
+Maintainer: Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>
+Original-Maintainer: LaMont Jones <lamont@debian.org>
+Bugs: https://bugs.launchpad.net/ubuntu/+filebug
+Installed-Size: 303
+Pre-Depends: libc6 (>= 2.14), libsystemd0
+Recommends: bsdmainutils
+Breaks: bash-completion (<< 1:2.1-4.1~)
+Replaces: bash-completion (<< 1:2.1-4.1~)
+Filename: pool/main/u/util-linux/bsdutils_2.34-0.1ubuntu2_amd64.deb
+Size: 63792
+MD5sum: 0f991ac78de1126084d7544426f52dbc
+SHA1: 2a53d8580097239f3aab002127397f3791b9a5f7
+SHA256: 339c6ef6c77148cb4263af4b21628e644812385b30bde10bbb43d98e7e737f25
+Description: basic utilities from 4.4BSD-Lite
+Task: minimal, ubuntu-desktop-minimal-default-languages, ubuntu-desktop-minimal-default-languages, ubuntu-desktop-minimal-default-languages, ubuntu-desktop-minimal-default-languages, ubuntu-desktop-minimal-default-languages, ubuntu-desktop-minimal-default-languages, ubuntu-desktop-minimal-default-languages, ubuntu-desktop-default-languages, ubuntu-desktop-default-languages, ubuntu-desktop-default-languages, ubuntu-desktop-default-languages, ubuntu-desktop-default-languages, ubuntu-desktop-default-languages, ubuntu-desktop-default-languages
+Description-md5: 48257031d7f91a8655d15ca8e9e4e07d
+Supported: 9m
+
+Package: bzip2
+Architecture: amd64
+Version: 1.0.6-9.2
+Multi-Arch: foreign
+Priority: important
+Section: utils
+Origin: Ubuntu
+Maintainer: Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>
+Original-Maintainer: Anibal Monsalve Salazar <anibal@debian.org>
+Bugs: https://bugs.launchpad.net/ubuntu/+filebug
+Installed-Size: 195
+Depends: libbz2-1.0 (= 1.0.6-9.2), libc6 (>= 2.14)
+Suggests: bzip2-doc
+Replaces: libbz2 (<< 0.9.5d-3)
+Filename: pool/main/b/bzip2/bzip2_1.0.6-9.2_amd64.deb
+Size: 33932
+MD5sum: 083a8865525390465799fa9fb3f61c97
+SHA1: 52eb23771736cbc66614e7e38a5943c2a640fd90
+SHA256: 590d5627156885166e04e10890d0b807a1ac1086cc6c0333d43986f25a39ad64
+Homepage: https://web.archive.org/web/20180801004107/http://www.bzip.org/
+Description: high-quality block-sorting file compressor - utilities
+Task: minimal, ubuntu-desktop-minimal-default-languages, ubuntu-desktop-minimal-default-languages, ubuntu-desktop-minimal-default-languages, ubuntu-desktop-minimal-default-languages, ubuntu-desktop-minimal-default-languages, ubuntu-desktop-minimal-default-languages, ubuntu-desktop-minimal-default-languages, ubuntu-desktop-default-languages, ubuntu-desktop-default-languages, ubuntu-desktop-default-languages, ubuntu-desktop-default-languages, ubuntu-desktop-default-languages, ubuntu-desktop-default-languages, ubuntu-desktop-default-languages, ubuntu-desktop-default-languages
+Description-md5: 1e71313ce794d3de1e3bc63ac58885b5
+Build-Essential: yes
+Supported: 9m
+
+Package: coreutils
+Architecture: amd64
+Version: 8.30-3ubuntu2
+Multi-Arch: foreign
+Priority: required
+Essential: yes
+Section: utils
+Origin: Ubuntu
+Maintainer: Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>
+Original-Maintainer: Michael Stone <mstone@debian.org>
+Bugs: https://bugs.launchpad.net/ubuntu/+filebug
+Installed-Size: 7196
+Pre-Depends: libacl1 (>= 2.2.23), libattr1 (>= 1:2.4.44), libc6 (>= 2.28), libselinux1 (>= 2.1.13)
+Filename: pool/main/c/coreutils/coreutils_8.30-3ubuntu2_amd64.deb
+Size: 1249368
+MD5sum: e8e201b6d1b7f39776da07f6713e1675
+SHA1: 1d4ab60c729a361d46a90d92defaca518b2918d2
+SHA256: 99aa50af84de1737735f2f51e570d60f5842aa1d4a3129527906e7ffda368853
+Homepage: http://gnu.org/software/coreutils
+Description: GNU core utilities
+Task: minimal, ubuntu-desktop-minimal-default-languages, ubuntu-desktop-minimal-default-languages, ubuntu-desktop-minimal-default-languages, ubuntu-desktop-minimal-default-languages, ubuntu-desktop-minimal-default-languages, ubuntu-desktop-minimal-default-languages, ubuntu-desktop-minimal-default-languages, ubuntu-desktop-default-languages, ubuntu-desktop-default-languages, ubuntu-desktop-default-languages, ubuntu-desktop-default-languages, ubuntu-desktop-default-languages, ubuntu-desktop-default-languages, ubuntu-desktop-default-languages, ubuntu-desktop-default-languages
+Description-md5: d0d975dec3625409d24be1238cede238
+Supported: 9m
+
+Package: dash
+Architecture: amd64
+Version: 0.5.10.2-6
+Multi-Arch: foreign
+Priority: required
+Essential: yes
+Section: shells
+Origin: Ubuntu
+Maintainer: Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>
+Original-Maintainer: Andrej Shadura <andrewsh@debian.org>
+Bugs: https://bugs.launchpad.net/ubuntu/+filebug
+Installed-Size: 212
+Pre-Depends: libc6 (>= 2.14)
+Depends: debianutils (>= 2.15), dpkg (>= 1.19.1), debconf (>= 0.5) | debconf-2.0
+Filename: pool/main/d/dash/dash_0.5.10.2-6_amd64.deb
+Size: 86336
+MD5sum: 8b22f294e3c973f57393f4d8eec04951
+SHA1: ae38915dd59c1589b4dda6219e179bb498d4aee5
+SHA256: 12607b28478fb815952f47c53394b57405244e675ff3220a982a0b8c7d826b0c
+Homepage: http://gondor.apana.org.au/~herbert/dash/
+Description: POSIX-compliant shell
+Task: minimal
+Description-md5: 8d4d9c32c6b2b70328f7f774a0cc1248
+Supported: 9m
+
+Package: debconf
+Architecture: all
+Version: 1.5.73
+Multi-Arch: foreign
+Priority: required
+Section: admin
+Origin: Ubuntu
+Maintainer: Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>
+Original-Maintainer: Debconf Developers <debconf-devel@lists.alioth.debian.org>
+Bugs: https://bugs.launchpad.net/ubuntu/+filebug
+Installed-Size: 520
+Provides: debconf-2.0
+Pre-Depends: perl-base (>= 5.20.1-3~)
+Recommends: apt-utils (>= 0.5.1), debconf-i18n
+Suggests: debconf-doc, debconf-utils, whiptail | dialog, libterm-readline-gnu-perl, libgtk3-perl, libnet-ldap-perl, perl, debconf-kde-helper (>= 0.1+git20110702)
+Conflicts: apt (<< 0.3.12.1), cdebconf (<< 0.96), debconf-tiny, debconf-utils (<< 1.3.22), dialog (<< 0.9b-20020814-1), menu (<= 2.1.3-1), whiptail (<< 0.51.4-11), whiptail-utf8 (<= 0.50.17-13)
+Breaks: apt-listchanges (<< 3.14), ubiquity (<< 17.10.2), update-notifier-common (<< 3.187~)
+Replaces: debconf-tiny
+Filename: pool/main/d/debconf/debconf_1.5.73_all.deb
+Size: 121524
+MD5sum: 7679138bdfa4b38eaf8489a18010e81f
+SHA1: 353bae74cf43beea36b4d1f97f1d9d845235effe
+SHA256: 7d639ffea1be8e8f5859ca94a0a09b1e4664d10af421c748b4163b08db515990
+Description: Debian configuration management system
+Task: minimal, ubuntu-desktop-minimal-default-languages, ubuntu-desktop-minimal-default-languages, ubuntu-desktop-minimal-default-languages, ubuntu-desktop-minimal-default-languages, ubuntu-desktop-minimal-default-languages, ubuntu-desktop-minimal-default-languages, ubuntu-desktop-minimal-default-languages, ubuntu-desktop-minimal-default-languages, ubuntu-desktop-default-languages, ubuntu-desktop-default-languages, ubuntu-desktop-default-languages, ubuntu-desktop-default-languages, ubuntu-desktop-default-languages, ubuntu-desktop-default-languages, ubuntu-desktop-default-languages, ubuntu-desktop-default-languages
+Description-md5: 85b82bf406dfc9a635114f44ab7fb66d
+Supported: 9m
+
+Package: debianutils
+Architecture: amd64
+Version: 4.8.6.3
+Multi-Arch: foreign
+Priority: required
+Essential: yes
+Section: utils
+Origin: Ubuntu
+Maintainer: Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>
+Original-Maintainer: Clint Adams <clint@debian.org>
+Bugs: https://bugs.launchpad.net/ubuntu/+filebug
+Installed-Size: 230
+Pre-Depends: libc6 (>= 2.15)
+Filename: pool/main/d/debianutils/debianutils_4.8.6.3_amd64.deb
+Size: 85472
+MD5sum: d20ebb924d55316c39b2a561ee8dd726
+SHA1: 95608439b3c6991c89bb7d3b70d4e53830c88216
+SHA256: 75ee5ab02dee0230aa72adde4bd7bcf6f6d2318e317f85e628cc1aaf4a55950b
+Description: Miscellaneous utilities specific to Debian
+Task: minimal, ubuntu-desktop-minimal-default-languages, ubuntu-desktop-minimal-default-languages, ubuntu-desktop-minimal-default-languages, ubuntu-desktop-minimal-default-languages, ubuntu-desktop-minimal-default-languages, ubuntu-desktop-minimal-default-languages, ubuntu-desktop-minimal-default-languages, ubuntu-desktop-default-languages, ubuntu-desktop-default-languages, ubuntu-desktop-default-languages, ubuntu-desktop-default-languages, ubuntu-desktop-default-languages, ubuntu-desktop-default-languages, ubuntu-desktop-default-languages, ubuntu-core
+Description-md5: ccafef5bb90a2453aecca96cbb772d23
+Supported: 9m
+
+Package: diffutils
+Architecture: amd64
+Version: 1:3.7-3
+Priority: required
+Essential: yes
+Section: utils
+Origin: Ubuntu
+Maintainer: Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>
+Original-Maintainer: Santiago Vila <sanvila@debian.org>
+Bugs: https://bugs.launchpad.net/ubuntu/+filebug
+Installed-Size: 532
+Pre-Depends: libc6 (>= 2.17)
+Suggests: diffutils-doc, wdiff
+Replaces: diff
+Filename: pool/main/d/diffutils/diffutils_3.7-3_amd64.deb
+Size: 199804
+MD5sum: 26c0fb5d9d7e8691e088f732d76f21bd
+SHA1: 914c0f0ddfa0e4ec465f75015686e95ab6497d6d
+SHA256: 1e47f7fb82fedcd69c4b8cba65861ad23e6af108612f8f111244f2a48eb7fd02
+Homepage: http://www.gnu.org/software/diffutils/
+Description: File comparison utilities
+Task: minimal
+Description-md5: 5cf0bc18e36aa2957e62b309d6aa34f9
+Supported: 9m
+
+Package: dpkg
+Architecture: amd64
+Version: 1.19.7ubuntu2
+Multi-Arch: foreign
+Priority: required
+Essential: yes
+Section: admin
+Origin: Ubuntu
+Maintainer: Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>
+Original-Maintainer: Dpkg Developers <debian-dpkg@lists.debian.org>
+Bugs: https://bugs.launchpad.net/ubuntu/+filebug
+Installed-Size: 6748
+Pre-Depends: libbz2-1.0, libc6 (>= 2.15), liblzma5 (>= 5.2.2), libselinux1 (>= 2.3), libzstd1 (>= 1.3.2), zlib1g (>= 1:1.1.4)
+Depends: tar (>= 1.28-1)
+Suggests: apt, debsig-verify
+Breaks: acidbase (<= 1.4.5-4), amule (<< 2.3.1+git1a369e47-3), beep (<< 1.3-4), im (<< 1:151-4), libapt-pkg5.0 (<< 1.7~b), libdpkg-perl (<< 1.18.11), lsb-base (<< 10.2019031300), netselect (<< 0.3.ds1-27), pconsole (<< 1.0-12), phpgacl (<< 3.3.7-7.3), pure-ftpd (<< 1.0.43-1), systemtap (<< 2.8-1), terminatorx (<< 4.0.1-1), xvt (<= 2.1-20.1)
+Filename: pool/main/d/dpkg/dpkg_1.19.7ubuntu2_amd64.deb
+Size: 1129844
+MD5sum: 60684f6729b9523d01490f7d78158073
+SHA1: 6660ce9c6ba9caf95087305e570d1096ca829866
+SHA256: 403bfcdbfc1c71d0782eacb43e4952dcc1187a5e2b6e14f7b50b48a1aadaad32
+Homepage: https://wiki.debian.org/Teams/Dpkg
+Description: Debian package management system
+Task: minimal, ubuntu-desktop-minimal-default-languages, ubuntu-desktop-minimal-default-languages, ubuntu-desktop-minimal-default-languages, ubuntu-desktop-minimal-default-languages, ubuntu-desktop-minimal-default-languages, ubuntu-desktop-minimal-default-languages, ubuntu-desktop-minimal-default-languages, ubuntu-desktop-minimal-default-languages, ubuntu-desktop-default-languages, ubuntu-desktop-default-languages, ubuntu-desktop-default-languages, ubuntu-desktop-default-languages, ubuntu-desktop-default-languages, ubuntu-desktop-default-languages, ubuntu-desktop-default-languages, ubuntu-desktop-default-languages
+Description-md5: 2f156c6a30cc39895ad3487111e8c190
+Supported: 9m
+
+Package: e2fsprogs
+Architecture: amd64
+Version: 1.45.3-4ubuntu2
+Multi-Arch: foreign
+Priority: required
+Section: admin
+Origin: Ubuntu
+Maintainer: Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>
+Original-Maintainer: Theodore Y. Ts'o <tytso@mit.edu>
+Bugs: https://bugs.launchpad.net/ubuntu/+filebug
+Installed-Size: 1486
+Pre-Depends: libblkid1 (>= 2.17.2), libc6 (>= 2.14), libcom-err2 (>= 1.43.9), libext2fs2 (= 1.45.3-4ubuntu2), libss2 (>= 1.38), libuuid1 (>= 2.16)
+Depends: logsave
+Recommends: e2fsprogs-l10n
+Suggests: gpart, parted, fuse2fs, e2fsck-static
+Filename: pool/main/e/e2fsprogs/e2fsprogs_1.45.3-4ubuntu2_amd64.deb
+Size: 525960
+MD5sum: 6d86fec3e9e1c04e689e1bede544508b
+SHA1: 0c4078834c088d10abe57b52fc4179cd5dc6168a
+SHA256: 656902d4b73967f6d991bebfcb665cdb23a59fdccfa13a2679ea7f7393b4b37c
+Homepage: http://e2fsprogs.sourceforge.net
+Description: ext2/ext3/ext4 file system utilities
+Task: minimal
+Important: yes
+Description-md5: 92d0fdf684262bbfa702eaea3f50b97e
+Supported: 9m
+
+Package: fdisk
+Architecture: amd64
+Version: 2.34-0.1ubuntu2
+Multi-Arch: foreign
+Priority: required
+Section: utils
+Source: util-linux
+Origin: Ubuntu
+Maintainer: Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>
+Original-Maintainer: LaMont Jones <lamont@debian.org>
+Bugs: https://bugs.launchpad.net/ubuntu/+filebug
+Installed-Size: 505
+Depends: libc6 (>= 2.14), libfdisk1 (>= 2.33), libmount1 (>= 2.24.2), libncursesw6 (>= 6), libsmartcols1 (>= 2.28~rc1), libtinfo6 (>= 6)
+Breaks: util-linux (<< 2.30.1-0ubuntu4~)
+Replaces: util-linux (<< 2.30.1-0ubuntu4~)
+Filename: pool/main/u/util-linux/fdisk_2.34-0.1ubuntu2_amd64.deb
+Size: 119096
+MD5sum: b32d26386c211af1d0ffa4d55e0ddd3d
+SHA1: 0f920c98ee7bc1b2693169f8574cf126c7bc3215
+SHA256: c1868369229e145693e544a165de5547136b6ab346a42f42790d618ceddaca66
+Description: collection of partitioning utilities
+Task: minimal, ubuntu-desktop-minimal-default-languages, ubuntu-desktop-minimal-default-languages, ubuntu-desktop-minimal-default-languages, ubuntu-desktop-minimal-default-languages, ubuntu-desktop-minimal-default-languages, ubuntu-desktop-minimal-default-languages, ubuntu-desktop-minimal-default-languages, ubuntu-desktop-default-languages, ubuntu-desktop-default-languages, ubuntu-desktop-default-languages, ubuntu-desktop-default-languages, ubuntu-desktop-default-languages, ubuntu-desktop-default-languages, ubuntu-desktop-default-languages, ubuntu-desktop-default-languages
+Important: yes
+Description-md5: 389774810aae3f2323ace16ab9ab19ae
+Supported: 9m
+
+Package: findutils
+Architecture: amd64
+Version: 4.6.0+git+20190209-2ubuntu1
+Multi-Arch: foreign
+Priority: required
+Essential: yes
+Section: utils
+Origin: Ubuntu
+Maintainer: Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>
+Original-Maintainer: Andreas Metzler <ametzler@debian.org>
+Bugs: https://bugs.launchpad.net/ubuntu/+filebug
+Installed-Size: 664
+Pre-Depends: libc6 (>= 2.17), libselinux1 (>= 1.32)
+Suggests: mlocate | locate
+Breaks: binstats (<< 1.08-8.1), guilt (<< 0.36-0.2), libpython3.4-minimal (<< 3.4.4-2), libpython3.5-minimal (<< 3.5.1-3), lsat (<< 0.9.7.1-2.1), mc (<< 3:4.8.11-1), switchconf (<< 0.0.9-2.1)
+Filename: pool/main/f/findutils/findutils_4.6.0+git+20190209-2ubuntu1_amd64.deb
+Size: 328420
+MD5sum: df746266f7790acf9dc19930efbbcc8f
+SHA1: 7cd1647f730bc9f2b626e3d5eaad111ae8fe9cc8
+SHA256: df917f8b8c48d8d51f739e689ec4cc1922f08c0fe5f3b5dbb763bd35f505a066
+Homepage: https://savannah.gnu.org/projects/findutils/
+Description: utilities for finding files--find, xargs
+Task: minimal
+Description-md5: ad1a783819241ffdf3ff5f37a676af59
+Supported: 9m
+
+Package: gcc-9-base
+Architecture: amd64
+Version: 9.2.1-9ubuntu2
+Multi-Arch: same
+Priority: required
+Section: libs
+Source: gcc-9
+Origin: Ubuntu
+Maintainer: Ubuntu Core developers <ubuntu-devel-discuss@lists.ubuntu.com>
+Original-Maintainer: Debian GCC Maintainers <debian-gcc@lists.debian.org>
+Bugs: https://bugs.launchpad.net/ubuntu/+filebug
+Installed-Size: 261
+Breaks: gnat (<< 7)
+Filename: pool/main/g/gcc-9/gcc-9-base_9.2.1-9ubuntu2_amd64.deb
+Size: 19344
+MD5sum: 31d19bfb0d785f9f9ecc89b3e277a00f
+SHA1: 628bd5a41ea25718e689eccf62dba7b406bec345
+SHA256: 564c62badbe9ff6c41f44df3131af2bf2793ce92d2c5dc597b2d2a80b25166b5
+Homepage: http://gcc.gnu.org/
+Description: GCC, the GNU Compiler Collection (base package)
+Task: minimal, ubuntu-desktop-minimal-default-languages, ubuntu-desktop-minimal-default-languages, ubuntu-desktop-minimal-default-languages, ubuntu-desktop-minimal-default-languages, ubuntu-desktop-minimal-default-languages, ubuntu-desktop-minimal-default-languages, ubuntu-desktop-minimal-default-languages, ubuntu-desktop-minimal-default-languages, ubuntu-desktop-default-languages, ubuntu-desktop-default-languages, ubuntu-desktop-default-languages, ubuntu-desktop-default-languages, ubuntu-desktop-default-languages, ubuntu-desktop-default-languages, ubuntu-desktop-default-languages, ubuntu-desktop-default-languages
+Description-md5: b6e93638a6d08ea7a18929d7cf078e5d
+Supported: 9m
+
+Package: gpgv
+Architecture: amd64
+Version: 2.2.12-1ubuntu3
+Multi-Arch: foreign
+Priority: important
+Section: utils
+Source: gnupg2
+Origin: Ubuntu
+Maintainer: Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>
+Original-Maintainer: Debian GnuPG Maintainers <pkg-gnupg-maint@lists.alioth.debian.org>
+Bugs: https://bugs.launchpad.net/ubuntu/+filebug
+Installed-Size: 488
+Depends: libbz2-1.0, libc6 (>= 2.25), libgcrypt20 (>= 1.8.0), libgpg-error0 (>= 1.26-2~), zlib1g (>= 1:1.1.4)
+Suggests: gnupg
+Breaks: gnupg2 (<< 2.0.21-2), gpgv2 (<< 2.1.11-7+exp1), python-debian (<< 0.1.29)
+Replaces: gnupg2 (<< 2.0.21-2), gpgv2 (<< 2.1.11-7+exp1)
+Filename: pool/main/g/gnupg2/gpgv_2.2.12-1ubuntu3_amd64.deb
+Size: 197208
+MD5sum: 40e097f5a212edc3f0c1f4c8d51b1ffc
+SHA1: b5bdcf34b073fa5a3e0d2c32131cc4ee1e2046f0
+SHA256: 0361ccb3586df07b7d1931f9140c79f7da5120e82300b5a46b5f3df44f11cb71
+Homepage: https://www.gnupg.org/
+Description: GNU privacy guard - signature verification tool
+Task: minimal, ubuntu-desktop-minimal-default-languages, ubuntu-desktop-minimal-default-languages, ubuntu-desktop-minimal-default-languages, ubuntu-desktop-minimal-default-languages, ubuntu-desktop-minimal-default-languages, ubuntu-desktop-minimal-default-languages, ubuntu-desktop-minimal-default-languages, ubuntu-desktop-minimal-default-languages, ubuntu-desktop-default-languages, ubuntu-desktop-default-languages, ubuntu-desktop-default-languages, ubuntu-desktop-default-languages, ubuntu-desktop-default-languages, ubuntu-desktop-default-languages, ubuntu-desktop-default-languages, ubuntu-desktop-default-languages
+Description-md5: 4ea8f4f4d6a0a387a4a3aeba3e6cc888
+Build-Essential: yes
+Supported: 9m
+
+Package: grep
+Architecture: amd64
+Version: 3.3-1build1
+Multi-Arch: foreign
+Priority: required
+Essential: yes
+Section: utils
+Origin: Ubuntu
+Maintainer: Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>
+Original-Maintainer: Anibal Monsalve Salazar <anibal@debian.org>
+Bugs: https://bugs.launchpad.net/ubuntu/+filebug
+Installed-Size: 492
+Provides: rgrep
+Pre-Depends: libc6 (>= 2.14), libpcre3
+Depends: dpkg (>= 1.15.4) | install-info
+Suggests: libpcre3 (>= 7.7)
+Conflicts: rgrep
+Filename: pool/main/g/grep/grep_3.3-1build1_amd64.deb
+Size: 148368
+MD5sum: d46120506c6e83e1ab6481020819d193
+SHA1: 1af758acb351f57e6b4e18da941b97bb06c7d13e
+SHA256: 9bca461c66150f861987309b360ee5fa05df77a8f02bf8ee6de8b489120f1b83
+Homepage: http://www.gnu.org/software/grep/
+Description: GNU grep, egrep and fgrep
+Task: minimal
+Description-md5: f9188c5583d41955f3b3fe60b9d445f1
+Supported: 9m
+
+Package: gzip
+Architecture: amd64
+Version: 1.10-0ubuntu3
+Priority: required
+Essential: yes
+Section: utils
+Origin: Ubuntu
+Maintainer: Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>
+Original-Maintainer: Bdale Garbee <bdale@gag.com>
+Bugs: https://bugs.launchpad.net/ubuntu/+filebug
+Installed-Size: 245
+Pre-Depends: libc6 (>= 2.17)
+Depends: dpkg (>= 1.15.4) | install-info
+Suggests: less
+Filename: pool/main/g/gzip/gzip_1.10-0ubuntu3_amd64.deb
+Size: 95200
+MD5sum: efdd8110c52a60b17460c32f58193825
+SHA1: 6ac68631aa90c03f0a93bfec0d8c1f7c3e5a5191
+SHA256: 1e39a5917c878fd7ad3bd3ee377cbd02260b5037a39107d991d87db34bbf4cfd
+Homepage: https://www.gnu.org/software/gzip/
+Description: GNU compression utilities
+Task: minimal
+Description-md5: 100720c9e2c6508f1a1f3731537b38e5
+Supported: 9m
+
+Package: hostname
+Architecture: amd64
+Version: 3.22
+Priority: required
+Essential: yes
+Section: admin
+Origin: Ubuntu
+Maintainer: Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>
+Original-Maintainer: Michael Meskes <meskes@debian.org>
+Bugs: https://bugs.launchpad.net/ubuntu/+filebug
+Installed-Size: 54
+Pre-Depends: libc6 (>= 2.4)
+Breaks: nis (<< 3.17-30)
+Replaces: nis (<< 3.17-30)
+Filename: pool/main/h/hostname/hostname_3.22_amd64.deb
+Size: 11320
+MD5sum: b8bec45fd2c9b03cc3e1a660e3bc50a0
+SHA1: ee33bb3a2f56ed95d203f60e4c8bebce0e736a9a
+SHA256: 9e9e66b2e3047cbf073bd16952be6d7389db6e1d6788df81f237233a56c27ae8
+Description: utility to set/show the host name or domain name
+Task: minimal
+Description-md5: a5a22acc3c69a7f40f07f1a8dfc93af1
+Supported: 9m
+
+Package: init-system-helpers
+Architecture: all
+Version: 1.57
+Multi-Arch: foreign
+Priority: required
+Essential: yes
+Section: admin
+Origin: Ubuntu
+Maintainer: Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>
+Original-Maintainer: Debian systemd Maintainers <pkg-systemd-maintainers@lists.alioth.debian.org>
+Bugs: https://bugs.launchpad.net/ubuntu/+filebug
+Installed-Size: 133
+Depends: perl-base (>= 5.20.1-3)
+Conflicts: file-rc (<< 0.8.17~), openrc (<= 0.18.3-1)
+Breaks: systemd (<< 228), sysvinit-utils (<< 2.88dsf-59.3~)
+Replaces: sysv-rc (<< 2.88dsf-59.3~), sysvinit-utils (<< 2.88dsf-59.3)
+Filename: pool/main/i/init-system-helpers/init-system-helpers_1.57_all.deb
+Size: 38260
+MD5sum: 6bb7bbd31d00dfab8eeee9d4dc021514
+SHA1: c11e83736f717091d44e09caaadb1efb48b836a1
+SHA256: 5628715888e797fcddf2c5b3c3923b0a76dad78916025a52e19375703dd9586c
+Description: helper tools for all init systems
+Task: minimal, ubuntu-desktop-minimal-default-languages, ubuntu-desktop-minimal-default-languages, ubuntu-desktop-minimal-default-languages, ubuntu-desktop-minimal-default-languages, ubuntu-desktop-minimal-default-languages, ubuntu-desktop-minimal-default-languages, ubuntu-desktop-minimal-default-languages, ubuntu-desktop-default-languages, ubuntu-desktop-default-languages, ubuntu-desktop-default-languages, ubuntu-desktop-default-languages, ubuntu-desktop-default-languages, ubuntu-desktop-default-languages, ubuntu-desktop-default-languages, ubuntu-core
+Description-md5: facafbf6c4b9fd95c34e95938629ecef
+Supported: 9m
+
+Package: libacl1
+Architecture: amd64
+Version: 2.2.53-4
+Multi-Arch: same
+Priority: required
+Section: libs
+Source: acl
+Origin: Ubuntu
+Maintainer: Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>
+Original-Maintainer: Guillem Jover <guillem@debian.org>
+Bugs: https://bugs.launchpad.net/ubuntu/+filebug
+Installed-Size: 70
+Depends: libc6 (>= 2.14)
+Filename: pool/main/a/acl/libacl1_2.2.53-4_amd64.deb
+Size: 18312
+MD5sum: 61516ee74658c6af5478c7e868d78696
+SHA1: 7aa5be62f1604ecc943bec08a0c34054d4242616
+SHA256: b841ef9ba4454648f743479f3bac8b12c994be499936f0806344594200cd0c43
+Homepage: https://savannah.nongnu.org/projects/acl/
+Description: access control list - shared library
+Task: minimal, ubuntu-desktop-minimal-default-languages, ubuntu-desktop-minimal-default-languages, ubuntu-desktop-minimal-default-languages, ubuntu-desktop-minimal-default-languages, ubuntu-desktop-minimal-default-languages, ubuntu-desktop-minimal-default-languages, ubuntu-desktop-minimal-default-languages, ubuntu-desktop-minimal-default-languages, ubuntu-desktop-default-languages, ubuntu-desktop-default-languages, ubuntu-desktop-default-languages, ubuntu-desktop-default-languages, ubuntu-desktop-default-languages, ubuntu-desktop-default-languages, ubuntu-desktop-default-languages, ubuntu-desktop-default-languages
+Description-md5: 819a4a0833dcbd5db23e4a5fd341c3aa
+Supported: 9m
+
+Package: libapt-pkg5.90
+Architecture: amd64
+Version: 1.9.4
+Multi-Arch: same
+Priority: important
+Section: libs
+Source: apt
+Origin: Ubuntu
+Maintainer: Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>
+Original-Maintainer: APT Development Team <deity@lists.debian.org>
+Bugs: https://bugs.launchpad.net/ubuntu/+filebug
+Installed-Size: 3340
+Provides: libapt-pkg (= 1.9.4)
+Depends: libbz2-1.0, libc6 (>= 2.27), libgcc1 (>= 1:3.0), liblz4-1 (>= 0.0~r127), liblzma5 (>= 5.1.1alpha+20120614), libstdc++6 (>= 9), libsystemd0 (>= 221), libudev1 (>= 183), libzstd1 (>= 1.3.2), zlib1g (>= 1:1.2.2.3)
+Recommends: apt (>= 1.9.4)
+Breaks: appstream (<< 0.9.0-3~), apt (<< 1.6~), aptitude (<< 0.8.9), libapt-inst1.5 (<< 0.9.9~)
+Filename: pool/main/a/apt/libapt-pkg5.90_1.9.4_amd64.deb
+Size: 846896
+MD5sum: 891f07915a5d8ccb5da440865c33b0a2
+SHA1: 8f3e85b52d661f593d1a3f7954c51ec96f2ff255
+SHA256: e9755babeaafc3d008f46181a37f3a911b331618eccbeb5d93205e92a5fbbdf5
+Description: package management runtime library
+Task: minimal, ubuntu-desktop-minimal-default-languages, ubuntu-desktop-minimal-default-languages, ubuntu-desktop-minimal-default-languages, ubuntu-desktop-minimal-default-languages, ubuntu-desktop-minimal-default-languages, ubuntu-desktop-minimal-default-languages, ubuntu-desktop-minimal-default-languages, ubuntu-desktop-minimal-default-languages, ubuntu-desktop-default-languages, ubuntu-desktop-default-languages, ubuntu-desktop-default-languages, ubuntu-desktop-default-languages, ubuntu-desktop-default-languages, ubuntu-desktop-default-languages, ubuntu-desktop-default-languages, ubuntu-desktop-default-languages
+Description-md5: eaacd63db236f47bdcc19e3bea7026a7
+Build-Essential: yes
+Supported: 9m
+
+Package: libattr1
+Architecture: amd64
+Version: 1:2.4.48-4
+Multi-Arch: same
+Priority: required
+Section: libs
+Source: attr
+Origin: Ubuntu
+Maintainer: Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>
+Original-Maintainer: Guillem Jover <guillem@debian.org>
+Bugs: https://bugs.launchpad.net/ubuntu/+filebug
+Installed-Size: 55
+Depends: libc6 (>= 2.4)
+Filename: pool/main/a/attr/libattr1_2.4.48-4_amd64.deb
+Size: 12568
+MD5sum: 3fe302a6adbbc2fdf9334d0759a5192f
+SHA1: cd91df3950fec48dc645e44f172a5862b6670f6b
+SHA256: f4b00f5cdad3f55ee66a91a22c25f52a0a2e0d6fd344f53321b38a1dbefba226
+Homepage: https://savannah.nongnu.org/projects/attr/
+Description: extended attribute handling - shared library
+Task: minimal, ubuntu-desktop-minimal-default-languages, ubuntu-desktop-minimal-default-languages, ubuntu-desktop-minimal-default-languages, ubuntu-desktop-minimal-default-languages, ubuntu-desktop-minimal-default-languages, ubuntu-desktop-minimal-default-languages, ubuntu-desktop-minimal-default-languages, ubuntu-desktop-default-languages, ubuntu-desktop-default-languages, ubuntu-desktop-default-languages, ubuntu-desktop-default-languages, ubuntu-desktop-default-languages, ubuntu-desktop-default-languages, ubuntu-desktop-default-languages, ubuntu-desktop-default-languages
+Description-md5: d4aef101ff5430158eae72e808000f6c
+Supported: 9m
+
+Package: libaudit-common
+Architecture: all
+Version: 1:2.8.5-2ubuntu1
+Multi-Arch: foreign
+Priority: required
+Section: libs
+Source: audit
+Origin: Ubuntu
+Maintainer: Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>
+Original-Maintainer: Laurent Bigonville <bigon@debian.org>
+Bugs: https://bugs.launchpad.net/ubuntu/+filebug
+Installed-Size: 24
+Breaks: libaudit0, libaudit1 (<< 1:2.2.1-2)
+Replaces: libaudit0, libaudit1 (<< 1:2.2.1-2)
+Filename: pool/main/a/audit/libaudit-common_2.8.5-2ubuntu1_all.deb
+Size: 4084
+MD5sum: 3aeef986a1f7b419fbbfcee3098c83c1
+SHA1: 07874af45489cc692dc7bf0f4859c7ba87afd186
+SHA256: 7740864bf1f07a21c2695328d0456b033da3efdfcb81b94114b16e4162b10bcf
+Homepage: https://people.redhat.com/sgrubb/audit/
+Description: Dynamic library for security auditing - common files
+Task: minimal, ubuntu-desktop-minimal-default-languages, ubuntu-desktop-minimal-default-languages, ubuntu-desktop-minimal-default-languages, ubuntu-desktop-minimal-default-languages, ubuntu-desktop-minimal-default-languages, ubuntu-desktop-minimal-default-languages, ubuntu-desktop-minimal-default-languages, ubuntu-desktop-minimal-default-languages, ubuntu-desktop-default-languages, ubuntu-desktop-default-languages, ubuntu-desktop-default-languages, ubuntu-desktop-default-languages, ubuntu-desktop-default-languages, ubuntu-desktop-default-languages, ubuntu-desktop-default-languages, ubuntu-desktop-default-languages
+Description-md5: f1e698fe58902299a06c8f79f079ac9a
+Supported: 9m
+
+Package: libaudit1
+Architecture: amd64
+Version: 1:2.8.5-2ubuntu1
+Multi-Arch: same
+Priority: required
+Section: libs
+Source: audit
+Origin: Ubuntu
+Maintainer: Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>
+Original-Maintainer: Laurent Bigonville <bigon@debian.org>
+Bugs: https://bugs.launchpad.net/ubuntu/+filebug
+Installed-Size: 157
+Depends: libaudit-common (>= 1:2.8.5-2ubuntu1), libc6 (>= 2.14), libcap-ng0 (>= 0.7.9)
+Filename: pool/main/a/audit/libaudit1_2.8.5-2ubuntu1_amd64.deb
+Size: 39048
+MD5sum: d345dbfbf3dc7414622500bc36c7b023
+SHA1: 3396fd7084b746a190d4cec3c850377df85930d0
+SHA256: 861c25e1cb0d881491b12789e07d3daf58f0da8f0e95b41c9014f6d469d75210
+Homepage: https://people.redhat.com/sgrubb/audit/
+Description: Dynamic library for security auditing
+Task: minimal, ubuntu-desktop-minimal-default-languages, ubuntu-desktop-minimal-default-languages, ubuntu-desktop-minimal-default-languages, ubuntu-desktop-minimal-default-languages, ubuntu-desktop-minimal-default-languages, ubuntu-desktop-minimal-default-languages, ubuntu-desktop-minimal-default-languages, ubuntu-desktop-minimal-default-languages, ubuntu-desktop-default-languages, ubuntu-desktop-default-languages, ubuntu-desktop-default-languages, ubuntu-desktop-default-languages, ubuntu-desktop-default-languages, ubuntu-desktop-default-languages, ubuntu-desktop-default-languages, ubuntu-desktop-default-languages
+Description-md5: ec521af3cbcca51c5a26a117f114a9b5
+Supported: 9m
+
+Package: libblkid1
+Architecture: amd64
+Version: 2.34-0.1ubuntu2
+Multi-Arch: same
+Priority: required
+Section: libs
+Source: util-linux
+Origin: Ubuntu
+Maintainer: Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>
+Original-Maintainer: LaMont Jones <lamont@debian.org>
+Bugs: https://bugs.launchpad.net/ubuntu/+filebug
+Installed-Size: 439
+Depends: libc6 (>= 2.25)
+Filename: pool/main/u/util-linux/libblkid1_2.34-0.1ubuntu2_amd64.deb
+Size: 137624
+MD5sum: 0b2a08af929a410e418870e9d8a7cb95
+SHA1: cd56b313195bed56e65f9915e4400931157b6be9
+SHA256: 94589bdae75c60c8421e4e5a169227c7cf589bb3131e23e9cbfe8c9e9f7cd5fe
+Description: block device ID library
+Task: minimal, ubuntu-desktop-minimal-default-languages, ubuntu-desktop-minimal-default-languages, ubuntu-desktop-minimal-default-languages, ubuntu-desktop-minimal-default-languages, ubuntu-desktop-minimal-default-languages, ubuntu-desktop-minimal-default-languages, ubuntu-desktop-minimal-default-languages, ubuntu-desktop-default-languages, ubuntu-desktop-default-languages, ubuntu-desktop-default-languages, ubuntu-desktop-default-languages, ubuntu-desktop-default-languages, ubuntu-desktop-default-languages, ubuntu-desktop-default-languages, ubuntu-desktop-default-languages
+Description-md5: a511054d3223ae05280eebc8f3e2c80e
+Supported: 9m
+
+Package: libbz2-1.0
+Architecture: amd64
+Version: 1.0.6-9.2
+Multi-Arch: same
+Priority: required
+Section: libs
+Source: bzip2
+Origin: Ubuntu
+Maintainer: Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>
+Original-Maintainer: Anibal Monsalve Salazar <anibal@debian.org>
+Bugs: https://bugs.launchpad.net/ubuntu/+filebug
+Installed-Size: 99
+Depends: libc6 (>= 2.4)
+Filename: pool/main/b/bzip2/libbz2-1.0_1.0.6-9.2_amd64.deb
+Size: 32184
+MD5sum: 208673ac06e8fb5663712acae41991cf
+SHA1: 0ae43dc587a9cbe2215d3323c3ce1e5afdb0d32e
+SHA256: d44fba16b15669ca673a74e543a244db42445f220aac7bf4f12c0cc73faf5600
+Homepage: https://web.archive.org/web/20180801004107/http://www.bzip.org/
+Description: high-quality block-sorting file compressor library - runtime
+Task: minimal, ubuntu-desktop-minimal-default-languages, ubuntu-desktop-minimal-default-languages, ubuntu-desktop-minimal-default-languages, ubuntu-desktop-minimal-default-languages, ubuntu-desktop-minimal-default-languages, ubuntu-desktop-minimal-default-languages, ubuntu-desktop-minimal-default-languages, ubuntu-desktop-minimal-default-languages, ubuntu-desktop-default-languages, ubuntu-desktop-default-languages, ubuntu-desktop-default-languages, ubuntu-desktop-default-languages, ubuntu-desktop-default-languages, ubuntu-desktop-default-languages, ubuntu-desktop-default-languages, ubuntu-desktop-default-languages
+Description-md5: 88cb63f2e4d8cedcf07307314fc3c3d3
+Supported: 9m
+
+Package: libc-bin
+Architecture: amd64
+Version: 2.30-0ubuntu2
+Multi-Arch: foreign
+Priority: required
+Essential: yes
+Section: libs
+Source: glibc
+Origin: Ubuntu
+Maintainer: Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>
+Original-Maintainer: GNU Libc Maintainers <debian-glibc@lists.debian.org>
+Bugs: https://bugs.launchpad.net/ubuntu/+filebug
+Installed-Size: 3703
+Depends: libc6 (>> 2.30), libc6 (<< 2.31)
+Suggests: manpages
+Filename: pool/main/g/glibc/libc-bin_2.30-0ubuntu2_amd64.deb
+Size: 633520
+MD5sum: ac398c2afaa0ec9f990138a44e213e2a
+SHA1: 5a485d311ac416ec8dcc94eb01bcfb48817eb1d1
+SHA256: 03ecfc9669e410f36c45ff86074b165aba43bdf578ba8327acef2dd69f6e6162
+Homepage: https://www.gnu.org/software/libc/libc.html
+Description: GNU C Library: Binaries
+Task: minimal, ubuntu-desktop-minimal-default-languages, ubuntu-desktop-minimal-default-languages, ubuntu-desktop-minimal-default-languages, ubuntu-desktop-minimal-default-languages, ubuntu-desktop-minimal-default-languages, ubuntu-desktop-minimal-default-languages, ubuntu-desktop-minimal-default-languages, ubuntu-desktop-minimal-default-languages, ubuntu-desktop-default-languages, ubuntu-desktop-default-languages, ubuntu-desktop-default-languages, ubuntu-desktop-default-languages, ubuntu-desktop-default-languages, ubuntu-desktop-default-languages, ubuntu-desktop-default-languages, ubuntu-desktop-default-languages
+Description-md5: 7625903821514b57277d1bae69ec3c1a
+Supported: 9m
+
+Package: libc6
+Architecture: amd64
+Version: 2.30-0ubuntu2
+Multi-Arch: same
+Priority: required
+Section: libs
+Source: glibc
+Origin: Ubuntu
+Maintainer: Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>
+Original-Maintainer: GNU Libc Maintainers <debian-glibc@lists.debian.org>
+Bugs: https://bugs.launchpad.net/ubuntu/+filebug
+Installed-Size: 13272
+Depends: libgcc1
+Recommends: libidn2-0 (>= 2.0.5~)
+Suggests: glibc-doc, debconf | debconf-2.0, locales
+Conflicts: openrc (<< 0.27-2~)
+Breaks: hurd (<< 1:0.9.git20170910-1), iraf-fitsutil (<< 2018.07.06-4), libtirpc1 (<< 0.2.3), locales (<< 2.30), locales-all (<< 2.30), nocache (<< 1.1-1~), nscd (<< 2.30), r-cran-later (<< 0.7.5+dfsg-2)
+Replaces: libc6-amd64
+Filename: pool/main/g/glibc/libc6_2.30-0ubuntu2_amd64.deb
+Size: 2725128
+MD5sum: 422f8ad4969ea70fefe2091f0a4e2ba7
+SHA1: efcbb70d36aba35f58e40ee44e24f1e6ea2743ff
+SHA256: 5ddfb300b65824d0a7c2ae7e36625590eaab0319569e080b04e77c45bf989cfb
+Homepage: https://www.gnu.org/software/libc/libc.html
+Description: GNU C Library: Shared libraries
+Task: minimal, ubuntu-desktop-minimal-default-languages, ubuntu-desktop-minimal-default-languages, ubuntu-desktop-minimal-default-languages, ubuntu-desktop-minimal-default-languages, ubuntu-desktop-minimal-default-languages, ubuntu-desktop-minimal-default-languages, ubuntu-desktop-minimal-default-languages, ubuntu-desktop-minimal-default-languages, ubuntu-desktop-default-languages, ubuntu-desktop-default-languages, ubuntu-desktop-default-languages, ubuntu-desktop-default-languages, ubuntu-desktop-default-languages, ubuntu-desktop-default-languages, ubuntu-desktop-default-languages, ubuntu-desktop-default-languages
+Description-md5: fc3001b0b90a1c8e6690b283a619d57f
+Supported: 9m
+
+Package: libcap-ng0
+Architecture: amd64
+Version: 0.7.9-2
+Multi-Arch: same
+Priority: required
+Section: libs
+Source: libcap-ng
+Origin: Ubuntu
+Maintainer: Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>
+Original-Maintainer: Pierre Chifflier <pollux@debian.org>
+Bugs: https://bugs.launchpad.net/ubuntu/+filebug
+Installed-Size: 45
+Depends: libc6 (>= 2.8)
+Filename: pool/main/libc/libcap-ng/libcap-ng0_0.7.9-2_amd64.deb
+Size: 10964
+MD5sum: fc8ee25cd1a67ce22d28799f20ed162a
+SHA1: 9b65e9b7a5793a1583e92ef60b364b418945b851
+SHA256: 83177e1dc837adae8032d14f81a19c6bff1a316588463b531de026649fc65a2b
+Homepage: http://people.redhat.com/sgrubb/libcap-ng
+Description: An alternate POSIX capabilities library
+Task: minimal, ubuntu-desktop-minimal-default-languages, ubuntu-desktop-minimal-default-languages, ubuntu-desktop-minimal-default-languages, ubuntu-desktop-minimal-default-languages, ubuntu-desktop-minimal-default-languages, ubuntu-desktop-minimal-default-languages, ubuntu-desktop-minimal-default-languages, ubuntu-desktop-minimal-default-languages, ubuntu-desktop-default-languages, ubuntu-desktop-default-languages, ubuntu-desktop-default-languages, ubuntu-desktop-default-languages, ubuntu-desktop-default-languages, ubuntu-desktop-default-languages, ubuntu-desktop-default-languages, ubuntu-desktop-default-languages
+Description-md5: a9611912ade327f38052faa7edd07603
+Supported: 9m
+
+Package: libcom-err2
+Architecture: amd64
+Version: 1.45.3-4ubuntu2
+Multi-Arch: same
+Priority: required
+Section: libs
+Source: e2fsprogs
+Origin: Ubuntu
+Maintainer: Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>
+Original-Maintainer: Theodore Y. Ts'o <tytso@mit.edu>
+Bugs: https://bugs.launchpad.net/ubuntu/+filebug
+Installed-Size: 99
+Provides: libcomerr2 (= 1.45.3-4ubuntu2)
+Depends: libc6 (>= 2.17)
+Breaks: libcomerr2 (<< 1.43.9-1~)
+Replaces: libcomerr2 (<< 1.43.9-1~)
+Filename: pool/main/e/e2fsprogs/libcom-err2_1.45.3-4ubuntu2_amd64.deb
+Size: 9160
+MD5sum: f32689705f9c71111a4edef1563a9d15
+SHA1: ff7dd08e8d527b4f34b442c86d7443ed7379383d
+SHA256: 3996250de894bf978ec9bc656ed9749805cb2e917c611121dcac8b279c6b0f14
+Homepage: http://e2fsprogs.sourceforge.net
+Description: common error description library
+Task: minimal, ubuntu-desktop-minimal-default-languages, ubuntu-desktop-minimal-default-languages, ubuntu-desktop-minimal-default-languages, ubuntu-desktop-minimal-default-languages, ubuntu-desktop-minimal-default-languages, ubuntu-desktop-minimal-default-languages, ubuntu-desktop-minimal-default-languages, ubuntu-desktop-default-languages, ubuntu-desktop-default-languages, ubuntu-desktop-default-languages, ubuntu-desktop-default-languages, ubuntu-desktop-default-languages, ubuntu-desktop-default-languages, ubuntu-desktop-default-languages, ubuntu-desktop-default-languages
+Description-md5: 5611f795c9947cfb9a2980a01506a1b9
+Supported: 9m
+
+Package: libdb5.3
+Architecture: amd64
+Version: 5.3.28+dfsg1-0.6ubuntu1
+Multi-Arch: same
+Priority: required
+Section: libs
+Source: db5.3
+Origin: Ubuntu
+Maintainer: Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>
+Original-Maintainer: Debian Berkeley DB Team <team+bdb@tracker.debian.org>
+Bugs: https://bugs.launchpad.net/ubuntu/+filebug
+Installed-Size: 1733
+Depends: libc6 (>= 2.17)
+Filename: pool/main/d/db5.3/libdb5.3_5.3.28+dfsg1-0.6ubuntu1_amd64.deb
+Size: 672472
+MD5sum: 6c675a69d1fad191d819dee159dfc0f9
+SHA1: 0fef1e31e24af242396c2393619496a6d533140f
+SHA256: 2c181b213cb65d9217e7017e8529c31b7523c60f2ac8d3fa4dfb96cd25e16149
+Homepage: http://www.oracle.com/technetwork/database/database-technologies/berkeleydb/overview/index.html
+Description: Berkeley v5.3 Database Libraries [runtime]
+Task: minimal, ubuntu-desktop-minimal-default-languages, ubuntu-desktop-minimal-default-languages, ubuntu-desktop-minimal-default-languages, ubuntu-desktop-minimal-default-languages, ubuntu-desktop-minimal-default-languages, ubuntu-desktop-minimal-default-languages, ubuntu-desktop-minimal-default-languages, ubuntu-desktop-minimal-default-languages, ubuntu-desktop-default-languages, ubuntu-desktop-default-languages, ubuntu-desktop-default-languages, ubuntu-desktop-default-languages, ubuntu-desktop-default-languages, ubuntu-desktop-default-languages, ubuntu-desktop-default-languages, ubuntu-desktop-default-languages
+Description-md5: 6cef0d1fc062f09a5c2c1209dc807be1
+Supported: 9m
+
+Package: libdebconfclient0
+Architecture: amd64
+Version: 0.249ubuntu1
+Multi-Arch: same
+Priority: required
+Section: libs
+Source: cdebconf
+Origin: Ubuntu
+Maintainer: Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>
+Original-Maintainer: Debian Install System Team <debian-boot@lists.debian.org>
+Bugs: https://bugs.launchpad.net/ubuntu/+filebug
+Installed-Size: 73
+Depends: libc6 (>= 2.4)
+Filename: pool/main/c/cdebconf/libdebconfclient0_0.249ubuntu1_amd64.deb
+Size: 6388
+MD5sum: 7449a239df9cbe3014931abe416a23ce
+SHA1: bfb27598c5f434b25c82ff7f8ca6c92735fca73f
+SHA256: 4fdc285449b3f7f824c756809b997739b8b4b789fb5fffd687d69d9790a81163
+Description: Debian Configuration Management System (C-implementation library)
+Task: minimal
+Description-md5: b6846d950dc3d5d61a275932cc66b18d
+Supported: 9m
+
+Package: libext2fs2
+Architecture: amd64
+Version: 1.45.3-4ubuntu2
+Multi-Arch: same
+Priority: required
+Section: libs
+Source: e2fsprogs
+Origin: Ubuntu
+Maintainer: Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>
+Original-Maintainer: Theodore Y. Ts'o <tytso@mit.edu>
+Bugs: https://bugs.launchpad.net/ubuntu/+filebug
+Installed-Size: 534
+Provides: e2fslibs (= 1.45.3-4ubuntu2)
+Depends: libc6 (>= 2.28)
+Breaks: e2fslibs (<< 1.43.9-1~)
+Replaces: e2fslibs (<< 1.43.9-1~)
+Filename: pool/main/e/e2fsprogs/libext2fs2_1.45.3-4ubuntu2_amd64.deb
+Size: 180832
+MD5sum: 923705cca92bdfd6d660a561d51ba7ff
+SHA1: d454969397a8f7617be807ea58a8a04bb5543387
+SHA256: 2d98dbe876010cccbfd894636decc844494d071fe0432ff6084d494a8b18dac8
+Homepage: http://e2fsprogs.sourceforge.net
+Description: ext2/ext3/ext4 file system libraries
+Task: minimal
+Description-md5: ba4f61a3e0b238831f03143cbdce696e
+Supported: 9m
+
+Package: libfdisk1
+Architecture: amd64
+Version: 2.34-0.1ubuntu2
+Multi-Arch: same
+Priority: required
+Section: libs
+Source: util-linux
+Origin: Ubuntu
+Maintainer: Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>
+Original-Maintainer: LaMont Jones <lamont@debian.org>
+Bugs: https://bugs.launchpad.net/ubuntu/+filebug
+Installed-Size: 548
+Depends: libblkid1 (>= 2.24.2), libc6 (>= 2.25), libuuid1 (>= 2.16)
+Filename: pool/main/u/util-linux/libfdisk1_2.34-0.1ubuntu2_amd64.deb
+Size: 174840
+MD5sum: a679310a28eebccba23ef40759d7e54c
+SHA1: b95e79a735966df296493bb993e52e542a70cac5
+SHA256: dd67b9e20377e2478d4ffb397537ab17a5e9c4f02589269c81f551a2df37d74a
+Description: fdisk partitioning library
+Task: minimal, ubuntu-desktop-minimal-default-languages, ubuntu-desktop-minimal-default-languages, ubuntu-desktop-minimal-default-languages, ubuntu-desktop-minimal-default-languages, ubuntu-desktop-minimal-default-languages, ubuntu-desktop-minimal-default-languages, ubuntu-desktop-minimal-default-languages, ubuntu-desktop-default-languages, ubuntu-desktop-default-languages, ubuntu-desktop-default-languages, ubuntu-desktop-default-languages, ubuntu-desktop-default-languages, ubuntu-desktop-default-languages, ubuntu-desktop-default-languages, ubuntu-desktop-default-languages
+Description-md5: 97986f600b6cd55d9613b5b8eac3b74a
+Supported: 9m
+
+Package: libffi6
+Architecture: amd64
+Version: 3.2.1-9
+Multi-Arch: same
+Priority: important
+Section: libs
+Source: libffi
+Origin: Ubuntu
+Maintainer: Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>
+Original-Maintainer: Debian GCC Maintainers <debian-gcc@lists.debian.org>
+Bugs: https://bugs.launchpad.net/ubuntu/+filebug
+Installed-Size: 56
+Depends: libc6 (>= 2.14)
+Filename: pool/main/libf/libffi/libffi6_3.2.1-9_amd64.deb
+Size: 18060
+MD5sum: 49843ee1f9a73f508d9630fc42eb3b57
+SHA1: 635e936c212900a66af1464e296400f7f24de929
+SHA256: 9f409446469198b272fc5acd5440a7733ececb1dddd91f22ed34a563aa4f737b
+Homepage: https://sourceware.org/libffi/
+Description: Foreign Function Interface library runtime
+Task: minimal, ubuntu-desktop-minimal-default-languages, ubuntu-desktop-minimal-default-languages, ubuntu-desktop-minimal-default-languages, ubuntu-desktop-minimal-default-languages, ubuntu-desktop-minimal-default-languages, ubuntu-desktop-minimal-default-languages, ubuntu-desktop-minimal-default-languages, ubuntu-desktop-minimal-default-languages, ubuntu-desktop-default-languages, ubuntu-desktop-default-languages, ubuntu-desktop-default-languages, ubuntu-desktop-default-languages, ubuntu-desktop-default-languages, ubuntu-desktop-default-languages, ubuntu-desktop-default-languages, ubuntu-desktop-default-languages
+Description-md5: aa11fa9e12227fc9a1de7b2cb193c270
+Build-Essential: yes
+Supported: 9m
+
+Package: libgcc1
+Architecture: amd64
+Version: 1:9.2.1-9ubuntu2
+Multi-Arch: same
+Priority: required
+Section: libs
+Source: gcc-9 (9.2.1-9ubuntu2)
+Origin: Ubuntu
+Maintainer: Ubuntu Core developers <ubuntu-devel-discuss@lists.ubuntu.com>
+Original-Maintainer: Debian GCC Maintainers <debian-gcc@lists.debian.org>
+Bugs: https://bugs.launchpad.net/ubuntu/+filebug
+Installed-Size: 116
+Depends: gcc-9-base (= 9.2.1-9ubuntu2), libc6 (>= 2.14)
+Breaks: gcc-4.3 (<< 4.3.6-1), gcc-4.4 (<< 4.4.6-4), gcc-4.5 (<< 4.5.3-2)
+Filename: pool/main/g/gcc-9/libgcc1_9.2.1-9ubuntu2_amd64.deb
+Size: 40784
+MD5sum: 5519ca34671820b31a2e0eda3d99487f
+SHA1: 11b29f6083ce291a8861693ab9f01f1cb5d87c3c
+SHA256: 2cc5dfd130713b11d3eae560375c33353412fc2c35b63156c5f5b83416906d3a
+Homepage: http://gcc.gnu.org/
+Description: GCC support library
+Task: minimal, ubuntu-desktop-minimal-default-languages, ubuntu-desktop-minimal-default-languages, ubuntu-desktop-minimal-default-languages, ubuntu-desktop-minimal-default-languages, ubuntu-desktop-minimal-default-languages, ubuntu-desktop-minimal-default-languages, ubuntu-desktop-minimal-default-languages, ubuntu-desktop-minimal-default-languages, ubuntu-desktop-default-languages, ubuntu-desktop-default-languages, ubuntu-desktop-default-languages, ubuntu-desktop-default-languages, ubuntu-desktop-default-languages, ubuntu-desktop-default-languages, ubuntu-desktop-default-languages, ubuntu-desktop-default-languages
+Description-md5: bbd60d723e97d8e06c04228ee4c76f10
+Supported: 9m
+
+Package: libgcrypt20
+Architecture: amd64
+Version: 1.8.4-5ubuntu2
+Multi-Arch: same
+Priority: required
+Section: libs
+Origin: Ubuntu
+Maintainer: Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>
+Original-Maintainer: Debian GnuTLS Maintainers <pkg-gnutls-maint@lists.alioth.debian.org>
+Bugs: https://bugs.launchpad.net/ubuntu/+filebug
+Installed-Size: 1223
+Depends: libc6 (>= 2.15), libgpg-error0 (>= 1.25)
+Suggests: rng-tools
+Filename: pool/main/libg/libgcrypt20/libgcrypt20_1.8.4-5ubuntu2_amd64.deb
+Size: 419412
+MD5sum: 189c3e8c55e586f72b15008ac088672f
+SHA1: 6d7a238e9ef23ec05b9515b8deb2bc8a00410444
+SHA256: 238f8eb7cc20a3c73e7ed5f1f6c14b8d411e1af2d7c9e83e963b38b6f4c8587e
+Homepage: https://directory.fsf.org/project/libgcrypt/
+Description: LGPL Crypto library - runtime library
+Task: minimal, ubuntu-desktop-minimal-default-languages, ubuntu-desktop-minimal-default-languages, ubuntu-desktop-minimal-default-languages, ubuntu-desktop-minimal-default-languages, ubuntu-desktop-minimal-default-languages, ubuntu-desktop-minimal-default-languages, ubuntu-desktop-minimal-default-languages, ubuntu-desktop-minimal-default-languages, ubuntu-desktop-default-languages, ubuntu-desktop-default-languages, ubuntu-desktop-default-languages, ubuntu-desktop-default-languages, ubuntu-desktop-default-languages, ubuntu-desktop-default-languages, ubuntu-desktop-default-languages, ubuntu-desktop-default-languages
+Description-md5: e8ab63c6be1944ea9efde5248663f053
+Supported: 9m
+
+Package: libgmp10
+Architecture: amd64
+Version: 2:6.1.2+dfsg-4
+Multi-Arch: same
+Priority: important
+Section: libs
+Source: gmp
+Origin: Ubuntu
+Maintainer: Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>
+Original-Maintainer: Debian Science Team <debian-science-maintainers@lists.alioth.debian.org>
+Bugs: https://bugs.launchpad.net/ubuntu/+filebug
+Installed-Size: 555
+Depends: libc6 (>= 2.14)
+Filename: pool/main/g/gmp/libgmp10_6.1.2+dfsg-4_amd64.deb
+Size: 236324
+MD5sum: 68e808a54788d4e41375c95bf4797086
+SHA1: dc66f632eeed8b9ee8d895386d812359aa25ffb6
+SHA256: 60456eb33dd80a92d0c98be4537363f6f6a8f5ff8c71c3eecf6f2441f3b2402a
+Homepage: http://gmplib.org/
+Description: Multiprecision arithmetic library
+Task: minimal, ubuntu-desktop-minimal-default-languages, ubuntu-desktop-minimal-default-languages, ubuntu-desktop-minimal-default-languages, ubuntu-desktop-minimal-default-languages, ubuntu-desktop-minimal-default-languages, ubuntu-desktop-minimal-default-languages, ubuntu-desktop-minimal-default-languages, ubuntu-desktop-minimal-default-languages, ubuntu-desktop-default-languages, ubuntu-desktop-default-languages, ubuntu-desktop-default-languages, ubuntu-desktop-default-languages, ubuntu-desktop-default-languages, ubuntu-desktop-default-languages, ubuntu-desktop-default-languages, ubuntu-desktop-default-languages
+Description-md5: cf6b3a218331a8f680398794acac47a0
+Build-Essential: yes
+Supported: 9m
+
+Package: libgnutls30
+Architecture: amd64
+Version: 3.6.9-5ubuntu1
+Multi-Arch: same
+Priority: important
+Section: libs
+Source: gnutls28
+Origin: Ubuntu
+Maintainer: Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>
+Original-Maintainer: Debian GnuTLS Maintainers <pkg-gnutls-maint@lists.alioth.debian.org>
+Bugs: https://bugs.launchpad.net/ubuntu/+filebug
+Installed-Size: 2100
+Depends: libgmp10 (>= 2:6.0.0), libc6 (>= 2.25), libhogweed4 (>= 3.4.1~rc1~), libidn2-0 (>= 2.0.0), libnettle6 (>= 3.4~), libp11-kit0 (>= 0.23.11), libtasn1-6 (>= 4.14), libunistring2 (>= 0.9.7)
+Suggests: gnutls-bin
+Filename: pool/main/g/gnutls28/libgnutls30_3.6.9-5ubuntu1_amd64.deb
+Size: 792296
+MD5sum: a3b78e85b9b2654443bac4413a3033a2
+SHA1: 25c7b07f09e911c96778f66b27a572a7428d41c3
+SHA256: 3f89ea9b479bbb2e2d5118b3546cc0bbd82aa7554ea0ea8093fc24cc166276ab
+Homepage: https://www.gnutls.org/
+Description: GNU TLS library - main runtime library
+Task: minimal, ubuntu-desktop-minimal-default-languages, ubuntu-desktop-minimal-default-languages, ubuntu-desktop-minimal-default-languages, ubuntu-desktop-minimal-default-languages, ubuntu-desktop-minimal-default-languages, ubuntu-desktop-minimal-default-languages, ubuntu-desktop-minimal-default-languages, ubuntu-desktop-minimal-default-languages, ubuntu-desktop-default-languages, ubuntu-desktop-default-languages, ubuntu-desktop-default-languages, ubuntu-desktop-default-languages, ubuntu-desktop-default-languages, ubuntu-desktop-default-languages, ubuntu-desktop-default-languages, ubuntu-desktop-default-languages
+Description-md5: 62280ac2a597a21eda709c611a5c0008
+Build-Essential: yes
+Supported: 9m
+
+Package: libgpg-error0
+Architecture: amd64
+Version: 1.36-7
+Multi-Arch: same
+Priority: required
+Section: libs
+Source: libgpg-error
+Origin: Ubuntu
+Maintainer: Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>
+Original-Maintainer: Debian GnuPG Maintainers <pkg-gnupg-maint@lists.alioth.debian.org>
+Bugs: https://bugs.launchpad.net/ubuntu/+filebug
+Installed-Size: 175
+Depends: libc6 (>= 2.15)
+Recommends: libgpg-error-l10n
+Filename: pool/main/libg/libgpg-error/libgpg-error0_1.36-7_amd64.deb
+Size: 57924
+MD5sum: b2c8ad5a7ed829981ba97a37f964a996
+SHA1: 67f825120297a9621fefd4cb37bc6909c19d38cc
+SHA256: abd78a70c212e356297479f3d588f301ed967d3b025e35928fd83757b3269dd4
+Homepage: https://www.gnupg.org/related_software/libgpg-error/
+Description: GnuPG development runtime library
+Task: minimal, ubuntu-desktop-minimal-default-languages, ubuntu-desktop-minimal-default-languages, ubuntu-desktop-minimal-default-languages, ubuntu-desktop-minimal-default-languages, ubuntu-desktop-minimal-default-languages, ubuntu-desktop-minimal-default-languages, ubuntu-desktop-minimal-default-languages, ubuntu-desktop-minimal-default-languages, ubuntu-desktop-default-languages, ubuntu-desktop-default-languages, ubuntu-desktop-default-languages, ubuntu-desktop-default-languages, ubuntu-desktop-default-languages, ubuntu-desktop-default-languages, ubuntu-desktop-default-languages, ubuntu-desktop-default-languages
+Description-md5: 25a68a249e16424360132bea187a6d2b
+Supported: 9m
+
+Package: libhogweed4
+Architecture: amd64
+Version: 3.4.1-1
+Multi-Arch: same
+Priority: important
+Section: libs
+Source: nettle
+Origin: Ubuntu
+Maintainer: Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>
+Original-Maintainer: Magnus Holmgren <holmgren@debian.org>
+Bugs: https://bugs.launchpad.net/ubuntu/+filebug
+Installed-Size: 240
+Depends: libc6 (>= 2.14), libgmp10 (>= 2:6.0.0), libnettle6 (= 3.4.1-1)
+Filename: pool/main/n/nettle/libhogweed4_3.4.1-1_amd64.deb
+Size: 139920
+MD5sum: 8b287886e0df4e83ab3efe207212bd1f
+SHA1: f933f257b115eb671241e2276d0883d37e6e105a
+SHA256: 2c896b11d0a17b0ff0ae19f37d61e2e36699f55cdb5e5af4cdbd962157dff22d
+Homepage: http://www.lysator.liu.se/~nisse/nettle/
+Description: low level cryptographic library (public-key cryptos)
+Task: minimal, ubuntu-desktop-minimal-default-languages, ubuntu-desktop-minimal-default-languages, ubuntu-desktop-minimal-default-languages, ubuntu-desktop-minimal-default-languages, ubuntu-desktop-minimal-default-languages, ubuntu-desktop-minimal-default-languages, ubuntu-desktop-minimal-default-languages, ubuntu-desktop-minimal-default-languages, ubuntu-desktop-default-languages, ubuntu-desktop-default-languages, ubuntu-desktop-default-languages, ubuntu-desktop-default-languages, ubuntu-desktop-default-languages, ubuntu-desktop-default-languages, ubuntu-desktop-default-languages, ubuntu-desktop-default-languages
+Description-md5: 2a20554eaadbd355079396956d5d3edb
+Build-Essential: yes
+Supported: 9m
+
+Package: libidn2-0
+Architecture: amd64
+Version: 2.2.0-2
+Multi-Arch: same
+Priority: important
+Section: libs
+Source: libidn2
+Origin: Ubuntu
+Maintainer: Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>
+Original-Maintainer: Debian Libidn team <help-libidn@gnu.org>
+Bugs: https://bugs.launchpad.net/ubuntu/+filebug
+Installed-Size: 216
+Depends: libc6 (>= 2.14), libunistring2 (>= 0.9.7)
+Filename: pool/main/libi/libidn2/libidn2-0_2.2.0-2_amd64.deb
+Size: 50448
+MD5sum: 60f7f603306c81ce5bf9870d8536c7ff
+SHA1: 6b569d664ef8156d27828c42724f1f2cadd39452
+SHA256: 698abe11d444c7e87c656c2083373d1e0fae04b3a64be0371adb2bb180092537
+Homepage: https://www.gnu.org/software/libidn/#libidn2
+Description: Internationalized domain names (IDNA2008/TR46) library
+Task: minimal, ubuntu-desktop-minimal-default-languages, ubuntu-desktop-minimal-default-languages, ubuntu-desktop-minimal-default-languages, ubuntu-desktop-minimal-default-languages, ubuntu-desktop-minimal-default-languages, ubuntu-desktop-minimal-default-languages, ubuntu-desktop-minimal-default-languages, ubuntu-desktop-minimal-default-languages, ubuntu-desktop-default-languages, ubuntu-desktop-default-languages, ubuntu-desktop-default-languages, ubuntu-desktop-default-languages, ubuntu-desktop-default-languages, ubuntu-desktop-default-languages, ubuntu-desktop-default-languages, ubuntu-desktop-default-languages
+Description-md5: 6db3016f9ad1788327b1e04cd1c8616e
+Build-Essential: yes
+Supported: 9m
+
+Package: liblz4-1
+Architecture: amd64
+Version: 1.9.1-1
+Multi-Arch: same
+Priority: required
+Section: libs
+Source: lz4
+Origin: Ubuntu
+Maintainer: Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>
+Original-Maintainer: Nobuhiro Iwamatsu <iwamatsu@debian.org>
+Bugs: https://bugs.launchpad.net/ubuntu/+filebug
+Installed-Size: 145
+Depends: libc6 (>= 2.14)
+Breaks: liblz4-1a
+Replaces: liblz4-1a
+Filename: pool/main/l/lz4/liblz4-1_1.9.1-1_amd64.deb
+Size: 54572
+MD5sum: 99a6269b702d9127d2a26adb15d8ae1e
+SHA1: 778355a4f2090b5dff3421c7b0ddbbbd3c9af524
+SHA256: 32fc509f5ccb6fe14c5a9363daab5638780e221ba16abc458872c9324222704a
+Homepage: https://github.com/Cyan4973/lz4
+Description: Fast LZ compression algorithm library - runtime
+Task: minimal, ubuntu-desktop-minimal-default-languages, ubuntu-desktop-minimal-default-languages, ubuntu-desktop-minimal-default-languages, ubuntu-desktop-minimal-default-languages, ubuntu-desktop-minimal-default-languages, ubuntu-desktop-minimal-default-languages, ubuntu-desktop-minimal-default-languages, ubuntu-desktop-minimal-default-languages, ubuntu-desktop-default-languages, ubuntu-desktop-default-languages, ubuntu-desktop-default-languages, ubuntu-desktop-default-languages, ubuntu-desktop-default-languages, ubuntu-desktop-default-languages, ubuntu-desktop-default-languages, ubuntu-desktop-default-languages
+Description-md5: c21cacb9494ced3b87993140a583422c
+Supported: 9m
+
+Package: liblzma5
+Architecture: amd64
+Version: 5.2.4-1
+Multi-Arch: same
+Priority: required
+Section: libs
+Source: xz-utils
+Origin: Ubuntu
+Maintainer: Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>
+Original-Maintainer: Jonathan Nieder <jrnieder@gmail.com>
+Bugs: https://bugs.launchpad.net/ubuntu/+filebug
+Installed-Size: 259
+Depends: libc6 (>= 2.17)
+Breaks: liblzma2 (<< 5.1.1alpha+20110809-3~)
+Filename: pool/main/x/xz-utils/liblzma5_5.2.4-1_amd64.deb
+Size: 92352
+MD5sum: 223533a347dc76a8cc9445cfc6146ec3
+SHA1: 8ed14092fb1caecfebc556fda0745e1e74ba5a67
+SHA256: 01020b5a0515dbc9a7c00b464a65450f788b0258c3fbb733ecad0438f5124800
+Homepage: https://tukaani.org/xz/
+Description: XZ-format compression library
+Task: minimal, ubuntu-desktop-minimal-default-languages, ubuntu-desktop-minimal-default-languages, ubuntu-desktop-minimal-default-languages, ubuntu-desktop-minimal-default-languages, ubuntu-desktop-minimal-default-languages, ubuntu-desktop-minimal-default-languages, ubuntu-desktop-minimal-default-languages, ubuntu-desktop-minimal-default-languages, ubuntu-desktop-default-languages, ubuntu-desktop-default-languages, ubuntu-desktop-default-languages, ubuntu-desktop-default-languages, ubuntu-desktop-default-languages, ubuntu-desktop-default-languages, ubuntu-desktop-default-languages, ubuntu-desktop-default-languages
+Description-md5: 0ceca09eb4ab99863be3578fa55e7d2b
+Supported: 9m
+
+Package: libmount1
+Architecture: amd64
+Version: 2.34-0.1ubuntu2
+Multi-Arch: same
+Priority: required
+Section: libs
+Source: util-linux
+Origin: Ubuntu
+Maintainer: Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>
+Original-Maintainer: LaMont Jones <lamont@debian.org>
+Bugs: https://bugs.launchpad.net/ubuntu/+filebug
+Installed-Size: 481
+Depends: libblkid1 (>= 2.17.2), libc6 (>= 2.25), libselinux1 (>= 2.6-3~)
+Filename: pool/main/u/util-linux/libmount1_2.34-0.1ubuntu2_amd64.deb
+Size: 149092
+MD5sum: 18fbb7bd087d94d22eccad52b1c6c64f
+SHA1: d2d1389b73846e41b340bd25f9e594042210a4b6
+SHA256: a680efcdfeed5290ec21a4676c76e1e554b174cac5f48e46fcf1d3bcc49cdeaf
+Description: device mounting library
+Task: minimal, ubuntu-desktop-minimal-default-languages, ubuntu-desktop-minimal-default-languages, ubuntu-desktop-minimal-default-languages, ubuntu-desktop-minimal-default-languages, ubuntu-desktop-minimal-default-languages, ubuntu-desktop-minimal-default-languages, ubuntu-desktop-minimal-default-languages, ubuntu-desktop-default-languages, ubuntu-desktop-default-languages, ubuntu-desktop-default-languages, ubuntu-desktop-default-languages, ubuntu-desktop-default-languages, ubuntu-desktop-default-languages, ubuntu-desktop-default-languages, ubuntu-desktop-default-languages
+Description-md5: 7e446c44302ff94779f1434f2e05d553
+Supported: 9m
+
+Package: libncurses6
+Architecture: amd64
+Version: 6.1+20190803-1ubuntu1
+Multi-Arch: same
+Priority: required
+Section: libs
+Source: ncurses
+Origin: Ubuntu
+Maintainer: Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>
+Original-Maintainer: Craig Small <csmall@debian.org>
+Bugs: https://bugs.launchpad.net/ubuntu/+filebug
+Installed-Size: 337
+Depends: libtinfo6 (= 6.1+20190803-1ubuntu1), libc6 (>= 2.14)
+Recommends: libgpm2
+Filename: pool/main/n/ncurses/libncurses6_6.1+20190803-1ubuntu1_amd64.deb
+Size: 101140
+MD5sum: 0c141d91ae18d4ba3587beaf5f52b3d3
+SHA1: d3184ffa2d98c033f0dff98965169bb00768574f
+SHA256: 5b8426b6663e343933bb6c8b430e9cbaf7d9225eda24cb4ee0ca28d25cbe0a5a
+Homepage: https://invisible-island.net/ncurses/
+Description: shared libraries for terminal handling
+Task: minimal, ubuntu-desktop-minimal-default-languages, ubuntu-desktop-minimal-default-languages, ubuntu-desktop-minimal-default-languages, ubuntu-desktop-minimal-default-languages, ubuntu-desktop-minimal-default-languages, ubuntu-desktop-minimal-default-languages, ubuntu-desktop-minimal-default-languages, ubuntu-desktop-default-languages, ubuntu-desktop-default-languages, ubuntu-desktop-default-languages, ubuntu-desktop-default-languages, ubuntu-desktop-default-languages, ubuntu-desktop-default-languages, ubuntu-desktop-default-languages, ubuntu-core
+Description-md5: 599cbbcff16d09b3b4643d84f37643fd
+Supported: 9m
+
+Package: libncursesw6
+Architecture: amd64
+Version: 6.1+20190803-1ubuntu1
+Multi-Arch: same
+Priority: required
+Section: libs
+Source: ncurses
+Origin: Ubuntu
+Maintainer: Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>
+Original-Maintainer: Craig Small <csmall@debian.org>
+Bugs: https://bugs.launchpad.net/ubuntu/+filebug
+Installed-Size: 418
+Depends: libtinfo6 (= 6.1+20190803-1ubuntu1), libc6 (>= 2.14)
+Recommends: libgpm2
+Filename: pool/main/n/ncurses/libncursesw6_6.1+20190803-1ubuntu1_amd64.deb
+Size: 132316
+MD5sum: fb90d115005eae84e9092e40fbd19bcf
+SHA1: 734b57fc4f2d891ad361d74d5565617e64cad652
+SHA256: 484091e342c8ef4b2ca789bf85bf49b61f724db3022031e213b38edb9a9f768f
+Homepage: https://invisible-island.net/ncurses/
+Description: shared libraries for terminal handling (wide character support)
+Task: minimal, ubuntu-desktop-minimal-default-languages, ubuntu-desktop-minimal-default-languages, ubuntu-desktop-minimal-default-languages, ubuntu-desktop-minimal-default-languages, ubuntu-desktop-minimal-default-languages, ubuntu-desktop-minimal-default-languages, ubuntu-desktop-minimal-default-languages, ubuntu-desktop-default-languages, ubuntu-desktop-default-languages, ubuntu-desktop-default-languages, ubuntu-desktop-default-languages, ubuntu-desktop-default-languages, ubuntu-desktop-default-languages, ubuntu-desktop-default-languages, ubuntu-desktop-default-languages
+Description-md5: 1a69a793355bf1fff9186f00b71dd14a
+Supported: 9m
+
+Package: libnettle6
+Architecture: amd64
+Version: 3.4.1-1
+Multi-Arch: same
+Priority: important
+Section: libs
+Source: nettle
+Origin: Ubuntu
+Maintainer: Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>
+Original-Maintainer: Magnus Holmgren <holmgren@debian.org>
+Bugs: https://bugs.launchpad.net/ubuntu/+filebug
+Installed-Size: 379
+Depends: libc6 (>= 2.14)
+Filename: pool/main/n/nettle/libnettle6_3.4.1-1_amd64.deb
+Size: 110344
+MD5sum: 5a88a3b96e9494420e62f3060daab261
+SHA1: 91230c4db324fe499307cdcf66bd3a2cd2ce1687
+SHA256: 5e6f0475e8d0936cb769bd62db704478477315a3aa5f08f8ed0505db8d8853f7
+Homepage: http://www.lysator.liu.se/~nisse/nettle/
+Description: low level cryptographic library (symmetric and one-way cryptos)
+Task: minimal, ubuntu-desktop-minimal-default-languages, ubuntu-desktop-minimal-default-languages, ubuntu-desktop-minimal-default-languages, ubuntu-desktop-minimal-default-languages, ubuntu-desktop-minimal-default-languages, ubuntu-desktop-minimal-default-languages, ubuntu-desktop-minimal-default-languages, ubuntu-desktop-minimal-default-languages, ubuntu-desktop-default-languages, ubuntu-desktop-default-languages, ubuntu-desktop-default-languages, ubuntu-desktop-default-languages, ubuntu-desktop-default-languages, ubuntu-desktop-default-languages, ubuntu-desktop-default-languages, ubuntu-desktop-default-languages
+Description-md5: 9dcb77a61a93b06eb5b005f9c8c509a4
+Build-Essential: yes
+Supported: 9m
+
+Package: libp11-kit0
+Architecture: amd64
+Version: 0.23.17-2
+Multi-Arch: same
+Priority: important
+Section: libs
+Source: p11-kit
+Origin: Ubuntu
+Maintainer: Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>
+Original-Maintainer: Debian GnuTLS Maintainers <pkg-gnutls-maint@lists.alioth.debian.org>
+Bugs: https://bugs.launchpad.net/ubuntu/+filebug
+Installed-Size: 1264
+Depends: libc6 (>= 2.26), libffi6 (>= 3.0.4)
+Breaks: opencryptoki (<= 3.6.1+dfsg-1)
+Filename: pool/main/p/p11-kit/libp11-kit0_0.23.17-2_amd64.deb
+Size: 188444
+MD5sum: 51f5b0ca97b5f93f8647bd44e4fd7bb8
+SHA1: cb9ec71d707f0f75bbdee741099bac644505fc1b
+SHA256: db7d072054fdfbfa7f4f12260d408cad8f7cbf3713447505104316093420f315
+Homepage: https://p11-glue.github.io/p11-glue/p11-kit.html
+Description: library for loading and coordinating access to PKCS#11 modules - runtime
+Task: minimal, ubuntu-desktop-minimal-default-languages, ubuntu-desktop-minimal-default-languages, ubuntu-desktop-minimal-default-languages, ubuntu-desktop-minimal-default-languages, ubuntu-desktop-minimal-default-languages, ubuntu-desktop-minimal-default-languages, ubuntu-desktop-minimal-default-languages, ubuntu-desktop-minimal-default-languages, ubuntu-desktop-default-languages, ubuntu-desktop-default-languages, ubuntu-desktop-default-languages, ubuntu-desktop-default-languages, ubuntu-desktop-default-languages, ubuntu-desktop-default-languages, ubuntu-desktop-default-languages, ubuntu-desktop-default-languages
+Description-md5: 35d0359f0f7422b8380df1a478394459
+Build-Essential: yes
+Supported: 9m
+
+Package: libpam-modules
+Architecture: amd64
+Version: 1.3.1-5ubuntu1
+Multi-Arch: same
+Priority: required
+Section: admin
+Source: pam
+Origin: Ubuntu
+Maintainer: Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>
+Original-Maintainer: Steve Langasek <vorlon@debian.org>
+Bugs: https://bugs.launchpad.net/ubuntu/+filebug
+Installed-Size: 1110
+Provides: libpam-mkhomedir, libpam-motd, libpam-umask
+Pre-Depends: libaudit1 (>= 1:2.2.1), libc6 (>= 2.27), libdb5.3, libpam0g (>= 1.3.1), libselinux1 (>= 2.1.9), debconf (>= 0.5) | debconf-2.0, libpam-modules-bin (= 1.3.1-5ubuntu1)
+Recommends: update-motd
+Conflicts: libpam-mkhomedir, libpam-motd, libpam-umask
+Replaces: libpam-umask, libpam0g-util
+Filename: pool/main/p/pam/libpam-modules_1.3.1-5ubuntu1_amd64.deb
+Size: 248148
+MD5sum: 24ff1b9cc74668b2526f4fdbcb1ee3bb
+SHA1: 72339e5b4e518358f280e29d94cf9a699ed638d8
+SHA256: cc4d426013fb64c7a7946f63f75204891577e1ecf0d3861cdb9ef76576e70a40
+Homepage: http://www.linux-pam.org/
+Description: Pluggable Authentication Modules for PAM
+Task: minimal, ubuntu-desktop-minimal-default-languages, ubuntu-desktop-minimal-default-languages, ubuntu-desktop-minimal-default-languages, ubuntu-desktop-minimal-default-languages, ubuntu-desktop-minimal-default-languages, ubuntu-desktop-minimal-default-languages, ubuntu-desktop-minimal-default-languages, ubuntu-desktop-minimal-default-languages, ubuntu-desktop-default-languages, ubuntu-desktop-default-languages, ubuntu-desktop-default-languages, ubuntu-desktop-default-languages, ubuntu-desktop-default-languages, ubuntu-desktop-default-languages, ubuntu-desktop-default-languages, ubuntu-desktop-default-languages
+Description-md5: 234b9429528430ead853cc8bbe97ffb4
+Supported: 9m
+
+Package: libpam-modules-bin
+Architecture: amd64
+Version: 1.3.1-5ubuntu1
+Multi-Arch: foreign
+Priority: required
+Section: admin
+Source: pam
+Origin: Ubuntu
+Maintainer: Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>
+Original-Maintainer: Steve Langasek <vorlon@debian.org>
+Bugs: https://bugs.launchpad.net/ubuntu/+filebug
+Installed-Size: 301
+Depends: libaudit1 (>= 1:2.2.1), libc6 (>= 2.14), libpam0g (>= 0.99.7.1), libselinux1 (>= 1.32)
+Replaces: libpam-modules (<< 1.1.3-8)
+Filename: pool/main/p/pam/libpam-modules-bin_1.3.1-5ubuntu1_amd64.deb
+Size: 38116
+MD5sum: 5a0cc80813fd5a7f7513d7f267bc4d8e
+SHA1: 2728c0578accd35f3d2bf51575365555d7b6696b
+SHA256: be42310863cf8557d49b7ee97d465a991f3a13db99ab2ef11c900eca6d6417f1
+Homepage: http://www.linux-pam.org/
+Description: Pluggable Authentication Modules for PAM - helper binaries
+Task: minimal, ubuntu-desktop-minimal-default-languages, ubuntu-desktop-minimal-default-languages, ubuntu-desktop-minimal-default-languages, ubuntu-desktop-minimal-default-languages, ubuntu-desktop-minimal-default-languages, ubuntu-desktop-minimal-default-languages, ubuntu-desktop-minimal-default-languages, ubuntu-desktop-minimal-default-languages, ubuntu-desktop-default-languages, ubuntu-desktop-default-languages, ubuntu-desktop-default-languages, ubuntu-desktop-default-languages, ubuntu-desktop-default-languages, ubuntu-desktop-default-languages, ubuntu-desktop-default-languages, ubuntu-desktop-default-languages
+Description-md5: 25d278fc7450d5202a9a137f71302e58
+Supported: 9m
+
+Package: libpam-runtime
+Architecture: all
+Version: 1.3.1-5ubuntu1
+Multi-Arch: foreign
+Priority: required
+Section: admin
+Source: pam
+Origin: Ubuntu
+Maintainer: Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>
+Original-Maintainer: Steve Langasek <vorlon@debian.org>
+Bugs: https://bugs.launchpad.net/ubuntu/+filebug
+Installed-Size: 304
+Depends: debconf (>= 0.5) | debconf-2.0, debconf (>= 1.5.19) | cdebconf, libpam-modules (>= 1.0.1-6)
+Conflicts: libpam0g-util
+Replaces: libpam0g-dev, libpam0g-util
+Filename: pool/main/p/pam/libpam-runtime_1.3.1-5ubuntu1_all.deb
+Size: 37276
+MD5sum: 26be363dfc558d5e9ab31bd1182bde1f
+SHA1: 39e92a2ec03b181f172b1af2325a9c3052e27323
+SHA256: 76c304b6c475b319a81f6a7160a26d9850066502a472f313159d8695463a6b22
+Homepage: http://www.linux-pam.org/
+Description: Runtime support for the PAM library
+Task: minimal, ubuntu-desktop-minimal-default-languages, ubuntu-desktop-minimal-default-languages, ubuntu-desktop-minimal-default-languages, ubuntu-desktop-minimal-default-languages, ubuntu-desktop-minimal-default-languages, ubuntu-desktop-minimal-default-languages, ubuntu-desktop-minimal-default-languages, ubuntu-desktop-default-languages, ubuntu-desktop-default-languages, ubuntu-desktop-default-languages, ubuntu-desktop-default-languages, ubuntu-desktop-default-languages, ubuntu-desktop-default-languages, ubuntu-desktop-default-languages, ubuntu-desktop-default-languages
+Description-md5: bc15ddbf92ee7965a8588141c54bb5a1
+Supported: 9m
+
+Package: libpam0g
+Architecture: amd64
+Version: 1.3.1-5ubuntu1
+Multi-Arch: same
+Priority: required
+Section: libs
+Source: pam
+Origin: Ubuntu
+Maintainer: Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>
+Original-Maintainer: Steve Langasek <vorlon@debian.org>
+Bugs: https://bugs.launchpad.net/ubuntu/+filebug
+Installed-Size: 227
+Depends: libaudit1 (>= 1:2.2.1), libc6 (>= 2.14), debconf (>= 0.5) | debconf-2.0
+Suggests: libpam-doc
+Replaces: libpam0g-util
+Filename: pool/main/p/pam/libpam0g_1.3.1-5ubuntu1_amd64.deb
+Size: 56200
+MD5sum: bb5aa8e433b6d9a6951950f93702c482
+SHA1: d41a7636577a831828e4e0d5b291bee61ba22f78
+SHA256: bda0cae6542c93cac57a31ae60a4718196c7526168ce0d837a6f4a1dc4cd60e2
+Homepage: http://www.linux-pam.org/
+Description: Pluggable Authentication Modules library
+Task: minimal, ubuntu-desktop-minimal-default-languages, ubuntu-desktop-minimal-default-languages, ubuntu-desktop-minimal-default-languages, ubuntu-desktop-minimal-default-languages, ubuntu-desktop-minimal-default-languages, ubuntu-desktop-minimal-default-languages, ubuntu-desktop-minimal-default-languages, ubuntu-desktop-minimal-default-languages, ubuntu-desktop-default-languages, ubuntu-desktop-default-languages, ubuntu-desktop-default-languages, ubuntu-desktop-default-languages, ubuntu-desktop-default-languages, ubuntu-desktop-default-languages, ubuntu-desktop-default-languages, ubuntu-desktop-default-languages
+Description-md5: af00a40029e1e1d2ad04c042c3b18095
+Supported: 9m
+
+Package: libpcre2-8-0
+Architecture: amd64
+Version: 10.32-5
+Multi-Arch: same
+Priority: required
+Section: libs
+Source: pcre2
+Origin: Ubuntu
+Maintainer: Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>
+Original-Maintainer: Matthew Vernon <matthew@debian.org>
+Bugs: https://bugs.launchpad.net/ubuntu/+filebug
+Installed-Size: 545
+Depends: libc6 (>= 2.14)
+Filename: pool/main/p/pcre2/libpcre2-8-0_10.32-5_amd64.deb
+Size: 180364
+MD5sum: 60ca75a5fc46ce0e96854b8ff23e8226
+SHA1: c5a0a5d29149efb0a55b6fdf5f91b8b0727e2165
+SHA256: f18330ab6dd59eccd27da63bf7c336a02ad0f5ccd7786544641af39c301e65cc
+Homepage: https://pcre.org/
+Description: New Perl Compatible Regular Expression Library- 8 bit runtime files
+Task: minimal, ubuntu-desktop-minimal-default-languages, ubuntu-desktop-minimal-default-languages, ubuntu-desktop-minimal-default-languages, ubuntu-desktop-minimal-default-languages, ubuntu-desktop-minimal-default-languages, ubuntu-desktop-minimal-default-languages, ubuntu-desktop-minimal-default-languages, ubuntu-desktop-minimal-default-languages, ubuntu-desktop-default-languages, ubuntu-desktop-default-languages, ubuntu-desktop-default-languages, ubuntu-desktop-default-languages, ubuntu-desktop-default-languages, ubuntu-desktop-default-languages, ubuntu-desktop-default-languages, ubuntu-desktop-default-languages
+Description-md5: 734c95b9f25246dab73666cd44bfe6a7
+Supported: 9m
+
+Package: libpcre3
+Architecture: amd64
+Version: 2:8.39-12
+Multi-Arch: same
+Priority: required
+Section: libs
+Source: pcre3
+Origin: Ubuntu
+Maintainer: Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>
+Original-Maintainer: Matthew Vernon <matthew@debian.org>
+Bugs: https://bugs.launchpad.net/ubuntu/+filebug
+Installed-Size: 673
+Depends: libc6 (>= 2.14)
+Conflicts: libpcre3-dev (<= 4.3-3)
+Breaks: approx (<< 4.4-1~), cduce (<< 0.5.3-2~), cmigrep (<< 1.5-7~), galax (<< 1.1-7~), libpcre-ocaml (<< 6.0.1~), liquidsoap (<< 0.9.2-3~), ocsigen (<< 1.3.3-1~)
+Filename: pool/main/p/pcre3/libpcre3_8.39-12_amd64.deb
+Size: 230936
+MD5sum: c74da6e32387c6b235206435d59153fd
+SHA1: 1cfa2ee2ab83fe723362c3dc6dbf7884a0557a57
+SHA256: 32fe9be0d22d9cf59f85ebcd2e51b26da7106cae02108c70e9d52779e323819e
+Description: Old Perl 5 Compatible Regular Expression Library - runtime files
+Task: minimal, ubuntu-desktop-minimal-default-languages, ubuntu-desktop-minimal-default-languages, ubuntu-desktop-minimal-default-languages, ubuntu-desktop-minimal-default-languages, ubuntu-desktop-minimal-default-languages, ubuntu-desktop-minimal-default-languages, ubuntu-desktop-minimal-default-languages, ubuntu-desktop-default-languages, ubuntu-desktop-default-languages, ubuntu-desktop-default-languages, ubuntu-desktop-default-languages, ubuntu-desktop-default-languages, ubuntu-desktop-default-languages, ubuntu-desktop-default-languages, ubuntu-desktop-default-languages
+Description-md5: 554ac784f7314cb2c59649814e330d34
+Supported: 9m
+
+Package: libprocps7
+Architecture: amd64
+Version: 2:3.3.15-2ubuntu3
+Multi-Arch: same
+Priority: required
+Section: libs
+Source: procps
+Origin: Ubuntu
+Maintainer: Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>
+Original-Maintainer: Craig Small <csmall@debian.org>
+Bugs: https://bugs.launchpad.net/ubuntu/+filebug
+Installed-Size: 128
+Depends: libc6 (>= 2.14), libsystemd0 (>= 209)
+Replaces: procps (<< 1:3.3.2-1)
+Filename: pool/main/p/procps/libprocps7_3.3.15-2ubuntu3_amd64.deb
+Size: 32972
+MD5sum: e8257be8bc49c91b9e650af7a9fc8b26
+SHA1: eb05b58b614cf63c75ef0e34105f33793e19db6e
+SHA256: a14c404180a630abafcd9479bdab0094d695b04cc3455d176d5ac7904a9e6f3c
+Homepage: https://gitlab.com/procps-ng/procps
+Description: library for accessing process information from /proc
+Task: minimal, ubuntu-desktop-minimal-default-languages, ubuntu-desktop-minimal-default-languages, ubuntu-desktop-minimal-default-languages, ubuntu-desktop-minimal-default-languages, ubuntu-desktop-minimal-default-languages, ubuntu-desktop-minimal-default-languages, ubuntu-desktop-minimal-default-languages, ubuntu-desktop-default-languages, ubuntu-desktop-default-languages, ubuntu-desktop-default-languages, ubuntu-desktop-default-languages, ubuntu-desktop-default-languages, ubuntu-desktop-default-languages, ubuntu-desktop-default-languages, ubuntu-core
+Description-md5: b045ca4f14733c5441c2830741e9cb4e
+Supported: 9m
+
+Package: libseccomp2
+Architecture: amd64
+Version: 2.4.1-0ubuntu0.19.10.3
+Multi-Arch: same
+Priority: important
+Section: libs
+Source: libseccomp
+Origin: Ubuntu
+Maintainer: Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>
+Original-Maintainer: Kees Cook <kees@debian.org>
+Bugs: https://bugs.launchpad.net/ubuntu/+filebug
+Installed-Size: 306
+Depends: libc6 (>= 2.4)
+Filename: pool/main/libs/libseccomp/libseccomp2_2.4.1-0ubuntu0.19.10.3_amd64.deb
+Size: 39020
+MD5sum: 098575adb03b0239f95e5280268ba3d9
+SHA1: 37be907bc3ed686fdecd73c512f0078104f5fa76
+SHA256: 51d5c6cdcb2d911697afb288d9263a6ac91e6ae120b75ee25090063e510e6ea6
+Homepage: https://github.com/seccomp/libseccomp
+Description: high level interface to Linux seccomp filter
+Task: minimal, ubuntu-desktop-minimal-default-languages, ubuntu-desktop-minimal-default-languages, ubuntu-desktop-minimal-default-languages, ubuntu-desktop-minimal-default-languages, ubuntu-desktop-minimal-default-languages, ubuntu-desktop-minimal-default-languages, ubuntu-desktop-minimal-default-languages, ubuntu-desktop-minimal-default-languages, ubuntu-desktop-default-languages, ubuntu-desktop-default-languages, ubuntu-desktop-default-languages, ubuntu-desktop-default-languages, ubuntu-desktop-default-languages, ubuntu-desktop-default-languages, ubuntu-desktop-default-languages, ubuntu-desktop-default-languages
+Description-md5: 7ee97a8161e83bfebc75870eb92bde51
+Build-Essential: yes
+Supported: 9m
+
+Package: libselinux1
+Architecture: amd64
+Version: 2.9-2
+Multi-Arch: same
+Priority: required
+Section: libs
+Source: libselinux
+Origin: Ubuntu
+Maintainer: Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>
+Original-Maintainer: Debian SELinux maintainers <selinux-devel@lists.alioth.debian.org>
+Bugs: https://bugs.launchpad.net/ubuntu/+filebug
+Installed-Size: 201
+Depends: libc6 (>= 2.14), libpcre2-8-0 (>= 10.32)
+Filename: pool/main/libs/libselinux/libselinux1_2.9-2_amd64.deb
+Size: 69684
+MD5sum: 06d3ac5ff74e986efe5bd9689df018bf
+SHA1: 527f62cc9070ff7afbab2cae529a27ef82599ff5
+SHA256: fc4c222d5427eecbd9dabccc808d69a83b02aa56689a6814c743e6523fb2d31f
+Homepage: http://userspace.selinuxproject.org/
+Description: SELinux runtime shared libraries
+Task: minimal, ubuntu-desktop-minimal-default-languages, ubuntu-desktop-minimal-default-languages, ubuntu-desktop-minimal-default-languages, ubuntu-desktop-minimal-default-languages, ubuntu-desktop-minimal-default-languages, ubuntu-desktop-minimal-default-languages, ubuntu-desktop-minimal-default-languages, ubuntu-desktop-minimal-default-languages, ubuntu-desktop-default-languages, ubuntu-desktop-default-languages, ubuntu-desktop-default-languages, ubuntu-desktop-default-languages, ubuntu-desktop-default-languages, ubuntu-desktop-default-languages, ubuntu-desktop-default-languages, ubuntu-desktop-default-languages
+Description-md5: 90f6e1cb06c527bc3fc11ec6f969c59c
+Supported: 9m
+
+Package: libsemanage-common
+Architecture: all
+Version: 2.9-3
+Multi-Arch: foreign
+Priority: required
+Section: libs
+Source: libsemanage
+Origin: Ubuntu
+Maintainer: Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>
+Original-Maintainer: Debian SELinux maintainers <selinux-devel@lists.alioth.debian.org>
+Bugs: https://bugs.launchpad.net/ubuntu/+filebug
+Installed-Size: 35
+Breaks: libsemanage1 (<= 2.0.41-1), libsemanage1-dev (<< 2.1.6-3~)
+Replaces: libsemanage1 (<= 2.0.41-1), libsemanage1-dev (<< 2.1.6-3~)
+Filename: pool/main/libs/libsemanage/libsemanage-common_2.9-3_all.deb
+Size: 9760
+MD5sum: 4d786a0607ff44cea77f53b0799ed271
+SHA1: c9bdcdf2907f951160602e7b751d858221892f05
+SHA256: d0a3f4df4ad93987d421c24d5161aac5a1d57fa0936ab278f7dedd02f779b263
+Homepage: http://userspace.selinuxproject.org/
+Description: Common files for SELinux policy management libraries
+Task: minimal, ubuntu-desktop-minimal-default-languages, ubuntu-desktop-minimal-default-languages, ubuntu-desktop-minimal-default-languages, ubuntu-desktop-minimal-default-languages, ubuntu-desktop-minimal-default-languages, ubuntu-desktop-minimal-default-languages, ubuntu-desktop-minimal-default-languages, ubuntu-desktop-minimal-default-languages, ubuntu-desktop-default-languages, ubuntu-desktop-default-languages, ubuntu-desktop-default-languages, ubuntu-desktop-default-languages, ubuntu-desktop-default-languages, ubuntu-desktop-default-languages, ubuntu-desktop-default-languages, ubuntu-desktop-default-languages
+Description-md5: c7a0a093650c85e838f42492add9b46b
+Supported: 9m
+
+Package: libsemanage1
+Architecture: amd64
+Version: 2.9-3
+Multi-Arch: same
+Priority: required
+Section: libs
+Source: libsemanage
+Origin: Ubuntu
+Maintainer: Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>
+Original-Maintainer: Debian SELinux maintainers <selinux-devel@lists.alioth.debian.org>
+Bugs: https://bugs.launchpad.net/ubuntu/+filebug
+Installed-Size: 305
+Depends: libsemanage-common (= 2.9-3), libaudit1 (>= 1:2.2.1), libbz2-1.0, libc6 (>= 2.14), libselinux1 (>= 2.9), libsepol1 (>= 2.9)
+Breaks: policycoreutils (<< 2.4), selinux-policy-default (<< 2:2.20140421-10~), selinux-policy-mls (<< 2:2.20140421-10~)
+Filename: pool/main/libs/libsemanage/libsemanage1_2.9-3_amd64.deb
+Size: 85428
+MD5sum: 13a070c4ed6aa1a8a07bf6ab8cad78c3
+SHA1: b582125c25fddfb252fc9059c577479a55eabc5b
+SHA256: 7e16da0e143417a025451ac94ba9b20c4af7945ea1dcc79c57df9683c8452d7d
+Homepage: http://userspace.selinuxproject.org/
+Description: SELinux policy management library
+Task: minimal, ubuntu-desktop-minimal-default-languages, ubuntu-desktop-minimal-default-languages, ubuntu-desktop-minimal-default-languages, ubuntu-desktop-minimal-default-languages, ubuntu-desktop-minimal-default-languages, ubuntu-desktop-minimal-default-languages, ubuntu-desktop-minimal-default-languages, ubuntu-desktop-minimal-default-languages, ubuntu-desktop-default-languages, ubuntu-desktop-default-languages, ubuntu-desktop-default-languages, ubuntu-desktop-default-languages, ubuntu-desktop-default-languages, ubuntu-desktop-default-languages, ubuntu-desktop-default-languages, ubuntu-desktop-default-languages
+Description-md5: 8998b538051f37f69c5f1bf9a005fa56
+Supported: 9m
+
+Package: libsepol1
+Architecture: amd64
+Version: 2.9-2
+Multi-Arch: same
+Priority: required
+Section: libs
+Source: libsepol
+Origin: Ubuntu
+Maintainer: Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>
+Original-Maintainer: Debian SELinux maintainers <selinux-devel@lists.alioth.debian.org>
+Bugs: https://bugs.launchpad.net/ubuntu/+filebug
+Installed-Size: 740
+Depends: libc6 (>= 2.14)
+Filename: pool/main/libs/libsepol/libsepol1_2.9-2_amd64.deb
+Size: 253708
+MD5sum: 269d2366d8cde84d966155ea477753e7
+SHA1: b3cd0955d23441ee8a7ea48749f2ee18e689a692
+SHA256: 885a2321613abf0559968bf13bf65ed7f55a745a79a23060a57ac87938731b83
+Homepage: http://userspace.selinuxproject.org/
+Description: SELinux library for manipulating binary security policies
+Task: minimal, ubuntu-desktop-minimal-default-languages, ubuntu-desktop-minimal-default-languages, ubuntu-desktop-minimal-default-languages, ubuntu-desktop-minimal-default-languages, ubuntu-desktop-minimal-default-languages, ubuntu-desktop-minimal-default-languages, ubuntu-desktop-minimal-default-languages, ubuntu-desktop-minimal-default-languages, ubuntu-desktop-default-languages, ubuntu-desktop-default-languages, ubuntu-desktop-default-languages, ubuntu-desktop-default-languages, ubuntu-desktop-default-languages, ubuntu-desktop-default-languages, ubuntu-desktop-default-languages, ubuntu-desktop-default-languages
+Description-md5: d569fae7efa3328b3d40879b104d9a63
+Supported: 9m
+
+Package: libsmartcols1
+Architecture: amd64
+Version: 2.34-0.1ubuntu2
+Multi-Arch: same
+Priority: required
+Section: libs
+Source: util-linux
+Origin: Ubuntu
+Maintainer: Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>
+Original-Maintainer: LaMont Jones <lamont@debian.org>
+Bugs: https://bugs.launchpad.net/ubuntu/+filebug
+Installed-Size: 337
+Depends: libc6 (>= 2.25)
+Filename: pool/main/u/util-linux/libsmartcols1_2.34-0.1ubuntu2_amd64.deb
+Size: 100784
+MD5sum: 2ee32f4af14aadd6cd7743baa8cc6a8c
+SHA1: 158009ed3da54d4b40da322c3457c8437a808981
+SHA256: fa98d7e18fc3e7d5de887c8e68bc1ca9962654749533d5b1d7d891c3d8b91502
+Description: smart column output alignment library
+Task: minimal, ubuntu-desktop-minimal-default-languages, ubuntu-desktop-minimal-default-languages, ubuntu-desktop-minimal-default-languages, ubuntu-desktop-minimal-default-languages, ubuntu-desktop-minimal-default-languages, ubuntu-desktop-minimal-default-languages, ubuntu-desktop-minimal-default-languages, ubuntu-desktop-default-languages, ubuntu-desktop-default-languages, ubuntu-desktop-default-languages, ubuntu-desktop-default-languages, ubuntu-desktop-default-languages, ubuntu-desktop-default-languages, ubuntu-desktop-default-languages, ubuntu-desktop-default-languages
+Description-md5: d5382f0223188fc45ed69f879488c198
+Supported: 9m
+
+Package: libss2
+Architecture: amd64
+Version: 1.45.3-4ubuntu2
+Multi-Arch: same
+Priority: required
+Section: libs
+Source: e2fsprogs
+Origin: Ubuntu
+Maintainer: Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>
+Original-Maintainer: Theodore Y. Ts'o <tytso@mit.edu>
+Bugs: https://bugs.launchpad.net/ubuntu/+filebug
+Installed-Size: 107
+Depends: libcom-err2, libc6 (>= 2.17)
+Replaces: e2fsprogs (<< 1.34-1)
+Filename: pool/main/e/e2fsprogs/libss2_1.45.3-4ubuntu2_amd64.deb
+Size: 11292
+MD5sum: 5395bf566d9acd9e92eb0eceeaf138e8
+SHA1: 2a8018918d883fcc5602fb67761c956a80223baf
+SHA256: c6634cd228f153033027ff47de9779625fbf150b4c8a4b8ba9044254c34ad4f7
+Homepage: http://e2fsprogs.sourceforge.net
+Description: command-line interface parsing library
+Task: minimal
+Description-md5: d3d9f89af5755a413e24d2dc0cb7df81
+Supported: 9m
+
+Package: libstdc++6
+Architecture: amd64
+Version: 9.2.1-9ubuntu2
+Multi-Arch: same
+Priority: important
+Section: libs
+Source: gcc-9
+Origin: Ubuntu
+Maintainer: Ubuntu Core developers <ubuntu-devel-discuss@lists.ubuntu.com>
+Original-Maintainer: Debian GCC Maintainers <debian-gcc@lists.debian.org>
+Bugs: https://bugs.launchpad.net/ubuntu/+filebug
+Installed-Size: 2478
+Depends: gcc-9-base (= 9.2.1-9ubuntu2), libc6 (>= 2.18), libgcc1 (>= 1:4.2)
+Conflicts: scim (<< 1.4.2-1)
+Breaks: gcc-4.3 (<< 4.3.6-1), gcc-4.4 (<< 4.4.6-4), gcc-4.5 (<< 4.5.3-2)
+Replaces: libstdc++6-9-dbg (<< 4.9.0-3)
+Filename: pool/main/g/gcc-9/libstdc++6_9.2.1-9ubuntu2_amd64.deb
+Size: 511264
+MD5sum: 87302ace02b42f2c9032e17d040d693c
+SHA1: 8e2b831f2a32d684d0472590cf215f96816c7398
+SHA256: 98345352d5e66a07ff0e3008ccf4c07d6c14b4d5cdb56510a2bff4babf39f143
+Homepage: http://gcc.gnu.org/
+Description: GNU Standard C++ Library v3
+Task: minimal, ubuntu-desktop-minimal-default-languages, ubuntu-desktop-minimal-default-languages, ubuntu-desktop-minimal-default-languages, ubuntu-desktop-minimal-default-languages, ubuntu-desktop-minimal-default-languages, ubuntu-desktop-minimal-default-languages, ubuntu-desktop-minimal-default-languages, ubuntu-desktop-minimal-default-languages, ubuntu-desktop-default-languages, ubuntu-desktop-default-languages, ubuntu-desktop-default-languages, ubuntu-desktop-default-languages, ubuntu-desktop-default-languages, ubuntu-desktop-default-languages, ubuntu-desktop-default-languages, ubuntu-desktop-default-languages
+Description-md5: 724ab84919e0e220afb960e36463914d
+Build-Essential: yes
+Supported: 9m
+
+Package: libsystemd0
+Architecture: amd64
+Version: 242-7ubuntu3
+Multi-Arch: same
+Priority: required
+Section: libs
+Source: systemd
+Origin: Ubuntu
+Maintainer: Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>
+Original-Maintainer: Debian systemd Maintainers <pkg-systemd-maintainers@lists.alioth.debian.org>
+Bugs: https://bugs.launchpad.net/ubuntu/+filebug
+Installed-Size: 824
+Pre-Depends: libc6 (>= 2.30), libgcrypt20 (>= 1.8.0), liblz4-1 (>= 0.0~r122), liblzma5 (>= 5.1.1alpha+20120614)
+Filename: pool/main/s/systemd/libsystemd0_242-7ubuntu3_amd64.deb
+Size: 260756
+MD5sum: e863c34c07a5972233209e0c31984fd9
+SHA1: 7960f29ed05171d24e09e14b9bb36bdee812688c
+SHA256: 44e69616ad220e8f7771a2259ac44703754aa230e705a1e576c5de626109bd51
+Homepage: https://www.freedesktop.org/wiki/Software/systemd
+Description: systemd utility library
+Task: minimal, ubuntu-desktop-minimal-default-languages, ubuntu-desktop-minimal-default-languages, ubuntu-desktop-minimal-default-languages, ubuntu-desktop-minimal-default-languages, ubuntu-desktop-minimal-default-languages, ubuntu-desktop-minimal-default-languages, ubuntu-desktop-minimal-default-languages, ubuntu-desktop-minimal-default-languages, ubuntu-desktop-default-languages, ubuntu-desktop-default-languages, ubuntu-desktop-default-languages, ubuntu-desktop-default-languages, ubuntu-desktop-default-languages, ubuntu-desktop-default-languages, ubuntu-desktop-default-languages, ubuntu-desktop-default-languages
+Description-md5: 92180a6b506aa0eff52136aeb8212dc6
+Supported: 9m
+
+Package: libtasn1-6
+Architecture: amd64
+Version: 4.14-3
+Multi-Arch: same
+Priority: important
+Section: libs
+Origin: Ubuntu
+Maintainer: Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>
+Original-Maintainer: Debian GnuTLS Maintainers <pkg-gnutls-maint@lists.alioth.debian.org>
+Bugs: https://bugs.launchpad.net/ubuntu/+filebug
+Installed-Size: 124
+Depends: libc6 (>= 2.14)
+Filename: pool/main/libt/libtasn1-6/libtasn1-6_4.14-3_amd64.deb
+Size: 37788
+MD5sum: d10bff9d2f7fc5a67cef9f2be8598058
+SHA1: f08765e03aea1e5b4b955bcab1eaa14fd859f71e
+SHA256: 28c359fcf09a363569b799f0555d9187c4b22faa5c5e9e1b046ebcf4c90efa51
+Homepage: https://www.gnu.org/software/libtasn1/
+Description: Manage ASN.1 structures (runtime)
+Task: minimal, ubuntu-desktop-minimal-default-languages, ubuntu-desktop-minimal-default-languages, ubuntu-desktop-minimal-default-languages, ubuntu-desktop-minimal-default-languages, ubuntu-desktop-minimal-default-languages, ubuntu-desktop-minimal-default-languages, ubuntu-desktop-minimal-default-languages, ubuntu-desktop-minimal-default-languages, ubuntu-desktop-default-languages, ubuntu-desktop-default-languages, ubuntu-desktop-default-languages, ubuntu-desktop-default-languages, ubuntu-desktop-default-languages, ubuntu-desktop-default-languages, ubuntu-desktop-default-languages, ubuntu-desktop-default-languages
+Description-md5: 535058cbce5722d1c5d399c0854dd71f
+Build-Essential: yes
+Supported: 9m
+
+Package: libtinfo6
+Architecture: amd64
+Version: 6.1+20190803-1ubuntu1
+Multi-Arch: same
+Priority: required
+Section: libs
+Source: ncurses
+Origin: Ubuntu
+Maintainer: Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>
+Original-Maintainer: Craig Small <csmall@debian.org>
+Bugs: https://bugs.launchpad.net/ubuntu/+filebug
+Installed-Size: 535
+Depends: libc6 (>= 2.16)
+Filename: pool/main/n/ncurses/libtinfo6_6.1+20190803-1ubuntu1_amd64.deb
+Size: 85328
+MD5sum: 201ba257aa04e76820f5802626ed4400
+SHA1: 4e72b1baac1838a618db1695bc2a3be57dc0dcfc
+SHA256: d611ab54212cec176bd2e65e963e740b7df8eb6794557aa552da6942ffb525f4
+Homepage: https://invisible-island.net/ncurses/
+Description: shared low-level terminfo library for terminal handling
+Task: minimal, ubuntu-desktop-minimal-default-languages, ubuntu-desktop-minimal-default-languages, ubuntu-desktop-minimal-default-languages, ubuntu-desktop-minimal-default-languages, ubuntu-desktop-minimal-default-languages, ubuntu-desktop-minimal-default-languages, ubuntu-desktop-minimal-default-languages, ubuntu-desktop-default-languages, ubuntu-desktop-default-languages, ubuntu-desktop-default-languages, ubuntu-desktop-default-languages, ubuntu-desktop-default-languages, ubuntu-desktop-default-languages, ubuntu-desktop-default-languages, ubuntu-desktop-default-languages
+Description-md5: f681846d99e5156a0882bb53c35d3244
+Supported: 9m
+
+Package: libudev1
+Architecture: amd64
+Version: 242-7ubuntu3
+Multi-Arch: same
+Priority: required
+Section: libs
+Source: systemd
+Origin: Ubuntu
+Maintainer: Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>
+Original-Maintainer: Debian systemd Maintainers <pkg-systemd-maintainers@lists.alioth.debian.org>
+Bugs: https://bugs.launchpad.net/ubuntu/+filebug
+Installed-Size: 307
+Depends: libc6 (>= 2.30)
+Filename: pool/main/s/systemd/libudev1_242-7ubuntu3_amd64.deb
+Size: 76428
+MD5sum: 4169e483e4254a0a2803213abf767fb5
+SHA1: 9fe065b12b5f4b8da94a850f50ef27e74e53efc9
+SHA256: 5baa0a58fcc5168adb1bb93ea4f78f5e7d04653d920cd1a9155c8f2b15e6c1c6
+Homepage: https://www.freedesktop.org/wiki/Software/systemd
+Description: libudev shared library
+Task: minimal, ubuntu-desktop-minimal-default-languages, ubuntu-desktop-minimal-default-languages, ubuntu-desktop-minimal-default-languages, ubuntu-desktop-minimal-default-languages, ubuntu-desktop-minimal-default-languages, ubuntu-desktop-minimal-default-languages, ubuntu-desktop-minimal-default-languages, ubuntu-desktop-minimal-default-languages, ubuntu-desktop-default-languages, ubuntu-desktop-default-languages, ubuntu-desktop-default-languages, ubuntu-desktop-default-languages, ubuntu-desktop-default-languages, ubuntu-desktop-default-languages, ubuntu-desktop-default-languages, ubuntu-desktop-default-languages
+Description-md5: ace5b83d7b48187416c90173a93255b6
+Supported: 9m
+
+Package: libunistring2
+Architecture: amd64
+Version: 0.9.10-2
+Multi-Arch: same
+Priority: important
+Section: libs
+Source: libunistring
+Origin: Ubuntu
+Maintainer: Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>
+Original-Maintainer: Jörg Frings-Fürst <debian@jff.email>
+Bugs: https://bugs.launchpad.net/ubuntu/+filebug
+Installed-Size: 1582
+Depends: libc6 (>= 2.14)
+Filename: pool/main/libu/libunistring/libunistring2_0.9.10-2_amd64.deb
+Size: 368092
+MD5sum: 2cd33faface48d8391c6ac682d5985d8
+SHA1: 55b3052275fad40890bd003845d73c40182038d8
+SHA256: 4ccfbc1e3a1cbc42616bd4fd407e01eb1434996c8500ac2fbccb7a2e1bcb166a
+Homepage: https://www.gnu.org/software/libunistring/
+Description: Unicode string library for C
+Task: minimal, ubuntu-desktop-minimal-default-languages, ubuntu-desktop-minimal-default-languages, ubuntu-desktop-minimal-default-languages, ubuntu-desktop-minimal-default-languages, ubuntu-desktop-minimal-default-languages, ubuntu-desktop-minimal-default-languages, ubuntu-desktop-minimal-default-languages, ubuntu-desktop-minimal-default-languages, ubuntu-desktop-default-languages, ubuntu-desktop-default-languages, ubuntu-desktop-default-languages, ubuntu-desktop-default-languages, ubuntu-desktop-default-languages, ubuntu-desktop-default-languages, ubuntu-desktop-default-languages, ubuntu-desktop-default-languages
+Description-md5: b202dbec3da512fe5ff554ac46cd2451
+Build-Essential: yes
+Supported: 9m
+
+Package: libuuid1
+Architecture: amd64
+Version: 2.34-0.1ubuntu2
+Multi-Arch: same
+Priority: required
+Section: libs
+Source: util-linux
+Origin: Ubuntu
+Maintainer: Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>
+Original-Maintainer: LaMont Jones <lamont@debian.org>
+Bugs: https://bugs.launchpad.net/ubuntu/+filebug
+Installed-Size: 122
+Depends: libc6 (>= 2.25)
+Recommends: uuid-runtime
+Replaces: e2fsprogs (<< 1.34-1)
+Filename: pool/main/u/util-linux/libuuid1_2.34-0.1ubuntu2_amd64.deb
+Size: 20636
+MD5sum: 0b39bf4dd280f71827fbaca9bb1eed34
+SHA1: ee9e1652432a286e320fb0dd631b41ad6d2e29c1
+SHA256: adb5a82ce65c9d48a2f66deefff68d32aeac27e4912aabbed3a84630219c1387
+Description: Universally Unique ID library
+Task: minimal, ubuntu-desktop-minimal-default-languages, ubuntu-desktop-minimal-default-languages, ubuntu-desktop-minimal-default-languages, ubuntu-desktop-minimal-default-languages, ubuntu-desktop-minimal-default-languages, ubuntu-desktop-minimal-default-languages, ubuntu-desktop-minimal-default-languages, ubuntu-desktop-default-languages, ubuntu-desktop-default-languages, ubuntu-desktop-default-languages, ubuntu-desktop-default-languages, ubuntu-desktop-default-languages, ubuntu-desktop-default-languages, ubuntu-desktop-default-languages, ubuntu-desktop-default-languages
+Description-md5: f31dd3d34d42a99fedd60c9fb7d79469
+Supported: 9m
+
+Package: libzstd1
+Architecture: amd64
+Version: 1.4.3+dfsg-1
+Multi-Arch: same
+Priority: required
+Section: libs
+Source: libzstd
+Origin: Ubuntu
+Maintainer: Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>
+Original-Maintainer: Debian Med Packaging Team <debian-med-packaging@lists.alioth.debian.org>
+Bugs: https://bugs.launchpad.net/ubuntu/+filebug
+Installed-Size: 692
+Depends: libc6 (>= 2.14)
+Filename: pool/main/libz/libzstd/libzstd1_1.4.3+dfsg-1_amd64.deb
+Size: 235672
+MD5sum: b91b2c4afd81eff0494bfaccb9eb1fba
+SHA1: d6575d3d77721e0e0dd91aaac1ed51f64989e536
+SHA256: 41bb071ca90fe5b1196cc82e5d97361e7f83e73f0261193e36a0828829bfca78
+Homepage: https://github.com/facebook/zstd
+Description: fast lossless compression algorithm
+Task: minimal, ubuntu-desktop-minimal-default-languages, ubuntu-desktop-minimal-default-languages, ubuntu-desktop-minimal-default-languages, ubuntu-desktop-minimal-default-languages, ubuntu-desktop-minimal-default-languages, ubuntu-desktop-minimal-default-languages, ubuntu-desktop-minimal-default-languages, ubuntu-desktop-minimal-default-languages, ubuntu-desktop-default-languages, ubuntu-desktop-default-languages, ubuntu-desktop-default-languages, ubuntu-desktop-default-languages, ubuntu-desktop-default-languages, ubuntu-desktop-default-languages, ubuntu-desktop-default-languages, ubuntu-desktop-default-languages
+Description-md5: 5529781042229a3d4fc1e69daa94d736
+Supported: 9m
+
+Package: login
+Architecture: amd64
+Version: 1:4.5-1.1ubuntu4
+Priority: required
+Essential: yes
+Section: admin
+Source: shadow
+Origin: Ubuntu
+Maintainer: Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>
+Original-Maintainer: Shadow package maintainers <pkg-shadow-devel@lists.alioth.debian.org>
+Bugs: https://bugs.launchpad.net/ubuntu/+filebug
+Installed-Size: 1124
+Pre-Depends: libaudit1 (>= 1:2.2.1), libc6 (>= 2.14), libpam0g (>= 0.99.7.1), libpam-runtime, libpam-modules (>= 1.1.8-1)
+Conflicts: amavisd-new (<< 2.3.3-8), backupninja (<< 0.9.3-5), echolot (<< 2.1.8-4), gnunet (<< 0.7.0c-2), python-4suite (<< 0.99cvs20060405-1)
+Breaks: util-linux (<< 2.32-0.2~)
+Replaces: manpages-de (<< 0.5-3), manpages-tr (<< 1.0.5), manpages-zh (<< 1.5.1-1)
+Filename: pool/main/s/shadow/login_4.5-1.1ubuntu4_amd64.deb
+Size: 263644
+MD5sum: e7b5c7c40068918cb368b083009ed9b4
+SHA1: 5cc22181e40a7df260a594d5f3965818ea4225b6
+SHA256: efad4c1ff42fd51d8592ec547b9476b7fc9ed0ec915af4464057a228d381fe57
+Homepage: https://github.com/shadow-maint/shadow
+Description: system login tools
+Task: minimal, ubuntu-desktop-minimal-default-languages, ubuntu-desktop-minimal-default-languages, ubuntu-desktop-minimal-default-languages, ubuntu-desktop-minimal-default-languages, ubuntu-desktop-minimal-default-languages, ubuntu-desktop-minimal-default-languages, ubuntu-desktop-minimal-default-languages, ubuntu-desktop-default-languages, ubuntu-desktop-default-languages, ubuntu-desktop-default-languages, ubuntu-desktop-default-languages, ubuntu-desktop-default-languages, ubuntu-desktop-default-languages, ubuntu-desktop-default-languages, ubuntu-desktop-default-languages
+Description-md5: a9c42fe48288d1e8b7d3d34463d0f485
+Supported: 9m
+
+Package: logsave
+Architecture: amd64
+Version: 1.45.3-4ubuntu2
+Multi-Arch: foreign
+Priority: required
+Section: admin
+Source: e2fsprogs
+Origin: Ubuntu
+Maintainer: Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>
+Original-Maintainer: Theodore Y. Ts'o <tytso@mit.edu>
+Bugs: https://bugs.launchpad.net/ubuntu/+filebug
+Installed-Size: 91
+Depends: libc6 (>= 2.14)
+Breaks: e2fsprogs (<< 1.45.3-1)
+Replaces: e2fsprogs (<< 1.45.3-1)
+Filename: pool/main/e/e2fsprogs/logsave_1.45.3-4ubuntu2_amd64.deb
+Size: 9836
+MD5sum: f90d96d6f800dfbcbc00e01e09428a13
+SHA1: 990a484e88346f8a7551da59710af29e433bc5ae
+SHA256: 3e249d3b67632eb131c2731b928e0487d87d9863bd262e8f3cd987ca887834eb
+Homepage: http://e2fsprogs.sourceforge.net
+Description: save the output of a command in a log file
+Task: minimal
+Description-md5: 423ff285c4e5f41ac959b0fda6f812fe
+Supported: 9m
+
+Package: lsb-base
+Architecture: all
+Version: 11.0.1ubuntu1
+Multi-Arch: foreign
+Priority: required
+Section: misc
+Source: lsb
+Origin: Ubuntu
+Maintainer: Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>
+Original-Maintainer: Debian sysvinit maintainers <debian-init-diversity@chiark.greenend.org.uk>
+Bugs: https://bugs.launchpad.net/ubuntu/+filebug
+Installed-Size: 59
+Filename: pool/main/l/lsb/lsb-base_11.0.1ubuntu1_all.deb
+Size: 12580
+MD5sum: 686a88821eaedb40c9977650524a24a1
+SHA1: f5228485e7f152280b9ff4fe37726c4ea5738bd0
+SHA256: 9bd26f5e986ab65bb9fbf8fdd4c82403fe74ac5aacd712feb347869f0480907a
+Homepage: https://wiki.linuxfoundation.org/lsb/start
+Description: Linux Standard Base init script functionality
+Task: minimal, ubuntu-desktop-minimal-default-languages, ubuntu-desktop-minimal-default-languages, ubuntu-desktop-minimal-default-languages, ubuntu-desktop-minimal-default-languages, ubuntu-desktop-minimal-default-languages, ubuntu-desktop-minimal-default-languages, ubuntu-desktop-minimal-default-languages, ubuntu-desktop-default-languages, ubuntu-desktop-default-languages, ubuntu-desktop-default-languages, ubuntu-desktop-default-languages, ubuntu-desktop-default-languages, ubuntu-desktop-default-languages, ubuntu-desktop-default-languages, ubuntu-desktop-default-languages
+Description-md5: 097c50ae4dc8b22ec551f0128089a56c
+Supported: 9m
+
+Package: mawk
+Architecture: amd64
+Version: 1.3.3-17ubuntu3
+Multi-Arch: foreign
+Priority: required
+Section: utils
+Origin: Ubuntu
+Maintainer: Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>
+Original-Maintainer: Steve Langasek <vorlon@debian.org>
+Bugs: https://bugs.launchpad.net/ubuntu/+filebug
+Installed-Size: 184
+Provides: awk
+Pre-Depends: libc6 (>= 2.14)
+Filename: pool/main/m/mawk/mawk_1.3.3-17ubuntu3_amd64.deb
+Size: 81500
+MD5sum: 7ef1218d3adffc006626ae4da0f5d094
+SHA1: f130dc4db737a4bc0f2ebd4f1c15f2589f98997a
+SHA256: 8261763e3a25c21fb015779bde4a088baea74a468ee66347ab2744cd3b52d3f7
+Description: a pattern scanning and text processing language
+Task: minimal
+Description-md5: e02f3de1fa8a56e3f324f082c0c2e41f
+Supported: 9m
+
+Package: mount
+Architecture: amd64
+Version: 2.34-0.1ubuntu2
+Multi-Arch: foreign
+Priority: required
+Section: admin
+Source: util-linux
+Origin: Ubuntu
+Maintainer: Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>
+Original-Maintainer: LaMont Jones <lamont@debian.org>
+Bugs: https://bugs.launchpad.net/ubuntu/+filebug
+Installed-Size: 432
+Pre-Depends: libblkid1 (>= 2.17.2), libc6 (>= 2.17), libmount1 (>= 2.34), libsmartcols1 (>= 2.33)
+Depends: util-linux (>= 2.30.1-0ubuntu4~)
+Suggests: nfs-common (>= 1:1.1.0-13)
+Breaks: bash-completion (<< 1:2.1-4.3~)
+Replaces: bash-completion (<< 1:2.1-4.3~)
+Filename: pool/main/u/util-linux/mount_2.34-0.1ubuntu2_amd64.deb
+Size: 114788
+MD5sum: 223a5979aef48c3af83ef3517818a53b
+SHA1: 7932e2b13573df1e28ced66dec44fcf82cfce254
+SHA256: 9e3034b17ee16f7b4980149d79cfbe530e39780398284bbb98054a13a01d4644
+Description: tools for mounting and manipulating filesystems
+Task: minimal, ubuntu-desktop-minimal-default-languages, ubuntu-desktop-minimal-default-languages, ubuntu-desktop-minimal-default-languages, ubuntu-desktop-minimal-default-languages, ubuntu-desktop-minimal-default-languages, ubuntu-desktop-minimal-default-languages, ubuntu-desktop-minimal-default-languages, ubuntu-desktop-default-languages, ubuntu-desktop-default-languages, ubuntu-desktop-default-languages, ubuntu-desktop-default-languages, ubuntu-desktop-default-languages, ubuntu-desktop-default-languages, ubuntu-desktop-default-languages, ubuntu-desktop-default-languages, ubuntu-core
+Important: yes
+Description-md5: 90e187380786a435bb9c85b37afa2c5f
+Supported: 9m
+
+Package: ncurses-base
+Architecture: all
+Version: 6.1+20190803-1ubuntu1
+Multi-Arch: foreign
+Priority: required
+Essential: yes
+Section: utils
+Source: ncurses
+Origin: Ubuntu
+Maintainer: Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>
+Original-Maintainer: Craig Small <csmall@debian.org>
+Bugs: https://bugs.launchpad.net/ubuntu/+filebug
+Installed-Size: 379
+Provides: ncurses-runtime
+Breaks: bash-static (<< 4.4.18-1.1), libmono-corlib4.5-cil (<< 4.6.2.7+dfsg-2), libslang2 (<< 2.3.1a-3), libtinfo5 (<< 6.1), libunibilium0 (<< 2), libunibilium4 (<< 2.0.0-3), zsh-static (<< 5.4.2-4)
+Filename: pool/main/n/ncurses/ncurses-base_6.1+20190803-1ubuntu1_all.deb
+Size: 17668
+MD5sum: d0c838853c208bf0a79e0fe5ce05b21c
+SHA1: b2dd95610b820e3ca4ad4b5fd340a727088a6e6a
+SHA256: 7887e689052e8fa55c46c993e0483bec9fdf9c464e03e094fd106b8c76e797ab
+Homepage: https://invisible-island.net/ncurses/
+Description: basic terminal type definitions
+Task: minimal
+Description-md5: 2cbef17322c0de7f007682de54ca0d4a
+Supported: 9m
+
+Package: ncurses-bin
+Architecture: amd64
+Version: 6.1+20190803-1ubuntu1
+Multi-Arch: foreign
+Priority: required
+Essential: yes
+Section: utils
+Source: ncurses
+Origin: Ubuntu
+Maintainer: Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>
+Original-Maintainer: Craig Small <csmall@debian.org>
+Bugs: https://bugs.launchpad.net/ubuntu/+filebug
+Installed-Size: 639
+Pre-Depends: libc6 (>= 2.14), libtinfo6 (>= 6.1+20190713), libtinfo6 (<< 6.2~)
+Filename: pool/main/n/ncurses/ncurses-bin_6.1+20190803-1ubuntu1_amd64.deb
+Size: 171600
+MD5sum: 96cfd732624e4ef5078e49334c30702f
+SHA1: 8a92dce59315e7150ae4ebcf678761483de73908
+SHA256: 7c840e79e469581409e182d3a703adbb8f61e500757c586f28533fb31a73acf1
+Homepage: https://invisible-island.net/ncurses/
+Description: terminal-related programs and man pages
+Task: minimal
+Description-md5: 682ee2624c08c54a53ecaefd778a4d86
+Supported: 9m
+
+Package: passwd
+Architecture: amd64
+Version: 1:4.5-1.1ubuntu4
+Multi-Arch: foreign
+Priority: required
+Section: admin
+Source: shadow
+Origin: Ubuntu
+Maintainer: Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>
+Original-Maintainer: Shadow package maintainers <pkg-shadow-devel@lists.alioth.debian.org>
+Bugs: https://bugs.launchpad.net/ubuntu/+filebug
+Installed-Size: 2718
+Depends: libaudit1 (>= 1:2.2.1), libc6 (>= 2.14), libpam0g (>= 0.99.7.1), libselinux1 (>= 1.32), libsemanage1 (>= 2.0.3), libpam-modules
+Replaces: manpages-tr (<< 1.0.5), manpages-zh (<< 1.5.1-1)
+Filename: pool/main/s/shadow/passwd_4.5-1.1ubuntu4_amd64.deb
+Size: 814912
+MD5sum: 3806170be6211efd0a38e7b0921d4ce1
+SHA1: f6b9efce9903b1732623eb18be8e3e856cd990b6
+SHA256: 163c35241dc000a46c339ea3b4dcf6af3c9c22ec65503b7eef6d097533a6978a
+Homepage: https://github.com/shadow-maint/shadow
+Description: change and administer password and group data
+Task: minimal, ubuntu-desktop-minimal-default-languages, ubuntu-desktop-minimal-default-languages, ubuntu-desktop-minimal-default-languages, ubuntu-desktop-minimal-default-languages, ubuntu-desktop-minimal-default-languages, ubuntu-desktop-minimal-default-languages, ubuntu-desktop-minimal-default-languages, ubuntu-desktop-minimal-default-languages, ubuntu-desktop-default-languages, ubuntu-desktop-default-languages, ubuntu-desktop-default-languages, ubuntu-desktop-default-languages, ubuntu-desktop-default-languages, ubuntu-desktop-default-languages, ubuntu-desktop-default-languages, ubuntu-desktop-default-languages
+Description-md5: 5bbd70e421ed3367a8299e53bd7afed4
+Supported: 9m
+
+Package: perl-base
+Architecture: amd64
+Version: 5.28.1-6build1
+Priority: required
+Essential: yes
+Section: perl
+Source: perl
+Origin: Ubuntu
+Maintainer: Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>
+Original-Maintainer: Niko Tyni <ntyni@debian.org>
+Bugs: https://bugs.launchpad.net/ubuntu/+filebug
+Installed-Size: 10201
+Provides: libfile-path-perl (= 2.15), libfile-temp-perl (= 0.2304), libio-socket-ip-perl (= 0.39), libscalar-list-utils-perl (= 1:1.50), libsocket-perl (= 2.027), libxsloader-perl (= 0.30), perlapi-5.28.0, perlapi-5.28.1
+Pre-Depends: libc6 (>= 2.29), dpkg (>= 1.17.17)
+Suggests: perl, sensible-utils
+Conflicts: defoma (<< 0.11.12), doc-base (<< 0.10.3), mono-gac (<< 2.10.8.1-3), safe-rm (<< 0.8), update-inetd (<< 4.41)
+Breaks: amanda-common (<< 1:3.3.9-2), backuppc (<< 3.3.1-2), debconf (<< 1.5.61), dh-haskell (<< 0.3), intltool (<< 0.51.0-4), libexception-class-perl (<< 1.42), libfile-path-perl (<< 2.15), libfile-spec-perl (<< 3.7400), libfile-temp-perl (<< 0.2304), libio-socket-ip-perl (<< 0.39), libsbuild-perl (<< 0.67.0-1), libscalar-list-utils-perl (<< 1:1.50), libsocket-perl (<< 2.027), libxsloader-perl (<< 0.30), mailagent (<< 1:3.1-81-2), perl (<< 5.28.1~), perl-modules (<< 5.28.1~), slic3r (<< 1.2.9+dfsg-6.1), slic3r-prusa (<< 1.37.0+dfsg-1.1), texinfo (<< 6.1.0.dfsg.1-8)
+Replaces: libfile-path-perl (<< 2.15), libfile-temp-perl (<< 0.2304), libio-socket-ip-perl (<< 0.39), libscalar-list-utils-perl (<< 1:1.50), libsocket-perl (<< 2.027), libxsloader-perl (<< 0.30), perl (<< 5.10.1-12), perl-modules (<< 5.20.1-3)
+Filename: pool/main/p/perl/perl-base_5.28.1-6build1_amd64.deb
+Size: 1510036
+MD5sum: 44a3dadef0c1954639a1a2520b3ca9a0
+SHA1: f370868de08c9694c927103d5708a1a17a3c355b
+SHA256: 4d8b1f815364512a3f57c580140702099567ae1e86fbc8efea2fca486eca9790
+Homepage: http://dev.perl.org/perl5/
+Description: minimal Perl system
+Task: minimal, ubuntu-desktop-minimal-default-languages, ubuntu-desktop-minimal-default-languages, ubuntu-desktop-minimal-default-languages, ubuntu-desktop-minimal-default-languages, ubuntu-desktop-minimal-default-languages, ubuntu-desktop-minimal-default-languages, ubuntu-desktop-minimal-default-languages, ubuntu-desktop-minimal-default-languages, ubuntu-desktop-default-languages, ubuntu-desktop-default-languages, ubuntu-desktop-default-languages, ubuntu-desktop-default-languages, ubuntu-desktop-default-languages, ubuntu-desktop-default-languages, ubuntu-desktop-default-languages, ubuntu-desktop-default-languages
+Description-md5: eb1cc1a34379af9091c6c5d6dc31f008
+Supported: 9m
+
+Package: procps
+Architecture: amd64
+Version: 2:3.3.15-2ubuntu3
+Multi-Arch: foreign
+Priority: required
+Section: admin
+Origin: Ubuntu
+Maintainer: Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>
+Original-Maintainer: Craig Small <csmall@debian.org>
+Bugs: https://bugs.launchpad.net/ubuntu/+filebug
+Installed-Size: 814
+Provides: watch
+Depends: libc6 (>= 2.27), libncurses6 (>= 6), libncursesw6 (>= 6), libprocps7 (>= 2:3.3.15-1), libtinfo6 (>= 6), lsb-base (>= 3.0-10), init-system-helpers (>= 1.29~)
+Recommends: psmisc
+Conflicts: pgrep (<< 3.3-5), w-bassman (<< 1.0-3)
+Breaks: guymager (<= 0.5.9-1), open-vm-tools (<= 2011.12.20-562307-1)
+Filename: pool/main/p/procps/procps_3.3.15-2ubuntu3_amd64.deb
+Size: 230480
+MD5sum: b07a36ec7e052e16228a4c0b7049ba22
+SHA1: 8ce358c7d0c7b8970fb407af95726e51aba49049
+SHA256: 5c84e0ba57bd20c580dba538d47f76707fd30d0bebf91039b71decdfed6a0eb2
+Homepage: https://gitlab.com/procps-ng/procps
+Description: /proc file system utilities
+Task: minimal, ubuntu-desktop-minimal-default-languages, ubuntu-desktop-minimal-default-languages, ubuntu-desktop-minimal-default-languages, ubuntu-desktop-minimal-default-languages, ubuntu-desktop-minimal-default-languages, ubuntu-desktop-minimal-default-languages, ubuntu-desktop-minimal-default-languages, ubuntu-desktop-default-languages, ubuntu-desktop-default-languages, ubuntu-desktop-default-languages, ubuntu-desktop-default-languages, ubuntu-desktop-default-languages, ubuntu-desktop-default-languages, ubuntu-desktop-default-languages, ubuntu-core
+Description-md5: 943f3288c1aaa379fca73a3ff1a35278
+Supported: 9m
+
+Package: sed
+Architecture: amd64
+Version: 4.7-1
+Multi-Arch: foreign
+Priority: required
+Essential: yes
+Section: utils
+Origin: Ubuntu
+Maintainer: Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>
+Original-Maintainer: Clint Adams <clint@debian.org>
+Bugs: https://bugs.launchpad.net/ubuntu/+filebug
+Installed-Size: 336
+Pre-Depends: libacl1 (>= 2.2.51-8), libc6 (>= 2.14), libselinux1 (>= 1.32)
+Filename: pool/main/s/sed/sed_4.7-1_amd64.deb
+Size: 189668
+MD5sum: 2e2c9a0370c20a2a1921572f250db43e
+SHA1: a8106de20fa00fc7f97a45d18ec411512cc64293
+SHA256: a5428ddec609149eb6086cec20bf14a0300972a191eb0cc010e7f1c7f17186f4
+Homepage: https://www.gnu.org/software/sed/
+Description: GNU stream editor for filtering/transforming text
+Task: minimal
+Description-md5: 2ed71305ee7a49ce4438c58140980d2f
+Supported: 9m
+
+Package: sensible-utils
+Architecture: all
+Version: 0.0.12
+Multi-Arch: foreign
+Priority: required
+Section: utils
+Origin: Ubuntu
+Maintainer: Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>
+Original-Maintainer: Anibal Monsalve Salazar <anibal@debian.org>
+Bugs: https://bugs.launchpad.net/ubuntu/+filebug
+Installed-Size: 62
+Replaces: debianutils (<= 2.32.3), manpages-pl (<= 20060617-3~)
+Filename: pool/main/s/sensible-utils/sensible-utils_0.0.12_all.deb
+Size: 14796
+MD5sum: f63607ee790d530aa1acb9d1f4bd9a08
+SHA1: 1e528958e036f1c59efbabc68c204d8d8ba2834c
+SHA256: 08186f9cdb8589b551c16ea4daa3ff37e88fa50a0a5efa8ea05efcce58c2180a
+Description: Utilities for sensible alternative selection
+Task: minimal, ubuntu-desktop-minimal-default-languages, ubuntu-desktop-minimal-default-languages, ubuntu-desktop-minimal-default-languages, ubuntu-desktop-minimal-default-languages, ubuntu-desktop-minimal-default-languages, ubuntu-desktop-minimal-default-languages, ubuntu-desktop-minimal-default-languages, ubuntu-desktop-default-languages, ubuntu-desktop-default-languages, ubuntu-desktop-default-languages, ubuntu-desktop-default-languages, ubuntu-desktop-default-languages, ubuntu-desktop-default-languages, ubuntu-desktop-default-languages, ubuntu-desktop-default-languages
+Description-md5: 762f81736340b99921c41ac6bb08e2b1
+Supported: 9m
+
+Package: sysvinit-utils
+Architecture: amd64
+Version: 2.95-5ubuntu2
+Multi-Arch: foreign
+Priority: required
+Essential: yes
+Section: admin
+Source: sysvinit
+Origin: Ubuntu
+Maintainer: Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>
+Original-Maintainer: Debian sysvinit maintainers <debian-init-diversity@chiark.greenend.org.uk>
+Bugs: https://bugs.launchpad.net/ubuntu/+filebug
+Installed-Size: 74
+Depends: init-system-helpers (>= 1.25~), util-linux (>> 2.28-2~), libc6 (>= 2.14)
+Breaks: systemd (<< 215)
+Replaces: initscripts (<< 2.88dsf-59.5)
+Filename: pool/main/s/sysvinit/sysvinit-utils_2.95-5ubuntu2_amd64.deb
+Size: 20568
+MD5sum: 4ff73a70f078098d6d981a29a306a450
+SHA1: 2cf6082e6a7b9cd04547b2cf894de8a95afd94c3
+SHA256: ea539bf8e270f160cc8064ee789449717bad9a7ebf6af5abf2847aff353ed1d9
+Homepage: https://savannah.nongnu.org/projects/sysvinit
+Description: System-V-like utilities
+Task: minimal
+Description-md5: bb5793e0170c92deb135060f77ebc485
+Supported: 9m
+
+Package: tar
+Architecture: amd64
+Version: 1.30+dfsg-6
+Multi-Arch: foreign
+Priority: required
+Essential: yes
+Section: utils
+Origin: Ubuntu
+Maintainer: Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>
+Original-Maintainer: Bdale Garbee <bdale@gag.com>
+Bugs: https://bugs.launchpad.net/ubuntu/+filebug
+Installed-Size: 884
+Pre-Depends: libacl1 (>= 2.2.23), libc6 (>= 2.17), libselinux1 (>= 1.32)
+Suggests: bzip2, ncompress, xz-utils, tar-scripts, tar-doc
+Conflicts: cpio (<= 2.4.2-38)
+Breaks: dpkg-dev (<< 1.14.26)
+Replaces: cpio (<< 2.4.2-39)
+Filename: pool/main/t/tar/tar_1.30+dfsg-6_amd64.deb
+Size: 242960
+MD5sum: 1ee4a9cf9ef31f0b1c8b5001f2b7f275
+SHA1: 87a533a29e1de321664ec1c0eafe20d080701546
+SHA256: 08718cd47439f066275d9182afe4033908b996a39bdf7123a90aa5eef89c6a4a
+Homepage: https://www.gnu.org/software/tar/
+Description: GNU version of the tar archiving utility
+Task: minimal, ubuntu-desktop-minimal-default-languages, ubuntu-desktop-minimal-default-languages, ubuntu-desktop-minimal-default-languages, ubuntu-desktop-minimal-default-languages, ubuntu-desktop-minimal-default-languages, ubuntu-desktop-minimal-default-languages, ubuntu-desktop-minimal-default-languages, ubuntu-desktop-minimal-default-languages, ubuntu-desktop-default-languages, ubuntu-desktop-default-languages, ubuntu-desktop-default-languages, ubuntu-desktop-default-languages, ubuntu-desktop-default-languages, ubuntu-desktop-default-languages, ubuntu-desktop-default-languages, ubuntu-desktop-default-languages
+Description-md5: 48033bf96442788d1f697785773ad9bb
+Supported: 9m
+
+Package: ubuntu-keyring
+Architecture: all
+Version: 2018.09.18.1
+Multi-Arch: foreign
+Priority: important
+Section: misc
+Origin: Ubuntu
+Maintainer: Dimitri John Ledkov <dimitri.ledkov@canonical.com>
+Bugs: https://bugs.launchpad.net/ubuntu/+filebug
+Installed-Size: 46
+Breaks: ubuntu-cloudimage-keyring (<< 2018.02.05)
+Replaces: ubuntu-cloudimage-keyring (<< 2018.02.05)
+Filename: pool/main/u/ubuntu-keyring/ubuntu-keyring_2018.09.18.1_all.deb
+Size: 22344
+MD5sum: 0552144d01be65664a0d0c7096ac79f2
+SHA1: 0a77d377e87d9433b159a46202de80d766ca8956
+SHA256: 49a67632ed4bcb042ef6129884f0521941c90e8e86fbeb09ed6dd3177b6cfe59
+Description: GnuPG keys of the Ubuntu archive
+Task: minimal, ubuntu-desktop-minimal-default-languages, ubuntu-desktop-minimal-default-languages, ubuntu-desktop-minimal-default-languages, ubuntu-desktop-minimal-default-languages, ubuntu-desktop-minimal-default-languages, ubuntu-desktop-minimal-default-languages, ubuntu-desktop-minimal-default-languages, ubuntu-desktop-minimal-default-languages, ubuntu-desktop-default-languages, ubuntu-desktop-default-languages, ubuntu-desktop-default-languages, ubuntu-desktop-default-languages, ubuntu-desktop-default-languages, ubuntu-desktop-default-languages, ubuntu-desktop-default-languages, ubuntu-desktop-default-languages
+Description-md5: 50b1d2c58bfd75a47173455de2fe5cfe
+Build-Essential: yes
+Supported: 9m
+
+Package: util-linux
+Architecture: amd64
+Version: 2.34-0.1ubuntu2
+Multi-Arch: foreign
+Priority: required
+Essential: yes
+Section: utils
+Origin: Ubuntu
+Maintainer: Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>
+Original-Maintainer: LaMont Jones <lamont@debian.org>
+Bugs: https://bugs.launchpad.net/ubuntu/+filebug
+Installed-Size: 4546
+Pre-Depends: libaudit1 (>= 1:2.2.1), libblkid1 (>= 2.31.1), libc6 (>= 2.25), libcap-ng0 (>= 0.7.9), libmount1 (>= 2.34), libpam0g (>= 0.99.7.1), libselinux1 (>= 2.6-3~), libsmartcols1 (>= 2.34), libsystemd0, libtinfo6 (>= 6), libudev1 (>= 183), libuuid1 (>= 2.16), zlib1g (>= 1:1.1.4)
+Depends: fdisk, login (>= 1:4.5-1.1~)
+Suggests: dosfstools, kbd | console-tools, util-linux-locales
+Breaks: bash-completion (<< 1:2.8), grml-debootstrap (<< 0.68), mount (<< 2.29.2-3~), s390-tools (<< 2.2.0-1~), setpriv (<< 2.32.1-0.2~), sysvinit-utils (<< 2.88dsf-59.4~)
+Replaces: bash-completion (<< 1:2.8), initscripts (<< 2.88dsf-59.2~), login (<< 1:4.5-1.1~), mount (<< 2.29.2-3~), s390-tools (<< 2.2.0-1~), setpriv (<< 2.32.1-0.2~), sysvinit-utils (<< 2.88dsf-59.1~)
+Filename: pool/main/u/util-linux/util-linux_2.34-0.1ubuntu2_amd64.deb
+Size: 1020632
+MD5sum: d8cc735b97f3836327d7243cc8df8302
+SHA1: d01b523099b74b1683b199b6bf51efa66eb183d1
+SHA256: aed5daa2fb26702688f20758b8e0dc2ba929e41ed60e304e05e455bbda6fd003
+Description: miscellaneous system utilities
+Task: minimal, ubuntu-desktop-minimal-default-languages, ubuntu-desktop-minimal-default-languages, ubuntu-desktop-minimal-default-languages, ubuntu-desktop-minimal-default-languages, ubuntu-desktop-minimal-default-languages, ubuntu-desktop-minimal-default-languages, ubuntu-desktop-minimal-default-languages, ubuntu-desktop-default-languages, ubuntu-desktop-default-languages, ubuntu-desktop-default-languages, ubuntu-desktop-default-languages, ubuntu-desktop-default-languages, ubuntu-desktop-default-languages, ubuntu-desktop-default-languages, ubuntu-desktop-default-languages
+Description-md5: 33d0291a69ffd307cfba295915df602a
+Supported: 9m
+
+Package: zlib1g
+Architecture: amd64
+Version: 1:1.2.11.dfsg-1ubuntu3
+Multi-Arch: same
+Priority: required
+Section: libs
+Source: zlib
+Origin: Ubuntu
+Maintainer: Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>
+Original-Maintainer: Mark Brown <broonie@debian.org>
+Bugs: https://bugs.launchpad.net/ubuntu/+filebug
+Installed-Size: 162
+Provides: libz1
+Depends: libc6 (>= 2.14)
+Conflicts: zlib1 (<= 1:1.0.4-7)
+Breaks: libxml2 (<< 2.7.6.dfsg-2), texlive-binaries (<< 2009-12)
+Filename: pool/main/z/zlib/zlib1g_1.2.11.dfsg-1ubuntu3_amd64.deb
+Size: 53604
+MD5sum: 719c598d7e502f5227fd8afdadbf022e
+SHA1: 949a08fe71b1ee65ad32cc93c869c14ab6dcd398
+SHA256: fe0d9b2a896571f981343be08b68a4dcbae5b3757202f0bbce888e55c9d419dd
+Homepage: http://zlib.net/
+Description: compression library - runtime
+Task: minimal, ubuntu-desktop-minimal-default-languages, ubuntu-desktop-minimal-default-languages, ubuntu-desktop-minimal-default-languages, ubuntu-desktop-minimal-default-languages, ubuntu-desktop-minimal-default-languages, ubuntu-desktop-minimal-default-languages, ubuntu-desktop-minimal-default-languages, ubuntu-desktop-minimal-default-languages, ubuntu-desktop-default-languages, ubuntu-desktop-default-languages, ubuntu-desktop-default-languages, ubuntu-desktop-default-languages, ubuntu-desktop-default-languages, ubuntu-desktop-default-languages, ubuntu-desktop-default-languages, ubuntu-desktop-default-languages
+Description-md5: 567f396aeeb2b2b63295099aed237057
+Supported: 9m
+

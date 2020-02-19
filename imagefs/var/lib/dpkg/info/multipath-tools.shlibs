@@ -1,0 +1,8 @@
+libdmmp 0.2.0 multipath-tools
+libmpathcmd 0 multipath-tools
+libmpathpersist 0 multipath-tools
+libmultipath 0 multipath-tools
+udeb: libdmmp 0.2.0 multipath-udeb
+udeb: libmpathcmd 0 multipath-udeb
+udeb: libmpathpersist 0 multipath-udeb
+udeb: libmultipath 0 multipath-udeb

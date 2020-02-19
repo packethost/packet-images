@@ -1,0 +1,9 @@
+Document: mdadm-faq
+Title: mdadm Debian FAQ
+Author: martin f. krafft
+Abstract: The document answers frequently asked questions about Debian's mdadm
+Section: System/Administration
+
+Format: text
+Index: /usr/share/doc/mdadm/FAQ.gz
+Files: /usr/share/doc/mdadm/FAQ.gz

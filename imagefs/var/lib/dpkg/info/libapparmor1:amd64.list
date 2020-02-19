@@ -1,0 +1,14 @@
+/.
+/usr
+/usr/lib
+/usr/lib/x86_64-linux-gnu
+/usr/lib/x86_64-linux-gnu/libapparmor.so.1.6.1
+/usr/share
+/usr/share/doc
+/usr/share/doc/libapparmor1
+/usr/share/doc/libapparmor1/changelog.Debian.gz
+/usr/share/doc/libapparmor1/copyright
+/usr/share/lintian
+/usr/share/lintian/overrides
+/usr/share/lintian/overrides/libapparmor1
+/usr/lib/x86_64-linux-gnu/libapparmor.so.1

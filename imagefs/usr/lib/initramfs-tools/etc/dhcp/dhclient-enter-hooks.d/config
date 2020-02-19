@@ -1,0 +1,58 @@
+#!/bin/sh
+
+case "$reason" in
+BOUND)
+	{
+		echo "DEVICE='$interface'"
+		echo "PROTO='dhcp'"
+		echo "IPV4PROTO='dhcp'"
+		echo "IPV4ADDR='$new_ip_address'"
+		echo "IPV4NETMASK='$new_subnet_mask'"
+		echo "IPV4BROADCAST='$new_broadcast_address'"
+		# Only keep the first router
+		echo "IPV4GATEWAY='${new_routers%% *}'"
+		i=0
+		for name in $new_domain_name_servers; do
+		    echo "IPV4DNS$i='$name'"
+		    i=$((i+1))
+		done
+		echo "ROOTSERVER='${new_routers%% *}'"
+		echo "HOSTNAME='$new_host_name'"
+		echo "DNSDOMAIN='$new_domain_name'"
+		if [ -n "$new_domain_search" ]; then
+			if [ -n "$new_domain_name" ]; then
+				domain_in_search_list=""
+				for domain in $new_domain_search; do
+					if [ "$domain" = "${new_domain_name}" ] ||
+						[ "$domain" = "${new_domain_name}." ]; then
+						domain_in_search_list="Yes"
+					fi
+				done
+				if [ -z "$domain_in_search_list" ]; then
+					new_domain_search="$new_domain_name $new_domain_search"
+				fi
+			fi
+			echo "DOMAINSEARCH='${new_domain_search}'"
+		elif [ -n "$new_domain_name" ]; then
+			echo "DOMAINSEARCH='${new_domain_name}'"
+		fi
+	} >"/run/net-$interface.conf"
+	;;
+BOUND6)
+	{
+		echo "DEVICE6='$interface'"
+		echo "IPV6PROTO='dhcp6'"
+		echo "IPV6ADDR='$new_ip6_address'"
+		echo "IPV6NETMASK='$new_ip6_prefixlen'"
+		i=0
+		for name in $new_dhcp6_name_servers; do
+		    echo "IPV6DNS$i='$name'"
+		    i=$((i+1))
+		done
+		if [ -n "$new_dhcp6_domain_search" ]; then
+			echo "IPV6DOMAINSEARCH='$new_dhcp6_domain_search'"
+		fi
+	} >"/run/net6-$interface.conf"
+	;;
+esac
+

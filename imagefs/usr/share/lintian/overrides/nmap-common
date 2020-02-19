@@ -1,0 +1,8 @@
+# Windows devel files will be kept until upstream drops them
+windows-devel-file-in-package usr/share/nmap/nselib/data/psexec/nmap_service.vcproj
+# .class files are used by NSE scripts jdwp-exec.nse
+package-installs-java-bytecode usr/share/nmap/nselib/data/jdwp-class/JDWPExecCmd.class
+package-installs-java-bytecode usr/share/nmap/nselib/data/jdwp-class/JDWPSystemInfo.class
+# Describes contents/purpose of directory
+package-contains-documentation-outside-usr-share-doc usr/share/nmap/nselib/data/psexec/README
+package-contains-documentation-outside-usr-share-doc usr/share/nmap/nselib/data/jdwp-class/README.txt

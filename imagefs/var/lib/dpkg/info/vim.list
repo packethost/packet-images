@@ -1,0 +1,17 @@
+/.
+/usr
+/usr/bin
+/usr/bin/vim.basic
+/usr/share
+/usr/share/bug
+/usr/share/bug/vim
+/usr/share/bug/vim/presubj
+/usr/share/bug/vim/script
+/usr/share/doc
+/usr/share/doc/vim
+/usr/share/doc/vim/NEWS.Debian.gz
+/usr/share/doc/vim/changelog.Debian.gz
+/usr/share/doc/vim/copyright
+/usr/share/lintian
+/usr/share/lintian/overrides
+/usr/share/lintian/overrides/vim

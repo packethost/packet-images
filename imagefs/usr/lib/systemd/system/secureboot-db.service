@@ -1,0 +1,13 @@
+[Unit]
+Description=Secure Boot updates for DB and DBX
+ConditionPathExists=/sys/firmware/efi/efivars/db-d719b2cb-3d3a-4596-a3bc-dad00e67656f
+
+[Service]
+Type=oneshot
+ExecStartPre=-/usr/bin/chattr -i /sys/firmware/efi/efivars/KEK-8be4df61-93ca-11d2-aa0d-00e098032b8c
+ExecStartPre=-/usr/bin/chattr -i /sys/firmware/efi/efivars/db-d719b2cb-3d3a-4596-a3bc-dad00e67656f
+ExecStartPre=-/usr/bin/chattr -i /sys/firmware/efi/efivars/dbx-d719b2cb-3d3a-4596-a3bc-dad00e67656f
+ExecStart=/usr/bin/sbkeysync --no-default-keystores --keystore /usr/share/secureboot/updates --verbose
+
+[Install]
+WantedBy=multi-user.target

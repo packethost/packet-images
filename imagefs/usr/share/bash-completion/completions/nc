@@ -1,0 +1,50 @@
+# nc(1) completion                                         -*- shell-script -*-
+
+_nc()
+{
+    local cur prev words cword
+    _init_completion -n : || return
+
+    case $prev in
+        -*[hIiMmOPpqVWw])
+            return
+            ;;
+        -*s)
+            if [[ "${words[*]}" == *-6* ]]; then
+                _ip_addresses -6
+                __ltrim_colon_completions "$cur"
+            else
+                _ip_addresses
+            fi
+            return
+            ;;
+        -*T)
+            COMPREPLY=( $(compgen -W 'critical inetcontrol lowcost lowdelay
+                netcontrol throughput reliability ef af{11..43} cs{0..7}' \
+                -- "$cur") )
+            return
+            ;;
+        -*X)
+            COMPREPLY=( $(compgen -W '4 5 connect' -- "$cur") )
+            return
+            ;;
+        -*x)
+            _known_hosts_real -- "$cur"
+            return
+            ;;
+    esac
+
+    if [[ "$cur" == -* ]]; then
+        COMPREPLY=( $(compgen -W '$(_parse_help "$1" -h)' -- "$cur") )
+        return
+    fi
+
+    # Complete 1st non-option arg only
+    local args; _count_args "" "-*[IiMmOPpqsTVWwXx]"
+    [[ $args -eq 1 ]] || return
+
+    _known_hosts_real -- "$cur"
+} &&
+complete -F _nc nc
+
+# ex: filetype=sh

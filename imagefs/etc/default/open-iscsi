@@ -1,0 +1,67 @@
+# List of LVMed iSCSI Volume Groups.
+# Multiple Volume Groups can be specified with spaces
+#
+# This list defines the Volume Groups that should be activated at boot
+# after iSCSI has been activated. If you use dynamic activation of LVM
+# volumes (lvmetad), you can (and should) leave this empty.
+#
+# On shutdown, this setting typically has no effect, since open-iscsi
+# tries to determine all active VGs on iSCSI and deactivate them.
+# However, if you have a really complicated stacking setup that isn't
+# automatically detected, volume groups defined here will also be
+# deactivated.
+#
+# To see whether open-iscsi is able to properly detect your setup for
+# shutdown, execute the following on a running system:
+#    /lib/open-iscsi/umountiscsi.sh --dry-run
+# This will tell you what steps will betaken at shutdown before logging
+# out of the iSCSI session.
+LVMGROUPS=""
+
+
+# Handle _netdev devices
+# You can specify your iSCSI (LVMed or Multipathed or DM Encrypted)
+# devices with the _netdev mount option and open-iscsi will treat them
+# accordingly.
+#
+# Note: however, handling _netdev devices comes with the caveat that
+# other _netdev mounts, like an NFS share, also get pulled in with it.
+#
+# If this option is set to 0, no iSCSI mounts in /etc/fstab will be
+# automatically mounted on systems running sysvinit. This setting is
+# not necessary when using systemd as init system (Debian's default).
+HANDLE_NETDEV=1
+
+
+# Additional mounts to exclude at shutdown.
+#
+# If you have additional mounts on iSCSI that shouldn't be umounted at
+# shutdown by open-iscsi (by default, open-iscsi excludes / and on
+# systemd systems als /usr), place them here. iSCSI sessions that carry
+# these mounts will also be kept open.
+#
+# If any of these mountpoints contain spaces, please use the same
+# escaping as in /etc/fstab, i.e. replace the spaces with \040.
+EXCLUDE_MOUNTS_AT_SHUTDOWN=""
+
+
+
+# Don't logout from ANY iSCSI session on shutdown
+#
+# When shutting down, if the root filesystem is on iSCSI, open-iscsi
+# tries to determine which sessions are still required for the root
+# filesystem. By default, the host will still logout from all other
+# sessions.
+#
+# If you are running a very complicated setup of your root filesystem
+# (multiple mapping levels stacked on top of each other), it may be the
+# case that the autodetection logic doesn't work propery. You may then
+# enable this setting to keep around all iSCSI sessions.
+#
+# Note that /etc/iscsi/iscsi.initramfs must exist for this option to
+# have any effect at all.
+#
+# This was the default behavior in previous versions of this package
+# up to the version that shipped with Debian 8 (Jessie).
+#
+ISCSI_ROOT_KEEP_ALL_SESSIONS_AT_SHUTDOWN=0

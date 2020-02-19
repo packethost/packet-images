@@ -1,0 +1,2 @@
+libevent_pthreads-2.1.so.6 libevent-pthreads-2.1-6 #MINVER#
+ evthread_use_pthreads@Base 2.1.8-stable

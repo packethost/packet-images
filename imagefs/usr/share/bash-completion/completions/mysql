@@ -1,0 +1,98 @@
+# mysql(1) completion                                      -*- shell-script -*-
+
+_mysql_character_sets()
+{
+    local IFS=$' \t\n' reset=$(shopt -p failglob); shopt -u failglob
+    local -a charsets=( /usr/share/m{ariadb,ysql}/charsets/*.xml )
+    $reset
+    charsets=( "${charsets[@]##*/}" )
+    charsets=( "${charsets[@]%%?(Index|\*).xml}" utf8 )
+    COMPREPLY+=( $(compgen -W '${charsets[@]}' -- "$cur") )
+}
+
+_mysql()
+{
+    local cur prev words cword split
+    _init_completion -s || return
+
+    case $prev in
+        --user|-!(-*)u)
+            COMPREPLY=( $(compgen -u -- "$cur") )
+            return
+            ;;
+        --database|-!(-*)D)
+            COMPREPLY=( $(compgen -W "$(mysqlshow 2>/dev/null | command sed -ne '2d' -e 's/^|.\([^|]*\)|.*/\1/p')" -- "$cur") )
+            return
+            ;;
+
+        --host|-!(-*)h)
+            _known_hosts_real -- "$cur"
+            return
+            ;;
+        --default-character-set)
+            _mysql_character_sets
+            return
+            ;;
+
+        --character-sets-dir|--ssl-capath)
+            _filedir -d
+            return
+            ;;
+        --socket|-!(-*)S)
+            _filedir sock
+            return
+            ;;
+        --protocol)
+            COMPREPLY=( $(compgen -W 'tcp socket pipe memory' -- "$cur") )
+            return
+            ;;
+        --defaults-file|--defaults-extra-file|--tee)
+            _filedir
+            return
+            ;;
+        --ssl-ca|--ssl-cert)
+            _filedir '@(pem|cer|c?(e)rt)'
+            return
+            ;;
+        --ssl-key)
+            _filedir '@(pem|key)'
+            return
+            ;;
+        --port|--set-variable|--ssl-cipher|--connect_timeout|\
+        --max_allowed_packet|--prompt|--net_buffer_length|--select_limit|\
+        --max_join_size|--server-arg|--debug|--delimiter|--execute|--pager|\
+        -!(-*)[Pe])
+            return
+            ;;
+        --help|--version|-!(-*)[?IV])
+            return
+            ;;
+    esac
+
+    $split && return
+
+    case $cur in
+        --*)
+            local help=$(_parse_help "$1")
+            help+=" --skip-comments --skip-ssl"
+
+            COMPREPLY=( $(compgen -W "$help" -- "$cur") )
+            [[ $COMPREPLY == *= ]] && compopt -o nospace
+            return
+            ;;
+
+        # only complete long options
+        -)
+            compopt -o nospace
+            COMPREPLY=( -- )
+            return
+            ;;
+    esac
+
+    COMPREPLY=( $(compgen -W \
+        "$(mysqlshow 2>/dev/null | command sed -ne '2d' -e 's/^|.\([^|]*\)|.*/\1/p')" \
+        -- "$cur") )
+} &&
+complete -F _mysql mysql
+
+# ex: filetype=sh

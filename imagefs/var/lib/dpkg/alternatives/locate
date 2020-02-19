@@ -1,0 +1,15 @@
+auto
+/usr/bin/locate
+locate.1.gz
+/usr/share/man/man1/locate.1.gz
+updatedb
+/usr/bin/updatedb
+updatedb.1.gz
+/usr/share/man/man1/updatedb.1.gz
+
+/usr/bin/locate.findutils
+20
+/usr/share/man/man1/locate.findutils.1.gz
+/usr/bin/updatedb.findutils
+/usr/share/man/man1/updatedb.findutils.1.gz
+

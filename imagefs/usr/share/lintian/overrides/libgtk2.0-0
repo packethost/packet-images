@@ -1,0 +1,2 @@
+# Deliberate choice to bundle these together
+libgtk2.0-0: package-name-doesnt-match-sonames libgdk-x11-2.0-0 libgtk-x11-2.0-0

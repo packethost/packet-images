@@ -1,0 +1,25 @@
+#!/bin/sh
+
+set -e
+
+if [ -r /etc/default/ntpdate ]; then
+	. /etc/default/ntpdate
+fi
+
+if [ "$NTPDATE_USE_NTP_CONF" = yes ]; then
+	for f in /etc/ntp.conf /etc/openntpd/ntpd.conf; do
+		if [ -r "$f" ]; then
+			file=$f
+			break
+		fi
+	done
+	if [ -n "$file" ]; then
+		NTPSERVERS=$(sed -rne 's/^(servers?|peer|pool)[[:space:]]+(-[46][[:space:]]+)?([-_.:[:alnum:]]+).*$/\3/p' "$file" | grep -v '^127\.127\.') || [ $? -le 1 ]
+	fi
+fi
+
+if [ -r /run/ntpdate.dhcp ]; then
+	. /run/ntpdate.dhcp
+fi
+
+exec /usr/sbin/ntpdate $NTPOPTIONS "$@" $NTPSERVERS
