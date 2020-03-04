@@ -1,0 +1,5 @@
+c544a92ff36a92cbef759f6d549c5d91  bin/ping
+5cc18efd44ddc5c81ccd4de29d077f31  usr/share/doc/iputils-ping/NEWS.Debian.gz
+61e01d7f5215b8ba5486fb33bb25f4d0  usr/share/doc/iputils-ping/changelog.Debian.gz
+82b26659c7b1a979fa288b4f88c78e59  usr/share/doc/iputils-ping/copyright
+edb37bf953ced8d03cc1584fe0de00f7  usr/share/man/man8/ping.8.gz

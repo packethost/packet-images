@@ -1,0 +1,5 @@
+grub-efi-amd64-bin: unstripped-binary-or-object *.mod
+grub-efi-amd64-bin: statically-linked-binary usr/lib/grub/x86_64-efi/kernel.img
+grub-efi-amd64-bin: statically-linked-binary ./usr/lib/grub/x86_64-efi/kernel.img
+grub-efi-amd64-bin: unstripped-binary-or-object usr/lib/grub/x86_64-efi/kernel.img
+# These aren't Windows executables, and these features wouldn't be very useful. echo grub-efi-amd64-bin: portable-executable-missing-security-features *.efi ASLR DEP/NX

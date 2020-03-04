@@ -1,0 +1,16 @@
+/.
+/usr
+/usr/lib
+/usr/lib/x86_64-linux-gnu
+/usr/lib/x86_64-linux-gnu/libutempter.so.1.1.6
+/usr/lib/x86_64-linux-gnu/utempter
+/usr/lib/x86_64-linux-gnu/utempter/utempter
+/usr/share
+/usr/share/lintian
+/usr/share/lintian/overrides
+/usr/share/lintian/overrides/libutempter0
+/usr/share/doc
+/usr/share/doc/libutempter0
+/usr/share/doc/libutempter0/copyright
+/usr/share/doc/libutempter0/changelog.Debian.gz
+/usr/lib/x86_64-linux-gnu/libutempter.so.0

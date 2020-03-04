@@ -1,0 +1,10 @@
+#!/bin/sh
+# If iscsiuio is present in the initramfs, and it was started by us,
+# stop it again so the system iscsiuio can take over later.
+if [ -x /sbin/iscsiuio ] && [ -e /run/initramfs/iscsiuio.pid ] ; then
+	start-stop-daemon --stop --quiet --retry=TERM/10/KILL/5 \
+		--pidfile /run/initramfs/iscsiuio.pid \
+		--name iscsiuio --exec /sbin/iscsiuio || :
+fi
+
+exit 0

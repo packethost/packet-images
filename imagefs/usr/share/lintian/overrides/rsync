@@ -1,0 +1,5 @@
+rsync: embedded-library usr/bin/rsync: zlib
+rsync: spelling-error-in-binary usr/bin/rsync dont don't
+rsync: init.d-script-does-not-provide-itself etc/init.d/rsync
+# false positive in this context
+rsync: spelling-error-in-manpage usr/share/man/man1/rsync.1.gz allow to allow one to

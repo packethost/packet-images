@@ -1,0 +1,6 @@
+[Desktop Entry]
+Type=KonsoleApplication
+Name=Python2 Interpreter
+Comment=Python2
+Exec=/usr/bin/python2
+Icon=/usr/share/pixmaps/python2.xpm

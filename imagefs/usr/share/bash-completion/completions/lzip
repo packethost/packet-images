@@ -1,0 +1,47 @@
+# lzip(1) completion                                       -*- shell-script -*-
+
+_lzip()
+{
+    local cur prev words cword split
+    _init_completion -s || return
+
+    local decompress=false
+
+    case $prev in
+        --help|--version|--member-size|--match-length|--dictionary-size|\
+        --volume-size|--data-size|-!(-*)@([bmsSB]|[hV]*))
+            return
+            ;;
+        --decompress-!(-*)d)
+            decompress=true
+            ;;
+        --threads-!(-*)n)
+            COMPREPLY=( $(compgen -W "{1..$(_ncpus)}" -- "$cur") )
+            return
+            ;;
+        --output-!(-*)o)
+            _filedir
+            return
+            ;;
+    esac
+
+    $split && return
+
+    if [[ "$cur" == -* ]]; then
+        COMPREPLY=( $(compgen -W '$(_parse_help "$1") {-1..-9}' -- "$cur") )
+        [[ $COMPREPLY == *= ]] && compopt -o nospace
+        return
+    fi
+
+    if $decompress; then
+        _filedir lz
+        return
+    fi
+
+    local IFS=$'\n'
+    compopt -o filenames
+    COMPREPLY=( $(compgen -f -X "*.lz" -- "$cur") $(compgen -d -- "$cur") )
+} &&
+complete -F _lzip clzip lzip pdlzip plzip
+
+# ex: filetype=sh

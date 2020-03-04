@@ -1,0 +1,105 @@
+#!/bin/sh
+#
+# Copyright © 2006-2008 Martin F. Krafft <madduck@debian.org>,
+#             2012 Michael Tokarev <mjt@tls.msk.ru>
+# based on the scripts in the initramfs-tools package.
+# released under the terms of the Artistic Licence.
+#
+set -eu
+
+PREREQ="udev"
+prereqs()
+{
+    echo "$PREREQ"
+}
+
+case "${1:-}" in
+  prereqs)
+    prereqs
+    exit 0
+    ;;
+esac
+
+is_true()
+{
+  case "${1:-}" in
+    [Yy]es|[Yy]|1|[Tt]rue|[Tt]) return 0;;
+    *) return 1;;
+  esac
+}
+
+write()
+{
+  local PREFIX; PREFIX=$1; shift
+  echo "${PREFIX}: mdadm: $@" >&2
+}
+
+info()
+{
+  is_true ${VERBOSE:-false} && write I "$@" || :
+}
+
+warn()
+{
+  write W "$@"
+}
+
+. /usr/share/initramfs-tools/hook-functions
+
+# copy the binary as early as possible
+copy_exec /sbin/mdadm /sbin
+copy_exec /sbin/mdmon /sbin
+
+# Copy udev rules, which udev no longer does
+for UDEV_RULE in 63-md-raid-arrays.rules 64-md-raid-assembly.rules; do
+for rules_folder in /lib/udev/rules.d /etc/udev/rules.d; do
+    if [ -f $rules_folder/$UDEV_RULE ]; then
+	mkdir -p $DESTDIR$rules_folder
+	cp $rules_folder/$UDEV_RULE $DESTDIR$rules_folder/$UDEV_RULE
+    fi
+done
+done
+
+# load raid modules in the initramfs
+for module in linear multipath raid0 raid1 raid456 raid5 raid6 raid10; do
+	force_load $module
+done
+
+# copy the mdadm configuration
+CONFIG=/etc/mdadm/mdadm.conf
+ALTCONFIG=/etc/mdadm.conf
+DESTMDADMCONF=$DESTDIR/etc/mdadm/mdadm.conf
+[ ! -f $CONFIG ] && [ -f $ALTCONFIG ] && CONFIG=$ALTCONFIG || :
+mkdir -p ${DESTDIR}/etc/mdadm
+
+if [ ! -f $CONFIG ]; then
+        # there is no configuration file, so let's create one
+        if /usr/share/mdadm/mkconf generate $CONFIG; then
+                # all is well
+                cp -p $CONFIG $DESTMDADMCONF
+                info "auto-generated the mdadm.conf configuration file."
+        else
+                # we failed to auto-generate, so let the emergency procedure take over
+                warn "failed to auto-generate the mdadm.conf file."
+                warn "please read /usr/share/doc/mdadm/README.upgrading-2.5.3.gz ."
+        fi
+else
+	cp -p $CONFIG ${DESTDIR}/etc/mdadm
+	sed -i '/^CREATE/s/^/#/' $DESTMDADMCONF
+        if ! grep -q '^ARRAY' $CONFIG; then
+                tmpfile="${DESTMDADMCONF}.tmp"
+                if /usr/share/mdadm/mkconf > $tmpfile; then
+                        cp -p $tmpfile $DESTMDADMCONF
+                else
+                        warn "failed to auto-generate temporary mdadm.conf file."
+                fi
+        else
+                # make sure the configuration file knows about all running devices
+                /sbin/mdadm --detail --scan | while read array device params; do
+                        uuid=${params#*UUID=}; uuid=${uuid%% *}
+                        if grep -qi "UUID=$uuid" $DESTMDADMCONF; then
+                                info "$uuid $device added to the mdadm.conf in the initramfs"
+                        fi
+                done
+        fi
+fi

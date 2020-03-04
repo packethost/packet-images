@@ -1,0 +1,3 @@
+# When iscsi disks are present, iscsid.service should be running. LP: #1802354
+# ID_PATH looks like ip-<ipv4-dotted-quad>:<port>-iscsi-<target>-lun-<lun>
+SUBSYSTEM=="block", ACTION=="add", ENV{ID_PATH}=="*-iscsi-*", ENV{SYSTEMD_WANTS}+="iscsid.service"

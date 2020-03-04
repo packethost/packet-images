@@ -1,0 +1,3 @@
+# libicu63 installs multiple shared libraries, none of which is
+# actually called libicu.so.63, but all of which are libicu*.so.63.
+libicu63: package-name-doesnt-match-sonames libicudata63 libicui18n63 libicuio63 libicutest63 libicutu63 libicuuc63

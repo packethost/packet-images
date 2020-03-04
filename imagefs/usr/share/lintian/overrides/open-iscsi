@@ -1,0 +1,5 @@
+open-iscsi: non-standard-file-perm etc/iscsi/iscsid.conf 0600 != 0644
+open-iscsi: postinst-uses-db-input
+
+# See discussion in Bug #797860
+open-iscsi: too-long-extended-description-in-templates open-iscsi/remove_even_with_active_sessions

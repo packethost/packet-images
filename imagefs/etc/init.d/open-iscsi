@@ -1,0 +1,116 @@
+#! /bin/sh
+### BEGIN INIT INFO
+# Provides:          open-iscsi iscsi
+# Required-Start:    $network $local_fs iscsid
+# Required-Stop:     $network $local_fs iscsid sendsigs
+# Default-Start:     S
+# Default-Stop:      0 1 6
+# Short-Description: Login to default iSCSI targets
+# Description:       Login to default iSCSI targets at boot and log out
+#                    of all iSCSI targets at shutdown.
+### END INIT INFO
+
+PATH=/sbin:/bin
+DAEMON=/sbin/iscsid
+ADM=/sbin/iscsiadm
+PIDFILE=/run/iscsid.pid
+NAMEFILE=/etc/iscsi/initiatorname.iscsi
+CONFIGFILE=/etc/iscsi/iscsid.conf
+OMITDIR=/run/sendsigs.omit.d
+
+[ -x "$DAEMON" ] || exit 0
+
+. /lib/lsb/init-functions
+
+# Include defaults if available
+if [ -f /etc/default/open-iscsi ]; then
+	. /etc/default/open-iscsi
+fi
+
+
+if [ ! -d /sys/class/ ]; then
+  log_failure_msg "iSCSI requires a mounted sysfs, not started."
+  exit 0
+fi
+
+RETVAL=0
+
+start() {
+	if ! [ -s $PIDFILE ] || ! kill -0 `sed -n 1p $PIDFILE` >/dev/null ; then
+		log_failure_msg "iSCSI initiator daemon not started: not logging in to default targets"
+		exit 1
+	fi
+
+	starttargets
+
+	# activate LVM, mount filesystems, etc.
+	/lib/open-iscsi/activate-storage.sh
+}
+
+starttargets() {
+	log_daemon_msg "Setting up iSCSI targets"
+	echo
+	$ADM -m node --loginall=automatic
+	log_end_msg 0
+}
+
+stoptargets() {
+	log_daemon_msg "Disconnecting iSCSI targets"
+	sync
+	# only logout if daemon is running, iscsiadm hangs otherwise
+        if [ -s $PIDFILE ] && kill -0 `sed -n 1p $PIDFILE` >/dev/null ; then
+		/lib/open-iscsi/logout-all.sh
+        fi
+
+	log_end_msg 0
+}
+
+stop() {
+	# Call umountiscsi.sh to unmount iSCSI devices first (always do
+	# that, regardless of whether root is on iSCSI, umountiscsi.sh
+	# will exclude it - and even if that shouldn't work, the mount
+	# point will be busy)
+	log_daemon_msg "Umounting iSCSI filesystems"
+	/lib/open-iscsi/umountiscsi.sh
+	umount_exit_status=$?
+	log_end_msg $umount_exit_status
+
+	if [ $umount_exit_status -ne 0 ]; then
+		log_failure_msg "Couldn't unmount all iSCSI devices. not logging out from any target."
+		exit 1
+	fi
+
+	stoptargets
+}
+
+restart() {
+	stop
+	start
+}
+
+restarttargets() {
+	stoptargets
+	starttargets
+}
+
+status() {
+	#XXX FIXME: what to do here?
+	#status iscsid
+	# list active sessions
+	echo Current active iSCSI sessions:
+	$ADM -m session
+}
+
+case "$1" in
+	start|starttargets|stop|stoptargets|restart|restarttargets|status)
+		$1
+		;;
+	force-reload)
+		restart
+		;;
+	*)
+		echo "Usage: $0 {start|stop|restart|force-reload|status}"
+		exit 1
+		;;
+esac
+exit $RETVAL

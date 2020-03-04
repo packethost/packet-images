@@ -1,0 +1,8 @@
+4f1b09a1dd0b32db9a1d1c3f3ad82a12  usr/sbin/ntpdate
+025ff9c8780bce3883db5bc4676567e4  usr/sbin/ntpdate-debian
+b79c2bf56477f83164e44375cb795903  usr/share/doc/ntpdate/NEWS.Debian.gz
+1f286f535e11263a4e79ce4b4a9e67e9  usr/share/doc/ntpdate/README.Debian
+8e1167d9ef9b4e0e679473562349e1d1  usr/share/doc/ntpdate/changelog.Debian.gz
+49e5c77426e2e3f5b635f7965f0020e3  usr/share/doc/ntpdate/copyright
+68b53d36a89084e278288c0cff0eafd2  usr/share/man/man8/ntpdate-debian.8.gz
+2e0534270c51769925f44284df12908e  usr/share/man/man8/ntpdate.8.gz

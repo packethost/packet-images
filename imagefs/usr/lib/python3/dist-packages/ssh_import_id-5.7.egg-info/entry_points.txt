@@ -1,0 +1,3 @@
+[console_scripts]
+ssh-import-id = ssh_import_id:main
+

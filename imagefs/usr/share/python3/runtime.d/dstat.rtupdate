@@ -1,0 +1,7 @@
+#! /bin/sh
+set -e
+
+if [ "$1" = rtupdate ]; then
+	py3clean -p dstat /usr/share/dstat
+	py3compile -p dstat  /usr/share/dstat
+fi

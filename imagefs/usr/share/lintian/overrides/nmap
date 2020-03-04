@@ -1,0 +1,6 @@
+# The Network Mapper is a good and concise short description
+description-synopsis-starts-with-article
+
+# false positives
+spelling-error-in-binary usr/bin/nping ment meant
+spelling-error-in-binary usr/bin/nmap ment meant

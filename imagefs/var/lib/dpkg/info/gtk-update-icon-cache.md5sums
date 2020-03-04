@@ -1,0 +1,7 @@
+a1ca5d9c60a6cf0fb688119dd1a7689f  usr/bin/gtk-update-icon-cache
+5228260cfcb02d76bdc8c8f31a42b312  usr/sbin/update-icon-caches
+462252ce98d71b71c9ab7717e9fc4d40  usr/share/doc/gtk-update-icon-cache/AUTHORS
+b8c6fa0327093b2dec345cbfdbc54f20  usr/share/doc/gtk-update-icon-cache/changelog.Debian.gz
+b8f4afee0915449bae10babe906d6eee  usr/share/doc/gtk-update-icon-cache/copyright
+2c3d67152e8c3f3d25bab9d24e88068b  usr/share/man/man1/gtk-update-icon-cache.1.gz
+7a8d5cc34c66f4b3cc0fe1a08067946c  usr/share/man/man8/update-icon-caches.8.gz

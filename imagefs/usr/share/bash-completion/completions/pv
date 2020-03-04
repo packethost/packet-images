@@ -1,0 +1,31 @@
+# pv(1) completion                                         -*- shell-script -*-
+
+_pv()
+{
+    local cur prev words cword
+    _init_completion || return
+
+    case $prev in
+        --help|--version|--last-written|--format|--delay-start|--interval|\
+        --width|--height|--name|--rate-limit|--buffer-size|-!(-*)[hVAFDiwHNLB])
+            return
+            ;;
+        --remote|-!(-*)R)
+            _pids
+            return
+            ;;
+        --pidfile|--watchfd|-!(-*)[Pd])
+            _filedir pid
+            return
+            ;;
+    esac
+
+    if [[ $cur == -* ]]; then
+        COMPREPLY=( $(compgen -W '$(_parse_help "$1")' -- "$cur") )
+    else
+        _filedir
+    fi
+} &&
+complete -F _pv pv
+
+# ex: filetype=sh

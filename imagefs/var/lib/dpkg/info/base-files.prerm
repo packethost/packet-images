@@ -1,0 +1,12 @@
+#!/bin/sh
+set -e
+# Automatically added by dh_systemd_start/12.6.1ubuntu2
+if [ -d /run/systemd/system ]; then
+	deb-systemd-invoke stop 'motd-news.service' >/dev/null || true
+fi
+# End automatically added section
+# Automatically added by dh_systemd_start/12.6.1ubuntu2
+if [ -d /run/systemd/system ]; then
+	deb-systemd-invoke stop 'motd-news.timer' >/dev/null || true
+fi
+# End automatically added section
