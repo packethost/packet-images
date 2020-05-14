@@ -1,0 +1,312 @@
+#!/bin/sh
+
+. /usr/share/debconf/confmodule
+set -e
+
+restore_old_timeouts()
+{
+    if [ -s /run/open-iscsi/upgrade/restore_old_timeouts ] ; then
+        sh /run/open-iscsi/upgrade/restore_old_timeouts || :
+    fi
+    rm -f /run/open-iscsi/upgrade/restore_old_timeouts
+    [ ! -d /run/open-iscsi/upgrade ] || rmdir --ignore-fail-on-non-empty /run/open-iscsi/upgrade
+    [ ! -d /run/open-iscsi ] || rmdir --ignore-fail-on-non-empty /run/open-iscsi
+}
+
+case "$1" in
+    configure)
+        # We switched over to modules-load.d logic, so we have to take
+        # care of this in postinst now.
+        MODULES_FILE=/lib/modules-load.d/open-iscsi.conf
+        if [ -f /etc/modules-load.d/open-iscsi.conf ] ; then
+            MODULES_FILE=/etc/modules-load.d/open-iscsi.conf
+        fi
+        grep '^[^#]' $MODULES_FILE | while read module args ; do
+            [ "$module" ] || continue
+            modprobe $module $args >/dev/null 2>&1 || true
+        done
+
+	# Move old configuration from /etc/ into /etc/iscsi/
+	# But only if configuration in /etc/iscsi is untouched
+	# (FIXME: should this be removed? this is ancient and was
+	# already in Squeeze's postinst - and we don't really need to
+	# support direct upgrades from Lenny (5) to Stretch (9).)
+	
+        if [ -f /etc/initiatorname.iscsi ] ; then
+            if grep -q "^GenerateName=yes" /etc/iscsi/initiatorname.iscsi ; then
+                mv /etc/initiatorname.iscsi /etc/iscsi/initiatorname.iscsi
+		chmod 600 /etc/iscsi/initiatorname.iscsi
+	    fi
+	fi
+
+	if dpkg --compare-versions "$2" le-nl "2.0.873+git0.3b4b4500-12" ; then
+	    # Handle the fact that /etc/iscsi/initiatorname.iscsi is no longer
+	    # a conffile of this package but we want to keep it.
+	    if [ -f /etc/iscsi/initiatorname.iscsi.dpkg-backup ] && ! [ -f /etc/iscsi/initiatorname.iscsi ] ; then
+		mv -f /etc/iscsi/initiatorname.iscsi.dpkg-backup /etc/iscsi/initiatorname.iscsi
+	    fi
+	fi
+
+	# Compatibility symlinks
+	for file in iscsid iscsi_discovery iscsi-iname iscsistart; do
+		if [ ! -e /usr/sbin/$file ]; then
+			ln -s /sbin/$file /usr/sbin/$file
+		fi
+	done
+
+	# Obsolete: only open-iscsi 1.0, never even shipped with any
+	# stable Debian release. But postinst up to Jessie still
+	# created this directory, so keep this until at least Stretch.
+	if [ -d /var/lib/open-iscsi ]; then
+		rmdir --ignore-fail-on-non-empty /var/lib/open-iscsi
+	fi
+
+        # generate a unique iSCSI InitiatorName
+        NAMEFILE=/etc/iscsi/initiatorname.iscsi
+        if [ ! -e $NAMEFILE ] && [ -z "$2" ] ; then
+            # Generate a unique InitiatorName and save it
+            INAME=$(iscsi-iname -p iqn.1993-08.org.debian:01)
+            if [ -n "$INAME" ] ; then
+                echo "## DO NOT EDIT OR REMOVE THIS FILE!" > $NAMEFILE
+                echo "## If you remove this file, the iSCSI daemon will not start." >> $NAMEFILE
+                echo "## If you change the InitiatorName, existing access control lists" >> $NAMEFILE
+                echo "## may reject this initiator.  The InitiatorName must be unique">> $NAMEFILE
+                echo "## for each iSCSI initiator.  Do NOT duplicate iSCSI InitiatorNames." >> $NAMEFILE
+                printf "InitiatorName=%s\n" "$INAME" >> $NAMEFILE
+                chmod 600 $NAMEFILE
+            else
+                echo "Error: failed to generate an iSCSI InitiatorName, driver cannot start."
+                echo
+                exit 1;
+            fi
+        fi
+    ;;
+
+    abort-upgrade|abort-remove|abort-deconfigure)
+    ;;
+
+    *)
+        echo "postinst called with unknown argument \`$1'" >&2
+        exit 1
+    ;;
+esac
+
+# Automatically added by dh_systemd_enable
+# This will only remove masks created by d-s-h on package removal.
+deb-systemd-helper unmask iscsid.service >/dev/null || true
+
+# was-enabled defaults to true, so new installations run enable.
+if deb-systemd-helper --quiet was-enabled iscsid.service; then
+	# Enables the unit on first installation, creates new
+	# symlinks on upgrades if the unit file has changed.
+	deb-systemd-helper enable iscsid.service >/dev/null || true
+else
+	# Update the statefile to add new symlinks (if any), which need to be
+	# cleaned up on purge. Also remove old symlinks.
+	deb-systemd-helper update-state iscsid.service >/dev/null || true
+fi
+# End automatically added section
+# Automatically added by dh_systemd_enable
+# This will only remove masks created by d-s-h on package removal.
+deb-systemd-helper unmask iscsid.service >/dev/null || true
+
+# was-enabled defaults to true, so new installations run enable.
+if deb-systemd-helper --quiet was-enabled iscsid.service; then
+	# Enables the unit on first installation, creates new
+	# symlinks on upgrades if the unit file has changed.
+	deb-systemd-helper enable iscsid.service >/dev/null || true
+else
+	# Update the statefile to add new symlinks (if any), which need to be
+	# cleaned up on purge. Also remove old symlinks.
+	deb-systemd-helper update-state iscsid.service >/dev/null || true
+fi
+# End automatically added section
+# Automatically added by dh_systemd_enable
+# This will only remove masks created by d-s-h on package removal.
+deb-systemd-helper unmask open-iscsi.service >/dev/null || true
+
+# was-enabled defaults to true, so new installations run enable.
+if deb-systemd-helper --quiet was-enabled open-iscsi.service; then
+	# Enables the unit on first installation, creates new
+	# symlinks on upgrades if the unit file has changed.
+	deb-systemd-helper enable open-iscsi.service >/dev/null || true
+else
+	# Update the statefile to add new symlinks (if any), which need to be
+	# cleaned up on purge. Also remove old symlinks.
+	deb-systemd-helper update-state open-iscsi.service >/dev/null || true
+fi
+# End automatically added section
+# Automatically added by dh_installinit
+if [ "$1" = "configure" ] || [ "$1" = "abort-upgrade" ]; then
+	if [ -x "/etc/init.d/iscsid" ]; then
+		update-rc.d iscsid defaults >/dev/null || exit $?
+	fi
+fi
+# End automatically added section
+# Automatically added by dh_installinit
+if [ "$1" = "configure" ] || [ "$1" = "abort-upgrade" ]; then
+	if [ -x "/etc/init.d/open-iscsi" ]; then
+		update-rc.d open-iscsi defaults >/dev/null || exit $?
+	fi
+fi
+# End automatically added section
+# Automatically added by dh_installdeb
+dpkg-maintscript-helper rm_conffile /etc/init.d/umountiscsi.sh 2.0.873+git0.3b4b4500-9 -- "$@"
+# End automatically added section
+
+
+if [ "$1" = configure ] ; then
+    # There already is a check in preinst with a debconf prompt that
+    # allows the administrator to abort. Don't abort here, because
+    # leaving the package in a half-configured state is probably worse.
+    # Just make sure to wait a while to see if recovery happens. If
+    # not, proceed anyway.
+    RETRIES=0
+    while cat /sys/class/iscsi_session/session*/state 2>/dev/null | grep -qv LOGGED_IN ; do
+        if [ $RETRIES -eq 0 ] ; then
+            echo "open-iscsi postinst: since the check in preinst some iSCSI sessions have" >&2
+            echo "                     failed. -> will wait 30s for automatic recovery" >&2
+        fi
+        if [ $RETRIES -gt 30 ]; then
+            echo "open-iscsi postinst: some sessions are still in failed state -> iscsid" >&2
+            echo "                     will be restarted regardless, since that may" >&2
+            echo "                     actually help with the session recovery." >&2
+            break
+        fi
+        RETRIES=$((RETRIES + 1))
+        sleep 1
+    done
+
+    # Before we restart iscsid, we should increase the recovery timeout
+    # significantly. Thanks to Mike Christie (open-iscsi upstream) for
+    # the suggestion. But store the old timeouts and restore them
+    # later.
+    new_timeout=120
+    mkdir -m 0700 -p /run/open-iscsi/upgrade
+    rm -f /run/open-iscsi/upgrade/restore_old_timeouts
+    trap restore_old_timeouts EXIT
+    for settingfile in /sys/class/iscsi_session/session*/recovery_tmo ; do
+        [ -f "${settingfile}" ] || continue
+        setting="$(cat "$settingfile" 2>/dev/null || :)"
+        if [ -n "$setting" ] ; then
+            echo "echo "'"'"${setting}"'"'" > "'"'"${settingfile}"'" 2>/dev/null' >> /run/open-iscsi/upgrade/restore_old_timeouts
+        fi
+        if [ ${new_timeout} -gt ${setting} ] ; then
+            echo ${new_timeout} > "${settingfile}" 2>/dev/null
+        fi
+    done
+
+    # Just in case something goes wrong:
+    sync
+
+    # We are upgrading from a pre-Stretch version of open-iscsi. There,
+    # we only had an open-iscsi init script. Since we now have iscsid
+    # for the daemon (which is and should be restarted on upgrades) and
+    # open-iscsi for logging in to the targets (which shouldn't be
+    # touched on upgrades, especially not restarted, because we don't
+    # want the storage stack to suddenly disappear on package
+    # installation!), we have to manually take care of this.
+    #
+    # Notes:
+    #   - kill iscsid directly, don't use the old stop script, since
+    #     we don't want to sever any connection. Can't use the new
+    #     stop script, because systemd tracks service status. Note
+    #     that services from init scripts have RemainAfterExit=yes, so
+    #     manually killing it is OK with systemd and the open-iscsi
+    #     service will still be considered to be started.
+    #   - use PIDFILE, not killall, since support for namespacing iSCSI
+    #     might come to the kernel soon (maybe 4.2?). Since that will
+    #     require no userspace change, people might run Jessie with a
+    #     backported kernel that supports this, and we REALLY don't
+    #     want to kill iscsid in containers (LXC, nspawn, ...)
+    #
+    # For safety, this upgrade path should be kept until at least
+    # Buster.
+    if dpkg --compare-versions "$2" le-nl "2.0.873+git0.3b4b4500-9"; then
+        # We need to query invoke-rc.d here to comply with Debian's
+        # policy, so we check if the old stop script would have been
+        # executed.
+        set +e
+        invoke-rc.d --query open-iscsi stop
+        POLICY_RC=$?
+        set -e
+        # invoke-rc.d will return 105 if there is no policy-rc.d.
+        # Also, even if there is a policy-rc.d and that returns 105
+        # ('undefined behavior'), invoke-rc.d will assume that it may
+        # in fact execute the action. Therefore, we will treat exit
+        # code 105 the same as exit code 104 here.
+        if [ $POLICY_RC -eq 104 ] || [ $POLICY_RC -eq 105 ] ; then
+            PIDFILE=/var/run/iscsid.pid
+            if ! start-stop-daemon --oknodo --stop --quiet \
+                                   --pidfile "$PIDFILE" \
+                                   --name iscsid --signal TERM \
+                                   --retry 30 ; then
+                # Check if it's still running, as error exit by
+                # start-stop-daemon might not be an actual error.
+                if [ -s $PIDFILE ] && kill -0 `sed -n 1p $PIDFILE` >/dev/null 2>/dev/null ; then
+                    echo "ERROR: Could not terminate old iscsid on upgrade, your system is most" >&2
+                    echo "likely hung. Don't know what to do, sorry! Aborting." >&2
+                    exit 1
+                fi
+            fi
+            rm -f $PIDFILE
+            unset PIDFILE
+        fi
+
+        # Note: 3>&- is required because iscsid doesn't close unused
+        #       FDs, but debconf/confmodule will make the fd 3 point to
+        #       the original stdout (and stdout to stderr) to make sure
+        #       no program accidentally issues a command on stdout. On
+        #       sysvinit systems this combination (iscsid not closing
+        #       fds, fd 3 remaining open) will cause dpkg to wait
+        #       forever for the maintscript to finish. (iscsid keeps
+        #       this end of the pipe open even though the maintscript
+        #       is finished, so dpkg will never receive a POLLHUP on
+        #       its end of the pipe, waiting forever.) Closing fd 3
+        #       here is the simplest solution. This issue does not
+        #       occur with other init systems, since they start
+        #       services in a clean environment without any extraneous
+        #       open fds.
+        invoke-rc.d iscsid start 3>&-
+    else
+        if [ -n "$2" ]; then
+            invoke-rc.d iscsid restart 3>&-
+        else
+            invoke-rc.d iscsid start 3>&-
+        fi
+    fi
+
+    RETRIES=0
+    while cat /sys/class/iscsi_session/session*/state 2>/dev/null | grep -qv LOGGED_IN ; do
+        if [ $RETRIES -eq 0 ]; then
+            echo "open-iscsi postinst: after iscsid restart, waiting for iSCSI sessions" >&2
+            echo "                     to recover. This may take a couple of seconds." >&2
+        fi
+
+        if [ $RETRIES -gt ${new_timeout} ]; then
+            db_reset open-iscsi/upgrade_recovery_error || true
+            db_input critical open-iscsi/upgrade_recovery_error || true
+            db_go
+            break
+        fi
+
+        RETRIES=$((RETRIES + 1))
+        sleep 1
+    done
+
+    restore_old_timeouts
+    trap - EXIT
+
+    # Don't restart (and therefore stop) open-iscsi, because we don't
+    # want to logout from targets during a simple upgrade. But also,
+    # if for some reason there's some misconfigured target in the
+    # config that couldn't be activated, don't break postinst, so
+    # ignore the exit code.
+    # See above for why 3>&- is here. (Technically it's not required
+    # for postinst to work, but vgchange likes to complain about leaked
+    # file descriptors, and we don't need to show that message to the
+    # user.)
+    invoke-rc.d open-iscsi start 3>&- || true
+fi
+
+exit 0

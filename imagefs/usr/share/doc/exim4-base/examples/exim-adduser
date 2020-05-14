@@ -1,0 +1,52 @@
+#!/usr/bin/perl
+
+# Stitched together by Andreas Metzler, really too trivial to be copyrightable.
+
+use strict;
+use warnings;
+my $user;
+my $passwd;
+my $file;
+my $rand;
+
+if (@ARGV == 0) {
+  $file="/etc/exim4/passwd";
+} else {
+  $file=$ARGV[0];
+}
+
+open(PWDFILE,">>$file") || die("Couldn't append to file '$file': $!");
+
+print "User: ";
+chop($user = <STDIN>);
+print "Password: ";
+chop($passwd = <STDIN>);
+
+$rand = join '', ('.', '/', 0..9, 'A'..'Z', 'a'..'z')[rand 64, rand 64, rand 64, rand 64];
+print PWDFILE $user . ":" . crypt($passwd, q{$1$} . $rand . q{$}) . ":" . $passwd . "\n";
+close(PWDFILE);
+
+__END__
+
+=head1 NAME
+
+exim-adduser - Add username/password to exim password-file.
+
+=head1 USAGE
+
+exim-adduser [filename]
+
+exim-adduser prompts for username and password and adds
+
+username:crypted-password:cleartext-password
+
+to the given file, if no filename is given /etc/exim4/passwd is used.
+
+=head1 BUGS
+
+Probably many, this really is just example code.
+
+=head1 SEE ALSO
+
+/usr/share/doc/exim4-base/*,
+exim4(8)

@@ -1,0 +1,69 @@
+           GNU LIBUNISTRING - Unicode string library
+
+This library provides functions for manipulating Unicode strings and
+for manipulating C strings according to the Unicode standard.
+
+It consists of the following parts:
+
+  unistr.h     elementary string functions
+  uniconv.h    conversion from/to legacy encodings
+  unistdio.h   formatted output to strings
+  uniname.h    character names
+  unictype.h   character classification and properties
+  uniwidth.h   string width when using nonproportional fonts
+  uniwbrk.h    word breaks
+  unilbrk.h    line breaking algorithm
+  uninorm.h    normalization (composition and decomposition)
+  unicase.h    case folding
+  uniregex.h   regular expressions (not yet implemented)
+
+libunistring is for you if your application involves non-trivial text
+processing, such as upper/lower case conversions, line breaking, operations
+on words, or more advanced analysis of text. Text provided by the user can,
+in general, contain characters of all kinds of scripts. The text processing
+functions provided by this library handle all scripts and all languages.
+
+libunistring is for you if your application already uses the ISO C / POSIX
+<ctype.h>, <wctype.h> functions and the text it operates on is provided by
+the user and can be in any language.
+
+libunistring is also for you if your application uses Unicode strings as
+internal in-memory representation.
+
+
+Installation
+------------
+
+As usual for GNU packages:
+
+    $ ./configure --prefix=/usr/local
+    $ make
+    $ make install
+
+
+Copyright
+---------
+
+The libunistring library and its header files are under the GNU LGPL, see
+file COPYING.LIB.  This license is based on the GNU GPL, see file COPYING.
+
+The documentation is under another license; see in the documentation.
+
+
+Download
+--------
+
+    http://ftp.gnu.org/gnu/libunistring/libunistring-0.9.3.tar.gz
+
+Homepage
+--------
+
+    http://www.gnu.org/software/libunistring/
+
+Bug reports to
+--------------
+
+    <bug-libunistring@gnu.org>
+
+
+Bruno Haible <bruno@clisp.org>

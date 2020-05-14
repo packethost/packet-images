@@ -1,0 +1,9 @@
+auto
+/usr/bin/movemail
+movemail.1.gz
+/usr/share/man/man1/movemail.1.gz
+
+/usr/bin/movemail.mailutils
+20
+/usr/share/man/man1/movemail.mailutils.1.gz
+

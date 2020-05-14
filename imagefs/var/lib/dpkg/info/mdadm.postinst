@@ -1,0 +1,129 @@
+#!/bin/sh
+# Copyright © 2001-2005 Mario Jou/3en <joussen@debian.org>
+# Copyright © 2005-2008 Martin F. Krafft <madduck@debian.org>
+# Distributable under the terms of the GNU GPL version 2.
+#
+set -e
+
+. /usr/share/debconf/confmodule
+
+case "${1:-}" in
+  configure|reconfigure)
+
+    if [ ! -f /proc/mdstat ] && [ -x $(command -v modprobe 2>/dev/null) ]; then
+      modprobe md >/dev/null 2>&1 || :
+    fi
+    if [ ! -f /proc/mdstat ]; then
+      echo 'W: mdadm: failed to load MD subsystem.' >&2
+    fi
+
+    DEBIANCONFIG=/etc/default/mdadm
+    CONFIG=/etc/mdadm/mdadm.conf
+    ALTCONFIG=/etc/mdadm.conf
+    MDADM=/sbin/mdadm
+
+    # load current settings, most of which will be overwritten.
+    [ -f $DEBIANCONFIG ] && . $DEBIANCONFIG
+
+    db_get mdadm/mail_to
+    MAILADDR="${RET:-root}"
+
+    [ ! -f $CONFIG ] && [ -f $ALTCONFIG ] && CONFIG=$ALTCONFIG
+    if [ ! -f $CONFIG ]; then
+      echo -n 'Generating mdadm.conf... ' >&2
+      # pass the MAILADDR variable into the script
+      MDADM_MAILADDR__="$MAILADDR"; export MDADM_MAILADDR__
+      if /usr/share/mdadm/mkconf generate $CONFIG 2>/dev/null; then
+        echo done. >&2
+      else
+        echo "done (failed to scan arrays; /proc probably not mounted)." >&2
+      fi
+    fi
+
+    if [ -w $CONFIG ] && [ -z "${MDADM_MAILADDR__:-}" ]; then
+      # if the configuration is writeable but has not been written just
+      # before, then edit it to reflect the MAILADDR preference
+      if grep -q '^MAILADDR' $CONFIG; then
+        sed -i -e "s/^MAILADDR.*/MAILADDR $MAILADDR/" $CONFIG
+      else
+        echo "MAILADDR $MAILADDR" >> $CONFIG
+      fi
+    fi
+    unset MDADM_MAILADDR__
+
+    db_get mdadm/autocheck
+    AUTOCHECK="${RET:-true}"
+    db_get mdadm/start_daemon
+    START_DAEMON="${RET:-true}"
+    #db_get mdadm/daemon_options
+    [ -n "${DAEMON_OPTIONS:-}" ] || DAEMON_OPTIONS='--syslog'
+
+    cat <<_eof > $DEBIANCONFIG
+# mdadm Debian configuration
+#
+# You can run 'dpkg-reconfigure mdadm' to modify the values in this file, if
+# you want. You can also change the values here and changes will be preserved.
+# Do note that only the values are preserved; the rest of the file is
+# rewritten.
+#
+
+# AUTOCHECK:
+#   should mdadm run periodic redundancy checks over your arrays? See
+#   /etc/cron.d/mdadm.
+AUTOCHECK=$AUTOCHECK
+
+# START_DAEMON:
+#   should mdadm start the MD monitoring daemon during boot?
+START_DAEMON=$START_DAEMON
+
+# DAEMON_OPTIONS:
+#   additional options to pass to the daemon.
+DAEMON_OPTIONS="$DAEMON_OPTIONS"
+
+# VERBOSE:
+#   if this variable is set to true, mdadm will be a little more verbose e.g.
+#   when creating the initramfs.
+VERBOSE=${VERBOSE:-false}
+_eof
+
+    db_stop
+
+    # Remove old init script
+    update-rc.d mdadm-raid remove
+    
+    command -v update-initramfs >/dev/null 2>&1 && update-initramfs -u
+
+    if command -v update-grub2 >/dev/null 2>&1; then
+        update-grub || true
+    fi
+
+    if dpkg --compare-versions "$2" le 3.3.2-3; then
+      rm -f /var/lib/mdadm/CONF-UNCHECKED /var/lib/mdadm/mdadm.conf-generated
+      if [ -d /var/lib/mdadm ]; then
+        rmdir --ignore-fail-on-non-empty /var/lib/mdadm
+      fi
+    fi
+    ;;
+esac
+
+[ -d /run/systemd/system ] && systemctl --system daemon-reload >/dev/null || :
+
+# Automatically added by dh_installinit
+if [ "$1" = "configure" ] || [ "$1" = "abort-upgrade" ]; then
+	if [ -x "/etc/init.d/mdadm-waitidle" ]; then
+		update-rc.d mdadm-waitidle stop 98 0 6 . >/dev/null || exit $?
+	fi
+fi
+# End automatically added section
+# Automatically added by dh_installinit
+if [ "$1" = "configure" ] || [ "$1" = "abort-upgrade" ]; then
+	if [ -x "/etc/init.d/mdadm" ]; then
+		update-rc.d mdadm defaults 25 >/dev/null
+		invoke-rc.d mdadm start || exit $?
+	fi
+fi
+# End automatically added section
+# Automatically added by dh_installdeb
+dpkg-maintscript-helper rm_conffile /etc/init.d/mdadm-raid 3.4-2~ -- "$@"
+# End automatically added section
+

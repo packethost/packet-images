@@ -1,0 +1,13 @@
+/.
+/lib
+/lib/x86_64-linux-gnu
+/lib/x86_64-linux-gnu/libe2p.so.2.3
+/lib/x86_64-linux-gnu/libext2fs.so.2.4
+/usr
+/usr/share
+/usr/share/doc
+/usr/share/doc/e2fslibs
+/usr/share/doc/e2fslibs/changelog.Debian.gz
+/usr/share/doc/e2fslibs/copyright
+/lib/x86_64-linux-gnu/libe2p.so.2
+/lib/x86_64-linux-gnu/libext2fs.so.2

@@ -1,0 +1,313 @@
+Template: exim4/purge_spool
+Type: boolean
+Default: false
+Description: Remove undelivered messages in spool directory?
+ There are e-mail messages in the Exim spool directory
+ /var/spool/exim4/input/ which have not yet been delivered. Removing
+ Exim will cause them to remain undelivered until Exim is re-installed.
+ .
+ If this option is not chosen, the spool directory is kept, allowing
+ the messages in the queue to be delivered at a later date after
+ Exim is re-installed.
+Description-ar.UTF-8: هل تريد إزالة البريد الغير موصل في مجلّد الصّف؟
+ هناك بريدٌ في مجلّد صفّ Exim /var/spool/exim4/input لم يوصل بعد. ستتسبب إزالة Exim ببقاء هذه الرسائل دون ايصال حتى تتم إعادة تثبيت Exim.
+ .
+ إن لم يتم اختيار هذا الخيار، فسيتم الإبقاء على دليل الصفّ، مما يسمح للرسائل بالوصول في وقت لاحق بعد إعادة تثبيت Exim.
+Description-ast.UTF-8: ¿Desaniciar los mensaxes non entregaos del direutoriu de la cola de corréu?
+ Hai mensaxes nel direutoriu de la cola de corréu de exim /var/spool/exim4/input/ que nun se entregaren entá. Si desinstales Exim estos nun podrán unviase fasta que lo reinstale.
+ .
+ Caltendráse'l direutoriu de coles si nun escueyes esta opción, lo que te permitirá xestionar los mensaxes encolaos más alantre dempués de reinstalar Exim.
+Description-be.UTF-8: Ці выдаліць недасланыя паведамленні з чаргі?
+ У дырэкторыі чаргі Exim (/var/spool/exim4/input/) ёсць e-mail паведамленні, што яшчэ недасланы. Выдаленне Exim спрычыніць іх застацца недасланымі, пакуль Exim не будзе ўсталяваны зноў.
+ .
+ Калі не згадзіцеся, дырэкторыя чаргі будзе пакінута, што дазволіць паведамленням у чарзе быць дасланымі пасля таго, як Exim будзе пераўсталяваны.
+Description-bg.UTF-8: Премахване на неизпратената поща от опашката?
+ В директорията /var/spool/exim4/input/ има поща, която още не е изпратена. Премахването на Exim ще остави тази поща да чака, докато не инсталирате Exim отново.
+ .
+ Ако изберете да запазите опашката, съобщенията в нея ще бъдат доставени при последваща нова инсталация на Exim.
+Description-bn.UTF-8: স্পুল ডিরেক্টরির অপ্রেরিত বার্তা মুছে ফেলা হবে?
+ এক্সিম স্পুল ডিরেক্টরি /var/spool/exim4/input/ তে অপ্রেরিত ই-মেইল বার্তা আছে। এক্সিম মুছে দিলে এগুলো অপ্রেরিতই রয়ে যাবে, যতক্ষন পর্যন্ত এক্সিম পুনরায় ইন্সটল না করা হয়।
+ .
+ যদি এই পছন্দটি নির্বাচন করা হয়, স্পুল ডিরেক্টরি রেখে দেয়া হবে, এতে বার্তাগুলো রয়ে যাবে যেন এগুলো পরবর্তীবার এক্সিম ইন্সটল করা হলে প্রেরন করার জন্য সংরক্ষন করা যায়।
+Description-ca.UTF-8: Voleu suprimir els missatges no enviats del directori de gestió de cues?
+ Hi ha missatges de correu al directori de gestió de cues de l'Exim /var/spool/exim4/input/ que encara no s'han enviat. Si elimineu l'Exim, romandran sense enviar fins que es reinstal·le l'Exim.
+ .
+ Si no es tria aquesta opció, es mantindrà el directori de gestió de cues, permetent que els missatges a la cua s'envien en el futur després de reinstal·lar l'Exim.
+Description-cs.UTF-8: Odstranit nedoručenou poštu z adresáře spool?
+ Ve spool adresáři Eximu /var/spool/exim4/input se nachází dosud nedoručená pošta. Odstraněním Eximu způsobíte, že zůstane nedoručená do doby, než Exim znovu nainstalujete.
+ .
+ Odmítnete-li tuto možnost, bude adresář s nedoručenou poštou zachován, což vám umožní doručit zprávy později, až se rozhodnete Exim znovu nainstalovat.
+Description-da.UTF-8: Fjern ikke-leverede breve i kø-mappen?
+ Der er e-post i exims kø-mappe /var/spool/exim4/input, som ikke er blevet leveret endnu. Hvis du fjerner Exim, vil de ikke blive leveret, før Exim bliver geninstalleret.
+ .
+ Hvis denne indstilling ikke bliver valgt, vil kø-mappen blive bevaret, så brevene i køen bliver leveret senere, når Exim er geninstalleret.
+Description-de.UTF-8: Nicht zugestellte E-Mails im »spool«-Verzeichnis löschen?
+ In Exims »spool«-Verzeichnis /var/spool/exim4/input/ befinden sich noch E-Mails, die noch nicht zugestellt wurden. Wenn Sie Exim entfernen, verbleiben sie dort als nicht zugestellt, bis Exim wieder installiert wird.
+ .
+ Wenn Sie dieser Auswahl nicht zustimmen, bleibt das »spool«-Verzeichnis bestehen. Dadurch können die Mitteilungen in der Warteschlange später zugestellt werden, nachdem Exim wieder installiert wurde.
+Description-dz.UTF-8: འཕྲལ་གསོག་སྣོད་ཐོ་ནང་ལུ་ མ་སྐྱེལ་བ་ཡོད་མི་ཡིག་འཕྲིན་ཚུ་ རྩ་བསྐྲད་གཏང་ནི་ཨིན་ན?
+ ཨེག་ཟིམ་འཕྲལ་གསོག་སྣོད་ཐོ་ /var/spool/exim4/input/  ནང་ལུ་ ད་ལྟོ་ཡང་མ་སྐྱེལ་བ་ཡོད་མི་ཡིག་འཕྲིན་ཚུ་འདུག ཨེག་ཟིམ་རྩ་བསྐྲད་བཏང་མི་འདི་གིས་ དེ་ཚུ་ཨེག་ཟིམ་སླར་གཞི་སྒྲིག་མ་འབད་ཚུན་ འགྲེམ་སྤེལ་མ་འབད་བར་ལུསཔ་ཨིན།
+ .
+ གདམ་ཁ་འདི་མ་གདམ་པ་ཅིན་ འཕྲལ་གསོག་སྣོད་ཐོ་འདི་  ཨེག་ཟིམ་སླར་གཞི་བཙུགས་འབད་བའི་ཤུལ་ལུ་ གྲལ་རིམ་ནང་ཡོད་པའི་འཕྲིན་དོན་ཚུ་ འགྲེམ་སྤེལ་འབད་བཅུགཔ་ཨིན།
+Description-el.UTF-8: Διαγραφή των μηνυμάτων στον κατάλογο spool που δεν έχουν παραδοθεί;
+ Υπάρχουν μηνύματα στον κατάλογο spool του Exim /var/spool/exim4/input/ που δεν έχουν παραδοθεί ακόμη. Η αφαίρεση του Exim θα έχει σαν αποτέλεσμα την μη παράδοσή τους μέχρι την επανεγκατάστασή του.
+ .
+ Αν δεν κάνετε αυτή την επιλογή, ο κατάλογος spool θα διατηρηθεί, επιτρέποντας την παράδοση των μηνυμάτων που βρίσκονται στην ουρά σε μια μεταγενέστερη χρονική στιγμή, μετά την επανεγκατάσταση του Exim.
+Description-eo.UTF-8: Ĉu forviŝi ne disdonitajn mesaĝojn el la bufra dosierujo 'spool'?
+ Ekzistas retpoŝtaj mesaĝoj en la bufra dosierujo '/var/spool/exim4/input' kiuj ne estis disdonitaj. Se vi forviŝos la programon 'Exim', ili ne estos disdonitaj, ĝis kiam 'Exim' estu re-instalita.
+ .
+ Se vi ne elektas ĉi tiun opcion, la dosierujo 'spool' estos tenita. Tio ebligos disdoni la vicigitajn atendantajn retmesaĝojn post la reinstalado de 'Exim'.
+Description-es.UTF-8: ¿Eliminar los mensajes no entregados del directorio de la cola de correo?
+ Hay mensajes en el directorio de la cola de correo de exim «/var/spool/exim4/input/» que no se han entregado todavía. Si desinstala Exim estos no podrán enviarse hasta que lo reinstale.
+ .
+ Se mantendrá el directorio de colas si no elige esta opción, lo que permitirá gestionar los mensajes encolados más adelante después de reinstalar Exim.
+Description-eu.UTF-8: Ezabatu bidaligabeko hilara direktorioko ePostak?
+ Oraindik bidali ez diren ePostak daude /var/spool/exim4/input exim hilara direktorioan. Exim ezabatzeak hauek exim berriz instalatu arte bidali gabe geratzea eragingo du.
+ .
+ Aukera hau ez hautatu ezkero, ilara direktorioa mantendu egingo da, mezu ilara beranduago exim instalatzen denean bidaltzeko aukera emanez.
+Description-fi.UTF-8: Poistetaanko jonosta viestit, joita ei ole toimitettu perille?
+ Exim-ohjelman viestijonossa hakemistossa /var/spool/exim4/input on viestejä, joita ei ole vielä toimitettu perille. Kun Exim poistetaan, niitä ei toimiteta perille ennen kuin Exim asennetaan uudelleen.
+ .
+ Jos tätä ei valita, viestijono säilytetään. Tällöin jonon viestit voidaan toimittaa perille myöhemmin kun Exim on asennettu uudelleen.
+Description-fr.UTF-8: Faut-il supprimer les courriers non distribués du tampon d'envoi ?
+ Des courriers électroniques non distribués ont été trouvés dans le tampon d'envoi d'Exim (/var/spool/exim4/input). Si vous supprimez Exim, ils ne seront pas distribués tant qu'il ne sera pas réinstallé.
+ .
+ Si vous refusez cette option, le tampon d'envoi sera conservé, ce qui permettra de distribuer les messages de la file d'attente lors de la réinstallation d'Exim.
+Description-gl.UTF-8: ¿Borrar as mensaxes sen enviar do directorio de traballo?
+ Hai mensaxes no directorio de traballo de Exim, /var/spool/exim4/input/, que aínda non se entregaron. Se elimina Exim ha facer que queden sen entregar ata que reinstale Exim.
+ .
+ Se non se escolle esta opción consérvase o directorio de traballo, o que permite que as mensaxes da cola se envíen nunha data posterior despois de reinstalar Exim.
+Description-he.UTF-8: להסיר דואר שלא הועבר מה-spool?
+ ישנן הודעות שלא נשלחו ב-spool של exim שנמצא בספריה  /var/spool/exim4/input. הסרה של Exim תגרום להם להישאר במצב זה עד התקנה מחדש של Exim.
+ .
+ אם אפשרות זאת אינה נבחרת, ספריית ה-spool תשמר, ובכך תתאפשר שליחה של הודעות שנמצאות בתור השליחה לאחר התקנה מחדש של Exim.
+Description-hr.UTF-8: Ukloni neposlane poruke iz 'spool' direktorija?
+ Postoje poruke e-pošte u Eximovom 'spool' direktoriju /var/spool/exim4/input koje još nisu isporučene. Uklanjanjem Exima će one ostati neisporučene dok se Exim ne instalira ponovo.
+ .
+ Ako ne odaberete ovu opciju, 'spool' direktorij će biti očuvan, što će omogućiti porukama koje čekaju u redu da se isporuče kasnije, nakon reinstalacije Exima.
+Description-id.UTF-8: Hapus surat-surat yang tak terkirim dalam direktori spool?
+ Ada surat-surat di direktori spool milik exim, /var/spool/exim4/input, yang belum terkirim. Membuang Exim akan meyebabkan surat-surat tersebut tak terkirim sampai Exim terpasang kembali.
+ .
+ Jika pilihan ini tidak diambil, direktori spool tak disentuh, sehingga pesan-pesan di dalamnya dapat dikirimkan kembali setelah Exim dipasang-ulang.
+Description-it.UTF-8: Cancellare i messaggi non consegnati dalla directory di «spool»?
+ Ci sono dei messaggi nella directory di «spool» di Exim, /var/spool/exim4/input che non sono stati ancora consegnati. Rimuovendo Exim i messaggi verranno mantenuti lì sinché Exim non verrà reinstallato.
+ .
+ Se questa opzione non è selezionata, la directory di «spool» viene conservata in modo che i messaggi possano essere consegnati in futuro, dopo una nuova installazione di Exim.
+Description-ja.UTF-8: スプールディレクトリにある未配送のメッセージを削除しますか?
+ exim スプールディレクトリ /var/spool/exim4/input にまだ配送されていないメールメッセージがあります。Exim を削除すると、Exim が再インストールされるまでこれらは未配送のままとなります。
+ .
+ この選択肢に「はい」と答えない場合、後日 Exim を再インストールしたあと、キューにあるメッセージを許可するよう、スプールディレクトリは保持されます。
+Description-kk.UTF-8: Спул бумасындағы жеткізілмеген хабардың жойылуын қалайсыз ба?
+ Exim спул бумасында (/var/spool/exim4/input/) әлі жеткізілмеген хабарлар бар. Exim жойылуы олардың жеткізілмеген күйде қалуына әкеледі.
+ .
+ Бұл опция таңдалмаса, спул бумасы сақталады. Кейін Exim қайта орнатылғанда, кезекте тұрған хабарлар жеткізіле алады.
+Description-km.UTF-8: យក​សារ​ដែលមិនបានផ្ដល់​ចេញ​នៅ​ក្នុង​ថត​ហុង ?
+ មាន​សារ​អ៊ីមែល​មួយ​នៅ​ក្នុង​ថត​ហុង Exim  /var/spool/exim4/input/ ដែល​មិន​ត្រូវ​បានបញ្ជូននៅ​ឡើយទេ ។ ការ​យក​ Exim នឹង​បណ្ដាល​ឲ្យ​ពួកវា​នៅតែ​មិនបានបញ្ជូន​រហូត​ដល់ Exim ត្រូវ​បាន​ដំឡើង​ម្ដង​ទៀត ។
+ .
+ ប្រសិន​បើ​ជម្រើស​នេះ​មិន​ត្រូវ​បាន​ជ្រើស ថត​ហុង​ត្រូវ​ត្រូវ​បាន​រក្សាទុក សារ​ដូច​ខាង​ក្រោម​នេះ​នៅ​ក្នុងជួរ​ត្រូវ​បញ្ជូន​ពេលក្រោយ​បន្ទាប់​ពី Exim ត្រូវ​បាន​ដំឡើង​ឡើង​វិញ ។
+Description-ko.UTF-8: 스풀 디렉토리의 배달하지 않은 메일을 지우시겠습니까?
+ exim의 스풀 디렉토리인 /var/spool/exim4/input/에 아직 배달하지 않은 메일이 들어있습니다. exim을 지우면 exim을 다시 설치할 때까지는 이 메일은 배달되지 않은 상태로 있을 것입니다.
+ .
+ 이 옵션을 선택하지 않으면 스풀 디렉토리를 그대로 둡니다. 나중에 exim을 다시 설치할 때 배달하지 않은 메시지를 다시 배달할 수 있습니다.
+Description-lt.UTF-8: Ar pašalinti neišsiųstus laiškus iš pašto eilės (spool) aplanko?
+ Pašto eilės (spool) aplanke /var/spool/exim4/input yra neišsiųstų laiškų. Jei dabar išinstaliuosite Exim, jie nebus išsiųsti tol, kol vėl instaliuosite Exim.
+ .
+ Jei šis nustatymas nepasirinktas, pašto eilės katalogas paliekamas neištrintas, todėl jame esantys laiškai gali būti išsiųsti vėliau iš naujo instaliavus Exim.
+Description-ml.UTF-8: സ്പൂള്‍ തട്ടിലുള്ള എത്തിക്കാന്‍ പറ്റാത്ത കത്തുകള്‍ നീക്കണോ?
+ എക്സിമിന്റെ സ്പൂള്‍ തട്ടായ /var/spool/exim4/input ല്‍ ഇതു വരെ എത്തിയ്ക്കാത്ത കത്തുകളുണ്ടു്. എക്സിം നീക്കുന്നതു് അവ എക്സിം വീണ്ടും ഇന്‍സ്റ്റോള്‍ ചെയ്യുന്നതു് വരെ എത്തിയ്ക്കാത്തതായി നിര്‍ത്തും.
+ .
+ ഈ ഐച്ഛികം തെരഞ്ഞെടുത്തിട്ടില്ലെങ്കില്‍ സ്പൂള്‍ തട്ടു് പിന്നീടൊരു ദിവസം എക്സിം വീണ്ടും ഇന്‍സ്റ്റോള്‍ചെയ്തതിനു് ശേഷം വരിയിലുള്ള സന്ദേശങ്ങള്‍ എത്തിക്കുന്നതിനു് അനുവദിച്ചുകൊണ്ടു് സൂക്ഷിക്കുന്നതാണു്.
+Description-mr.UTF-8: स्पूल निर्देशिकेतील अजून पोचती न झालेली पत्रे काढून टाकायची?
+ एक्झिम निर्देशिका /व्हार/स्पूल/एक्झिम४/निवेश मधे काही अजून पोचती न झालेली पत्रे आहेत. आपण पुढे कधीतरी एक्झिम परत अधिष्ठापन करणार असल्यास ही पत्रे तशीच ठेऊ शकता, किंवा आपण ती काढून टाकू शकता.
+ .
+ जर हा पर्याय निवडला नाही, तर स्पूल निर्देशिका ठेवली जाते, ज्यामुळे रांगेतील संदेश नंतरच्या
+Description-nb.UTF-8: Fjern ikke-levert e-post i køkatalogen?
+ Det finnes e-post i Exims køkatalog /var/spool/exim4/input/ som ennå ikke er blitt levert. Sletter du Exim, blir de liggende i køen til Exim er installert på nytt.
+ .
+ Hvis dette valget ikke er krysset av, blir køkatalogen beholdt, slik at meldingene i køen kan sendes senere etter at Exim er installert på nytt.
+Description-ne.UTF-8: स्पूल डाइरेक्ट्रीमा हस्तान्तरण नभएका पत्रहरू हटाउनुहुन्छ ?
+ त्यहाँ एक्जिम स्पूल डाइरेक्ट्री /var/spool/exim4/input मा पत्रहरू छन् जुन अहिले सम्म हस्तान्तरण भएको छैन । एक्जिम हटाउँनाले तिनीहरू एक्जिम पुन-स्थापना नभए सम्म हस्तान्तरण हुने छैन ।
+ .
+ यदि यो विकल्प रोज्नु भएन भने, एक्जिम पुन: स्थापना गरेपछि पछिल्लो मितिमा हस्तान्तरण गर्न लाममा सन्देशहरूलाई अनुमति दिएर, स्पूल डाइरेक्टरी राखिन्छ ।
+Description-nl.UTF-8: Niet afgeleverde berichten uit de spoolmap verwijderen?
+ Er zijn nog niet-afgeleverde berichten in de exim spoolmap (/var/spool/exim4/input). Verwijderen van Exim zal tot gevolg hebben dat deze onafgeleverd blijven totdat Exim opnieuw geïnstalleerd is.
+ .
+ Tenzij u voor deze optie kiest wordt de spoolmap behouden. Hierdoor zullen berichten in de wachtrij later, na herinstallatie van Exim, alsnog afgeleverd worden.
+Description-nn.UTF-8: Fjerne e-post som ikkje er sendt frå kømappa?
+ I kømappa til exim /var/spool/exim4/input/ er det framleis e-post som ikkje er levert enno. Ved å fjerne Exim vil desse forbli ulevert fram til Exim blir installert igjen.
+ .
+ Viss dette ikkje er valt, vil kømappa bli lagt igjen. Meldingane i kømappa kan då bli levert ved eit seinare høve etter ein reinstallasjon av Exim.
+Description-no.UTF-8: Fjern ikke-levert e-post i køkatalogen?
+ Det finnes e-post i Exims køkatalog /var/spool/exim4/input/ som ennå ikke er blitt levert. Sletter du Exim, blir de liggende i køen til Exim er installert på nytt.
+ .
+ Hvis dette valget ikke er krysset av, blir køkatalogen beholdt, slik at meldingene i køen kan sendes senere etter at Exim er installert på nytt.
+Description-pa.UTF-8: ਕੀ spool ਡਾਇਰੈਕਟਰੀ ਵਿੱਚੋਂ ਨਾ-ਭੇਜੇ ਪੱਤਰ ਹਟਾਉਣੇ ਹਨ?
+ Exim ਸਪੂਲ ਡਾਇਰੈਕਟਰੀ /var/spool/exim4/input ਵਿੱਚ ਪੱਤਰ ਹਨ, ਜੋ ਕਿ ਅਜੇ ਤੱਕ ਭੇਜੇ ਨਹੀਂ ਗਏ ਹਨ। Exim ਨੂੰ ਹਟਾਉਣ ਨਾਲ ਉਹ ਬਿਨ-ਭੇਜੇ ਹੀ ਪਏ ਰਹਿਣਗੇ, ਜਦੋਂ ਤੱਕ ਕਿ Exim ਨੂੰ ਮੁੜ ਇੰਸਟਾਲ ਨਹੀਂ ਕੀਤਾ ਜਾਂਦਾ ਹੈ।
+ .
+ ਜੇ ਇਹ ਚੋਣ ਨਾ ਕੀਤੀ ਗਈ ਤਾਂ, spool ਡਾਇਰੈਕਟਰੀ ਰੱਖੀ ਜਾਵੇਗੀ, Exim ਦੇ ਮੁੜ-ਇੰਸਟਾਲ ਹੋਣ ਬਾਅਦ ਕਿਸੇ ਵੀ ਮਿਤੀ ਵਿੱਚ ਪੱਤਰ ਭੇਜਣ ਲਈ ਕਤਾਰ 'ਚ ਸੁਨੇਹੇ ਰੱਖੇ ਜਾਣਗੇ।
+Description-pl.UTF-8: Usunąć niedostarczoną pocztę z katalogu kolejki?
+ W katalogu kolejki exima /var/spool/exim4/input istnieją wiadomości, które nie zostały jeszcze dostarczone. Po usunięciu exima będą tam leżały niedostarczone, aż do ponownej jego instalacji.
+ .
+ Jeśli nie wybierzesz tej opcji, katalog kolejki nie zostanie usunięty, co pozwoli na dostarczenie oczekujących wiadomości w przyszłości, jeśli Exim zostanie ponownie zainstalowany.
+Description-pt.UTF-8: Remover mensagens não entregues no directório de spool?
+ Existem mensagens de e-mail no directório de spool do Exim /var/spool/exim4/input/ que ainda não foram entregues. Remover o Exim irá fazer com que fiquem por entregar até o Exim ser reinstalado.
+ .
+ Se esta opção não for escolhida, o directório de spool é mantido, permitindo que as mensagens na fila de espera sejam entregues posteriormente após o Exim ser reinstalado.
+Description-pt_BR.UTF-8: Remover mensagens não entregues no diretório de spool?
+ Existem mensagens no diretório de spool do exim, /var/spool/exim4/input que ainda não foram entregues. Remover o Exim fará com que as mesmas permaneçam não entregues até que o Exim seja reinstalado.
+ .
+ Se esta opção não for escolhida, o diretório de spool será mantido, permitindo que as mensagens na fila sejam entregues posteriormente, após a reinstalação do Exim.
+Description-ro.UTF-8: Se șterg mesajele nelivrate din directorul „spool”?
+ În directorul „spool” al lui Exim, /var/spool/exim4/input, se află mesaje care nu au fost livrate încă. Dacă Exim este șters, acestea vor rămâne nelivrate până la reinstalarea lui Exim.
+ .
+ Dacă nu se alege această opțiune, directorul „spool” este păstrat, permițând mesajelor din coada de așteptare să fie livrate la o dată ulterioară, după reinstalarea lui Exim.
+Description-ru.UTF-8: Удалить недоставленную почту из каталога почтовой очереди?
+ В каталоге почтовой очереди Exim /var/spool/exim4/input есть почта, которая пока не была доставлена. Если Exim будет удалён, то она так и не будет доставлена, пока Exim не будет установлен снова.
+ .
+ Если этот параметр не выбран, то каталог почтовой очереди будет сохранён, что позволит доставить сообщения в очереди позже, после переустановки Exim.
+Description-sk.UTF-8: Odstrániť nedoručené správy z adresára spool?
+ V Exim spool adresári /var/spool/exim4/input sa nachádzajú doposiaľ nedoručené správy. Odstránenie Exim-u spôsobí ich nedoručenie, až kým sa Exim nepreinštaluje.
+ .
+ Ak sa nezvolí táto možnosť, tak sa spool adresár ponechá a pošty vo fronte sa môžu doručiť neskôr po preinštalovaní Exim-u.
+Description-sq.UTF-8: T'i fshij mesazhet e pashpërndarë nga dosja spool?
+ Ka mesazhe e-mail në dosjen spool /var/spool/exim4/input që ende nuk janë shpërndarë. Nëse heq Exim këto mesazhe do mbesin të padërguar deri kur Exim do të reinstalohet.
+ .
+ Nëse kjo mundësi nuk zgjidhet, dosja spool ruhet, duke lejuar që mesazhet në rradhe të dërgohen në një datë të mëvonshme pas reinstalimit të Exim.
+Description-sv.UTF-8: Ta bort olevererade meddelanden i kökatalogen?
+ Det finns e-postmeddelanden i Exims kökatalog /var/spool/exim4/input som ännu inte har levererats. Borttagning av Exim gör att de finns kvar men blir inte levererade förrän Exim har installerats om.
+ .
+ Om det här alternativet inte väljs kommer kökatalogen att behållas och gör att meddelanden i kön kan levereras vid ett senare tillfälle, efter att Exim har installerats om.
+Description-ta.UTF-8: கண்டு அடைவிலிருந்து சேர்ப்பிக்கப் படாத அஞ்சல்களை நீக்கவா? 
+ எக்ஸ் இம் கண்டு அடைவு /var/spool/exim4/input இல் இது வரை சேர்ப்பிக்கப் படாத சில அஞ்சல்கள் உள்ளன. எக்ஸ் இம் ஐ நீக்குவதால் அவை எக்ஸ் இம் ஐ மீண்டும் நிறுவும் வரை சேர்ப்பிக்கப் படாமலே இருக்கும். 
+ .
+ இந்த தேர்வை தேர்ந்தெடுக்கவில்லையானால் கண்டு அடைவு அப்படியே வைக்கப் படும். அதனால் எக்ஸ் இம் மீண்டும் நிறுவப் படும் போது க்யூவில் உள்ள செய்திகள் பின்னால் ஒரு தேதியில் சேர்ப்பிக்க இயலும்.
+Description-th.UTF-8: จะลบเมลฝากส่งที่ตกค้างอยู่ในไดเรกทอรี spool หรือไม่?
+ มีเมลตกค้างอยู่ในไดเรกทอรี spool ของ Exim /var/spool/exim4/input ซึ่งยังไม่ได้ส่ง การถอดถอน Exim จะทิ้งเมลเหล่านั้นไว้โดยไม่ส่ง จนกว่าจะติดตั้ง Exim ใหม่
+ .
+ ถ้าไม่เลือกตัวเลือกนี้ ไดเรกทอรี spool จะถูกเก็บรักษาไว้ และจะสามารถส่งเมลเหล่านั้นได้ในภายหลัง เมื่อได้ติดตั้ง Exim ใหม่อีกครั้ง
+Description-tr.UTF-8: Kuyruk dizinindeki gönderilmeyen postalar silinsin mi?
+ Exim kuyruk dizini olan /var/spool/exim4/input'da henüz gönderilmemiş epostalar var.  Exim'i silmeniz halinde bu epostalar ileri bir tarihte Exim tekrar kuruluncaya kadar gönderilmemiş halde muhafaza edilecektir.
+ .
+ Eğer bu seçenek seçilmemişse kuyruk (spool) dizini korunacak ve burada bekleyen iletilerin gönderilmesi Exim'in tekrar kurulduğu ileriki bir tarihe ertelenecektir.
+Description-vi.UTF-8: Gỡ bỏ các thư chưa phát khỏi thư mục ống chỉ không?
+ Thư mục ống chỉ của exim « /var/spool/exim4/input » chứa một số thư chưa được phát. Việc gỡ bỏ chương trình Exim sẽ gây ra các thư này còn lại chưa được phát đến khi Exim được cài đặt lại.
+ .
+ Không bật tùy chọn này thì thư mục ống chỉ được giữ lại, cho phép các thư nằm trong hàng đợi được phát vào ngày sau, sau khi cài đặt lái chương trình Exim.
+Description-wo.UTF-8: Ndax nu dindi bataaxal yiñu jebbalewul yi ne ci gakku spool?
+ Amna ay bataaxal yu ne ci kaggu spool bu exim /var/spool/exim4/ input/ ta jebbaleeguñu leen. Boo dindée Exim kon kenn du leen manatee jébbalé fii ak ngay istalewaat Exim.
+ .
+ Buf fekkee tannóo lii, kon deesna fi bayyi kaggu bu spool. Loolu dana tax bañu mana jébbalé bataaxal yi nekk ci sappe si, ginnaaw buñu istalewaatee Exim.
+Description-zh_CN.UTF-8: 删除缓冲目录中未投递的信件吗？
+ 有些存放在 Exim 的缓冲目录 /var/spool/exim4/input/ 中的 e-mail 信件尚未被投递。如果您卸载 Exim，则直至 Exim 被重新安装为止，它们将一直保持未被投递的状态。
+ .
+ 如果不做这一选择，缓冲目录将被保留，这样日后重新安装 Exim 后，这些现在仍在队列中的信件将可被投递。
+Description-zh_TW.UTF-8: 是否清除在 spool 目錄中尚未遞送之信件？
+ 在 exim 的 spool 目錄 /var/spool/exim4/input 中，還有一些郵件尚未遞送。移除 Exim 將會導致它們停止遞送直到重新安裝了 Exim。
+ .
+ 如果沒有選取這個選項，那麼 spool 目錄將會被保留下來。這將允許在 queue 中的郵件可以在日後重新安裝 Exim 後再重新遞送。
+
+Template: exim4-base/drec
+Type: error
+Description: Reconfigure exim4-config instead of this package
+ Exim4 has its configuration factored out into a dedicated package,
+ exim4-config. To reconfigure Exim4, use 'dpkg-reconfigure exim4-config'.
+Description-ar.UTF-8: الرجاء إعادة تهيئة exim4-config بدلاً من هذه الحزمة.
+ هناك حزمة مخصصة لتهيئة Exim4، والمسماة exim4-config. إن كنت تريد إعادة تهيئة Exim4، استخدم الأمر 'dpkg-reconfigure exim4-config'.
+Description-ast.UTF-8: Reconfigure exim4-config n'arróu d'esti paquete
+ Movióse la configuración de exim4 a un paquete dedicaú: exim4-config. Si quies reconfigurar Exim4 tendríes d'executar 'dpkg-reconfigure exim4-config'.
+Description-be.UTF-8: Пераналадзьце exim4-config, а не гэты пакет
+ Наладкі Exim захоўваюцца ў асобным пакеце exim4-config. Каб пераналадзіць Exim4, выканайце 'dpkg-reconfigure exim4-config'.
+Description-bg.UTF-8: Настройте exim4-config, а не този пакет
+ Конфигурацията на Exim4 е отделена в отделен пакет - exim4-config. Ако искате да промените настройките на Exim4, използвайте командата „dpkg-reconfigure exim4-config“.
+Description-bn.UTF-8: এই প্যাকেজের পরিবর্তে exim4-কনফিগ পুনরায় কনফিগার করা হবে
+ Exim4 এর কনফিগারেশন একটি নির্দিষ্ট প্যাকেজে (exim4-config) ফ্যাক্টর করা থাকে। Exim4 পুনরায় কনফিগার করার জন্য 'dpkg-reconfigure exim4-config' ব্যবহার করুন।
+Description-ca.UTF-8: Reconfigureu el paquet exim4-config en comptes d'aquest paquet
+ Exim4 té la seua configuració en un paquet dedicat, exim4-config. Si voleu reconfigurar l'Exim4, utilitzeu «dpkg-reconfigure exim4-config».
+Description-cs.UTF-8: Místo tohoto balíku použijte raději exim4-config
+ Exim4 má svou konfiguraci oddělenou do samostatného balíku exim4-config. Chcete-li změnit nastavení Eximu4, použijte příkaz 'dpkg-reconfigure exim4-config'.
+Description-da.UTF-8: Sæt exim4-config op i stedet for denne pakke
+ Exim4 har udskilt sin opsætning i en dertil oprettet pakke, exim4-config. For at rekonfigurere Exim4 bruges 'dpkg-reconfigure exim4-config'.
+Description-de.UTF-8: Exim4-config anstelle dieses Pakets neu einrichten
+ Die Einstellungen von Exim4 wurden in ein eigenes Paket, exim4-config, ausgelagert. Benutzen Sie den Befehl 'dpkg-reconfigure exim4-config', um Exim4 neu einzurichten.
+Description-dz.UTF-8: ཐུམ་སྒྲིལ་འདི་གི་ཚབ་ལུ་ exim4-config སླར་རིམ་སྒྲིག་འབད།
+ Exim4 འདི་ ཆེད་བརྩོན་ཐུམ་སྒྲིལ་ exim4-config ལུ་ ཆ་རྐྱེན་འབད་དེ་ཡོདཔ་ཨིན། Exim4 ལོག་རིམ་སྒྲིག་འབད་ནི་ལུ་ 'dpkg-reconfigure exim4-config' འདི་ ལག་ལེན་འཐབ།
+Description-el.UTF-8: Να γίνει επαναρύθμιση του exim4-config αντί αυτού του πακέτου
+ Η ρύθμιση του Exim4 γίνεται με ένα συγκεκριμένο πακέτο ειδικά για τον σκοπό αυτό, το exim4-config. Για  να επαναρυθμίσετε το Exim4, χρησιμοποιήστε την εντολή 'dpkg-reconfigure exim4-config'.
+Description-eo.UTF-8: Reakomodi la pakon 'exim4-config' anstataŭ tiun ĉi pakon
+ La akomodado de 'Exim4' estas mastrumata per specifa pako, 'exim4-config'. Por reakomodi la pakon 'Exim4', uzu la komandon 'dpkg-reconfigure exim4-config'.
+Description-es.UTF-8: Reconfigure exim4-config en lugar de este paquete
+ Se ha movido la configuración de exim4 a un paquete dedicado: «exim4-config». Si quiere reconfigurar Exim4 debería ejecutar «dpkg-reconfigure exim4-config».
+Description-eu.UTF-8: Exim4-config birkonfiguratu pakete honen beharrean
+ Exim4-ek bere konfigurazio beste pakete batetan du, exim4-config. Exim4 birkonfiguratu nahi izan ezkero "dpkg-reconfigure exim4-config" erabili.
+Description-fi.UTF-8: Tee tämän paketin sijaan paketin exim4-config asetukset
+ Exim4:n asetukset ovat erillisessä asetuspaketissa exim4-config. Exim4:n asetukset voidaan tehdä uudelleen komennolla ”dpkg-reconfigure exim4-config”.
+Description-fr.UTF-8: Reconfiguration d'Exim avec exim4-config
+ La configuration d'Exim 4 est gérée par un paquet dédié nommé exim4-config. Si vous souhaitez reconfigurer Exim 4, vous devez utiliser la commande « dpkg-reconfigure exim4-config ».
+Description-gl.UTF-8: Reconfigure exim4-config no canto deste paquete
+ Exim4 ten a configuración separada nun paquete adicado, exim4-config. Para reconfigurar Exim4, empregue "dpkg-reconfigure exim4-config".
+Description-he.UTF-8: הגדר מחדש את החבילה exim4-config במקום את החבילה הזאת
+ קבצי ההגדרות של Exim4 הופרדו לחבילה ייעודית, exim4-config. על מנת לשנות את ההגדרות של Exim4 יש להשתמש ב-'dpkg-reconfigure exim4-config'.
+Description-hr.UTF-8: Napravite rekonfiguraciju exim4-config umjesto ovog paketa
+ Exim4 ima svoje postavke izdvojene u zasebni paket nazvan exim4-config. Za rekonfiguriranje Exima 4 koristite 'dpkg-reconfigure exim4-config'.
+Description-id.UTF-8: Konfigurasi ulang exim4-config, bukannya paket ini 
+ Exim4 memiliki konfigurasi yang diletakkan terpisah dalam paket 'exim4-config'. Jika Anda ingin konfigurasi-ulang Exim4, gunakan 'dpkg-reconfigure exim4-config'.
+Description-it.UTF-8: Riconfigurare exim4-config anziché questo pacchetto
+ Exim4 ha la sua configurazione in un pacchetto dedicato, exim4-config. Per riconfigurare Exim4 usare «dpkg-reconfigure exim4-config».
+Description-ja.UTF-8: このパッケージの代わりに exim4-config を再設定してください
+ Exim4 は、自身の設定を専用パッケージ exim4-config に委ねています。Exim4 を再設定したい場合には、'dpkg-reconfigure exim4-config' を利用してください。
+Description-kk.UTF-8: Бұл дестенің орнына exim4-config баптау керек
+ Exim4 баптауы exim4-config бөлек дестесіне шығарылған. Exim4 баптау үшін 'dpkg-reconfigure exim4-config' пайдалану керек.
+Description-km.UTF-8: កំណត់​រចនា​សម្ព័ន្ធ exim4-config ជំនួស​ឲ្យ​កញ្ចប់​នេះ
+ Exim4 មាន​ការ​កំណត់​រចនា​សម្ព័ន្ធ​របស់វា បាន​ដាក់​ក្នុង​កញ្ចប់​ដែល​បាន​ផ្ដល់​ឲ្យ exim4-config ។ ដើម្បី​កំណត់​រចនាសម្ព័ន្ធ Exim4 ប្រើ 'dpkg-reconfigure exim4-config' ។
+Description-ko.UTF-8: 이 패키지 대신에 exim4-config을 다시 설정합니다
+ exim4는 설정 부분을 exim4-config라는 전용 패키지에 둡니다. exim4를 다시 설정하려면 'dpkg-reconfigure exim4-config' 명령을 실행하십시오.
+Description-lt.UTF-8: Perkonfigūruoti exim4-config vietoje šio paketo
+ Exim4 konfigūracija buvo iškelta į atskirą paketą exim4-config. Jei norite konfigūruoti Exim4, įvykdykite „dpkg-reconfigure exim4-config“.
+Description-ml.UTF-8: ഈ പാക്കേജിനു പകരം exim4-config പാക്കേജ് പുനഃക്രമീകരിക്കുക
+ എക്സിം4 നു് അതിന്റെ ക്രമീകരണത്തിനായി പ്രത്യേകം മാറ്റിവച്ച ഒരു പാക്കേജുണ്ട്, exim4-config. നിങ്ങള്‍ക്കു് എക്സിം4 പുനഃക്രമീകരിക്കണമെന്നുണ്ടെങ്കില്‍ dpkg-reconfigure exim4-config ഉപയോഗിക്കൂ.
+Description-mr.UTF-8: या पॅकेजऐवजी एकझिम४-कॉन्फिग ची पुनर्रचना करायची?
+ एकझिम४ मधे संरचना एक समर्पित पॅकेज, एकझिम४-कॉन्फिग मधे घटक पाडून केली आहे. एकझिम४ पुनर्रचित करण्याकरिता 'डिपीकेजी रिकॉन्फिगर एकझिम४-कॉन्फिग' वापरा.
+Description-nb.UTF-8: Sett opp exim4-config i stedet for denne pakka
+ Oppsett for Exim4 er skilt ut i en egen pakke, exim4-config. Hvis Exim4 skal settes opp på nytt, bruk «dpkg-reconfigure exim4-config».
+Description-ne.UTF-8:  यो प्याकेजहरूको सट्टामा एक्जिम४-कन्फिग पुन: कन्फिगर गर्नुहोस्
+ एक्जिम४ सँग समर्पित गरिएको प्याकेज, एक्जिम४-कन्फिगमा यसको कन्फिगरेसन फ्याक्टर्ड आउट छ ।एक्जिम४ पुन: कन्फिगर गर्न, 'dpkg-reconfigure exim4-config' प्रयोग गर्नुहोस् ।
+Description-nl.UTF-8: Niet dit pakket maar exim4-config herconfigureren
+ De configuratie van Exim4 is afgesplitst naar een het pakket exim4-config . Als u Exim4 wilt herconfigureren dient u dus 'dpkg-reconfigure exim4-config' uit te voeren.
+Description-nn.UTF-8: Vil du setje opp exim4-config i staden for denne pakka?
+ Oppsettet av Exim4 er skilt ut i ein eigen pakke, exim4-config. For å setje opp Exim4, bruk dpkg-reconfigure exim4-config.
+Description-no.UTF-8: Sett opp exim4-config i stedet for denne pakka
+ Oppsett for Exim4 er skilt ut i en egen pakke, exim4-config. Hvis Exim4 skal settes opp på nytt, bruk «dpkg-reconfigure exim4-config».
+Description-pa.UTF-8: ਇਹ ਪੈਕੇਜ ਦੀ ਬਜਾਏ exim4-config ਮੁੜ-ਸੰਰਚਨਾ
+ Exim4 ਦੀ ਸੰਰਚਨਾ ਨੂੰ ਇੱਕ ਸਮਰਪਿਤ ਪੈਕੇਜ ਵਿੱਚ ਵੰਡਿਆ ਗਿਆ ਹੈ, exim4-config। ਜੇ ਤੁਸੀਂ Exim4 ਦੀ ਮੁੜ ਸੰਰਚਨਾ ਕਰਨੀ ਚਾਹੁੰਦੇ ਹੋ ਤਾਂ 'dpkg-reconfigure exim4-config' ਵਰਤੋਂ।
+Description-pl.UTF-8: Uruchom rekonfigurację exim4-config, zamiast tego pakietu
+ Konfiguracja Exim4 znajduje się w osobnym pakiecie, exim4-config. Aby ją zmienić, uruchom "dpkg-reconfigure exim4-config".
+Description-pt.UTF-8: Reconfigurar exim4-config em vez deste pacote
+ O Exim4 tem a sua configuração num pacote dedicado, o exim4-config. Para reconfigurar o Exim4, utilize 'dpkg-reconfigure exim4-config'.
+Description-pt_BR.UTF-8: Reconfigure o pacote exim4-config ao invés deste pacote
+ O Exim4 possui sua configuração separada em um pacote dedicado, o pacote exim4-config. Para reconfigurar o Exim4, utilize o comando 'dpkg-reconfigure exim4-config'.
+Description-ro.UTF-8: Reconfigurați exim4-config în loc să-l configurați pe acesta.
+ Exim4 își crează configurația printr-un pachet dedicat, exim4-config. Pentru reconfigurarea lui Exim4, folosiți „dpkg-reconfigure exim4-config”.
+Description-ru.UTF-8: Перенастройка с помощью exim4-config, а не с помощью этого пакета.
+ Настройка Exim4 вынесена в отдельный пакет, exim4-config. Если нужно перенастроить Exim4, используйте команду 'dpkg-reconfigure exim4-config'.
+Description-sk.UTF-8: Zmena nastavenia exim4-config namiesto tohto balíka
+ Exim4 má na nastavenia určený balík exim4-config. Ak chcete zmeniť nastavenia Exim4, použite „dpkg-reconfigure exim4-config“.
+Description-sq.UTF-8: Rikonfiguro exim4-config në vend të kësaj pakete
+ Exim4 e ka konfigurimin e tij në një paketë të përkushtuar, exim4-config. Nëse dëshiron të rikonfigurosh Exim4, përdor 'dpkg-reconfigure exim4-config'.
+Description-sv.UTF-8: Konfigurera om exim4-config istället för det här paketet
+ Exim4 har fått sin konfiguration flyttad till ett eget paket, exim4-config. Använd "dpkg-reconfigure exim4-config" om du vill konfigurera om Exim4.
+Description-ta.UTF-8: இந்த பணிதொகுப்புக்கு பதில் எக்ஸ் இம் 4 ஐ மீண்டும் வடிவமைக்கவும்.
+ எக்ஸ் இம்4 இன் வடிவமைப்பு பிரத்யேக பொதி exim4-config இல் வரையப் பட்டுள்ளது. நீங்கள் எக்ஸ் இம்4 ஐ மீண்டும் வடிவமைக்க விரும்பினால் 'dpkg-reconfigure exim4-config' என்ற கட்டளையை பயன் படுத்தவும்.
+Description-th.UTF-8: ตั้งค่า exim4-config ไม่ใช่แพกเกจนี้
+ Exim4 มีระบบตั้งค่าแยกออกไปในแพกเกจต่างหาก คือ exim4-config  ถ้าคุณต้องการตั้งค่า Exim4 ให้เรียก 'dpkg-reconfigure exim4-config'
+Description-tr.UTF-8: Bu paket yerine exim4-config yeniden yapılandırılsın mı?
+ Exim4 yapılandırması kendi başına ayrı bir paket olan exim4-config tarafından yapılmaktadır.  Exim4'ü tekrar yapılandırmak için 'dpkg-reconfigure exim4-config' komutunu kullanın.
+Description-uk.UTF-8: Переналаштовуйте exim4-config, а не цей пакунок
+ Все що пов'язано з налаштуванням Exim4 винесено в окремий пакунок - exim4-config. Використовуйте dpkg-reconfigure exim4-config, якщо бажаєте переналаштувати Exim4.
+Description-vi.UTF-8: Cấu hình lại « exim4-config » thay cho gói này
+ Exim4 có cấu hình được định dạng như là gói riêng, « exim-config ». Muốn cấu hình lại phần mềm Exim4 thì sử dụng lệnh « dpkg-reconfigure exim4-config ».
+Description-wo.UTF-8: Komfigurewaat exim4-config ta bayye bii paket
+ Exim4 jëlnañu komfiguraasioŋam jagleelko ab paketu boppam muy exim4-config. Saa yoo bëggée komfigurewaat Exim4, jëfandikool 'dpkg-reconfigure exim4-config'.
+Description-zh_CN.UTF-8: 重新配置 exim4-config 而非本软件包
+ Exim4 的设置被分出来放到了专用软件包 exim4-config 中。要重新设置 Exim4，请使用“dpkg-reconfigure exim4-config”。
+Description-zh_TW.UTF-8: 在重新設定時請替而使用 exim4-config 而不是本套件
+ Exim4 已將其設定程式分離為另一個獨立套件，exim4-config。如果您想要重新設定 Exim4，請使用 dpkg-reconfigure exim4-config。

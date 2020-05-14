@@ -1,0 +1,37 @@
+#!/bin/sh
+
+set -e
+
+if [ -n "$EX4DEBUG" ]; then
+  echo "now debugging $0 $@"
+  set -x
+fi
+
+case "$1" in
+	remove|upgrade)
+    	if [ -x /etc/init.d/exim4 ]; then
+		if [ -n "$EX4DEBUG" ]; then
+		  netstat -tulpen
+		  ls -al /run/exim4/
+		  cat /run/exim4/exim.pid
+		  pidof exim4
+		fi
+		if command -v invoke-rc.d >/dev/null 2>&1; then
+		    invoke-rc.d exim4 stop
+		else
+		    /etc/init.d/exim4 stop
+		fi
+		if [ -n "$EX4DEBUG" ]; then
+		  netstat -tulpen
+		  ls -al /run/exim4/
+		  cat /run/exim4/exim.pid
+		  pidof exim4
+		  if pidof exim4; then
+		    echo >&2 "WARN: There are some exim4 processes still running after stopping exim"
+		  fi
+		fi
+	fi
+	;;
+esac
+
+

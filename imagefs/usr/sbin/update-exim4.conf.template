@@ -1,0 +1,139 @@
+#!/bin/bash
+
+set -e
+
+CONFDIR="${CONFDIR:-/etc/exim4}"
+DONOTRUN='true'
+
+UPEX4CT_outputfile="${CONFDIR}/exim4.conf.template"
+
+usage() {
+cat <<EOF
+$0 - Generate exim4 configuration file template
+       Options:
+       -n|--nobackup - Overwrite old template, do not take backup.
+       -o|--output file - write output to file instead of ${UPEX4CT_outputfile}
+       -h|--help - This message.
+       -r|--run - Actually do something
+EOF
+}
+
+## Parse commandline
+TEMP=$(getopt -n update-exim4.conf.template \
+	-l nobackup,output:,help,run -- \
+	+no:hr "$@")
+
+if test "$?" != 0; then
+	echo "Terminating..." >&2
+	exit 1
+fi
+
+eval set -- ${TEMP}
+while test "$1" != "--"; do
+	case $1 in
+		-h|--help)
+			usage
+			exit 0
+		;;
+		-o|--output)
+			shift
+			UPEX4CT_outputfile="$1"
+		;;
+		-n|--nobackup)
+			NOBACKUP=1
+		;;
+		-r|--run)
+			DONOTRUN='false'
+		;;
+	esac
+	shift
+done
+shift
+
+# No non-option arguments allowed.
+if [ "$#" -ne 0 ]; then
+	echo "No non option arguments ($@) allowed" >&2
+	usage >&2
+	exit 1
+fi
+
+# run-parts emulation, stolen from Branden's /etc/X11/Xsession
+# Addition: Use file.rul instead if file if it exists.
+run_parts () {
+	# reset LC_COLLATE
+	unset LANG LC_COLLATE LC_ALL
+
+	if [ -z "$1" ]; then
+		errormessage "$0: internal run_parts called without an argument"
+	fi
+	if [ ! -d "$1" ]; then
+		errormessage "$0: internal run_parts called, but $1 does not exist or is not a directory."
+	fi
+  	for F in $(ls $1 | grep -v /.svn); do
+		if expr "$F" : '[[:alnum:]_-]\+$' > /dev/null 2>&1; then
+			if [ -f "$1/$F" ] ; then
+				if [ -f "$1/${F}.rul" ] ; then
+					echo "$1/${F}.rul"
+				else
+					echo "$1/$F"
+				fi
+			fi
+		fi
+	done;
+}
+# also from Branden
+errormessage () {
+	# pretty-print messages of arbitrary length (no trailing newline)
+	echo "$*" | fold -s -w ${COLUMNS:-80} >&2;
+}
+
+cat_parts() {
+       if [ -z "$1" ]; then
+               errormessage "$0: internal cat_parts called without an argument"
+       fi
+       if [ ! -d "$1" ]; then
+               errormessage "$0: internal cat_parts called, but $1 does not exist or is not a directory."
+       fi
+       for file in $(run_parts $1); do
+               echo "#####################################################"
+               echo "### $file"
+               echo "#####################################################"
+               cat $file
+               echo "#####################################################"
+               echo "### end $file"
+               echo "#####################################################"
+       done
+}
+
+if [ "$DONOTRUN" = "true" ]; then
+	errormessage "This program overwrites conffiles. Do not run unless you have consulted the manpage." >&2
+	echo "Terminating..." >&2
+	exit 1
+fi
+
+
+if [ -e "${UPEX4CT_outputfile}" ] && [ -z "$NOBACKUP" ]; then
+  if [ -e "${UPEX4CT_outputfile}.bak.$$" ]; then
+    echo >&2 "ERR: ${UPEX4CT_outputfile}.bak.$$ already exists, aborting"
+    exit 1
+  fi
+fi
+ 
+NEWTEMPLATE=$(tempfile -m644 -p ex4)
+if [ -f "${UPEX4CT_outputfile}" ] ; then
+	chmod --reference="${UPEX4CT_outputfile}" "$NEWTEMPLATE"
+fi
+
+# generate .template. Ugly - better alternative?
+SAVEWD="$(pwd)"
+cd ${CONFDIR}/conf.d
+for i in main acl router transport retry rewrite auth ; do
+  cat_parts $i
+done > "$NEWTEMPLATE"
+cd "$SAVEWD"
+
+if [ -e "${UPEX4CT_outputfile}" ] && [ -z "$NOBACKUP" ] ; then
+	mv "${UPEX4CT_outputfile}" \
+		"${UPEX4CT_outputfile}.bak.$$"
+fi
+mv "$NEWTEMPLATE" "${UPEX4CT_outputfile}"

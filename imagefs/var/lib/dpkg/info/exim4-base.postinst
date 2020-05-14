@@ -1,0 +1,103 @@
+#!/bin/sh
+
+set -e
+. /usr/share/debconf/confmodule
+
+if [ -n "$EX4DEBUG" ]; then
+  echo "now debugging $0 $@"
+  set -x
+fi
+
+db_version 2.0
+
+BDBVERSION=5.3
+
+case "$1" in
+  configure)
+
+	if ! getent passwd Debian-exim > /dev/null ; then
+	  echo 'Adding system-user for exim (v4)' 1>&2
+	  adduser --system --group --quiet --home /var/spool/exim4 \
+	    --no-create-home --disabled-login --force-badname Debian-exim
+	fi
+	# Create directories for log etc
+	# install also fixes permissions.
+	install -d -oDebian-exim -gadm -m2750 /var/log/exim4
+	install -d -oDebian-exim -gDebian-exim -m750 /run/exim4
+	install -d -oDebian-exim -gDebian-exim -m750 /var/spool/exim4
+	install -d -oDebian-exim -gDebian-exim -m750 /var/spool/exim4/db \
+		/var/spool/exim4/input /var/spool/exim4/msglog
+
+	# fix permissions on upgrades
+	if dpkg --compare-versions "$2" le "4.30-1" ; then
+		find /var/log/exim4 /var/spool/exim4 -group mail \
+			\( -type f -or -type d \) -print0 | \
+			xargs -0r chgrp Debian-exim
+		find /var/log/exim4 /var/spool/exim4 -user mail \
+			\( -type f -or -type d \) -print0 | \
+			xargs -0r chown Debian-exim
+	fi
+	
+	# Paranoia check: On any db upgrade throw away hints
+	# databases.
+	if test -r /var/lib/exim4/berkeleydbvers.txt ; then
+		OLDBDB=`head -n1 /var/lib/exim4/berkeleydbvers.txt`
+	else
+		OLDBDB="unknown"
+	fi
+	if [ "$BDBVERSION" != "$OLDBDB" ] ; then
+		echo exim: DB upgrade, deleting hints-db 1>&2
+		rm -f /var/spool/exim4/db/misc-* /var/spool/exim4/db/wait-* \
+			/var/spool/exim4/db/callout* \
+			/var/spool/exim4/db/retry* \
+			/var/spool/exim4/db/ratelimit* \
+			/var/spool/exim4/db/__db.retry \
+			/var/spool/exim4/db/__db.misc* \
+			/var/spool/exim4/db/__db.callout \
+			/var/spool/exim4/db/__db.ratelimit \
+			/var/spool/exim4/db/__db.wait* \
+			/var/spool/exim4/db/log.*
+		echo "$BDBVERSION" > /var/lib/exim4/berkeleydbvers.txt
+	fi
+	# Check that db files are readable by this Exim's db library
+	dbfiles=""
+	for f in /var/spool/exim4/db/misc-* /var/spool/exim4/db/wait-* \
+	         /var/spool/exim4/db/callout* /var/spool/exim4/db/retry* \
+		 /var/spool/exim4/db/ratelimit* ; do
+	    if [ -f "$f" ]; then
+		if echo $f | grep \.lockfile\$ >/dev/null 2>&1; then
+		    : # ignore lock files
+		else
+		    dbfiles="$dbfiles $(basename $f)"
+		fi
+	    fi
+	done
+	for dbfile in $dbfiles; do
+	    if exim_dumpdb /var/spool/exim4 $dbfile >/dev/null 2>&1; then
+		: # File OK
+	    else
+		echo "Resetting invalid $dbfile hints db" 1>&2
+		rm -f /var/spool/exim4/db/$dbfile \
+			/var/spool/exim4/db/$dbfile.* \
+			/var/spool/exim4/db/__db.${dbfile}.* \
+			/var/spool/exim4/db/log.*
+	    fi
+	done
+
+       if [ -x "/etc/init.d/exim4" ]; then
+           update-rc.d exim4 defaults >/dev/null
+       fi
+
+	# honor dpkg-statoverride settings for files not managed with dpkg
+	for pat in /var/\*/exim4 /var/\*/exim4/\*; do
+		[ $EX4DEBUG ] && eval echo "evaluate statoverride $pat"
+		eval dpkg-statoverride --list $pat | while read USER GROUP MODE FILE; do
+			[ $EX4DEBUG ] && echo "statoverride $USER $GROUP $MODE $FILE"
+			chown ${USER}:${GROUP} $FILE
+			chmod $MODE $FILE
+		done
+	done
+	;;
+esac
+
+

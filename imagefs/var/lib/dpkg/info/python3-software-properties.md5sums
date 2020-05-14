@@ -1,0 +1,15 @@
+d4396b0005743436f395051a5c0636a0  usr/lib/python3/dist-packages/softwareproperties/AptAuth.py
+38194faef9ae3053387ef8f94d9c3ad5  usr/lib/python3/dist-packages/softwareproperties/CountryInformation.py
+ff38c8d575de724abcfe1ec75678e45a  usr/lib/python3/dist-packages/softwareproperties/MirrorTest.py
+ae9f0287131b9b20bef73e87e284a797  usr/lib/python3/dist-packages/softwareproperties/SoftwareProperties.py
+5334d9a1ccd771cc4e7bb08f1529284c  usr/lib/python3/dist-packages/softwareproperties/__init__.py
+489eee6627476c0d119f4ab18a73b50a  usr/lib/python3/dist-packages/softwareproperties/cloudarchive.py
+2362d74d21a1af443b44595abe3315b6  usr/lib/python3/dist-packages/softwareproperties/distro.py
+611b689f384dd572b9d817370e8b8461  usr/lib/python3/dist-packages/softwareproperties/ppa.py
+46a5f20b0105722f35e95296a7b60e89  usr/lib/python3/dist-packages/softwareproperties/shortcuts.py
+d452acfcbbca9f831a00db7deb82bbab  usr/share/doc/python3-software-properties/AUTHORS
+6ff0bedc540baa621b8ef9ccc212039b  usr/share/doc/python3-software-properties/README
+dd5bbca91225f9394188adfce26242ba  usr/share/doc/python3-software-properties/TODO
+6ec1f0458407bdba1d1bc3e8f09bd9c3  usr/share/doc/python3-software-properties/changelog.Debian.gz
+66830284bb4ab58272c14d06bf82a88b  usr/share/doc/python3-software-properties/changelog.gz
+1de030797e7b8d1ca0a0deaca557ae76  usr/share/doc/python3-software-properties/copyright

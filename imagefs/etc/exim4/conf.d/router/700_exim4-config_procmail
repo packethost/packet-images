@@ -1,0 +1,15 @@
+
+procmail:
+  debug_print = "R: procmail for $local_part@$domain"
+  driver = accept
+  domains = +local_domains
+  check_local_user
+  transport = procmail_pipe
+  # emulate OR with "if exists"-expansion
+  require_files = ${local_part}:\
+                  ${if exists{/etc/procmailrc}\
+                    {/etc/procmailrc}{${home}/.procmailrc}}:\
+                  +/usr/bin/procmail
+  no_verify
+  no_expn
+

@@ -1,0 +1,7 @@
+[Unit]
+Description=Updates the operating system whilst offline
+Requires=dbus.socket
+OnFailure=reboot.target
+
+[Service]
+ExecStart=/usr/lib/packagekit/pk-offline-update

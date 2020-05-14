@@ -1,0 +1,17 @@
+/.
+/usr
+/usr/bin
+/usr/bin/python3.5
+/usr/bin/python3.5m
+/usr/share
+/usr/share/binfmts
+/usr/share/binfmts/python3.5
+/usr/share/doc
+/usr/share/doc/python3.5-minimal
+/usr/share/doc/python3.5-minimal/README.Debian
+/usr/share/doc/python3.5-minimal/changelog.Debian.gz
+/usr/share/doc/python3.5-minimal/copyright
+/usr/share/man
+/usr/share/man/man1
+/usr/share/man/man1/python3.5.1.gz
+/usr/share/man/man1/python3.5m.1.gz

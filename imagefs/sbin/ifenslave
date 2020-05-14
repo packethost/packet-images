@@ -1,0 +1,122 @@
+#!/bin/sh
+
+#    Copyright (C) 2012-2013  Guus Sliepen <guus@debian.org>
+#
+#    This program is free software: you can redistribute it and/or modify
+#    it under the terms of the GNU General Public License as published by
+#    the Free Software Foundation, either version 3 of the License, or
+#    (at your option) any later version.
+#
+#    This program is distributed in the hope that it will be useful,
+#    but WITHOUT ANY WARRANTY; without even the implied warranty of
+#    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+#    GNU General Public License for more details.
+#
+#    You should have received a copy of the GNU General Public License
+#    along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
+set -e
+
+version() {
+	echo 'ifenslave.sh version 2 (2013-05-05)'
+	echo 'Copyright (c) 2012-2013 Guus Sliepen <guus@debian.org>'
+	exit 0
+}
+
+usage() {
+	echo 'Usage: ifenslave [-acdfhuvV] <master> <slave> ...'
+	exit 0
+}
+
+error() {
+	echo "$@" >&2
+	exit 1
+}
+
+all_interfaces() {
+	# I guess this was a debugging feature.
+	ip link show
+	exit 0
+}
+
+# Parse options
+
+while true; do
+	if [ "$1" = "-a" -o "$1" = "--all-interfaces" ]; then
+		all_interfaces
+	elif [ "$1" = "-c" -o "$1" = "--change-active" ]; then
+		CHANGE_ACTIVE=1; shift
+	elif [ "$1" = "-d" -o "$1" = "--detach" ]; then
+		DETACH=1; shift
+	elif [ "$1" = "-f" -o "$1" = "--force" ]; then
+		FORCE=1; shift
+	elif [ "$1" = "-h" -o "$1" = "--help" ]; then
+		exec man 8 ifenslave
+	elif [ "$1" = "-u" -o "$1" = "--usage" ]; then
+		usage
+	elif [ "$1" = "-v" -o "$1" = "--verbose" ]; then
+		VERBOSE=1; shift
+	elif [ "$1" = "-V" -o "$1" = "--version" ]; then
+		version
+	elif [ "$1" = "--" ]; then
+		shift
+		break
+	else
+		break
+	fi
+done
+
+# Check that we have enough arguments remaining.
+
+[ -z "$2" ] && error "Not enough arguments"
+
+master="$1"
+shift
+
+# Check that the master is really a bonding interface.
+
+[ -d "/sys/class/net/$master" ] || error "$master: no such interface"
+[ -d "/sys/class/net/$master/bonding" ] || error "$master: is not a bonding interface"
+
+# Do we need to change the active interface?
+
+if [ "$CHANGE_ACTIVE" = 1 ]; then
+	[ -z "$2" ] || error 'You can only set one interface to be the active slave!'
+	[ "$VERBOSE" = 1 ] && echo "Changing active slave of $master to $slave"
+	echo "$1" >"/sys/class/net/$master/bonding/active_slave" || error "$master: could not set $slave to active slave"
+	exit 0
+fi
+
+# Otherwise, loop over all slaves and either attach or detach them.
+
+for slave in "$@"; do
+	[ -d "/sys/class/net/$slave" ] || error "$slave: no such interface"
+
+	if [ -z "$DETACH" ]; then
+		if [ -h "/sys/class/net/$master/slave_$slave" ] ||
+		   [ -h "/sys/class/net/$master/lower_$slave" ]; then
+			echo "$slave: already enslaved to $master" >&2
+			continue
+		fi
+
+		read type <"/sys/class/net/$slave/type"
+		if [ -z "$FORCE" -a "$type" != "1" ]; then
+			error "$slave: does not appear to be an Ethernet interface (use -f to force)"
+		fi
+
+		[ "$VERBOSE" = 1 ] && echo "Adding slave $slave to master $master"
+		ip link set "$slave" down
+		echo "+$slave" >"/sys/class/net/$master/bonding/slaves" || error "$slave: could not add interface"
+	else
+		if [ ! -h "/sys/class/net/$master/slave_$slave" ] &&
+		   [ ! -h "/sys/class/net/$master/lower_$slave" ]; then
+			echo "$slave: is not enslaved to $master" >&2
+			continue
+		fi
+
+		[ "$VERBOSE" = 1 ] && echo "Detaching slave $slave from master $master"
+		echo "-$slave" >"/sys/class/net/$master/bonding/slaves" || error "$slave: could not detach interface"
+	fi
+done
+
+exit 0

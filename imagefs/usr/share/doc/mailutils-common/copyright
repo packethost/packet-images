@@ -1,0 +1,68 @@
+Format: http://www.debian.org/doc/packaging-manuals/copyright-format/1.0/
+Upstream-Name: mailutils
+Source: http://ftp.gnu.org/gnu/mailutils/
+Comment:
+ This package was put together by Jeff Bailey <jbailey@nisa.net>.
+ Since Sun, 29 Dec 2002 14:25:00 +0100, Jordi Mallach <jordi@debian.org> has
+ been officially maintaining these packages, with Luk Claes as a co-maintainer.
+ .
+ Information on this project can generally be found at:
+ http://mailutils.org/
+
+Files: *
+Copyright: 1999-2007, 2009-2012 Free Software Foundation, Inc.
+License: GPL-3+
+ GNU Mailutils is free software; you can redistribute it and/or modify
+ it under the terms of the GNU General Public License as published by
+ the Free Software Foundation; either version 3, or (at your option)
+ any later version.
+ .
+ GNU Mailutils is distributed in the hope that it will be useful,
+ but WITHOUT ANY WARRANTY; without even the implied warranty of
+ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ GNU General Public License for more details.
+ .
+ You should have received a copy of the GNU General Public License
+ along with GNU Mailutils.  If not, see <http://www.gnu.org/licenses/>.
+ .
+ On Debian systems, the complete text of the GNU General Public License
+ can be found in "/usr/share/common-licenses/GPL-3".
+
+Files: examples/echosrv.c
+       examples/numaddr.c
+       include/*.h
+       lib*/*.c
+       libmu_cpp/*.cc
+       python/*
+       sql/*.c
+Copyright: 1999-2007, 2009-2012 Free Software Foundation, Inc.
+License: LGPL-3+
+ This library is free software; you can redistribute it and/or
+ modify it under the terms of the GNU Lesser General Public
+ License as published by the Free Software Foundation; either
+ version 3 of the License, or (at your option) any later version.
+ .
+ This library is distributed in the hope that it will be useful,
+ but WITHOUT ANY WARRANTY; without even the implied warranty of
+ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+ Lesser General Public License for more details.
+ .
+ You should have received a copy of the GNU Lesser General
+ Public License along with this library.  If not, see
+ <http://www.gnu.org/licenses/>. */
+ .
+ On Debian systems, the complete text of the GNU Lesser General Public
+ License can be found in "/usr/share/common-licenses/LGPL-3".
+
+Files: doc/texinfo/*
+Copyright: 1999-2004, 2008-2012 Free Software Foundation, Inc.
+License: GFDL-NIV+
+ Permission is granted to copy, distribute and/or modify this document
+ under the terms of the GNU Free Documentation License, Version 1.2
+ or any later version published by the Free Software Foundation;
+ with no Invariant Sections, no Front-Cover Texts, and no Back-Cover Texts.
+ A copy of the license is included in the section entitled "GNU
+ Free Documentation License".
+ .
+ On Debian systems, the complete text of the GNU Free Documentation License
+ can be found in "/usr/share/common-licenses/GFDL-1.2".

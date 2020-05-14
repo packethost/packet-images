@@ -1,0 +1,12 @@
+/.
+/lib
+/lib/x86_64-linux-gnu
+/lib/x86_64-linux-gnu/libisc-export.so.160.0.0
+/usr
+/usr/share
+/usr/share/doc
+/usr/share/doc/libisc-export160
+/usr/share/doc/libisc-export160/changelog.Debian.gz
+/usr/share/doc/libisc-export160/changelog.gz
+/usr/share/doc/libisc-export160/copyright
+/lib/x86_64-linux-gnu/libisc-export.so.160

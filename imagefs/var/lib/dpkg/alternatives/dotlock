@@ -1,0 +1,9 @@
+auto
+/usr/bin/dotlock
+dotlock.1.gz
+/usr/share/man/man1/dotlock.1.gz
+
+/usr/bin/dotlock.mailutils
+4
+/usr/share/man/man1/dotlock.mailutils.1.gz
+

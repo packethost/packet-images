@@ -1,0 +1,16 @@
+/.
+/lib
+/lib/x86_64-linux-gnu
+/lib/x86_64-linux-gnu/libaio.so.1.0.1
+/usr
+/usr/share
+/usr/share/doc
+/usr/share/doc/libaio1
+/usr/share/doc/libaio1/TODO
+/usr/share/doc/libaio1/changelog.Debian.gz
+/usr/share/doc/libaio1/changelog.gz
+/usr/share/doc/libaio1/copyright
+/usr/share/lintian
+/usr/share/lintian/overrides
+/usr/share/lintian/overrides/libaio1
+/lib/x86_64-linux-gnu/libaio.so.1

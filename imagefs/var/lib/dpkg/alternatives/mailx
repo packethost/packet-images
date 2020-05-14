@@ -1,0 +1,15 @@
+auto
+/usr/bin/mailx
+mail
+/usr/bin/mail
+mail.1.gz
+/usr/share/man/man1/mail.1.gz
+mailx.1.gz
+/usr/share/man/man1/mailx.1.gz
+
+/usr/bin/mail.mailutils
+30
+/usr/bin/mail.mailutils
+/usr/share/man/man1/mail.mailutils.1.gz
+/usr/share/man/man1/mail.mailutils.1.gz
+

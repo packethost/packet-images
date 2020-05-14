@@ -1,0 +1,284 @@
+#!/bin/sh
+# update-exim4defaults(8): manage entries in /etc/default/exim4
+# per script
+
+if [ -n "$EX4DEBUG" ]; then
+  echo "now debugging $0 $@"
+  set -x
+fi
+
+unset LC_ALL
+export LC_CTYPE=C
+
+defaultfile=/etc/default/exim4
+
+EX4DEF_INIT=false
+EX4DEF_FORCE=false
+
+
+if [ -r ${defaultfile} ]; then
+	. ${defaultfile}
+fi
+
+
+# initialize variables
+EX4DEF_QUEUERUNNER="${QUEUERUNNER}"
+EX4DEF_QUEUEINTERVAL="${QUEUEINTERVAL}"
+EX4DEF_COMMONOPTIONS="${COMMONOPTIONS}"
+EX4DEF_QUEUERUNNEROPTIONS="${QUEUERUNNEROPTIONS}"
+EX4DEF_QFLAGS="${QFLAGS}"
+EX4DEF_SMTPLISTENEROPTIONS="${SMTPLISTENEROPTIONS}"
+
+EX4DEF_FLAGOPTIONS=false
+EX4DEF_FLAGREMOVE=false
+
+ex4def_usage ()
+{
+	echo "update-exim4defaults: manage entries in /etc/default/exim4"
+	echo "   usage: update-exim4defaults [[--queuerunner combined|separate|queueonly|ppp|no|nodaemon]"
+	echo "          [--qflags flags ] [--queuetime time] [--commonoptions options]"
+	echo "          [--queuerunneroptions options] [--smtplisteneroptions options]]"
+	echo "          [--remove-common options] [--remove-queue options]"
+	echo "          [--remove-smtp options]"
+	echo "          [--force|-f] [--help|-h]"
+	echo "          [--init]"
+}
+
+
+# used for initialzing and with --force.
+ex4def_write(){
+	EX4DEF_TMP="$(tempfile -m 600 -p ex4)"
+	cat << EOF > "${EX4DEF_TMP}"
+# /etc/default/exim4
+EX4DEF_VERSION='${EX4DEF_VERSION}'
+
+# 'combined' -	 one daemon running queue and listening on SMTP port
+# 'no'       -	 no daemon running the queue
+# 'separate' -	 two separate daemons
+# 'ppp'      -   only run queue with /etc/ppp/ip-up.d/exim4.
+# 'nodaemon' - no daemon is started at all.
+# 'queueonly' - only a queue running daemon is started, no SMTP listener.
+# setting this to 'no' will also disable queueruns from /etc/ppp/ip-up.d/exim4
+QUEUERUNNER='${EX4DEF_QUEUERUNNER}'
+# how often should we run the queue
+QUEUEINTERVAL='${EX4DEF_QUEUEINTERVAL}'
+# options common to quez-runner and listening daemon
+COMMONOPTIONS='${EX4DEF_COMMONOPTIONS}'
+# more options for the daemon/process running the queue (applies to the one
+# started in /etc/ppp/ip-up.d/exim4, too.
+QUEUERUNNEROPTIONS='${EX4DEF_QUEUERUNNEROPTIONS}'
+# special flags given to exim directly after the -q. See exim(8)
+QFLAGS='${EX4DEF_QFLAGS}'
+# Options for the SMTP listener daemon. By default, it is listening on
+# port 25 only. To listen on more ports, it is recommended to use
+# -oX 25:587:10025 -oP /run/exim4/exim.pid
+SMTPLISTENEROPTIONS='${EX4DEF_SMTPLISTENEROPTIONS}'
+EOF
+	cat "${EX4DEF_TMP}" > "${defaultfile}"
+	rm -f "${EX4DEF_TMP}"
+}
+
+## Parse commandline
+TEMP=$(getopt -n update-exim4defaults \
+	-l qflags:,queuerunner:,queuetime:,commonoptions:,queuerunneroptions:,smtplisteneroptions:,remove-common:,remove-queue:,remove-smtp:,force,help,init -- \
+	+fh "$@")
+
+if test "$?" != 0; then
+	echo "Terminating..." >&2
+	exit 1
+fi
+
+eval set -- ${TEMP}
+while test "$1" != "--"; do
+	case $1 in
+		-f|--force)
+			EX4DEF_FORCE=true
+		;;
+		-h|--help)
+			ex4def_usage
+			exit 0
+		;;
+		--qflags)
+			shift
+			EX4DEF_QFLAGS="$1"
+			;;
+		--queuerunner)
+			shift
+			EX4DEF_QUEUERUNNER="$1"
+			if ! expr match "${EX4DEF_QUEUERUNNER}" '\(ppp\|no\|combined\|nodaemon\|queueonly\|separate\)$' >/dev/null ; then
+				echo "invalid argument ${EX4DEF_QUEUERUNNER} for --queuerunner" 1>&2
+				exit 1
+			fi
+		;;
+		--queuetime)
+			shift
+			EX4DEF_QUEUEINTERVAL="$1"
+		;;
+		--commonoptions)
+			shift
+			EX4DEF_COMMONOPTIONS="$1"
+			EX4DEF_FLAGOPTIONS=true
+		;;
+		--queuerunneroptions)
+			shift
+			EX4DEF_QUEUERUNNEROPTIONS="$1"
+			EX4DEF_FLAGOPTIONS=true
+		;;
+		--smtplisteneroptions)
+			shift
+			EX4DEF_SMTPLISTENEROPTIONS="$1"
+			EX4DEF_FLAGOPTIONS=true
+		;;
+		--remove-common)
+			shift
+			EX4DEF_REMOVECOMMON="$1"
+			EX4DEF_FLAGREMOVE=true
+		;;
+		--remove-queue)
+			shift
+			EX4DEF_REMOVEQUEUE="$1"
+			EX4DEF_FLAGREMOVE=true
+		;;
+		--remove-smtp)
+			shift
+			EX4DEF_REMOVESMTP="$1"
+			EX4DEF_FLAGREMOVE=true
+		;;
+		--init)
+			EX4DEF_INIT=true
+		;;
+	esac
+	shift
+done
+shift
+
+# No non-option arguments allowed.
+if [ "$#" -ne 0 ]; then
+	echo "No non option arguments allowed" >&2
+	ex4def_usage >&2
+	exit 1
+fi
+
+if [ "${EX4DEF_FLAGREMOVE}" = "true" ] && [ "${EX4DEF_FLAGOPTIONS}" = "true" ] ; then
+	echo "Cannot use --remove-something together with --somethingoptions" >&2
+	ex4def_usage >&2
+	exit 1
+fi
+
+#if [ ! -r ${defaultfile} ]; then
+#	echo "Cannot read ${defaultfile}, terminating" >&2
+#	exit 1
+#fi
+
+if "${EX4DEF_INIT}" = "true" ] ; then
+	[ -e "${defaultfile}" ] && [ "${EX4DEF_FORCE}" != "true" ] && exit 0
+	# Reset to default values
+	EX4DEF_QUEUERUNNER='combined'
+	EX4DEF_QUEUEINTERVAL='30m'
+	EX4DEF_COMMONOPTIONS=''
+	EX4DEF_QUEUERUNNEROPTIONS=''
+	EX4DEF_QFLAGS=''
+	EX4DEF_SMTPLISTENEROPTIONS=''
+	
+	ex4def_write
+	exit 0
+fi
+
+#Try removing
+if [ "${EX4DEF_FLAGREMOVE}" = "true" ] ; then
+	EX4DEF_REMOVEERROR="false"
+	if [ ! -z "${EX4DEF_REMOVECOMMON}" ] ; then
+		EX4DEF_COMMONOPTIONS=$(echo "${COMMONOPTIONS}" | \
+			sed -e "sÄ${EX4DEF_REMOVECOMMON}ÄÄ" -e "s/  / /g" -e 's/^ //' -e 's/ $//')
+		[ "${EX4DEF_COMMONOPTIONS}" = "${COMMONOPTIONS}" ] && \
+			EX4DEF_REMOVEERROR="true"
+	fi
+	if [ ! -z "${EX4DEF_REMOVEQUEUE}" ] ; then
+		EX4DEF_QUEUERUNNEROPTIONS=$(echo "${QUEUERUNNEROPTIONS}" | \
+			sed -e "sÄ${EX4DEF_REMOVEQUEUE}ÄÄ" -e "s/  / /g" -e 's/^ //' -e 's/ $//')
+		[ "${EX4DEF_QUEUERUNNEROPTIONS}" = "${QUEUERUNNEROPTIONS}" ] && \
+			EX4DEF_REMOVEERROR="true"
+	fi
+	if [ ! -z "${EX4DEF_REMOVESMTP}" ] ; then
+		EX4DEF_SMTPLISTENEROPTIONS=$(echo "${SMTPLISTENEROPTIONS}" | \
+			sed -e "sÄ${EX4DEF_REMOVESMTP}ÄÄ" -e "s/  / /g" -e 's/^ //' -e 's/ $//')
+		[ "${EX4DEF_SMTPLISTENEROPTIONS}" = "${SMTPLISTENEROPTIONS}"] && \
+			EX4DEF_REMOVEERROR="true"
+	fi
+	if [ "${EX4DEF_REMOVEERROR}" = "true" ] ; then
+		echo "$0: removing failed, no changes" >&2
+		exit 64
+	fi
+
+	EX4DEF_TMP="$(tempfile -m 600 -p ex4)"
+	sed -e "sÄ^QFLAGS=.*ÄQFLAGS='${EX4DEF_QFLAGS}'Ä" \
+		-e "sÄ^QUEUERUNNER=.*ÄQUEUERUNNER='${EX4DEF_QUEUERUNNER}'Ä" \
+		-e "sÄ^QUEUEINTERVAL=.*ÄQUEUEINTERVAL='${EX4DEF_QUEUEINTERVAL}'Ä" \
+		-e "sÄ^COMMONOPTIONS=.*ÄCOMMONOPTIONS='${EX4DEF_COMMONOPTIONS}'Ä" \
+		-e "sÄ^QUEUERUNNEROPTIONS=.*ÄQUEUERUNNEROPTIONS='${EX4DEF_QUEUERUNNEROPTIONS}'Ä" \
+		-e "sÄ^SMTPLISTENEROPTIONS=.*ÄSMTPLISTENEROPTIONS='${EX4DEF_SMTPLISTENEROPTIONS}'Ä" \
+		< $defaultfile > "${EX4DEF_TMP}"
+	mv "${EX4DEF_TMP}" $defaultfile
+	rm -f "${EX4DEF_TMP}"
+	exit 0
+fi
+
+if [ "${EX4DEF_FORCE}" = "true" ] ; then
+	ex4def_write
+	exit 0
+
+else
+	EX4DEF_DOANYTHING=0
+	EX4DEF_NOTALLOWED=0
+	if [ "${QUEUERUNNER}" != "${EX4DEF_QUEUERUNNER}" ]; then
+		EX4DEF_DOANYTHING=$((${EX4DEF_DOANYTHING}+1))
+		# switching the QUEUERUNNER modus is always allowed
+		#[ -z "${QUEUERUNNER}" ] || EX4DEF_NOTALLOWED=$((${EX4DEF_NOTALLOWED}+1))
+	fi
+	if [ "${QUEUEINTERVAL}" != "${EX4DEF_QUEUEINTERVAL}" ] ; then
+		EX4DEF_DOANYTHING=$((${EX4DEF_DOANYTHING}+2))
+		[ -z "${QUEUEINTERVAL}" ] || \
+			EX4DEF_NOTALLOWED=$((${EX4DEF_NOTALLOWED}+2))
+	fi
+	if [ "${COMMONOPTIONS}" != "${EX4DEF_COMMONOPTIONS}" ] ; then
+		EX4DEF_DOANYTHING=$((${EX4DEF_DOANYTHING}+4))
+		[ -z "${COMMONOPTIONS}" ] || \
+			EX4DEF_NOTALLOWED=$((${EX4DEF_NOTALLOWED}+4))
+	fi
+	if [ "${QUEUERUNNEROPTIONS}" != "${EX4DEF_QUEUERUNNEROPTIONS}" ] ; then
+		EX4DEF_DOANYTHING=$((${EX4DEF_DOANYTHING}+8))
+		[ -z "${QUEUERUNNEROPTIONS}" ] || \
+			EX4DEF_NOTALLOWED=$((${EX4DEF_NOTALLOWED}+8))
+	fi
+	if [ "${SMTPLISTENEROPTIONS}" != "${EX4DEF_SMTPLISTENEROPTIONS}" ] ; then
+		EX4DEF_DOANYTHING=$((${EX4DEF_DOANYTHING}+16))
+		[ -z "${SMTPLISTENEROPTIONS}" ] || \
+			EX4DEF_NOTALLOWED=$((${EX4DEF_NOTALLOWED}+16))
+	fi
+	if [ "${QFLAGS}" != "${EX4DEF_QFLAGS}" ] ; then
+		EX4DEF_DOANYTHING=$((${EX4DEF_DOANYTHING}+32))
+		[ -z "${QFLAGS}" ] || \
+			EX4DEF_NOTALLOWED=$((${EX4DEF_NOTALLOWED}+32))
+	fi
+
+	[ ${EX4DEF_DOANYTHING} -eq 0 ] && exit 0
+	if [ ${EX4DEF_NOTALLOWED} -ne 0 ] ; then
+		echo "setting(s) conflict with current one, terminating" >&2
+		exit ${EX4DEF_NOTALLOWED}
+	fi
+	
+	EX4DEF_TMP="$(tempfile -m 600 -p ex4)"
+	sed -e "sÄ^QFLAGS=.*ÄQFLAGS='${EX4DEF_QFLAGS}'Ä" \
+		-e "sÄ^QUEUERUNNER=.*ÄQUEUERUNNER='${EX4DEF_QUEUERUNNER}'Ä" \
+		-e "sÄ^QUEUEINTERVAL=.*ÄQUEUEINTERVAL='${EX4DEF_QUEUEINTERVAL}'Ä" \
+		-e "sÄ^COMMONOPTIONS=.*ÄCOMMONOPTIONS='${EX4DEF_COMMONOPTIONS}'Ä" \
+		-e "sÄ^QUEUERUNNEROPTIONS=.*ÄQUEUERUNNEROPTIONS='${EX4DEF_QUEUERUNNEROPTIONS}'Ä" \
+		-e "sÄ^SMTPLISTENEROPTIONS=.*ÄSMTPLISTENEROPTIONS='${EX4DEF_SMTPLISTENEROPTIONS}'Ä" \
+		< $defaultfile > "${EX4DEF_TMP}"
+	mv "${EX4DEF_TMP}" $defaultfile
+	rm -f "${EX4DEF_TMP}"
+	exit 0
+fi
+
+
+

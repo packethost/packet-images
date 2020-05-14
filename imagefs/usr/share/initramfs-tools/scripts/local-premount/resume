@@ -1,0 +1,34 @@
+#!/bin/sh
+
+PREREQ=""
+
+prereqs()
+{
+	echo "$PREREQ"
+}
+
+case $1 in
+# get pre-requisites
+prereqs)
+	prereqs
+	exit 0
+	;;
+esac
+
+if [ -z "${resume}" ] || [ ! -e /sys/power/resume ]; then
+	exit 0
+fi
+
+. /scripts/functions
+. /scripts/local
+
+if ! local_device_setup ${resume} "suspend/resume device" false; then
+	exit 0
+fi
+
+# hardcode path, uswsusp ships an resume binary too
+if [ -n "${resume_offset}" ]; then
+	/bin/resume ${DEV} ${resume_offset}
+else
+	/bin/resume ${DEV}
+fi

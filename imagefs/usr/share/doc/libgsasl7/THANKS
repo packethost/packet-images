@@ -1,0 +1,50 @@
+GNU SASL THANKS -- Acknowledgements.
+Copyright (C) 2002-2012 Simon Josefsson
+See the end for copying conditions.
+
+GNU SASL uses libntlm by Grant Edwards maintained by Simon Josefsson;
+libgssapi by MIT/Heimdal; libgcrypt by Werner Koch; GSS, Libidn, and
+Shishi by Simon Josefsson.
+
+Bug reports, patches and/or suggestions were also received from:
+
+Andorz Nilsson
+Sergey Poznyakoff
+Lars Engebretsen
+Marc Mutz
+Peter Prohaska
+Wojciech Polak
+Jakub Bogusz
+Tomas Ogren
+Alexey Melnikov
+Darian Lanx
+Dirk Dierckx
+Paul Romero
+Mike Castle
+Martin Lambers
+Clytie Siddall
+Ryan Slack
+Yvan Bassuel
+Francis Brosnan Blazquez
+James Mansion
+Maxim Britov
+Brad Hards
+James Canete
+Daniel Armyr
+Enrico Scholz <enrico.scholz@informatik.tu-chemnitz.de>
+Martin Rozee
+Pawel Widera
+Gazsó Attila
+Adam Goode <adam@spicenitz.org>
+Andery Melnikov <temnota.am@gmail.com>
+Vincent Untz <vuntz@opensuse.org>
+Marco Maggi <marco.maggi-ipsu@poste.it>
+"carlo.bramix" <carlo.bramix@libero.it>
+Marc Santamaria <asgarath@gmail.com>
+Wim Lewis <wiml@hhhh.org>
+Phil Pennock <gsasl-phil@spodhuis.org>
+
+----------------------------------------------------------------------
+Copying and distribution of this file, with or without modification,
+are permitted in any medium without royalty provided the copyright
+notice and this notice are preserved.

@@ -1,0 +1,23 @@
+^\w{3} [ :0-9]{11} [._[:alnum:]-]+ kernel:( \[ *[[:digit:]]+\.[[:digit:]]+\])? md: md driver [.[:digit:]]+ MAX_MD_DEVS=[[:digit:]]+, MD_SB_DISKS=[[:digit:]]+$
+^\w{3} [ :0-9]{11} [._[:alnum:]-]+ kernel:( \[ *[[:digit:]]+\.[[:digit:]]+\])? md: bitmap version [.[:digit:]]+$
+^\w{3} [ :0-9]{11} [._[:alnum:]-]+ kernel:( \[ *[[:digit:]]+\.[[:digit:]]+\])? md: md[[:digit:]]+ stopped\.$
+^\w{3} [ :0-9]{11} [._[:alnum:]-]+ kernel:( \[ *[[:digit:]]+\.[[:digit:]]+\])? md: md[[:digit:]]+ still in use\.$
+^\w{3} [ :0-9]{11} [._[:alnum:]-]+ kernel:( \[ *[[:digit:]]+\.[[:digit:]]+\])? md: cannot remove active disk [[:alnum:]]+ from md[[:digit:]]+ \.\.\. ?$
+^\w{3} [ :0-9]{11} [._[:alnum:]-]+ kernel:( \[ *[[:digit:]]+\.[[:digit:]]+\])? md: raid([01456]|456|10) personality registered for level ([01456]|10)$
+^\w{3} [ :0-9]{11} [._[:alnum:]-]+ kernel:( \[ *[[:digit:]]+\.[[:digit:]]+\])? md: (data-check|requested-resync|resync|reshape|recovery) of RAID array md[[:digit:]]+$
+^\w{3} [ :0-9]{11} [._[:alnum:]-]+ kernel:( \[ *[[:digit:]]+\.[[:digit:]]+\])? md: resuming (data-check|requested-resync|resync|reshape|recovery) of md[[:digit:]]+ from checkpoint\.$
+^\w{3} [ :0-9]{11} [._[:alnum:]-]+ kernel:( \[ *[[:digit:]]+\.[[:digit:]]+\])? md: md[[:digit:]]+: (data-check|requested-resync|resync|reshape|recovery) done\.$
+^\w{3} [ :0-9]{11} [._[:alnum:]-]+ kernel:( \[ *[[:digit:]]+\.[[:digit:]]+\])? md: minimum _guaranteed_  ?speed: [[:digit:]]+ KB/sec/disk\.$
+^\w{3} [ :0-9]{11} [._[:alnum:]-]+ kernel:( \[ *[[:digit:]]+\.[[:digit:]]+\])? md: using maximum available idle IO bandwidth \(but not more than [[:digit:]]+ KB/sec\) for (data-check|requested-resync|resync|reshape|recovery)\.$
+^\w{3} [ :0-9]{11} [._[:alnum:]-]+ kernel:( \[ *[[:digit:]]+\.[[:digit:]]+\])? md: delaying (data-check|requested-resync|resync|reshape|recovery) of md[[:digit:]]+ until md[[:digit:]]+ has finished \(they share one or more physical units\)$
+^\w{3} [ :0-9]{11} [._[:alnum:]-]+ kernel:( \[ *[[:digit:]]+\.[[:digit:]]+\])? md: using [[:digit:]]+k window, over a total of [[:digit:]]+( blocks|k)\.$
+^\w{3} [ :0-9]{11} [._[:alnum:]-]+ kernel:( \[ *[[:digit:]]+\.[[:digit:]]+\])? md: (un)?bind<[^>]+>$
+^\w{3} [ :0-9]{11} [._[:alnum:]-]+ kernel:( \[ *[[:digit:]]+\.[[:digit:]]+\])? md: export_rdev\([^)]+\)$
+^\w{3} [ :0-9]{11} [._[:alnum:]-]+ kernel:( \[ *[[:digit:]]+\.[[:digit:]]+\])? raid[[:digit:]]+: raid set [[:alnum:]]+ active with [[:digit:]]+ out of [[:digit:]]+ mirrors$
+^\w{3} [ :0-9]{11} [._[:alnum:]-]+ kernel:( \[ *[[:digit:]]+\.[[:digit:]]+\])? RAID([01456]|10) conf printout:$
+^\w{3} [ :0-9]{11} [._[:alnum:]-]+ kernel:( \[ *[[:digit:]]+\.[[:digit:]]+\])?[[:space:]]+---( [wrf]d:[[:digit:]]+){2,3}$
+^\w{3} [ :0-9]{11} [._[:alnum:]-]+ kernel:( \[ *[[:digit:]]+\.[[:digit:]]+\])?[[:space:]]+disk [[:digit:]]+,( wo:[[:digit:]]+,)? o:[[:digit:]]+, dev:[[:alnum:]]+$
+^\w{3} [ :0-9]{11} [._[:alnum:]-]+ mdadm(\[[[:digit:]]+\])?: Rebuild((Start|Finish)ed|[[:digit:]]+) event detected on md device /dev/[-_./[:alnum:]]+$
+^\w{3} [ :0-9]{11} [._[:alnum:]-]+ mdadm(\[[[:digit:]]+\])?: SpareActive event detected on md device /dev/[-_./[:alnum:]]+, component device /dev/[-_./[:alnum:]]+$
+^\w{3} [ :0-9]{11} [._[:alnum:]-]+ mdadm(\[[[:digit:]]+\])?: (New|Degraded)Array event detected on md device /dev/[-_./[:alnum:]]+$
+^\w{3} [ :0-9]{11} [._[:alnum:]-]+ mdadm(\[[[:digit:]]+\])?: DeviceDisappeared event detected on md device /dev/[-_./[:alnum:]]+$

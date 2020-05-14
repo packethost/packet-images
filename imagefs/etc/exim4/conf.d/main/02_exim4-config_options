@@ -1,0 +1,218 @@
+
+### main/02_exim4-config_options
+#################################
+
+
+# Defines the access control list that is run when an
+# SMTP MAIL command is received.
+#
+.ifndef MAIN_ACL_CHECK_MAIL
+MAIN_ACL_CHECK_MAIL = acl_check_mail
+.endif
+acl_smtp_mail = MAIN_ACL_CHECK_MAIL
+
+
+# Defines the access control list that is run when an
+# SMTP RCPT command is received.
+#
+.ifndef MAIN_ACL_CHECK_RCPT
+MAIN_ACL_CHECK_RCPT = acl_check_rcpt
+.endif
+acl_smtp_rcpt = MAIN_ACL_CHECK_RCPT
+
+
+# Defines the access control list that is run when an
+# SMTP DATA command is received.
+#
+.ifndef MAIN_ACL_CHECK_DATA
+MAIN_ACL_CHECK_DATA = acl_check_data
+.endif
+acl_smtp_data = MAIN_ACL_CHECK_DATA
+
+
+# Message size limit. The default (used when MESSAGE_SIZE_LIMIT
+# is unset) is 50 MB
+.ifdef MESSAGE_SIZE_LIMIT
+message_size_limit = MESSAGE_SIZE_LIMIT
+.endif
+
+
+# If you are running exim4-daemon-heavy or a custom version of Exim that
+# was compiled with the content-scanning extension, you can cause incoming
+# messages to be automatically scanned for viruses. You have to modify the
+# configuration in two places to set this up. The first of them is here,
+# where you define the interface to your scanner. This example is typical
+# for ClamAV; see the manual for details of what to set for other virus
+# scanners. The second modification is in the acl_check_data access
+# control list.
+
+# av_scanner = clamd:/var/run/clamav/clamd.ctl
+
+
+# For spam scanning, there is a similar option that defines the interface to
+# SpamAssassin. You do not need to set this if you are using the default, which
+# is shown in this commented example. As for virus scanning, you must also
+# modify the acl_check_data access control list to enable spam scanning.
+
+# spamd_address = 127.0.0.1 783
+
+# Domain used to qualify unqualified recipient addresses
+# If this option is not set, the qualify_domain value is used.
+# qualify_recipient = <value of qualify_domain>
+
+
+# Allow Exim to recognize addresses of the form "user@[10.11.12.13]",
+# where the domain part is a "domain literal" (an IP address) instead
+# of a named domain. The RFCs require this facility, but it is disabled
+# in the default config since it is rarely used and frequently abused.
+# Domain literal support also needs a special router, which is automatically
+# enabled if you use the enable macro MAIN_ALLOW_DOMAIN_LITERALS.
+# Additionally, you might want to make your local IP addresses (or @[])
+# local domains.
+.ifdef MAIN_ALLOW_DOMAIN_LITERALS
+allow_domain_literals
+.endif
+
+
+# Do a reverse DNS lookup on all incoming IP calls, in order to get the
+# true host name. If you feel this is too expensive, the networks for
+# which a lookup is done can be listed here.
+.ifndef DC_minimaldns
+.ifndef MAIN_HOST_LOOKUP
+MAIN_HOST_LOOKUP = *
+.endif
+host_lookup = MAIN_HOST_LOOKUP
+.endif
+
+
+# In a minimaldns setup, update-exim4.conf guesses the hostname and
+# dumps it here to avoid DNS lookups being done at Exim run time.
+.ifdef MAIN_HARDCODE_PRIMARY_HOSTNAME
+primary_hostname = MAIN_HARDCODE_PRIMARY_HOSTNAME
+.endif
+
+# The settings below cause Exim to make RFC 1413 (ident) callbacks
+# for all incoming SMTP calls. You can limit the hosts to which these
+# calls are made, and/or change the timeout that is used. If you set
+# the timeout to zero, all RFC 1413 calls are disabled. RFC 1413 calls
+# are cheap and can provide useful information for tracing problem
+# messages, but some hosts and firewalls have problems with them.
+# This can result in a timeout instead of an immediate refused
+# connection, leading to delays on starting up SMTP sessions.
+# (The default was reduced from 30s to 5s for release 4.61. and to
+# disabled for release 4.86)
+#
+#rfc1413_hosts = *
+#rfc1413_query_timeout = 5s
+
+
+# Enable an efficiency feature.  We advertise the feature; clients
+# may request to use it.  For multi-recipient mails we then can
+# reject or accept per-user after the message is received.
+#
+prdr_enable = true
+
+# When using an external relay tester (such as rt.njabl.org and/or the
+# currently defunct relay-test.mail-abuse.org, the test may be aborted
+# since exim complains about "too many nonmail commands". If you want
+# the test to complete, add the host from where "your" relay tester
+# connects from to the MAIN_SMTP_ACCEPT_MAX_NOMAIL_HOSTS macro.
+# Please note that a non-empty setting may cause extra DNS lookups to
+# happen, which is the reason why this option is commented out in the
+# default settings.
+# MAIN_SMTP_ACCEPT_MAX_NOMAIL_HOSTS = !rt.njabl.org
+.ifdef MAIN_SMTP_ACCEPT_MAX_NOMAIL_HOSTS
+smtp_accept_max_nonmail_hosts = MAIN_SMTP_ACCEPT_MAX_NOMAIL_HOSTS
+.endif
+
+# By default, exim forces a Sender: header containing the local
+# account name at the local host name in all locally submitted messages
+# that don't have the local account name at the local host name in the
+# From: header, deletes any Sender: header present in the submitted
+# message and forces the envelope sender of all locally submitted
+# messages to the local account name at the local host name.
+# The following settings allow local users to specify their own envelope sender
+# in a locally submitted message. Sender: headers existing in a locally
+# submitted message are not removed, and no automatic Sender: headers
+# are added. These settings are fine for most hosts.
+# If you run exim on a classical multi-user systems where all users
+# have local mailboxes that can be reached via SMTP from the Internet
+# with the local FQDN as the domain part of the address, you might want
+# to disable the following three lines for traceability reasons.
+.ifndef MAIN_FORCE_SENDER
+local_from_check = false
+local_sender_retain = true
+untrusted_set_sender = *
+.endif
+
+
+# By default, Exim expects all envelope addresses to be fully qualified, that
+# is, they must contain both a local part and a domain. Configure exim
+# to accept unqualified addresses from certain hosts. When this is done,
+# unqualified addresses are qualified using the settings of qualify_domain
+# and/or qualify_recipient (see above).
+# sender_unqualified_hosts = <unset>
+# recipient_unqualified_hosts = <unset>
+
+
+# Configure Exim to support the "percent hack" for certain domains.
+# The "percent hack" is the feature by which mail addressed to x%y@z
+# (where z is one of the domains listed) is locally rerouted to x@y
+# and sent on. If z is not one of the "percent hack" domains, x%y is
+# treated as an ordinary local part. The percent hack is rarely needed
+# nowadays but frequently abused. You should not enable it unless you
+# are sure that you really need it.
+# percent_hack_domains = <unset>
+
+
+# Bounce handling
+.ifndef MAIN_IGNORE_BOUNCE_ERRORS_AFTER
+MAIN_IGNORE_BOUNCE_ERRORS_AFTER = 2d
+.endif
+ignore_bounce_errors_after = MAIN_IGNORE_BOUNCE_ERRORS_AFTER
+
+.ifndef MAIN_TIMEOUT_FROZEN_AFTER
+MAIN_TIMEOUT_FROZEN_AFTER = 7d
+.endif
+timeout_frozen_after = MAIN_TIMEOUT_FROZEN_AFTER
+
+.ifndef MAIN_FREEZE_TELL
+MAIN_FREEZE_TELL = postmaster
+.endif
+freeze_tell = MAIN_FREEZE_TELL
+
+
+# Define spool directory
+.ifndef SPOOLDIR
+SPOOLDIR = /var/spool/exim4
+.endif
+spool_directory = SPOOLDIR
+
+
+# trusted users can set envelope-from to arbitrary values
+.ifndef MAIN_TRUSTED_USERS
+MAIN_TRUSTED_USERS = uucp
+.endif
+trusted_users = MAIN_TRUSTED_USERS
+.ifdef MAIN_TRUSTED_GROUPS
+trusted_groups = MAIN_TRUSTED_GROUPS
+.endif
+
+
+# users in admin group can do many other things
+# admin_groups = <unset>
+
+
+# SMTP Banner. The example includes the Debian version in the SMTP dialog
+# MAIN_SMTP_BANNER = "${primary_hostname} ESMTP Exim ${version_number} (Debian package MAIN_PACKAGE_VERSION) ${tod_full}"
+# smtp_banner = $smtp_active_hostname ESMTP Exim $version_number $tod_full
+
+.ifdef MAIN_KEEP_ENVIRONMENT
+keep_environment = MAIN_KEEP_ENVIRONMENT
+.else
+# set option to empty value to avoid warning.
+keep_environment =
+.endif
+.ifdef MAIN_ADD_ENVIRONMENT
+add_environment = MAIN_ADD_ENVIRONMENT
+.endif

@@ -1,0 +1,8 @@
+#!/bin/sh
+set -e
+# Automatically added by dh_installdeb
+dpkg-maintscript-helper rm_conffile /etc/PackageKit/events/post-transaction.d/README 1.0.1-1 -- "$@"
+# End automatically added section
+# Automatically added by dh_installdeb
+dpkg-maintscript-helper rm_conffile /etc/PackageKit/events/pre-transaction.d/README 1.0.1-1 -- "$@"
+# End automatically added section

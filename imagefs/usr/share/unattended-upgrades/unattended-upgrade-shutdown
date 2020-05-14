@@ -1,0 +1,162 @@
+#!/usr/bin/python3
+# Copyright (c) 2009 Canonical Ltd
+#
+# AUTHOR:
+# Michael Vogt <mvo@ubuntu.com>
+#
+# unattended-upgrade-shutdown - helper that checks if a
+# unattended-upgrade is in progress and waits until it exists
+#
+# This file is part of unattended-upgrades
+#
+# unattended-upgrades is free software; you can redistribute it and/or
+# modify it under the terms of the GNU General Public License as published
+# by the Free Software Foundation; either version 2 of the License, or (at
+# your option) any later version.
+#
+# unattended-upgrades is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+# General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with unattended-upgrades; if not, write to the Free Software
+# Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+#
+
+import copy
+import signal
+import sys
+import time
+import logging
+import logging.handlers
+import gettext
+import subprocess
+import os.path
+
+from optparse import OptionParser
+from gettext import gettext as _
+
+try:
+    import apt_pkg
+except:
+    # if there is no python-apt no unattended-upgrades can run so not
+    # need to stop the shutdown
+    logging.exception("importing of apt_pkg failed, exiting")
+    sys.exit(0)
+
+
+def do_usplash(msg):
+    if os.path.exists("/sbin/usplash_write"):
+        logging.debug("Running usplash_write")
+        subprocess.call(["/sbin/usplash_write", "TEXT", msg])
+        subprocess.call(["/sbin/usplash_write", "PULSATE"])
+
+
+def do_plymouth(msg):
+    if os.path.exists("/bin/plymouth"):
+        logging.debug("Running plymouth --text")
+        subprocess.call(["/bin/plymouth", "message", "--text", msg])
+
+
+def log_msg(msg, level=logging.WARN):
+    """ helper that will print msg to usplash, plymouth, console """
+    logging.log(level, msg)
+    do_plymouth(msg)
+    do_usplash(msg)
+
+
+def log_progress():
+    """ helper to log the install progress (if any) """
+    # wait a some seconds and try again
+    msg = _("Unattended-upgrade in progress during shutdown, "
+            "sleeping for 5s")
+    # progress info
+    progress = "/var/run/unattended-upgrades.progress"
+    if os.path.exists(progress):
+        msg += "\n" + open(progress).read()
+    # log it
+    log_msg(msg)
+
+
+if __name__ == "__main__":
+    # setup gettext
+    localesApp = "unattended-upgrades"
+    localesDir = "/usr/share/locale"
+    gettext.bindtextdomain(localesApp, localesDir)
+    gettext.textdomain(localesApp)
+
+    parser = OptionParser()
+    parser.add_option("", "--debug",
+                      action="store_true", dest="debug", default=False,
+                      help="print debug messages")
+    parser.add_option("", "--delay", default=10,
+                      help="delay in minutes to wait for unattended-upgrades")
+    parser.add_option("", "--lock-file",
+                      default="/var/run/unattended-upgrades.lock",
+                      help="lock file location")
+    (options, args) = parser.parse_args()
+
+    # setup logging
+    level = logging.INFO
+    if options.debug:
+        level = logging.DEBUG
+
+    # use a normal logfile instead of syslog too as on shutdown its too
+    # easy to get syslog killed
+    logdir = apt_pkg.config.find_dir(
+        "Unattended-Upgrade::LogDir", "/var/log/unattended-upgrades/")
+    if not os.path.exists(logdir):
+        os.makedirs(logdir)
+    logfile = os.path.join(logdir, "unattended-upgrades-shutdown.log")
+    logging.basicConfig(filename=logfile,
+                        level=level,
+                        format="%(asctime)s %(levelname)s - %(message)s")
+
+    # check if we need to run unattended-upgrades on shutdown and if so,
+    # run it
+    p = None
+    apt_pkg.init_config()
+    if apt_pkg.config.find_b("Unattended-Upgrade::InstallOnShutdown", False):
+        env = copy.copy(os.environ)
+        env["UNATTENDED_UPGRADES_FORCE_INSTALL_ON_SHUTDOWN"] = "1"
+        logging.debug("starting unattended-upgrades in shutdown mode")
+        p = subprocess.Popen(["unattended-upgrade"], env=env)
+        log_msg(_("Running unattended-upgrades in shutdown mode"))
+        while True:
+            log_progress()
+            if p.poll() is not None:
+                break
+            time.sleep(5)
+
+    # run the monitoring loop and keep the "UI" updated
+    start_time = time.time()
+    lock_was_taken = False
+    while True:
+        res = apt_pkg.get_lock(options.lock_file)
+        logging.debug("get_lock returned %i" % res)
+        # exit here if there is no lock
+        if res > 0:
+            logging.debug("lock not taken")
+            break
+        lock_was_taken = True
+        # signal unattended-upgrades to stop
+        p = "/var/run/unattended-upgrades.pid"
+        if os.path.exists(p):
+            pid = int(open(p).read())
+            logging.debug("found running unattended-upgrades pid %s" % pid)
+            os.kill(pid, signal.SIGUSR1)
+        # show log
+        log_progress()
+        time.sleep(5)
+        if (time.time() - start_time) > options.delay * 60:
+            logging.warning(_("Giving up on lockfile after %s delay"),
+                            options.delay)
+            sys.exit(1)
+
+    # add finished info to the log/terminal to help tracking down
+    # LP: #434835
+    if lock_was_taken:
+        # re-use existing string
+        log_msg(_("All upgrades installed"), logging.INFO)
+    sys.exit(0)

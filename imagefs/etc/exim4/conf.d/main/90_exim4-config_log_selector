@@ -1,0 +1,10 @@
+
+### main/90_exim4-config_log_selector
+#################################
+
+# uncomment this for debugging
+# MAIN_LOG_SELECTOR == MAIN_LOG_SELECTOR +all -subject -arguments
+
+.ifdef MAIN_LOG_SELECTOR
+log_selector = MAIN_LOG_SELECTOR
+.endif

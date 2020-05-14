@@ -1,0 +1,13 @@
+/.
+/etc
+/etc/libibverbs.d
+/etc/libibverbs.d/mlx5.driver
+/usr
+/usr/lib
+/usr/lib/libibverbs
+/usr/lib/libibverbs/libmlx5-rdmav2.so
+/usr/share
+/usr/share/doc
+/usr/share/doc/libmlx5-1
+/usr/share/doc/libmlx5-1/changelog.Debian.gz
+/usr/share/doc/libmlx5-1/copyright

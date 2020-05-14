@@ -1,0 +1,14 @@
+#!/bin/sh
+
+set -e
+
+if [ "$1" = "configure" ]; then
+    if [ -z "$2" ] || dpkg --compare-versions "$2" lt "1.5-3"; then
+	add-shell /usr/bin/tmux
+    fi
+fi
+
+# Automatically added by dh_installdeb
+dpkg-maintscript-helper rm_conffile /etc/init.d/tmux-cleanup 1.4-6 -- "$@"
+# End automatically added section
+

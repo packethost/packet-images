@@ -1,0 +1,17 @@
+#!/bin/sh
+set -e
+
+case "$1" in
+	remove)
+		;;
+
+	purge)
+		update-rc.d hwclock.sh remove >/dev/null || true
+		rm -f /etc/adjtime
+		;;
+
+	*)
+		;;
+esac
+
+

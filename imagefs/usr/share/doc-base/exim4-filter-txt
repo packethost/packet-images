@@ -1,0 +1,8 @@
+Document: exim4-filter-txt
+Title: Exim's interface to mail filtering
+Author: Various
+Abstract: Description of the user interface to Exim's in-built mail filtering facility. This is the text version.
+Section: Network/Communication
+
+Format: text
+Files: /usr/share/doc/exim4-base/filter.txt.gz

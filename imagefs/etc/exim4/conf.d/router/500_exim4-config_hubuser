@@ -1,0 +1,31 @@
+
+### router/500_exim4-config_hubuser
+#################################
+
+.ifdef DCconfig_satellite
+# This router is only used for configtype=satellite.
+# It takes care to route all mail targeted to <somelocaluser@this.machine>
+# to the host where we read our mail
+#
+hub_user:
+  debug_print = "R: hub_user for $local_part@$domain"
+  driver = redirect
+  domains = +local_domains
+  data = ${local_part}@DCreadhost
+  check_local_user
+
+# Grab the redirected mail and deliver it.
+# This is a duplicate of the smarthost router, needed because
+# DCreadhost might end up as part of +local_domains
+hub_user_smarthost:
+  debug_print = "R: hub_user_smarthost for $local_part@$domain"
+  driver = manualroute
+  domains = DCreadhost
+  transport = remote_smtp_smarthost
+  route_list = * DCsmarthost byname
+  host_find_failed = ignore
+  same_domain_copy_routing = yes
+  check_local_user
+.endif
+
+

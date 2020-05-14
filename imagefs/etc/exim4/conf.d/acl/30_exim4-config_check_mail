@@ -1,0 +1,11 @@
+
+### acl/30_exim4-config_check_mail
+#################################
+
+# This access control list is used for every MAIL command in an incoming
+# SMTP message. The tests are run in order until the address is either
+# accepted or denied.
+#
+acl_check_mail:
+
+  accept

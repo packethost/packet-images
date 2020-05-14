@@ -1,0 +1,3 @@
+[console_scripts]
+cloud-init = cloudinit.cmd.main:main
+

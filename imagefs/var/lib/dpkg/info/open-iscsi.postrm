@@ -1,0 +1,104 @@
+#!/bin/sh
+# postrm script for open-iscsi
+
+set -e
+
+case "$1" in
+    purge)
+        if [ -d /etc/iscsi ] ; then
+            rm -rf /etc/iscsi
+        fi
+    ;;
+
+    remove)
+	for file in iscsid iscsi_discovery iscsi-iname iscsistart; do
+		if [ -L /usr/sbin/$file ]; then
+			rm /usr/sbin/$file
+		fi
+	done
+    ;;
+
+    abort-upgrade)
+	if dpkg --compare-versions "$2" le-nl "2.0.873+git0.3b4b4500-12" ; then
+	    # Since we moved that away because it was no longer a conffile in
+	    # the new version, we have to move it back now, to make sure the
+	    # old version remains intact.
+	    if [ -f /etc/iscsi/initiatorname.iscsi.dpkg-backup ] && ! [ -f /etc/iscsi/initiatorname.iscsi ] ; then
+		mv -f /etc/iscsi/initiatorname.iscsi.dpkg-backup /etc/iscsi/initiatorname.iscsi
+	    fi
+	fi
+    ;;
+
+    upgrade|failed-upgrade|abort-install|disappear)
+    ;;
+
+    *)
+        echo "postrm called with unknown argument \`$1'" >&2
+        exit 1
+    ;;
+esac
+
+# Automatically added by dh_installdeb
+dpkg-maintscript-helper rm_conffile /etc/init.d/umountiscsi.sh 2.0.873+git0.3b4b4500-9 -- "$@"
+# End automatically added section
+# Automatically added by dh_installinit
+if [ "$1" = "purge" ] ; then
+	update-rc.d open-iscsi remove >/dev/null
+fi
+
+
+# In case this system is running systemd, we make systemd reload the unit files
+# to pick up changes.
+if [ -d /run/systemd/system ] ; then
+	systemctl --system daemon-reload >/dev/null || true
+fi
+# End automatically added section
+# Automatically added by dh_installinit
+if [ "$1" = "purge" ] ; then
+	update-rc.d iscsid remove >/dev/null
+fi
+
+
+# In case this system is running systemd, we make systemd reload the unit files
+# to pick up changes.
+if [ -d /run/systemd/system ] ; then
+	systemctl --system daemon-reload >/dev/null || true
+fi
+# End automatically added section
+# Automatically added by dh_systemd_enable
+if [ "$1" = "remove" ]; then
+	if [ -x "/usr/bin/deb-systemd-helper" ]; then
+		deb-systemd-helper mask iscsid.service open-iscsi.service >/dev/null
+	fi
+fi
+
+if [ "$1" = "purge" ]; then
+	if [ -x "/usr/bin/deb-systemd-helper" ]; then
+		deb-systemd-helper purge iscsid.service open-iscsi.service >/dev/null
+		deb-systemd-helper unmask iscsid.service open-iscsi.service >/dev/null
+	fi
+fi
+# End automatically added section
+# Automatically added by dh_systemd_enable
+if [ "$1" = "remove" ]; then
+	if [ -x "/usr/bin/deb-systemd-helper" ]; then
+		deb-systemd-helper mask iscsid.service >/dev/null
+	fi
+fi
+
+if [ "$1" = "purge" ]; then
+	if [ -x "/usr/bin/deb-systemd-helper" ]; then
+		deb-systemd-helper purge iscsid.service >/dev/null
+		deb-systemd-helper unmask iscsid.service >/dev/null
+	fi
+fi
+# End automatically added section
+# Automatically added by dh_installdebconf
+if [ "$1" = purge ] && [ -e /usr/share/debconf/confmodule ]; then
+	. /usr/share/debconf/confmodule
+	db_purge
+fi
+# End automatically added section
+
+
+exit 0

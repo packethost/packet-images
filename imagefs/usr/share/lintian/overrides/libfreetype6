@@ -1,0 +1,2 @@
+# yes, and if you see a dependency on this it means your package is screwed up, not mine ;)
+libfreetype6: symbols-declares-dependency-on-other-package INVALID_SYMBOL_USAGE

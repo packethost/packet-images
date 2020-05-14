@@ -1,0 +1,49 @@
+
+### acl/20_exim4-config_local_deny_exceptions
+#################################
+
+# This is used to determine whitelisted senders and hosts.
+# It checks for CONFDIR/host_local_deny_exceptions and
+# CONFDIR/sender_local_deny_exceptions.
+#
+# It is meant to be used from some other acl entry.
+#
+# See exim4-config_files(5) for details.
+#
+# If the files do not exist, the white list never matches, which is
+# the desired behaviour.
+#
+# The old file names CONFDIR/local_host_whitelist and
+# CONFDIR/local_sender_whitelist will continue to be honored for a
+# transition period. Their use is deprecated.
+
+acl_local_deny_exceptions:
+  accept
+    hosts = ${if exists{CONFDIR/host_local_deny_exceptions}\
+                 {CONFDIR/host_local_deny_exceptions}\
+                 {}}
+  accept
+    senders = ${if exists{CONFDIR/sender_local_deny_exceptions}\
+                   {CONFDIR/sender_local_deny_exceptions}\
+                   {}}
+  accept
+    hosts = ${if exists{CONFDIR/local_host_whitelist}\
+                 {CONFDIR/local_host_whitelist}\
+                 {}}
+  accept
+    senders = ${if exists{CONFDIR/local_sender_whitelist}\
+                   {CONFDIR/local_sender_whitelist}\
+                   {}}
+
+  # This hook allows you to hook in your own ACLs without having to
+  # modify this file. If you do it like we suggest, you'll end up with
+  # a small performance penalty since there is an additional file being
+  # accessed. This doesn't happen if you leave the macro unset.
+  .ifdef LOCAL_DENY_EXCEPTIONS_LOCAL_ACL_FILE
+  .include LOCAL_DENY_EXCEPTIONS_LOCAL_ACL_FILE
+  .endif
+  
+  # this is still supported for a transition period and is deprecated.
+  .ifdef WHITELIST_LOCAL_DENY_LOCAL_ACL_FILE
+  .include WHITELIST_LOCAL_DENY_LOCAL_ACL_FILE
+  .endif

@@ -1,0 +1,32 @@
+#!/bin/sh
+#
+# multipath-tools prerm script
+set -e
+
+FIXED=0.4.8-1
+# fix upgrades from versions << $FIXED where the init script would return an
+# error on stop when the daemon isn't running:
+if [ "$1" = "failed-upgrade" ] && dpkg --compare-versions "$2" lt "$FIXED"; then
+    if [ -x "/etc/init.d/multipath-tools" ]; then
+	echo "Ignoring broken stop target in versions << $FIXED..."
+	if [ -x "`which invoke-rc.d 2>/dev/null`" ]; then
+		invoke-rc.d multipath-tools stop || true
+	else
+		/etc/init.d/multipath-tools stop || true
+	fi
+	exit 0
+    fi
+fi
+
+# Automatically added by dh_systemd_start
+if [ -d /run/systemd/system ]; then
+	deb-systemd-invoke stop multipathd.socket >/dev/null
+fi
+# End automatically added section
+# Automatically added by dh_installinit
+if [ -x "/etc/init.d/multipath-tools" ]; then
+	invoke-rc.d multipath-tools stop || exit $?
+fi
+# End automatically added section
+
+

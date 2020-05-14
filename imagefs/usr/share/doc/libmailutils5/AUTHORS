@@ -1,0 +1,21 @@
+The current maintainer Sergey Poznyakoff
+
+Alain Magloire <alainm@gnu.org>
+	The starting framework of mailutils etc ..
+Brian Edmond <briane@qnx.com>
+	Various code and bug reports
+Dave Inglis <dinglis@qnx.com>
+	The orignal MIME handling code
+Jakob Kaivo <jkaivo@ndn.net>
+	The starting framework for the POP3 and IMAP4 daemons
+Jeff Bailey <jbailey@gnu.org>
+	The starting framework for the mailbox library
+Sean 'Shaleh' Perry <shaleh@debian.org>
+	The starting framewok for the mailbox library
+Sergey Poznyakoff <gray@Mirddin.farlep.net>
+	Worked on pretty much everything 8-)
+Sam Roberts <sroberts@uniserve.com>
+	The parsing code for email addresses.
+Wojciech Polak <polak@gnu.org>
+	TLS, NLS, Python interface, libmu_cpp, docs, misc hacking.
+

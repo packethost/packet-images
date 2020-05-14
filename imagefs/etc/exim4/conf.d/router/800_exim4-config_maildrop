@@ -1,0 +1,14 @@
+
+### router/800_exim4-config_maildrop
+#################################
+
+maildrop:
+  debug_print = "R: maildrop for $local_part@$domain"
+  driver = accept
+  domains = +local_domains
+  check_local_user
+  transport = maildrop_pipe
+  require_files = ${local_part}:${home}/.mailfilter:+/usr/bin/maildrop
+  no_verify
+  no_expn
+

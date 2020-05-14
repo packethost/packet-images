@@ -1,0 +1,84 @@
+
+### acl/40_exim4-config_check_data
+#################################
+
+# This ACL is used after the contents of a message have been received. This
+# is the ACL in which you can test a message's headers or body, and in
+# particular, this is where you can invoke external virus or spam scanners.
+
+acl_check_data:
+
+  # Deny if the message contains an overlong line.  Per the standards
+  # we should never receive one such via SMTP.
+  #
+  .ifndef IGNORE_SMTP_LINE_LENGTH_LIMIT
+  deny    message    = maximum allowed line length is 998 octets, \
+                       got $max_received_linelength
+          condition  = ${if > {$max_received_linelength}{998}}
+  .endif
+
+  # Deny unless the address list headers are syntactically correct.
+  #
+  # If you enable this, you might reject legitimate mail.
+  .ifdef CHECK_DATA_VERIFY_HEADER_SYNTAX
+  deny
+    message = Message headers fail syntax check
+    !acl = acl_local_deny_exceptions
+    !verify = header_syntax
+  .endif
+
+
+  # require that there is a verifiable sender address in at least
+  # one of the "Sender:", "Reply-To:", or "From:" header lines.
+  .ifdef CHECK_DATA_VERIFY_HEADER_SENDER
+  deny
+    message = No verifiable sender address in message headers
+    !acl = acl_local_deny_exceptions
+    !verify = header_sender
+  .endif
+
+
+  # Deny if the message contains malware. Before enabling this check, you
+  # must install a virus scanner and set the av_scanner option in the
+  # main configuration.
+  #
+  # exim4-daemon-heavy must be used for this section to work.
+  #
+  # deny
+  #   malware = *
+  #   message = This message was detected as possible malware ($malware_name).
+
+
+  # Add headers to a message if it is judged to be spam. Before enabling this,
+  # you must install SpamAssassin. You also need to set the spamd_address
+  # option in the main configuration.
+  #
+  # exim4-daemon-heavy must be used for this section to work.
+  #
+  # Please note that this is only suiteable as an example. There are
+  # multiple issues with this configuration method. For example, if you go
+  # this way, you'll give your spamassassin daemon write access to the
+  # entire exim spool which might be a security issue in case of a
+  # spamassassin exploit.
+  #
+  # See the exim docs and the exim wiki for more suitable examples.
+  #
+  # warn
+  #   spam = Debian-exim:true
+  #   add_header = X-Spam_score: $spam_score\n\
+  #             X-Spam_score_int: $spam_score_int\n\
+  #             X-Spam_bar: $spam_bar\n\
+  #             X-Spam_report: $spam_report
+
+
+  # This hook allows you to hook in your own ACLs without having to
+  # modify this file. If you do it like we suggest, you'll end up with
+  # a small performance penalty since there is an additional file being
+  # accessed. This doesn't happen if you leave the macro unset.
+  .ifdef CHECK_DATA_LOCAL_ACL_FILE
+  .include CHECK_DATA_LOCAL_ACL_FILE
+  .endif
+
+
+  # accept otherwise
+  accept

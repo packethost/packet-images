@@ -1,0 +1,60 @@
+#!/usr/bin/perl -w
+#
+# Copyright (c) 2003 Martin A. Godisch for Debian GNU/Linux, GPL
+
+=head1 NAME
+
+syslog2eximlog - make syslog output suitable for eximstats
+
+=head1 SYNOPSIS
+
+B<syslog2eximlog> B<<> I<mail.log> B<|> B<eximstats>
+
+=head1 DESCRIPTION
+
+syslog2eximlog converts logfiles produced by syslog when using
+B<log_file_path = syslog> in your I<exim.conf> back to exim
+logfile format, suitable for B<eximstats>. B<syslog_timestamp>
+may be B<true> or B<false>.
+
+The program always succeeds, invalid lines will be ignored.
+
+=head1 BUGS
+
+Please report any bugs directly to the author.
+
+=head1 AUTHOR
+
+Martin A. Godisch <godisch@debian.org> for Debian GNU/Linux.
+
+=head1 SEE ALSO
+
+B<eximstats>(8)
+
+=cut
+
+my @date  = localtime(time);
+$date[4] +=    1;
+$date[5] += 1900;
+my %names = (
+	"Jan", "01", "Feb", "02", "Mar", "03", "Apr", "04",
+	"May", "05", "Jun", "06", "Jul", "07", "Aug", "08",
+	"Sep", "09", "Oct", "10", "Nov", "11", "Dec", "12"
+);
+
+while (<>) {
+	next unless (s/^(\w{3})\s([\s\d]\d)\s(\d\d):(\d\d):(\d\d)\s\S+\sexim\[\d+\]:\s//);
+
+	my ($month, $day, $hour, $min, $sec) = ($names{$1}, $2, $3, $4, $5);
+
+	if (/^\d{4}-\d\d-\d\d\s\d\d:\d\d:\d\d\s/) {
+		print $_;
+	} else {
+		printf "%04d-%02d-%02d %02d:%02d:%02d %s",
+			# assume current year if month/day <= today, otherwise assume last year
+			$month > $date[4] || $month == $date[4] && $day > $date[3] ? $date[5] - 1 : $date[5],
+			$month, $day, $hour, $min, $sec, $_;
+	}
+}
+
+exit 0;

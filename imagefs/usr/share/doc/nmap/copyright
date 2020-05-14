@@ -1,0 +1,214 @@
+This is the Debian GNU/Linux package of NMAP -- The Network Mapper,
+by Fyodor <fyodor@insecure.org>.  Please see http://nmap.org/.
+
+This package was crafted by LaMont Jones <lamont@debian.org> using:
+
+	http://nmap.org/
+
+NMAP is copyright 1997-2003 by Fyodor <fyodor@insecure.org> and others,
+and distributed under the terms of the GNU General Public License, Version 2.
+
+On Debian GNU/Linux systems, the complete text of the GNU General
+Public License can be found in `/usr/share/common-licenses/GPL-2'.
+
+The actual Nmap license (minus the copy of GPL-2 mentioned above):
+
+  The main Nmap code is covered under the Nmap license, which is the GPL
+  with a few clarifications/exceptions. A copy of that can be found at
+  http://insecure.org/nmap/data/COPYING .
+
+  The Nmap Security Scanner also uses 3rd party open source libraries
+  for various functions. Some or all of these may be necessary or
+  desirable to distribute Nmap. All use BSD-style licenses. If they
+  are included, their license must be followed. This document briefly
+  describes how and when each library is used, and details the license
+  terms. The six libraries are the the LibPcap raw packet capture
+  library, WinPcap Windows Packet Capture Library, Libdnet raw
+  networking library, LibPCRE perl-compatable regular expression
+  library, Lua programming language, and the OpenSSL SSL encryption
+  library.
+
+  ==LibPcap Raw Packet Capture Library==
+
+  LibPcap is used by Nmap on UNIX for raw packet reading during host
+  discovery, port scanning, and OS detection. It is available from
+  http://www.tcpdump.org. It is bundled with the Nmap Security Scanner
+  in the libpcap-possiblymodified subdirectory. The BSD-style license
+  for version 0.8.3 follows:
+
+  License: BSD
+
+  Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
+
+    1. Redistributions of source code must retain the above copyright
+       notice, this list of conditions and the following disclaimer.
+
+    2. Redistributions in binary form must reproduce the above copyright
+       notice, this list of conditions and the following disclaimer in
+       the documentation and/or other materials provided with the
+       distribution.
+
+    3. The names of the authors may not be used to endorse or promote
+       products derived from this software without specific prior
+       written permission.
+
+  THIS SOFTWARE IS PROVIDED ``AS IS'' AND WITHOUT ANY EXPRESS OR IMPLIED
+  WARRANTIES, INCLUDING, WITHOUT LIMITATION, THE IMPLIED WARRANTIES OF
+  MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE.
+
+  ==WinPcap Windows Packet Library==
+
+  WinPcap is used by Nmap on Windows for raw packet reading during host
+  discovery, port scanning, and OS detection. It is available from
+  http://winpcap.polito.it/. It is a derivative of LibPcap, so that
+  license (above) must be followed as well. The BSD-style license terms
+  for WinPcap 3.1 follow:
+
+  Copyright (c) 1999 - 2005 NetGroup, Politecnico di Torino (Italy).
+  Copyright (c) 2005 CACE Technologies, Davis (California).
+  All rights reserved.
+
+  Redistribution and use in source and binary forms, with or without
+  modification, are permitted provided that the following conditions are
+  met:
+
+     1. Redistributions of source code must retain the above copyright
+	notice, this list of conditions and the following disclaimer.
+
+     2. Redistributions in binary form must reproduce the above
+	copyright notice, this list of conditions and the following
+	disclaimer in the documentation and/or other materials provided
+	with the distribution.
+
+     3. Neither the name of the Politecnico di Torino, CACE Technologies
+	nor the names of its contributors may be used to endorse or
+	promote products derived from this software without specific
+	prior written permission.
+
+  THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
+  "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
+  LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR
+  A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT
+  OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
+  SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
+  LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,
+  DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY
+  THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
+  (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
+  OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+
+  This product includes software developed by the University of
+  California, Lawrence Berkeley Laboratory and its contributors.
+
+  ==Libdnet raw networking library==
+
+  Libdnet (http://libdnet.sourceforge.net/) is bundled with Nmap and is
+  required on all platforms for low-level tasks such as sending raw
+  Ethernet frames. Version 1.10 is distributed under the following
+  BSD-style license:
+
+    Copyright (c) 2000-2004 Dug Song <dugsong_at_monkey.org>
+    All rights reserved, all wrongs reversed.
+
+    Redistribution and use in source and binary forms, with or without
+    modification, are permitted provided that the following conditions
+    are met:
+
+    1. Redistributions of source code must retain the above copyright
+       notice, this list of conditions and the following disclaimer.
+
+    2. Redistributions in binary form must reproduce the above copyright
+       notice, this list of conditions and the following disclaimer in
+       the documentation and/or other materials provided with the
+       distribution.
+
+    3. The names of the authors and copyright holders may not be used to
+       endorse or promote products derived from this software without
+       specific prior written permission.
+
+    THIS SOFTWARE IS PROVIDED ``AS IS'' AND ANY EXPRESS OR IMPLIED
+    WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF
+    MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+    DISCLAIMED. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR ANY DIRECT,
+    INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES
+    (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
+    SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION)
+    HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT,
+    STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
+    ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED
+    OF THE POSSIBILITY OF SUCH DAMAGE.
+
+  ==LibPCRE Perl-compatable Regular Expression Library==
+
+  LibPCRE is used as part of Nmap version detection. It is licensed
+  under a BSD license. It is bundled with Nmap in the libpcre
+  subdirectory. The license terms for LibPCRE 7.0 follows:
+
+  Written by: Philip Hazel
+  Copyright (c) 1997-2005 University of Cambridge
+  All rights reserved.
+
+  Redistribution and use in source and binary forms, with or without
+  modification, are permitted provided that the following conditions are
+  met:
+
+      * Redistributions of source code must retain the above copyright
+	notice, this list of conditions and the following disclaimer.
+
+      * Redistributions in binary form must reproduce the above
+	copyright notice, this list of conditions and the following
+	disclaimer in the documentation and/or other materials provided
+	with the distribution.
+
+      * Neither the name of the University of Cambridge nor the name of
+	Google Inc. nor the names of their contributors may be used to
+	endorse or promote products derived from this software without
+	specific prior written permission.
+
+  THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
+  "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
+  LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR
+  A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT
+  OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
+  SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
+  LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,
+  DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY
+  THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
+  (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
+  OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+
+  ==Lua programming language==
+
+  The LUA programming language may optionally be embedded into Nmap as
+  part of the Nmap Scripting Engine functionality. LUA will not be
+  included if the –without-liblua configuration option is given. If Lua
+  is included, Nmap also includes some LUA modules which also fall under
+  the free LUA license. The LUA license is as follows:
+
+  Copyright 1994-2007 Lua.org, PUC-Rio.
+
+  Permission is hereby granted, free of charge, to any person obtaining
+  a copy of this software and associated documentation files (the
+  "Software"), to deal in the Software without restriction, including
+  without limitation the rights to use, copy, modify, merge, publish,
+  distribute, sublicense, and/or sell copies of the Software, and to
+  permit persons to whom the Software is furnished to do so, subject to
+  the following conditions:
+
+  The above copyright notice and this permission notice shall be
+  included in all copies or substantial portions of the Software.
+
+  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
+  EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
+  MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
+  NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE
+  LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION
+  OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
+  WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+
+  ==OpenSSL SSL encryption library==
+
+  OpenSSL can optionally be used by Nmap Service Detection to
+  communicate with SSL-enabled protocols such as https, pop3-s, imaps,
+  etc. Its BSD-style license is too long to include here, but available
+  from http://www.openssl.org/ . OpenSSL is not bundled with Nmap.

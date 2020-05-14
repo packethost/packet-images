@@ -1,0 +1,18 @@
+
+### router/100_exim4-config_domain_literal
+#################################
+
+# This router handles e-mail addresses in "domain literal" form like
+# <user@[10.11.12.13]>. The RFCs require this facility, but it is disabled
+# in the default config since it is rarely used and frequently abused.
+# Domain literal support also needs to be enabled in the main config,
+# which is automatically done if you use the enable macro
+# MAIN_ALLOW_DOMAIN_LITERALS.
+
+.ifdef MAIN_ALLOW_DOMAIN_LITERALS
+domain_literal:
+  debug_print = "R: domain_literal for $local_part@$domain"
+  driver = ipliteral
+  domains = ! +local_domains
+  transport = remote_smtp
+.endif

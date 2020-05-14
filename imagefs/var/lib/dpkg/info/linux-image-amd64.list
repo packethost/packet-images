@@ -1,0 +1,11 @@
+/.
+/usr
+/usr/share
+/usr/share/bug
+/usr/share/bug/linux-image-amd64
+/usr/share/bug/linux-image-amd64/presubj
+/usr/share/doc
+/usr/share/doc/linux-image-amd64
+/usr/share/doc/linux-image-amd64/NEWS.Debian.gz
+/usr/share/doc/linux-image-amd64/changelog.gz
+/usr/share/doc/linux-image-amd64/copyright

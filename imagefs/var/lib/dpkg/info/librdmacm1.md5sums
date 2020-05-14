@@ -1,0 +1,4 @@
+db573b17ed60847060e8babda0445da7  usr/lib/x86_64-linux-gnu/librdmacm.so.1.0.0
+7701fec1f5909e909a59bf059a4ccb07  usr/lib/x86_64-linux-gnu/rsocket/librspreload.so.1.0.0
+8b13cda3c560182ee6f13a3da0fb6629  usr/share/doc/librdmacm1/changelog.Debian.gz
+aa31a8cb4a75749081cf6f1a870c011f  usr/share/doc/librdmacm1/copyright

@@ -1,0 +1,28 @@
+#!/bin/bash
+# install as /usr/share/bug/$package/script or /usr/share/bug/$package
+
+UE4CC="/etc/exim4/update-exim4.conf.conf"
+REDIR=">&3"
+if [ "$OUTPUT" = "all" ]; then
+  REDIR=""
+fi
+
+if test -x /usr/sbin/exim4 ; then
+	eval /usr/sbin/exim4 -bV $REDIR
+fi
+if [ "$OUTPUT" != "all" ]; then
+	yesno "Include extended configuration information?" "yep"
+	if [ "$REPLY" != "yep" ] ;then
+        	exit 0
+	fi
+fi
+if test -r $UE4CC ; then
+	eval cat $UE4CC $REDIR
+fi
+if test -r /etc/mailname ; then
+	eval echo -n 'mailname:' $REDIR
+	eval cat /etc/mailname $REDIR
+fi
+if test -r  /etc/default/exim4 ; then
+	eval cat /etc/default/exim4 $REDIR
+fi

@@ -1,0 +1,14 @@
+libmailutils 5 libmailutils5
+libmuaux 5 libmailutils5
+libmu_auth 5 libmailutils5
+libmu_compat 0 libmailutils5
+libmu_dbm 5 libmailutils5
+libmu_imap 5 libmailutils5
+libmu_maildir 5 libmailutils5
+libmu_mailer 5 libmailutils5
+libmu_mbox 5 libmailutils5
+libmu_mh 5 libmailutils5
+libmu_pop 5 libmailutils5
+libmu_py 5 libmailutils5
+libmu_scm 5 libmailutils5
+libmu_sieve 5 libmailutils5

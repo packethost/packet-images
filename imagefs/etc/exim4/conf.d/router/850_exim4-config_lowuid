@@ -1,0 +1,29 @@
+
+### router/850_exim4-config_lowuid
+#################################
+
+.ifndef FIRST_USER_ACCOUNT_UID
+FIRST_USER_ACCOUNT_UID = 0
+.endif
+
+.ifndef DEFAULT_SYSTEM_ACCOUNT_ALIAS
+DEFAULT_SYSTEM_ACCOUNT_ALIAS = :fail: no mail to system accounts
+.endif
+
+COND_SYSTEM_USER_AND_REMOTE_SUBMITTER = "\
+               ${if and{{! match_ip{$sender_host_address}{:@[]}}\
+                        {<{$local_user_uid}{FIRST_USER_ACCOUNT_UID}}}\
+                    {1}{0}\
+		}"
+
+lowuid_aliases:
+  debug_print = "R: lowuid_aliases for $local_part@$domain (UID $local_user_uid)"
+  check_local_user
+  driver = redirect
+  allow_fail
+  domains = +local_domains
+  condition = COND_SYSTEM_USER_AND_REMOTE_SUBMITTER
+  data = ${if exists{CONFDIR/lowuid-aliases}\
+              {${lookup{$local_part}lsearch{CONFDIR/lowuid-aliases}\
+              {$value}{DEFAULT_SYSTEM_ACCOUNT_ALIAS}}}\
+              {DEFAULT_SYSTEM_ACCOUNT_ALIAS}}

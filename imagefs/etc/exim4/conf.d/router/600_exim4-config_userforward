@@ -1,0 +1,51 @@
+
+### router/600_exim4-config_userforward
+#################################
+
+# This router handles forwarding using traditional .forward files in users'
+# home directories. It also allows mail filtering with a forward file
+# starting with the string "# Exim filter" or "# Sieve filter".
+#
+# The no_verify setting means that this router is skipped when Exim is
+# verifying addresses. Similarly, no_expn means that this router is skipped if
+# Exim is processing an EXPN command.
+#
+# The check_ancestor option means that if the forward file generates an
+# address that is an ancestor of the current one, the current one gets
+# passed on instead. This covers the case where A is aliased to B and B
+# has a .forward file pointing to A.
+#
+# The four transports specified at the end are those that are used when
+# forwarding generates a direct delivery to a directory, or a file, or to a
+# pipe, or sets up an auto-reply, respectively.
+#
+userforward:
+  debug_print = "R: userforward for $local_part@$domain"
+  driver = redirect
+  domains = +local_domains
+  check_local_user
+  file = $home/.forward
+  require_files = $local_part:$home/.forward
+  no_verify
+  no_expn
+  check_ancestor
+  allow_filter
+  forbid_smtp_code = true
+  directory_transport = address_directory
+  file_transport = address_file
+  pipe_transport = address_pipe
+  reply_transport = address_reply
+  skip_syntax_errors
+  syntax_errors_to = real-$local_part@$domain
+  syntax_errors_text = \
+    This is an automatically generated message. An error has\n\
+    been found in your .forward file. Details of the error are\n\
+    reported below. While this error persists, you will receive\n\
+    a copy of this message for every message that is addressed\n\
+    to you. If your .forward file is a filter file, or if it is\n\
+    a non-filter file containing no valid forwarding addresses,\n\
+    a copy of each incoming message will be put in your normal\n\
+    mailbox. If a non-filter file contains at least one valid\n\
+    forwarding address, forwarding to the valid addresses will\n\
+    happen, and those will be the only deliveries that occur.
+

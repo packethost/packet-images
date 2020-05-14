@@ -1,0 +1,10 @@
+#!/bin/sh -e
+
+if [ "$1" = configure ]
+then
+    update-alternatives --install /usr/bin/rename rename /usr/bin/file-rename \
+    70 --slave /usr/share/man/man1/rename.1.gz rename.1.gz \
+    /usr/share/man/man1/file-rename.1p.gz
+fi
+
+

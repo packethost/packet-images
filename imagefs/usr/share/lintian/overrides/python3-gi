@@ -1,0 +1,2 @@
+python3-gi: package-name-doesnt-match-sonames *
+python3-gi: dev-pkg-without-shlib-symlink *

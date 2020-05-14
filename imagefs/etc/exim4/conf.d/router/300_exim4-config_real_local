@@ -1,0 +1,22 @@
+
+### router/300_exim4-config_real_local
+#################################
+
+# This router allows reaching a local user while avoiding local
+# processing. This can be used to inform a user of a broken .forward
+# file, for example. The userforward router does this.
+
+COND_LOCAL_SUBMITTER = "\
+               ${if match_ip{$sender_host_address}{:@[]}\
+                    {1}{0}\
+		}"
+
+real_local:
+  debug_print = "R: real_local for $local_part@$domain"
+  driver = accept
+  domains = +local_domains
+  condition = COND_LOCAL_SUBMITTER
+  local_part_prefix = real-
+  check_local_user
+  transport = LOCAL_DELIVERY
+

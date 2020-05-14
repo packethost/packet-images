@@ -1,0 +1,13 @@
+/.
+/usr
+/usr/bin
+/usr/bin/ioping
+/usr/share
+/usr/share/doc
+/usr/share/doc/ioping
+/usr/share/doc/ioping/copyright
+/usr/share/doc/ioping/changelog.gz
+/usr/share/doc/ioping/changelog.Debian.gz
+/usr/share/man
+/usr/share/man/man1
+/usr/share/man/man1/ioping.1.gz

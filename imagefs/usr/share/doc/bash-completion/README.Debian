@@ -1,0 +1,11 @@
+bash-completion for Debian
+--------------------------
+
+ Completions are kept in /usr/share/bash-completion/completions.
+
+ /etc/bash_completion.d/ is being kept for compatibility reasons; but will
+ disappear in future. If you're a package maintainer, you're encouraged to
+ use dh_bash-completion(1), which will take care of installing third-party
+ completions into the appropriate directory.
+
+ -- David Paleino <dapal@debian.org>  Sun, 10 Apr 2011 15:33:19 +0200

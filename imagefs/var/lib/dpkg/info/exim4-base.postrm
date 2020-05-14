@@ -1,0 +1,75 @@
+#!/bin/sh
+
+set -e
+
+if [ -e /usr/share/debconf/confmodule ] ; then
+  . /usr/share/debconf/confmodule
+  export debconfavailable="yes"
+fi
+
+if [ -n "$EX4DEBUG" ]; then
+  echo "now debugging $0 $@"
+  set -x
+fi
+
+case "$1" in
+    remove)
+    # work around apt purging -base before even removing -daemon #261994.
+    # postrm is good enough, we just need the init-script which is a conffile.
+    	if [ -x /etc/init.d/exim4 ]; then
+                if [ -n "$EX4DEBUG" ]; then
+                  netstat -tulpen
+                  ls -al /run/exim4/
+                  cat /run/exim4/exim.pid
+                  pidof exim4
+                fi
+		if command -v invoke-rc.d >/dev/null 2>&1; then
+		    invoke-rc.d exim4 stop
+		else
+		    /etc/init.d/exim4 stop
+		fi
+                if [ -n "$EX4DEBUG" ]; then
+                  netstat -tulpen
+                  ls -al /run/exim4/
+                  cat /run/exim4/exim.pid
+                  pidof exim4
+                  if pidof exim4; then
+                    echo >&2 "WARN: There are some exim4 processes still running after stopping exim"
+                  fi
+                fi
+	fi
+	rm -f /var/lib/exim4/berkeleydbvers.txt
+    ;;
+    purge)
+	update-rc.d exim4 remove > /dev/null
+
+	# ask about purging mailqueue if debconf is available, keep it
+	# otherwise
+	if [ -e /var/spool/exim4/input ] \
+		&& ! rmdir /var/spool/exim4/input 2>/dev/null \
+		&& [ "$debconfavailable" = "yes" ]; then
+		db_version 2.0
+		db_input medium exim4/purge_spool || true
+		db_go || true
+		db_get exim4/purge_spool
+		purge_spool="$RET"
+		if [ "${purge_spool}" = "true" ] ; then 
+			rm -rf /var/spool/exim4/input
+		fi
+	fi
+							
+	# remove logs and pid-dir.
+	rm -rf /run/exim4 /var/log/exim4 /var/spool/exim4/msglog \
+		/var/spool/exim4/db /var/spool/exim4/exim-process.info \
+		/var/spool/exim4/gnutls-params*
+	rmdir /var/spool/exim4 /var/lib/exim4 2> /dev/null || true
+	;;
+esac
+
+# Automatically added by dh_installdebconf
+if [ "$1" = purge ] && [ -e /usr/share/debconf/confmodule ]; then
+	. /usr/share/debconf/confmodule
+	db_purge
+fi
+# End automatically added section
+

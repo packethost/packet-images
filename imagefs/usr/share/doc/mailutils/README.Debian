@@ -1,0 +1,28 @@
+mailutils for Debian
+=============================
+
+Welcome to GNU mailutils.  It has been configured with the following
+options:
+
+        --with-lispdir=\$${prefix}/share/emacs/site-lisp \
+        --enable-virtual-domains --enable-mh --enable-python \
+        --with-gnutls --with-kyotocabinet --with-gssapi --with-gsasl \
+        --with-mysql --disable-rpath --disable-static \
+        --disable-cxx --disable-nntp \
+        --program-transform-name='s/^mu$$/mu-tool/'
+
+This package is work in progress, and feedback is appreciated, either
+through bug reports in the Debian BTS, or upstream at
+bug-mailutils@gnu.org.
+
+Support for PostgreSQL is not enabled for licensing reasons. PostgreSQL
+uses OpenSSL for encryption, and due to incompatibilities between the GPL
+and the OpenSSL license, it is not possible to link GNU mailutils to
+PostgreSQL's client library. Until this is resolved (ie, PostgreSQL
+switches to gnutls), the package can't add PostgreSQL support.
+
+The `mu' utility has been renamed to `mu-tool', as another binary with
+that name already existed in a Debian package when it was introduced in
+Mailutils.
+
+ Jordi Mallach <jordi@debian.org>  Fri, 22 Jun 2012 22:05:45 +0200

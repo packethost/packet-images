@@ -1,0 +1,1401 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1"><title>Exim 4 for Debian</title><meta name="generator" content="DocBook XSL Stylesheets V1.79.1"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="article"><div class="titlepage"><div><div><h2 class="title"><a name="idm1"></a>Exim 4 for Debian</h2></div></div><hr></div><div class="toc"><p><b>Table of Contents</b></p><dl class="toc"><dt><span class="section"><a href="#idm3">1. Introduction</a></span></dt><dd><dl><dt><span class="section"><a href="#idm6">1.1. How to find your way around the Documentation</a></span></dt><dt><span class="section"><a href="#idm33">1.2. Getting Support</a></span></dt><dt><span class="section"><a href="#idm40">1.3. Packaging</a></span></dt></dl></dd><dt><span class="section"><a href="#idm71">2. Configuration of Exim 4 in the Debian packages</a></span></dt><dd><dl><dt><span class="section"><a href="#idm84">2.1. The Configuration System</a></span></dt><dt><span class="section"><a href="#TLS">2.2. Using TLS</a></span></dt><dt><span class="section"><a href="#smtp-auth">2.3. SMTP-AUTH</a></span></dt><dt><span class="section"><a href="#idm417">2.4. How the Exim daemon is started</a></span></dt><dt><span class="section"><a href="#idm426">2.5. Miscellaneous packaging issues</a></span></dt><dt><span class="section"><a href="#idm455">2.6. Using Exim with inetd/xinetd</a></span></dt><dt><span class="section"><a href="#idm484">2.7. Handling incoming mail for local accounts with low UID</a></span></dt><dt><span class="section"><a href="#idm491">2.8. How to bypass local routing specialities</a></span></dt><dt><span class="section"><a href="#idm496">2.9. Using more complex deliveries from alias files</a></span></dt><dt><span class="section"><a href="#idm515">2.10. Putting Exim 4 and UUCP together</a></span></dt></dl></dd><dt><span class="section"><a href="#idm555">3. Updating from Exim 3</a></span></dt><dt><span class="section"><a href="#idm574">4. Misc Notes</a></span></dt><dd><dl><dt><span class="section"><a href="#idm576">4.1. PAM</a></span></dt><dt><span class="section"><a href="#idm581">4.2. Account name restrictions</a></span></dt><dt><span class="section"><a href="#idm585">4.3. No deliveries to root!</a></span></dt><dt><span class="section"><a href="#idm591">4.4. Debugging maintainer and init scripts</a></span></dt><dt><span class="section"><a href="#idm595">4.5. SELinux</a></span></dt><dt><span class="section"><a href="#idm599">4.6. misc</a></span></dt></dl></dd><dt><span class="section"><a href="#idm615">5. Debian modifications to the Exim source</a></span></dt><dt><span class="section"><a href="#idm637">6. Credits</a></span></dt></dl></div><div class="section"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="idm3"></a>1. Introduction</h2></div></div></div><p>
+      If you're reading this, you have found the README.Debian
+      file. This is good, thanks! Please continue reading this file in
+      its entirety. It is full of important information and has been
+      written with the questions in mind that keep popping up on the
+      mailing lists.
+    </p><div class="section"><div class="titlepage"><div><div><h3 class="title"><a name="idm6"></a>1.1. How to find your way around the Documentation</h3></div></div></div><p>
+        Exim comes with very extensive documentation. Here is how to
+        find it.
+     	</p><div class="orderedlist"><ol class="orderedlist" type="1"><li class="listitem">
+	      A lot of information about Debian's Exim 4
+              packaging can be found in this document.
+            </li><li class="listitem">
+	      The packages contain a lot of Debian-specific man pages.
+              Use the <span class="command"><strong>apropos exim</strong></span> command to get a list.
+            </li><li class="listitem">
+	      Most files that control the default configuration are
+	      documented in the exim4-config_files(5) man page, which
+	      is symlinked to the file names. man &lt;filename&gt; should
+	      lead you to the page.
+            </li><li class="listitem">
+              The Debian Exim 4 packages have their own
+	      <a class="ulink" href="http://pkg-exim4.alioth.debian.org" target="_top">
+	        Home Page
+	      </a> which also links to a User FAQ.
+	    </li><li class="listitem"><p>
+	      The very extensive Upstream documentation is shipped
+	      </p><div class="orderedlist"><ol class="orderedlist" type="a"><li class="listitem">
+		    in text form
+	            (<code class="filename">/usr/share/doc/exim4-base/spec.txt.gz</code>)
+	            with the binary packages.
+		  </li><li class="listitem">
+		    in HTML in the package
+		    <code class="filename">exim4-doc-html</code>
+		  </li><li class="listitem">
+		    as a Texinfo file in the package
+                    <code class="filename">exim4-doc-info</code>
+		  </li></ol></div><p>
+	    </p></li></ol></div><p>
+      </p><p>
+        Please note that documentation found on the web or in other
+	parts of the Debian system (such as the Debian Reference)
+	might be outdated and thus give wrong advice. In doubt, the
+	documentation listed above should take precedence.
+      </p></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a name="idm33"></a>1.2. Getting Support</h3></div></div></div><p>
+	For your questions and comments, there is a <a class="ulink" href="http://lists.alioth.debian.org/mailman/listinfo/pkg-exim4-users" target="_top">
+	Debian-specific mailing	list</a>. Please ask Debian-specific
+	questions there, and only write to the upstream exim-users mailing
+	list if
+	you are sure that your question is not Debian-specific. 
+	Debian-specific questions are more likely to find answers on
+	our pkg-exim4-users mailing list, while complex custom
+	configuration issues might be more easily solved on the
+	upstream exim-users mailing list because of the broader and
+	more experienced audience there. You can subscribe to
+	pkg-exim4-users <a class="ulink" href="http://lists.alioth.debian.org/mailman/listinfo/pkg-exim4-users" target="_top">
+	  via the subscription web page;</a> you need to be
+        subscribed to post.
+      </p><p>
+        If you think that your question might be more easily answered
+	if one knows a bit about your configuration, you might want to
+	execute <span class="command"><strong>reportbug --subject="none" --offline --quiet
+	--severity=wishlist --body="none" --output=exim4.reportbug
+	exim4-config</strong></span> on the system in question, answer yes
+        to both "include [extended] configuration" questions and include
+	the contents of the exim4.reportbug file generated by this
+	command with your question. Please check whether the file
+	contains any confidential information before sending.
+      </p></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a name="idm40"></a>1.3. Packaging</h3></div></div></div><p>
+	Similar to the Apache2 package, Exim 4 is an entirely
+	different package that does not currently offer a smooth
+	upgrade path from Debian's Exim 3 packages.
+      </p><p>
+	It is the first Exim package in Debian that can be configured
+	using debconf. However, the entire configuration framework is
+	extremely flexible, allowing you to get exactly the amount of
+	control you need for the job at hand.
+      </p><p>
+	The <a class="ulink" href="http://pkg-exim4.alioth.debian.org" target="_top">development web page</a> contains a lot of
+	useful links and other information. The subversion repository
+	of the Debian package is available for public read-only access
+	and is linked from the development web page.
+      </p><div class="section"><div class="titlepage"><div><div><h4 class="title"><a name="idm46"></a>1.3.1. Feature Sets in the daemon packages</h4></div></div></div><p>
+	  To use Exim 4, you need at least the following packages:
+	  </p><div class="variablelist"><dl class="variablelist"><dt><span class="term">exim4-base</span></dt><dd>support files for all Exim MTA (v4) packages</dd><dt><span class="term">exim4-config</span></dt><dd>configuration for the Exim MTA (v4)</dd><dt><span class="term">exim4-daemon-light</span></dt><dd>lightweight exim MTA (v4) daemon</dd></dl></div><p>
+	</p><p>
+	  Just apting the metapackage <span class="command"><strong>exim4</strong></span> will pull
+	  in the other packages per dependency. You'll get an exim daemon
+	  with minimal feature set (no external lookups).
+	</p><p>
+	  If you need more advanced features like LDAP, sqlite, PostgreSQL
+	  and MySQL data lookups, SASL and SPA SMTP authentication, embedded
+	  Perl interpreter, and exiscan-acl for integration of
+	  virus-scanners and SpamAssassin, you can replace
+	  <span class="command"><strong>exim4-daemon-heavy</strong></span> instead of
+	  <span class="command"><strong>exim4-daemon-light</strong></span>. Additionally, the source
+	  package offers infrastructure to build your own custom-tailored
+	  exim4-daemon-custom which exactly fits your special local needs. 
+	  The infrastructure to do so is already in place, see
+	  debian/rules for instructions.
+	</p></div><div class="section"><div class="titlepage"><div><div><h4 class="title"><a name="idm67"></a>1.3.2. How to build a custom daemon</h4></div></div></div><p>
+	  The process of building a custom daemon is partially
+          documented in the <code class="filename">debian/rules</code> file
+	  in the source package. Patches for more documentation are welcome.
+	</p></div></div></div><div class="section"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="idm71"></a>2. Configuration of Exim 4 in the Debian packages</h2></div></div></div><p>
+      Generally, the Debian Exim 4 packages are configured through
+      debconf. You have been asked some questions on package installation,
+      and your initial Exim configuration has been created from your
+      answers. You can repeat the configuration process any time by invoking
+      <span class="command"><strong>dpkg-reconfigure exim4-config</strong></span>. If you are an
+      experienced Exim administrator and prefer to have your own,
+      hand-crafted, non-automatic Exim configuration, you will find
+      information about how to do so in
+      <a class="xref" href="#completely-different-configuration" title="2.1.6. Using a completely different configuration scheme">Section 2.1.6, &#8220;Using a completely different configuration scheme&#8221;</a>.
+    </p><p>
+      The debconf-driven configuration is mainly geared for a
+      one-domain shell account machine/workstation with local delivery
+      as suggested by the original upstream default configuration.
+      If you configure the packages to handle more than one local
+      domain, all local domains are treated identically. The domain
+      part is not used for routing and filtering decisions.
+    </p><p>
+      Despite the default configuration being extended somewhat from
+      the original upstream, chances are that you'll need to
+      manually change the Exim configuration with an editor if you intend to
+      do something that is not covered by the debconf-driven configuration.
+      It has never been the packages' intention to offer all possible
+      configuration methods through debconf. The configuration files are
+      there to be changed, feel free to do so if you see fit. The Debian
+      Exim 4 maintainers have tried to make the configuration as flexible as
+      possible so that manual intervention can be minimized.
+    </p><p>
+      If you need to make manual changes to the Exim configuration,
+      please be familiar with how Exim works. At minimum, have read this
+      README file and the manpages delivered with the Debian Exim 4
+      packages, and <code class="filename">/usr/share/doc/exim4-base/spec.txt.gz</code>
+      chapters <span class="phrase">"How Exim receives and delivers mail"</span> and
+      <span class="phrase">"The Exim run time configuration file"</span>.
+      <code class="filename">spec.txt.gz</code> is an excellent reference.
+    </p><p>
+      Please note that while most free-form fields in the
+      debconf-driven configuration have the entered string end up
+      verbatim in Exim's configuration file (and thus using more
+      advanced features like host, address and domain lists is possible
+      and will probably work), this is not officially supported.
+      Only plain lists are supported in the debconf dialogs. You may
+      use more advanced features, but they may stop working any time
+      during upgrades.
+    </p><div class="section"><div class="titlepage"><div><div><h3 class="title"><a name="idm84"></a>2.1. The Configuration System</h3></div></div></div><div class="section"><div class="titlepage"><div><div><h4 class="title"><a name="debconf-questions"></a>2.1.1. The Debconf questions</h4></div></div></div><p>
+	      In this section, we try to document and explain the debconf
+	      questions, which are themselves limited to a small screen of
+	      information and might leave questions unanswered. Since you
+	      can usually read this file only after having answered the 
+	      questions, the process can always be repeated by invoking
+	      <span class="command"><strong>dpkg-reconfigure exim4-config.</strong></span> 
+	      <code class="filename">/etc/exim4/update-exim4.conf.conf</code>,
+	      documented in the <span class="command"><strong>update-exim4.conf</strong></span>
+	      manual page, is
+	      a simple shell-script snippet used to store the answers
+	      that you passed to debconf when initially configuring Exim.
+	      You may also modify this file with an editor of your choice.
+	      The package maintainer scripts can handle this and will
+	      preserve your changes. 
+	    </p><div class="section"><div class="titlepage"><div><div><h5 class="title"><a name="idm92"></a>2.1.1.1. General type of mail configuration</h5></div></div></div><p>
+                This is the main configuration question which will
+		control which of the remaining questions are
+		presented to you. It also controls things like daemon
+		invocation and delivery of outgoing mail.
+              </p><div class="section"><div class="titlepage"><div><div><h6 class="title"><a name="idm95"></a>2.1.1.1.1.  internet site; mail is sent and
+	      received directly using SMTP</h6></div></div></div><p>
+		    This option is suitable for a standalone system
+		    with full internet connectivity.
+		  </p><div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: disc; "><li class="listitem"><p>
+			    The Exim SMTP daemon will accept messages
+			    to local domains, and deliver them locally.
+                          </p></li><li class="listitem"><p>
+			    Outgoing mail will be delivered directly
+			    to the mail exchange servers of the
+			    recipient domain
+                          </p></li></ul></div></div><div class="section"><div class="titlepage"><div><div><h6 class="title"><a name="idm103"></a>2.1.1.1.2.  mail sent by smarthost; received via
+	      SMTP or fetchmail</h6></div></div></div><p>
+		    This option is suitable for a standalone client system
+		    which has restricted internet connectivity, for
+		    example on a residential connection where an SMTP
+		    smarthost is used. Some ISPs block outgoing SMTP
+		    connections to combat the spam problem, thus
+		    requiring the use of their smarthosts. It is
+		    generally a good idea to use the ISPs smart host
+		    if one is connected with a dynamic IP address
+		    since quite a few sites do not accept mail
+		    directly delivered from a dial-in pool.
+		  </p><p>
+		    fetchmail can be used to retrieve incoming mail
+		    from the ISP's POP3 or IMAP mail server and
+		    deliver it to Exim via SMTP.
+		  </p><div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: disc; "><li class="listitem"><p>
+			    The Exim SMTP daemon will accept messages
+			    to local domains, and deliver them locally.
+                          </p></li><li class="listitem"><p>
+			    Outgoing mail will always be delivered to
+			    the smarthost configured in exim4.
+                          </p></li></ul></div></div><div class="section"><div class="titlepage"><div><div><h6 class="title"><a name="idm112"></a>2.1.1.1.3. mail sent by smarthost; no local mail</h6></div></div></div><p>
+		    This option is suitable for a client system in a
+		    computer pool which is not responsible for a local
+		    e-mail domain. All locally generated e-mail is
+		    sent to the smarthost without any local domains.
+		  </p></div><div class="section"><div class="titlepage"><div><div><h6 class="title"><a name="idm115"></a>2.1.1.1.4. local delivery only; not on a network</h6></div></div></div><p>
+		    This option is suitable for a standalone system
+		    with no networking at all. Only messages for configured
+		    local domains are accepted and delivered locally;
+		    messages for all other domains are rejected:
+		    ``Mailing to remote domains not supported''.
+		  </p></div><div class="section"><div class="titlepage"><div><div><h6 class="title"><a name="idm118"></a>2.1.1.1.5. no configuration at this time</h6></div></div></div><p>
+		    This option disables most of Debian's automatisms
+		    and leaves exim in an unconfigured state.
+		    update-exim4.conf will still copy
+		    <code class="filename">/etc/exim4/exim4.conf.template</code>
+		    or concatenate the files from
+		    <code class="filename">/etc/exim4/conf.d,</code> and will
+		    not generate any configuration control macros.
+		    Unless you manually edit the configuration source,
+		    this will leave Exim with a syntactically invalid
+		    configuration file, thus in a state where the
+		    daemon won't even start.
+		  </p><p>
+		    Only choose this option if you know what you're
+		    doing and are prepared to create your own Exim
+		    configuration.
+		  </p><p>
+		    dpkg-conffile handling is still in place, and you
+		    will be offered updates for configuration
+		    snippets, as soon as they become available.
+		  </p></div></div><div class="section"><div class="titlepage"><div><div><h5 class="title"><a name="idm125"></a>2.1.1.2. System mail name</h5></div></div></div><p>
+	         The "mail name" is the domain name used to "qualify"
+		 mail addresses without a domain name.
+	      </p><p>
+                 This name will also be used by other programs. It
+		 should be the single, full domain name (FQDN).
+	      </p><p>
+                 For example, if a mail address on the local host is
+		 foo@example.org, then the correct value for this
+		 option would be example.org.
+	      </p><p>
+	        Exim, as a rule, handles only fully qualified mail
+		addresses, that is, addresses with a local part, an @
+		sign and a domain. If confronted with an unqualified
+		address, that is, one without @ sign and without
+       		domain, first thing exim does is qualify the address
+		by adding the @ sign and a domain.
+	      </p><p>
+	        This qualification happens for all addresses exim
+                encounters, be it sender, recipient or else.
+              </p><p>
+	        The domain name used to qualify unqualified mail addresses
+		is called ``mail name'' on Debian systems and entered
+                in this debconf dialog. What you enter here will end
+		up in <code class="filename">/etc/mailname,</code> which is a
+		file that might be used by other programs as well.
+	      </p><p>
+	        In some configuration types, the package configuration
+		will offer you, at a later step, to hide this name 
+		from outgoing messages by rewriting the headers.
+	      </p></div><div class="section"><div class="titlepage"><div><div><h5 class="title"><a name="idm135"></a>2.1.1.3. IP addresses to listen on for incoming SMTP
+	  connections</h5></div></div></div><p>
+	        Please enter a semicolon-separated list of IP addresses.
+	        The Exim SMTP listener daemon will listen on all IP
+	        addresses listed here.
+	      </p><p>
+	        An empty value will cause Exim to listen for connections
+	        on all available network interfaces.
+	      </p><p>
+	        If this system does only receive e-mail directly from
+	        local services (and not from other hosts),
+	        it is suggested to prohibit external connections to the
+	        local Exim daemon. Such services include e-mail
+                programs (MUSs) which talk to localhost only as well as
+		fetchmail. External connections are impossible when
+	        127.0.0.1 is entered here, as this will disable listening
+		on public network interfaces.
+	      </p><p>
+	        Do not change this unless you know what you are doing.
+		Altering this value could post a security risk to your
+		system. For most users, the default value is sufficient.
+	      </p></div><div class="section"><div class="titlepage"><div><div><h5 class="title"><a name="idm141"></a>2.1.1.4. Other destinations for which mail is accepted</h5></div></div></div><p>
+	         Please enter a semicolon-separated list of recipient
+		 domains for which this machine should consider itself
+		 the final destination. These domains are commonly
+                 called 'local domains'. The local hostname and 'localhost'
+		 are always added to the list given here.
+	      </p><p>
+                 By  default  all  local    domains  will   be  treated
+		 identically.  If   both a.example and  b.example   are
+		 local  domains, acc@a.example   and acc@b.example will
+		 be delivered to the  same final   destination.      If
+		 different  domain names should be treated differently,
+		 it is necessary to edit the config files afterwards.
+	      </p><p>
+	        The answer to this question ends up in the list of
+		domains that Exim will consider local domains. Mail
+		for recipients in one of these domains will be
+		subject to local alias expansion and then delivered
+		locally in the appropriate configuration types.
+	      </p></div><div class="section"><div class="titlepage"><div><div><h5 class="title"><a name="idm146"></a>2.1.1.5. Domains to relay mail for</h5></div></div></div><p>
+	        Please enter a semicolon-separated list of recipient
+		domains for which this system will relay mail, for
+		example as a fallback MX or mail gateway. This means
+		that this system will accept mail for these domains
+	        from anywhere on the Internet and deliver them
+	        according to local delivery rules.
+	      </p><p>
+                Do not mention local domains here. Wildcards may be used.
+	      </p><p>
+                The answer to this question is a list of the domains
+		for which Exim will relay messages coming in from anywhere
+		on the Internet.
+	      </p></div><div class="section"><div class="titlepage"><div><div><h5 class="title"><a name="idm151"></a>2.1.1.6. Machines to relay mail for</h5></div></div></div><p>
+	         Please enter a semicolon-separated list of IP address
+		 ranges for which this system will unconditionally relay
+		 mail, functioning as a smarthost.
+	      </p><p>
+                 You should use the standard address/prefix format
+		 (e.g. 194.222.242.0/24 or 5f03:1200:836f::/48).
+	      </p><p>
+                 If this system should not be a smarthost for any
+		 other host, leave this list blank.
+	      </p><p>
+	        Please note that systems not listed here can still use
+		SMTP AUTH to relay through this system. If this system
+		only has clients on dynamic IP addresses that use SMTP
+		AUTH, leave this list blank as well. Do
+		<span class="emphasis"><em>NOT</em></span> list 0.0.0.0/0!
+	      </p><p>
+		Warning: While it is possible to use 
+		host<span class="emphasis"><em>names</em></span> instead of IP addresses in this
+		list extra care needs to be taken in this case. 
+		<span class="emphasis"><em>Unresolvable names in the host list will break
+		relaying.</em></span> See
+		Exim specification chapter <span class="phrase">"Domain, host, address, and
+		local part lists"</span>
+		and the exim4-config_files man page.
+	      </p></div><div class="section"><div class="titlepage"><div><div><h5 class="title"><a name="idm162"></a>2.1.1.7. IP address or host name of the outgoing
+              smarthost</h5></div></div></div><p>
+	        Please enter the IP address or the host name of a mail
+		server that this system should use as outgoing
+		smarthost. If the smarthost only accepts your mail on
+		a port different from TCP/25, append two colons and
+		the port number (for example smarthost.example::587 or
+		192.168.254.254::2525). Colons in IPv6 addresses need
+		to be doubled.
+	      </p><p>
+	        If the smarthost requires authentication, please refer
+		to <a class="xref" href="#smtp-auth" title="2.3. SMTP-AUTH">Section 2.3, &#8220;SMTP-AUTH&#8221;</a> for notes about setting
+		up SMTP authentication.
+	      </p><p>
+	        Multiple smarthost entries are permitted, semicolon
+		separated. Each of the hosts is tried, in the order
+		specified (See Exim specification, chapter
+		<span class="phrase">"The manualroute router"</span>, section
+		<span class="phrase">"How the list of hosts is used"</span>.)
+	      </p></div><div class="section"><div class="titlepage"><div><div><h5 class="title"><a name="idm170"></a>2.1.1.8. Hide local mail name in outgoing mail</h5></div></div></div><p>
+	        The headers of outgoing mail can be rewritten to make
+		it appear to have been generated on a different
+		system, replacing the local host name in From,
+		Reply-To, Sender and Return-Path.
+              </p></div><div class="section"><div class="titlepage"><div><div><h5 class="title"><a name="idm173"></a>2.1.1.9. Visible domain name for local users</h5></div></div></div><p>
+	        If you ask Exim to hide the local mail name in
+		outgoing mail, it will next ask you for the domain
+		name that should be visible for your local users.
+		These information is then used to establish the
+		appropriate rewriting rules.
+              </p></div><div class="section"><div class="titlepage"><div><div><h5 class="title"><a name="idm176"></a>2.1.1.10. Keep number of DNS queries minimal
+              (Dial-on-Demand)</h5></div></div></div><p>
+	         In normal mode of operation Exim does DNS lookups at
+		 startup, and when receiving or delivering messages.
+		 This is for logging purposes and allows keeping down
+		 the number of hard-coded values in the configuration.
+	      </p><p>
+                 If this system does not have a DNS full service
+		 resolver available at all times (for example if its
+		 Internet access is a dial-up line using
+		 dial-on-demand), this might have unwanted
+		 consequences. For example, starting up Exim or
+		 running the queue (even with no messages waiting)
+		 might trigger a costly dial-up-event.
+	      </p><p>
+                 This option should be selected if this system is
+		 using Dial-on-Demand. If it has always-on Internet
+		 access, this option should be disabled.
+	      </p></div><div class="section"><div class="titlepage"><div><div><h5 class="title"><a name="idm181"></a>2.1.1.11. Delivery method for local mail</h5></div></div></div><p>
+	        Exim is able to store locally delivered mail in
+		different formats. The most commonly used ones are
+		mbox and Maildir. mbox uses a single file for the
+		complete mail folder stored in /var/mail/. With
+		Maildir format every single message is stored in a
+		separate file in ~/Maildir/.
+	      </p><p>
+	        Please note that most mail tools in Debian expect the
+		local delivery method to be mbox in their default.
+	      </p></div><div class="section"><div class="titlepage"><div><div><h5 class="title"><a name="idm185"></a>2.1.1.12. Split configuration into small files</h5></div></div></div><p>
+	        Our packages offer two (actually three, see
+		<a class="xref" href="#completely-different-configuration" title="2.1.6. Using a completely different configuration scheme">Section 2.1.6, &#8220;Using a completely different configuration scheme&#8221;</a>)
+		possibilities:
+              </p><div class="orderedlist"><ol class="orderedlist" type="1"><li class="listitem">
+		          Generate Exim's configuration from
+			  <code class="filename">/etc/exim4/exim4.conf.template,</code>
+			  which is basically a normal Exim run-time
+			  configuration file which will be supplemented
+			  with some macros generated from Debconf in a
+			  post-processing step before it is passed to exim.
+		      </li><li class="listitem">
+			  Generate Exim's configuration from the
+			  multiple files in
+			  <code class="filename">/etc/exim4/conf.d/</code>. The
+			  directories in
+			  <code class="filename">/etc/exim4/conf.d/</code>
+			  correspond to the sections of the Exim
+			  run-time configuration file, so you should
+			  easily find your way around there.
+		      </li></ol></div><p>
+	        Splitting the configuration across multiple files
+		means that you have the actual configuration file
+		automatically generated from the files below
+		<code class="filename">/etc/exim4/conf.d/</code> by invoking
+		<span class="command"><strong>update-exim4.conf</strong></span>. Each section
+		of Exim's configuration has its own subdirectory and
+		the files in there are supposed to be read in
+		alphanumeric order.
+		<code class="filename">router/00_exim4-config_header</code>
+		is followed by
+		<code class="filename">router/100_exim4-config_domain_literal</code>,
+		...
+              </p><p>
+    	        If you chose unsplit configuration,
+		<span class="command"><strong>update-exim4.conf</strong></span> builds the
+		configuration from
+		<code class="filename">/etc/exim4/exim4.conf.template</code>,
+		which is basically the files from
+		<code class="filename">/etc/exim4/conf.d/</code> concatenated
+		together at package build time, and thus guarantees
+		consistency on the target system.
+              </p><p>
+    	        In both cases, <span class="command"><strong>update-exim4.conf</strong></span>
+		generates exim configuration macros from the debconf
+		configuration values and puts them into
+		the actual configuration file, which is then used by
+		the Exim daemon. See the
+		<span class="command"><strong>update-exim4.conf</strong></span> manual
+		page for more in-depth information about this
+		mechanism.
+              </p><p>
+    	        Benefits of the split configuration approach:
+    		</p><div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: disc; "><li class="listitem">
+                          it means less work for you when upgrading.
+			  If we shipped one big file and modified
+			  for example the Maildir transport in a new
+			  version you won't have to do manual
+			  conffile merging unless you had changed
+			  exactly <span class="emphasis"><em>this</em></span>
+			  transport.
+			</li><li class="listitem">
+			  It allows other packages (e.g. sa-exim) to
+			  modify Exim's configuration by dropping
+			  files into
+			  <code class="filename">/etc/exim4/conf.d</code>.
+			  This needs, however quite exact syncing
+			  between the exim4 packages and the other,
+			  cooperating package.
+			</li></ul></div><p>
+	      </p><p>
+		Drawbacks of the split configuration approach:
+		</p><div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: disc; "><li class="listitem">
+			  It is more fragile. If files from
+			  different sources (package, manually
+			  changed, or other package) get out of
+			  sync, it is possible for Exim to break
+			  until you manually correct this. This can
+			  for example happen if we decide to add a
+			  new option to the Debian setup of a later
+			  version, and you have already set this
+			  option in a local file.
+			</li></ul></div><p>
+	      </p><p>
+	        Benefits of the unsplit configuration approach:
+		</p><div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: disc; "><li class="listitem">
+			  People familiar with configuring Exim may
+			  find this approach easier to understand as
+			  <code class="filename">exim4.conf.template</code>
+			  basically is a complete Exim configuration
+			  file which will only undergo some basic
+			  string replacement before is it passed to
+			  exim.
+		        </li><li class="listitem">
+			  Split-config's fragility mentioned
+			  above does not occur.
+			</li></ul></div><p>
+	      </p><p>
+	        Drawbacks of the unsplit configuration approach:
+		</p><div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: disc; "><li class="listitem">
+			  Will require manual intervention in case of an
+			  upgrade.
+			</li></ul></div><p>
+	      </p><p>
+                If in doubt go for the unsplit config, because it is
+		easier to roll back to Debian's default configuration
+		in one step. If you intend to do many changes to the
+		Debian setup, you might want to use the split config
+		at the price of having to more closely examine the
+		config file after an update.
+	      </p><p>
+	        We'd appreciate a patch that uses ucf and the
+		3-way-merge mechanism offered by that package. It
+		might be the best way to handle the big configuration
+		file.
+	      </p><p>
+	        If you are using unsplit configuration, have local
+		changes to <code class="filename">/etc/exim4/conf.d/</code>
+		(either made by yourself or by other packages dropping
+		their own routers or transports in) and want to
+		re-generate
+		<code class="filename">/etc/exim4/exim4.conf.template</code> to
+		activate these changes, you can do so by using
+		<span class="command"><strong>update-exim4.conf.template</strong></span>.
+	      </p></div></div><div class="section"><div class="titlepage"><div><div><h4 class="title"><a name="idm238"></a>2.1.2. Access Control in the default configuration</h4></div></div></div><p>
+          The Debian exim 4 packages come with a default configuration
+	  that allows flexible access control and blacklisting of
+	  sites and hosts. The acls involved can be found in
+	  /etc/exim4/conf.d/acl, or in /etc/exim4/exim4.conf.template,
+	  depending on which configuration scheme you use. Most
+	  rejections of messages due to this mechanism happen at RCPT
+	  time. Local configuration of the mechanisms happens through
+	  data files in /etc/exim4 or via Exim macros that you can set
+	  in /etc/exim4/conf.d/main, so there is normally no need to
+	  change the files in the acl subdirectory in a split-config
+	  setup. If you use the non-split config, you need to edit
+	  /etc/exim4/exim4.conf.template, which, as a big
+	  dpkg-conffile, won't give you any advantage of the .ifdef
+	  scheme.
+        </p><p>
+          The data files are documented in the exim4-config_files man
+          page.
+        </p><p>
+          The access lists delivered with the exim4 packages also
+	  contain quite a few configuration options that are too
+	  restrictive to be active by default on a real-life site.
+	  These are masked by .ifdef statements, can be activated by
+	  setting the appropriate macros, and are documented in the
+	  ACL files itself.
+        </p></div><div class="section"><div class="titlepage"><div><div><h4 class="title"><a name="macros"></a>2.1.3. Using Exim Macros to control the
+      configuration</h4></div></div></div><p>
+	Our configuration can be controlled in a limited way by
+	setting macros. That way, you can switch on and off certain
+	parts of the default configuration and/or override values set
+        in Debconf without having to touch the dpkg-conffiles. While
+	touching dpkg-conffiles itself is explicitly allowed and wanted,
+	it can be quite a nuisance to be asked on package upgrade
+	whether one wants to use the locally changed file or the
+	file changed by the package maintainer.
+      </p><p>
+	Whenever you see an <span class="command"><strong>.ifdef</strong></span> or
+	<span class="command"><strong>.ifndef</strong></span> clause in the configuration file,
+	you can control the appropriate clause by setting the macro in
+	a local configuration file. For split configuration, you can
+	drop the local configuration file anywhere in
+	<code class="filename">/etc/exim4/conf.d/main</code>. Just make sure it
+	gets read before the macro is first used. 
+	<code class="filename">000_localmacros</code> is a possible name,
+	guaranteeing first order. For a non-split configuration,
+	<code class="filename">/etc/exim4/exim4.conf.localmacros</code> gets
+	read before
+	<code class="filename">/etc/exim4/exim4.conf.template</code>. To
+	actually set the macro <code class="varname">EXIM4_EXAMPLE</code> to the
+	value "this is a sample", write the following line
+      </p><p>
+	EXIM4_EXAMPLE = this is a sample
+      </p><p>
+	into the appropriate file. For more detailed discussion of the
+	general macro mechanism, see the Exim specification, chapter
+	<span class="phrase">"The Exim run time configuration file"</span>, for
+	details how macro expansion works.
+      </p></div><div class="section"><div class="titlepage"><div><div><h4 class="title"><a name="idm257"></a>2.1.4. How does this work?</h4></div></div></div><p>
+	  The script <span class="command"><strong>update-exim4.conf</strong></span> parses the
+	  <code class="filename">/etc/exim4/update-exim4.conf.conf</code> file
+	  and provides the configuration for the exim daemon.
+	</p><p>
+	  Depending on the value of
+	  <code class="varname">dc_use_split_config</code>, it either
+	  </p><div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: disc; "><li class="listitem">
+		takes all the files below
+		<code class="filename">/etc/exim4/conf.d/</code> and
+		concatenates them together or
+	      </li><li class="listitem">
+		uses <code class="filename">exim4.conf.template</code> as
+		input.
+	      </li></ul></div><p>
+	  The debconf-managed information from
+	  <code class="filename">/etc/exim4/update-exim4.conf.conf</code> is
+	  merged into the generated configuration file by generating a
+          number of Exim configuration macros.
+	</p><p>
+	  <code class="varname">DCsmarthost</code>, for example, is set to the
+	  value of <code class="varname">$dc_smarthost</code>
+	  in <code class="filename">/etc/exim4/update-exim4.conf.conf</code>
+	  which holds the answer to "Which machine will act as the
+	  smarthost and handle outgoing mail?"
+	</p><p>
+	  The result of these operations is saved as
+	  <code class="filename">/var/lib/exim4/config.autogenerated</code>,
+	  which is <span class="emphasis"><em>not</em></span> a dpkg-conffile! Manual
+	  changes to this file will be overwritten by
+	  <span class="command"><strong>update-exim4.conf</strong></span>.
+	</p><p>
+	  Please consult <span class="command"><strong>update-exim4.conf</strong></span> manpage
+	  for more detailed information.
+	</p><p>
+	  <span class="command"><strong>update-exim4.conf</strong></span> is invoked by the init
+	  script prior to any operation that may invoke an exim process,
+	  and gives an error message if the generated config file is
+	  syntactically invalid. If you want to activate your changes to
+	  files in conf.d/ just execute <span class="command"><strong>invoke-rc.d exim4 restart</strong></span>.
+	</p></div><div class="section"><div class="titlepage"><div><div><h4 class="title"><a name="howto-change-config"></a>2.1.5. How do I do minor tweaks to the configuration?</h4></div></div></div><p>
+	  Some times, you want to do minor adjustments to the Exim
+	  configuration to make Exim behave exactly like you want it
+	  to behave. There are the following possibilities to modify
+	  Exim's behavior.
+	</p><div class="section"><div class="titlepage"><div><div><h5 class="title"><a name="idm288"></a>2.1.5.1. Adjustments supported by the debconf configuration</h5></div></div></div><p>
+	    If you want to modify parameters that are supported by the
+	    debconf configuration, things are easy. Just invoke
+	    <span class="command"><strong>dpkg-reconfigure exim4-config</strong></span> or hand-edit
+	    <code class="filename">/etc/exim4/update-exim4.conf.conf</code> to your
+	    liking and restart Exim.
+	  </p><p>
+	    You can find explanation of the debconf questions in <a class="xref" href="#debconf-questions" title="2.1.1. The Debconf questions">Section 2.1.1, &#8220;The Debconf questions&#8221;</a>.
+            Additionally,
+	    <code class="filename">/etc/exim4/update-exim4.conf.conf</code>
+	    is documented in the <span class="command"><strong>update-exim4.conf</strong></span>
+	    man page.
+	  </p></div><div class="section"><div class="titlepage"><div><div><h5 class="title"><a name="idm297"></a>2.1.5.2. Adjustments controlled by macros in the Debian Exim configuration</h5></div></div></div><p>
+	    Some aspects of the Debian Exim configuration can be
+	    controlled by Exim macros. To find out about these, you
+	    need basic understanding of Exim configuration. Just look
+	    in our Exim configuration and see which macro needs to be
+	    set to a different value to alter Exim's behavior.
+	  </p><p>
+	    <a class="xref" href="#macros" title="2.1.3. Using Exim Macros to control the configuration">Section 2.1.3, &#8220;Using Exim Macros to control the
+      configuration&#8221;</a> gives a closer explanation about
+            how to do this.
+	  </p></div><div class="section"><div class="titlepage"><div><div><h5 class="title"><a name="idm302"></a>2.1.5.3. Making direct changes to the Debian Exim configuration</h5></div></div></div><p>
+	    You can, of course, make direct change to the
+	    configuration. All configuration files in /etc/exim4 are
+	    dpkg-conffiles, and you can thus edit them any time. Your
+	    changes will be preserved through updates. You need to
+            know about how to configure Exim to be successful.
+	  </p><p>
+	    If you use unsplit configuration, edit
+            <code class="filename">/etc/exim4/exim4.conf.template</code>. If you use
+	    split configuration, edit the Exim configuration snippets in
+	    <code class="filename">/etc/exim4/conf.d</code>.
+	  </p><p>
+	    More information about how the Exim configuration is built
+            can be found in this document and in the
+	    <span class="command"><strong>update-exim4.conf</strong></span> manual page.
+	  </p></div></div><div class="section"><div class="titlepage"><div><div><h4 class="title"><a name="completely-different-configuration"></a>2.1.6. Using a completely different configuration scheme</h4></div></div></div><p>
+	  If you are an experienced Exim administrator, you might feel
+	  working with our pre-fabricated configuration
+	  cumbersome and complex. You might feel right if you need to
+	  make more complex changes and do not need to receive updates
+	  from us. This section is going to tell about how to use
+	  your own configuration.
+	</p><p>
+	  But, you might profit from keeping the Debian magic. Most
+	  files that come with Debian exim4 are conffiles. Debian is
+	  going to care about your changes and keeps them around.
+	  Additionally, a lot of configuration options can be
+	  overridden with a macro, which does not require you to
+	  actually change our configuration file. A lot of people are
+	  using our configuration scheme, and maybe it is going to
+	  save you a lot of time if you decide to spend some time
+	  familiarizing yourself with our scheme.
+	</p><div class="section"><div class="titlepage"><div><div><h5 class="title"><a name="idm314"></a>2.1.6.1. Override exim4-config configuration magic</h5></div></div></div><p>
+	    	If you are only running a small number of systems and
+		want to completely disable Debian's magic, just take
+		your monolithic configuration file and install it as
+		<code class="filename">/etc/exim4/exim4.conf</code>. Exim will
+		use that file verbatim. To have something to start,
+		you can either take
+		<code class="filename">/etc/exim4/exim4.conf.template</code>, 
+		run <span class="command"><strong>update-exim4.conf --keepcomments --output
+		/etc/exim4/exim4.conf</strong></span>, or use upstream's
+		default configuration file that is installed as
+		<code class="filename">/usr/share/doc/exim4-base/examples/example.conf.gz</code>.
+		You are going to lose all magic you get from packaging
+		though, so you need to be familiar with Exim to build
+		an actually working config.
+	    </p><p>
+		<code class="filename">/var/lib/exim4/config.autogenerated</code>,
+		the file generated by
+		<span class="command"><strong>update-exim4.conf</strong></span>, is ignored as soon
+		as <code class="filename">/etc/exim4/exim4.conf</code> is found. 
+		You should not edit
+		<code class="filename">/etc/exim4/exim4.conf</code> directly when
+		Exim is running, because the forked processes Exim starts
+		for SMTP receiving or queue running would use the new
+		configuration file, while the original main exim-daemon
+		would still use the old configuration file.
+	    </p><p>
+	    	Some third-party HOWTOs that reference Debian and
+		claim to make things easy suggest dumping a
+		pre-fabricated, static config file to
+		<code class="filename">/etc/exim4/exim4.conf</code>. This is
+		considered bad advice by the Debian maintainers since
+		you are going to disable all updates and service magic
+		that Debian might deliver in the future this way. If
+		you do not know exactly what you're doing here, this
+		is a bad choice. We try to comment on external HOWTOs
+		found on the web in the <a class="ulink" href="http://wiki.debian.org/PkgExim4UserFAQ" target="_top">Debian
+		Exim4 User FAQ</a> to help you find out which
+		advice to follow.
+	    </p></div><div class="section"><div class="titlepage"><div><div><h5 class="title"><a name="idm329"></a>2.1.6.2. Replacing exim4-config with your own exim4 configuration package.</h5></div></div></div><p>
+		We split off Exim's configuration system (debconf,
+		<span class="command"><strong>update-exim4.conf</strong></span>, and the files in
+		<code class="filename">/etc/exim4/conf.d)</code> to a separate
+		package, exim4-config. If you want to, you can replace
+		exim4-config by something entirely different. The other
+		packages don't care. Your package needs to:
+		</p><div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: disc; "><li class="listitem">
+			Provides: exim4-config-2, Conflicts:
+			exim4-config-2,exim4-config
+		    </li><li class="listitem">
+			drop the Exim 4 configuration either into
+			<code class="filename">/var/lib/exim4/config.autogenerated</code>
+			or into <code class="filename">/etc/exim4/exim4.conf</code>.
+		    </li></ul></div><p>
+		Your package must provide an executable <span class="command"><strong>update-exim4.conf</strong></span>
+		that must be in root's path (<code class="filename">/usr/sbin</code> recommended). The init
+		script will invoke that executable prior to invoking the
+		actual exim daemon. If you do not need that script, have it exit 0.
+	    </p><p>
+		If you want to create your own configuration packages, there is a
+		number of helpers available.
+		</p><div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: disc; "><li class="listitem">
+			The Exim 4 Debian svn repository holds sources for a
+			exim4-config-simple package which contains a simple, not
+			debconf-driven configuration scheme as an example which can
+			be used as a template for a classical, exim4.conf based
+			configuration scheme.
+		    </li><li class="listitem">
+			The Exim 4 Debian svn repository holds sources for a
+			exim4-config-medium package which contains the conf.d
+			driven configuration of the main package with the
+			debconf interaction removed. This can be used to create
+			your own non-debconf configuration package that uses the
+			conf.d mechanism.
+		    </li><li class="listitem">
+			Finally, you can invoke the script
+			<code class="filename">debian/config-custom/create-custom-config-package</code>
+			which will create a new source package
+			"exim4-config-custom" with the debconf-driven config
+			scheme of exim4-config for your local modification.
+		    </li></ul></div><p>
+		Please note that exim4-config-simple and
+		exim4-config-medium are only targeted to be used as a
+		template. The configurations contained are not
+		suitable for productive use. Of course, the Debian
+		maintainers appreciate any patches you might find
+		suitable. The scripts in exim4-config-simple and
+		exim4-config-medium may not work at all in your
+		environment. Unfortunately, they have not been
+		updated in a long time as well. We are willing to
+		accept patches.
+	    </p><p>
+		See the development web page for links to the subversion
+		repository.
+	    </p><p>
+		Exchanging the entire exim4-config package with
+		something custom comes particularly handy for sites
+		that have more than a few machines that are
+		similarly configured, but do not want to use the
+		original exim4-config package. Build your own
+		exim4-config-custom or exim4-config-foo, and simply
+		 apt that package to the machines that need to have
+		that configuration.  Future updates can then be
+		handled via the dpkg-conffile mechanism, properly
+		detecting local modifications.
+	    </p><p>
+		In the future, it might be possible that Debian will
+		contain multiple flavours of Exim4 configuration.
+		However, these packages would have to be maintained
+		by someone else because the exim4 package
+		maintainers think that the scheme delivered with
+		exim4-config is the least of all evils and would
+		rather not spend the time to maintain multiple configuration
+		schemes while only actually using one. It would be
+		nice to have a configuration scheme using a
+		monolithic config file, managed by ucf in
+		three-way-merge mode. If anybody feels ready to
+		maintain it, please go ahead.
+	    </p></div></div></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a name="TLS"></a>2.2. Using TLS</h3></div></div></div><div class="section"><div class="titlepage"><div><div><h4 class="title"><a name="idm357"></a>2.2.1. Exim 4 as TLS/SSL client</h4></div></div></div><p>
+	  Both exim4-daemon-heavy and exim4-daemon-light support TLS/SSL
+	  using the GnuTLS library and STARTTLS. Exim will use TLS
+	  via STARTTLS <span class="emphasis"><em>automatically</em></span> as client if
+	  the server Exim connects to offers it.
+	</p><p>
+	  This means that you will not need any special configuration if
+	  you want to use TLS for outgoing mail. However, if your
+	  server setup mandates the use of client certificates, you
+	  need to amend your remote_smtp and/or remote_smtp_smarthost
+	  transports with a tls_certificate option. This is not
+          commonly needed.
+	</p><p>
+	  The certificate
+	  presented by the remote host is not checked unless you
+	  specify a tls_verify_certificate option on the transport.
+	</p><p><a name="tls_client_certicate"></a>
+		To make exim send a TLS certificate to the remote host set
+		REMOTE_SMTP_TLS_CERTIFICATE/REMOTE_SMTP_PRIVATEKEY or for
+		the remote_smtp_smarthost transport
+		REMOTE_SMTP_SMARTHOST_TLS_CERTIFICATE/REMOTE_SMTP_SMARTHOST_PRIVATEKEY
+		respectively.
+	</p><p>
+	   TLS on connect is not natively supported.
+	</p></div><div class="section"><div class="titlepage"><div><div><h4 class="title"><a name="idm365"></a>2.2.2. Enabling TLS support for Exim as server</h4></div></div></div><p>
+	  You should have created certificates in
+	  <code class="filename">/etc/exim4/</code> either by hand or by usage of
+	  the exim-gencert (which requires openssl). exim-gencert is
+	  shipped in
+	  <code class="filename">/usr/share/doc/exim4-base/examples/</code> and
+	  takes care of proper access privileges on the private key
+	  file.
+	</p><p>
+	  Now, enable TLS by setting the macro MAIN_TLS_ENABLE in a
+	  local configuration file as described in <a class="xref" href="#macros" title="2.1.3. Using Exim Macros to control the configuration">Section 2.1.3, &#8220;Using Exim Macros to control the
+      configuration&#8221;</a>.
+	</p><p>
+	  After this configuration, Exim will advertise STARTTLS when
+	  connected to on the normal SMTP ports. Some broken clients
+          (most prominent example being nearly all versions of Microsoft
+	  Outlook and Outlook Express, and Incredimail) insist on doing
+	  TLS on connect on Port 465. If you need to support these, set
+	  SMTPLISTENEROPTIONS='-oX 465:25 -oP /run/exim4/exim.pid'
+	  in <code class="filename">/etc/default/exim4</code> and
+	  "tls_on_connect_ports=465" in the main configuration section.
+	</p><p>
+	  The -oP is needed because Exim does not write an implicit pid
+	  file if -oX is given. Without pid file, init script and cron
+          job will malfunction.
+	</p><p>
+	  It might be appropriate to add "+tls_cipher" to
+	  any log_selector statement you might already have, or to add a
+	  log_selector statement setting these two options in a local
+	  configuration file. (For Debian's configuration simply define
+	  the MAIN_LOG_SELECTOR macro.)
+	  This option makes Exim log what cipher
+	  your Exim and the peer's mailer have negotiated to use to
+	  encrypt the transaction.
+	</p><p>
+	  Exim can be configured to ask a client for a certificate and to
+	  try to verify it. Debian's exim configuration used to enable
+	  this by default, but stopped doing so since it caused TLS errors
+	  with a couple of popular clients (Outlook, Incredimail, etc.).
+	  To enable this again set the macro MAIN_TLS_TRY_VERIFY_HOSTS to
+	  the lists hosts whose certificates you want to check. (Use * to
+	  try checking all hosts. The value of the macro is used to
+	  populate exim's main option tls_try_verify_hosts.) You should
+	  also point MAIN_TLS_VERIFY_CERTIFICATES to a file containing the
+	  accepted certificates, since its default setting
+	  (/etc/ssl/certs/ca-certificates.crt) can contain a large list of
+	  certificates which causes the interoperabilty problems with
+	  Outlook et.al. noted above.
+	</p><p>
+		The server certificate is only used for incoming connections,
+		please consult <a class="xref" href="#tls_client_certicate">Section 2.2.1, &#8220;Exim 4 as TLS/SSL client&#8221;</a> for the
+		corresponding outgoing conncection options.
+	</p></div><div class="section"><div class="titlepage"><div><div><h4 class="title"><a name="idm379"></a>2.2.3. Troubleshooting</h4></div></div></div><p>
+	  If Exim complains in an SMTP session that TLS is unavailable,
+	  the Exim mainlog or paniclog frequently has exact information
+	  about what might be wrong. Fo example, you might see
+	</p><p>
+	  2003-01-27 19:06:45 TLS error on connection from localhost [127.0.0.1]
+	  (cert/key setup): Error while reading file)
+	</p><p>
+	  showing that there has been an error while accessing the
+	  certificate or the private key file.
+	</p><p>
+	  Insuffient entropy available is a frequent cause of TLS
+          failures in Exim context. If Exim logs "not enough random bytes
+	  available", or simply hangs silently when an encrypted
+          connection should be established, then Exim was
+	  unable to read enough random data from
+	  <code class="filename">/dev/random</code> to do whatever cryptographic
+	  operation is requested. Please check that your
+	  <code class="filename">/dev/random</code> device is setup properly.
+	</p><p>
+	  You might also find "TLS error on connection to [...]
+	  (gnutls_handshake): The Diffie-Hellman prime sent by the server is
+	  not acceptable (not long enough)." given as reason. Exim by default
+	  requires a DH prime length of 1024 bits. This requirement can be
+	  downgraded by setting the tls_dh_min_bits option on the SMTP
+	  transport.  The setting is accessible in the Debian configuration by
+	  setting the macro TLS_DH_MIN_BITS. (e.g. "TLS_DH_MIN_BITS = 768").
+	</p></div></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a name="smtp-auth"></a>2.3. SMTP-AUTH</h3></div></div></div><p>
+        Exim can do SMTP AUTH both as a client and as a server.
+      </p><p>
+	AUTH PLAIN and AUTH LOGIN are disabled for connections which are
+	not protected by SSL/TLS per default. These authentication
+	methods use cleartext passwords, and allowing the
+	transmission of cleartext passwords on unencrypted connections
+	is a security risk. Therefore, the default configuration configures
+	Exim not to use and/or allow AUTH PLAIN and AUTH LOGIN over
+        unencrypted connections.
+      </p><p>
+        It is thus recommended to set up Exim to use TLS to encrypt
+        the connections. Please refer to <a class="xref" href="#TLS" title="2.2. Using TLS">Section 2.2, &#8220;Using TLS&#8221;</a> for
+        documentation about this. Note that most Microsoft clients
+        need special handling for TLS.
+      </p><div class="section"><div class="titlepage"><div><div><h4 class="title"><a name="idm394"></a>2.3.1. Using Exim as SMTP-AUTH client</h4></div></div></div><p>
+	  If you want to set up Exim as SMTP AUTH client for delivery
+	  to your internet access provider's smarthost put the name of
+	  the server, your login and password in
+	  <code class="filename">/etc/exim4/passwd.client</code>. See the man
+          page for exim4-config_files(5) for more information about the
+	  required format.
+	</p><p>
+	  If you need to enable AUTH PLAIN or AUTH LOGIN for unencrypted
+	  connections because your service provider does support neither
+	  TLS encryption nor the CRAM MD5 authentication method, you can
+	  do so by setting the AUTH_CLIENT_ALLOW_NOTLS_PASSWORDS macro.
+	  Please refer to <a class="xref" href="#macros" title="2.1.3. Using Exim Macros to control the configuration">Section 2.1.3, &#8220;Using Exim Macros to control the
+      configuration&#8221;</a> for an explanation of
+	  how best to do this.
+	</p><p>
+	  <code class="filename">/etc/exim4/passwd.client</code> needs to be
+	  readable for the exim user (user Debian-exim, group
+	  Debian-exim). It is suggested that you keep the default
+	  permissions root:Debian-exim 0640.
+	</p></div><div class="section"><div class="titlepage"><div><div><h4 class="title"><a name="idm402"></a>2.3.2. Using Exim as SMTP-AUTH server</h4></div></div></div><p>
+	  The configuration files include many, verbosely commented,
+	  examples for server-side smtp-authentication which just need
+	  to be uncommented.
+	</p><p>
+	  If you need to enable AUTH PLAIN or AUTH LOGIN for unencrypted
+	  connections because your clients neither support TLS encryption
+	  nor the CRAM MD5 authentication method, you can do so by setting
+	  the AUTH_SERVER_ALLOW_NOTLS_PASSWORDS macro. Please refer to
+	  <a class="xref" href="#macros" title="2.1.3. Using Exim Macros to control the configuration">Section 2.1.3, &#8220;Using Exim Macros to control the
+      configuration&#8221;</a> for an explanation of how best to
+	  do this.
+	</p><p>
+	  If you want to authenticate against system passwords (e.g. 
+	  <code class="filename">/etc/shadow</code>) the easiest way is to use
+	  saslauthd in the Debian package sasl2-bin. You have to add the
+	  exim-user (currently Debian-exim) to the sasl group, to give
+	  exim permission to use the saslauthd service.
+	</p><p>
+	  The Debian exim4 maintainers consider using system login
+	  passwords a bad idea for the following reasons:
+	  </p><div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: disc; "><li class="listitem">
+	        A compromised password will give access to a system account.
+	      </li><li class="listitem">
+	        E-Mail passwords could accidentally be transmitted unencrypted.
+	      </li><li class="listitem">
+	        E-Mail passwords are likely to be stored with the
+                client software, which greatly increases the chance of a
+		compromise.
+	      </li></ul></div><p>
+	</p></div></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a name="idm417"></a>2.4. How the Exim daemon is started</h3></div></div></div><p>
+        The Debian Exim 4 packages' init script is located in
+	<code class="filename">/etc/init.d/exim4</code>. Apart from the
+	functions that are required by Debian policy and the LSB, it
+	supports the commands <span class="command"><strong>what</strong></span>, which executes
+	<span class="command"><strong>exiwhat</strong></span> to show what your Exim processes
+	are doing, and <span class="command"><strong>force_stop</strong></span> which
+	unconditionally kills all Exim processes.
+      </p><p>
+        The init script can be configured to start listening and/or
+	queue running daemons. This configuration can be found in
+	<code class="filename">/etc/default/exim4</code>. This file is
+	extensively documented.
+      </p></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a name="idm426"></a>2.5. Miscellaneous packaging issues</h3></div></div></div><div class="section"><div class="titlepage"><div><div><h4 class="title"><a name="idm428"></a>2.5.1. The daily cron job</h4></div></div></div><p>
+	    Exim4's daily cron job
+            (<code class="filename">/etc/cron.daily/exim4-base</code>)
+	    does basic housekeeping tasks:
+	    </p><div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: disc; "><li class="listitem">
+		  It reads <code class="filename">/etc/default/exim4</code>, so you
+		  can use this file to change any of the variables used in
+		  the cron job.
+	        </li><li class="listitem">
+		  It is a no-op if no Exim4 binary is found.
+	        </li><li class="listitem">
+		  If <span class="command"><strong>$E4BCD_DAILY_REPORT_TO</strong></span> is set
+		  to a non-empty string, the output of eximstats is
+		  mailed to the address given in that variable. The
+                  default is empty, so no reports are sent. Options
+                  for eximstats can be given in
+                  <span class="command"><strong>$E4BCD_DAILY_REPORT_OPTIONS</strong></span>.
+	        </li><li class="listitem"><p class="simpara">
+		  A non-empty paniclog is a nearly sure sign of bad
+		  things going on. Thus, the cron job will send out
+		  warning messages to the syslog and root if it finds
+		  the panic log non-empty.
+		  Please note that the paniclog is not rotated daily,
+		  so existing issues will be reported daily until
+		  either the paniclog is rotated due to its sheer
+		  size, or you manually move it away, for example by
+		  calling <span class="command"><strong>logrotate -f
+		  /etc/logrotate.d/exim4-paniclog</strong></span> from a shell.
+	        </p><p class="simpara">
+		  Just in case your system logs transient error
+		  situations to the panic log as well (see, for
+		  example,
+		  <a class="ulink" href="http://www.exim.org/bugzilla/show_bug.cgi?id=92" target="_top">Exim Bug 92</a>),
+		  you can configure
+		  <span class="command"><strong>$E4BCD_PANICLOG_NOISE</strong></span> to a
+		  regular expression. If the paniclog contains only
+		  lines that match that regular expression, no warning
+		  messages are generated.
+	        </p><p class="simpara">
+		  If you want to disable paniclog monitoring
+		  completely, set <span class="command"><strong>$E4BCD_WATCH_PANICLOG</strong></span>
+		  to no. <span class="command"><strong>E4BCD_WATCH_PANICLOG=once</strong></span> will
+		  rotate a non-empty paniclog automatically after sending out
+		  the warning e-mail.
+	        </p><p class="simpara">
+		  The <span class="command"><strong>E4BCD_PANICLOG_LINES</strong></span> setting can be
+		  used to limit the number of lines of paniclog quoted in
+		  warning email. It is set to 10 by default.
+		</p></li><li class="listitem">
+		  It tidies up the retry and hints databases.
+	        </li></ul></div><p>
+	  </p></div></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a name="idm455"></a>2.6. Using Exim with inetd/xinetd</h3></div></div></div><p>
+	Exim4 is run as a separate daemon instead of inetd/xinetd for
+	two reasons:
+	</p><div class="variablelist"><dl class="variablelist"><dt><span class="term">Ease of maintenance:</span></dt><dd>
+		update-inetd is difficult to impossible to handle
+		correctly (Just check the archived bug reports of Exim.) 
+		and update-inetd seems to be unmaintained for a long
+		time, nobody dares to touch it. To quote Mark Baker, the
+		maintainer of Exim (v3): "I really wish I had never used
+		inetd in the first place, but simply set up exim to run
+		as a daemon, but it's too late to change that now."
+	      </dd><dt><span class="term">Extended features</span></dt><dd>
+		Running from <span class="command"><strong>inetd</strong></span> interferes with
+		Exim's resource controls (e.g it disables
+		smtp_accept_max_per_host and smtp_accept_max).
+	      </dd></dl></div><p>
+      </p><p>
+	If you introduce bugs on your systems by running from (x)inetd
+	you are on your own! If you want to run exim from
+	<span class="command"><strong>xinetd</strong></span>, follow these steps:
+	</p><div class="orderedlist"><ol class="orderedlist" type="1"><li class="listitem">
+	      Disable Exim 4's listening daemon by executing
+	      <span class="command"><strong>update-exim4defaults --queuerunner
+		queueonly</strong></span>
+	    </li><li class="listitem"><p>
+	      Create <code class="filename">/etc/xinetd.d/exim4</code>
+	      </p><pre class="programlisting">
+service smtp
+{
+    disable     = no
+    flags       = NAMEINARGS
+    socket_type = stream
+    protocol    = tcp
+    wait        = no
+    user        = Debian-exim
+    group       = Debian-exim
+    server      = /usr/sbin/exim4
+    server_args = exim4 -bs
+}
+	      </pre><p>
+	    </p></li><li class="listitem">Run <span class="command"><strong>invoke-rc.d exim4 restart; invoke-rc.d
+(x)inetd restart</strong></span></li></ol></div><p>
+      </p><p>If you want to use plain inetd, insert following line into
+	<code class="filename">/etc/inetd.conf</code>:</p><pre class="programlisting">
+smtp stream   tcp     nowait  Debian-exim     /usr/sbin/exim4 exim4 -bs
+	</pre><p>
+      </p></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a name="idm484"></a>2.7. Handling incoming mail for local accounts with low UID</h3></div></div></div><p>
+        Since system accounts (mail, uucp, lp etc) are usually aliased
+	to root, and root's mailbox is usually read by a human, these
+	account names have started to be a common target for spammers.
+	The Debian Exim 4 packages have a mechanism to deal with this
+	situation. However, since this derives rather far from normal
+	behavior, it is disabled by default.
+      </p><p>
+        To enable it, set the macro FIRST_USER_ACCOUNT_UID to a numeric,
+	non-zero value. Incoming mail for local users that have a UID
+	lower than FIRST_USER_ACCOUNT_UID is rejected with the message "no
+	mail to system accounts". Incoming mail for local users that
+	have a UID greater or equal FIRST_USER_ACCOUNT_UID are processed as
+	usual. Therefore, the default value of 0 ensures that the
+	mechanism is disabled. On Debian systems, setting
+	FIRST_USER_ACCOUNT_UID to 500 or 1000 (depending on your local policy)
+	will disable incoming mail for system accounts.
+      </p><p>
+        Just in case that you need exceptions to the rule,
+	<code class="filename">/etc/exim4/lowuid-aliases</code> is an alias
+	file that is only honored for local accounts with UID lower
+	than FIRST_USER_ACCOUNT_UID. If you define an alias for such an
+	account here, incoming mail is processed according to the
+	alias. If you alias the account to itself, messages are
+	delivered to the account itself, which is an exception to the
+	rule that messages for low-UID accounts are rejected. The
+	format of <code class="filename">/etc/exim4/lowuid-aliases</code> is
+	just another alias file.
+      </p></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a name="idm491"></a>2.8. How to bypass local routing specialities</h3></div></div></div><p>
+        Sometimes, it might be desirable to be able to bypass local
+	routing specialities like the alias file or a user-forward
+	file. This is possible in the Debian Exim4 packages by
+	prefixing the account name with "real-". For a local account
+	name "foo", "real-foo@hostname.example" will result in direct
+	delivery to foo's local Mailbox.
+      </p><p>
+        This feature is by default only available for locally
+	generated messages. If you want it to be accessible for
+	messages delivered from remote as well, set the Exim macro
+	COND_LOCAL_SUBMITTER to true. If you do not want this at all,
+	set the macro to false. Please note that the userforward
+	router uses this feature to get error messages delivered, i.e.
+	notifying the user of a syntax error in her
+	<code class="filename">.forward</code> file.
+      </p></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a name="idm496"></a>2.9. Using more complex deliveries from alias files</h3></div></div></div><p>
+	Delivery to arbitrary files, directory or to pipes in the
+	<code class="filename">/etc/aliases</code> file is disabled by default
+	in the Debian Exim 4 packages. The delivery process including the
+	program being piped to would run as the exim admin-user
+	Debian-exim, which might open up security holes.
+      </p><p>
+	Invoking pipes from <code class="filename">/etc/aliases</code> file is
+	widely considered obsolete and deprecated. The Debian Exim
+	package maintainers would like to suggest using a dedicated
+	router/transport pair to invoke local processes for mail
+	processing. For example, the Debian mailman package contains a
+	<code class="filename">/usr/share/doc/mailman/README.Exim4.Debian</code> file
+	that gives a good example how to implement this. Using a
+	dedicated router/transport pair have the following advantages:
+	</p><div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: disc; "><li class="listitem"><p>
+	      The router/transport pair can be put in place by another
+	      package, giving a well-defined transaction point between
+	      Exim 4 and $PACKAGE.
+	    </p></li><li class="listitem"><p>
+	      Not allowing pipe deliveries from alias files makes it
+	      harder to accidentally run programs with wrong
+	      privileges.
+	    </p></li><li class="listitem"><p>
+	      It is possible to run different pipe processes under
+	      different accounts.
+	    </p></li><li class="listitem"><p>
+	      Even if only invoking a single local program, it is easier
+	      to do with your dedicated router/transport since you won't
+	      need to change this file, making automatic updates of this
+	      file possible for future versions of the Exim 4 packages. If
+	      you do local changes here, dpkg conffile handling will
+	      bother you on future updates.
+	    </p></li></ul></div><p>
+	If you insist on using <code class="filename">/etc/aliases</code> in
+	the traditional way, you will need to activate the
+	respective functions by setting the transport options on the
+        system_aliases router appropriately. Macros are defined to make
+	this easier. See
+       
+<code class="filename">/etc/exim4/conf.d/router/400_exim4-config_system_aliases</code>
+	for information about which macros are available. You might
+        find the address_file, address_pipe and/or address_directory
+        transports that are used for the userforward router helpful in
+	writing your own transports for use in the system_aliases router.
+      </p><p>
+	If any of your aliases expand to pipes or files or directories
+	you should set up a user and a group for these deliveries to run
+	under. You can do this by setting the "user" and - if necessary
+	- a "group" option and adding a "group" option if necessary. 
+	Alternatively, you can specify "user" and/or "group" on the
+	transports that are used.
+      </p></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a name="idm515"></a>2.10. Putting Exim 4 and UUCP together</h3></div></div></div><p>
+	UUCP is a traditional way to execute remote jobs (e.g. spool
+	mails), and as a lot of old things there are much more than one
+	way to do it. However, today, the ways to handle it have boiled
+	down to more or less two different ways.
+      </p><p>
+	Our recommendation is to use bsmtp/rsmtp wherever possible,
+	because it supports all kinds of mail addresses (also the empty
+	ones in bounces), and is also better from the security point of
+	view.
+      </p><div class="section"><div class="titlepage"><div><div><h4 class="title"><a name="idm519"></a>2.10.1. Sending mail via UUCP</h4></div></div></div><div class="section"><div class="titlepage"><div><div><h5 class="title"><a name="idm521"></a>2.10.1.1. rmail with full addresses</h5></div></div></div><p>
+	    rmail is the oldest way to transfer mail to a remote system. 
+	    However, today it is normally required to use addresses with
+	    full domains for that (Well, they look like any normal address
+	    for you, and we do not tell about the other way to not confuse
+	    you ;). If you want this, you can use this transport:
+	  </p><pre class="programlisting">
+rmail:
+    debug_print = "T: rmail for $pipe_addresses"
+    driver=pipe
+    command = uux - -r -a$sender_address -gC $domain_data!rmail $pipe_addresses
+    return_fail_output
+    user=uucp
+    batch_max = 20
+	  </pre><p>
+	    However, all recipients are handled via the command line, so
+	    you are discouraged to use it.
+	  </p></div><div class="section"><div class="titlepage"><div><div><h5 class="title"><a name="idm526"></a>2.10.1.2. bsmtp/rsmtp</h5></div></div></div><p>
+	    This is a more efficient way to transfer mails. It works
+	    like sending SMTP via a pipe, but instead of waiting for an
+	    answer, the SMTP is just batched; from this is also the name
+	    batched SMTP or short bsmtp.
+	  </p><p>
+	    Furthermore, this way won't fail on addresses like "
+	    "@do.main. If you want this, please use this, if the remote
+	    site uses rsmtp (e.g. is Exim 4):
+	  </p><pre class="programlisting">
+rsmtp:
+    debug_print = "T: rsmtp for $pipe_addresses"
+    driver=pipe
+    command = /usr/bin/uux - -r -a$sender_address -gC $domain_data!rsmtp
+    use_bsmtp
+    return_fail_output
+    user=uucp
+    batch_max = 100
+	  </pre><p>
+	    and this if it wants bsmtp as the command:
+	  </p><pre class="programlisting">
+bsmtp:
+    debug_print = "T: bsmtp for $pipe_addresses"
+    driver=pipe
+    command = /usr/bin/uux - -r -a$sender_address -gC $domain_data!bsmtp
+    use_bsmtp
+    return_fail_output
+    user=uucp
+    batch_max = 100
+	  </pre><p>
+	    Of course, these examples can be extended for e.g. 
+	    compression (but you can also use ssh for compression, if
+	    you want).
+	  </p></div><div class="section"><div class="titlepage"><div><div><h5 class="title"><a name="idm534"></a>2.10.1.3. The router</h5></div></div></div><p>
+	    You need a router to tell Exim 4 which mails to forward to
+	    UUCP. You can use this one; please adopt the last line. Of
+	    course, it is also possible to send mail via more than one way.
+	  </p><pre class="programlisting">
+uucp_router:
+    debug_print = "R: uucp_router for $local_part@$domain"
+    driver=accept
+    require_files = +/usr/bin/uux
+    domains = wildlsearch;/etc/exim4/uucp
+    transport = rsmtp
+	  </pre><p>
+	    The file <code class="filename">/etc/exim4/uucp</code> looks like:
+	  </p><pre class="programlisting">
+*.do.main       uucp.name.of.remote.side
+	  </pre></div><div class="section"><div class="titlepage"><div><div><h5 class="title"><a name="idm541"></a>2.10.1.4. Speaking UUCP with the smarthost</h5></div></div></div><p>
+	    If you have a leaf system (i.e. all your mail not for your
+	    local system goes to a single remote system), you can just
+	    forward all non-local mail to the remote UUCP system. In
+	    this case, you can replace "domains = ..." with "domains = ! 
+	    +local_domains", but then you need also to replace
+	    $domain_data in the transport by the UUCP-name of your
+	    smarthost. The file <code class="filename">/etc/exim4/uucp</code> is
+	    not needed in this case.
+	  </p></div></div><div class="section"><div class="titlepage"><div><div><h4 class="title"><a name="idm545"></a>2.10.2. Receiving mail via UUCP</h4></div></div></div><div class="section"><div class="titlepage"><div><div><h5 class="title"><a name="idm547"></a>2.10.2.1. Allow UUCP to use any envelope address</h5></div></div></div><p>
+	    Depending how much you trust your local users, you might use
+	    trusted_users and add uucp to it or use
+	    local_sender_retain=true and local_from_check=false.
+	  </p></div><div class="section"><div class="titlepage"><div><div><h5 class="title"><a name="idm550"></a>2.10.2.2. If you get batched smtp</h5></div></div></div><p>
+	    Allow uucp to execute rsmtp via
+	    </p><pre class="programlisting">
+commands        rmail rnews rsmtp
+	    </pre><p>
+	    in your <code class="filename">/etc/uucp/sys</code>, and ask the
+	    sending site to use rsmtp (and not bsmtp) as the batched
+	    command.
+	  </p></div></div></div></div><div class="section"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="idm555"></a>3. Updating from Exim 3</h2></div></div></div><p>
+      If you use <span class="command"><strong>exim4-config</strong></span> from Debian, you will
+      get the debconf based configuration scheme that is intended to
+      cover the majority of cases.
+    </p><p>
+      If <span class="command"><strong>exim4-config</strong></span> is installed while an Exim 3
+      package is present on the system,
+      <span class="command"><strong>exim4-config</strong></span> tries to parse the Exim 3 config
+      file to determine the answers that were given to
+      <span class="command"><strong>eximconfig</strong></span> on Exim 3 installation. These
+      answers are then taken as default values for the debconf based
+      configuration process. Be warned! <span class="command"><strong>eximconfig</strong></span>
+      from the Exim 3 packages does not record the explicit answers
+      given on Exim 3 configuration. So we have to guess the answers
+      from the Exim 3 configuration file
+      <code class="filename">/etc/exim/exim.conf</code>, which is bound to fail
+      if the config file has been modified after using
+      <span class="command"><strong>eximconfig</strong></span>.
+    </p><p>
+      This is the reason why we refrained from doing a "silent update", but
+      only use the guessed answers to get reasonable defaults for our
+      debconf based configuration process.
+    </p><p>
+      Please note that we do not use the
+      <span class="command"><strong>exim_convert4r4</strong></span> script, but try to configure
+      the Exim 4 package in the same way Exim 3 was. This will
+      hopefully aid future updates.
+    </p><p>
+      If you have used a customized Exim 3 configuration, you can of
+      course use <span class="command"><strong>exim_convert4r4</strong></span>, and install the
+      resulting file as <code class="filename">/etc/exim4/exim4.conf</code>
+      after careful inspection. Exim 4 will then use that file and
+      ignore the file that it generated from the debconf
+      configuration. To aid future updates, we do, however, encourage
+      you not to use the
+      <code class="filename">exim_convert4r4-generated</code> file verbatim but
+      instead drop appropriate configuration snippets in their
+      appropriate place in <code class="filename">/etc/exim4/conf.d</code>.
+    </p></div><div class="section"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="idm574"></a>4. Misc Notes</h2></div></div></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a name="idm576"></a>4.1. PAM</h3></div></div></div><p>
+	  On Debian systems the PAM modules run as the same user
+	  as the calling program, so they cannot do anything you
+	  could not do yourself, and in particular cannot access
+	  <code class="filename">/etc/shadow</code> unless the user is in group
+	  shadow. - If you want to use
+	  <code class="filename">/etc/shadow</code> for Exim's SMTP AUTH you
+	  will need to run exim as group shadow.  Only
+	  exim4-daemon-heavy is linked against libpam. We suggest using
+	  saslauthd instead.
+        </p></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a name="idm581"></a>4.2. Account name restrictions</h3></div></div></div><p>
+          In the default configuration, Exim cannot locally deliver
+          mail to accounts which have capitals in their name. This is
+          caused by the fact that Exim converts the local part of incoming
+          mail to lower case before the comparison done by the
+          check_local_user directive in routers is done.
+        </p><p>
+          The router option caseful_local_part can be used to control
+          this, and we decided not to set this option in the Debian
+          configuration since it would be a rather big change to Exim's
+          default behavior.
+        </p></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a name="idm585"></a>4.3. No deliveries to root!</h3></div></div></div><p>
+            No Exim 4 version released with any Debian OS can run
+	    deliveries as root. If you don't redirect mail for root via
+            <code class="filename">/etc/aliases</code> to a nonprivileged
+            account, the mail will be delivered to
+	    <code class="filename">/var/mail/mail</code> with permissions 0600 and
+            owner mail:mail.
+	</p><p>
+	    This redirection is done by the mail4root router which
+            is last in the list and will thus catch mail for root that has not
+            been taken care of earlier.
+        </p></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a name="idm591"></a>4.4. Debugging maintainer and init scripts</h3></div></div></div><p>
+	    Most of the scripts that come with this Debian package do a
+	    <span class="command"><strong>set -x</strong></span> if invoked with the environment
+	    variable EX4DEBUG defined and non-zero. This is particularly
+	    handy if you need to debug the maintainer scripts that are
+	    invoked during package installation. Since dpkg redirects
+	    stdout of maintainer scripts, calling dpkg with EX4DEBUG
+	    set might yield interesting results. If in doubt, invoke
+	    the maintainer scripts with EX4DEBUG set manually directly
+	    from the command line.
+        </p></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a name="idm595"></a>4.5. SELinux</h3></div></div></div><p>
+            There is no SELinux policy for Exim4 available so far.
+	    Until this is resolved, users should use postfix or
+	    sendmail if they intend to run SELinux.
+        </p><p>
+	    The Debian Exim4 maintainers would appreciate if
+            somebody could write an SELinux policy. We will gladly
+	    use them in the Debian packages as long as there is
+	    somebody available to test, debug and support.
+	</p></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a name="idm599"></a>4.6. misc</h3></div></div></div><div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: disc; "><li class="listitem">
+                    <span class="command"><strong>convert4r4</strong></span> is installed as
+                    <code class="filename">/usr/sbin/exim_convert4r4.</code>
+		</li><li class="listitem">
+                    The charset for $header_foo expansions defaults to
+		    UTF-8 instead of ISO-8859-1.
+		</li><li class="listitem">
+		    <a class="ulink" href="http://marc.merlins.org/linux/exim/" target="_top">
+		    Marc Merlin's Exim 4 Page</a> has a lot of ACL
+		    examples.
+		</li><li class="listitem">
+		    For an example of Exim usage in a
+		    <span class="emphasis"><em>large</em></span> installation, see
+		    Tony Finch's 
+		    <a class="ulink" href="http://www-uxsup.csx.cam.ac.uk/~fanf2/hermes/doc/talks/2005-02-eximconf/" target="_top">
+paper</a>
+		    about the Exim installation at University of Cambridge:
+		</li></ul></div></div></div><div class="section"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="idm615"></a>5. Debian modifications to the Exim source</h2></div></div></div><div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: disc; "><li class="listitem">
+		Install the exim binary as /usr/sbin/exim4 instead of 
+		/usr/sbin/exim-&lt;version&gt; with a symlink /usr/sbin/exim. Also
+		adapt the documentation.
+        </li><li class="listitem">
+		Make the build reproducible. Pull date/time from debian/changelog
+		and use it as build time instead of using __DATE__.
+        </li><li class="listitem"><p class="simpara">
+		Documentation updates
+        </p><div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: circle; "><li class="listitem">
+                  Mention how to install the Debian packaged perl-modules needed
+                  for eximstats' graphs.
+            </li><li class="listitem">
+                  Add a warning about convert4r4.
+            </li><li class="listitem">
+		  Point to the <a class="ulink" href="mailto:pkg-exim4-users@lists.alioth.debian.org" target="_top">
+		  Debian-specific mailing list</a> instead of
+		  the <a class="ulink" href="mailto:exim-users@exim.org" target="_top">official
+		  exim-users list</a>.
+	    </li></ul></div></li><li class="listitem">
+          <a class="ulink" href="http://marc.merlins.org/linux/exim/files/sa-exim-current/" target="_top">localscan_dlopen.patch</a>:
+		This patch makes it possible to use and switch between
+		different local_scan
+		functions without recompiling Exim. Use
+		local_scan_path = /path/to/sharedobject to utilize
+		local_scan() in <code class="filename">/path/to/sharedobject</code>.
+        </li></ul></div></div><div class="section"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="idm637"></a>6. Credits</h2></div></div></div><div class="variablelist"><dl class="variablelist"><dt><span class="term"><a class="ulink" href="mailto:aba@not.so.argh.org" target="_top">Andreas
+	      Barth</a></span></dt><dd>UUCP documentation</dd><dt><span class="term">Dan Weber, Ryen Underwood</span></dt><dd>inetd/xinetd documentation</dd></dl></div><p>
+    </p></div></div></body></html>

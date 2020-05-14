@@ -1,0 +1,11 @@
+libntlm.so.0 libntlm0 #MINVER#
+ buildSmbNtlmAuthRequest@Base 1.2
+ buildSmbNtlmAuthRequest_noatsplit@Base 1.2
+ buildSmbNtlmAuthResponse@Base 1.2
+ buildSmbNtlmAuthResponse_noatsplit@Base 1.2
+ dumpSmbNtlmAuthChallenge@Base 1.2
+ dumpSmbNtlmAuthRequest@Base 1.2
+ dumpSmbNtlmAuthResponse@Base 1.2
+ ntlm_check_version@Base 1.2
+ ntlm_smb_encrypt@Base 1.2
+ ntlm_smb_nt_encrypt@Base 1.2

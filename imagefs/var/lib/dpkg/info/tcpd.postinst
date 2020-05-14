@@ -1,0 +1,22 @@
+#!/bin/sh -e
+
+upgrade_quirks() {
+  # replaced by a symlink long ago but dpkg fails to do it on upgrades
+  if [ -d /usr/share/doc/tcpd -a \
+      ! -L /usr/share/doc/tcpd ]; then
+    rmdir /usr/share/doc/tcpd
+    ln -s /usr/share/doc/libwrap0 /usr/share/doc/tcpd
+  fi
+
+  return 0
+}
+
+case "$1" in
+    configure)
+    upgrade_quirks "$@"
+    ;;
+esac
+
+
+
+exit 0

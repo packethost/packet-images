@@ -1,0 +1,5 @@
+c1b521c3c88b19c25afbfc07ef3492a2  usr/lib/x86_64-linux-gnu/libutempter.so.1.1.6
+390c100cc7b4d779b3415c48157b5f8a  usr/lib/x86_64-linux-gnu/utempter/utempter
+37797c13037ed424e82cce3920160aaa  usr/share/doc/libutempter0/changelog.Debian.gz
+5f08d4c4980d7026f864644160c97af8  usr/share/doc/libutempter0/copyright
+03c3b9dbf497eea61b63a8c6e3528de3  usr/share/lintian/overrides/libutempter0

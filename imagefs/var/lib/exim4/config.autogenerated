@@ -1,0 +1,929 @@
+#########
+# WARNING WARNING WARNING
+# WARNING WARNING WARNING
+# WARNING WARNING WARNING
+# WARNING WARNING WARNING
+# WARNING WARNING WARNING
+# This file was generated dynamically from
+# non-split config (/etc/exim4/exim4.conf.localmacros
+# and /etc/exim4/exim4.conf.template).
+# The config files are supplemented with package installation/configuration
+# settings managed by debconf. This data is stored in
+# /etc/exim4/update-exim4.conf.conf
+# Any changes you make here will be lost.
+# See /usr/share/doc/exim4-base/README.Debian.gz and update-exim4.conf(8)
+# for instructions of customization.
+# WARNING WARNING WARNING
+# WARNING WARNING WARNING
+# WARNING WARNING WARNING
+# WARNING WARNING WARNING
+# WARNING WARNING WARNING
+#########
+
+exim_path = /usr/sbin/exim4
+
+.ifndef CONFDIR
+CONFDIR = /etc/exim4
+.endif
+
+UPEX4CmacrosUPEX4C = 1
+##############################################
+# the following macro definitions were created
+# dynamically by /usr/sbin/update-exim4.conf
+.ifndef MAIN_LOCAL_INTERFACES
+MAIN_LOCAL_INTERFACES=<; 127.0.0.1 ; ::1
+.endif
+.ifndef MAIN_PACKAGE_VERSION
+MAIN_PACKAGE_VERSION=4.89-2+deb9u6
+.endif
+.ifndef MAIN_LOCAL_DOMAINS
+MAIN_LOCAL_DOMAINS=@:localhost:db86192c04bc
+.endif
+.ifndef MAIN_RELAY_TO_DOMAINS
+MAIN_RELAY_TO_DOMAINS=empty
+.endif
+.ifndef ETC_MAILNAME
+ETC_MAILNAME=db86192c04bc
+.endif
+.ifndef LOCAL_DELIVERY
+LOCAL_DELIVERY=mail_spool
+.endif
+.ifndef MAIN_RELAY_NETS
+MAIN_RELAY_NETS=: 127.0.0.1 : ::::1
+.endif
+.ifndef DCreadhost
+DCreadhost=empty
+.endif
+.ifndef DCsmarthost
+DCsmarthost=empty
+.endif
+.ifndef DC_eximconfig_configtype
+DC_eximconfig_configtype=local
+.endif
+.ifndef DCconfig_local
+DCconfig_local=1
+.endif
+##############################################
+
+
+domainlist local_domains = MAIN_LOCAL_DOMAINS
+
+domainlist relay_to_domains = MAIN_RELAY_TO_DOMAINS
+
+hostlist relay_from_hosts = MAIN_RELAY_NETS
+
+.ifndef MAIN_PRIMARY_HOSTNAME_AS_QUALIFY_DOMAIN
+.ifndef MAIN_QUALIFY_DOMAIN
+qualify_domain = ETC_MAILNAME
+.else
+qualify_domain = MAIN_QUALIFY_DOMAIN
+.endif
+.endif
+
+.ifdef MAIN_LOCAL_INTERFACES
+local_interfaces = MAIN_LOCAL_INTERFACES
+.endif
+
+.ifndef LOCAL_DELIVERY
+LOCAL_DELIVERY=mail_spool
+.endif
+
+gecos_pattern = ^([^,:]*)
+gecos_name = $1
+
+.ifndef CHECK_RCPT_LOCAL_LOCALPARTS
+CHECK_RCPT_LOCAL_LOCALPARTS = ^[.] : ^.*[@%!/|`#&?]
+.endif
+
+.ifndef CHECK_RCPT_REMOTE_LOCALPARTS
+CHECK_RCPT_REMOTE_LOCALPARTS = ^[./|] : ^.*[@%!`#&?] : ^.*/\\.\\./
+.endif
+
+.ifndef MAIN_LOG_SELECTOR
+MAIN_LOG_SELECTOR = +smtp_protocol_error +smtp_syntax_error +tls_certificate_verified +tls_peerdn
+.endif
+
+.ifndef MAIN_ACL_CHECK_MAIL
+MAIN_ACL_CHECK_MAIL = acl_check_mail
+.endif
+acl_smtp_mail = MAIN_ACL_CHECK_MAIL
+
+.ifndef MAIN_ACL_CHECK_RCPT
+MAIN_ACL_CHECK_RCPT = acl_check_rcpt
+.endif
+acl_smtp_rcpt = MAIN_ACL_CHECK_RCPT
+
+.ifndef MAIN_ACL_CHECK_DATA
+MAIN_ACL_CHECK_DATA = acl_check_data
+.endif
+acl_smtp_data = MAIN_ACL_CHECK_DATA
+
+.ifdef MESSAGE_SIZE_LIMIT
+message_size_limit = MESSAGE_SIZE_LIMIT
+.endif
+
+.ifdef MAIN_ALLOW_DOMAIN_LITERALS
+allow_domain_literals
+.endif
+
+.ifndef DC_minimaldns
+.ifndef MAIN_HOST_LOOKUP
+MAIN_HOST_LOOKUP = *
+.endif
+host_lookup = MAIN_HOST_LOOKUP
+.endif
+
+.ifdef MAIN_HARDCODE_PRIMARY_HOSTNAME
+primary_hostname = MAIN_HARDCODE_PRIMARY_HOSTNAME
+.endif
+
+prdr_enable = true
+
+.ifdef MAIN_SMTP_ACCEPT_MAX_NOMAIL_HOSTS
+smtp_accept_max_nonmail_hosts = MAIN_SMTP_ACCEPT_MAX_NOMAIL_HOSTS
+.endif
+
+.ifndef MAIN_FORCE_SENDER
+local_from_check = false
+local_sender_retain = true
+untrusted_set_sender = *
+.endif
+
+.ifndef MAIN_IGNORE_BOUNCE_ERRORS_AFTER
+MAIN_IGNORE_BOUNCE_ERRORS_AFTER = 2d
+.endif
+ignore_bounce_errors_after = MAIN_IGNORE_BOUNCE_ERRORS_AFTER
+
+.ifndef MAIN_TIMEOUT_FROZEN_AFTER
+MAIN_TIMEOUT_FROZEN_AFTER = 7d
+.endif
+timeout_frozen_after = MAIN_TIMEOUT_FROZEN_AFTER
+
+.ifndef MAIN_FREEZE_TELL
+MAIN_FREEZE_TELL = postmaster
+.endif
+freeze_tell = MAIN_FREEZE_TELL
+
+.ifndef SPOOLDIR
+SPOOLDIR = /var/spool/exim4
+.endif
+spool_directory = SPOOLDIR
+
+.ifndef MAIN_TRUSTED_USERS
+MAIN_TRUSTED_USERS = uucp
+.endif
+trusted_users = MAIN_TRUSTED_USERS
+.ifdef MAIN_TRUSTED_GROUPS
+trusted_groups = MAIN_TRUSTED_GROUPS
+.endif
+
+.ifdef MAIN_KEEP_ENVIRONMENT
+keep_environment = MAIN_KEEP_ENVIRONMENT
+.else
+keep_environment =
+.endif
+.ifdef MAIN_ADD_ENVIRONMENT
+add_environment = MAIN_ADD_ENVIRONMENT
+.endif
+
+.ifdef MAIN_TLS_ENABLE
+.ifndef MAIN_TLS_ADVERTISE_HOSTS
+MAIN_TLS_ADVERTISE_HOSTS = *
+.endif
+tls_advertise_hosts = MAIN_TLS_ADVERTISE_HOSTS
+
+.ifdef MAIN_TLS_CERTKEY
+tls_certificate = MAIN_TLS_CERTKEY
+.else
+.ifndef MAIN_TLS_CERTIFICATE
+MAIN_TLS_CERTIFICATE = CONFDIR/exim.crt
+.endif
+tls_certificate = MAIN_TLS_CERTIFICATE
+
+.ifndef MAIN_TLS_PRIVATEKEY
+MAIN_TLS_PRIVATEKEY = CONFDIR/exim.key
+.endif
+tls_privatekey = MAIN_TLS_PRIVATEKEY
+.endif
+
+.ifndef MAIN_TLS_VERIFY_CERTIFICATES
+MAIN_TLS_VERIFY_CERTIFICATES = ${if exists{/etc/ssl/certs/ca-certificates.crt}\
+                                    {/etc/ssl/certs/ca-certificates.crt}\
+				    {/dev/null}}
+.endif
+tls_verify_certificates = MAIN_TLS_VERIFY_CERTIFICATES
+
+.ifdef MAIN_TLS_VERIFY_HOSTS
+tls_verify_hosts = MAIN_TLS_VERIFY_HOSTS
+.endif
+
+.ifdef MAIN_TLS_TRY_VERIFY_HOSTS
+tls_try_verify_hosts = MAIN_TLS_TRY_VERIFY_HOSTS
+.endif
+
+.ifdef _HAVE_GNUTLS
+tls_dhparam = historic
+.endif
+
+.else
+tls_advertise_hosts =
+.endif
+
+.ifdef MAIN_LOG_SELECTOR
+log_selector = MAIN_LOG_SELECTOR
+.endif
+
+begin acl
+
+acl_local_deny_exceptions:
+  accept
+    hosts = ${if exists{CONFDIR/host_local_deny_exceptions}\
+                 {CONFDIR/host_local_deny_exceptions}\
+                 {}}
+  accept
+    senders = ${if exists{CONFDIR/sender_local_deny_exceptions}\
+                   {CONFDIR/sender_local_deny_exceptions}\
+                   {}}
+  accept
+    hosts = ${if exists{CONFDIR/local_host_whitelist}\
+                 {CONFDIR/local_host_whitelist}\
+                 {}}
+  accept
+    senders = ${if exists{CONFDIR/local_sender_whitelist}\
+                   {CONFDIR/local_sender_whitelist}\
+                   {}}
+
+  .ifdef LOCAL_DENY_EXCEPTIONS_LOCAL_ACL_FILE
+  .include LOCAL_DENY_EXCEPTIONS_LOCAL_ACL_FILE
+  .endif
+  
+  .ifdef WHITELIST_LOCAL_DENY_LOCAL_ACL_FILE
+  .include WHITELIST_LOCAL_DENY_LOCAL_ACL_FILE
+  .endif
+
+acl_check_mail:
+
+  accept
+
+acl_check_rcpt:
+
+  accept
+    hosts = :
+    control = dkim_disable_verify
+
+.ifdef DC_minimaldns
+  warn
+    control = dkim_disable_verify
+.else
+.ifdef DISABLE_DKIM_VERIFY
+  warn
+    control = dkim_disable_verify
+.endif
+.endif
+
+  .ifdef CHECK_RCPT_LOCAL_LOCALPARTS
+  deny
+    domains = +local_domains
+    local_parts = CHECK_RCPT_LOCAL_LOCALPARTS
+    message = restricted characters in address
+  .endif
+
+  
+
+  .ifdef CHECK_RCPT_REMOTE_LOCALPARTS
+  deny
+    domains = !+local_domains
+    local_parts = CHECK_RCPT_REMOTE_LOCALPARTS
+    message = restricted characters in address
+  .endif
+
+  accept
+    .ifndef CHECK_RCPT_POSTMASTER
+    local_parts = postmaster
+    .else
+    local_parts = CHECK_RCPT_POSTMASTER
+    .endif
+    domains = +local_domains : +relay_to_domains
+
+  .ifdef CHECK_RCPT_VERIFY_SENDER
+  deny
+    message = Sender verification failed
+    !acl = acl_local_deny_exceptions
+    !verify = sender
+  .endif
+
+  deny
+    !acl = acl_local_deny_exceptions
+    senders = ${if exists{CONFDIR/local_sender_callout}\
+                         {CONFDIR/local_sender_callout}\
+                   {}}
+    !verify = sender/callout
+
+  accept
+    hosts = +relay_from_hosts
+    control = submission/sender_retain
+    control = dkim_disable_verify
+
+  accept
+    authenticated = *
+    control = submission/sender_retain
+    control = dkim_disable_verify
+
+  require message	= nice hosts say HELO first
+          condition	= ${if def:sender_helo_name}
+
+  require
+    message = relay not permitted
+    domains = +local_domains : +relay_to_domains
+
+  require
+    verify = recipient
+
+  deny
+    !acl = acl_local_deny_exceptions
+    recipients = ${if exists{CONFDIR/local_rcpt_callout}\
+                            {CONFDIR/local_rcpt_callout}\
+                      {}}
+    !verify = recipient/callout
+
+  deny
+    message = sender envelope address $sender_address is locally blacklisted here. If you think this is wrong, get in touch with postmaster
+    !acl = acl_local_deny_exceptions
+    senders = ${if exists{CONFDIR/local_sender_blacklist}\
+                   {CONFDIR/local_sender_blacklist}\
+                   {}}
+
+  deny
+    message = sender IP address $sender_host_address is locally blacklisted here. If you think this is wrong, get in touch with postmaster
+    !acl = acl_local_deny_exceptions
+    hosts = ${if exists{CONFDIR/local_host_blacklist}\
+                 {CONFDIR/local_host_blacklist}\
+                 {}}
+
+  .ifdef CHECK_RCPT_REVERSE_DNS
+  warn
+    condition = ${if and{{def:sender_host_address}{!def:sender_host_name}}\
+                      {yes}{no}}
+    add_header = X-Host-Lookup-Failed: Reverse DNS lookup failed for $sender_host_address (${if eq{$host_lookup_failed}{1}{failed}{deferred}})
+  .endif
+
+  .ifdef CHECK_RCPT_SPF
+  deny
+    message = [SPF] $sender_host_address is not allowed to send mail from \
+              ${if def:sender_address_domain {$sender_address_domain}{$sender_helo_name}}.  \
+              Please see \
+	      http://www.openspf.org/Why?scope=${if def:sender_address_domain \
+              {mfrom}{helo}};identity=${if def:sender_address_domain \
+              {$sender_address}{$sender_helo_name}};ip=$sender_host_address
+    log_message = SPF check failed.
+    !acl = acl_local_deny_exceptions
+    condition = ${run{/usr/bin/spfquery.mail-spf-perl --ip \
+                   ${quote:$sender_host_address} --identity \
+                   ${if def:sender_address_domain \
+                       {--scope mfrom  --identity ${quote:$sender_address}}\
+                       {--scope helo --identity ${quote:$sender_helo_name}}}}\
+                   {no}{${if eq {$runrc}{1}{yes}{no}}}}
+
+  defer
+    message = Temporary DNS error while checking SPF record.  Try again later.
+    !acl = acl_local_deny_exceptions
+    condition = ${if eq {$runrc}{5}{yes}{no}}
+
+  warn
+    condition = ${if <={$runrc}{6}{yes}{no}}
+    add_header = Received-SPF: ${if eq {$runrc}{0}{pass}\
+                                {${if eq {$runrc}{2}{softfail}\
+                                 {${if eq {$runrc}{3}{neutral}\
+				  {${if eq {$runrc}{4}{permerror}\
+				   {${if eq {$runrc}{6}{none}{error}}}}}}}}}\
+				} client-ip=$sender_host_address; \
+				${if def:sender_address_domain \
+				   {envelope-from=${sender_address}; }{}}\
+				helo=$sender_helo_name
+
+  warn
+    log_message = Unexpected error in SPF check.
+    condition = ${if >{$runrc}{6}{yes}{no}}
+  .endif
+
+  .ifdef CHECK_RCPT_IP_DNSBLS
+  warn
+    dnslists = CHECK_RCPT_IP_DNSBLS
+    add_header = X-Warning: $sender_host_address is listed at $dnslist_domain ($dnslist_value: $dnslist_text)
+    log_message = $sender_host_address is listed at $dnslist_domain ($dnslist_value: $dnslist_text)
+  .endif
+
+  .ifdef CHECK_RCPT_DOMAIN_DNSBLS
+  warn
+    !senders = ${if exists{CONFDIR/local_domain_dnsbl_whitelist}\
+                    {CONFDIR/local_domain_dnsbl_whitelist}\
+                    {}}
+    dnslists = CHECK_RCPT_DOMAIN_DNSBLS
+    add_header = X-Warning: $sender_address_domain is listed at $dnslist_domain ($dnslist_value: $dnslist_text)
+    log_message = $sender_address_domain is listed at $dnslist_domain ($dnslist_value: $dnslist_text)
+  .endif
+
+  .ifdef CHECK_RCPT_LOCAL_ACL_FILE
+  .include CHECK_RCPT_LOCAL_ACL_FILE
+  .endif
+
+  accept
+    domains = +relay_to_domains
+    endpass
+    verify = recipient
+
+  accept
+
+acl_check_data:
+
+  .ifndef IGNORE_SMTP_LINE_LENGTH_LIMIT
+  deny    message    = maximum allowed line length is 998 octets, \
+                       got $max_received_linelength
+          condition  = ${if > {$max_received_linelength}{998}}
+  .endif
+
+  .ifdef CHECK_DATA_VERIFY_HEADER_SYNTAX
+  deny
+    message = Message headers fail syntax check
+    !acl = acl_local_deny_exceptions
+    !verify = header_syntax
+  .endif
+
+  .ifdef CHECK_DATA_VERIFY_HEADER_SENDER
+  deny
+    message = No verifiable sender address in message headers
+    !acl = acl_local_deny_exceptions
+    !verify = header_sender
+  .endif
+
+  .ifdef CHECK_DATA_LOCAL_ACL_FILE
+  .include CHECK_DATA_LOCAL_ACL_FILE
+  .endif
+
+  accept
+
+begin routers
+
+.ifdef MAIN_ALLOW_DOMAIN_LITERALS
+domain_literal:
+  debug_print = "R: domain_literal for $local_part@$domain"
+  driver = ipliteral
+  domains = ! +local_domains
+  transport = remote_smtp
+.endif
+
+hubbed_hosts:
+  debug_print = "R: hubbed_hosts for $domain"
+  driver = manualroute
+  domains = "${if exists{CONFDIR/hubbed_hosts}\
+                   {partial-lsearch;CONFDIR/hubbed_hosts}\
+              fail}"
+  same_domain_copy_routing = yes
+  route_data = ${lookup{$domain}partial-lsearch{CONFDIR/hubbed_hosts}}
+  transport = remote_smtp
+
+.ifdef DCconfig_internet
+
+dnslookup_relay_to_domains:
+  debug_print = "R: dnslookup_relay_to_domains for $local_part@$domain"
+  driver = dnslookup
+  domains = ! +local_domains : +relay_to_domains
+  transport = remote_smtp
+  same_domain_copy_routing = yes
+  no_more
+
+dnslookup:
+  debug_print = "R: dnslookup for $local_part@$domain"
+  driver = dnslookup
+  domains = ! +local_domains
+  transport = remote_smtp
+  same_domain_copy_routing = yes
+  ignore_target_hosts = 0.0.0.0 : 127.0.0.0/8 : 192.168.0.0/16 :\
+                        172.16.0.0/12 : 10.0.0.0/8 : 169.254.0.0/16 :\
+			255.255.255.255
+  no_more
+
+.endif
+
+.ifdef DCconfig_local
+nonlocal:
+  debug_print = "R: nonlocal for $local_part@$domain"
+  driver = redirect
+  domains = ! +local_domains
+  allow_fail
+  data = :fail: Mailing to remote domains not supported
+  no_more
+
+.endif
+
+.ifdef DCconfig_smarthost DCconfig_satellite
+
+smarthost:
+  debug_print = "R: smarthost for $local_part@$domain"
+  driver = manualroute
+  domains = ! +local_domains
+  transport = remote_smtp_smarthost
+  route_list = * DCsmarthost byname
+  host_find_failed = ignore
+  same_domain_copy_routing = yes
+  no_more
+
+.endif
+
+COND_LOCAL_SUBMITTER = "\
+               ${if match_ip{$sender_host_address}{:@[]}\
+                    {1}{0}\
+		}"
+
+real_local:
+  debug_print = "R: real_local for $local_part@$domain"
+  driver = accept
+  domains = +local_domains
+  condition = COND_LOCAL_SUBMITTER
+  local_part_prefix = real-
+  check_local_user
+  transport = LOCAL_DELIVERY
+
+system_aliases:
+  debug_print = "R: system_aliases for $local_part@$domain"
+  driver = redirect
+  domains = +local_domains
+  allow_fail
+  allow_defer
+  data = ${lookup{$local_part}lsearch{/etc/aliases}}
+  .ifdef SYSTEM_ALIASES_USER
+  user = SYSTEM_ALIASES_USER
+  .endif
+  .ifdef SYSTEM_ALIASES_GROUP
+  group = SYSTEM_ALIASES_GROUP
+  .endif
+  .ifdef SYSTEM_ALIASES_FILE_TRANSPORT
+  file_transport = SYSTEM_ALIASES_FILE_TRANSPORT
+  .endif
+  .ifdef SYSTEM_ALIASES_PIPE_TRANSPORT
+  pipe_transport = SYSTEM_ALIASES_PIPE_TRANSPORT
+  .endif
+  .ifdef SYSTEM_ALIASES_DIRECTORY_TRANSPORT
+  directory_transport = SYSTEM_ALIASES_DIRECTORY_TRANSPORT
+  .endif
+
+.ifdef DCconfig_satellite
+hub_user:
+  debug_print = "R: hub_user for $local_part@$domain"
+  driver = redirect
+  domains = +local_domains
+  data = ${local_part}@DCreadhost
+  check_local_user
+
+hub_user_smarthost:
+  debug_print = "R: hub_user_smarthost for $local_part@$domain"
+  driver = manualroute
+  domains = DCreadhost
+  transport = remote_smtp_smarthost
+  route_list = * DCsmarthost byname
+  host_find_failed = ignore
+  same_domain_copy_routing = yes
+  check_local_user
+.endif
+
+userforward:
+  debug_print = "R: userforward for $local_part@$domain"
+  driver = redirect
+  domains = +local_domains
+  check_local_user
+  file = $home/.forward
+  require_files = $local_part:$home/.forward
+  no_verify
+  no_expn
+  check_ancestor
+  allow_filter
+  forbid_smtp_code = true
+  directory_transport = address_directory
+  file_transport = address_file
+  pipe_transport = address_pipe
+  reply_transport = address_reply
+  skip_syntax_errors
+  syntax_errors_to = real-$local_part@$domain
+  syntax_errors_text = \
+    This is an automatically generated message. An error has\n\
+    been found in your .forward file. Details of the error are\n\
+    reported below. While this error persists, you will receive\n\
+    a copy of this message for every message that is addressed\n\
+    to you. If your .forward file is a filter file, or if it is\n\
+    a non-filter file containing no valid forwarding addresses,\n\
+    a copy of each incoming message will be put in your normal\n\
+    mailbox. If a non-filter file contains at least one valid\n\
+    forwarding address, forwarding to the valid addresses will\n\
+    happen, and those will be the only deliveries that occur.
+
+procmail:
+  debug_print = "R: procmail for $local_part@$domain"
+  driver = accept
+  domains = +local_domains
+  check_local_user
+  transport = procmail_pipe
+  require_files = ${local_part}:\
+                  ${if exists{/etc/procmailrc}\
+                    {/etc/procmailrc}{${home}/.procmailrc}}:\
+                  +/usr/bin/procmail
+  no_verify
+  no_expn
+
+maildrop:
+  debug_print = "R: maildrop for $local_part@$domain"
+  driver = accept
+  domains = +local_domains
+  check_local_user
+  transport = maildrop_pipe
+  require_files = ${local_part}:${home}/.mailfilter:+/usr/bin/maildrop
+  no_verify
+  no_expn
+
+.ifndef FIRST_USER_ACCOUNT_UID
+FIRST_USER_ACCOUNT_UID = 0
+.endif
+
+.ifndef DEFAULT_SYSTEM_ACCOUNT_ALIAS
+DEFAULT_SYSTEM_ACCOUNT_ALIAS = :fail: no mail to system accounts
+.endif
+
+COND_SYSTEM_USER_AND_REMOTE_SUBMITTER = "\
+               ${if and{{! match_ip{$sender_host_address}{:@[]}}\
+                        {<{$local_user_uid}{FIRST_USER_ACCOUNT_UID}}}\
+                    {1}{0}\
+		}"
+
+lowuid_aliases:
+  debug_print = "R: lowuid_aliases for $local_part@$domain (UID $local_user_uid)"
+  check_local_user
+  driver = redirect
+  allow_fail
+  domains = +local_domains
+  condition = COND_SYSTEM_USER_AND_REMOTE_SUBMITTER
+  data = ${if exists{CONFDIR/lowuid-aliases}\
+              {${lookup{$local_part}lsearch{CONFDIR/lowuid-aliases}\
+              {$value}{DEFAULT_SYSTEM_ACCOUNT_ALIAS}}}\
+              {DEFAULT_SYSTEM_ACCOUNT_ALIAS}}
+
+local_user:
+  debug_print = "R: local_user for $local_part@$domain"
+  driver = accept
+  domains = +local_domains
+  check_local_user
+  local_parts = ! root
+  transport = LOCAL_DELIVERY
+  cannot_route_message = Unknown user
+
+mail4root:
+  debug_print = "R: mail4root for $local_part@$domain"
+  driver = redirect
+  domains = +local_domains
+  data = /var/mail/mail
+  file_transport = address_file
+  local_parts = root
+  user = mail
+  group = mail
+
+begin transports
+
+.ifdef HIDE_MAILNAME
+REMOTE_SMTP_HEADERS_REWRITE=*@+local_domains $1@DCreadhost frs : *@ETC_MAILNAME $1@DCreadhost frs
+REMOTE_SMTP_RETURN_PATH=${if match_domain{$sender_address_domain}{+local_domains}{${sender_address_local_part}@DCreadhost}{${if match_domain{$sender_address_domain}{ETC_MAILNAME}{${sender_address_local_part}@DCreadhost}fail}}}
+.endif
+
+.ifdef REMOTE_SMTP_HELO_FROM_DNS
+.ifdef REMOTE_SMTP_HELO_DATA
+REMOTE_SMTP_HELO_DATA==${lookup dnsdb {ptr=$sending_ip_address}{$value}{$primary_hostname}}
+.else
+REMOTE_SMTP_HELO_DATA=${lookup dnsdb {ptr=$sending_ip_address}{$value}{$primary_hostname}}
+.endif
+.endif
+
+address_file:
+  debug_print = "T: address_file for $local_part@$domain"
+  driver = appendfile
+  delivery_date_add
+  envelope_to_add
+  return_path_add
+
+address_pipe:
+  debug_print = "T: address_pipe for $local_part@$domain"
+  driver = pipe
+  return_fail_output
+
+address_reply:
+  debug_print = "T: autoreply for $local_part@$domain"
+  driver = autoreply
+
+mail_spool:
+  debug_print = "T: appendfile for $local_part@$domain"
+  driver = appendfile
+  file = /var/mail/$local_part
+  delivery_date_add
+  envelope_to_add
+  return_path_add
+  group = mail
+  mode = 0660
+  mode_fail_narrower = false
+
+maildir_home:
+  debug_print = "T: maildir_home for $local_part@$domain"
+  driver = appendfile
+  .ifdef MAILDIR_HOME_MAILDIR_LOCATION
+  directory = MAILDIR_HOME_MAILDIR_LOCATION
+  .else
+  directory = $home/Maildir
+  .endif
+  .ifdef MAILDIR_HOME_CREATE_DIRECTORY
+  create_directory
+  .endif
+  .ifdef MAILDIR_HOME_CREATE_FILE
+  create_file = MAILDIR_HOME_CREATE_FILE
+  .endif
+  delivery_date_add
+  envelope_to_add
+  return_path_add
+  maildir_format
+  .ifdef MAILDIR_HOME_DIRECTORY_MODE
+  directory_mode = MAILDIR_HOME_DIRECTORY_MODE
+  .else
+  directory_mode = 0700
+  .endif
+  .ifdef MAILDIR_HOME_MODE
+  mode = MAILDIR_HOME_MODE
+  .else
+  mode = 0600
+  .endif
+  mode_fail_narrower = false
+
+maildrop_pipe:
+  debug_print = "T: maildrop_pipe for $local_part@$domain"
+  driver = pipe
+  path = "/bin:/usr/bin:/usr/local/bin"
+  command = "/usr/bin/maildrop"
+  message_prefix =
+  message_suffix =
+  return_path_add
+  delivery_date_add
+  envelope_to_add
+
+procmail_pipe:
+  debug_print = "T: procmail_pipe for $local_part@$domain"
+  driver = pipe
+  path = "/bin:/usr/bin:/usr/local/bin"
+  command = "/usr/bin/procmail"
+  return_path_add
+  delivery_date_add
+  envelope_to_add
+
+remote_smtp:
+  debug_print = "T: remote_smtp for $local_part@$domain"
+  driver = smtp
+.ifndef IGNORE_SMTP_LINE_LENGTH_LIMIT
+  message_size_limit = ${if > {$max_received_linelength}{998} {1}{0}}
+.endif
+.ifdef REMOTE_SMTP_HOSTS_AVOID_TLS
+  hosts_avoid_tls = REMOTE_SMTP_HOSTS_AVOID_TLS
+.endif
+.ifdef REMOTE_SMTP_HEADERS_REWRITE
+  headers_rewrite = REMOTE_SMTP_HEADERS_REWRITE
+.endif
+.ifdef REMOTE_SMTP_RETURN_PATH
+  return_path = REMOTE_SMTP_RETURN_PATH
+.endif
+.ifdef REMOTE_SMTP_HELO_DATA
+  helo_data=REMOTE_SMTP_HELO_DATA
+.endif
+.ifdef DKIM_DOMAIN
+dkim_domain = DKIM_DOMAIN
+.endif
+.ifdef DKIM_SELECTOR
+dkim_selector = DKIM_SELECTOR
+.endif
+.ifdef DKIM_PRIVATE_KEY
+dkim_private_key = DKIM_PRIVATE_KEY
+.endif
+.ifdef DKIM_CANON
+dkim_canon = DKIM_CANON
+.endif
+.ifdef DKIM_STRICT
+dkim_strict = DKIM_STRICT
+.endif
+.ifdef DKIM_SIGN_HEADERS
+dkim_sign_headers = DKIM_SIGN_HEADERS
+.endif
+.ifdef TLS_DH_MIN_BITS
+tls_dh_min_bits = TLS_DH_MIN_BITS
+.endif
+.ifdef REMOTE_SMTP_TLS_CERTIFICATE
+tls_certificate = REMOTE_SMTP_TLS_CERTIFICATE
+.endif
+.ifdef REMOTE_SMTP_PRIVATEKEY
+tls_privatekey = REMOTE_SMTP_PRIVATEKEY
+.endif
+
+remote_smtp_smarthost:
+  debug_print = "T: remote_smtp_smarthost for $local_part@$domain"
+  driver = smtp
+.ifndef IGNORE_SMTP_LINE_LENGTH_LIMIT
+  message_size_limit = ${if > {$max_received_linelength}{998} {1}{0}}
+.endif
+  hosts_try_auth = <; ${if exists{CONFDIR/passwd.client} \
+        {\
+        ${lookup{$host}nwildlsearch{CONFDIR/passwd.client}{$host_address}}\
+        }\
+        {} \
+      }
+.ifdef REMOTE_SMTP_SMARTHOST_HOSTS_AVOID_TLS
+  hosts_avoid_tls = REMOTE_SMTP_SMARTHOST_HOSTS_AVOID_TLS
+.endif
+.ifdef REMOTE_SMTP_SMARTHOST_HOSTS_REQUIRE_TLS
+  hosts_require_tls = REMOTE_SMTP_SMARTHOST_HOSTS_REQUIRE_TLS
+.endif
+.ifdef REMOTE_SMTP_HEADERS_REWRITE
+  headers_rewrite = REMOTE_SMTP_HEADERS_REWRITE
+.endif
+.ifdef REMOTE_SMTP_RETURN_PATH
+  return_path = REMOTE_SMTP_RETURN_PATH
+.endif
+.ifdef REMOTE_SMTP_HELO_DATA
+  helo_data=REMOTE_SMTP_HELO_DATA
+.endif
+.ifdef TLS_DH_MIN_BITS
+tls_dh_min_bits = TLS_DH_MIN_BITS
+.endif
+.ifdef REMOTE_SMTP_SMARTHOST_TLS_CERTIFICATE
+tls_certificate = REMOTE_SMTP_SMARTHOST_TLS_CERTIFICATE
+.endif
+.ifdef REMOTE_SMTP_SMARTHOST_PRIVATEKEY
+tls_privatekey = REMOTE_SMTP_SMARTHOST_PRIVATEKEY
+.endif
+
+address_directory:
+  debug_print = "T: address_directory for $local_part@$domain"
+  driver = appendfile
+  delivery_date_add
+  envelope_to_add
+  return_path_add
+  check_string = ""
+  escape_string = ""
+  maildir_format
+
+begin retry
+
+*                      *           F,2h,15m; G,16h,1h,1.5; F,4d,6h
+
+begin rewrite
+
+.ifndef NO_EAA_REWRITE_REWRITE
+*@+local_domains "${lookup{${local_part}}lsearch{/etc/email-addresses}\
+                   {$value}fail}" Ffrs
+*@ETC_MAILNAME "${lookup{${local_part}}lsearch{/etc/email-addresses}\
+                   {$value}fail}" Ffrs
+.endif
+
+begin authenticators
+
+cram_md5:
+  driver = cram_md5
+  public_name = CRAM-MD5
+  client_name = ${extract{1}{:}{${lookup{$host}nwildlsearch{CONFDIR/passwd.client}{$value}fail}}}
+  client_secret = ${extract{2}{:}{${lookup{$host}nwildlsearch{CONFDIR/passwd.client}{$value}fail}}}
+
+PASSWDLINE=${sg{\
+                ${lookup{$host}nwildlsearch{CONFDIR/passwd.client}{$value}fail}\
+	        }\
+	        {\\N[\\^]\\N}\
+	        {^^}\
+	    }
+
+plain:
+  driver = plaintext
+  public_name = PLAIN
+.ifndef AUTH_CLIENT_ALLOW_NOTLS_PASSWORDS
+  client_send = "<; ${if !eq{$tls_out_cipher}{}\
+                    {^${extract{1}{:}{PASSWDLINE}}\
+		     ^${sg{PASSWDLINE}{\\N([^:]+:)(.*)\\N}{\\$2}}\
+		   }fail}"
+.else
+  client_send = "<; ^${extract{1}{:}{PASSWDLINE}}\
+		    ^${sg{PASSWDLINE}{\\N([^:]+:)(.*)\\N}{\\$2}}"
+.endif
+
+login:
+  driver = plaintext
+  public_name = LOGIN
+.ifndef AUTH_CLIENT_ALLOW_NOTLS_PASSWORDS
+  client_send = "<; ${if and{\
+                          {!eq{$tls_out_cipher}{}}\
+                          {!eq{PASSWDLINE}{}}\
+                         }\
+                      {}fail}\
+                 ; ${extract{1}{::}{PASSWDLINE}}\
+		 ; ${sg{PASSWDLINE}{\\N([^:]+:)(.*)\\N}{\\$2}}"
+.else
+  client_send = "<; ${if !eq{PASSWDLINE}{}\
+                      {}fail}\
+                 ; ${extract{1}{::}{PASSWDLINE}}\
+		 ; ${sg{PASSWDLINE}{\\N([^:]+:)(.*)\\N}{\\$2}}"
+.endif

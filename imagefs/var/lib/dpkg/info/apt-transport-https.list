@@ -1,0 +1,13 @@
+/.
+/usr
+/usr/lib
+/usr/lib/apt
+/usr/lib/apt/methods
+/usr/lib/apt/methods/https
+/usr/share
+/usr/share/doc
+/usr/share/doc/apt-transport-https
+/usr/share/doc/apt-transport-https/NEWS.Debian.gz
+/usr/share/doc/apt-transport-https/apt-transport-https.README
+/usr/share/doc/apt-transport-https/changelog.gz
+/usr/share/doc/apt-transport-https/copyright

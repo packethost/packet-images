@@ -1,0 +1,18 @@
+
+# router/150_exim4-config_hubbed_hosts
+#################################
+
+# route specific domains manually.
+#
+# see exim4-config_files(5) and spec.txt chapter 20.3 through 20.7 for
+# more detailed documentation.
+
+hubbed_hosts:
+  debug_print = "R: hubbed_hosts for $domain"
+  driver = manualroute
+  domains = "${if exists{CONFDIR/hubbed_hosts}\
+                   {partial-lsearch;CONFDIR/hubbed_hosts}\
+              fail}"
+  same_domain_copy_routing = yes
+  route_data = ${lookup{$domain}partial-lsearch{CONFDIR/hubbed_hosts}}
+  transport = remote_smtp

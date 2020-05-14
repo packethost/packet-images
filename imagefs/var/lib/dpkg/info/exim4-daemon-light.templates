@@ -1,0 +1,105 @@
+Template: exim4-daemon-light/drec
+Type: error
+Description: Reconfigure exim4-config instead of this package
+ Exim4 has its configuration factored out into a dedicated package,
+ exim4-config. To reconfigure Exim4, use 'dpkg-reconfigure exim4-config'.
+Description-ar.UTF-8: الرجاء إعادة تهيئة exim4-config بدلاً من هذه الحزمة.
+ هناك حزمة مخصصة لتهيئة Exim4، والمسماة exim4-config. إن كنت تريد إعادة تهيئة Exim4، استخدم الأمر 'dpkg-reconfigure exim4-config'.
+Description-ast.UTF-8: Reconfigure exim4-config n'arróu d'esti paquete
+ Movióse la configuración de exim4 a un paquete dedicaú: exim4-config. Si quies reconfigurar Exim4 tendríes d'executar 'dpkg-reconfigure exim4-config'.
+Description-be.UTF-8: Пераналадзьце exim4-config, а не гэты пакет
+ Наладкі Exim захоўваюцца ў асобным пакеце exim4-config. Каб пераналадзіць Exim4, выканайце 'dpkg-reconfigure exim4-config'.
+Description-bg.UTF-8: Настройте exim4-config, а не този пакет
+ Конфигурацията на Exim4 е отделена в отделен пакет - exim4-config. Ако искате да промените настройките на Exim4, използвайте командата „dpkg-reconfigure exim4-config“.
+Description-bn.UTF-8: এই প্যাকেজের পরিবর্তে exim4-কনফিগ পুনরায় কনফিগার করা হবে
+ Exim4 এর কনফিগারেশন একটি নির্দিষ্ট প্যাকেজে (exim4-config) ফ্যাক্টর করা থাকে। Exim4 পুনরায় কনফিগার করার জন্য 'dpkg-reconfigure exim4-config' ব্যবহার করুন।
+Description-ca.UTF-8: Reconfigureu el paquet exim4-config en comptes d'aquest paquet
+ Exim4 té la seua configuració en un paquet dedicat, exim4-config. Si voleu reconfigurar l'Exim4, utilitzeu «dpkg-reconfigure exim4-config».
+Description-cs.UTF-8: Místo tohoto balíku použijte raději exim4-config
+ Exim4 má svou konfiguraci oddělenou do samostatného balíku exim4-config. Chcete-li změnit nastavení Eximu4, použijte příkaz 'dpkg-reconfigure exim4-config'.
+Description-da.UTF-8: Sæt exim4-config op i stedet for denne pakke
+ Exim4 har udskilt sin opsætning i en dertil oprettet pakke, exim4-config. For at rekonfigurere Exim4 bruges 'dpkg-reconfigure exim4-config'.
+Description-de.UTF-8: Exim4-config anstelle dieses Pakets neu einrichten
+ Die Einstellungen von Exim4 wurden in ein eigenes Paket, exim4-config, ausgelagert. Benutzen Sie den Befehl 'dpkg-reconfigure exim4-config', um Exim4 neu einzurichten.
+Description-dz.UTF-8: ཐུམ་སྒྲིལ་འདི་གི་ཚབ་ལུ་ exim4-config སླར་རིམ་སྒྲིག་འབད།
+ Exim4 འདི་ ཆེད་བརྩོན་ཐུམ་སྒྲིལ་ exim4-config ལུ་ ཆ་རྐྱེན་འབད་དེ་ཡོདཔ་ཨིན། Exim4 ལོག་རིམ་སྒྲིག་འབད་ནི་ལུ་ 'dpkg-reconfigure exim4-config' འདི་ ལག་ལེན་འཐབ།
+Description-el.UTF-8: Να γίνει επαναρύθμιση του exim4-config αντί αυτού του πακέτου
+ Η ρύθμιση του Exim4 γίνεται με ένα συγκεκριμένο πακέτο ειδικά για τον σκοπό αυτό, το exim4-config. Για  να επαναρυθμίσετε το Exim4, χρησιμοποιήστε την εντολή 'dpkg-reconfigure exim4-config'.
+Description-eo.UTF-8: Reakomodi la pakon 'exim4-config' anstataŭ tiun ĉi pakon
+ La akomodado de 'Exim4' estas mastrumata per specifa pako, 'exim4-config'. Por reakomodi la pakon 'Exim4', uzu la komandon 'dpkg-reconfigure exim4-config'.
+Description-es.UTF-8: Reconfigure exim4-config en lugar de este paquete
+ Se ha movido la configuración de exim4 a un paquete dedicado: «exim4-config». Si quiere reconfigurar Exim4 debería ejecutar «dpkg-reconfigure exim4-config».
+Description-eu.UTF-8: Exim4-config birkonfiguratu pakete honen beharrean
+ Exim4-ek bere konfigurazio beste pakete batetan du, exim4-config. Exim4 birkonfiguratu nahi izan ezkero "dpkg-reconfigure exim4-config" erabili.
+Description-fi.UTF-8: Tee tämän paketin sijaan paketin exim4-config asetukset
+ Exim4:n asetukset ovat erillisessä asetuspaketissa exim4-config. Exim4:n asetukset voidaan tehdä uudelleen komennolla ”dpkg-reconfigure exim4-config”.
+Description-fr.UTF-8: Reconfiguration d'Exim avec exim4-config
+ La configuration d'Exim 4 est gérée par un paquet dédié nommé exim4-config. Si vous souhaitez reconfigurer Exim 4, vous devez utiliser la commande « dpkg-reconfigure exim4-config ».
+Description-gl.UTF-8: Reconfigure exim4-config no canto deste paquete
+ Exim4 ten a configuración separada nun paquete adicado, exim4-config. Para reconfigurar Exim4, empregue "dpkg-reconfigure exim4-config".
+Description-he.UTF-8: הגדר מחדש את החבילה exim4-config במקום את החבילה הזאת
+ קבצי ההגדרות של Exim4 הופרדו לחבילה ייעודית, exim4-config. על מנת לשנות את ההגדרות של Exim4 יש להשתמש ב-'dpkg-reconfigure exim4-config'.
+Description-hr.UTF-8: Napravite rekonfiguraciju exim4-config umjesto ovog paketa
+ Exim4 ima svoje postavke izdvojene u zasebni paket nazvan exim4-config. Za rekonfiguriranje Exima 4 koristite 'dpkg-reconfigure exim4-config'.
+Description-id.UTF-8: Konfigurasi ulang exim4-config, bukannya paket ini 
+ Exim4 memiliki konfigurasi yang diletakkan terpisah dalam paket 'exim4-config'. Jika Anda ingin konfigurasi-ulang Exim4, gunakan 'dpkg-reconfigure exim4-config'.
+Description-it.UTF-8: Riconfigurare exim4-config anziché questo pacchetto
+ Exim4 ha la sua configurazione in un pacchetto dedicato, exim4-config. Per riconfigurare Exim4 usare «dpkg-reconfigure exim4-config».
+Description-ja.UTF-8: このパッケージの代わりに exim4-config を再設定してください
+ Exim4 は、自身の設定を専用パッケージ exim4-config に委ねています。Exim4 を再設定したい場合には、'dpkg-reconfigure exim4-config' を利用してください。
+Description-kk.UTF-8: Бұл дестенің орнына exim4-config баптау керек
+ Exim4 баптауы exim4-config бөлек дестесіне шығарылған. Exim4 баптау үшін 'dpkg-reconfigure exim4-config' пайдалану керек.
+Description-km.UTF-8: កំណត់​រចនា​សម្ព័ន្ធ exim4-config ជំនួស​ឲ្យ​កញ្ចប់​នេះ
+ Exim4 មាន​ការ​កំណត់​រចនា​សម្ព័ន្ធ​របស់វា បាន​ដាក់​ក្នុង​កញ្ចប់​ដែល​បាន​ផ្ដល់​ឲ្យ exim4-config ។ ដើម្បី​កំណត់​រចនាសម្ព័ន្ធ Exim4 ប្រើ 'dpkg-reconfigure exim4-config' ។
+Description-ko.UTF-8: 이 패키지 대신에 exim4-config을 다시 설정합니다
+ exim4는 설정 부분을 exim4-config라는 전용 패키지에 둡니다. exim4를 다시 설정하려면 'dpkg-reconfigure exim4-config' 명령을 실행하십시오.
+Description-lt.UTF-8: Perkonfigūruoti exim4-config vietoje šio paketo
+ Exim4 konfigūracija buvo iškelta į atskirą paketą exim4-config. Jei norite konfigūruoti Exim4, įvykdykite „dpkg-reconfigure exim4-config“.
+Description-ml.UTF-8: ഈ പാക്കേജിനു പകരം exim4-config പാക്കേജ് പുനഃക്രമീകരിക്കുക
+ എക്സിം4 നു് അതിന്റെ ക്രമീകരണത്തിനായി പ്രത്യേകം മാറ്റിവച്ച ഒരു പാക്കേജുണ്ട്, exim4-config. നിങ്ങള്‍ക്കു് എക്സിം4 പുനഃക്രമീകരിക്കണമെന്നുണ്ടെങ്കില്‍ dpkg-reconfigure exim4-config ഉപയോഗിക്കൂ.
+Description-mr.UTF-8: या पॅकेजऐवजी एकझिम४-कॉन्फिग ची पुनर्रचना करायची?
+ एकझिम४ मधे संरचना एक समर्पित पॅकेज, एकझिम४-कॉन्फिग मधे घटक पाडून केली आहे. एकझिम४ पुनर्रचित करण्याकरिता 'डिपीकेजी रिकॉन्फिगर एकझिम४-कॉन्फिग' वापरा.
+Description-nb.UTF-8: Sett opp exim4-config i stedet for denne pakka
+ Oppsett for Exim4 er skilt ut i en egen pakke, exim4-config. Hvis Exim4 skal settes opp på nytt, bruk «dpkg-reconfigure exim4-config».
+Description-ne.UTF-8:  यो प्याकेजहरूको सट्टामा एक्जिम४-कन्फिग पुन: कन्फिगर गर्नुहोस्
+ एक्जिम४ सँग समर्पित गरिएको प्याकेज, एक्जिम४-कन्फिगमा यसको कन्फिगरेसन फ्याक्टर्ड आउट छ ।एक्जिम४ पुन: कन्फिगर गर्न, 'dpkg-reconfigure exim4-config' प्रयोग गर्नुहोस् ।
+Description-nl.UTF-8: Niet dit pakket maar exim4-config herconfigureren
+ De configuratie van Exim4 is afgesplitst naar een het pakket exim4-config . Als u Exim4 wilt herconfigureren dient u dus 'dpkg-reconfigure exim4-config' uit te voeren.
+Description-nn.UTF-8: Vil du setje opp exim4-config i staden for denne pakka?
+ Oppsettet av Exim4 er skilt ut i ein eigen pakke, exim4-config. For å setje opp Exim4, bruk dpkg-reconfigure exim4-config.
+Description-no.UTF-8: Sett opp exim4-config i stedet for denne pakka
+ Oppsett for Exim4 er skilt ut i en egen pakke, exim4-config. Hvis Exim4 skal settes opp på nytt, bruk «dpkg-reconfigure exim4-config».
+Description-pa.UTF-8: ਇਹ ਪੈਕੇਜ ਦੀ ਬਜਾਏ exim4-config ਮੁੜ-ਸੰਰਚਨਾ
+ Exim4 ਦੀ ਸੰਰਚਨਾ ਨੂੰ ਇੱਕ ਸਮਰਪਿਤ ਪੈਕੇਜ ਵਿੱਚ ਵੰਡਿਆ ਗਿਆ ਹੈ, exim4-config। ਜੇ ਤੁਸੀਂ Exim4 ਦੀ ਮੁੜ ਸੰਰਚਨਾ ਕਰਨੀ ਚਾਹੁੰਦੇ ਹੋ ਤਾਂ 'dpkg-reconfigure exim4-config' ਵਰਤੋਂ।
+Description-pl.UTF-8: Uruchom rekonfigurację exim4-config, zamiast tego pakietu
+ Konfiguracja Exim4 znajduje się w osobnym pakiecie, exim4-config. Aby ją zmienić, uruchom "dpkg-reconfigure exim4-config".
+Description-pt.UTF-8: Reconfigurar exim4-config em vez deste pacote
+ O Exim4 tem a sua configuração num pacote dedicado, o exim4-config. Para reconfigurar o Exim4, utilize 'dpkg-reconfigure exim4-config'.
+Description-pt_BR.UTF-8: Reconfigure o pacote exim4-config ao invés deste pacote
+ O Exim4 possui sua configuração separada em um pacote dedicado, o pacote exim4-config. Para reconfigurar o Exim4, utilize o comando 'dpkg-reconfigure exim4-config'.
+Description-ro.UTF-8: Reconfigurați exim4-config în loc să-l configurați pe acesta.
+ Exim4 își crează configurația printr-un pachet dedicat, exim4-config. Pentru reconfigurarea lui Exim4, folosiți „dpkg-reconfigure exim4-config”.
+Description-ru.UTF-8: Перенастройка с помощью exim4-config, а не с помощью этого пакета.
+ Настройка Exim4 вынесена в отдельный пакет, exim4-config. Если нужно перенастроить Exim4, используйте команду 'dpkg-reconfigure exim4-config'.
+Description-sk.UTF-8: Zmena nastavenia exim4-config namiesto tohto balíka
+ Exim4 má na nastavenia určený balík exim4-config. Ak chcete zmeniť nastavenia Exim4, použite „dpkg-reconfigure exim4-config“.
+Description-sq.UTF-8: Rikonfiguro exim4-config në vend të kësaj pakete
+ Exim4 e ka konfigurimin e tij në një paketë të përkushtuar, exim4-config. Nëse dëshiron të rikonfigurosh Exim4, përdor 'dpkg-reconfigure exim4-config'.
+Description-sv.UTF-8: Konfigurera om exim4-config istället för det här paketet
+ Exim4 har fått sin konfiguration flyttad till ett eget paket, exim4-config. Använd "dpkg-reconfigure exim4-config" om du vill konfigurera om Exim4.
+Description-ta.UTF-8: இந்த பணிதொகுப்புக்கு பதில் எக்ஸ் இம் 4 ஐ மீண்டும் வடிவமைக்கவும்.
+ எக்ஸ் இம்4 இன் வடிவமைப்பு பிரத்யேக பொதி exim4-config இல் வரையப் பட்டுள்ளது. நீங்கள் எக்ஸ் இம்4 ஐ மீண்டும் வடிவமைக்க விரும்பினால் 'dpkg-reconfigure exim4-config' என்ற கட்டளையை பயன் படுத்தவும்.
+Description-th.UTF-8: ตั้งค่า exim4-config ไม่ใช่แพกเกจนี้
+ Exim4 มีระบบตั้งค่าแยกออกไปในแพกเกจต่างหาก คือ exim4-config  ถ้าคุณต้องการตั้งค่า Exim4 ให้เรียก 'dpkg-reconfigure exim4-config'
+Description-tr.UTF-8: Bu paket yerine exim4-config yeniden yapılandırılsın mı?
+ Exim4 yapılandırması kendi başına ayrı bir paket olan exim4-config tarafından yapılmaktadır.  Exim4'ü tekrar yapılandırmak için 'dpkg-reconfigure exim4-config' komutunu kullanın.
+Description-uk.UTF-8: Переналаштовуйте exim4-config, а не цей пакунок
+ Все що пов'язано з налаштуванням Exim4 винесено в окремий пакунок - exim4-config. Використовуйте dpkg-reconfigure exim4-config, якщо бажаєте переналаштувати Exim4.
+Description-vi.UTF-8: Cấu hình lại « exim4-config » thay cho gói này
+ Exim4 có cấu hình được định dạng như là gói riêng, « exim-config ». Muốn cấu hình lại phần mềm Exim4 thì sử dụng lệnh « dpkg-reconfigure exim4-config ».
+Description-wo.UTF-8: Komfigurewaat exim4-config ta bayye bii paket
+ Exim4 jëlnañu komfiguraasioŋam jagleelko ab paketu boppam muy exim4-config. Saa yoo bëggée komfigurewaat Exim4, jëfandikool 'dpkg-reconfigure exim4-config'.
+Description-zh_CN.UTF-8: 重新配置 exim4-config 而非本软件包
+ Exim4 的设置被分出来放到了专用软件包 exim4-config 中。要重新设置 Exim4，请使用“dpkg-reconfigure exim4-config”。
+Description-zh_TW.UTF-8: 在重新設定時請替而使用 exim4-config 而不是本套件
+ Exim4 已將其設定程式分離為另一個獨立套件，exim4-config。如果您想要重新設定 Exim4，請使用 dpkg-reconfigure exim4-config。

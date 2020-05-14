@@ -1,0 +1,114 @@
+GNU mailutils TODO list. 2010-12-21
+Copyright (C) 2001-2008, 2010-2012, 2014-2016 Free Software Foundation,
+Inc.
+
+* Provide a generic way to store UID, UIDNEXT and UIDVALIDITY in mailboxes.
+
+* prog_stream: provide a way to startup environment
+
+* redo the support of the default user email and mail domain.
+
+* use the above in message_stream.
+
+* envelope: date returned by mu_envelope_?get_date must not end with a \n
+
+See also mu_rfc2822_in_reply_to.
+
+* Check if _mu_smtp_trace_disable correctly dereferences streams.
+
+* re-implement nntp client
+
+* properties:
+
+** consider a possibility of typed properties (integer, unsigned, string, ...)
+
+* remove libmu_auth, rewrite mu_auth support via mu_property_t
+
+* locale-dependent variant of mu_rfc2047_decode
+
+See rfc2047_decode_wrapper in frm/common.c for a prototype.
+
+* observer: allow for procedure-data closures
+
+See frm/common.c (near line 425).
+
+* mu_address_createv: pass hints as in mu_address_create_hint?
+
+* fix C++ support
+
+* redo libraries as loadable modules (where possible)
+
+* Configuration callback functions should not modify node->tag and node->label.
+
+* mailbox 
+
+** Generic search interface
+
+** Locking
+
+*** Implement a read/write locker_lock() flag so that when MU_LOCKER_WRONLY
+is set in the locker flags, only write locks actually lock the file,
+read locks don't do anything.
+
+*** reportedly mimetest fails on a symlink, but succeeds on a dotlocked file?
+
+* mu_cpystr - revise the use of. 
+
+* support AUTH=anonymous (imap://cyrus.andrew.cmu.edu/archive.info-cyrus)
+
+* mail aliasing support in libmailutils
+
+Use code from MH.
+
+* imap4d
+
+** Check interaction with various imap clients. Currently tested with:
+mail (from mailutils itself), mutt, pine, netscape, mozilla,
+thunderbird, roundcube.
+
+** Better support of multi-access mailboxes?
+
+** implement charsets in search: 1 SEARCH CHARSET ISO-8859-2 TEXT ...
+
+** implement AUTHENTICATE KERBEROS_V4 and SKEY and SRP?
+
+** Implement extensions:
+
+ - QUOTA     : RFC 2087
+ - ACL       : RFC 4314
+ - CHILDREN  : RFC 3348
+ 
+** Consider implementing the following extensions:
+
+ - CONDSTORE : RFC 4551
+ - ESEARCH   : RFC 4731
+ - SEARCHRES : RFC 5182
+
+* Mailcap API
+
+The framework is implemented. Needs extensive testing.
+
+* Mime.types API is available in mimeview. Do we need to move it to
+libmailbox?
+
+* mh -- see mh/TODO
+
+* utilities
+
+** mimeview: support nametemplate
+
+* stream: associate with input location (mu_locus_t or the like).
+
+This is already implemented in logstream.  Does it make sense for
+streams in general?
+
+
+
+Local variables:
+mode: outline
+paragraph-separate: "[ 	]*$"
+eval: (add-hook 'write-file-hooks 'time-stamp)
+time-stamp-start: "list. "
+time-stamp-format: "%:y-%02m-%02d"
+time-stamp-end: "\n"
+end:

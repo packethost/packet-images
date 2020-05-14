@@ -1,0 +1,24 @@
+# Default .mailrc
+# Set prompt string
+set prompt="& "
+# Indentprefix is used for quoting messages
+set indentprefix="> "
+# Assume 20 lines per screen
+set screen=20
+# Ask for CC before sending the message
+set askcc
+# Use '.' to terminate composition of messages
+set dot
+# Emulate mailx's behaviour
+#set mailx
+# Preserve aborted messages in 'dead.letter'
+set save appenddeadletter
+# Hold read or saved messages in the system mailbox
+set hold
+# Display only these headers:
+retain from to subject cc reply-to date
+# Uncomment and set this to the list of your email addresses:
+#alt none@none.org
+# Set sendmail to the directory mandated by the FHS
+set sendmail="/usr/sbin/sendmail"
+# End of .mailrc

@@ -1,0 +1,31 @@
+#!/bin/sh
+
+set -e
+
+case "$1" in
+  configure)
+    if test -d /usr/share/slib; then
+      dpkg-trigger /usr/share/slib
+    fi
+    ;;
+  triggered)
+    case " $2 " in
+      *" /usr/share/slib "*)
+        # Configure slib support.
+        if test -d /usr/share/slib
+        then
+          # Uncomment the code below whenever SLIB supports Guile 2.0.
+          echo "SLIB does not support Guile 2.0 yet.  Ignoring."
+          #(cd /usr/share/guile/2.0 && ln -sf ../../slib .)
+          #/usr/lib/guile-2.0/bin/guile -c \
+          #  "(use-modules (ice-9 slib)) (require 'new-catalog)"
+        else
+        # slib isn't installed -- clean up symlink.
+          rm -f /usr/share/guile/2.0/slib
+        fi
+        ;;
+    esac
+    ;;
+esac
+
+

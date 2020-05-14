@@ -1,0 +1,25 @@
+#!/bin/bash
+
+# Execute the right version of perf for the current kernel.
+# Remove flavour or custom suffix and fix number of version components to 2.
+version="$(uname -r)"
+version="${version%%-*}"
+case "$version" in
+    *.*.*)
+	version="${version%.*}"
+	;;
+esac
+shopt -s execfail
+exec "perf_$version" "$@"
+
+# Not found? Tell the user which package to install.
+case "$version" in
+    3.* | 4.0 | 4.0.*)
+	package=linux-tools-$version
+	;;
+    *)
+	package=linux-perf-$version
+	;;
+esac
+echo >&2 "E: $package is not installed."
+exit 1

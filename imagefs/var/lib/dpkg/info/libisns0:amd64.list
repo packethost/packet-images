@@ -1,0 +1,14 @@
+/.
+/lib
+/lib/x86_64-linux-gnu
+/lib/x86_64-linux-gnu/libisns-nocrypto.so.0
+/usr
+/usr/lib
+/usr/lib/x86_64-linux-gnu
+/usr/lib/x86_64-linux-gnu/libisns.so.0
+/usr/share
+/usr/share/doc
+/usr/share/doc/libisns0
+/usr/share/doc/libisns0/changelog.Debian.gz
+/usr/share/doc/libisns0/changelog.gz
+/usr/share/doc/libisns0/copyright

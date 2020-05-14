@@ -1,0 +1,17 @@
+20ade85a1dc59c43913419ba20776e3b  usr/bin/bc
+82feaf215f58a1703a343f90e54ac980  usr/share/doc-base/bc
+1f9bf5d11d249e256a5b6e33e38a96d5  usr/share/doc/bc/AUTHORS
+26475808771439af5d7e656970886ba2  usr/share/doc/bc/NEWS.gz
+1224d4b5747b717476e1920b5930480a  usr/share/doc/bc/README
+f79bd0dd622944ba2701949d7ef24816  usr/share/doc/bc/bc.html
+2d60d43a8ff4246d809c3a9a73879158  usr/share/doc/bc/changelog.Debian.amd64.gz
+d09923405e986a018f84b7903fe30b08  usr/share/doc/bc/changelog.Debian.gz
+52a3747890b374f0ded810a4021763b6  usr/share/doc/bc/changelog.gz
+6fc68bef151f62e54f1c86b87bcd7a6a  usr/share/doc/bc/copyright
+5b0d9cd9724d2f225034a14d5ac0c132  usr/share/doc/bc/examples/ckbook.b
+5c7c5cf3d718d0f70f32c011ae5b0470  usr/share/doc/bc/examples/pi.b
+e7c56b4013e6fea9c6585b58923c9cd2  usr/share/doc/bc/examples/primes.b
+aedd7cbce6c32f74165850755482a40c  usr/share/doc/bc/examples/twins.b
+240d370943bd86b11ff30261f1a2e1ba  usr/share/info/bc.info.gz
+f08eeaad2ea69ee46107b964523b0dfa  usr/share/man/man1/bc.1.gz
+d1652511d26939710b6dbcea762c5dc3  usr/share/menu/bc

@@ -1,0 +1,7 @@
+/etc/cron.d/mdadm
+/etc/cron.daily/mdadm
+/etc/init.d/mdadm
+/etc/init.d/mdadm-waitidle
+/etc/logcheck/ignore.d.server/mdadm
+/etc/logcheck/violations.d/mdadm
+/etc/modprobe.d/mdadm.conf

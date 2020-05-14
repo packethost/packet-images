@@ -1,0 +1,14 @@
+A simple configuration with two ethernet (wire) interfaces.
+
+-----8<----------8<----------8<----------8<----------8<-----
+
+auto bond0
+iface bond0 inet dhcp
+	bond-slaves eth0 eth1
+	bond-mode 1
+	bond-miimon 100
+	bond-primary eth0 eth1
+
+-----8<----------8<----------8<----------8<----------8<-----
+
+You do not need an "iface eth0" nor an "iface eth1" stanza.

@@ -1,0 +1,61 @@
+#!/bin/sh
+# prerm script for open-iscsi
+
+. /usr/share/debconf/confmodule
+set -e
+
+case "$1" in
+    remove)
+        if ls -d /sys/class/iscsi_session/session* >/dev/null 2>&1 ; then
+            # There are still active iSCSI sessions. Ask the user
+            # if they know what they are doing.
+            db_reset open-iscsi/remove_even_with_active_sessions || true
+            db_input critical open-iscsi/remove_even_with_active_sessions || true
+            db_go
+            db_get open-iscsi/remove_even_with_active_sessions
+            if [ "$RET" = "false" ] ; then
+                echo "Aborting prerm due to user request." >&2
+                exit 1
+            fi
+        fi
+
+        sync
+        # If there are still active and mounted iSCSI sessions,
+        # open-iscsi stop may fail. But we did warn the user...
+        invoke-rc.d open-iscsi stop || true
+        invoke-rc.d iscsid stop || exit $?
+    ;;
+    
+    upgrade)
+        if dpkg --compare-versions "$2" le "2.0.873+git0.3b4b4500-9"; then
+            # The user is attempting to downgrade, ask them if they
+            # really want to do this.
+            db_reset open-iscsi/downgrade_and_break_system || true
+            db_input critical open-iscsi/downgrade_and_break_system || true
+            db_go
+            db_get open-iscsi/downgrade_and_break_system
+            if [ "$RET" = "false" ] ; then
+                echo "Aborting prerm due to user request." >&2
+                exit 1
+            fi
+        fi
+    ;;
+
+    deconfigure)
+    ;;
+
+    failed-upgrade)
+    ;;
+
+    *)
+        echo "prerm called with unknown argument \`$1'" >&2
+        exit 1
+    ;;
+esac
+
+# Automatically added by dh_installdeb
+dpkg-maintscript-helper rm_conffile /etc/init.d/umountiscsi.sh 2.0.873+git0.3b4b4500-9 -- "$@"
+# End automatically added section
+
+
+exit 0

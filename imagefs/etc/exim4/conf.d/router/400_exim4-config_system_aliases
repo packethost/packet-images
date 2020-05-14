@@ -1,0 +1,44 @@
+
+### router/400_exim4-config_system_aliases
+#################################
+
+# This router handles aliasing using a traditional /etc/aliases file.
+#
+##### NB  You must ensure that /etc/aliases exists. It used to be the case
+##### NB  that every Unix had that file, because it was the Sendmail default.
+##### NB  These days, there are systems that don't have it. Your aliases
+##### NB  file should at least contain an alias for "postmaster".
+#
+# This router handles the local part in a case-insensitive way which
+# satisfies the RFCs requirement that postmaster be reachable regardless
+# of case. If you decide to handle /etc/aliases in a caseful way, you
+# need to make arrangements for a caseless postmaster.
+#
+# Delivery to arbitrary directories, files, and piping to programs in
+# /etc/aliases is disabled per default.
+# If that is a problem for you, see
+#   /usr/share/doc/exim4-base/README.Debian.gz
+# for explanation and some workarounds.
+
+system_aliases:
+  debug_print = "R: system_aliases for $local_part@$domain"
+  driver = redirect
+  domains = +local_domains
+  allow_fail
+  allow_defer
+  data = ${lookup{$local_part}lsearch{/etc/aliases}}
+  .ifdef SYSTEM_ALIASES_USER
+  user = SYSTEM_ALIASES_USER
+  .endif
+  .ifdef SYSTEM_ALIASES_GROUP
+  group = SYSTEM_ALIASES_GROUP
+  .endif
+  .ifdef SYSTEM_ALIASES_FILE_TRANSPORT
+  file_transport = SYSTEM_ALIASES_FILE_TRANSPORT
+  .endif
+  .ifdef SYSTEM_ALIASES_PIPE_TRANSPORT
+  pipe_transport = SYSTEM_ALIASES_PIPE_TRANSPORT
+  .endif
+  .ifdef SYSTEM_ALIASES_DIRECTORY_TRANSPORT
+  directory_transport = SYSTEM_ALIASES_DIRECTORY_TRANSPORT
+  .endif

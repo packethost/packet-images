@@ -1,0 +1,17 @@
+
+### router/mmm_mail4root
+#################################
+# deliver mail addressed to root to /var/mail/mail as user mail:mail
+# if it was not redirected in /etc/aliases or by other means
+# Exim cannot deliver as root since 4.24 (FIXED_NEVER_USERS)
+
+mail4root:
+  debug_print = "R: mail4root for $local_part@$domain"
+  driver = redirect
+  domains = +local_domains
+  data = /var/mail/mail
+  file_transport = address_file
+  local_parts = root
+  user = mail
+  group = mail
+

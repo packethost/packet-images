@@ -1,0 +1,9 @@
+2b122875c0af9088f7771a8272aa5b8a  bin/busybox
+2f91f6fda8f23b17c48bc8506c5cc4cd  usr/share/doc/busybox/changelog.Debian.amd64.gz
+165f2e6e2cc6d6c7d04c24e99a137e11  usr/share/doc/busybox/changelog.Debian.gz
+e4a6f98fa82c414802eae075f1e6e837  usr/share/doc/busybox/copyright
+274dba242a30eb1601444bf15c4923f6  usr/share/doc/busybox/mdev.txt.gz
+923ceec813f3e45f099767d6f5e02107  usr/share/doc/busybox/syslog.conf.txt
+2029cc4b85b2536fc257447aa4a00168  usr/share/initramfs-tools/conf-hooks.d/busybox
+ff0c38ecb2edc241b7e5fdac08b8fcdb  usr/share/initramfs-tools/hooks/zz-busybox
+31831e100e5503c8035c695c0ceda4db  usr/share/man/man1/busybox.1.gz

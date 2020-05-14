@@ -1,0 +1,17 @@
+
+### transport/30_exim4-config_mail_spool
+
+# This transport is used for local delivery to user mailboxes in traditional
+# BSD mailbox format.
+#
+mail_spool:
+  debug_print = "T: appendfile for $local_part@$domain"
+  driver = appendfile
+  file = /var/mail/$local_part
+  delivery_date_add
+  envelope_to_add
+  return_path_add
+  group = mail
+  mode = 0660
+  mode_fail_narrower = false
+

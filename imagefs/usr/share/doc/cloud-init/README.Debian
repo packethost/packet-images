@@ -1,0 +1,9 @@
+cloud-init is a tool for early initialization of servers,
+  usually in a cloud environment.
+
+It can be used to set the hostname, configure SSH and APT repositories,
+  add users, install and configure services, ...
+
+See https://cloudinit.readthedocs.io/en/stable/
+
+ -- Nicolas Braud-Santoni <nicolas@braud-santoni.eu>, Sat, 24 Sep 2016 14:13:24 +0200

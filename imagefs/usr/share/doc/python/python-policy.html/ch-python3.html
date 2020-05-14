@@ -1,0 +1,172 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0//EN">
+
+<html>
+
+<head>
+
+<meta http-equiv="content-type" content="text/html; charset=utf-8">
+
+<title>Debian Python Policy - On the move to Python 3</title>
+
+<link href="index.html" rel="start">
+<link href="index.html" rel="prev">
+<link href="ch-python.html" rel="next">
+<link href="index.html#contents" rel="contents">
+<link href="index.html#copyright" rel="copyright">
+<link href="ch-python3.html" rel="chapter" title="1 On the move to Python 3">
+<link href="ch-python.html" rel="chapter" title="2 Python Packaging">
+<link href="ch-module_packages.html" rel="chapter" title="3 Packaged Modules">
+<link href="ch-programs.html" rel="chapter" title="4 Python Programs">
+<link href="ch-embed.html" rel="chapter" title="5 Programs Embedding Python">
+<link href="ch-other.html" rel="chapter" title="6 Interaction with Locally Installed Python Versions">
+<link href="ap-build_dependencies.html" rel="appendix" title="A Build Dependencies">
+<link href="ap-packaging_tools.html" rel="appendix" title="B Packaging Tools">
+<link href="ap-upgrade.html" rel="appendix" title="C Upgrade Procedure">
+<link href="ch-python.html#s-versions" rel="section" title="2.1 Versions">
+<link href="ch-python.html#s-base" rel="section" title="2.2 Main packages">
+<link href="ch-python.html#s-minimal" rel="section" title="2.3 Minimal packages">
+<link href="ch-python.html#s-interpreter" rel="section" title="2.4 Python Interpreter">
+<link href="ch-python.html#s-paths" rel="section" title="2.5 Module Path">
+<link href="ch-python.html#s-runtimes_hooks" rel="section" title="2.6 Hooks for updates to installed runtimes">
+<link href="ch-python.html#s-docs" rel="section" title="2.7 Documentation">
+<link href="ch-module_packages.html#s3.1" rel="section" title="3.1 Types of Python Modules">
+<link href="ch-module_packages.html#s-wheels" rel="section" title="3.2 Wheels">
+<link href="ch-module_packages.html#s-package_names" rel="section" title="3.3 Module Package Names">
+<link href="ch-module_packages.html#s-specifying_versions" rel="section" title="3.4 Specifying Supported Versions">
+<link href="ch-module_packages.html#s-dependencies" rel="section" title="3.5 Dependencies">
+<link href="ch-module_packages.html#s-provides" rel="section" title="3.6 Provides">
+<link href="ch-module_packages.html#s-byte_compilation" rel="section" title="3.7 Modules Byte-Compilation">
+<link href="ch-programs.html#s-interpreter-directive" rel="section" title="4.1 Interpreter directive (“Shebang”)">
+<link href="ch-programs.html#s-version_indep_progs" rel="section" title="4.2 Programs using the default Python">
+<link href="ch-programs.html#s-version_dep_progs" rel="section" title="4.3 Programs Using a Particular Python Version">
+<link href="ch-embed.html#s-build_embedded" rel="section" title="5.1 Building Embedded Programs">
+<link href="ch-embed.html#s-embedded_deps" rel="section" title="5.2 Embedded Python Dependencies">
+<link href="ap-packaging_tools.html#s-distutils" rel="section" title="B.1 distutils">
+<link href="ap-packaging_tools.html#s-setuptools" rel="section" title="B.2 setuptools">
+<link href="ap-packaging_tools.html#s-dh-python" rel="section" title="B.3 dh-python">
+<link href="ap-packaging_tools.html#s-pybuild" rel="section" title="B.4 pybuild">
+<link href="ap-packaging_tools.html#s-cdbs" rel="section" title="B.5 CDBS">
+<link href="ap-packaging_tools.html#s-pysupport" rel="section" title="B.6 python-support (removed)">
+<link href="ap-packaging_tools.html#s-pycentral" rel="section" title="B.7 python-central (removed)">
+<link href="ch-python.html#s-interpreter_name" rel="subsection" title="2.4.1 Interpreter Name">
+<link href="ch-python.html#s-interpreter_loc" rel="subsection" title="2.4.2 Interpreter Location">
+<link href="ch-programs.html#s-current_version_progs" rel="subsection" title="4.2.1 Programs Shipping Private Modules">
+
+</head>
+
+<body>
+
+<p><a name="ch-python3"></a></p>
+<hr>
+
+<p>
+[ <a href="index.html">previous</a> ]
+[ <a href="index.html#contents">Contents</a> ]
+[ 1 ]
+[ <a href="ch-python.html">2</a> ]
+[ <a href="ch-module_packages.html">3</a> ]
+[ <a href="ch-programs.html">4</a> ]
+[ <a href="ch-embed.html">5</a> ]
+[ <a href="ch-other.html">6</a> ]
+[ <a href="ap-build_dependencies.html">A</a> ]
+[ <a href="ap-packaging_tools.html">B</a> ]
+[ <a href="ap-upgrade.html">C</a> ]
+[ <a href="ch-python.html">next</a> ]
+</p>
+
+<hr>
+
+<h1>
+Debian Python Policy
+<br>Chapter 1 - On the move to Python 3
+</h1>
+
+<hr>
+
+<p>
+Debian currently supports two Python stacks, one for Python 3 and one for
+Python 2.  The long term goal for Debian is to reduce this to one stack,
+dropping the Python 2 stack at some time.
+</p>
+
+<p>
+<code><a href="https://www.python.org/dev/peps/pep-0404/">PEP 404</a></code>
+states that no more major Python 2 releases are planned, although the latest
+released minor version 2.7 will see some extended support, documented in
+<code><a href="https://www.python.org/dev/peps/pep-0466/">PEP 466</a></code>.
+</p>
+
+<p>
+Packages in Debian should use Python 3 if Python 3 is supported.  New packages
+should use Python 3 from the initial upload, new upstream versions for existing
+packages should use Python 3 if the new upstream version supports it.
+</p>
+<ol type="1" start="1" >
+<li>
+<p>
+Programs should use Python 3, and should not be packaged for Python 2 as well.
+Python 3 should be used for the packaging if the packaging scripts use Python.
+</p>
+</li>
+</ol>
+<ol type="1" start="2" >
+<li>
+<p>
+Python libraries, if they support Python 3, should be always packaged for
+Python 3.  If an application supports only Python 2, the Python libraries for
+that application should also be packaged for Python 2.
+</p>
+</li>
+</ol>
+<ol type="1" start="3" >
+<li>
+<p>
+Existing Python 2 libraries should not be dropped before the last reverse
+dependency is removed.
+</p>
+</li>
+</ol>
+
+<hr>
+
+<p>
+[ <a href="index.html">previous</a> ]
+[ <a href="index.html#contents">Contents</a> ]
+[ 1 ]
+[ <a href="ch-python.html">2</a> ]
+[ <a href="ch-module_packages.html">3</a> ]
+[ <a href="ch-programs.html">4</a> ]
+[ <a href="ch-embed.html">5</a> ]
+[ <a href="ch-other.html">6</a> ]
+[ <a href="ap-build_dependencies.html">A</a> ]
+[ <a href="ap-packaging_tools.html">B</a> ]
+[ <a href="ap-upgrade.html">C</a> ]
+[ <a href="ch-python.html">next</a> ]
+</p>
+
+<hr>
+
+<p>
+Debian Python Policy
+</p>
+
+<address>
+version 0.10.1.1<br>
+<br>
+Neil Schemenauer <code><a href="mailto:nas@debian.org">mailto:nas@debian.org</a></code><br>
+Matthias Klose <code><a href="mailto:doko@debian.org">mailto:doko@debian.org</a></code><br>
+Gregor Hoffleit <code><a href="mailto:flight@debian.org">mailto:flight@debian.org</a></code><br>
+Josselin Mouette <code><a href="mailto:joss@debian.org">mailto:joss@debian.org</a></code><br>
+Joe Wreschnig <code><a href="mailto:piman@debian.org">mailto:piman@debian.org</a></code><br>
+Lo&iuml;c Minier <code><a href="mailto:lool@debian.org">mailto:lool@debian.org</a></code><br>
+Scott Kitterman <code><a href="mailto:scott@kitterman.com">mailto:scott@kitterman.com</a></code><br>
+Barry Warsaw <code><a href="mailto:barry@debian.org">mailto:barry@debian.org</a></code><br>
+Ben Finney <code><a href="mailto:ben+debian@benfinney.id.au">mailto:ben+debian@benfinney.id.au</a></code><br>
+<br>
+</address>
+<hr>
+
+</body>
+
+</html>
+

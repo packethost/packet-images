@@ -1,0 +1,101 @@
+######################################################################
+#      Runtime configuration file for Exim 4 (Debian Packaging)      #
+######################################################################
+
+######################################################################
+# /etc/exim4/exim4.conf.template is only used with the non-split
+#   configuration scheme.
+# /etc/exim4/conf.d/main/01_exim4-config_listmacrosdefs is only used
+#   with the split configuration scheme.
+# If you find this comment anywhere else, somebody copied it there.
+# Documentation about the Debian exim4 configuration scheme can be
+# found in /usr/share/doc/exim4-base/README.Debian.gz.
+######################################################################
+
+######################################################################
+#                    MAIN CONFIGURATION SETTINGS                     #
+######################################################################
+
+# Just for reference and scripts. 
+# On Debian systems, the main binary is installed as exim4 to avoid
+# conflicts with the exim 3 packages.
+exim_path = /usr/sbin/exim4
+
+# Macro defining the main configuration directory.
+# We do not use absolute paths.
+.ifndef CONFDIR
+CONFDIR = /etc/exim4
+.endif
+
+# debconf-driven macro definitions get inserted after this line
+UPEX4CmacrosUPEX4C = 1
+
+# Create domain and host lists for relay control
+# '@' refers to 'the name of the local host'
+
+# List of domains considered local for exim. Domains not listed here
+# need to be deliverable remotely.
+domainlist local_domains = MAIN_LOCAL_DOMAINS
+
+# List of recipient domains to relay _to_. Use this list if you're -
+# for example - fallback MX or mail gateway for domains.
+domainlist relay_to_domains = MAIN_RELAY_TO_DOMAINS
+
+# List of sender networks (IP addresses) to _unconditionally_ relay
+# _for_. If you intend to be SMTP AUTH server, you do not need to enter
+# anything here.
+hostlist relay_from_hosts = MAIN_RELAY_NETS
+
+
+# Decide which domain to use to add to all unqualified addresses.
+# If MAIN_PRIMARY_HOSTNAME_AS_QUALIFY_DOMAIN is defined, the primary
+# hostname is used. If not, but MAIN_QUALIFY_DOMAIN is set, the value
+# of MAIN_QUALIFY_DOMAIN is used. If both macros are not defined,
+# the first line of /etc/mailname is used.
+.ifndef MAIN_PRIMARY_HOSTNAME_AS_QUALIFY_DOMAIN
+.ifndef MAIN_QUALIFY_DOMAIN
+qualify_domain = ETC_MAILNAME
+.else
+qualify_domain = MAIN_QUALIFY_DOMAIN
+.endif
+.endif
+
+# listen on all all interfaces?
+.ifdef MAIN_LOCAL_INTERFACES
+local_interfaces = MAIN_LOCAL_INTERFACES
+.endif
+
+.ifndef LOCAL_DELIVERY
+# The default transport, set in /etc/exim4/update-exim4.conf.conf,
+# defaulting to mail_spool. See CONFDIR/conf.d/transport/ for possibilities
+LOCAL_DELIVERY=mail_spool
+.endif
+
+# The gecos field in /etc/passwd holds not only the name. see passwd(5).
+gecos_pattern = ^([^,:]*)
+gecos_name = $1
+
+# define macros to be used in acl/30_exim4-config_check_rcpt to check
+# recipient local parts for strange characters.
+
+# This macro definition really should be in
+# acl/30_exim4-config_check_rcpt but cannot be there due to
+# http://www.exim.org/bugzilla/show_bug.cgi?id=101 as of exim 4.62.
+
+# These macros are documented in acl/30_exim4-config_check_rcpt,
+# can be changed here or overridden by a locally added configuration
+# file as described in README.Debian section "Using Exim Macros to control
+# the configuration".
+
+.ifndef CHECK_RCPT_LOCAL_LOCALPARTS
+CHECK_RCPT_LOCAL_LOCALPARTS = ^[.] : ^.*[@%!/|`#&?]
+.endif
+
+.ifndef CHECK_RCPT_REMOTE_LOCALPARTS
+CHECK_RCPT_REMOTE_LOCALPARTS = ^[./|] : ^.*[@%!`#&?] : ^.*/\\.\\./
+.endif
+
+# always log tls_peerdn as we use TLS for outgoing connects by default
+.ifndef MAIN_LOG_SELECTOR
+MAIN_LOG_SELECTOR = +smtp_protocol_error +smtp_syntax_error +tls_certificate_verified +tls_peerdn
+.endif

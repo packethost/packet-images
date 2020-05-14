@@ -1,0 +1,12 @@
+/.
+/usr
+/usr/share
+/usr/share/doc
+/usr/share/doc/libpipeline1
+/usr/share/doc/libpipeline1/changelog.Debian.gz
+/usr/share/doc/libpipeline1/changelog.gz
+/usr/share/doc/libpipeline1/copyright
+/usr/lib
+/usr/lib/x86_64-linux-gnu
+/usr/lib/x86_64-linux-gnu/libpipeline.so.1.4.1
+/usr/lib/x86_64-linux-gnu/libpipeline.so.1

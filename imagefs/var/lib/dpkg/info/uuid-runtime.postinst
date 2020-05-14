@@ -1,0 +1,73 @@
+#!/bin/sh
+set -e
+
+# upgrade existing libuuid user/group.
+if getent group libuuid >/dev/null && ! getent group uuidd >/dev/null ; then
+	groupmod --new-name uuidd libuuid
+fi
+if getent passwd libuuid >/dev/null && ! getent passwd uuidd >/dev/null ; then
+	# attempt to stop potentially running uuidd, otherwise usermod will fail.
+	invoke-rc.d --quiet uuidd stop || true
+
+	# rename user, change shell and set new homedir.
+	usermod --login uuidd --shell /bin/false --home /run/uuidd libuuid
+
+	# attemp cleanup of old home directory.
+	[ -d /var/lib/libuuid ] && \
+		rmdir --ignore-fail-on-non-empty /var/lib/libuuid || true
+fi
+
+# add uuidd user/group if needed.
+if ! getent group uuidd >/dev/null; then
+	addgroup --system uuidd
+fi
+if ! getent passwd uuidd >/dev/null; then
+	adduser --system --ingroup uuidd \
+		--home /run/uuidd --no-create-home \
+		uuidd
+fi
+
+# Automatically added by dh_systemd_enable
+# This will only remove masks created by d-s-h on package removal.
+deb-systemd-helper unmask uuidd.service >/dev/null || true
+
+# was-enabled defaults to true, so new installations run enable.
+if deb-systemd-helper --quiet was-enabled uuidd.service; then
+	# Enables the unit on first installation, creates new
+	# symlinks on upgrades if the unit file has changed.
+	deb-systemd-helper enable uuidd.service >/dev/null || true
+else
+	# Update the statefile to add new symlinks (if any), which need to be
+	# cleaned up on purge. Also remove old symlinks.
+	deb-systemd-helper update-state uuidd.service >/dev/null || true
+fi
+# End automatically added section
+# Automatically added by dh_systemd_enable
+# This will only remove masks created by d-s-h on package removal.
+deb-systemd-helper unmask uuidd.socket >/dev/null || true
+
+# was-enabled defaults to true, so new installations run enable.
+if deb-systemd-helper --quiet was-enabled uuidd.socket; then
+	# Enables the unit on first installation, creates new
+	# symlinks on upgrades if the unit file has changed.
+	deb-systemd-helper enable uuidd.socket >/dev/null || true
+else
+	# Update the statefile to add new symlinks (if any), which need to be
+	# cleaned up on purge. Also remove old symlinks.
+	deb-systemd-helper update-state uuidd.socket >/dev/null || true
+fi
+# End automatically added section
+# Automatically added by dh_installinit
+if [ "$1" = "configure" ] || [ "$1" = "abort-upgrade" ]; then
+	if [ -x "/etc/init.d/uuidd" ]; then
+		update-rc.d uuidd defaults >/dev/null
+		if [ -n "$2" ]; then
+			_dh_action=restart
+		else
+			_dh_action=start
+		fi
+		invoke-rc.d uuidd $_dh_action || exit $?
+	fi
+fi
+# End automatically added section
+

@@ -1,0 +1,215 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0//EN">
+
+<html>
+
+<head>
+
+<meta http-equiv="content-type" content="text/html; charset=utf-8">
+
+<title>Debian Python Policy - Python Programs</title>
+
+<link href="index.html" rel="start">
+<link href="ch-module_packages.html" rel="prev">
+<link href="ch-embed.html" rel="next">
+<link href="index.html#contents" rel="contents">
+<link href="index.html#copyright" rel="copyright">
+<link href="ch-python3.html" rel="chapter" title="1 On the move to Python 3">
+<link href="ch-python.html" rel="chapter" title="2 Python Packaging">
+<link href="ch-module_packages.html" rel="chapter" title="3 Packaged Modules">
+<link href="ch-programs.html" rel="chapter" title="4 Python Programs">
+<link href="ch-embed.html" rel="chapter" title="5 Programs Embedding Python">
+<link href="ch-other.html" rel="chapter" title="6 Interaction with Locally Installed Python Versions">
+<link href="ap-build_dependencies.html" rel="appendix" title="A Build Dependencies">
+<link href="ap-packaging_tools.html" rel="appendix" title="B Packaging Tools">
+<link href="ap-upgrade.html" rel="appendix" title="C Upgrade Procedure">
+<link href="ch-python.html#s-versions" rel="section" title="2.1 Versions">
+<link href="ch-python.html#s-base" rel="section" title="2.2 Main packages">
+<link href="ch-python.html#s-minimal" rel="section" title="2.3 Minimal packages">
+<link href="ch-python.html#s-interpreter" rel="section" title="2.4 Python Interpreter">
+<link href="ch-python.html#s-paths" rel="section" title="2.5 Module Path">
+<link href="ch-python.html#s-runtimes_hooks" rel="section" title="2.6 Hooks for updates to installed runtimes">
+<link href="ch-python.html#s-docs" rel="section" title="2.7 Documentation">
+<link href="ch-module_packages.html#s3.1" rel="section" title="3.1 Types of Python Modules">
+<link href="ch-module_packages.html#s-wheels" rel="section" title="3.2 Wheels">
+<link href="ch-module_packages.html#s-package_names" rel="section" title="3.3 Module Package Names">
+<link href="ch-module_packages.html#s-specifying_versions" rel="section" title="3.4 Specifying Supported Versions">
+<link href="ch-module_packages.html#s-dependencies" rel="section" title="3.5 Dependencies">
+<link href="ch-module_packages.html#s-provides" rel="section" title="3.6 Provides">
+<link href="ch-module_packages.html#s-byte_compilation" rel="section" title="3.7 Modules Byte-Compilation">
+<link href="ch-programs.html#s-interpreter-directive" rel="section" title="4.1 Interpreter directive (“Shebang”)">
+<link href="ch-programs.html#s-version_indep_progs" rel="section" title="4.2 Programs using the default Python">
+<link href="ch-programs.html#s-version_dep_progs" rel="section" title="4.3 Programs Using a Particular Python Version">
+<link href="ch-embed.html#s-build_embedded" rel="section" title="5.1 Building Embedded Programs">
+<link href="ch-embed.html#s-embedded_deps" rel="section" title="5.2 Embedded Python Dependencies">
+<link href="ap-packaging_tools.html#s-distutils" rel="section" title="B.1 distutils">
+<link href="ap-packaging_tools.html#s-setuptools" rel="section" title="B.2 setuptools">
+<link href="ap-packaging_tools.html#s-dh-python" rel="section" title="B.3 dh-python">
+<link href="ap-packaging_tools.html#s-pybuild" rel="section" title="B.4 pybuild">
+<link href="ap-packaging_tools.html#s-cdbs" rel="section" title="B.5 CDBS">
+<link href="ap-packaging_tools.html#s-pysupport" rel="section" title="B.6 python-support (removed)">
+<link href="ap-packaging_tools.html#s-pycentral" rel="section" title="B.7 python-central (removed)">
+<link href="ch-python.html#s-interpreter_name" rel="subsection" title="2.4.1 Interpreter Name">
+<link href="ch-python.html#s-interpreter_loc" rel="subsection" title="2.4.2 Interpreter Location">
+<link href="ch-programs.html#s-current_version_progs" rel="subsection" title="4.2.1 Programs Shipping Private Modules">
+
+</head>
+
+<body>
+
+<p><a name="ch-programs"></a></p>
+<hr>
+
+<p>
+[ <a href="ch-module_packages.html">previous</a> ]
+[ <a href="index.html#contents">Contents</a> ]
+[ <a href="ch-python3.html">1</a> ]
+[ <a href="ch-python.html">2</a> ]
+[ <a href="ch-module_packages.html">3</a> ]
+[ 4 ]
+[ <a href="ch-embed.html">5</a> ]
+[ <a href="ch-other.html">6</a> ]
+[ <a href="ap-build_dependencies.html">A</a> ]
+[ <a href="ap-packaging_tools.html">B</a> ]
+[ <a href="ap-upgrade.html">C</a> ]
+[ <a href="ch-embed.html">next</a> ]
+</p>
+
+<hr>
+
+<h1>
+Debian Python Policy
+<br>Chapter 4 - Python Programs
+</h1>
+
+<hr>
+
+<h2 id="s-interpreter-directive">4.1 Interpreter directive (“Shebang”)</h2>
+
+<p>
+Executables written for interpretation by Python must use an appropraite
+interpreter directive, or “shebang”, as the first line of the program.
+This line should be of the form <samp>#!<var>interpreter_location</var></samp>.
+See <a href="ch-python.html#s-interpreter_name">Interpreter Name, Section
+2.4.1</a> for the interpreter name to use.
+</p>
+
+<p>
+As noted in <a href="ch-python.html#s-interpreter_loc">Interpreter Location,
+Section 2.4.2</a>, the form <samp>#!/usr/bin/env
+<var>interpreter_name</var></samp> is deprecated.
+</p>
+
+<hr>
+
+<h2 id="s-version_indep_progs">4.2 Programs using the default Python</h2>
+
+<p>
+A package that installs a program that can be run by any version of Python 3
+must declare a dependency on <code>python3</code>, with a versioned dependency
+if necessary.
+</p>
+
+<p>
+A package that installs a program that can be run by any version of Python 2
+must declare a dependency on <code>python2</code>, with a versioned dependency
+if necessary.
+</p>
+
+<p>
+If the program needs the public Python module <samp>foo</samp>, the package
+must depend on the binary package that installs the <samp>foo</samp> module.
+See <a href="ch-module_packages.html#s-package_names">Module Package Names,
+Section 3.3</a> for the naming of packages that install public Python modules.
+</p>
+
+<hr>
+
+<h3 id="s-current_version_progs">4.2.1 Programs Shipping Private Modules</h3>
+
+<p>
+A program that specifies <code>python3</code> or <code>python</code> as its
+interpreter may require its own private Python modules.  These modules should
+be installed in <code>/usr/share/<var>module</var></code>, or
+<code>/usr/lib/<var>module</var></code> if the modules are
+architecture-dependent (e.g.  extensions).
+</p>
+
+<p>
+The rules explained in <a
+href="ch-module_packages.html#s-byte_compilation">Modules Byte-Compilation,
+Section 3.7</a> apply to those private modules: the byte-compiled modules must
+not be shipped with the binary package, they should be generated in the
+package's post-install script using the current default Python version, and
+removed in the pre-remove script.  Modules should be byte-compiled using the
+current default Python version.
+</p>
+
+<p>
+Programs that have private compiled extensions must either handle multiple
+version support themselves, or declare a tight dependency on the current Python
+version (e.g.  <samp>Depends: python3&nbsp;(&gt;=&nbsp;3.5),
+python3&nbsp;(&lt;&lt;&nbsp;3.6)</samp>.
+</p>
+
+<hr>
+
+<h2 id="s-version_dep_progs">4.3 Programs Using a Particular Python Version</h2>
+
+<p>
+A program which requires a specific minor version of Python must specify the
+versioned interpreter <code>python<var>X</var>.<var>Y</var></code>.  The
+package that installs the programs must also specify a dependency on
+<code>python<var>X</var>.<var>Y</var></code> and on any packages that install
+necessary modules.
+</p>
+
+<p>
+The notes on installation directories and byte-compilation for programs that
+support any version of Python also apply to programs supporting only a single
+Python version.  Modules to be byte-compiled should use the same Python version
+as the package itself.
+</p>
+
+<hr>
+
+<p>
+[ <a href="ch-module_packages.html">previous</a> ]
+[ <a href="index.html#contents">Contents</a> ]
+[ <a href="ch-python3.html">1</a> ]
+[ <a href="ch-python.html">2</a> ]
+[ <a href="ch-module_packages.html">3</a> ]
+[ 4 ]
+[ <a href="ch-embed.html">5</a> ]
+[ <a href="ch-other.html">6</a> ]
+[ <a href="ap-build_dependencies.html">A</a> ]
+[ <a href="ap-packaging_tools.html">B</a> ]
+[ <a href="ap-upgrade.html">C</a> ]
+[ <a href="ch-embed.html">next</a> ]
+</p>
+
+<hr>
+
+<p>
+Debian Python Policy
+</p>
+
+<address>
+version 0.10.1.1<br>
+<br>
+Neil Schemenauer <code><a href="mailto:nas@debian.org">mailto:nas@debian.org</a></code><br>
+Matthias Klose <code><a href="mailto:doko@debian.org">mailto:doko@debian.org</a></code><br>
+Gregor Hoffleit <code><a href="mailto:flight@debian.org">mailto:flight@debian.org</a></code><br>
+Josselin Mouette <code><a href="mailto:joss@debian.org">mailto:joss@debian.org</a></code><br>
+Joe Wreschnig <code><a href="mailto:piman@debian.org">mailto:piman@debian.org</a></code><br>
+Lo&iuml;c Minier <code><a href="mailto:lool@debian.org">mailto:lool@debian.org</a></code><br>
+Scott Kitterman <code><a href="mailto:scott@kitterman.com">mailto:scott@kitterman.com</a></code><br>
+Barry Warsaw <code><a href="mailto:barry@debian.org">mailto:barry@debian.org</a></code><br>
+Ben Finney <code><a href="mailto:ben+debian@benfinney.id.au">mailto:ben+debian@benfinney.id.au</a></code><br>
+<br>
+</address>
+<hr>
+
+</body>
+
+</html>
+

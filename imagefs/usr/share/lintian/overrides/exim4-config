@@ -1,0 +1,1 @@
+exim4-config: non-standard-file-perm etc/exim4/passwd.client 0640 != 0644

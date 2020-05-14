@@ -1,0 +1,1 @@
+mailutils: setgid-binary usr/bin/dotlock.mailutils 2755 root/mail

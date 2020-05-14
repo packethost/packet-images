@@ -1,0 +1,39 @@
+#! /bin/sh
+# preinst script for multipath-tools
+
+set -e
+
+case "$1" in
+    install)
+    ;;
+
+    upgrade)
+	if dpkg --compare-versions "$2" lt "0.4.7-3"; then
+	    [ -e /etc/rcS.d/S03multipath-tools-boot ] && rm /etc/rcS.d/S03multipath-tools-boot
+	fi
+	if dpkg --compare-versions "$2" lt "0.4.8-7"; then
+	    [ -e /etc/rcS.d/S04multipath-tools-boot ] && rm /etc/rcS.d/S04multipath-tools-boot
+	fi
+	if dpkg --compare-versions "$2" lt "0.4.9"; then
+	    if [ -e /var/lib/multipath/bindings ]; then
+	        echo "Moving bindings file to /etc/multipath/"
+	        mkdir -p /etc/multipath/
+	        mv /var/lib/multipath/bindings /etc/multipath/
+	    fi
+	fi
+    ;;
+
+    abort-upgrade)
+    ;;
+
+    *)
+        echo "preinst called with unknown argument \`$1'" >&2
+        exit 1
+    ;;
+esac
+
+
+
+exit 0
+
+

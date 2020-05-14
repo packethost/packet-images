@@ -1,0 +1,10 @@
+libmailutils5 for Debian
+=============================
+
+Support for PostgreSQL is not enabled for licensing reasons. PostgreSQL
+uses OpenSSL for encryption, and due to incompatibilities between the GPL
+and the OpenSSL license, it is not possible to link GNU mailutils to
+PostgreSQL's client library. Until this is resolved (ie, PostgreSQL
+switches to GnuTLS, the package can't add PostgreSQL support.
+
+ Jordi Mallach <jordi@debian.org>  Tue, 31 Oct 2006 11:58:24 +0100

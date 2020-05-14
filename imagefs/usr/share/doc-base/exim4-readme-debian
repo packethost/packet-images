@@ -1,0 +1,9 @@
+Document: exim4-readme-debian
+Title: Debian-specific documentation for Exim 4
+Author: Various
+Abstract: This file documents specific details of the Exim4 Debian packages.
+Section: Network/Communication
+
+Format: html
+Index: /usr/share/doc/exim4-base/README.Debian.html
+Files: /usr/share/doc/exim4-base/README.Debian.html

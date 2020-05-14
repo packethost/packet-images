@@ -1,0 +1,37 @@
+#!/bin/bash
+
+# put this file in /etc/network/if-up.d/exim4-smarthost
+# add an exim4-smarthost smtp.server.example.com::587 line to your interface
+# stanza in /etc/network/interfaces
+
+# this will only work for split config, since in non-split config we
+# only have a single file which is included and which would need more
+# serious string processing to alter. With split config, we can blindly
+# overwrite our previous file.
+
+# Environment:
+#  MODE = { start | stop }
+#  IF_EXIM4_SMARTHOST = hostname[::port]
+
+SMARTHOSTFILE="/etc/exim4/conf.d/main/00_local_DCsmarthost"
+
+if [ -z "$IF_EXIM4_SMARTHOST" ]; then
+  exit 0
+fi
+
+if [ "$MODE" = 'stop' ]; then
+  rm -f $SMARTHOSTFILE
+  /etc/init.d/exim4 reload > /dev/null || true
+  exit 0
+fi
+
+if [ "$IF_EXIM4_SMARTHOST" = "none" ]; then
+  rm -f $SMARTHOSTFILE
+  /etc/init.d/exim4 reload > /dev/null || true
+  exit 0
+fi
+
+echo "DCsmarthost = ${IF_EXIM4_SMARTHOST}" > $SMARTHOSTFILE
+
+/etc/init.d/exim4 reload > /dev/null || true
+/usr/sbin/exim4 -qqf

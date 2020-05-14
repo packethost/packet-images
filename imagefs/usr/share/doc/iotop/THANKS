@@ -1,0 +1,50 @@
+Iain Lea <iain@bricbrac.de>
+    Reported spelling errors, suggested --only.
+
+tropikhajma@gmail.com
+    Reported cosmetic bug: strip dirname from cmdline only on absolute paths.
+
+Roland Kletzing <devzero@web.de>
+    Reported crashing bug: successfully opening /proc/PID/cmdline does not imply
+we can read it (PID died between open() and read()).
+
+Paul Wise <pabs@debian.org>
+    Started the man page.
+
+Göran Uddeborg <goeran@uddeborg.se>
+    Reported that iotop was misbehaving with UTF-8 strings.
+
+Ryan Lovett <ryan@stat.berkeley.edu>
+    Contributed a bugfix: flush the output in batch mode, so that a potential
+output file is updated.
+
+Martin Bammer <mrbm74@gmail.com>
+    Initial implementation of the --time and --quiet options.
+
+Piotr Engelking <inkerman42@gmail.com>
+    Reported that iotop's ioprio_get syscall detection was buggy on 32bit
+userspace on a x86_64 kernel.
+
+Gabriel Redner <gredner@gmail.com>
+    Reported a crash were iotop could open /proc/PID/status but not read it as the process disappeared by then.
+
+Jiri Olsa <jolsa@redhat.com>
+    Wrote the support for python2.4 with the ctypes module.
+
+Philipp Thomas <pth@suse.de>
+    Reported that iotop produced wrong numbers in openSUSE 11.3.
+
+Jakub Wilk <jwilk@debian.org>
+    Contributed syscall numbers for getting and setting IO priority on armel and hppa architectures.
+
+Jeff Mahoney <jeffm@suse.com>
+    Contributed a fixed implementation of the taskstats parsing code.
+
+Florian Mickler <florian@mickler.org>
+    Contributed a fixed implementation of the taskstats parsing code.
+
+Ka-Hing Cheung <kcheung@riverbed.com>
+    Contributed code to show custom thread names.
+
+Igor Bazhitov <ibazhitov@parallels.com>
+    Contributed the differentiation between total and actual I/O.

@@ -1,0 +1,59 @@
+#!/bin/sh
+# preinst script for open-iscsi
+
+. /usr/share/debconf/confmodule
+set -e
+
+case "$1" in
+    install|upgrade)
+        # Determine if we have any iSCSI sessions that are in a failed
+        # state. If so, upgrading iSCSI is dangerous, so ask the user
+        # if they really want to do it. But before prompting, retry a
+        # few times, just in case we hit a bad moment where a TCP
+        # connection was being reestablished.
+        RETRIES=0
+        while cat /sys/class/iscsi_session/session*/state 2>/dev/null | grep -qv LOGGED_IN ; do
+            if [ $RETRIES -gt 5 ]; then
+                db_reset open-iscsi/upgrade_even_with_failed_sessions || true
+                db_input critical open-iscsi/upgrade_even_with_failed_sessions || true
+                db_go
+                db_get open-iscsi/upgrade_even_with_failed_sessions
+                if [ "$RET" = "false" ] ; then
+                    echo "Aborting preinst due to user request." >&2
+                    exit 1
+                fi
+                break
+            fi
+
+            RETRIES=$((RETRIES + 1))
+            sleep 1
+        done
+    ;;
+
+    abort-upgrade)
+    ;;
+
+    *)
+        echo "preinst called with unknown argument \`$1'" >&2
+        exit 1
+    ;;
+esac
+
+if [ "$1" = "upgrade" ] && dpkg --compare-versions "$2" le-nl "2.0.873+git0.3b4b4500-12" ; then
+    # /etc/iscsi/initiatorname.iscsi is no longer a conffile, so we rename it
+    # to .dpkg-backup so that dpkg will not mark it as an obsolete conffile
+    # on upgrading (which could cause some administrators to accidentally
+    # remove the file even though they need it while removing obsolete
+    # conffiles) - and then in postinst we will rename it back to
+    # initiatorname.iscsi.
+    if [ -f /etc/iscsi/initiatorname.iscsi ] ; then
+        mv -f /etc/iscsi/initiatorname.iscsi /etc/iscsi/initiatorname.iscsi.dpkg-backup
+    fi
+fi
+
+# Automatically added by dh_installdeb
+dpkg-maintscript-helper rm_conffile /etc/init.d/umountiscsi.sh 2.0.873+git0.3b4b4500-9 -- "$@"
+# End automatically added section
+
+
+exit 0

@@ -1,0 +1,11 @@
+83ab72cc49b4bdd08972621b5065384c  usr/lib/x86_64-linux-gnu/sasl2/libanonymous.so.2.0.25
+8087157c9c5eca254bb1cf9d2afca4d1  usr/lib/x86_64-linux-gnu/sasl2/libcrammd5.so.2.0.25
+d6f711a8778e21621bafdf54d02a1b95  usr/lib/x86_64-linux-gnu/sasl2/libdigestmd5.so.2.0.25
+9ccfa722606bb574aa7838a107147a55  usr/lib/x86_64-linux-gnu/sasl2/liblogin.so.2.0.25
+85ef20fd7d73e9fb817179cee3578e0f  usr/lib/x86_64-linux-gnu/sasl2/libntlm.so.2.0.25
+2fb6ef861e1f529ac5f221e3b757fec7  usr/lib/x86_64-linux-gnu/sasl2/libplain.so.2.0.25
+cba810b73f30ce64df6e67ece59d3459  usr/share/doc/libsasl2-modules/NEWS.Debian.gz
+9a70e65be9b46dffd59a6d575b6b80f1  usr/share/doc/libsasl2-modules/changelog.Debian.gz
+ed1899fb5879468be4a1c14c8584d092  usr/share/doc/libsasl2-modules/changelog.gz
+b92be2df0593e83d71985793e80afb98  usr/share/doc/libsasl2-modules/copyright
+7b9adf3f4e6435d2d64847ebfb54a297  usr/share/lintian/overrides/libsasl2-modules

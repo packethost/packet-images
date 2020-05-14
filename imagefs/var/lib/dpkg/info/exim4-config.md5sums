@@ -1,0 +1,14 @@
+135087436cecd61bebf5d009372dc338  usr/sbin/update-exim4.conf
+1dfaa4ea45d537bb1ac6963b282aba62  usr/sbin/update-exim4.conf.template
+b4e4c65d7e0a2cbb5acfcdddc23caacf  usr/sbin/update-exim4defaults
+5f254c019b7103756c72a798ce6769b9  usr/share/bug/exim4-config/script
+f518febd60ef296eb51d13b1abea5097  usr/share/doc/exim4-config/NEWS.Debian.gz
+c50070840bc081a170ded702846fc7bf  usr/share/doc/exim4-config/README.Debian.gz
+ce2142daa9f1b0d19c0747ede68fd0fd  usr/share/doc/exim4-config/changelog.Debian.gz
+561b50033d6f5ce6c122b6869774f3b8  usr/share/doc/exim4-config/copyright
+a54e98d7b079e5de49f48c31abe8a84f  usr/share/doc/exim4-config/examples/e-n-if-up
+34551e467628f6f3edd4e7a1e4773f33  usr/share/lintian/overrides/exim4-config
+3e2f36d05eacc9fdbca8a1b581b1be28  usr/share/man/man5/exim4-config_files.5.gz
+a879c4a398f6bf5f7e3cad5c35e4b635  usr/share/man/man8/update-exim4.conf.8.gz
+28858b314b9525b06dfbad357b4ccfc3  usr/share/man/man8/update-exim4.conf.template.8.gz
+a9300eef6e390583d74649fd56f69b81  usr/share/man/man8/update-exim4defaults.8.gz

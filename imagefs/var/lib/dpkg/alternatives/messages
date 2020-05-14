@@ -1,0 +1,9 @@
+auto
+/usr/bin/messages
+messages.1.gz
+/usr/share/man/man1/messages.1.gz
+
+/usr/bin/messages.mailutils
+20
+/usr/share/man/man1/messages.mailutils.1.gz
+

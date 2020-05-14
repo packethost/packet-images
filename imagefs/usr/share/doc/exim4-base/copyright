@@ -1,0 +1,254 @@
+This is Debian GNU/Linux's prepackaged version of exim, a powerful yet easy
+to configure mail transport agent.
+
+-----------------------------------------------------------------
+This package was put together from the original sources which are
+maintained by Philip Hazel <ph10@cus.cam.ac.uk>, and which were
+obtained from
+
+	ftp://ftp.csx.cam.ac.uk/pub/software/email/exim/
+
+Some modifications to the Makefiles have been made to fit with the Linux
+FHS.
+-----------------------------------------------------------------
+
+-----------------------------------------------------------------
+The exim content filtering extension, formally known as the
+exiscan-acl patch, and which is included in exim4-daemon-heavy,
+was written by Tom Kistner <tom@duncanthrax.net>.
+/* Copyright (c) Tom Kistner <tom@duncanthrax.net> 2003-???? */
+/* License: GPL */
+-----------------------------------------------------------------
+
+-----------------------------------------------------------------
+Debian Maintainer history:
+- The Debian package for exim was originally made by Tim Cutts
+  <timc@chiark.greenend.org.uk>.
+- Mark Baker <mbaker@iee.org> took over until exim version 3 and is
+  still involved with packaging.
+- Steve Haslam, Hilko Bengen and Marc Haber generated the initial
+  packages of Exim v4.
+- The exim4 packages are currently maintained by
+  - Core Team
+    - (mh) Marc Haber <mh+debian-packages@zugschlus.de> (team leader)
+    - (am) Andreas Metzler <ametzler@downhill.at.eu.org> (uploader)
+  - Commit Privileges
+    - (hb) Hilko Bengen <bengen@debian.org> (documentation, hacks etc)
+    - (cb) Christian Perrier <bubulle@debian.org> (translations)
+
+The following people helped in preparing the exim4 packages and gave
+important feedback:
+- Marc Merlin provides the dlopen patch, making it possible to load
+  local_scan-routines for a external shared object.
+  The original patch was written by David Woodhouse, it was modified first
+  by Derrick 'dman' Hudson and afterwards by Marc Merlin.
+- Sander Smeenk provided the TLS-docs and the script to generate the
+  self-signed certificates.
+- The people on the exim4debian list that submitted bug-reports and -fixes,
+  and helped with design issues: Matthias Klose, Alexander Koch, Ola
+  Lundqvist, Andrew Mulholland, David Pashley, Andreas Piesk, Nick Phillips
+  and whoever I forgot to mention.
+- syslog2eximlog script by Martin Godisch.
+- Hilko Bengen converted the Debian documentation from plain-text to XML
+  format.
+-----------------------------------------------------------------
+
+
+-----------------------------------------------------------------
+exim is copyright (c) 1995 - 2017 University of Cambridge.
+
+The original licence is as follows (from the file NOTICE in the upstream
+distribution); a copy of the GNU GPL version 2 is available in 
+/usr/share/common-licenses/GPL-2 on Debian systems.
+
+_________________________________________________________________________
+THE EXIM MAIL TRANSFER AGENT
+----------------------------
+
+Copyright (c) 2004 University of Cambridge
+
+This program is free software; you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation; either version 2 of the License, or
+(at your option) any later version.
+
+In addition, for the avoidance of any doubt, permission is granted to
+link this program with OpenSSL or any other library package and to
+(re)distribute the binaries produced as the result of such linking.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with this program; if not, write to the Free Software
+Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
+
+
+UNSOLICITED EMAIL
+-----------------
+
+The use, supply or promotion of Exim for the purpose of sending bulk,
+unsolicited electronic mail is incompatible with the basic aims of the program,
+which revolve around the free provision of a service that enhances the quality
+of personal communications. The author of Exim regards indiscriminate
+mass-mailing as an antisocial, irresponsible abuse of the Internet.
+
+
+INCORPORATED CODE
+-----------------
+
+A number of pieces of external code are included in the Exim distribution.
+
+ .   Support for the cdb (Constant DataBase) lookup method is provided by code
+     contributed by Nigel Metheringham of Planet Online Ltd. which contains
+     the following statements:
+     _________________________________________________________________________
+
+     Copyright (c) 1998 Nigel Metheringham, Planet Online Ltd
+
+     This program is free software; you can redistribute it and/or modify it
+     under the terms of the GNU General Public License as published by the
+     Free Software Foundation; either version 2 of the License, or (at your
+     option) any later version.
+
+     This code implements Dan Bernstein's Constant DataBase (cdb) spec.
+     Information, the spec and sample code for cdb can be obtained from
+     http://www.pobox.com/~djb/cdb.html. This implementation borrows some code
+     from Dan Bernstein's implementation (which has no license restrictions
+     applied to it).
+     _________________________________________________________________________
+
+     The implementation is completely contained within the code of Exim. It
+     does not link against an external cdb library.
+
+ .   Client support for Microsoft's "Secure Password Authentication" is pro-
+     vided by code contributed by Marc Prud'hommeaux. Server support was
+     contributed by Tom Kistner. This includes code taken from the Samba
+     project, which is released under the Gnu GPL.
+
+
+ .   Support for calling the Cyrus "pwcheck" and "saslauthd" daemons is
+     provided by code taken from the Cyrus-SASL library and adapted by
+     Alexander S. Sabourenkov. The permission notice appears below, in
+     accordance with the conditions expressed therein.
+
+     _________________________________________________________________________
+
+     Copyright (c) 2001 Carnegie Mellon University. All rights reserved.
+
+     Redistribution and use in source and binary forms, with or without
+     modification, are permitted provided that the following conditions are
+     met:
+
+     1.   Redistributions of source code must retain the above copyright
+          notice, this list of conditions and the following disclaimer.
+
+     2.   Redistributions in binary form must reproduce the above copyright
+          notice, this list of conditions and the following disclaimer in the
+          documentation and/or other materials provided with the distribution.
+
+     3.   The name 'Carnegie Mellon University' must not be used to endorse or
+          promote products derived from this software without prior written
+          permission. For permission or any other legal details, please
+          contact
+
+            Office of Technology Transfer
+            Carnegie Mellon University
+            5000 Forbes Avenue
+            Pittsburgh, PA  15213-3890
+            (412) 268-4387, fax: (412) 268-7395
+            tech-transfer@andrew.cmu.edu
+
+     4.   Redistributions of any form whatsoever must retain the following
+          acknowledgment:
+             This product includes software developed by Computing Services at
+             Carnegie Mellon University (http://www.cmu.edu/computing/).
+
+     CARNEGIE MELLON UNIVERSITY DISCLAIMS ALL WARRANTIES WITH REGARD TO THIS
+     SOFTWARE, INCLUDING ALL IMPLIED WARRANTIES OF MERCHANTABILITY AND
+     FITNESS, IN NO EVENT SHALL CARNEGIE MELLON UNIVERSITY BE LIABLE FOR ANY
+     SPECIAL, INDIRECT OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES WHATSOEVER
+     RESULTING FROM LOSS OF USE, DATA OR PROFITS, WHETHER IN AN ACTION OF
+     CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF OR IN
+     CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
+     _________________________________________________________________________
+
+
+ .   The Exim Monitor program, which is an X-Window application, includes
+     modified versions of the Athena StripChart and TextPop widgets. This code
+     is copyright by DEC and MIT, and their permission notice appears below,
+     in accordance with the conditions expressed therein.
+
+     _________________________________________________________________________
+
+     Copyright 1987, 1988 by Digital Equipment Corporation, Maynard,
+     Massachusetts, and the Massachusetts Institute of Technology, Cambridge,
+     Massachusetts.
+
+                                All Rights Reserved
+
+     Permission to use, copy, modify, and distribute this software and its
+     documentation for any purpose and without fee is hereby granted, provided
+     that the above copyright notice appear in all copies and that both that
+     copyright notice and this permission notice appear in supporting documen-
+     tation, and that the names of Digital or MIT not be used in advertising
+     or publicity pertaining to distribution of the software without specific,
+     written prior permission.
+
+     DIGITAL DISCLAIMS ALL WARRANTIES WITH REGARD TO THIS SOFTWARE, INCLUDING
+     ALL IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS, IN NO EVENT SHALL
+     DIGITAL BE LIABLE FOR ANY SPECIAL, INDIRECT OR CONSEQUENTIAL DAMAGES OR
+     ANY DAMAGES WHATSOEVER RESULTING FROM LOSS OF USE, DATA OR PROFITS,
+     WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION,
+     ARISING OUT OF OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS
+     SOFTWARE.
+     _________________________________________________________________________
+
+
+ .   Some of the code to support the use of maildirsize files for maildir
+     deliveries is taken from the Courier Imapd source code. This code is
+     released under the GPL.
+     _________________________________________________________________________
+
+--
+Philip Hazel            University of Cambridge Computing Service,
+-----------------------------------------------------------------
+src/pdkim/*
+
+PDKIM - a RFC4871 (DKIM) implementation
+http://duncanthrax.net/pdkim/
+Copyright (C) 2009 - 2016  Tom Kistner <tom@duncanthrax.net>
+Copyright (C) 2016 - 2017 Jeremy Harris <jgh@exim.org>
+
+Includes code from the PolarSSL project.
+http://polarssl.org
+Copyright (C) 2009      Paul Bakker <polarssl_maintainer@polarssl.org>
+Copyright (C) 2006-2008 Christophe Devine
+Copyright (C) 2006-2010, Brainspark B.V.
+
+This copy of PDKIM is included with Exim. For a standalone distribution,
+visit http://duncanthrax.net/pdkim/.
+
+License: Both the parts from PolarSSL and the original code are licensed
+under GPLv2+.
+
+Please note that the parts copied from PolarSSL are only used with ancient
+(< 2.10) GnuTLS.
+-----------------------------------------------------------------
+
+-----------------------------------------------------------------
+Generating a tarball from CVS snapshot.
+
+Upstream is keeping sourcecode and documentation (including changelog) in
+separate CVS modules: exim-src and exim-doc. However the release tarball
+contains parts from both modules.
+
+1. Use exim-src modules as base
+2. Generate a doc subdirectory containing he contents of exim-doc/doc-txt/.
+3. Take exim-doc and build the txt files You will need xfpt, xmlto, docbook-xsl
+and w3m.
+cd doc-docbook ; make spec.txt filter.txt exim.8
+Copy the three files to exim-version/doc/
+

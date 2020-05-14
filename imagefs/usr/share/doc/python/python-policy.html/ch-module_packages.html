@@ -1,0 +1,436 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0//EN">
+
+<html>
+
+<head>
+
+<meta http-equiv="content-type" content="text/html; charset=utf-8">
+
+<title>Debian Python Policy - Packaged Modules</title>
+
+<link href="index.html" rel="start">
+<link href="ch-python.html" rel="prev">
+<link href="ch-programs.html" rel="next">
+<link href="index.html#contents" rel="contents">
+<link href="index.html#copyright" rel="copyright">
+<link href="ch-python3.html" rel="chapter" title="1 On the move to Python 3">
+<link href="ch-python.html" rel="chapter" title="2 Python Packaging">
+<link href="ch-module_packages.html" rel="chapter" title="3 Packaged Modules">
+<link href="ch-programs.html" rel="chapter" title="4 Python Programs">
+<link href="ch-embed.html" rel="chapter" title="5 Programs Embedding Python">
+<link href="ch-other.html" rel="chapter" title="6 Interaction with Locally Installed Python Versions">
+<link href="ap-build_dependencies.html" rel="appendix" title="A Build Dependencies">
+<link href="ap-packaging_tools.html" rel="appendix" title="B Packaging Tools">
+<link href="ap-upgrade.html" rel="appendix" title="C Upgrade Procedure">
+<link href="ch-python.html#s-versions" rel="section" title="2.1 Versions">
+<link href="ch-python.html#s-base" rel="section" title="2.2 Main packages">
+<link href="ch-python.html#s-minimal" rel="section" title="2.3 Minimal packages">
+<link href="ch-python.html#s-interpreter" rel="section" title="2.4 Python Interpreter">
+<link href="ch-python.html#s-paths" rel="section" title="2.5 Module Path">
+<link href="ch-python.html#s-runtimes_hooks" rel="section" title="2.6 Hooks for updates to installed runtimes">
+<link href="ch-python.html#s-docs" rel="section" title="2.7 Documentation">
+<link href="ch-module_packages.html#s3.1" rel="section" title="3.1 Types of Python Modules">
+<link href="ch-module_packages.html#s-wheels" rel="section" title="3.2 Wheels">
+<link href="ch-module_packages.html#s-package_names" rel="section" title="3.3 Module Package Names">
+<link href="ch-module_packages.html#s-specifying_versions" rel="section" title="3.4 Specifying Supported Versions">
+<link href="ch-module_packages.html#s-dependencies" rel="section" title="3.5 Dependencies">
+<link href="ch-module_packages.html#s-provides" rel="section" title="3.6 Provides">
+<link href="ch-module_packages.html#s-byte_compilation" rel="section" title="3.7 Modules Byte-Compilation">
+<link href="ch-programs.html#s-interpreter-directive" rel="section" title="4.1 Interpreter directive (“Shebang”)">
+<link href="ch-programs.html#s-version_indep_progs" rel="section" title="4.2 Programs using the default Python">
+<link href="ch-programs.html#s-version_dep_progs" rel="section" title="4.3 Programs Using a Particular Python Version">
+<link href="ch-embed.html#s-build_embedded" rel="section" title="5.1 Building Embedded Programs">
+<link href="ch-embed.html#s-embedded_deps" rel="section" title="5.2 Embedded Python Dependencies">
+<link href="ap-packaging_tools.html#s-distutils" rel="section" title="B.1 distutils">
+<link href="ap-packaging_tools.html#s-setuptools" rel="section" title="B.2 setuptools">
+<link href="ap-packaging_tools.html#s-dh-python" rel="section" title="B.3 dh-python">
+<link href="ap-packaging_tools.html#s-pybuild" rel="section" title="B.4 pybuild">
+<link href="ap-packaging_tools.html#s-cdbs" rel="section" title="B.5 CDBS">
+<link href="ap-packaging_tools.html#s-pysupport" rel="section" title="B.6 python-support (removed)">
+<link href="ap-packaging_tools.html#s-pycentral" rel="section" title="B.7 python-central (removed)">
+<link href="ch-python.html#s-interpreter_name" rel="subsection" title="2.4.1 Interpreter Name">
+<link href="ch-python.html#s-interpreter_loc" rel="subsection" title="2.4.2 Interpreter Location">
+<link href="ch-programs.html#s-current_version_progs" rel="subsection" title="4.2.1 Programs Shipping Private Modules">
+
+</head>
+
+<body>
+
+<p><a name="ch-module_packages"></a></p>
+<hr>
+
+<p>
+[ <a href="ch-python.html">previous</a> ]
+[ <a href="index.html#contents">Contents</a> ]
+[ <a href="ch-python3.html">1</a> ]
+[ <a href="ch-python.html">2</a> ]
+[ 3 ]
+[ <a href="ch-programs.html">4</a> ]
+[ <a href="ch-embed.html">5</a> ]
+[ <a href="ch-other.html">6</a> ]
+[ <a href="ap-build_dependencies.html">A</a> ]
+[ <a href="ap-packaging_tools.html">B</a> ]
+[ <a href="ap-upgrade.html">C</a> ]
+[ <a href="ch-programs.html">next</a> ]
+</p>
+
+<hr>
+
+<h1>
+Debian Python Policy
+<br>Chapter 3 - Packaged Modules
+</h1>
+
+<hr>
+
+<p>
+The goal of these policies is to reduce the work necessary for Python
+transitions.  Python modules are internally very dependent on a specific Python
+version.  However, we want to automate recompiling modules when possible,
+either during the upgrade itself (re-compiling bytecode files
+<code>*.pyc</code> and <code>*.pyo</code>) or shortly thereafter with automated
+rebuilds (to handle C extensions).  These policies encourage automated
+dependency generation and loose version bounds whenever possible.
+</p>
+
+<hr>
+
+<h2 id="s3.1">3.1 Types of Python Modules</h2>
+
+<p>
+There are two kinds of Python modules, &quot;pure&quot; Python modules, and
+extension modules.  Pure Python modules are Python source code that generally
+works across many versions of Python.  Extensions are C code compiled and
+linked against a specific version of the Python runtime, and so can only be
+used by one version of Python.
+</p>
+
+<p>
+Debian Python does not link extensions to <code>libpython</code> (as is done in
+some operating systems).  Symbols are resolved by
+<code>/usr/bin/python<var>X</var>.<var>Y</var></code> which is not linked to
+<code>libpython</code>.
+</p>
+
+<p>
+Python packages are a way of structuring Python’s module namespace by using
+“dotted module names”.  See <code><a
+href="https://docs.python.org/3/glossary.html#term-package">Python's
+glossary</a></code> for details on how packages are defined in Python terms (a
+package in the Python sense is unrelated to a Debian package).  Python packages
+must be packaged into the same directory (as done by upstream).  Splitting
+components of a package across directories changes the import order and may
+confuse documentation tools and IDEs.
+</p>
+
+<p>
+There are two ways to distribute Python modules.  Public modules are installed
+in a public directory as listed in <a href="ch-python.html#s-paths">Module
+Path, Section 2.5</a>.  They are accessible to any program.  Private modules
+are installed in a private directory such as
+<code>/usr/share/<var>package-name</var></code> or
+<code>/usr/lib/<var>package-name</var></code>.  They are generally only
+accessible to a specific program or suite of programs included in the same
+package.
+</p>
+
+<hr>
+
+<h2 id="s-wheels">3.2 Wheels</h2>
+
+<p>
+<code><a href="https://www.python.org/dev/peps/pep-0427/">PEP 427</a></code>
+defines a built-package format called &quot;wheels&quot;, which is a Zip format
+archive containing Python code and a <code>*.dist-info</code> metadata
+directory, in a single file named with the <code>.whl</code> suffix.  As Zip
+files, wheels containing pure Python can be put on sys.path and modules in the
+wheel can be imported directly by Python's <samp>import</samp> statement.
+(Importing extension modules from wheels is not yet supported as of Python
+3.4.)
+</p>
+
+<p>
+Except as described below, packages must not build or provide wheels.  They are
+redundant to the established way of providing Python libraries to Debian users,
+take no advantage of distro-based tools, and are less convenient to use.  E.g.
+they must be explicitly added to <samp>sys.path</samp>, cannot be easily
+grepped, and stack traces through Zip files are more difficult to debug.
+</p>
+
+<p>
+A very limited set of wheel packages are available in the archive, but these
+support the narrow purpose of enabling the <code>pip</code>,
+<code>virtualenv</code>, and <code>pyvenv</code> tools in a Debian policy
+compliant way.  These packages build their own dependent wheels through the use
+of the <code>dirtbike</code> &quot;rewheeling&quot; tool, which takes installed
+Debian packages and turns them back into wheels.  Only universal wheels (i.e.
+pure-Python, Python 3 and 2 compatible packages) are supported.  Since only the
+programs that require wheels need build them, only they may provide
+<code>-whl</code> packages, e.g.  <code>python3-pip-whl</code>.
+</p>
+
+<p>
+When these binary packages are installed, <code>*.whl</code> files must be
+placed in the <code>/usr/share/python-wheels</code> directory.  The location
+inside a virtual environment will be rooted in the virtual environment, instead
+of <code>/usr</code>.
+</p>
+
+<hr>
+
+<h2 id="s-package_names">3.3 Module Package Names</h2>
+
+<p>
+Public Python modules must be packages separately by major Python version, to
+preserve run time separation between Python 2 and Python 3.
+</p>
+
+<p>
+Public Python 3 modules used by other packages must have their binary package
+name prefixed with <code>python3-</code>.  Public Python 2 modules used by
+other packages must have their binary package name prefixed with
+<code>python-</code>.  It is recommended to use this prefix for all packages
+with public modules as they may be used by other packages in the future.
+</p>
+
+<p>
+The binary package for module <var>foo</var> should preferably be named
+<code>python3-<var>foo</var></code> (for Python 3) or
+<code>python-<var>foo</var></code> (for Python 2), if the module name allows.
+This is not required if the binary package installs multiple modules, in which
+case the maintainer shall choose the name of the module which best represents
+the package.
+</p>
+
+<p>
+For subpackages such as <var>foo.bar</var>, the recommendation is to name the
+binary package <code>python3-<var>foo.bar</var></code> (for Python 3) or
+<code>python-<var>foo.bar</var></code> (for Python 2).
+</p>
+
+<p>
+Such a package should support the current Debian Python version, and more if
+possible (there are several tools to help implement this, see <a
+href="ap-packaging_tools.html">Packaging Tools, Appendix B</a>).  For example,
+if Python 3.3, 3.4, and 3.5 are supported, the Python statement
+</p>
+
+<pre>
+     import foo
+</pre>
+
+<p>
+should import the module when the program interpreter is any of
+<code>/usr/bin/python3.3</code>, <code>/usr/bin/python3.4</code>, and
+<code>/usr/bin/python3.5</code>.  This requirement also applies to extension
+modules; binaries for all the supported Python versions should be included in a
+single package.
+</p>
+
+<p>
+Packages intended for use with Django (<code>python3-django</code>/
+<code>python-django</code>) are installed in the same namespace as other python
+packages for a variety of reasons.  Many such packages are named django_$name
+upstream.  These are then packaged as <code>python3-django-$name</code> and
+<code>python-django-$name</code>.  This makes it clear that they are intended
+for use with Django and not general purpose Python modules.  Debian maintainers
+are encouraged to work with their upstreams to support consistent use of this
+approach.
+</p>
+
+<hr>
+
+<h2 id="s-specifying_versions">3.4 Specifying Supported Versions</h2>
+
+<p>
+The <code>debian/control</code> source paragraph may contain optional fields to
+specify the versions of Python the package supports.
+</p>
+
+<p>
+The optional <samp>X-Python3-Version</samp> field specifies the versions of
+Python 3 supported.  When not specified, it defaults to all currently supported
+Python 3 versions.
+</p>
+
+<p>
+Similarly, the optional fields <samp>X-Python-Version</samp> or
+<samp>XS-Python-Version</samp> were used to specify the versions of Python 2
+supported by the source package.  They are obsolete and can be removed now that
+only Python 2.7 is supported.
+</p>
+
+<p>
+These fields are used by some packaging scripts to automatically generate
+appropriate Depends and Provides lines.  The format of the field may be one of
+the following:
+</p>
+
+<pre>
+     X-Python3-Version: &gt;= X.Y
+     X-Python3-Version: &gt;= A.B, &lt;&lt; X.Y
+     XS-Python-Version: A.B, X.Y
+     XS-Python-Version: all
+</pre>
+
+<p>
+The keyword <samp>all</samp> means that the package supports any Python 2
+version available but might be deprecated in the future since using version
+numbers is clearer than <samp>all</samp> and encodes more information.  The
+keyword <samp>all</samp> is limited to Python 2 versions and must be ignored
+for Python 3 versions.
+</p>
+
+<p>
+A comma-separated list of multiple individual versions (e.g.  <samp>3.3, 3.4,
+3.5</samp>) in <samp>XS-Python-Version</samp> will continue to be supported,
+but is not recommended.  The use of multiple individual versions in
+<samp>X-Python-Version</samp> or <samp>X-Python3-Version</samp> is not
+supported for Wheezy and later releases.
+</p>
+
+<p>
+The keyword <samp>current</samp> has been deprecated and used to mean that the
+package would only have to support a single Python 2 version (even across
+default version changes).  It must be ignored for Python 3 versions.
+</p>
+
+<p>
+The use of <samp>XB-Python-Version</samp> in the binary package paragraphs of
+<code>debian/control</code> file has been deprecated and should be removed in
+the normal course of package updates.  It never achieved sufficient deployment
+to support its intended purpose of managing Python transitions.  This purpose
+can be adequately accomplished by examining package dependencies.
+</p>
+
+<hr>
+
+<h2 id="s-dependencies">3.5 Dependencies</h2>
+
+<p>
+Any package that installs modules for the default Python version (or many
+versions including the default) as described in <a
+href="#s-package_names">Module Package Names, Section 3.3</a>, must declare a
+dependency on the default Python runtime package.  If it requires other modules
+to work, the package must declare dependencies on the corresponding packaged
+modules.  The package must not declare dependency on any version-specific
+Python runtime or module package.
+</p>
+
+<p>
+For Python 3, the correct dependencies are <samp>Depends:
+python3&nbsp;(&gt;=&nbsp;3.<var>Y</var>)</samp> and any corresponding
+<code>python3-<var>foo</var></code> packages.
+</p>
+
+<p>
+For Python 2, the correct dependencies are <samp>Depends:
+python&nbsp;(&gt;=&nbsp;2.<var>Y</var>)</samp> and any corresponding
+<code>python-<var>foo</var></code> packages.
+</p>
+
+<p>
+Any package that installs Python modules or Python 3 binary extensions must
+also declare a maximum version it supports as currently built.  This is
+accomplished by declaring a maximum version constraint strictly less than one
+higher than the current maximum version, i.e.  <samp>Depends:
+python3&nbsp;(&lt;&lt;&nbsp;<var>X</var>.<var>Y</var>)</samp>.
+</p>
+
+<hr>
+
+<h2 id="s-provides">3.6 Provides</h2>
+
+<p>
+Binary packages that declare Provides dependencies of the form
+<code>python<var>X</var>.<var>Y</var>-<var>foo</var></code> were never
+supported for Python 3 and are no longer useful for Python 2.  They should be
+removed in the normal course of package updates.  Future provision of values
+for the substituation variable <samp>python:Provides</samp> is not guaranteed.
+</p>
+
+<hr>
+
+<h2 id="s-byte_compilation">3.7 Modules Byte-Compilation</h2>
+
+<p>
+If a binary package provides any binary-independent modules
+(<code><var>foo</var>.py</code> files), the corresponding byte-compiled modules
+(<code><var>foo</var>.pyc</code> files) and optimized modules
+(<code><var>foo</var>.pyo</code> files) must not ship in the package.  Instead,
+they should be generated in the package's post-install script, and removed in
+the package's pre-remove script.  The package's prerm has to make sure that
+both <code><var>foo</var>.pyc</code> and <code><var>foo</var>.pyo</code> are
+removed.
+</p>
+
+<p>
+A binary package should only byte-compile the files which belong to the
+package.
+</p>
+
+<p>
+The file <code>/etc/python/debian_config</code> allows configuration how
+modules should be byte-compiled.  The post-install scripts should respect these
+settings.
+</p>
+
+<p>
+Pure Python modules in private installation directories that are byte-compiled
+with the default Python version must be forcefully byte-compiled again when the
+default Python version changes.
+</p>
+
+<p>
+Public Python extensions should be bin-NMUed.
+</p>
+
+<p>
+Private Python extensions should be subject to binary NMUs every time the
+default interpreter changes, unless the extension is updated through a
+<code>*.rtupdate</code> script.
+</p>
+
+<hr>
+
+<p>
+[ <a href="ch-python.html">previous</a> ]
+[ <a href="index.html#contents">Contents</a> ]
+[ <a href="ch-python3.html">1</a> ]
+[ <a href="ch-python.html">2</a> ]
+[ 3 ]
+[ <a href="ch-programs.html">4</a> ]
+[ <a href="ch-embed.html">5</a> ]
+[ <a href="ch-other.html">6</a> ]
+[ <a href="ap-build_dependencies.html">A</a> ]
+[ <a href="ap-packaging_tools.html">B</a> ]
+[ <a href="ap-upgrade.html">C</a> ]
+[ <a href="ch-programs.html">next</a> ]
+</p>
+
+<hr>
+
+<p>
+Debian Python Policy
+</p>
+
+<address>
+version 0.10.1.1<br>
+<br>
+Neil Schemenauer <code><a href="mailto:nas@debian.org">mailto:nas@debian.org</a></code><br>
+Matthias Klose <code><a href="mailto:doko@debian.org">mailto:doko@debian.org</a></code><br>
+Gregor Hoffleit <code><a href="mailto:flight@debian.org">mailto:flight@debian.org</a></code><br>
+Josselin Mouette <code><a href="mailto:joss@debian.org">mailto:joss@debian.org</a></code><br>
+Joe Wreschnig <code><a href="mailto:piman@debian.org">mailto:piman@debian.org</a></code><br>
+Lo&iuml;c Minier <code><a href="mailto:lool@debian.org">mailto:lool@debian.org</a></code><br>
+Scott Kitterman <code><a href="mailto:scott@kitterman.com">mailto:scott@kitterman.com</a></code><br>
+Barry Warsaw <code><a href="mailto:barry@debian.org">mailto:barry@debian.org</a></code><br>
+Ben Finney <code><a href="mailto:ben+debian@benfinney.id.au">mailto:ben+debian@benfinney.id.au</a></code><br>
+<br>
+</address>
+<hr>
+
+</body>
+
+</html>
+

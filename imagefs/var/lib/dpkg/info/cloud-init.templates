@@ -1,0 +1,61 @@
+Template: cloud-init/datasources
+Type: multiselect
+Default: NoCloud, ConfigDrive, OpenNebula, Azure, AltCloud, OVF, MAAS, GCE, OpenStack, CloudSigma, SmartOS, Ec2, CloudStack, None
+Choices-C: NoCloud, ConfigDrive, OpenNebula, Azure, AltCloud, OVF, MAAS, GCE, Openstack, CloudSigma, SmartOS, Ec2, CloudStack, None
+Choices: NoCloud: Use /var/lib/cloud/seed, ConfigDrive: OpenStack config drive, OpenNebula: OpenNebula context disk, Azure: Microsoft Azure. Requires waagent package!, AltCloud: RHEVm and vSphere config disks, OVF: OVF transports, MAAS: Ubuntu MAAS, GCE: Google Compute metadata service, OpenStack: Native OpenStack metadata service, CloudSigma: Metadata over serial for cloudsigma.com, SmartOS: SmartOS metadata service, Ec2: EC2 Metadata service, CloudStack: CloudStack metadata service, None: Fallback
+Choices-pt.UTF-8: NoCloud: Utilize /var/lib/cloud/seed, ConfigDrive: Drive de Configuração do OpenStack, OpenNebula: Disco de contexto do OpenNebula, Azure: Microsoft Azure. Requer o pacote waagent!, AltCloud: Discos de configuração RHEVm e vSphere, OVF: Transportes OVF, MAAS: MAAS do Ubuntu, GCE: Serviço de meta-dados do Google Compute, OpenStack: Serviço nativo de meta-dados do OpenStack, CloudSigma: Meta-dados sobre série para cloudsigma.com, SmartOS: Serviço de meta-dados do SmartOS, Ec2: Serviço de Meta-dados EC2, CloudStack: Serviço de meta-dados do CloudStack, None: Regressar
+Description: Data sources to read from:
+ Cloud-init supports searching different "Data Sources" for information
+ that it uses to configure a cloud instance.
+ .
+ Please note that "EC2 Metadata service" should be used only if
+ the EC2 metadata service is present. Otherwise, it will trigger
+ a very noticeable timeout on boot.
+Description-cs.UTF-8: Načítat datové zdroje z:
+ Cloud-init pro vyhledávání informací, které se používají k nastavení cloudové instance, podporuje různé "datové zdroje".
+ .
+ Berte prosím na vědomí, že "Služba metadat EC2" by se měla používat pouze tehdy, pokud se v systému nachází. Jinak to způsobí znatelnou prodlevu při zavádění systému.
+Description-da.UTF-8: Datakilder at læse fra:
+ Cloud-init understøtter søgning i forskellige »Datakilder« for information som den bruger til at konfigurere en skyinstans.
+ .
+ Bemærk venligst at »EC2 - metadatatjeneste« kun bør bruges hvis EC2-metadatatjenesten er til stede. Ellers vil den udløse et meget tydelig tidsudløb ved opstart.
+Description-de.UTF-8: Datenquellen, von denen gelesen werden soll:
+ Cloud-init unterstützt das Durchsuchen verschiedener »Datenquellen« nach Informationen, die es zur Konfiguration einer Cloud-Instanz verwendet.
+ .
+ Bitte beachten Sie, dass der »EC2-Metadatendienst« nur benutzt werden sollte, falls er vorhanden ist. Andernfalls wird dies eine spürbare Zeitüberschreitung beim Systemstart auslösen.
+Description-es.UTF-8: Leer fuentes de datos desde:
+ Cloud-init permite buscar diferentes «Fuentes de datos» para obtener información que se utiliza para configurar una instancia en la nube.
+ .
+ Tenga en cuenta que el «Servicio de metadatos de EC2» sólo debe utilizarse si el servicio de metadatos EC2 está presente. De lo contrario, se producirá un tiempo de espera notable en el arranque.
+Description-fr.UTF-8: Sources des données à lire :
+ Cloud-init gère la recherche de différentes « sources de données » pour configurer une instance dans le nuage.
+ .
+ Veuillez noter que l'option « Service de métadonnées pour EC2 » ne devrait être sélectionnée que si ce service est présent. Dans le cas contraire, une longue pause se manifestera lors du démarrage.
+Description-it.UTF-8: Sorgenti di dati da cui leggere:
+ Cloud-init può cercare in diverse "Sorgenti di dati" le informazioni che usa per configurare un'istanza di nuvola.
+ .
+ Notare che "Servizio di metadati EC2" dovrebbe essere usato solamente se è presente il servizio di metadati EC2, altrimenti causerà un tempo di attesa molto considerevole all'avvio.
+Description-ja.UTF-8: データソースの取得元:
+ Cloud-init はクラウドインスタンスの設定に利用する情報について、複数の「データソース」からの検索に対応しています。
+ .
+ 「EC2 メタデータサービス」は EC2 メタデータサービスが存在している場合にのみ選択すべきであることに注意してください。存在しない場合に選択すると起動時に目に見えて遅くなり、タイムアウトを引き起こします。
+Description-nl.UTF-8: Gegevensbronnen waaruit zal gelezen worden:
+ Cloud-init ondersteunt het doorzoeken van verschillende "Gegevensbronnen" naar informatie die het gebruikt om een cloudrealisatie te configureren.
+ .
+ Merk op dat "Metagegevensdienst van EC2" enkel gebruikt zou mogen worden als de dienst ook effectief aanwezig is. Anders zal een gevoelig langere verlooptijd tijdens het opstarten het gevolg zijn.
+Description-pl.UTF-8: Źródło danych do odczytu:
+ W celu pozyskania informacji potrzebnych do skonfigurowania chmury program Cloud-init obsługuje różne źródła danych.
+ .
+ Proszę zauważyć, że "metadane usługi EC2" mogą być wybrane wyłącznie jeśli obecna jest usługa metadanych EC2. W przeciwnym razie rozruch systemu będzie znacząco spowolniony.
+Description-pt.UTF-8: Fontes de dados de onde ler:
+ O Cloud-init suporta procurar informações em diferentes "Fontes de Dados" que usa para configurar uma instância do cloud.
+ .
+ Por favor note que o "Serviço de Meta-dados EC2" deve apenas ser usado se estiver presente um serviço de meta-dados EC2. Caso contrário, irá provocar um atraso bastante notável no arranque da máquina.
+Description-ru.UTF-8: Источники данных для чтения:
+ Cloud-init поддерживает поиск информации в различных «источниках данных», которая потом используется для настройки экземпляра облака.
+ .
+ Заметим, что «службу метаданных EC2» можно использовать, только если она действительно есть. В противном случае, её отсутствие приведёт к очень заметной задержке при запуске.
+Description-sv.UTF-8: Datakälla att läsa från.
+ Cloud-init kan söka i olika resurser för källdata efter information som används för att ställa in moln-instansen.
+ .
+ Observera att "EC2 Metadata service" endast ska användas om denna finns tillgänglig. Annars kommer den att orsaka en mycket märkbar paus under uppstarten.

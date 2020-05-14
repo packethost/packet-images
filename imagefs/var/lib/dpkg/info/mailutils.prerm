@@ -1,0 +1,12 @@
+#!/bin/sh
+
+set -e
+       
+if [ "$1" = "remove" ]; then
+    for bin in dotlock frm from messages movemail readmsg; do
+        update-alternatives --remove $bin /usr/bin/$bin.mailutils
+    done
+    update-alternatives --remove mailx /usr/bin/mail.mailutils
+fi
+
+

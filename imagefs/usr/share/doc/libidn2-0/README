@@ -1,0 +1,38 @@
+Libidn2 README -- Introduction information.                     -*- outline -*-
+Copyright (C) 2011-2017 Simon Josefsson
+See the end for copying conditions.
+
+Libidn2 is a free software implementation of IDNA2008 and TR46.
+
+RFC 5890: https://tools.ietf.org/html/rfc5890
+RFC 5891: https://tools.ietf.org/html/rfc5891
+RFC 5892: https://tools.ietf.org/html/rfc5892
+RFC 5893: https://tools.ietf.org/html/rfc5893
+TR46: http://www.unicode.org/reports/tr46/
+
+Libidn2 uses GNU libunistring for Unicode processing and GNU libiconv
+for character set conversion.
+
+https://www.gnu.org/software/libunistring/
+https://www.gnu.org/software/libiconv/
+
+Libidn2 is believed to be a complete IDNA2008 and TR46 implementation,
+but has yet to be as extensively used as the IDNA2003 Libidn library.
+
+The installed C library libidn2 is dual-licensed under LGPLv3+|GPLv2+,
+while the rest of the package is GPLv3+.  See the file COPYING for
+detailed information.
+
+----------------------------------------------------------------------
+This file is free software: you can redistribute it and/or modify it
+under the terms of the GNU General Public License as published by the
+Free Software Foundation, either version 3 of the License, or (at your
+option) any later version.
+
+This file is distributed in the hope that it will be useful, but
+WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with this file.  If not, see <http://www.gnu.org/licenses/>.

@@ -1,0 +1,10 @@
+
+procmail_pipe:
+  debug_print = "T: procmail_pipe for $local_part@$domain"
+  driver = pipe
+  path = "/bin:/usr/bin:/usr/local/bin"
+  command = "/usr/bin/procmail"
+  return_path_add
+  delivery_date_add
+  envelope_to_add
+

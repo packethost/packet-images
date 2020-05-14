@@ -1,0 +1,19 @@
+
+### retry/30_exim4-config
+#################################
+
+# This single retry rule applies to all domains and all errors. It specifies
+# retries every 15 minutes for 2 hours, then increasing retry intervals,
+# starting at 1 hour and increasing each time by a factor of 1.5, up to 16
+# hours, then retries every 6 hours until 4 days have passed since the first
+# failed delivery.
+
+# Please note that these rules only limit the frequency of retries, the
+# effective retry-time depends on the frequency of queue-running, too.
+# See QUEUEINTERVAL in /etc/default/exim4.
+
+# Address or Domain    Error       Retries
+# -----------------    -----       -------
+
+*                      *           F,2h,15m; G,16h,1h,1.5; F,4d,6h
+

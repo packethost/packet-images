@@ -1,0 +1,10 @@
+/var/log/exim4/paniclog {
+	size 10M
+	missingok
+	rotate 10
+	compress
+	delaycompress
+	notifempty
+	create 640 Debian-exim adm
+}
+

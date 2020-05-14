@@ -1,0 +1,24 @@
+#!/bin/sh
+set -e
+# Automatically added by dh_installudev
+if [ "$1" = install ] || [ "$1" = upgrade ]; then
+	if [ -e "/etc/udev/rules.d/55_sg3-utils-udev.scsi-sg3_id.rules" ]; then
+		if [ "`md5sum \"/etc/udev/rules.d/55_sg3-utils-udev.scsi-sg3_id.rules\" | sed -e \"s/ .*//\"`" = \
+		     "`dpkg-query -W -f='${Conffiles}' sg3-utils-udev | sed -n -e \"\\\\' /etc/udev/rules.d/55_sg3-utils-udev.scsi-sg3_id.rules '{s/ obsolete$//;s/.* //p}\"`" ]
+		then
+			rm -f "/etc/udev/rules.d/55_sg3-utils-udev.scsi-sg3_id.rules"
+		fi
+	fi
+fi
+# End automatically added section
+# Automatically added by dh_installudev
+if [ "$1" = install ] || [ "$1" = upgrade ]; then
+	if [ -e "/etc/udev/rules.d/58_sg3-utils-udev.scsi-sg3_symlink.rules" ]; then
+		if [ "`md5sum \"/etc/udev/rules.d/58_sg3-utils-udev.scsi-sg3_symlink.rules\" | sed -e \"s/ .*//\"`" = \
+		     "`dpkg-query -W -f='${Conffiles}' sg3-utils-udev | sed -n -e \"\\\\' /etc/udev/rules.d/58_sg3-utils-udev.scsi-sg3_symlink.rules '{s/ obsolete$//;s/.* //p}\"`" ]
+		then
+			rm -f "/etc/udev/rules.d/58_sg3-utils-udev.scsi-sg3_symlink.rules"
+		fi
+	fi
+fi
+# End automatically added section

@@ -1,0 +1,30 @@
+#!/bin/sh
+
+set -e
+
+if [ "$1" = "configure" ]; then
+    for bin in frm from messages movemail readmsg; do
+	update-alternatives --install /usr/bin/$bin $bin \
+				      /usr/bin/$bin.mailutils 20 \
+			--slave /usr/share/man/man1/$bin.1.gz $bin.1.gz \
+				      /usr/share/man/man1/$bin.mailutils.1.gz
+    done
+    # dotlock needs a low priority, so maildrop can be the default for now.
+    update-alternatives --install /usr/bin/dotlock dotlock \
+    				  /usr/bin/dotlock.mailutils 4 \
+		--slave /usr/share/man/man1/dotlock.1.gz dotlock.1.gz \
+				  /usr/share/man/man1/dotlock.mailutils.1.gz
+    # Install an alternative for mailx and mail, pointing to
+    # /usr/bin/mail.mailutils, with a lower priority than bsd-mailx.
+    update-alternatives --install /usr/bin/mailx mailx \
+    				  /usr/bin/mail.mailutils 30 \
+		--slave /usr/share/man/man1/mailx.1.gz mailx.1.gz \
+				  /usr/share/man/man1/mail.mailutils.1.gz \
+		--slave /usr/bin/mail mail \
+				  /usr/bin/mail.mailutils \
+		--slave /usr/share/man/man1/mail.1.gz mail.1.gz \
+				  /usr/share/man/man1/mail.mailutils.1.gz
+
+fi
+
+

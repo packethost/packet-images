@@ -1,0 +1,21 @@
+[Unit]
+Description=Device-Mapper Multipath Device Controller
+Before=iscsi.service iscsid.service lvm2-activation-early.service
+Before=local-fs-pre.target systemd-udev-trigger.service
+After=multipathd.socket systemd-udevd.service
+DefaultDependencies=no
+Wants=local-fs-pre.target multipathd.socket blk-availability.service
+Conflicts=shutdown.target
+
+[Service]
+Type=notify
+NotifyAccess=main
+LimitCORE=infinity
+ExecStartPre=/sbin/modprobe -a scsi_dh_alua scsi_dh_emc scsi_dh_rdac dm-multipath
+ExecStart=/sbin/multipathd -d -s
+ExecReload=/sbin/multipathd reconfigure
+
+[Install]
+WantedBy=sysinit.target
+Also=multipathd.socket
+Alias=multipath-tools.service

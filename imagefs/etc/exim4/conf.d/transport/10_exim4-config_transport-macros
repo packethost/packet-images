@@ -1,0 +1,16 @@
+
+### transport/10_exim4-config_transport-macros
+#################################
+
+.ifdef HIDE_MAILNAME
+REMOTE_SMTP_HEADERS_REWRITE=*@+local_domains $1@DCreadhost frs : *@ETC_MAILNAME $1@DCreadhost frs
+REMOTE_SMTP_RETURN_PATH=${if match_domain{$sender_address_domain}{+local_domains}{${sender_address_local_part}@DCreadhost}{${if match_domain{$sender_address_domain}{ETC_MAILNAME}{${sender_address_local_part}@DCreadhost}fail}}}
+.endif
+
+.ifdef REMOTE_SMTP_HELO_FROM_DNS
+.ifdef REMOTE_SMTP_HELO_DATA
+REMOTE_SMTP_HELO_DATA==${lookup dnsdb {ptr=$sending_ip_address}{$value}{$primary_hostname}}
+.else
+REMOTE_SMTP_HELO_DATA=${lookup dnsdb {ptr=$sending_ip_address}{$value}{$primary_hostname}}
+.endif
+.endif

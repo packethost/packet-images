@@ -1,0 +1,53 @@
+
+### transport/30_exim4-config_remote_smtp
+#################################
+# This transport is used for delivering messages over SMTP connections.
+# Refuse to send any message with over-long lines, which could have
+# been received other than via SMTP. The use of message_size_limit to
+# enforce this is a red herring.
+
+remote_smtp:
+  debug_print = "T: remote_smtp for $local_part@$domain"
+  driver = smtp
+.ifndef IGNORE_SMTP_LINE_LENGTH_LIMIT
+  message_size_limit = ${if > {$max_received_linelength}{998} {1}{0}}
+.endif
+.ifdef REMOTE_SMTP_HOSTS_AVOID_TLS
+  hosts_avoid_tls = REMOTE_SMTP_HOSTS_AVOID_TLS
+.endif
+.ifdef REMOTE_SMTP_HEADERS_REWRITE
+  headers_rewrite = REMOTE_SMTP_HEADERS_REWRITE
+.endif
+.ifdef REMOTE_SMTP_RETURN_PATH
+  return_path = REMOTE_SMTP_RETURN_PATH
+.endif
+.ifdef REMOTE_SMTP_HELO_DATA
+  helo_data=REMOTE_SMTP_HELO_DATA
+.endif
+.ifdef DKIM_DOMAIN
+dkim_domain = DKIM_DOMAIN
+.endif
+.ifdef DKIM_SELECTOR
+dkim_selector = DKIM_SELECTOR
+.endif
+.ifdef DKIM_PRIVATE_KEY
+dkim_private_key = DKIM_PRIVATE_KEY
+.endif
+.ifdef DKIM_CANON
+dkim_canon = DKIM_CANON
+.endif
+.ifdef DKIM_STRICT
+dkim_strict = DKIM_STRICT
+.endif
+.ifdef DKIM_SIGN_HEADERS
+dkim_sign_headers = DKIM_SIGN_HEADERS
+.endif
+.ifdef TLS_DH_MIN_BITS
+tls_dh_min_bits = TLS_DH_MIN_BITS
+.endif
+.ifdef REMOTE_SMTP_TLS_CERTIFICATE
+tls_certificate = REMOTE_SMTP_TLS_CERTIFICATE
+.endif
+.ifdef REMOTE_SMTP_PRIVATEKEY
+tls_privatekey = REMOTE_SMTP_PRIVATEKEY
+.endif

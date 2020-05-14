@@ -1,0 +1,8 @@
+[Unit]
+Description=PackageKit Daemon
+
+[Service]
+Type=dbus
+BusName=org.freedesktop.PackageKit
+User=root
+ExecStart=/usr/lib/packagekit/packagekitd

@@ -1,0 +1,60 @@
+#!/bin/sh
+
+set -e
+
+. /usr/share/debconf/confmodule
+
+if [ -n "$EX4DEBUG" ]; then
+  echo "now debugging $0 $@"
+  set -x
+fi
+
+dc_eximconfig_configtype="other"
+db_get exim4/dc_eximconfig_configtype || true
+if [ "$RET" = "no configuration at this time" ]; then
+  dc_eximconfig_configtype="none"
+fi
+
+case "$1" in
+	configure)
+
+	# || true is needed for succesfull installation with configtype 'none'
+	if [ -x /etc/init.d/exim4 ]; then
+		db_stop
+		if [ "$dc_eximconfig_configtype" = "none" ]; then
+			# we may have broken config here, ignore errors
+	       		invoke-rc.d exim4 start || true
+		else
+			# we must have working config here, honor errors
+			invoke-rc.d exim4 start
+		fi
+	fi
+
+	# set up DH-parameter file, update if older than 160 days
+	if test -e /var/spool/exim4/gnutls-params-2048 ; then
+		if [ `stat --format=%Y /var/spool/exim4/gnutls-params-2048` -le $(( `date +%s` - 13824000 )) ];
+			then
+			echo "Updating GnuTLS DH parameter file" 1>&2
+			/usr/share/exim4/exim4_refresh_gnutls-params
+		fi
+	else
+		echo "Initializing GnuTLS DH parameter file" 1>&2
+		tempgnutls=$(tempfile --directory /var/spool/exim4 --mode 644 --prefix  "gnutp")
+		chown Debian-exim:Debian-exim $tempgnutls
+		if [ -x /usr/bin/certtool ] && \
+			timeout --preserve-status --kill-after=15 120 \
+			certtool --generate-dh-params --bits 2048 > $tempgnutls ; then
+				mv $tempgnutls /var/spool/exim4/gnutls-params-2048
+		else
+			rm -f $tempgnutls
+			install -m 644 -o Debian-exim -g Debian-exim \
+				/usr/share/exim4/gnutls-params-2048 \
+				/var/spool/exim4/gnutls-params-2048
+		fi
+	fi
+
+
+	;;
+esac
+
+

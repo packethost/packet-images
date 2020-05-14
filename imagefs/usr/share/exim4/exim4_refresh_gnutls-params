@@ -1,0 +1,52 @@
+#!/bin/sh
+set -e
+
+if [ -n "$EX4DEBUG" ]; then
+  echo "now debugging $0 $@"
+  set -x
+fi
+
+
+# regenerate $EXIM4_SPOOLDIR/gnutls-params-*
+# As this can take _very_ long on machines with little entropy, we limit
+# the maximum runtime to 1800 seconds and keep using the
+# old file otherwise.
+
+# Only do anything if exim4 is actually installed
+if [ ! -x /usr/lib/exim4/exim4 ]; then
+  exit 0
+fi
+
+# Only do anyting if TLS is enabled in exim
+if [ -z "$(/usr/lib/exim4/exim4 -bP tls_advertise_hosts | sed 's/.*=[[:space:]]\(.*\)/\1/')" ]; then 
+  # TLS disabled
+  exit 0
+fi
+
+TIMEOUT=${1:-1800}
+
+EXIM4_SPOOLDIR="${EXIM4_SPOOLDIR:-$(/usr/lib/exim4/exim4 -bP spool_directory | sed 's/.*=[[:space:]]\(.*\)/\1/')}"
+cd $EXIM4_SPOOLDIR
+
+# loop over gnutls-params-files
+for paramfile in `find -maxdepth 1 -regex '\./gnutls-params-[0-9][0-9][0-9]*'` ; do
+  bits=`echo ${paramfile} | sed -e 's:\./gnutls-params-::'`
+  tempgnutls=$(tempfile --directory $EXIM4_SPOOLDIR --mode 644 --prefix  "gnutp" )
+
+  if [ -x /usr/bin/certtool ] ; then
+    # GnuTLS
+    if timeout --preserve-status --kill-after=15 \
+        "$TIMEOUT" /usr/bin/certtool --generate-dh-params --bits ${bits} \
+        > "$tempgnutls" 2> /dev/null ; then
+      cat "$tempgnutls" > "${paramfile}" ; rm -f "$tempgnutls"
+    else
+      rm -f "$tempgnutls"
+      break
+    fi
+  else
+    # gnutls-bin not installed, let exim generate the DH params
+    rm -f "${paramfile}" "$tempgnutls"
+  fi
+done
+
+# vim:tabstop=2:expandtab:shiftwidth=2

@@ -1,0 +1,13 @@
+/.
+/usr
+/usr/lib
+/usr/lib/x86_64-linux-gnu
+/usr/lib/x86_64-linux-gnu/libboost_iostreams.so.1.62.0
+/usr/share
+/usr/share/doc
+/usr/share/doc/libboost-iostreams1.62.0
+/usr/share/doc/libboost-iostreams1.62.0/changelog.Debian.gz
+/usr/share/doc/libboost-iostreams1.62.0/copyright
+/usr/share/lintian
+/usr/share/lintian/overrides
+/usr/share/lintian/overrides/libboost-iostreams1.62.0

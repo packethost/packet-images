@@ -1,0 +1,7 @@
+liburcu-bp 4 liburcu4 (>= 0.9.3)
+liburcu-cds 4 liburcu4 (>= 0.9.3)
+liburcu-common 4 liburcu4 (>= 0.9.3)
+liburcu-mb 4 liburcu4 (>= 0.9.3)
+liburcu-qsbr 4 liburcu4 (>= 0.9.3)
+liburcu-signal 4 liburcu4 (>= 0.9.3)
+liburcu 4 liburcu4 (>= 0.9.3)

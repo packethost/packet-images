@@ -1,0 +1,41 @@
+
+### transport/30_exim4-config_maildir_home
+#################################
+
+# Use this instead of mail_spool if you want to to deliver to Maildir in
+# home-directory - change the definition of LOCAL_DELIVERY
+#
+maildir_home:
+  debug_print = "T: maildir_home for $local_part@$domain"
+  driver = appendfile
+  .ifdef MAILDIR_HOME_MAILDIR_LOCATION
+  directory = MAILDIR_HOME_MAILDIR_LOCATION
+  .else
+  directory = $home/Maildir
+  .endif
+  .ifdef MAILDIR_HOME_CREATE_DIRECTORY
+  create_directory
+  .endif
+  .ifdef MAILDIR_HOME_CREATE_FILE
+  create_file = MAILDIR_HOME_CREATE_FILE
+  .endif
+  delivery_date_add
+  envelope_to_add
+  return_path_add
+  maildir_format
+  .ifdef MAILDIR_HOME_DIRECTORY_MODE
+  directory_mode = MAILDIR_HOME_DIRECTORY_MODE
+  .else
+  directory_mode = 0700
+  .endif
+  .ifdef MAILDIR_HOME_MODE
+  mode = MAILDIR_HOME_MODE
+  .else
+  mode = 0600
+  .endif
+  mode_fail_narrower = false
+  # This transport always chdirs to $home before trying to deliver. If
+  # $home is not accessible, this chdir fails and prevents delivery.
+  # If you are in a setup where home directories might not be
+  # accessible, uncomment the current_directory line below.
+  # current_directory = /

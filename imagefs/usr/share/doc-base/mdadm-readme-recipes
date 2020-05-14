@@ -1,0 +1,9 @@
+Document: mdadm-readme-recipes
+Title: mdadm Debian recipes
+Author: David Pashley
+Abstract: The document contains some common recipes for mdadm usage on Debian
+Section: System/Administration
+
+Format: text
+Index: /usr/share/doc/mdadm/README.recipes.gz
+Files: /usr/share/doc/mdadm/README.recipes.gz

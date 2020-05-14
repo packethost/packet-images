@@ -1,0 +1,279 @@
+#! /bin/sh
+# /etc/init.d/exim4
+#
+# Written by Miquel van Smoorenburg <miquels@drinkel.ow.org>.
+# Modified for Debian GNU/Linux by Ian Murdock <imurdock@gnu.ai.mit.edu>.
+# Modified for exim by Tim Cutts <timc@chiark.greenend.org.uk>
+# Modified for exim4 by Andreas Metzler <ametzler@debian.org>
+#                   and Marc Haber <mh+debian-packages@zugschlus.de>
+
+### BEGIN INIT INFO
+# Provides:          exim4
+# Required-Start:    $remote_fs $syslog $named $network $time
+# Required-Stop:     $remote_fs $syslog $named $network
+# Should-Start:      postgresql mysql clamav-daemon greylist spamassassin
+# Should-Stop:       postgresql mysql clamav-daemon greylist spamassassin
+# Default-Start:     2 3 4 5
+# Default-Stop:      0 1 6
+# Short-Description: exim Mail Transport Agent
+# Description:       exim is a Mail Transport agent
+### END INIT INFO
+
+set -e
+
+test -x /usr/lib/exim4/exim4 || exit 0
+
+. /lib/lsb/init-functions
+
+if [ -n "$EX4DEBUG" ]; then
+  echo "now debugging $0 $@"
+  set -x
+fi
+
+LANG=C
+export LANG
+
+#read default file
+QUEUERUNNER='combined'
+QUEUEINTERVAL='30m'
+UPEX4OPTS=''
+[ -f /etc/default/exim4 ] && . /etc/default/exim4
+PIDFILE="/run/exim4/exim.pid"
+QRPIDFILE="/run/exim4/eximqr.pid"
+
+upex4conf() {
+  UPEX4CONF="update-exim4.conf"
+  OLDIFS="$IFS"
+  IFS=:
+  for p in $PATH; do
+    if [ -x "$p/$UPEX4CONF" ]; then
+      IFS="$OLDIFS"
+      $p/$UPEX4CONF $UPEX4OPTS $1
+      return 0
+    fi
+  done
+  IFS="$OLDIFS"
+}
+
+# Exit if exim runs from /etc/inetd.conf
+if [ -f /etc/inetd.conf ] && grep -E -q '^[[:space:]]*((\*|[[:alnum:].-]+):)?smtp[[:space:]]' /etc/inetd.conf
+then
+  upex4conf
+  exit 0
+fi
+
+
+DAEMON="/usr/sbin/exim4"
+NAME="exim4"
+
+# this is from madduck on IRC, 2006-07-06
+# There should be a better possibility to give daemon error messages
+# and/or to log things
+log()
+{
+  case "$1" in
+    [[:digit:]]*) success=$1; shift;;
+    *) :;;
+  esac
+  log_action_begin_msg "$1"; shift
+  log_action_end_msg ${success:-0} "$*"
+}
+
+start_exim()
+{
+  [ -e /run/exim4 ] || \
+    install -d -oDebian-exim -gDebian-exim -m750 /run/exim4
+  case ${QUEUERUNNER} in
+    combined)
+      start_daemon -p "$PIDFILE" \
+        "$DAEMON" -bd "-q${QFLAGS}${QUEUEINTERVAL}" \
+        ${COMMONOPTIONS} \
+        ${QUEUERUNNEROPTIONS} \
+        ${SMTPLISTENEROPTIONS}
+      log_progress_msg "exim4"
+      ;;
+    separate)
+      start_daemon -p "$PIDFILE" \
+        "$DAEMON" -bd \
+        ${COMMONOPTIONS} \
+        ${SMTPLISTENEROPTIONS}
+      log_progress_msg "exim4_listener"
+      start_daemon -p "$QRPIDFILE" \
+        "$DAEMON" -oP $QRPIDFILE \
+        "-q${QFLAGS}${QUEUEINTERVAL}" \
+        ${COMMONOPTIONS} \
+        ${QUEUERUNNEROPTIONS}
+      log_progress_msg "exim4_queuerunner"
+      ;;
+    queueonly)
+      start_daemon -p "$PIDFILE" \
+        "$DAEMON" -oP $PIDFILE \
+        "-q${QFLAGS}${QUEUEINTERVAL}" \
+        ${COMMONOPTIONS} \
+        ${QUEUERUNNEROPTIONS}
+      log_progress_msg "exim4_queuerunner"
+      ;;
+    no|ppp)
+      start_daemon -p "$PIDFILE" \
+        "$DAEMON" -bd \
+        ${COMMONOPTIONS} \
+        ${SMTPLISTENEROPTIONS}
+      log_progress_msg "exim4_listener"
+      ;;
+    nodaemon)
+      ;;    
+  esac
+}
+
+stop_exim()
+{
+# we try to kill eximqr and exim SMTP listener, no matter what
+# ${QUEUERUNNER} is set to, we could have switched since starting.
+  if [ -f "$QRPIDFILE" ]; then
+    killproc -p "$QRPIDFILE" "$DAEMON"
+    # exim does not remove the pidfile
+    if [ $? -eq 0 ] ; then rm -f "$QRPIDFILE" ; fi
+    log_progress_msg "exim4_queuerunner"
+  fi
+  if [ -f "$PIDFILE" ]; then
+    killproc -p "$PIDFILE" "$DAEMON"
+    # exim does not remove the pidfile
+    if [ $? -eq 0 ] ; then rm -f "$PIDFILE" ; fi
+    log_progress_msg "exim4_listener"
+  fi
+}
+
+reload_exim()
+{
+  case ${QUEUERUNNER} in
+    combined|no|ppp|queueonly)
+      killproc -p "$PIDFILE" "$DAEMON" -HUP
+      log_progress_msg "exim4"
+      ;;
+    separate)
+      killproc -p "$PIDFILE" "$DAEMON" -HUP
+      log_progress_msg "exim4_listener"
+      killproc -p "$QRPIDFILE" "$DAEMON" -HUP
+      log_progress_msg "exim4_queuerunner"
+      ;;
+  esac
+}
+
+kill_all_exims()
+{  SIG="${1:-TERM}"
+  for pid in $(pidof $NAME); do
+    if [ "$(readlink /proc/$pid/root)" = "/" ]; then
+      kill -$SIG $pid
+    fi
+  done
+}
+
+status()
+{
+  # the exit value of this function reflects the status of the SMTP
+  # service. Output shows the status of the queue runner as well.
+  SMTPNAME="SMTP listener daemon"
+  QRNAME="separate queue runner daemon"
+  if [ "${QUEUERUNNER}" = "combined" ]; then
+      SMTPNAME="combined SMTP listener and queue runner daemon"
+  elif [ "${QUEUERUNNER}" = "queueonly" ]; then
+    SMTPNAME="separate queue runner daemon"
+  fi
+  log_action_begin_msg "checking $QRNAME"
+  if pidofproc -p "$QRPIDFILE" "$DAEMON" >/dev/null; then
+    log_action_end_msg 0 "running"
+  else
+    if [ -e "$QRPIDFILE" ]; then
+      log_action_end_msg 1 "$QRNAME failed"
+    else
+      log_action_end_msg 0 "not running"
+    fi
+  fi
+  log_action_begin_msg "checking $SMTPNAME"
+  if pidofproc -p "$PIDFILE" "$DAEMON" >/dev/null; then
+    log_action_end_msg 0 "running"
+    exit 0
+  else
+    if [ -e "$PIDFILE" ]; then
+      log_action_end_msg 1 "$SMTPNAME failed"
+      exit 1
+    else
+      log_action_end_msg 0 "not running"
+      exit 3
+    fi
+  fi
+}
+
+# check for valid configuration file
+isconfigvalid()
+{
+if ! $DAEMON -bV > /dev/null ; then
+  log 1 "Warning! Invalid configuration file for $NAME. Exiting."
+  exit 1
+fi
+}
+
+# check for non-empty paniclog
+warn_paniclog()
+{
+  if [ -s "/var/log/exim4/paniclog" ]; then
+    if [ -z "$E4BCD_PANICLOG_NOISE" ] || grep -vq "$E4BCD_PANICLOG_NOISE" /var/log/exim4/paniclog; then
+      echo "ALERT: exim paniclog /var/log/exim4/paniclog has non-zero size, mail system possibly broken" 1>&2
+    fi
+  fi
+}
+
+case "$1" in
+  start)
+    log_daemon_msg "Starting MTA"
+    # regenerate exim4.conf
+    upex4conf
+    isconfigvalid
+    start_exim
+    log_end_msg 0
+    warn_paniclog
+    ;;
+  stop)
+    log_daemon_msg "Stopping MTA"
+    stop_exim
+    log_end_msg 0
+    warn_paniclog
+    ;;
+  restart)
+    # check whether newly generated config would work
+    upex4conf --check
+    log_daemon_msg "Stopping MTA for restart"
+    stop_exim
+    # regenerate exim4.conf
+    upex4conf
+    isconfigvalid
+    log_end_msg 0
+    sleep 2
+    log_daemon_msg "Restarting MTA"
+    start_exim
+    log_end_msg 0
+    warn_paniclog
+    ;;
+  reload|force-reload)
+    log_daemon_msg "Reloading $NAME configuration files"
+    # regenerate exim4.conf
+    upex4conf
+    isconfigvalid
+    reload_exim
+    log_end_msg 0
+    warn_paniclog
+    ;;
+  status)
+    status
+    ;;
+  force-stop)
+    kill_all_exims $2
+    ;;
+  *)
+    echo "Usage: $0 {start|stop|restart|reload|status|force-stop}"
+    exit 1
+    ;;
+esac
+
+exit 0
+# vim:tabstop=2:expandtab:shiftwidth=2

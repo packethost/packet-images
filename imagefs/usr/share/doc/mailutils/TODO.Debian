@@ -1,0 +1,7 @@
+mailutils for Debian TODO
+-----------------------------
+
+- let the user choose if they want TLS & non-TLS or just one of them.
+- better descriptions.
+
+ -- Jordi Mallach <jordi@debian.org>  Sat, 18 Jan 2003 19:37:47 +0100

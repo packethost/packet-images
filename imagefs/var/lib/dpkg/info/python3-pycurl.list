@@ -1,0 +1,15 @@
+/.
+/usr
+/usr/lib
+/usr/lib/python3
+/usr/lib/python3/dist-packages
+/usr/lib/python3/dist-packages/curl
+/usr/lib/python3/dist-packages/curl/__init__.py
+/usr/lib/python3/dist-packages/pycurl-7.43.0.egg-info
+/usr/lib/python3/dist-packages/pycurl.cpython-35m-x86_64-linux-gnu.so
+/usr/share
+/usr/share/doc
+/usr/share/doc/python3-pycurl
+/usr/share/doc/python3-pycurl/changelog.Debian.gz
+/usr/share/doc/python3-pycurl/changelog.gz
+/usr/share/doc/python3-pycurl/copyright

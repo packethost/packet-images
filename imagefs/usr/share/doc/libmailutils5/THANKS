@@ -1,0 +1,40 @@
+GNU Mailutils THANKS file.
+
+Many people further contributed to GNU mailutils by reporting problems,
+suggesting various improvements or submitting actual code. Here is a list
+of these people. Help us keep it complete and exempt of errors.
+
+Alain Magloire       <alainm@gnu.org>
+Amit Jhawar          <ajhawar@frontbridge.com>
+D. J. Henman         <henman@it.to-be.co.jp>
+Damon Harper         <dl+bug-mailutils@usrbin.ca>
+Dan Jacobson         <jidanni@jidanni.org>
+Daniel Kahn Gillmor  <dkg-debian.org@fifthhorseman.net>
+Felix Egli           <fegli@goldnet.ch>
+Frank Belew          <frb@wiw.org>
+Helmut Leitner       <leitner@hls.via.at>
+Jakob 'sparky' Kaivo <jkaivo@elijah.nodomainname.net>
+James Troup          <james@nocrew.org>
+Jeff Bailey          <jbailey@nisa.net>
+Jim Hull             <imaginos@imaginos.net>
+Jordi Mallach        <jordi@sindominio.net>
+Kidong Lee           <briankdlee@yahoo.com>
+Kostas Zorbadelos    <kzorba@otenet.gr>
+Matthew Whitworth    <matthew@okcomputer.org>
+maks                 <maksqwe1@ukr.net>
+Neil R. Ormos        <ormos@ormos.org>
+Olivier Bornet       <Olivier.Bornet@smartdata.ch>
+Robby Villegas       <robby.villegas@gmail.com>
+Ronan KERYELL        <Ronan.Keryell@enstb.org>
+Sam Roberts          <sroberts@uniserve.com>
+Sean 'Shaleh' Perry  <shaleh@debian.org>
+Sergey Poznyakoff    <gray@gnu.org.ua>
+Simon Josefsson      <jas@extundo.com>
+Daniel Kahn Gillmor  <dkg-debian.org@fifthhorseman.net>
+Thien-Thi Nguyen     <ttn@surf.glug.org>
+Thomas Guyot-Sionnest <dermoth@aei.ca>
+Timothy Carpenter    <timbeau_hk@yahoo.co.uk>
+Vesselin Atanasov    <vesselin@bgnet.bg>
+Walter Neumann       <neumann@cpw.math.columbia.edu>
+Willem Jaap Zwart    <W.J.Zwart@NescioLudens.nl>
+Wojciech Polak       <polak@gnu.org>

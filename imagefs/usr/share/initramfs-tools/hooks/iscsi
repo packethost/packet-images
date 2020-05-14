@@ -1,0 +1,41 @@
+#!/bin/sh
+
+PREREQ="udev"
+
+prereqs()
+{
+	echo "$PREREQ"
+}
+
+case $1 in
+# get pre-requisites
+prereqs)
+	prereqs
+	exit 0
+	;;
+esac
+
+if [ -r /etc/initramfs-tools/conf.d/open-iscsi ] ; then
+	. /etc/initramfs-tools/conf.d/open-iscsi
+fi
+
+if [ x"$NO_ISCSI_IN_INITRAMFS" = x"yes" ] ; then
+	exit 0
+fi
+
+# Hooks for loading iscsi bits into the initramfs
+. /usr/share/initramfs-tools/hook-functions
+
+copy_exec /sbin/iscsistart /sbin
+cp /etc/iscsi/initiatorname.iscsi $DESTDIR/etc
+if [ -r /etc/iscsi/iscsi.initramfs ] ; then
+	cp /etc/iscsi/iscsi.initramfs $DESTDIR/etc
+fi
+
+for x in crc32c libcrc32c iscsi_tcp libiscsi scsi_transport_iscsi iscsi_ibft; do
+	manual_add_modules ${x}
+done
+for x in cxgb3i cxgb4i; do
+	manual_add_modules ${x}
+done
+

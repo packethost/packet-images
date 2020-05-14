@@ -1,0 +1,16 @@
+
+### rewrite/31_exim4-config_rewriting
+#################################
+
+# This rewriting rule is particularly useful for dialup users who
+# don't have their own domain, but could be useful for anyone.
+# It looks up the real address of all local users in a file
+.ifndef NO_EAA_REWRITE_REWRITE
+*@+local_domains "${lookup{${local_part}}lsearch{/etc/email-addresses}\
+                   {$value}fail}" Ffrs
+# identical rewriting rule for /etc/mailname
+*@ETC_MAILNAME "${lookup{${local_part}}lsearch{/etc/email-addresses}\
+                   {$value}fail}" Ffrs
+.endif
+
+

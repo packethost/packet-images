@@ -1,0 +1,6 @@
+d80cb4adec3bfdb122aa057b47226519  lib/udev/rules.d/55-scsi-sg3_id.rules
+805d470b8d94e0826db01ad3dddd83c0  lib/udev/rules.d/58-scsi-sg3_symlink.rules
+472b818c3126bb5649c01775aad64e09  usr/share/doc/sg3-utils-udev/changelog.Debian.gz
+e5a9879754324655c808547cecb629b1  usr/share/doc/sg3-utils-udev/changelog.gz
+6c1cdb0f470c581bda9a1c5d988d2578  usr/share/doc/sg3-utils-udev/copyright
+dc9d559e769d43ac669096f56b10fc51  usr/share/initramfs-tools/hooks/sg3-utils

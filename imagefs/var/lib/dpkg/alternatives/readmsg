@@ -1,0 +1,9 @@
+auto
+/usr/bin/readmsg
+readmsg.1.gz
+/usr/share/man/man1/readmsg.1.gz
+
+/usr/bin/readmsg.mailutils
+20
+/usr/share/man/man1/readmsg.mailutils.1.gz
+

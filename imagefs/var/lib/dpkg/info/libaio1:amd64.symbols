@@ -1,0 +1,15 @@
+libaio.so.1 libaio1 #MINVER#
+ LIBAIO_0.1@LIBAIO_0.1 0.3.9
+ LIBAIO_0.4@LIBAIO_0.4 0.3.93
+ io_cancel@LIBAIO_0.1 0.3.9
+ io_cancel@LIBAIO_0.4 0.3.93
+ io_destroy@LIBAIO_0.4 0.3.93
+ io_getevents@LIBAIO_0.1 0.3.9
+ io_getevents@LIBAIO_0.4 0.3.93
+ io_queue_init@LIBAIO_0.1 0.3.9
+ io_queue_release@LIBAIO_0.1 0.3.9
+ io_queue_run@LIBAIO_0.1 0.3.9
+ io_queue_wait@LIBAIO_0.1 0.3.9
+ io_queue_wait@LIBAIO_0.4 0.3.93
+ io_setup@LIBAIO_0.4 0.3.93
+ io_submit@LIBAIO_0.1 0.3.9

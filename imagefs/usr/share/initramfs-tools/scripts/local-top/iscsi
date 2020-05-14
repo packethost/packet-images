@@ -1,0 +1,349 @@
+#!/bin/sh
+
+PREREQ=""
+
+prereqs()
+{
+	echo "$PREREQ"
+}
+
+case $1 in
+# get pre-requisites
+prereqs)
+	prereqs
+	exit 0
+	;;
+esac
+
+parse_root_param ()
+{
+	target="$1"
+	auth="$2"
+	OLDIFS="$IFS"
+	IFS=":"
+	set -- $target
+	IFS="$OLDIFS"
+
+	tmp_ISCSI_TARGET_IP="$1"
+	if [ -n "$2" ] ; then
+		if [ x"$2" != x"6" ] ; then
+			echo "Warning: unsupported protocol specified for iSCSI root parameter, assuming 6 (TCP)" >&2
+		fi
+	fi
+	tmp_ISCSI_TARGET_PORT="$3"
+	tmp_ISCSI_ROOT_LUN="$4"
+	tmp_ISCSI_TARGET_NAME="$5"
+	shift 5
+	while [ -n "$1" ] ; do
+		tmp_ISCSI_TARGET_NAME="${tmp_ISCSI_TARGET_NAME}:$1"
+		shift
+	done
+
+	if [ -z "$tmp_ISCSI_TARGET_IP" ] || [ -z "$tmp_ISCSI_TARGET_NAME" ] ; then
+		echo "Warning: empty iSCSI IP / target name currently not supported for root=iscsi:, ignoring parameter" >&2
+		return
+	fi
+
+	OLDIFS="$IFS"
+	IFS=":"
+	set -- $auth
+	IFS="$OLDIFS"
+
+	tmp_ISCSI_USERNAME=""
+	tmp_ISCSI_PASSWORD=""
+	tmp_ISCSI_IN_USERNAME=""
+	tmp_ISCSI_IN_PASSWORD=""
+
+	if [ $# -gt 4 ] ; then
+		echo "Warning: invalid authentication for root=iscsi:, ignoring" >&2
+		return
+	fi
+
+	if [ $# -gt 0 ] ; then
+		tmp_ISCSI_USERNAME="$1"
+		tmp_ISCSI_PASSWORD="$2"
+		if [ $# -gt 2 ] ; then
+			tmp_ISCSI_IN_USERNAME="$3"
+			tmp_ISCSI_IN_PASSWORD="$4"
+		fi
+	fi
+
+	ISCSI_TARGET_IP="$tmp_ISCSI_TARGET_IP"
+	ISCSI_TARGET_PORT="$tmp_ISCSI_TARGET_PORT"
+	ISCSI_TARGET_NAME="$tmp_ISCSI_TARGET_NAME"
+	ISCSI_ROOT_LUN="$tmp_ISCSI_ROOT_LUN"
+	if [ -n "$tmp_ISCSI_USERNAME" ] ; then
+		ISCSI_USERNAME="$tmp_ISCSI_USERNAME"
+		ISCSI_PASSWORD="$tmp_ISCSI_PASSWORD"
+	fi
+	if [ -n "$tmp_ISCSI_IN_USERNAME" ] ; then
+		ISCSI_IN_USERNAME="$tmp_ISCSI_IN_USERNAME"
+		ISCSI_IN_PASSWORD="$tmp_ISCSI_IN_PASSWORD"
+	fi
+	ISCSI_HAD_ROOT=yes
+}
+
+do_iscsi_login ()
+{
+	# Bring in the main config
+	. /conf/initramfs.conf
+	for conf in conf/conf.d/*; do
+		[ -f ${conf} ] && . ${conf}
+	done
+	. /scripts/functions
+
+	udevadm settle
+
+	if [ -n "$ISCSI_AUTO" ] ; then
+		# try to auto-configure network interface based
+		# on firmware values
+		modprobe iscsi_ibft
+		iscsistart -N
+
+		# write out /run/net-$IFACE.conf based on what
+		# was in the firmware
+		iscsistart -f | while read k eq v; do
+			case "${k} ${eq} ${v}" in
+			("# BEGIN RECORD"*)
+				DEVICE=""
+				PROTO="none"
+				IPV4ADDR=""
+				IPV4NETMASK=""
+				IPV4GATEWAY=""
+				IPV4DNS0=""
+				IPV4DNS1=""
+				UPTIME="0"
+				DHCPLEASETIME="0"
+				DOMAINSEARCH=""
+				continue
+				;;
+			("# END RECORD"*)
+				if [ -n "$DEVICE" ] ; then
+				{
+					echo "DEVICE='${DEVICE}'"
+					echo "PROTO='${PROTO}'"
+					echo "IPV4ADDR='${IPV4ADDR}'"
+					echo "IPV4BROADCAST=''"
+					echo "IPV4NETMASK='${IPV4NETMASK}'"
+					echo "IPV4GATEWAY='${IPV4GATEWAY}'"
+					echo "IPV4DNS0='${IPV4DNS0}'"
+					echo "IPV4DNS1='${IPV4DNS1}'"
+					echo "HOSTNAME=''"
+					echo "DNSDOMAIN=''"
+					echo "NISDOMAIN=''"
+					echo "ROOTSERVER=''"
+					echo "ROOTPATH=''"
+					echo "UPTIME='${UPTIME}'"
+					echo "DHCPLEASETIME='${DHCPLEASETIME}'"
+					echo "DOMAINSEARCH=''"
+				} > "/run/net-${DEVICE}.conf"
+				echo "${DEVICE}" > /run/initramfs/open-iscsi.interface
+				# iscsistart -N doesn't set the default gateway. Therefore,
+				# we need to add it ourselves. However, the ip command is
+				# only available if we use busybox in the initramfs (it's
+				# in open-iscsi's Recommends), so check for that.
+				if [ -n "${IPV4GATEWAY}" ] && which ip >/dev/null 2>&1 ; then
+					ip route add default via "${IPV4GATEWAY}"
+				fi
+				fi
+				continue
+				;;
+			esac
+			if [ "${eq}" != "=" ] ; then
+				continue
+			fi
+			case "${k}" in
+				iface.ipaddress)     IPV4ADDR="${v}" ;;
+				iface.subnet_mask)   IPV4NETMASK="${v}" ;;
+				iface.gateway)       IPV4GATEWAY="${v}" ;;
+				iface.primary_dns)   IPV4DNS0="${v}" ;;
+				iface.secondary_dns) IPV4DNS1="${v}" ;;
+				iface.net_ifacename) DEVICE="${v}" ;;
+			esac
+		done
+	fi
+
+	# run configure_networking even if we have iscsi_auto, because there
+	# could be other network interfaces that need to be configured
+	# manually
+	configure_networking
+
+	# Save network device we configured via configure_networking, but only
+	# if we didn't already get one from autoconfiguration (then we always
+	# prefer that).
+	if ! [ -e /run/initramfs/open-iscsi.interface ] ; then
+		if [ -z "${DEVICE}" ] || ! [ -e "/run/net-${DEVICE}.conf" ] ; then
+			for i in /run/net-*.conf ; do
+				[ -e "${i}" ] && { . "${i}" ; break ; }
+			done
+		fi
+		if [ -n "${DEVICE}" ] ; then
+			echo "${DEVICE}" > /run/initramfs/open-iscsi.interface
+		fi
+	fi
+
+	modprobe iscsi_tcp
+	modprobe crc32c
+
+	# If iscsiuio is present in the initramfs, start it, in case UIO
+	# offloading is required.
+	if [ -x /sbin/iscsiuio ] ; then
+		start-stop-daemon --start --quiet --pidfile /run/initramfs/iscsiuio.pid \
+				  --startas /sbin/iscsiuio --name iscsiuio \
+				  --exec /sbin/iscsiuio -- --pid=/run/initramfs/iscsiuio.pid || :
+	fi
+
+	if [ -z $ISCSI_AUTO ]; then
+		if [ -z $ISCSI_INITIATOR ]; then
+			. /etc/initiatorname.iscsi
+			ISCSI_INITIATOR=$InitiatorName
+		fi
+
+		if [ -z $ISCSI_TARGET_PORT ]; then
+			ISCSI_TARGET_PORT=3260
+		fi
+
+		if [ -z $ISCSI_TARGET_GROUP ]; then
+			ISCSI_TARGET_GROUP=1
+		fi
+
+		iscsistart -i $ISCSI_INITIATOR -t $ISCSI_TARGET_NAME	\
+			   -g $ISCSI_TARGET_GROUP -a $ISCSI_TARGET_IP	\
+			   -p $ISCSI_TARGET_PORT \
+			   ${ISCSI_USERNAME:+-u "$ISCSI_USERNAME"}	\
+			   ${ISCSI_PASSWORD:+-w "$ISCSI_PASSWORD"}	\
+			   ${ISCSI_IN_USERNAME:+-U "$ISCSI_IN_USERNAME"}\
+			   ${ISCSI_IN_PASSWORD:+-W "$ISCSI_IN_PASSWORD"}
+	else
+		modprobe iscsi_ibft
+		iscsistart -b
+	fi
+
+	if [ -z $ISCSI_TARGET_PORT ]; then
+		ISCSI_TARGET_PORT=3260
+	fi
+
+	if [ -z $ISCSI_TARGET_GROUP ]; then
+		ISCSI_TARGET_GROUP=1
+	fi
+
+	for i in $ISCSI_TARGET_IP; do
+	iscsistart -i $ISCSI_INITIATOR -t $ISCSI_TARGET_NAME	\
+		   -g $ISCSI_TARGET_GROUP -a $i \
+		   -p $ISCSI_TARGET_PORT \
+		   ${ISCSI_USERNAME:+-u "$ISCSI_USERNAME"}	\
+		   ${ISCSI_PASSWORD:+-w "$ISCSI_PASSWORD"}	\
+		   ${ISCSI_IN_USERNAME:+-U "$ISCSI_IN_USERNAME"}\
+		   ${ISCSI_IN_PASSWORD:+-W "$ISCSI_IN_PASSWORD"}
+	done
+}
+
+parse_iscsi_ops ()
+{
+	[ -r /etc/iscsi.initramfs ] && . /etc/iscsi.initramfs
+
+	for x in $(cat /proc/cmdline); do
+		case ${x} in
+		iscsi_auto)
+			ISCSI_AUTO=true
+			;;
+        	iscsi_initiator=*)
+                	ISCSI_INITIATOR="${x#iscsi_initiator=}"
+                	;;
+        	iscsi_target_name=*)
+                	ISCSI_TARGET_NAME="${x#iscsi_target_name=}"
+                	;;
+        	iscsi_target_ip=*)
+                	ISCSI_TARGET_IP="${x#iscsi_target_ip=}"
+                	;;
+        	iscsi_target_port=*)
+                	ISCSI_TARGET_PORT="${x#iscsi_target_port=}"
+                	;;
+		iscsi_target_group=*)
+			ISCSI_TARGET_GROUP="${x#iscsi_target_group=}"
+			;;
+		iscsi_username=*)
+			ISCSI_USERNAME="${x#iscsi_username=}"
+			;;
+		iscsi_password=*)
+			ISCSI_PASSWORD="${x#iscsi_password=}"
+			;;
+		iscsi_in_username=*)
+			ISCSI_IN_USERNAME="${x#iscsi_in_username=}"
+			;;
+		iscsi_in_password=*)
+			ISCSI_IN_PASSWORD="${x#iscsi_in_password=}"
+			;;
+		root=iscsi:*@*)
+			x="${x##root=iscsi:}"
+			parse_root_param "${x#*@}" "${x%%@*}"
+			;;
+		root=iscsi:*)
+			parse_root_param "${x##root=iscsi:}" ""
+			;;
+		esac
+	done
+}
+
+if [ ! -x /sbin/iscsistart ]; then
+	exit 0
+fi
+
+parse_iscsi_ops
+
+if ( [ -z $ISCSI_TARGET_NAME ] || [ -z $ISCSI_TARGET_IP ] ) && [ -z $ISCSI_AUTO ]; then
+	exit 0
+fi
+
+do_iscsi_login
+
+udevadm settle
+
+# The second check is to allow us to use multiple root= parameters. That way
+# one may specify root=iscsi:... root=UUID=... to mount partitions on an iSCSI
+# disk. (The latter value will overwrite the former for purposes of the main
+# initramfs scripts, but our loop that scans /proc/cmdline will still detect
+# the former and set proper parameters.
+if [ -n "$ISCSI_HAD_ROOT" ] && [ x"${ROOT##iscsi:}" != x"${ROOT}" ] ; then
+	if [ -z "$ISCSI_ROOT_LUN" ] ; then
+		ISCSI_ROOT_LUN=0
+	fi
+	found=0
+	# FIXME: RFC 4173 defines the LUN field to be more complicated and that
+	#        the same LUN may have multiple representations.
+	for disk in /dev/disk/by-path/*-iscsi-*-"${ISCSI_ROOT_LUN}" ; do
+		# Resolve device name, as the colons in the by-path name will
+		# cause mount to think that this is a NFS share, which we don't
+		# want.
+		if ! disk="$(readlink -f "$disk")" ; then
+			continue
+		fi
+
+		# Try to load file system type module (ignore errors), otherwise
+		# this won't succeed.
+		if fstype=$(get_fstype "$disk") ; then
+			modprobe "$fstype" || :
+			ROOTFSTYPE="$fstype"
+		fi
+
+		# Try to mount read-only and see if it's the right filesystem.
+		# If so, record the device name but umount again, because we
+		# want to be able to do an fsck on it.
+		if mount -r -t "${ROOTFSTYPE:-auto}" ${ROOTFLAGS} "${disk}" ${rootmnt} ; then
+			if [ -d ${rootmnt}/proc ] ; then
+				# This will be sourced by init after this hook has run.
+				echo "export ROOT=$disk" >> /conf/param.conf
+				if [ -n "$ROOTFSTYPE" ] && [ x"$ROOTFSTYPE" != x"auto" ] ; then
+					echo "export ROOTFSTYPE=$ROOTFSTYPE" >> /conf/param.conf
+				fi
+				found=1
+			fi
+			umount ${rootmnt}
+			if [ $found -eq 1 ] ; then
+				break
+			fi
+		fi
+	done
+fi
+
+exit 0

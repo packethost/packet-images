@@ -1,0 +1,15 @@
+#!/bin/sh
+set -e
+
+if [ "$1" = "triggered" ]; then
+    if [ -x /usr/bin/update-mime-database.real ]; then
+        update-mime-database.real /usr/share/mime
+    fi
+    exit 0
+fi
+
+if [ -x /usr/bin/update-mime-database.real ]; then
+    update-mime-database.real /usr/share/mime
+fi
+
+

@@ -1,0 +1,2 @@
+# OK for legacy reasons
+libmariadbclient18: symbols-file-contains-current-version-with-debian-revision on symbol THR_KEY_mysys@libmysqlclient_16 and 396 others
