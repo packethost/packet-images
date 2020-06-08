@@ -3,24 +3,485 @@ OS: Debian	VERSION: 8.11
 Overview:
 ======================================================================
 Image Size
-   Current: 260M
+   Current: 316M
    Previous:: 260M
 Filesystem Size
-   Current: 775M
+   Current: 907M
    Previous: 775M
 Packages
-   Current: 425
+   Current: 464
    Previous: 425
 Kernel(s)
    Current:
-      linux-image-3.16.0-10-amd643.16.81-1
-      linux-image-amd643.16+63+deb8u6
+      linux-image-4.9.0-12-amd644.9.210-1
+      linux-image-amd644.9+80+deb9u10
    Previous:
       linux-image-3.16.0-10-amd643.16.81-1
       linux-image-amd643.16+63+deb8u6
 ======================================================================
 New Packages:
 ======================================================================
+distro-info-data
+gcc-6-base:amd64
+gdisk
+gir1.2-packagekitglib-1.0
+gnome-icon-theme
+gtk-update-icon-cache
+guile-2.0-libs:amd64
+initramfs-tools-core
+libapparmor1:amd64
+libapt-inst2.0:amd64
+libapt-pkg5.0:amd64
+libboost-iostreams1.62.0:amd64
+libboost-random1.62.0:amd64
+libboost-system1.62.0:amd64
+libboost-thread1.62.0:amd64
+libc-l10n
+libcroco3:amd64
+libdns-export162
+libelf1:amd64
+libfastjson4:amd64
+libfdisk1:amd64
+libfribidi0:amd64
+libgail18:amd64
+libgail-common:amd64
+libgc1c2:amd64
+libglib2.0-bin
+libgnutls30:amd64
+libgsasl7
+libgstreamer1.0-0:amd64
+libhogweed4:amd64
+libicu57:amd64
+libidn2-0:amd64
+libip4tc0:amd64
+libip6tc0:amd64
+libiptc0:amd64
+libisc-export160
+libisns0:amd64
+libjq1:amd64
+libkyotocabinet16v5:amd64
+libldap-common
+liblinear3:amd64
+liblognorm5:amd64
+libltdl7:amd64
+liblua5.3-0:amd64
+liblz4-1:amd64
+liblzo2-2:amd64
+libmagic-mgc
+libmailutils5:amd64
+libmariadbclient18:amd64
+libmnl0:amd64
+libnetfilter-conntrack3:amd64
+libnettle6:amd64
+libnghttp2-14:amd64
+libnl-3-200:amd64
+libnl-route-3-200:amd64
+libntlm0:amd64
+libonig4:amd64
+libpackagekit-glib2-18:amd64
+libpam-systemd:amd64
+libperl5.24:amd64
+libpng16-16:amd64
+libpolkit-agent-1-0:amd64
+libpolkit-backend-1-0:amd64
+libpolkit-gobject-1-0:amd64
+libprotobuf10:amd64
+libpsl5:amd64
+libpython2.7:amd64
+libpython3.5-minimal:amd64
+libpython3.5-stdlib:amd64
+libreadline7:amd64
+librsvg2-2:amd64
+librsvg2-common:amd64
+libseccomp2:amd64
+libsgutils2-2
+libssl1.0.2:amd64
+libssl1.1:amd64
+libunistring0:amd64
+liburcu4:amd64
+libutempter0:amd64
+libxtables12:amd64
+linux-image-4.9.0-12-amd64
+mailutils
+mailutils-common
+manpages
+mysql-common
+packagekit
+packagekit-tools
+perl-modules-5.24
+policykit-1
+publicsuffix
+python3.5
+python3.5-minimal
+python3-blinker
+python3-cffi-backend
+python3-chardet
+python3-configobj
+python3-cryptography
+python3-idna
+python3-jinja2
+python3-jsonpatch
+python3-json-pointer
+python3-jwt
+python3-markupsafe
+python3-oauthlib
+python3-pkg-resources
+python3-prettytable
+python3-pyasn1
+python3-pycurl
+python3-requests
+python3-setuptools
+python3-six
+python3-urllib3
+python3-yaml
+python-bs4
+python-html5lib
+python-webencodings
+sg3-utils
+sg3-utils-udev
+xxd
 ======================================================================
 Updated Packages:
 ======================================================================
+apt1.0.9.8.5						      |	apt1.4.10
+apt-transport-https1.0.9.8.6				      |	apt-transport-https1.4.10
+apt-utils1.0.9.8.6					      |	apt-utils1.4.10
+bash4.3-11+deb8u2					      |	bash4.4-5
+bash-completion1:2.1-4					      |	bash-completion1:2.1-4.3
+bc1.06.95-9						      |	bc1.06.95-9+b3
+bsd-mailx8.1.2-0.20141216cvs-2				      |	bsdmainutils9.0.12+nmu1
+bsdmainutils9.0.6					      <
+busybox1:1.22.0-9+deb8u4				      |	busybox1:1.22.0-19+b3
+bzip21.0.6-7+deb8u2					      |	bzip21.0.6-8.1
+ca-certificates20141019+deb8u4				      |	ca-certificates20200601~deb9u1
+cloud-init0.7.6~bzr976-2+deb8u1				      |	cloud-init0.7.9-2
+cpio2.11+dfsg-4.1+deb8u2				      |	cpio2.11+dfsg-6
+cron3.0pl1-127+deb8u2					      |	cron3.0pl1-128+deb9u1
+curl7.38.0-4+deb8u16					      |	curl7.52.1-5+deb9u10
+dbus1.8.22-0+deb8u2					      |	dbus1.10.28-0+deb9u1
+dh-python1.20141111-2					      |	dh-python2.20170125
+dialog1.2-20140911-1					      |	dialog1.3-20160828-2
+dmsetup2:1.02.90-2.2+deb8u1				      |	distro-info-data0.36
+e2fslibs:amd641.42.12-2+deb8u2				      |	e2fslibs:amd641.43.4-2+deb9u1
+e2fsprogs1.42.12-2+deb8u2				      |	e2fsprogs1.43.4-2+deb9u1
+ethstatus0.4.3						      |	ethstatus0.4.8
+exim44.84.2-2+deb8u7					      |	exim44.89-2+deb9u7
+exim4-base4.84.2-2+deb8u7				      |	exim4-base4.89-2+deb9u7
+exim4-config4.84.2-2+deb8u7				      |	exim4-config4.89-2+deb9u7
+exim4-daemon-light4.84.2-2+deb8u7			      |	exim4-daemon-light4.89-2+deb9u7
+file1:5.22+15-2+deb8u7					      |	file1:5.30-1+deb9u3
+fio2.1.11-2						      |	fio2.16-1
+firmware-linux-free3.3					      |	firmware-linux-free3.4
+fontconfig2.11.0-6.3+deb8u1				      |	fontconfig2.11.0-6.7+b1
+fontconfig-config2.11.0-6.3+deb8u1			      |	fontconfig-config2.11.0-6.7
+fonts-dejavu-core2.34-1					      |	fonts-dejavu-core2.37-1
+gir1.2-glib-2.0:amd641.42.0-2.2				      |	gcc-6-base:amd646.3.0-18+deb9u1
+groff-base1.22.2-8					      |	groff-base1.22.3-9
+haveged1.9.1-1						      |	haveged1.9.1-5+deb9u1
+hicolor-icon-theme0.13-1				      |	hicolor-icon-theme0.15-1
+htop1.0.3-1						      |	htop2.0.2-1
+ifenslave2.6						      |	ifenslave2.9
+ifupdown0.7.53.1					      |	ifupdown0.8.19
+initramfs-tools0.120+deb8u3				      |	initramfs-tools0.130
+initscripts2.88dsf-59					      |	initramfs-tools-core0.130
+init-system-helpers1.22					      |	initscripts2.88dsf-59.9
+ioping0.9-1						      |	ioping1.0-2
+iotop0.6-1						      |	iotop0.6-2
+iperf2.0.5+dfsg1-2					      |	iperf2.0.9+dfsg1-1
+iptables1.4.21-2+b1					      |	iptables1.6.0+snapshot20161117-6
+iputils-ping3:20121221-5+b2				      |	iputils-ping3:20161105-1
+irqbalance1.0.6-3+deb8u1				      |	irqbalance1.1.0-2.3
+isc-dhcp-client4.3.1-6+deb8u4				      |	isc-dhcp-client4.3.5-3+deb9u1
+isc-dhcp-common4.3.1-6+deb8u4				      |	isc-dhcp-common4.3.5-3+deb9u1
+iso-codes3.57-1						      |	iso-codes3.75-1
+jq1.4-2.1+deb8u1					      |	jq1.5+dfsg-1.3
+klibc-utils2.0.4-2					      |	klibc-utils2.0.4-9
+kmod18-3						      |	kmod23-2
+kpartx0.5.0-6+deb8u2					      |	kpartx0.6.4-5+deb9u1
+krb5-locales1.12.1+dfsg-19+deb8u5			      |	krb5-locales1.15-1+deb9u1
+less458-3						      |	less481-2.1
+libaio1:amd640.3.110-1					      |	libaio1:amd640.3.110-3
+libalgorithm-c3-perl0.09-1				      |	libapparmor1:amd642.11.0-3+deb9u2
+libapt-inst1.5:amd641.0.9.8.6				      |	libapt-inst2.0:amd641.4.10
+libapt-pkg4.12:amd641.0.9.8.6				      |	libapt-pkg4.12:amd641.0.9.8.5
+libarchive-extract-perl0.72-1				      |	libapt-pkg5.0:amd641.4.10
+libatk1.0-0:amd642.14.0-1				      |	libatk1.0-0:amd642.22.0-1
+libatk1.0-data2.14.0-1					      |	libatk1.0-data2.22.0-1
+libavahi-client3:amd640.6.31-5				      |	libavahi-client3:amd640.6.32-2
+libavahi-common3:amd640.6.31-5				      |	libavahi-common3:amd640.6.32-2
+libavahi-common-data:amd640.6.31-5			      |	libavahi-common-data:amd640.6.32-2
+libblas31.2.20110419-10					      |	libblas33.7.0-2
+libblas-common1.2.20110419-10				      |	libblas-common3.7.0-2
+libboost-system1.55.0:amd641.55.0+dfsg-3		      |	libboost-iostreams1.62.0:amd641.62.0+dfsg-4
+libboost-thread1.55.0:amd641.55.0+dfsg-3		      |	libboost-random1.62.0:amd641.62.0+dfsg-4
+libbsd0:amd640.7.0-2+deb8u1				      |	libboost-system1.62.0:amd641.62.0+dfsg-4
+libbz2-1.0:amd641.0.6-7+deb8u2				      |	libboost-thread1.62.0:amd641.62.0+dfsg-4
+libc6:amd642.19-18+deb8u10				      |	libbsd0:amd640.8.3-1
+libcairo2:amd641.14.0-2.1+deb8u2			      |	libbz2-1.0:amd641.0.6-8.1
+libcap-ng0:amd640.7.4-2					      |	libcap-ng0:amd640.7.7-3+b1
+libc-bin2.19-18+deb8u10					      |	libc-bin2.24-11+deb9u4
+libcgi-fast-perl1:2.04-1				      |	libc-l10n2.24-11+deb9u4
+libcgi-pm-perl4.09-1					      <
+libclass-c3-perl0.26-1					      <
+libclass-c3-xs-perl0.13-2+b1				      <
+libcpan-meta-perl2.142690-1				      |	libcroco3:amd640.6.11-3
+libcups2:amd641.7.5-11+deb8u7				      |	libcups2:amd642.2.1-8+deb9u5
+libcurl3:amd647.38.0-4+deb8u16				      |	libcurl3:amd647.52.1-5+deb9u10
+libcurl3-gnutls:amd647.38.0-4+deb8u16			      |	libcurl3-gnutls:amd647.52.1-5+deb9u10
+libdata-optlist-perl0.109-1				      |	libdatrie1:amd640.2.10-4+b1
+libdata-section-perl0.200006-1				      <
+libdatrie1:amd640.2.8-1					      <
+libdbus-1-3:amd641.8.22-0+deb8u2			      |	libdbus-1-3:amd641.10.28-0+deb9u1
+libdbus-glib-1-2:amd640.102-1				      |	libdbus-glib-1-2:amd640.108-2
+libdevmapper1.02.1:amd642:1.02.90-2.2+deb8u1		      |	libdevmapper1.02.1:amd642:1.02.137-2
+libdns-export1001:9.9.5.dfsg-9+deb8u19			      |	libdns-export1621:9.10.3.dfsg.P4-12.3+deb9u6
+libedit2:amd643.1-20140620-2				      |	libedit2:amd643.1-20160903-3
+libestr00.1.9-1.1					      |	libelf1:amd640.168-1
+libevent-2.0-5:amd642.0.21-stable-2+deb8u1		      |	libestr00.1.10-2
+libexpat1:amd642.1.0-6+deb8u6				      |	libevent-2.0-5:amd642.0.21-stable-3
+libfcgi-perl0.77-1+deb8u1				      |	libexpat1:amd642.2.0-2+deb9u3
+libfontconfig1:amd642.11.0-6.3+deb8u1			      |	libfontconfig1:amd642.11.0-6.7+b1
+libfreetype6:amd642.5.2-3+deb8u4			      |	libfreetype6:amd642.6.3-3.2+deb9u1
+libgcrypt20:amd641.6.3-2+deb8u8				      |	libgcrypt20:amd641.7.6-2+deb9u3
+libgdbm3:amd641.8.3-13.1				      |	libgdbm3:amd641.8.3-14
+libgdk-pixbuf2.0-0:amd642.31.1-2+deb8u9			      |	libgdk-pixbuf2.0-0:amd642.36.5-2+deb9u2
+libgdk-pixbuf2.0-common2.31.1-2+deb8u9			      |	libgdk-pixbuf2.0-common2.36.5-2+deb9u2
+libgfortran3:amd644.9.2-10+deb8u2			      |	libgfortran3:amd646.3.0-18+deb9u1
+libgirepository-1.0-1:amd641.42.0-2.2			      |	libgirepository-1.0-1:amd641.50.0-1+b1
+libglib2.0-0:amd642.42.1-1+deb8u3			      |	libglib2.0-0:amd642.50.3-2+deb9u2
+libglib2.0-data2.42.1-1+deb8u3				      |	libglib2.0-bin2.50.3-2+deb9u2
+libgpm2:amd641.20.4-6.1+b2				      |	libgpm2:amd641.20.4-6.2+b1
+libgraphite2-3:amd641.3.10-1~deb8u1			      |	libgraphite2-3:amd641.3.10-1
+libgssapi-krb5-2:amd641.12.1+dfsg-19+deb8u5		      |	libgsasl71.8.0-8+b2
+libgtk2.0-0:amd642.24.25-3+deb8u2			      |	libgssapi-krb5-2:amd641.15-1+deb9u1
+libgtk2.0-bin2.24.25-3+deb8u2				      |	libgstreamer1.0-0:amd641.10.4-1
+libgtk2.0-common2.24.25-3+deb8u2			      |	libgtk2.0-0:amd642.24.31-2
+libharfbuzz0b:amd640.9.35-2+deb8u1			      |	libgtk2.0-bin2.24.31-2
+libhavege1:amd641.9.1-1					      |	libgtk2.0-common2.24.31-2
+libibverbs11.1.8-1.1					      |	libhogweed4:amd643.3-1+b2
+libicu52:amd6452.1-8+deb8u8				      |	libibverbs11.2.1-2
+libidn11:amd641.29-1+deb8u3				      |	libicu57:amd6457.1-6+deb9u4
+libirs-export911:9.9.5.dfsg-9+deb8u19			      |	libidn11:amd641.33-1+deb9u1
+libisccfg-export901:9.9.5.dfsg-9+deb8u19		      |	libidn2-0:amd640.16-1+deb9u1
+libisc-export951:9.9.5.dfsg-9+deb8u19			      |	libip4tc0:amd641.6.0+snapshot20161117-6
+libjasper1:amd641.900.1-debian1-2.4+deb8u6		      |	libip6tc0:amd641.6.0+snapshot20161117-6
+libjbig0:amd642.1-3.1					      |	libiptc0:amd641.6.0+snapshot20161117-6
+libjpeg62-turbo:amd641:1.3.1-12+deb8u2			      |	libisc-export1601:9.10.3.dfsg.P4-12.3+deb9u6
+libjson-c2:amd640.11-4+deb8u2				      |	libisns0:amd640.97-2
+libk5crypto3:amd641.12.1+dfsg-19+deb8u5			      |	libjbig0:amd642.1-3.1+b2
+libkeyutils1:amd641.5.9-5+b1				      |	libjpeg62-turbo:amd641:1.5.1-2
+libklibc2.0.4-2						      |	libjq1:amd641.5+dfsg-1.3
+libkmod2:amd6418-3					      |	libk5crypto3:amd641.15-1+deb9u1
+libkrb5-3:amd641.12.1+dfsg-19+deb8u5			      |	libkeyutils1:amd641.5.9-9
+libkrb5support0:amd641.12.1+dfsg-19+deb8u5		      |	libklibc2.0.4-9
+libldap-2.4-2:amd642.4.40+dfsg-1+deb8u6			      |	libkmod2:amd6423-2
+liblinear1:amd641.8+dfsg-4				      |	libkrb5-3:amd641.15-1+deb9u1
+liblocale-gettext-perl1.05-8+b1				      |	libkrb5support0:amd641.15-1+deb9u1
+liblockfile1:amd641.09-6				      |	libkyotocabinet16v5:amd641.2.76-4.2+b1
+liblockfile-bin1.09-6					      |	libldap-2.4-2:amd642.4.44+dfsg-5+deb9u4
+liblogging-stdlog0:amd641.0.4-1				      |	libldap-common2.4.44+dfsg-5+deb9u4
+liblog-message-perl0.8-1				      |	liblinear3:amd642.1.0+dfsg-2
+liblog-message-simple-perl0.10-2			      |	liblocale-gettext-perl1.07-3+b1
+liblognorm1:amd641.0.1-3				      |	liblogging-stdlog0:amd641.0.5-2+b2
+liblua5.2-0:amd645.2.3-1.1				      |	liblognorm5:amd642.0.1-1.1+b1
+liblzma5:amd645.1.1alpha+20120614-2+b3			      |	libltdl7:amd642.4.6-2
+libmagic1:amd641:5.22+15-2+deb8u7			      |	liblua5.3-0:amd645.3.3-1
+libmlx5-11.0.1-2					      |	liblz4-1:amd640.0~r131-2+b1
+libmodule-build-perl0.421000-2+deb8u1			      |	liblzma5:amd645.2.2-1.2+b1
+libmodule-pluggable-perl5.1-1				      |	liblzo2-2:amd642.08-1.2+b2
+libmodule-signature-perl0.73-1+deb8u2			      |	libmagic1:amd641:5.30-1+deb9u3
+libmount1:amd642.25.2-6					      |	libmagic-mgc1:5.30-1+deb9u3
+libmpdec2:amd642.4.1-1					      |	libmailutils5:amd641:3.1.1-1
+libmro-compat-perl0.12-1				      |	libmariadbclient18:amd6410.1.44-0+deb9u1
+libncurses5:amd645.9+20140913-1+deb8u3			      |	libmlx5-11.2.1-1
+libncursesw5:amd645.9+20140913-1+deb8u3			      |	libmnl0:amd641.0.4-2
+libnspr4:amd642:4.12-1+debu8u1				      |	libnghttp2-14:amd641.18.1-1+deb9u1
+libnss3:amd642:3.26-1+debu8u10				      |	libnl-3-200:amd643.2.27-2
+libnuma1:amd642.0.10-1					      |	libnl-route-3-200:amd643.2.27-2
+libopts25:amd641:5.18.4-3				      |	libnspr4:amd642:4.12-6
+libp11-kit0:amd640.20.7-1				      |	libnss3:amd642:3.26.2-1.1+deb9u1
+libpackage-constants-perl0.04-1				      |	libntlm0:amd641.4-8
+libpango-1.0-0:amd641.36.8-3				      |	libpam-systemd:amd64232-25+deb9u12
+libpango1.0-0:amd641.36.8-3				      |	libpango-1.0-0:amd641.40.5-1
+libpangocairo-1.0-0:amd641.36.8-3			      |	libpangocairo-1.0-0:amd641.40.5-1
+libpangoft2-1.0-0:amd641.36.8-3				      |	libpangoft2-1.0-0:amd641.40.5-1
+libpangox-1.0-0:amd640.0.2-5				      |	libpcap0.8:amd641.8.1-3
+libpangoxft-1.0-0:amd641.36.8-3				      <
+libparams-util-perl1.07-2+b1				      <
+libpcap0.8:amd641.6.2-2+deb8u1				      <
+libperl4-corelibs-perl0.003-1				      |	libperl5.24:amd645.24.1-3+deb9u6
+libpipeline1:amd641.4.0-1				      |	libpipeline1:amd641.4.1-2
+libpixman-1-0:amd640.32.6-3+deb8u1			      |	libpixman-1-0:amd640.34.0-1
+libpng12-0:amd641.2.50-2+deb8u3				      |	libpng16-16:amd641.6.28-1+deb9u1
+libpod-latex-perl0.61-1					      |	libpolkit-agent-1-0:amd640.105-18+deb9u1
+libpod-readme-perl0.11-1				      |	libpolkit-backend-1-0:amd640.105-18+deb9u1
+libpopt0:amd641.16-10					      |	libpolkit-gobject-1-0:amd640.105-18+deb9u1
+libprotobuf9:amd642.6.1-1				      |	libprotobuf10:amd643.0.0-9
+libpsl0:amd640.5.1-1					      |	libpsl5:amd640.17.0-3
+libpython2.7-minimal:amd642.7.9-2+deb8u5		      |	libpython2.7:amd642.7.13-2+deb9u3
+libpython2.7-stdlib:amd642.7.9-2+deb8u5			      |	libpython2.7-minimal:amd642.7.13-2+deb9u3
+libpython3.4-minimal:amd643.4.2-1+deb8u7		      |	libpython2.7-stdlib:amd642.7.13-2+deb9u3
+libpython3.4-stdlib:amd643.4.2-1+deb8u7			      |	libpython3.5-minimal:amd643.5.3-1+deb9u1
+libpython3-stdlib:amd643.4.2-2				      |	libpython3.5-stdlib:amd643.5.3-1+deb9u1
+libpython-stdlib:amd642.7.9-1				      |	libpython3-stdlib:amd643.5.3-1
+libquadmath0:amd644.9.2-10+deb8u2			      |	libpython-stdlib:amd642.7.13-2
+librados20.80.7-2+deb8u4				      |	libquadmath0:amd646.3.0-18+deb9u1
+librbd10.80.7-2+deb8u4					      |	librados210.2.11-2
+librdmacm11.0.19.1-1					      |	librbd110.2.11-2
+libregexp-common-perl2013031301-1			      |	libreadline7:amd647.0-3
+librtmp1:amd642.4+20150115.gita107cef-1+deb8u1		      |	librsvg2-2:amd642.40.16-1+b1
+libsasl2-2:amd642.1.26.dfsg1-13+deb8u2			      |	librsvg2-common:amd642.40.16-1+b1
+libsasl2-modules:amd642.1.26.dfsg1-13+deb8u2		      |	librtmp1:amd642.4+20151223.gitfa8646d.1-1+b1
+libsasl2-modules-db:amd642.1.26.dfsg1-13+deb8u2		      |	libsasl2-2:amd642.1.27~101-g0780600+dfsg-3+deb9u1
+libselinux1:amd642.3-2					      |	libsasl2-modules:amd642.1.27~101-g0780600+dfsg-3+deb9u1
+libsensors4:amd641:3.3.5-2				      |	libsensors4:amd641:3.4.0-4
+libsmartcols1:amd642.25.2-6				      |	libsmartcols1:amd642.29.2-1+deb9u1
+libsoftware-license-perl0.103010-3			      |	libsqlite3-0:amd643.16.2-5+deb9u1
+libsqlite3-0:amd643.8.7.1-1+deb8u6			      <
+libssh2-1:amd641.4.3-4.1+deb8u6				      |	libssh2-1:amd641.7.0-1+deb9u1
+libssl1.0.0:amd641.0.1t-1+deb8u12			      |	libssl1.0.2:amd641.0.2u-1~deb9u1
+libstdc++6:amd644.9.2-10+deb8u2				      |	libssl1.1:amd641.1.0l-1~deb9u1
+libsub-exporter-perl0.986-1				      |	libstdc++6:amd646.3.0-18+deb9u1
+libsub-install-perl0.928-1				      |	libsystemd0:amd64232-25+deb9u12
+libsystemd0:amd64215-17+deb8u13				      |	libtasn1-6:amd644.10-1.1+deb9u1
+libtasn1-6:amd644.2-3+deb8u3				      |	libtext-charwidth-perl0.04-7+b5
+libterm-ui-perl0.42-1					      |	libtext-iconv-perl1.7-5+b4
+libtext-charwidth-perl0.04-7+b3				      <
+libtext-iconv-perl1.7-5+b2				      <
+libtext-soundex-perl3.4-1+b2				      <
+libtext-template-perl1.46-1				      <
+libthai0:amd640.1.21-1					      |	libthai0:amd640.1.26-1
+libthai-data0.1.21-1					      |	libthai-data0.1.26-1
+libtiff5:amd644.0.3-12.3+deb8u10			      |	libtiff5:amd644.0.8-2+deb9u5
+libtinfo5:amd645.9+20140913-1+deb8u3			      |	libtinfo5:amd646.0+20161126-1+deb9u2
+libudev1:amd64215-17+deb8u13				      |	libudev1:amd64232-25+deb9u12
+libutempter01.1.5-4					      |	libutempter0:amd641.1.6-3
+libwrap0:amd647.6.q-25					      |	libwrap0:amd647.6.q-26
+libx11-6:amd642:1.6.2-3+deb8u2				      |	libx11-6:amd642:1.6.4-3+deb9u1
+libx11-data2:1.6.2-3+deb8u2				      |	libx11-data2:1.6.4-3+deb9u1
+libxcb1:amd641.10-3+b1					      |	libxcb1:amd641.12-1
+libxcb-render0:amd641.10-3+b1				      |	libxcb-render0:amd641.12-1
+libxcb-shm0:amd641.10-3+b1				      |	libxcb-shm0:amd641.12-1
+libxcomposite1:amd641:0.4.4-1				      |	libxcomposite1:amd641:0.4.4-2
+libxcursor1:amd641:1.1.14-1+deb8u2			      |	libxcursor1:amd641:1.1.14-1+deb9u2
+libxdamage1:amd641:1.1.4-2+b1				      |	libxdamage1:amd641:1.1.4-2+b3
+libxdmcp6:amd641:1.1.1-1+deb8u1				      |	libxdmcp6:amd641:1.1.2-3
+libxext6:amd642:1.3.3-1					      |	libxext6:amd642:1.3.3-1+b2
+libxfixes3:amd641:5.0.1-2+deb8u1			      |	libxfixes3:amd641:5.0.3-1
+libxft2:amd642.3.2-1					      |	libxi6:amd642:1.7.9-1
+libxi6:amd642:1.7.4-1+deb8u1				      |	libxinerama1:amd642:1.1.3-1+b3
+libxinerama1:amd642:1.1.3-1+b1				      |	libxml2:amd642.9.4+dfsg1-2.2+deb9u2
+libxml2:amd642.9.1+dfsg1-5+deb8u8			      |	libxmuu1:amd642:1.1.2-2
+libxmuu1:amd642:1.1.2-1					      |	libxrandr2:amd642:1.5.1-1
+libxrandr2:amd642:1.4.2-1+deb8u1			      |	libxrender1:amd641:0.9.10-1
+libxrender1:amd641:0.9.8-1+b1				      |	libxslt1.1:amd641.1.29-2.1+deb9u2
+libxslt1.1:amd641.1.28-2+deb8u6				      |	libxtables12:amd641.6.0+snapshot20161117-6
+libxtables101.4.21-2+b1					      |	libyaml-0-2:amd640.1.7-2
+libyaml-0-2:amd640.1.6-3				      |	linux-base4.5
+linux-base4.5~deb8u1					      |	linux-image-4.9.0-12-amd644.9.210-1
+linux-image-3.16.0-10-amd643.16.81-1			      |	linux-image-amd644.9+80+deb9u10
+linux-image-amd643.16+63+deb8u6				      |	locales2.24-11+deb9u4
+locales2.19-18+deb8u10					      |	locate4.6.0+git+20161106-2
+locate4.4.2-9+b1					      <
+lockfile-progs0.1.17					      <
+logrotate3.8.7-1+b1					      |	logrotate3.11.0-0.1
+lsb-release4.1+Debian13+nmu1				      |	lsb-release9.20161125
+lsof4.86+dfsg-1						      |	lsof4.89+dfsg-0.1
+make4.0-8.1						      |	mailutils1:3.1.1-1
+man-db2.7.0.2-5						      |	mailutils-common1:3.1.1-1
+mdadm3.3.2-5+deb8u2					      |	mdadm3.4-4+b1
+mg20110905-2						      |	mg20161005-1+b1
+mime-support3.58					      |	mime-support3.60
+mosh1.2.4a-1+b2						      |	mosh1.2.6-1+b2
+mount2.25.2-6						      |	mount2.29.2-1+deb9u1
+mtr0.85-3						      |	mtr0.87-1
+multipath-tools0.5.0-6+deb8u2				      |	multipath-tools0.6.4-5+deb9u1
+nano2.2.6-3						      |	nano2.7.4-1
+ncurses-term5.9+20140913-1+deb8u3			      |	ncurses-term6.0+20161126-1+deb9u2
+ndiff6.47-3+deb8u2					      |	ndiff7.40-1
+netbase5.3						      |	netbase5.4
+netcat-traditional1.10-41				      |	netcat-traditional1.10-41+b1
+net-tools1.60-26+b1					      |	net-tools1.60+git20161116.90da8a0-1
+nmap6.47-3+deb8u2					      |	nmap7.40-1
+ntp1:4.2.6.p5+dfsg-7+deb8u3				      |	ntp1:4.2.8p10+dfsg-3+deb9u2
+ntpdate1:4.2.6.p5+dfsg-7+deb8u3				      |	ntpdate1:4.2.8p10+dfsg-3+deb9u2
+open-iscsi2.0.873+git0.3b4b4500-8+deb8u2		      |	open-iscsi2.0.874-3~deb9u1
+openssh-client1:6.7p1-5+deb8u8				      |	openssh-client1:7.4p1-10+deb9u7
+openssh-server1:6.7p1-5+deb8u8				      |	openssh-server1:7.4p1-10+deb9u7
+openssh-sftp-server1:6.7p1-5+deb8u8			      |	openssh-sftp-server1:7.4p1-10+deb9u7
+openssl1.0.1t-1+deb8u12					      |	openssl1.1.0l-1~deb9u1
+perl5.20.2-3+deb8u12					      |	perl5.24.1-3+deb9u6
+perl-base5.20.2-3+deb8u12				      |	perl-base5.24.1-3+deb9u6
+perl-modules5.20.2-3+deb8u12				      |	perl-modules-5.245.24.1-3+deb9u6
+psmisc22.21-2						      |	psmisc22.21-2.1+b2
+python2.72.7.9-2+deb8u5					      |	publicsuffix20190415.1030-0+deb9u1
+python2.7.9-1						      |	python2.7.13-2
+python2.7-minimal2.7.9-2+deb8u5				      |	python2.72.7.13-2+deb9u3
+python33.4.2-2						      |	python2.7-minimal2.7.13-2+deb9u3
+python3.43.4.2-1+deb8u7					      |	python33.5.3-1
+python3.4-minimal3.4.2-1+deb8u7				      |	python3.53.5.3-1+deb9u1
+python3-apt0.9.3.13					      |	python3.5-minimal3.5.3-1+deb9u1
+python3-dbus1.2.0-2+b3					      |	python3-apt1.4.1
+python3-gi3.14.0-1					      |	python3-blinker1.3.dfsg2-1
+python3-minimal3.4.2-2					      |	python3-cffi-backend1.9.1-2
+python3-software-properties0.92.25debian1		      |	python3-chardet2.3.0-2
+python-apt0.9.3.13					      |	python3-configobj5.0.6-2
+python-apt-common0.9.3.13				      |	python3-cryptography1.7.1-3+deb9u2
+python-boto2.34.0-2					      |	python3-dbus1.2.4-1+b1
+python-cffi0.8.6-1					      |	python3-gi3.22.0-2
+python-chardet2.3.0-1					      |	python3-idna2.2-1
+python-cheetah2.4.4-3					      |	python3-jinja22.8-1
+python-configobj5.0.6-1					      |	python3-jsonpatch1.19-4
+python-cryptography0.6.1-1+deb8u1			      |	python3-json-pointer1.10-1
+python-jsonpatch1.3-5					      |	python3-jwt1.4.2-1+deb9u1
+python-json-pointer1.0-2				      |	python3-markupsafe0.23-3
+python-lxml3.4.0-1+deb8u1				      |	python3-minimal3.5.3-1
+python-minimal2.7.9-1					      |	python3-oauthlib2.0.1-1
+python-ndg-httpsclient0.3.2-1				      |	python3-pkg-resources33.1.1-1
+python-oauth1.0.1-4					      |	python3-prettytable0.7.2-3
+python-openssl0.14-1					      |	python3-pyasn10.1.9-2
+python-pkg-resources5.5.1-1				      |	python3-pycurl7.43.0-2
+python-ply3.4-5						      |	python3-requests2.12.4-1
+python-prettytable0.7.2-3				      |	python3-setuptools33.1.1-1
+python-pyasn10.1.7-1					      |	python3-six1.10.0-3
+python-pycparser2.10+dfsg-3				      |	python3-software-properties0.96.20.2-1
+python-requests2.4.3-6					      |	python3-urllib31.19.1-1
+python-serial2.6-1.1					      |	python3-yaml3.12-1
+python-six1.8.0-1					      |	python-apt1.4.1
+python-software-properties0.92.25debian1		      |	python-apt-common1.4.1
+python-support1.0.15					      |	python-bs44.5.3-1
+python-urllib31.9.1-3+deb8u1				      |	python-chardet2.3.0-2
+python-yaml3.11-2					      |	python-html5lib0.999999999-1
+rename0.20-3						      |	rename0.20-4
+rsync3.1.1-3+deb8u2					      |	rsync3.1.2-1+deb9u2
+rsyslog8.4.2-1+deb8u3					      |	rsyslog8.24.0-1
+screen4.2.1-3+deb8u1					      |	screen4.5.0-6
+sgml-base1.26+nmu4					      |	sg3-utils1.42-2
+shared-mime-info1.3-1					      |	sg3-utils-udev1.42-2
+shunit22.1.6-1						      |	sgml-base1.29
+socat1.7.2.4-2						      |	shared-mime-info1.8-1+deb9u1
+software-properties-common0.92.25debian1		      |	shunit22.1.6-1.1
+ssh1:6.7p1-5+deb8u8					      |	socat1.7.3.1-2+deb9u1
+sudo1.8.10p3-1+deb8u7					      |	sudo1.8.19p1-2.1+deb9u2
+sysstat11.0.1-1						      |	sysstat11.4.3-2
+systemd215-17+deb8u13					      |	systemd232-25+deb9u12
+systemd-sysv215-17+deb8u13				      |	systemd-sysv232-25+deb9u12
+sysvinit-utils2.88dsf-59				      |	sysvinit-utils2.88dsf-59.9
+tar1.27.1-2+deb8u2					      |	tar1.29b-1.1
+tcpd7.6.q-25						      |	tcpd7.6.q-26
+tcpdump4.9.3-1~deb8u1					      |	tcpdump4.9.3-1~deb9u1
+tmux1.9-6						      |	tmux2.3-4
+traceroute1:2.0.20-2+b1					      |	traceroute1:2.1.0-2
+ucf3.0030						      |	ucf3.0036
+udev215-17+deb8u13					      |	udev232-25+deb9u12
+unattended-upgrades0.83.3.2+deb8u1			      |	unattended-upgrades0.93.1+nmu1
+util-linux2.25.2-6					      |	util-linux2.29.2-1+deb9u1
+uuid-runtime2.25.2-6					      |	uuid-runtime2.29.2-1+deb9u1
+vim2:7.4.488-7+deb8u4					      |	vim2:8.0.0197-4+deb9u3
+vim-common2:7.4.488-7+deb8u4				      |	vim-common2:8.0.0197-4+deb9u3
+vim-runtime2:7.4.488-7+deb8u4				      |	vim-runtime2:8.0.0197-4+deb9u3
+wget1.16-1+deb8u7					      |	wget1.18-5+deb9u3
+xauth1:1.0.9-1						      |	xauth1:1.0.9-1+b2
+xdg-user-dirs0.15-2					      |	xdg-user-dirs0.15-2+b1
+xml-core0.13+nmu2					      |	xml-core0.17
+xz-utils5.1.1alpha+20120614-2+b3			      |	xxd2:8.0.0197-4+deb9u3
