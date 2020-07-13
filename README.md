@@ -13,8 +13,6 @@ This repository contains Dockerfiles that we use as the basis for the OSes that 
 - SUSE SLES12 SP3
 - Ubuntu 14.04
 - Ubuntu 16.04
-- Ubuntu 17.04 (deprecated)
-- Ubuntu 17.10 (deprecated)
 - Ubuntu 18.04
 - Ubuntu 19.04 (deprecated)
 - Virtuozzo (not present)
