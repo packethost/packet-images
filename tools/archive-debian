@@ -5,8 +5,7 @@
 IMAGE=$1
 OUTDIR=$2
 
-#IMAGETMP=$(mktemp -d -t image-XXXXXXX)
-IMAGETMP=image-temp
+IMAGETMP=$(mktemp -d -t image-XXXXXXX)
 mkdir -p $IMAGETMP
 tar -zxf $IMAGE -C $IMAGETMP
 
@@ -14,7 +13,7 @@ tar -zxf $IMAGE -C $IMAGETMP
 #INITRD=$(ls -al $IMAGETMP/boot/initramfs* | awk {'print $9'} | sort -V | grep -v rescue | head -1)
 KERNEL=$(ls -al $IMAGETMP/boot/vmlinuz-* | awk {'print $9'} | sort -V | tail -1)
 INITRD=$(ls -al $IMAGETMP/boot/initrd* | awk {'print $9'} | sort -V | tail -1)
-KERNELVER=$(echo $KERNEL | sed "s/$IMAGETMP\/boot\/vmlinuz-//g")
+KERNELVER=$(echo $KERNEL | sed "s:$IMAGETMP/boot/vmlinuz-::g")
 
 echo "Kernel file: $KERNEL"
 echo "Initrd file: $INITRD"
