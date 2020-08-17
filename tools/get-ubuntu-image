@@ -14,10 +14,13 @@ esac
 
 case "$version" in
 '14.04') fullversion=$version.5 ;;
-'16.04') fullversion=$version.4 ;;
+'16.04') fullversion=$version.7 ;;
 '17.10') fullversion=$version ;;
-'18.04') fullversion=$version ;;
+'18.04') fullversion=$version.5 ;;
 '19.04') fullversion=$version ;;
+'19.10') fullversion=$version ;;
+'20.04') fullversion=$version.1 ;;
+'20.10') fullversion=$version ;;
 *) echo "$version is not supported, sorry" && exit 1 ;;
 esac
 
