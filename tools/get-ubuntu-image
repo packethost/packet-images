@@ -3,41 +3,104 @@
 [[ $VERBOSE == 1 ]] && set -x
 set -o nounset -o pipefail -o errexit
 
-version=$1
-arch=$2
-outdir=$3
+usage() {
+	cat >&2 <<EOF
+usage: $0 [-qh] [version] [architecture] [outdir]
+	-q      quiet
+	-h		display help
+EOF
+}
 
-case $arch in
-aarch64) arch=arm64 ;;
-x86_64) arch=amd64 ;;
-esac
+msg() { echo "$@"; }
 
-case "$version" in
-'14.04') fullversion=$version.5 ;;
-'16.04') fullversion=$version.4 ;;
-'17.10') fullversion=$version ;;
-'18.04') fullversion=$version ;;
-'19.04') fullversion=$version ;;
-*) echo "$version is not supported, sorry" && exit 1 ;;
-esac
+# Get cli options
+while getopts "qh" OPTION; do
+    case $OPTION in
+	h) usage && exit 0 ;;
+	q) q=true && msg() { :; } ;;
+	*) usage && exit 1 ;;
+	esac
+done
+
+shift $((OPTIND - 1))
+
+version=${1:-''}
+arch=${2:-''}
+outdir=${3:-''}
+
+get_input() {
+	read -ep "$1" -i "$2"
+	echo $REPLY
+}
+
+get_version() {
+	version=$1
+	case $version in
+	'14.04') fullversion=$version.5 ;;
+	'16.04') fullversion=$version.4 ;;
+	'18.04') fullversion=$version ;;
+		'l') printf "Supported versions:\n14.04\n16.04\n18.04.\n" && \
+             get_version $(get_input "Specify a version or l to list: " "18.04") ;;
+	      *) echo "Version $version is not supported." && \
+             get_version $(get_input "Specify a version or l to list: " "18.04") ;;
+	esac
+}
+
+get_arch() {
+	arch=$1
+	case $arch in
+	aarch64) arch=arm64 ;;
+	 x86_64) arch=amd64 ;;
+	 	'l') printf "supported architctures:\naarch64\nx86_64.\n" && \
+             get_arch $(get_input "Specify an architcture or l to list: " "x86_64") ;;
+	      *) echo "That architcture is not supported." && \
+             get_arch $(get_input "Specify an architcture or l to list: " "x86_64") ;;
+	esac
+}
+
+get_outdir() {
+    if [[ -d $1 ]]
+    then
+        outdir=$1
+    else
+        echo "Directory not found." && \
+        get_outdir $(get_input "Specify an output directory: " ".")
+    fi
+}
+
+get_version ${version:-$(get_input "Specify version or l to list options: " "18.04")}
+get_arch ${arch:-$(get_input "Specify architcture or l to list options: " "x86_64")}
+get_outdir ${outdir:-$(get_input "Specify an output directory: " ".")}
 
 path="http://cdimage.ubuntu.com/ubuntu-base/releases/$version/release"
-file=ubuntu-base-$fullversion-base-$arch.tar.gz
-
-echo "Fetching keys"
-gpg --keyserver hkp://ha.pool.sks-keyservers.net --recv-keys \
-	843938DF228D22F7B3742BC0D94AA3F0EFE21092 \
-	C5986B4F1257FFA86632CBA746181433FBB75451
+file=ubuntu-base-${fullversion}-base-${arch}.tar.gz
 
 cd "$outdir"
-wget -qN "$path/$file" "$path/SHA256SUMS" "$path/SHA256SUMS.gpg"
+wget ${q:+-q} -N "$path/$file" "$path/SHA256SUMS" "$path/SHA256SUMS.gpg"
 
-# verify signature and also keys used to sign
+msg "verifing signature and keys used to sign."
 statusf=$(mktemp -t get-ubuntu-image-keys-XXXXXX)
-gpg --quiet --verify --status-fd=3 SHA256SUMS.gpg SHA256SUMS 3>"$statusf" 2>/dev/null
-grep -q 'VALIDSIG 843938DF228D22F7B3742BC0D94AA3F0EFE21092' "$statusf"
-grep -q 'VALIDSIG C5986B4F1257FFA86632CBA746181433FBB75451' "$statusf"
-rm -f "$statusf"
 
-grep "$file" SHA256SUMS | sha256sum --status -c
-ln -s "$file" rootfs.tar.gz
+set +o pipefail
+gpg --keyid-format long --verify SHA256SUMS.gpg SHA256SUMS 2>&1 | \
+grep -oP "(?<=key\s)[A-Z0-9]+" > "$statusf"
+set -o pipefail
+
+msg "Fetching keys"
+while read keyid
+do
+	gpg ${q:+--quiet} --keyserver keyserver.ubuntu.com --recv-keys $keyid
+done < $statusf
+
+if  gpg --keyid-format long --verify SHA256SUMS.gpg SHA256SUMS 2> $statusf && \
+   grep "$file" SHA256SUMS | sha256sum ${q:+--status} -c
+	then
+        [[ ${q:-'false'} == 'true' ]] && : || cat $statusf
+		msg "Image integrity verified. Creating rootfs symlink and exiting"
+		ln -s "$file" rootfs.tar.gz
+		rm -f "$statusf"
+	else
+		echo "Exiting with error: image signature could not be verified."
+        [[ ${q:-'false'} == 'true' ]] && : || cat $statusf
+		rm $statusf
+fi
