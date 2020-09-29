@@ -1,4 +1,6 @@
 # Packet Images
+[![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2Fpackethost%2Fpacket-images.svg?type=shield)](https://app.fossa.io/projects/git%2Bgithub.com%2Fpackethost%2Fpacket-images?ref=badge_shield)
+
 
 This repository contains Dockerfiles that we use as the basis for the OSes that we provision. The Dockerfiles contained here are the source for the official Packet.net managed images, other semi-official images are managed by the community.
 
@@ -148,3 +150,7 @@ Archiving the kernel:
 ### Deploying your custom image on Packet
 You have a working image built, so now what?
 Run it using our custom_image feature, or use it via iPXE/Custom OS.
+
+
+## License
+[![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2Fpackethost%2Fpacket-images.svg?type=large)](https://app.fossa.io/projects/git%2Bgithub.com%2Fpackethost%2Fpacket-images?ref=badge_large)
