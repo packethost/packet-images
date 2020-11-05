@@ -1,6 +1,10 @@
+![](https://img.shields.io/badge/Stability-Maintained-green.svg)
+
 # Equinix Metal Images
 
 This repository contains Dockerfiles that we use as the basis for the OSes that we provision. The Dockerfiles contained here are the source for the official Equinix Metal managed images, other semi-official images are managed by the community.
+
+This repository is [Maintained](https://github.com/packethost/standards/blob/master/maintained-statement.md) meaning that this software is supported by Packet and its community - available to use in production environments.
 
 ### Official Images
 - CentOS 7
