@@ -1,6 +1,6 @@
-# Packet Images
+# Equinix Metal Images
 
-This repository contains Dockerfiles that we use as the basis for the OSes that we provision. The Dockerfiles contained here are the source for the official Packet.net managed images, other semi-official images are managed by the community.
+This repository contains Dockerfiles that we use as the basis for the OSes that we provision. The Dockerfiles contained here are the source for the official Equinix Metal managed images, other semi-official images are managed by the community.
 
 ### Official Images
 - CentOS 7
@@ -25,7 +25,7 @@ This repository contains Dockerfiles that we use as the basis for the OSes that 
 - NixOS - maintained by [@grahamc](https://github.com/grahamc) [NixOS](https://github.com/grahamc/packet-provision-nixos-ipxe)
 
 
-Within this repo you will find a collection of tools, examples and docs for building OS images to be used on Packet.net baremetal servers.
+Within this repo you will find a collection of tools, examples and docs for building OS images to be used on Equinix Metal baremetal servers.
 
   - Building images from Dockerfile
   - Converting Docker images for use on physical baremetal servers
@@ -34,7 +34,7 @@ TLDR:  Build docker image, save docker image to archive and convert the archive 
 image. The image can be used on a baremetal physical server with or without docker.
 
 ### Overview
-Branch layout consists of a primacy "base" branch for each supported operating system distro. See centos\_7-base, ubuntu\_17\_10-base, etc. The base branch contains a Dockerfile (per supported architecture) with a sufficient level of customization (stage 1) to produce a standardized operating system experience across Packet.net's hardware offering. If any hardware specific changes are to be included in a particular image, a separate branch is created for the hardware type / plan the image is customized. Any such hardware specific image is formed by using the base image as the template. For example, if we want to create a new image for ubuntu_17_10-supermachine1, the Dockerfile for this branch will use "FROM ubuntu_17_10-base" as to complete a multi-stage (stage 2) build based off the official Packet base image.
+Branch layout consists of a primacy "base" branch for each supported operating system distro. See centos\_7-base, ubuntu\_17\_10-base, etc. The base branch contains a Dockerfile (per supported architecture) with a sufficient level of customization (stage 1) to produce a standardized operating system experience across Equinix Metal's hardware offering. If any hardware specific changes are to be included in a particular image, a separate branch is created for the hardware type / plan the image is customized. Any such hardware specific image is formed by using the base image as the template. For example, if we want to create a new image for ubuntu_17_10-supermachine1, the Dockerfile for this branch will use "FROM ubuntu_17_10-base" as to complete a multi-stage (stage 2) build based off the official Equinix Metal base image.
 
 ### Dependencies
 There is only a small list of deps required to run image builds, but we recommend a dedicated
