@@ -37,8 +37,8 @@ get_version() {
 	version=$1
 	case $version in
 	'14.04') fullversion=$version.5 ;;
-	'16.04') fullversion=$version.4 ;;
-	'18.04') fullversion=$version ;;
+	'16.04') fullversion=$version.6 ;;
+	'18.04') fullversion=$version.5 ;;
 		'l') printf "Supported versions:\n14.04\n16.04\n18.04.\n" && \
              get_version $(get_input "Specify a version or l to list: " "18.04") ;;
 	      *) echo "Version $version is not supported." && \
