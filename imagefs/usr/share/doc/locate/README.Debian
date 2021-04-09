@@ -1,0 +1,72 @@
+Debian README for GNU locate/updatedb.
+
+The database is updated daily by running /etc/cron.daily/locate.
+Customizations can be made by either editing this file directly (Since
+it is a dpkg-conffile changes will be preserved.) or by generating 
+/etc/updatedb.findutils.cron.local which will be sourced by the cronjob
+before running updatedb.
+
+The cronjob by default runs with nice level 10 and with IONICE_CLASS 3
+(idle). Using IONICE_CLASS is a trade-off between locate database
+consistency and friendliness to other processes. The nicer we are, the
+less impact we have on system performance when updating the database,
+because we generally spread our usage out more. Spreading the usage out
+a bit more means that updating the database takes longer and the result
+is a slightly less consistent view of the filesystem. Since it is not
+possible to get a perfectly consistent view anyway, using IONICE_CLASS=3
+is normally reasonable.
+
+-------------------------------
+Questions and examples
+--------------------------------
+
+My systems slows down everyday at bootup, how can I stop the daily
+updatedb-invocations?
+
+* Generate a new file /etc/updatedb.findutils.cron.local that consists of
+  the single line "exit 0" (without the quotes).
+
+* Uninstall locate.
+
+* Edit /etc/cron.daily/locate. It is a dpkg conffile and your changes won't be
+  overwritten.
+
+Q: How can I stop /etc/cron.daily/locate from using ionice?
+A: add UPDATDB_NO_IONICE=yes to /etc/updatedb.findutils.cron.local
+
+Examples:
+* Run weekly instead of daily:
+  Add this to the head of /etc/cron.daily/locate
+  #----------
+  if [ -d /var/cache/locate ] ; then
+     # locatedb is younger than 7 days
+     [ -n "`find /var/cache/locate -name locatedb -mtime -7`" ] && exit 0
+  fi
+  #----------
+  To run every other day on would use "2" instead of "7".
+
+* Disable updatedb completely:
+  Either delete /etc/cron.daily/locate or add "exit 0" as the second line of
+  /etc/cron.daily/locate
+
+* On a laptop only update the locate database if running on AC-power:
+  Add "on_ac_power || exit 0" as the second line of /etc/cron.daily/locate.
+  If you are using anacron for running cron.daily there is no need for
+  changing /etc/cron.daily/locate, anacron will by default not execute the
+  jobs when the system is running on battery.
+
+* Some people wish to have updatedb only include mount points which are
+  automatically mounted by "mount -a", which mounts devices listed in
+  /etc/fstab. 
+
+  The following lines may be added to /etc/cron.daily/locate (or to a newly
+  generated /etc/updatedb.findutils.cron.local) to exclude non-automatic mount
+  points from updatedb.
+  
+  # mount points not to be scanned (regexp matching lines into /etc/fstab)
+  EXCLUDE_MOINT_POINTS=noauto
+  EXCLUDE_PATH=`awk "/^#/ {next}; /$EXCLUDE_MOINT_POINTS/ {print \\$2}" < /etc/fstab | tr '\012' ' '`
+  PRUNEPATHS="$PRUNEPATHS $EXCLUDE_PATH"
+  
+  This suggestion is due to Eric Delaunay
+  <delaunay@lix.polytechnique.fr>

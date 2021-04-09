@@ -1,0 +1,21 @@
+[Unit]
+Description=Device-Mapper Multipath Device Controller
+Before=iscsi.service iscsid.service lvm2-activation-early.service
+Before=local-fs-pre.target
+After=multipathd.socket
+DefaultDependencies=no
+Wants=local-fs-pre.target multipathd.socket
+Conflicts=shutdown.target
+
+[Service]
+Type=notify
+NotifyAccess=main
+LimitCORE=infinity
+ExecStartPre=/sbin/modprobe dm-multipath
+ExecStart=/sbin/multipathd -d -s
+ExecReload=/sbin/multipathd reconfigure
+
+[Install]
+WantedBy=sysinit.target
+Also=multipathd.socket
+Alias=multipath-tools.service

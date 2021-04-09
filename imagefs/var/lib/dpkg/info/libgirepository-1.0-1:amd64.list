@@ -1,0 +1,16 @@
+/.
+/usr
+/usr/share
+/usr/share/doc
+/usr/share/doc/libgirepository-1.0-1
+/usr/share/doc/libgirepository-1.0-1/AUTHORS
+/usr/share/doc/libgirepository-1.0-1/CONTRIBUTORS
+/usr/share/doc/libgirepository-1.0-1/README
+/usr/share/doc/libgirepository-1.0-1/TODO
+/usr/share/doc/libgirepository-1.0-1/copyright
+/usr/share/doc/libgirepository-1.0-1/NEWS.gz
+/usr/share/doc/libgirepository-1.0-1/changelog.Debian.gz
+/usr/lib
+/usr/lib/x86_64-linux-gnu
+/usr/lib/x86_64-linux-gnu/libgirepository-1.0.so.1.0.0
+/usr/lib/x86_64-linux-gnu/libgirepository-1.0.so.1

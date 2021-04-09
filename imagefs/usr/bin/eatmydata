@@ -1,0 +1,86 @@
+#!/bin/sh
+#-
+# Copyright © 2014
+#  Thorsten “mirabilos” Glaser <t.glaser@tarent.de>
+#
+# Provided that these terms and disclaimer and all copyright notices
+# are retained or reproduced in an accompanying document, permission
+# is granted to deal in this work without restriction, including un‐
+# limited rights to use, publicly perform, distribute, sell, modify,
+# merge, give away, or sublicence.
+#
+# This work is provided “AS IS” and WITHOUT WARRANTY of any kind, to
+# the utmost extent permitted by applicable law, neither express nor
+# implied; without malicious intent or gross negligence. In no event
+# may a licensor, author or contributor be held liable for indirect,
+# direct, other damage, loss, or other issues arising in any way out
+# of dealing in the work, even if advised of the possibility of such
+# damage or existence of a defect, except proven that it results out
+# of said person’s immediate fault when using the work as intended.
+#-
+# eatmydata utility / wrapper compatible with both 26 and 82 series,
+# but only on Debian systems.
+
+usage() {
+   echo >&2 "usage: $0 [--] command [arg ...]"
+   exit 2
+}
+
+# everything in a function to avoid environment pollution
+runprog() {
+   local cmd me spath saveIFS pathelem tgt rltgt
+
+   # Detect operation mode. If this script is run via a symbolic link,
+   # look for the basename in the PATH and execute that.
+   if test -L "$0"; then
+       # symlink mode
+       cmd=$(basename "$0")
+   else
+       # regular mode
+       test x"$1" = x"--" && shift
+       test -n "$1" || usage
+       cmd=$1
+       shift
+   fi
+
+   # detect command to run, if necessary
+   case $cmd in
+   (*/*) ;;
+   (*)
+       # $cmd does not contain a '/'
+       # look in the PATH but avoid loops with myself
+       me=$(readlink -f "$0")
+       # append :/dev/null both to catch a trailing colon
+       # and for an easy abort condition
+       spath=$PATH:/dev/null
+       saveIFS=$IFS
+       IFS=:
+       for pathelem in $spath; do
+           if test x"$pathelem" = x"/dev/null"; then
+               echo >&2 E: eatmydata: \
+                   "unable to find '$cmd' in PATH"
+               exit 1
+           fi
+           tgt=${pathelem:-.}/$cmd
+           if test -x "$tgt"; then
+               # still call whathever is in the path, even if it is a link,
+               # as there are programs relying on argv[0] content.
+               rltgt=$(readlink -f "$tgt")
+               test x"$rltgt" = x"$me" || break
+           fi
+       done
+       IFS=$saveIFS
+       cmd=$tgt
+       ;;
+   esac
+
+   # set up environment
+   LD_LIBRARY_PATH=${LD_LIBRARY_PATH:+"$LD_LIBRARY_PATH:"}/usr/lib/libeatmydata
+   LD_PRELOAD=${LD_PRELOAD:+"$LD_PRELOAD "}libeatmydata.so
+   export LD_LIBRARY_PATH LD_PRELOAD
+
+   # execute the command
+   exec "$cmd" "$@"
+}
+
+runprog "$@"

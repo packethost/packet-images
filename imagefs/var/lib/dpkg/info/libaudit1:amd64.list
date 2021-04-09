@@ -1,0 +1,11 @@
+/.
+/usr
+/usr/share
+/usr/share/doc
+/usr/share/doc/libaudit1
+/usr/share/doc/libaudit1/copyright
+/usr/share/doc/libaudit1/changelog.Debian.gz
+/lib
+/lib/x86_64-linux-gnu
+/lib/x86_64-linux-gnu/libaudit.so.1.0.0
+/lib/x86_64-linux-gnu/libaudit.so.1

@@ -1,0 +1,20 @@
+[Unit]
+Description=Prepare mdadm shutdown initramfs
+ConditionFileIsExecutable=/usr/bin/dracut
+After=local-fs.target boot.mount boot.automount
+Wants=local-fs.target
+Conflicts=shutdown.target umount.target
+DefaultDependencies=no
+
+[Service]
+RemainAfterExit=yes
+Type=oneshot
+ExecStart=/bin/true
+ExecStop=/bin/mount -o remount,exec,suid /run
+ExecStop=/bin/mkdir -p /run/initramfs
+ExecStop=/usr/bin/dracut --no-compress --no-kernel --quiet --force --force-add "shutdown mdraid" --omit "caps" /run/initramfs/shutdown.cpio
+ExecStop=/bin/sh -c 'cd /run/initramfs; cpio -id --quiet < shutdown.cpio'
+ExecStop=/bin/rm /run/initramfs/shutdown.cpio
+
+[Install]
+WantedBy=sysinit.target

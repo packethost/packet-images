@@ -1,0 +1,97 @@
+Additional information for users of multipath-tools from Debian.
+
+What are these weird numbers in /dev/mapper?
+============================================
+Modern Fibre-Channel connected storage devices are identified by
+World-Wide-Numbers. If multipath-tools detects one of these devices,
+it uses that as the default identifier in /dev/mapper.
+If you want multipath-tools to use easier-to-read names, set
+  user_friendly_names = yes
+in the 'defaults' section of /etc/multipath.conf.
+
+Note: While widely used (including the Debian Installer, which depends on it),
+user_friendly_names can lead to locking issues with large numbers of LUNs
+resulting in some maps not having friendly_names [1].
+
+Note: The mpathN <-> wwwn name mapping created by the user_friendly_names
+feature can change unexpectedly across reboots. A more stable solution for
+'friendly' names is to make explicit aliases in multipath.conf, e.g.
+  multipaths {
+      multipath {
+          wwwid 2226f000123deadbf
+          alias diskbox1-lun0
+      }
+  }
+This device should be accessible as /dev/mapper/diskbox1-lun0.
+
+
+
+If using user_friendly_names = yes, please ensure that your /etc/multipath/bindings
+file gets propagated to the initramfs.
+
+For that, please follow the following steps:
+
+1) set "user_friendly_names = yes" in /etc/multipath.conf
+2) Run `multipath -F` to flush your device maps. For root on multipath devices,
+   this could still be tricky
+3) Run `multipath -v3` to read your /etc/multipath.conf changes.
+4) Run `update-initramfs -u -k all` to update your initramfs images.
+
+
+
+Where did my FC-connected filesystem go?
+========================================
+If you were previously mounting a device connected to your system by
+Fibre Channel and then installed multipath-tools, you need to change
+the way you mount the device. The device must now be accessed using
+the identifier by which device-mapper knows it.
+
+For example if you have in /dev/mapper a file like this:
+   brw-rw---- 1 root disk 254,  8 2009-01-05 14:35 /dev/mapper/36000393000007d3901000000fef00a2d
+
+then you can mount the filesystem like this:
+  mount /dev/mapper/36000393000007d3901000000fef00a2d /mnt
+or this
+  mount /dev/disk/by-id/scsi-36000393000007d3901000000fef00a2d /mnt
+You should prefer the latter, as this will work whether or not
+multipath-tools is installed.
+
+Note that with multipath-tools installed you cannot use the device's node
+in /dev, e.g.
+  # mount /dev/sdc1 /mnt
+  mount: /dev/sdc1 already mounted or /mnt busy
+The device is 'busy' because it is part of a multipath map.
+See the output of 'multipath -l' to confirm this.
+
+Preventing multipath-tools mapping any devices
+==============================================
+You may wish to prevent multipath-tools mapping any of your storage devices.
+To do this replace the contents of /etc/multipath.conf with:
+
+  blacklist {
+         devnode "*"
+  }
+
+Booting from multipathed devices
+================================
+To enable booting from multipathed devices install the multipath-tools-boot
+package. Be sure to update your bootloader configuration (e.g.
+/boot/grub/menu.lst) to point to the multipathed root device afterwards.
+
+By default this will be
+
+  /dev/disk/by-id/scsi-<wwid>-part<N>
+
+If you set user_friendly_names = yes in /etc/multipath.conf, the path
+to the device will be
+
+  /dev/mapper/mpath<X>-part<N>
+
+If you make changes in multipath.conf, remember to run update-initramfs so the
+updated version of the configuration gets included in the initramfs.
+
+ -- Guido Günther <agx@sigxcpu.org>  Tue, 20 Feb 2008 13:49:18 +0100
+
+-- 
+[1] https://bugzilla.redhat.com/show_bug.cgi?id=445268
+

@@ -1,0 +1,3 @@
+# yes we do want to ship these
+dbus: package-contains-empty-directory usr/share/dbus-1/services/
+dbus: package-contains-empty-directory usr/share/dbus-1/system-services/

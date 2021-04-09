@@ -1,0 +1,11 @@
+/.
+/usr
+/usr/share
+/usr/share/doc
+/usr/share/doc/libxfixes3
+/usr/share/doc/libxfixes3/copyright
+/usr/share/doc/libxfixes3/changelog.Debian.gz
+/usr/lib
+/usr/lib/x86_64-linux-gnu
+/usr/lib/x86_64-linux-gnu/libXfixes.so.3.1.0
+/usr/lib/x86_64-linux-gnu/libXfixes.so.3

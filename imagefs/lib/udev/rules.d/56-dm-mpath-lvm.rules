@@ -1,0 +1,26 @@
+# An individual device may be part of a multipath device.
+# In such case, remove its partition device nodes so for
+# LVM to scan/lock/use only the multipath device.
+# - Check it on 'add' uevent.
+# - Check it on 'change' uevent (it may change).
+
+SUBSYSTEM!="block", \
+	GOTO="end_mpath"
+
+ACTION=="remove", \
+	GOTO="end_mpath"
+
+ENV{DEVTYPE}=="partition", \
+	IMPORT{parent}="DM_MULTIPATH_DEVICE_PATH", \
+	GOTO="end_mpath"
+
+PROGRAM=="/sbin/multipath -u $devnode", \
+	ENV{DM_MULTIPATH_DEVICE_PATH}="1", \
+	ENV{ID_FS_TYPE}="mpath_member", \
+	RUN+="/usr/bin/partx -d --nr 1-1024 $devnode", \
+	GOTO="end_mpath"
+
+# Not part of a multipath device.
+ENV{DM_MULTIPATH_DEVICE_PATH}=""
+
+LABEL="end_mpath"

@@ -1,0 +1,11 @@
+Document: mdadm-raid5-vs-10
+Title: Comparison of RAID5 and RAID10
+Author: Art S. Kagel
+Abstract: This document compares RAID5 and RAID10 and strongly argues against
+ RAID5. The Debian package maintainer does not agree in full but includes the
+ document to allow people to make up their own mind.
+Section: System/Administration
+
+Format: text
+Index: /usr/share/doc/mdadm/RAID5_versus_RAID10.txt.gz
+Files: /usr/share/doc/mdadm/RAID5_versus_RAID10.txt.gz

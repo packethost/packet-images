@@ -1,0 +1,38 @@
+#!/bin/sh
+## ----------------------------------------------------------------------
+## debian/preinst : preinstallation script for xml-core
+## ----------------------------------------------------------------------
+
+## ----------------------------------------------------------------------
+set -e
+
+## ----------------------------------------------------------------------
+if [ "$1" = "install" ]
+then
+
+    ## ------------------------------------------------------------------
+    ## preserve legacy /etc/xml/catalog
+    if [ -f /etc/xml/catalog ]
+    then
+	mv /etc/xml/catalog /etc/xml/catalog.legacy
+    fi
+
+fi
+
+## ---------------------------------------------------------------------- 
+## automatically generated debhelper commands
+# Automatically added by dh_installcatalogs
+if test -f /etc/sgml/xml-core.cat -a "(" "$1" = "upgrade" -o "$1" = "install" -a -n "$2" ")" && 
+		! dpkg-query -S /etc/sgml/xml-core.cat >/dev/null 2>&1; then
+	# If the dpkg-query command returns non-zero, the central catalog is
+	# not owned by any package. This is due to an old behaviour of
+	# debhelper. Now that file becomes a conffile. In order to avoid a
+	# question during installation, we remove the old non-conffile.
+	mv /etc/sgml/xml-core.cat /etc/sgml/xml-core.cat.old
+fi
+# End automatically added section
+
+
+exit 0
+
+## ----------------------------------------------------------------------

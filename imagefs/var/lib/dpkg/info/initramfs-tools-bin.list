@@ -1,0 +1,13 @@
+/.
+/usr
+/usr/share
+/usr/share/doc
+/usr/share/doc/initramfs-tools-bin
+/usr/share/doc/initramfs-tools-bin/copyright
+/usr/share/doc/initramfs-tools-bin/changelog.gz
+/usr/share/doc/initramfs-tools-bin/NEWS.Debian.gz
+/usr/lib
+/usr/lib/initramfs-tools
+/usr/lib/initramfs-tools/bin
+/usr/lib/initramfs-tools/bin/wait-for-root
+/usr/lib/initramfs-tools/bin/rzscontrol

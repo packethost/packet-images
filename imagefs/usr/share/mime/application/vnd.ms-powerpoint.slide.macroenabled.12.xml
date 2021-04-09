@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mime-type xmlns="http://www.freedesktop.org/standards/shared-mime-info" type="application/vnd.ms-powerpoint.slide.macroEnabled.12">
+  <!--Created automatically by update-mime-database. DO NOT EDIT!-->
+  <comment>PowerPoint slide</comment>
+  <generic-icon name="x-office-presentation"/>
+  <glob pattern="*.sldm"/>
+  <sub-class-of type="application/vnd.openxmlformats-officedocument.presentationml.slide"/>
+</mime-type>

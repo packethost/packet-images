@@ -1,0 +1,33 @@
+checkarray notes
+================
+
+checkarray will run parity checks across all your redundant arrays. By
+default, it is configured to run on the first Sunday of each month, at 01:06
+in the morning. This is realised by asking cron to wake up every Sunday with
+/etc/cron.d/mdadm, but then only running the script when the day of the month
+is less than or equal to 7. See #380425.
+
+Cron will try to run the check at "idle I/O priority" (see ionice(1)), so that
+the check does not overload the system too much. Note that this will only
+work if all the component devices of the array employ the (default) "cfq" I/O
+scheduler. See the kernel documentation[0] for information on how to verify
+and modify the scheduler. checkarray does not verify this for you.
+
+  0. http://www.kernel.org/doc/Documentation/block/switching-sched.txt
+
+If you manually invoke checkarray, it runs with default I/O priority. Should
+you need to run a check at a higher (or lower) I/O priority, then have a look
+at the --idle, --slow, --fast, and --realtime options.
+
+'check' is a read-only operation, even though the kernel logs may suggest
+otherwise (e.g. /proc/mdstat and several kernel messages will mention
+"resync"). Please also see question 21 of the FAQ.
+
+If, however, while reading, a read error occurs, the check will trigger the
+normal response to read errors which is to generate the 'correct' data and try
+to write that out - so it is possible that a 'check' will trigger a write.
+However in the absence of read errors it is read-only.
+
+You can cancel a running array check with the -x option to checkarray.
+
+ -- martin f. krafft <madduck@debian.org>  Thu, 02 Sep 2010 10:27:29 +0200

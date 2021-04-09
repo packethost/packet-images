@@ -1,0 +1,12 @@
+1c0a9774ff11cae4ba5635d26eee856b  usr/lib/x86_64-linux-gnu/libexslt.so.0.8.17
+d297f8525460356dd7e39cd8d5f3cbc3  usr/lib/x86_64-linux-gnu/libxslt.so.1.1.28
+5b02669437670161c86e18fe64105301  usr/share/doc/libxslt1.1/AUTHORS
+9e8bd690c75965486826e59d46950e4a  usr/share/doc/libxslt1.1/FEATURES.gz
+1931602b6cda103997ffcb4b551fdb2d  usr/share/doc/libxslt1.1/NEWS.gz
+bc65c900f4d1e6b9aea0329b3b804dca  usr/share/doc/libxslt1.1/README
+d70f8f5992d96205ee260c3232318be2  usr/share/doc/libxslt1.1/README.Debian
+1671e62be479162b8d9a012c81bc235e  usr/share/doc/libxslt1.1/TODO
+29abecfdafe1a5a267baedc57e44fdb8  usr/share/doc/libxslt1.1/TODO.Debian
+dfe61175b78a174f52940acda3f5c9b5  usr/share/doc/libxslt1.1/changelog.Debian.gz
+3896dd4041149ce6158d2aa28d963db0  usr/share/doc/libxslt1.1/copyright
+f71e24c0633ea0098416c800d139aca1  usr/share/lintian/overrides/libxslt1.1

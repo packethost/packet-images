@@ -1,0 +1,4 @@
+grub-efi-amd64 	 /etc/default/grub
+rsyslog 	 /etc/rsyslog.d/50-default.conf
+sysstat 	 /etc/default/sysstat
+unattended-upgrades 	 /etc/apt/apt.conf.d/20auto-upgrades

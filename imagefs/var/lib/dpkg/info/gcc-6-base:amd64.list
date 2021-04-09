@@ -1,0 +1,14 @@
+/.
+/usr
+/usr/lib
+/usr/lib/gcc
+/usr/lib/gcc/x86_64-linux-gnu
+/usr/lib/gcc/x86_64-linux-gnu/6
+/usr/share
+/usr/share/doc
+/usr/share/doc/gcc-6-base
+/usr/share/doc/gcc-6-base/copyright
+/usr/share/doc/gcc-6-base/README.Debian.amd64.gz
+/usr/share/doc/gcc-6-base/changelog.Debian.gz
+/usr/share/doc/gcc-6-base/TODO.Debian
+/usr/lib/gcc/x86_64-linux-gnu/6.0.0

@@ -1,0 +1,8 @@
+Ethstatus for Debian
+--------------------
+
+The upstream maintainer is no longer actively supporting this package.
+This release consists of 95% original source code from Gabriel Montenegro
+and 5% bug fixes and additions by Chrsitoph Haas.
+
+ -- Christoph Haas <email@christoph-haas.de>, Sat, 10 May 2003 15:48:17 +0200

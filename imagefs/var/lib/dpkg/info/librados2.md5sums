@@ -1,0 +1,4 @@
+109a8463863fe01c80e19561a7bee96a  usr/lib/x86_64-linux-gnu/librados.so.2.0.0
+42eaa38ca2b955161ce7ca68a5d88db6  usr/share/doc/librados2/changelog.Debian.gz
+6b40e3b1ce2556e9626fb32570051c53  usr/share/doc/librados2/copyright
+75e6a87de11914b03ec3efd075dd4898  usr/share/lintian/overrides/librados2

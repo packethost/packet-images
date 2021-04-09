@@ -1,0 +1,23 @@
+This package was debianized by Paul Wise <pabs@debian.org> on
+Thu, 24 Apr 2008 21:51:35 +0800.
+
+It was downloaded from http://guichaz.free.fr/iotop/files/
+
+Author:
+
+	Guillaume Chazarain <guichaz@yahoo.fr>
+	Parts based on pynl80211 by Johannes Berg <johannes@sipsolutions.net>
+
+Copyright & License:
+
+	Copyright 2007-2008 Guillaume Chazarain
+	Copyright 2007 Johannes Berg
+
+License:
+
+	GPLv2
+
+On Debian systems, the complete text of the GNU General Public License,
+version 2, can be found in /usr/share/common-licenses/GPL-2.
+
+The Debian packaging is placed in the Public Domain in 2009 by Paul Wise.

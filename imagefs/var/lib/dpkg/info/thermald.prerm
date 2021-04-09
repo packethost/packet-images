@@ -1,0 +1,7 @@
+#!/bin/sh
+set -e
+# Automatically added by dh_installinit
+if [ -x "/etc/init.d/thermald" ] || [ -e "/etc/init/thermald.conf" ]; then
+	invoke-rc.d thermald stop || true
+fi
+# End automatically added section

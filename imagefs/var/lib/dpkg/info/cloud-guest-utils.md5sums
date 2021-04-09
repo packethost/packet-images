@@ -1,0 +1,6 @@
+7929a259e9b534105459493b54dda7a9  usr/bin/ec2metadata
+4bedc9be6d357cd24f8090ac8befe736  usr/bin/growpart
+edbf44784eb642a97930f0ac1ff9950c  usr/bin/vcs-run
+825ef07e5c70be50ab8b8a569d85c1b5  usr/share/doc/cloud-guest-utils/changelog.Debian.gz
+0b699f1cce73c8c3d781447f47eafa4b  usr/share/doc/cloud-guest-utils/copyright
+0b46a0b0cbe3315c247999c18358a218  usr/share/man/man1/growpart.1.gz

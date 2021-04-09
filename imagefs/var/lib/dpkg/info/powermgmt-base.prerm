@@ -1,0 +1,11 @@
+#!/bin/sh -e
+
+
+
+FN="/etc/modprobe.d/apm"
+if [ -f "${FN}" ] && md5sum --check --status > /dev/null 2>&1 << EOF
+05bec108b10c64c5a614cf4576e5d66a  ${FN}
+EOF
+then
+    rm -f "${FN}"
+fi

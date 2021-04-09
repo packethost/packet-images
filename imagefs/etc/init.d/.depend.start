@@ -1,0 +1,15 @@
+TARGETS = uuidd rsyslog killprocs unattended-upgrades multipath-tools mdadm thermald single ntp ssh rsync dbus sysstat cron ondemand rc.local grub-common
+INTERACTIVE =
+multipath-tools: rsyslog
+mdadm: rsyslog
+thermald: rsyslog
+single: killprocs
+ntp: rsyslog
+ssh: rsyslog
+rsync: rsyslog
+dbus: rsyslog
+sysstat: rsyslog
+cron: rsyslog
+ondemand: uuidd multipath-tools rsyslog mdadm thermald ntp ssh rsync dbus sysstat cron unattended-upgrades
+rc.local: uuidd multipath-tools rsyslog mdadm thermald ntp ssh rsync dbus sysstat cron unattended-upgrades
+grub-common: uuidd multipath-tools rsyslog mdadm thermald ntp ssh rsync dbus sysstat cron unattended-upgrades

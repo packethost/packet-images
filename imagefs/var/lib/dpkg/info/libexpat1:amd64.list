@@ -1,0 +1,15 @@
+/.
+/usr
+/usr/share
+/usr/share/doc
+/usr/share/doc/libexpat1
+/usr/share/doc/libexpat1/changelog.Debian.gz
+/usr/share/doc/libexpat1/copyright
+/usr/lib
+/usr/lib/x86_64-linux-gnu
+/usr/lib/x86_64-linux-gnu/libexpatw.so.1.6.0
+/lib
+/lib/x86_64-linux-gnu
+/lib/x86_64-linux-gnu/libexpat.so.1.6.0
+/usr/lib/x86_64-linux-gnu/libexpatw.so.1
+/lib/x86_64-linux-gnu/libexpat.so.1

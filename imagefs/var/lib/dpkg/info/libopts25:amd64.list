@@ -1,0 +1,11 @@
+/.
+/usr
+/usr/share
+/usr/share/doc
+/usr/share/doc/libopts25
+/usr/share/doc/libopts25/copyright
+/usr/share/doc/libopts25/changelog.Debian.gz
+/usr/lib
+/usr/lib/x86_64-linux-gnu
+/usr/lib/x86_64-linux-gnu/libopts.so.25.16.1
+/usr/lib/x86_64-linux-gnu/libopts.so.25

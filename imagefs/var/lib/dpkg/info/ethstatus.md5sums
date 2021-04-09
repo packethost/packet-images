@@ -1,0 +1,7 @@
+e13b4b16c0c5ca42b892d762d6758cae  usr/bin/ethstatus
+b0d115a56b0ac27e0700bbbcd0a03be3  usr/share/doc/ethstatus/README
+c342daaa22ac6e04d79d27046d4bb59e  usr/share/doc/ethstatus/README.Debian
+f5c4e4f61abb586c7cfa9c675ca4d9b7  usr/share/doc/ethstatus/THANKS
+bdc1e7b73e748704c8ed9c12189d1fa2  usr/share/doc/ethstatus/changelog.Debian.gz
+68aaa55422c3800bc30b8f4ef0814784  usr/share/doc/ethstatus/copyright
+418bad202a5c82e63e635675d12df6e3  usr/share/man/man1/ethstatus.1.gz

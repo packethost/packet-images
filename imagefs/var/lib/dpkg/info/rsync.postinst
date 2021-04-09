@@ -1,0 +1,30 @@
+#!/bin/sh -e
+
+action="$1"
+oldversion="$2"
+
+if [ "$action" != configure ]; then
+    exit 0
+fi
+
+
+if [ -x /etc/init.d/rsync ]; then
+    if dpkg --compare-versions "$oldversion" lt "3.0.7-2"; then
+        update-rc.d -f rsync remove
+    fi
+
+    update-rc.d rsync defaults
+    if [ -x /usr/sbin/invoke-rc.d ]; then
+        invoke-rc.d rsync restart
+    else
+        /etc/init.d/rsync restart
+    fi
+fi
+
+# # Remove shutdown and reboot links; this init script does not need them.
+# # The wildcards are needed as we can't predict the number anymore...
+# if dpkg --compare-versions "$oldversion" lt "3.0.7-2"; then
+#     rm -f /etc/rc0.d/K??rsync /etc/rc1.d/K??rsync /etc/rc6.d/K??rsync
+# fi
+
+exit 0

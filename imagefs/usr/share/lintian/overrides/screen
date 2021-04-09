@@ -1,0 +1,20 @@
+# Screen is setgid by default to be able to write to the utmp database
+screen: setgid-binary usr/bin/screen 2755 root/utmp
+
+# Only the fixup to migrate away from old /tmp/.screen
+screen: possibly-insecure-handling-of-tmp-files-in-maintainer-script preinst:8
+
+# There is no status, it's just for cleaning up.
+screen: init.d-script-does-not-implement-optional-option etc/init.d/screen-cleanup status
+
+# hyphen-used-as-minus-sign false positives
+# "'$'-character"
+screen: hyphen-used-as-minus-sign usr/share/man/man1/screen.1.gz:679
+# "`%'-character"
+screen: hyphen-used-as-minus-sign usr/share/man/man1/screen.1.gz:833
+
+# False positive, handled by debian/tmpfile, debian/postinst and
+# debian/postrm. See https://bugs.debian.org/740301 and
+# https://bugs.launchpad.net/bugs/1462692 for the context of this
+# implementation.
+screen: systemd-no-service-for-init-rcS-script screen-cleanup

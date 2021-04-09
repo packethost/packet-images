@@ -1,0 +1,16 @@
+4eac6bd5ae61ff046d56a74a50ace568  usr/lib/python3/dist-packages/pkg_resources/__init__.py
+d41d8cd98f00b204e9800998ecf8427e  usr/lib/python3/dist-packages/pkg_resources/_vendor/__init__.py
+855a259838095df9a4373bfda3f802ba  usr/lib/python3/dist-packages/pkg_resources/_vendor/packaging/__about__.py
+85e510fd8eb0ae25569cd94a59346b2e  usr/lib/python3/dist-packages/pkg_resources/_vendor/packaging/__init__.py
+8e4d826f663db72301814c6c1e100401  usr/lib/python3/dist-packages/pkg_resources/_vendor/packaging/_compat.py
+c0ad8b638ffb4c5790aeb70530b707d3  usr/lib/python3/dist-packages/pkg_resources/_vendor/packaging/_structures.py
+afaa3b5b81ab64aba48745682632466c  usr/lib/python3/dist-packages/pkg_resources/_vendor/packaging/markers.py
+c6b41e1444205ecfe76d89344a8d82f3  usr/lib/python3/dist-packages/pkg_resources/_vendor/packaging/requirements.py
+383a6adb779947b380253fdcac67f596  usr/lib/python3/dist-packages/pkg_resources/_vendor/packaging/specifiers.py
+d64b6356739a1b411eb55f3949a035af  usr/lib/python3/dist-packages/pkg_resources/_vendor/packaging/utils.py
+3838ffdea923479bc8f646aa8a6923c2  usr/lib/python3/dist-packages/pkg_resources/_vendor/packaging/version.py
+801d310f7cbbd3b910d3b6d37b8ef2ed  usr/lib/python3/dist-packages/pkg_resources/_vendor/pyparsing.py
+f01049871bac643b4d7221f6c5cad17a  usr/lib/python3/dist-packages/pkg_resources/_vendor/six.py
+1070fe04e872bf589b348581108162da  usr/lib/python3/dist-packages/pkg_resources/extern/__init__.py
+edd6adbb38b62c15e495a2a8325dded2  usr/share/doc/python3-pkg-resources/changelog.Debian.gz
+330b9dde0b00b295f5c3f73815e255f2  usr/share/doc/python3-pkg-resources/copyright

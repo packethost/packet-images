@@ -1,0 +1,199 @@
+Template: mdadm/autocheck
+Type: boolean
+Default: true
+Description: Should mdadm run monthly redundancy checks of the MD arrays?
+ If the kernel supports it (versions greater than 2.6.14), mdadm can periodically check the
+ redundancy of MD arrays (RAIDs). This may be a resource-intensive process,
+ depending on the local setup, but it could help prevent rare cases of data loss.
+ Note that this is a read-only check unless errors are found; if errors are
+ found, mdadm will try to correct them, which may result in write access to
+ the media.
+ .
+ The default, if turned on, is to check on the first Sunday of every
+ month at 01:06.
+Description-ca.UTF-8: Voleu que «mdadm» executi comprovacions de redundància mensuals de les matrius MD?
+ Si el nucli ho accepta (versions superiors a la 2.6.14), «mdadm» pot fer comprovacions periòdiques de la redundància de les matrius MD (RAIDs). Pot ésser que aquest procés consumeixi molts recursos del sistema, depenent de la configuració, però pot ajudar a prevenir casos poc freqüents de pèrdua de dades. Teniu present que aquestes comprovacions es fan en mode lectura llevat que es detectin errors: si hi ha errors, «mdadm» els corregirà i per això, caldrà que tengui accés d'escriptura als mitjans físics. 
+ .
+ El valor predeterminat, si s'activa, es fer la comprovació el primer diumenge de cada mes a les 01:06 am.
+Description-cs.UTF-8: Má mdadm spouštět měsíční kontroly redundance MD polí?
+ Pokud to vaše jádro podporuje (verze větší než 2.6.14), může mdadm pravidelně kontrolovat redundanci MD polí (RAIDů). Podle konfigurace počítače to může být proces velmi náročný na prostředky, ovšem může předejít vzácným případům ztráty dat. Pokud nejsou nalezeny chyby, používá tato kontrola v zásadě jen čtecí operace. Při nalezení chyb se je mdadm pokusí opravit, což může znamenat zápis na médium.
+ .
+ Pokud kontrolu povolíte, bude se dle výchozího nastavení spouštět každou první neděli v měsíci v 01:06 ráno.
+Description-da.UTF-8: Skal mdadm køre månedlig redundanskontrol af MD arrays?
+ Hvis kernen understøtter det (versioner større end 2.6.14), kan mdadm periodisk kontrollere redundansen på MD arrays (RAID'er). Det kan være en ressourcekrævende proces, afhængig af den lokale opsætning, men det kan hjælpe med at forhindre at du i sjældne tilfælde får datatab. Bemærk at dette er en skrivebeskyttet kontrol med mindre at der findes fejl; hvis der registreres fejl vil mdadm forsøge at rette dem, hvilket kan medføre skriveadgang til mediet.
+ .
+ Standarden - hvis aktiveret - er at kontrollere på den første søndag i hver måned klokken 01:06.
+Description-de.UTF-8: Soll mdadm monatlich die Redundanzüberprüfung auf den RAID-Verbünden ausführen?
+ Falls Ihr Kernel es unterstützt (Versionen größer als 2.6.14) kann mdadm regelmäßig die Redundanz Ihrer MD-Verbünde (RAID) überprüfen. Dies kann abhängig von Ihrer Installation ein resourcenintensiver Vorgang sein, der aber helfen kann, seltene Fälle von Datenverlust zu vermeiden. Bitte beachten Sie, dass diese Überprüfung nur lesend erfolgt, solange keine Fehler gefunden werden. Falls Fehler gefunden werden, wird mdadm versuchen, diese zu beheben, was zu schreibendem Zugriff auf das Medium führen kann.
+ .
+ Die Voreinstellung ist, falls eingeschaltet, die Überprüfung am ersten Sonntag jedes Monats um 01:06 Uhr durchzuführen.
+Description-es.UTF-8: ¿Debería mdadm ejecutar comprobaciones de redundancia mensuales de los arrays MD?
+ Mdadm puede comprobar de forma periódica la redundancia de sus arrays MD (RAIDs) si el núcleo lo soporta (si su versión es superior a la 2.6.14). Esto puede ser un proceso que consuma muchos recursos, dependiendo de su configuración, pero podría ayudar a prevenir casos raros de pérdida de datos. Tenga en cuenta que estas comprobaciones se hacen en modo lectura salvo que se detecten errores, en cuyo caso mdadm necesitará corregirlos, lo que significa que será necesario tener acceso de escritura a los medios físicos.
+ .
+ El valor por omisio, si se activa, es comprobar el primer Domingo de cada mes a las 01:06 am.
+Description-eu.UTF-8: Mdadm-ek hilabetero egin behar al du MD array-en erredundantzia egiaztapena?
+ Kernelak onartzen badu (2.6.14 baino bertsio berriagoak), mdadm-ek aldiro MD array-en (RAID-en) erredundantzia aldiro egiazta dezake. Hau errekurtso-behar handiko prozesu bat izan daiteke, konfigurazio lokalaren arabera, baina datu galera kasuak saihesten lagundu dezake. Kontutan izan errorerik aurkitzen ez bada irakurketa-soileko egiaztapen bat dela; errorerik arukituko balitz mdadm konpontzen saiatuko da, honetarako euskarrian idaztea beharrezko izan daitekeelarik.
+ .
+ Lehenespen bezala gaiturik dago, egiaztapena hilabete bakoitzeko lehenengo asteleheneko 01:06-etan egingo da.
+Description-fi.UTF-8: Tulisiko mdadm:n tarkistaa kuukausittain MD-pakkojen eheys?
+ Ohjelma mdadm voi säännöllisesti tarkistaa MD-pakkojen (RAIDien) tietojen monistuksen, jos ydin tukee tätä (versiosta 2.6.14 eteenpäin). Tämä prosessi voi paikallisesta kokoonpanosta riippuen kuluttaa paljon resursseja, mutta saattaa ehkäistä tietojen menetyksiä tietyissä harvinaisissa tapauksissa. Tarkistus vaatii vain tietojen lukemista, jos virheitä ei löyty. Jos virheitä löytyy, mdadm yrittää korjata ne, jolloin levylle saatetaan myös kirjoittaa.
+ .
+ Oletuksena, jos tarkistus on käytössä, se tehdään kuukauden ensimmäisenä sunnuntaina kello 01.06.
+Description-fr.UTF-8: Faut-il vérifier chaque mois la redondance des ensembles RAID ?
+ Si le noyau le gère (à partir de la version 2.6.14), mdadm peut vérifier périodiquement la redondance des ensembles RAID. Cette action peut demander beaucoup de ressources selon la configuration, mais cela aide à prévenir les rares cas de pertes de données. Notez que ce test est réalisé en lecture seule à moins que des erreurs ne soient rencontrées. Si des erreurs sont détectées, mdadm essayera de les corriger, ce qui entraînera des écritures sur le média.
+ .
+ Par défaut, la vérification s'effectuera tous les premiers dimanche du mois à 01 h 06.
+Description-gl.UTF-8: ¿Debería mdadm facer comprobacións mensuais de redundancia dos arrays MD?
+ Se o núcleo ten soporte para iso (en versións superiores á 2.6.14), mdadm pode facer comprobacións periódicas de redundancia dos arrays MD (RAIDs). Este pode ser un proceso intensivo en recursos, dependendo da configuración local, pero pode axudar a evitar algúns casos raros de perdas de datos. Teña en conta que esta é unha comprobación de só lectura a menos que se atopen erros; se se atopan erros, mdadm ha tratar de os arranxar, o que pode producir accesos de escritura aos soportes.
+ .
+ A opción por defecto, se se activa, é facer as comprobacións o primeiro domingo de cada mes ás 01:16.
+Description-it.UTF-8: Far eseguire a mdadm i controlli mensili di ridondanza sugli array MD?
+ Se il kernel lo supporta (tutte le versioni successive la 2.6.14), mdadm può effettuare delle verifiche periodiche sulla ridondanza degli array MD (RAID). Questo è un processo che potrebbe richiedere molte risorse, in base alle impostazioni locali, ma può prevenire i rari casi di perdita di dati. Notare che questa verifica è di sola-lettura tranne quando riscontra degli errori; quando ci sono errori, mdadm prova a correggerli e potrebbe accedere in scrittura al supporto.
+ .
+ Se attivo, la configurazione predefinita prevede che il controllo sia eseguito la prima domenica di ogni mese alle 01.06.
+Description-ja.UTF-8: mdadm は、毎月 MD アレイの冗長性チェックを行いますか?
+ カーネルがサポートしている場合 (バージョン 2.6.14 以降)、mdadm は定期的に MD アレイ (RAID) の冗長性チェックをすることが可能です。これは、設定に依存しますがリソースを集中的に使用する動作です。しかし、稀なデータ消失をあらかじめ避けるのに役立つでしょう。これは、エラーが見つからない限りは読み込みチェックのみであるのに注意してください。エラーが発見された場合、mdadm は修正しようとして、結果的にメディアへ書き込みを行います。
+ .
+ 有効にした場合、デフォルトでは毎月第一日曜 01:06 にチェックが実行されます。
+Description-nl.UTF-8: Maandelijkse redundantiecontrole van RAID-reeksen uitvoeren?
+ Als uw kernel dit ondersteunt (versies groter dan 2.6.14), kan mdadm periodiek de redundantie van uw RAID reeksen controleren. Afhankelijk van uw configuratie kan dit een intensief proces zijn, maar het kan wel helpen om uitzonderlijke gevallen van gegevensverlies te voorkomen. Zolang geen fouten worden gevonden, zal het proces alleen gegevens lezen; als echter wel fouten worden gevonden zal mdadm deze proberen te corrigeren.
+ .
+ Standaard wordt de controle, indien geactiveerd, uitgevoerd om 01:06 op elke eerste zondag van de maand.
+Description-pt.UTF-8: O mdadm deve correr verificações de redundância nos grupos MD mensalmente?
+ Se o kernel suportar (versões mais recentes que 2.6.14) o mdadm pode verificar periodicamente a redundância dos grupos MD (RAIDs). Isto pode ser um processo que requer muitos recursos, dependendo da sua configuração, mas pode prevenir casos raros de perda de dados. Notar que esta verificação é feita em modo de leitura a não ser que sejam encontrados erros; se forem encontrados erros, o mdadm tenta corrigi-los, o que pode resultar em acessosde escrita aos discos.
+ .
+ O pré-definido, se ligado, é os testes serem executados no primeiro Domingo de cada mês às 01:06.
+Description-ru.UTF-8: Должен ли mdadm запускать ежемесячную проверку избыточности на MD-массивах?
+ Если это поддерживается ядром (>> 2.6.14), mdadm может периодически проверять избыточность MD массивов (RAID-ов). Это может стать ресурсоёмким процессом в зависимости от настройки, но он может помочь предотвратить редкие случаи потери данных. Заметим, что пока не обнаружено ошибок, работа ведётся в режиме только чтение; если обнаруживается ошибка, mdadm попытается исправить её, что может потребовать прав записи на носитель.
+ .
+ Если ответить утвердительно, то по умолчанию проверка выполняется в первое воскресенье каждого месяца в 01:06.
+Description-sk.UTF-8: Má mdadm spúšťať mesačnú kontrolu redundancie polí MD?
+ Ak to jadro podporuje (verzie novšie ako 2.6.14), mdadm môže periodicky kontrolovať redundanciu polí MD (RAIDov). Tento proces môže byť (v závislosti od lokálneho nastavenia) náročný na zdroje systému, ale môže pomôcť pri predchádzaní vzácnym prípadom straty dát. Pamätajte, že, pokiaľ nie sú nájdené chyby, je to kontrola read-only, až keď sú nájdené chyby, pokúsi sa ich mdadm opraviť, čo môže mať za následok zápis na médium.
+ .
+ Predvolene je vypnuté, ak túto možnosť zapnete, bude kontrola vykonávaná každú prvú nedeľu mesiaca o 01:06.
+Description-sv.UTF-8: Ska mdadm köra månatliga redundanskontroller av MD-kedjorna?
+ Om din kärna har stöd för det (versioner senare än 2.6.14), kan mdadm periodvis kontrollera redundansen för dina MD-kedjor (RAID). Det här kan vara en resurskrävande process, beroende på din konfiguration, men den kan hjälpa till att förhindra ovanliga fall av dataförluster. Observera att det är en skrivskyddad kontroll såvida inte fel påträffas; om fel hittas kommer mdadm försöka att rätta till dem, vilket kan leda till skrivåtkomst till mediet.
+ .
+ Standardvärdet, om påslagen, är att kontrollera på den första söndagen i varje månad klockan 01.06.
+Description-vi.UTF-8: mdadm có nên chạy việc kiểm tra thừa hàng tháng trên những mảng MD không?
+ Nếu hạt nhân có phải hỗ trợ (các phiên bản sau 2.6.14) thì mdadm có thể kiểm tra theo chu kỳ tình thừa của các mảng MD (RAID). Tiến trình này có thể chiếm nhiều tài nguyên hệ thống, phụ thuộc vào thiết lập cục bộ, nhưng nó có thể giúp ngăn cản trường hợp mất dữ liệu (ít có). Ghi chú rằng việc kiểm tra này là chỉ đọc: gặp lỗi thì mdadm sẽ thử sửa chữa, mà có thể gây ra truy cập ghi vào vật chứa.
+ .
+ Giá trị mặc định, nếu được bật, là chạy những việc kiểm tra vào ngày hôm Chủ Nhật thứ nhất của mỗi tháng, vào lúc 01:06 giờ (giờ ti).
+
+Template: mdadm/start_daemon
+Type: boolean
+Default: true
+Description: Do you want to start the MD monitoring daemon?
+ The MD (RAID) monitor daemon sends email notifications in response to
+ important MD events (such as a disk failure).
+ .
+ Enabling this option is recommended.
+Description-ca.UTF-8: Desitjau arrencar el dimoni monitor MD?
+ El dimoni monitor de MD (RAID) envia notificacions per correu electrònic quan es produeixen esdeveniments importants en els dispositius MD (com un error de disc).
+ .
+ Es recomana l'activació d'aquesta opció.
+Description-cs.UTF-8: Chcete spustit daemon pro monitorování MD?
+ Daemon pro monitorování MD (RAIDu) zasílá emailová upozornění na významné MD události, jako je selhání disku.
+ .
+ Povolení této možnosti je doporučeno.
+Description-da.UTF-8: Ønsker du at starte MD-overvågningsdæmonen?
+ MD-overvågningsdæmonem (RAID) sender e-post-påmindelser udløst af vigtige MD-hændelser (såsom en diskfejl).
+ .
+ Aktivering af denne indstilling anbefales.
+Description-de.UTF-8: Möchten Sie den RAID-Überwachungsdämon starten?
+ Der MD- (RAID-)Überwachungsdämon verschickt Benachrichtigungen als Reaktion auf wichtige RAID-Ereignisse (wie zum Beispiel Festplattenfehler).
+ .
+ Das Aktivieren dieser Option ist empfohlen.
+Description-es.UTF-8: ¿Desea arrancar el demonio de monitorización MD?
+ El demonio de monitorización MD (RAID) envía notificaciones por correo electrónico cuando se producen eventos importantes en los dispositivos MD (como pueda ser el caso de un fallo de un disco).
+ .
+ Es opcional habilitar esta opción.
+Description-eu.UTF-8: MD monitorizazio deabrua abiarazi nahi al duzu?
+ MD (RAID) monitore deabruak eposta bidezko berri-emateak bidaltzen ditu gertaera garrantzitsuetan (disko erroreen antzerakoetan).
+ .
+ Aukera hau gaitzea gomendagarria da.
+Description-fi.UTF-8: Haluatko käynnistää MD-seurannan?
+ MD-pakkoja (RAIDeja) seuraava taustaohjelma lähettää tietoja sähköpostiin tärkeiden MD-tapahtumien (kuten levyrikon) sattuessa.
+ .
+ Tämän valitseminen on suositeltavaa.
+Description-fr.UTF-8: Faut-il démarrer le démon de surveillance MD ?
+ Le démon de surveillance MD envoie des notifications par courriel lors d'importants événements MD (comme une panne de disque dur).
+ .
+ Il est recommandé d'activer cette option.
+Description-gl.UTF-8: ¿Quere iniciar o servizo de monitorización de MD?
+ O servizo de monitorización de MD (RAID) envía avisos por email en resposta a eventos importantes de MD (coma fallos nos discos).
+ .
+ Recoméndase activar esta opción.
+Description-it.UTF-8: Avviare il demone di monitoraggio MD?
+ Il demone di monitoraggio MD (RAID) invia delle notifiche via email quando si verificano eventi importanti (come la rottura di un disco).
+ .
+ Si raccomanda l'attivazione di questa funzione.
+Description-ja.UTF-8: MD 監視デーモンを起動しますか?
+ MD (RAID) 監視デーモンは、重大な MD 関連のイベント (ディスク障害など) に対してメールで通知を送ります。
+ .
+ この機能を有効にするのをお勧めします。
+Description-nl.UTF-8: Wilt u de achtergronddienst voor de RAID-monitor starten?
+ De achtergronddienst voor de RAID-monitor stuurt per e-mail berichten bij belangrijke gebeurtenissen die betrekking hebben op RAID (zoals een falende harde schijf).
+ .
+ Gebruik van deze optie wordt aanbevolen.
+Description-pt.UTF-8: Quer iniciar o deamon de monitorização do MD?
+ O daemon monitor MD(RAID) envia notificações por email no caso de eventos importantes (tais como falha de um disco). Provavelmente quer activar esta opção.
+ .
+ É recomendado activar esta opção.
+Description-ru.UTF-8: Запускать демон-монитор MD?
+ Демон-монитор MD (RAID) посылает почтовые уведомления в случае возникновения важных событий с MD (таких как отказ диска).
+ .
+ Рекомендуется ответить утвердительно.
+Description-sk.UTF-8: Chcete spustiť démona monitorovania MD?
+ Monitorovací démon MD (RAID) posiela upozornenia emailom, ako reakcie na dôležité udalosti MD (napr. zlyhanie disku).
+ .
+ Povolenie tejto možnosti je odporúčané.
+Description-sv.UTF-8: Vill du starta MD-övervakningsdemonen?
+ MD-övervakningsdemonen (RAID) skickar e-postnotifieringar för viktiga MD-händelser (såsom ett diskfel).
+ .
+ Att aktivera denna funktion rekommenderas.
+Description-vi.UTF-8: Bạn có muốn khởi chạy trình nền theo dõi MD không?
+ Trình nền theo dõi MD (RAID) gửi thư thông báo hưởng ứng dữ kiện MD quan trọng (v.d. đĩa bị hỏng).
+ .
+ Khuyên bạn hiệu lực tùy chọn này.
+
+Template: mdadm/mail_to
+Type: string
+Default: root
+Description: Recipient for email notifications:
+ Please enter the email address of the user who should get the email
+ notifications for important MD events.
+Description-ca.UTF-8: Destinatari de les notificacions de correu electrònic:
+ Introduïu l'adreça de correu electrònic de l'usuari que ha de rebre les notificacions de correu electrònic per a esdeveniments MD rellevants.
+Description-cs.UTF-8: Příjemce emailových upozornění:
+ Zadejte prosím emailovou adresu uživatele, který má dostávat emailová upozornění při výskytu významných MD událostí.
+Description-da.UTF-8: Modtager af e-post-påmindelser:
+ Indtast venligst e-post-adressen på brugeren, som skal modtage e-post-påmindelser for vigtige MD-hændelser.
+Description-de.UTF-8: Empfänger der E-Mail-Benachrichtungen:
+ Geben Sie bitte die E-Mail-Adresse des Benutzers an, der die E-Mail-Benachrichtigung für wichtigen MD-Ereignisse erhalten soll.
+Description-es.UTF-8: Destinatario de las notificaciones por correo:
+ Introduzca la dirección de correo electrónico del usuario que debería recibir las notificaciones por correo de eventos relevantes en los dispositivos MD.
+Description-eu.UTF-8: Eposta berri-emateen hartzailea:
+ Mesedez idatzi MD gertaera garrantzitsuen berri emate mezuak jaso behar dituen erabiltzailearen eposta helbidea.
+Description-fi.UTF-8: Sähköpostiviestien vastaanottaja:
+ Anna sähköpostiosoite, johon sähköpostitiedotteet tärkeistä MD-tapahtumista lähetetään.
+Description-fr.UTF-8: Destinataire des notifications par courriel :
+ Veuillez indiquer l'adresse électronique de l'utilisateur qui doit recevoir les notifications lors d'importants événements MD.
+Description-gl.UTF-8: Destinatario para os avisos por email:
+ Introduza o enderezo de email do usuario que debe recibir os avisos por email de eventos importantes de MD.
+Description-it.UTF-8: Destinatario delle email di notifica:
+ Inserire l'indirizzo email dell'utente che deve ricevere le notifiche di eventi importanti legati al MD.
+Description-ja.UTF-8: メール通知の宛先:
+ MD 関連の重大なイベントが発生した際、メールでの通知を受け取る必要があるユーザのメールアドレスを入力してください。
+Description-nl.UTF-8: Adres voor e-mailberichten:
+ Wat is het e-mailadres van de gebruiker die de e-mailberichten voor belangrijke gebeurtenissen met betrekking tot RAID dient te ontvangen.
+Description-pt.UTF-8: Destinatário de email para notificações:
+ Por favor, introduza o endereço de email do utilizador que deve receber as notificações de eventos MD importantes.
+Description-ru.UTF-8: Получатель уведомительных писем:
+ Введите адрес электронной почты пользователя, который будет получать почтовые уведомления о важных изменениях в состоянии MD.
+Description-sk.UTF-8: Príjemca emailových upozornení:
+ Prosím, zadajte emailovú adresu používateľa, ktorý má dostávať emailové upozornenia na dôležité udalosti MD.
+Description-sv.UTF-8: Mottagare av e-postnotifieringar:
+ Ange e-postadressen till den användare som ska ta emot e-postnotifieringar för dessa viktiga MD-händelser.
+Description-vi.UTF-8: Người nhận thư thông báo :
+ Hãy nhập địa chỉ thư của người dùng nên nhận thư thông báo về dữ kiện MD quan trọng.

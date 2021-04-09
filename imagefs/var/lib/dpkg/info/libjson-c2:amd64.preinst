@@ -1,0 +1,18 @@
+#!/bin/sh
+
+set -e
+
+if [ "$1" = upgrade ] && [ "$2" = 0.11-4ubuntu2.1 ]; then
+        # When upgrading from 0.11-4ubuntu2.1, we don't want to reexec upstart because
+        # it will die. However, upgrades to 0.11-4ubuntu2.1 may leave the package
+        # half-configured (because it may have caused a system crash during configure)
+        # and therefore we can't detect we are upgrading from 0.11-4ubuntu2.1 during the
+        # postinst script (which gets called with the previously configured package
+        # version). Signal to the postinst script that we are upgrading from a
+        # half-configured, broken version (see https://launchpad.net/bugs/1878723).
+        touch /var/run/jsonc_dont_reexec_upstart
+fi
+
+
+
+exit 0

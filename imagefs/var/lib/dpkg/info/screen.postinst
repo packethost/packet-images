@@ -1,0 +1,51 @@
+#!/bin/sh
+set -e
+
+. /usr/share/debconf/confmodule
+
+if [ "$1" = configure ]; then
+  if ! test -d /var/run/screen; then
+    install -g utmp -m 0775 -d /var/run/screen
+  fi
+  perms="`stat -c%a /usr/bin/screen`"
+  override=/etc/tmpfiles.d/screen-cleanup.conf
+  if [ $perms -eq 4755 ]; then
+    chmod 0755 /var/run/screen
+    if [ ! -f $override ]; then
+       echo 'd /var/run/screen 0755 root utmp' > $override
+    fi
+  elif [ $perms -eq 755 ]; then
+    chmod 1777 /var/run/screen
+    if [ ! -f $override ]; then
+       echo 'd /var/run/screen 1777 root utmp' > $override
+    fi
+  fi
+
+  # LP #1462692
+  servicedir=/lib/systemd/system
+  servicefile=$servicedir/screen-cleanup.service
+  mkdir -p $servicedir
+  if [ ! -e $servicefile ]; then
+      ln -s /dev/null $servicefile
+  fi
+
+  add-shell /usr/bin/screen || true
+fi
+
+# Automatically added by dh_installinit
+if [ "$1" = "configure" ] || [ "$1" = "abort-upgrade" ]; then
+	# In case this system is running systemd, we need to ensure that all
+	# necessary tmpfiles (if any) are created before starting.
+	if [ -d /run/systemd/system ] ; then
+		systemd-tmpfiles --create /usr/lib/tmpfiles.d/screen-cleanup.conf >/dev/null || true
+	fi
+fi
+# End automatically added section
+# Automatically added by dh_installinit
+if [ "$1" = "configure" ] || [ "$1" = "abort-upgrade" ]; then
+	if [ -x "/etc/init.d/screen-cleanup" ]; then
+		update-rc.d screen-cleanup defaults >/dev/null || exit $?
+	fi
+fi
+# End automatically added section
+

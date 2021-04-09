@@ -1,0 +1,32 @@
+#!/bin/sh
+set -e
+
+if [ "$1" = purge ] || [ "$1" = remove ]; then
+  rm -rf /var/run/screen
+fi
+
+if [ "$1" = purge ]; then
+  rm -vf /etc/tmpfiles.d/screen-cleanup.conf
+
+  # LP #1462692
+  rm -f /lib/systemd/system/screen-cleanup.service
+  rmdir -p --ignore-fail-on-non-empty /lib/systemd/system
+fi
+
+if [ "$1" = disappear ]; then
+  remove-shell /usr/bin/screen || true
+fi
+
+# Automatically added by dh_installinit
+if [ "$1" = "purge" ] ; then
+	update-rc.d screen-cleanup remove >/dev/null
+fi
+
+
+# In case this system is running systemd, we make systemd reload the unit files
+# to pick up changes.
+if [ -d /run/systemd/system ] ; then
+	systemctl --system daemon-reload >/dev/null || true
+fi
+# End automatically added section
+

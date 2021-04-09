@@ -1,0 +1,10 @@
+ca7eafdaa2b27d470bb084fb74cd098b  usr/bin/mtr
+092fda54255f4c4f02c4ec8ff71d68dc  usr/share/doc/mtr/AUTHORS
+070fa7627326a1ca7eb296b7b527bd86  usr/share/doc/mtr/FORMATS
+82a85e26b2c518b90e597eb52c17422a  usr/share/doc/mtr/README
+008767d77ea276c0b536790b9ffd99d3  usr/share/doc/mtr/SECURITY
+811236204bc9530ff18ebe74ff1f9f99  usr/share/doc/mtr/TODO.gz
+4b12cf5a83533751c0ee22f07900ba9f  usr/share/doc/mtr/changelog.Debian.gz
+bfa2c2ebf662098b5f6816b62b204995  usr/share/doc/mtr/copyright
+96e4017d4ad636c91b41e31c9b377ae3  usr/share/man/man8/mtr.8.gz
+e259f9f1642ce29de71ce7232679f4fb  usr/share/menu/mtr

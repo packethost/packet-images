@@ -1,0 +1,13 @@
+/.
+/usr
+/usr/lib
+/usr/lib/x86_64-linux-gnu
+/usr/lib/x86_64-linux-gnu/libefiboot.so.0.23
+/usr/lib/x86_64-linux-gnu/libefivar.so.0.23
+/usr/share
+/usr/share/doc
+/usr/share/doc/libefivar0
+/usr/share/doc/libefivar0/copyright
+/usr/share/doc/libefivar0/changelog.Debian.gz
+/usr/lib/x86_64-linux-gnu/libefiboot.so.0
+/usr/lib/x86_64-linux-gnu/libefivar.so.0

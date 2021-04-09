@@ -1,0 +1,4 @@
+libmpathpersist 0 multipath-tools
+libmultipath 0 multipath-tools
+udeb: libmpathpersist 0 multipath-udeb
+udeb: libmultipath 0 multipath-udeb

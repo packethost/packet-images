@@ -1,0 +1,33 @@
+#!/bin/sh
+# (based on multipath-tools-boot)
+
+PREREQS="udev"
+
+prereqs() { echo "$PREREQS"; }
+
+case $1 in
+prereqs)
+	prereqs
+	exit 0
+	;;
+esac
+
+if [ ! -x /usr/bin/sg_inq ]; then
+	exit 0
+fi
+
+. /usr/share/initramfs-tools/hook-functions
+
+add_udev_rules()
+{
+  for rules in 55-scsi-sg3_id.rules 58-scsi-sg3_symlink.rules; do
+    if [ -e /lib/udev/rules.d/$rules ]; then
+      cp -p /lib/udev/rules.d/$rules $DESTDIR/lib/udev/rules.d/
+    fi
+  done
+}
+
+copy_exec /usr/bin/sg_inq
+
+add_udev_rules
+

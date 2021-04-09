@@ -1,0 +1,13 @@
+TARGETS = uuidd unattended-upgrades multipath-tools mdadm thermald ntp urandom open-iscsi iscsid sendsigs rsyslog umountnfs.sh hwclock.sh networking umountfs umountroot mdadm-waitidle halt reboot
+open-iscsi: multipath-tools
+iscsid: open-iscsi
+sendsigs: uuidd iscsid open-iscsi multipath-tools mdadm thermald unattended-upgrades
+rsyslog: multipath-tools mdadm thermald sendsigs ntp
+umountnfs.sh: uuidd multipath-tools thermald sendsigs rsyslog unattended-upgrades
+hwclock.sh: uuidd rsyslog
+networking: iscsid open-iscsi umountnfs.sh
+umountfs: urandom uuidd iscsid open-iscsi hwclock.sh multipath-tools mdadm umountnfs.sh thermald networking unattended-upgrades
+umountroot: umountfs
+mdadm-waitidle: umountroot
+halt: umountroot mdadm-waitidle
+reboot: umountroot mdadm-waitidle

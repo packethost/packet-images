@@ -1,0 +1,21 @@
+#!/bin/sh
+set -e
+
+action=$1
+version=$2
+
+if [ "$action" = upgrade ] || [ "$action" = install ]
+then
+  if dpkg --compare-versions "$version" lt 1:5.5p1-6 && \
+     [ -d /var/run/sshd ]; then
+    # make sure /var/run/sshd is not removed on upgrades
+    touch /var/run/sshd/.placeholder
+  fi
+fi
+
+# Automatically added by dh_installdeb
+dpkg-maintscript-helper mv_conffile /etc/pam.d/ssh /etc/pam.d/sshd 1:4.7p1-4~ -- "$@"
+# End automatically added section
+
+
+exit 0

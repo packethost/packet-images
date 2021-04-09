@@ -1,0 +1,31 @@
+[Unit]
+Description=Login to default iSCSI targets
+Documentation=man:iscsiadm(8) man:iscsid(8)
+Wants=network-online.target remote-fs-pre.target iscsid.service
+After=network-online.target iscsid.service
+Before=remote-fs-pre.target
+DefaultDependencies=no
+Conflicts=shutdown.target
+Before=shutdown.target
+
+[Service]
+Type=oneshot
+RemainAfterExit=true
+# iscsiadm --login will return 21 if no nodes are configured,
+# and 15 if a session is alread logged in (which we do not
+# consider an error)
+SuccessExitStatus=15 21
+# iscsiadm will only work if iscsid is running. But we can't use a
+# Requires= dependency, since restarts of iscsid would then be
+# propagated to this service - and that would cause all sorts of
+# mayhem. Therefore, check it in ExecStartPre.
+ExecStartPre=/bin/systemctl --quiet is-active iscsid.service
+ExecStart=/sbin/iscsiadm -m node --loginall=automatic
+ExecStart=/lib/open-iscsi/activate-storage.sh
+ExecStop=/lib/open-iscsi/umountiscsi.sh
+ExecStop=/bin/sync
+ExecStop=/lib/open-iscsi/logout-all.sh
+
+[Install]
+WantedBy=sysinit.target
+Alias=iscsi.service

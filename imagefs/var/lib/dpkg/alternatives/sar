@@ -1,0 +1,9 @@
+auto
+/usr/bin/sar
+sar.1.gz
+/usr/share/man/man1/sar.1.gz
+
+/usr/bin/sar.sysstat
+0
+/usr/share/man/man1/sar.sysstat.1.gz
+

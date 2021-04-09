@@ -1,0 +1,11 @@
+#!/bin/sh
+set -e
+# Automatically added by dh_installdeb
+dpkg-maintscript-helper rm_conffile /etc/fonts/fonts.dtd 2.10.1-0ubuntu1 -- "$@"
+# End automatically added section
+# Automatically added by dh_installdeb
+dpkg-maintscript-helper rm_conffile /etc/fonts/conf.avail/20-fix-globaladvance.conf 2.10.1-0ubuntu1 -- "$@"
+# End automatically added section
+# Automatically added by dh_installdeb
+dpkg-maintscript-helper rm_conffile /etc/fonts/conf.avail/11-lcd-filter-lcddefault.conf 2.10.1-0ubuntu1 -- "$@"
+# End automatically added section

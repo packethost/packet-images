@@ -1,0 +1,9 @@
+020071cb8fcff2b7eab8e1beaf65058b  lib/x86_64-linux-gnu/libpcre.so.3.13.2
+66cae850e791d89892cb8b71d07ab39c  usr/lib/x86_64-linux-gnu/libpcreposix.so.3.13.2
+b9b3de67051caa3e97feb271c6e4604b  usr/share/doc/libpcre3/AUTHORS
+9b99ad8cfa64eb1413c086aa5256feca  usr/share/doc/libpcre3/NEWS.gz
+1803fd54d33fac74c113b78c18d56355  usr/share/doc/libpcre3/README.Debian
+34e24fc18ff2c4206c683296d3d0430d  usr/share/doc/libpcre3/README.gz
+a76c8f37edf86cd45683eb0e003bffea  usr/share/doc/libpcre3/changelog.Debian.gz
+b74684cdd7069616a57aa29cb658da63  usr/share/doc/libpcre3/copyright
+8fef8d0d78968f4d60cde4848385b7e8  usr/share/man/man3/pcrepattern.3.gz

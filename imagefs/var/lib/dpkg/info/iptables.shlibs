@@ -1,0 +1,3 @@
+libip4tc 0 iptables
+libip6tc 0 iptables
+libiptc 0 iptables

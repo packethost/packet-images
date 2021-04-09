@@ -1,0 +1,16 @@
+5f77b77ef0452ee823eedef8e0a7aeb6  usr/bin/2to3-3.5
+7162b79f5f8bbc5e6380b0e96e051e8b  usr/bin/pydoc3.5
+129e7f63949a8b7ecfe386c7bd050ff8  usr/bin/pygettext3.5
+9e648b25a34c7871d72954318fa47721  usr/share/applications/python3.5.desktop
+d5627d51a7ab9e6f3f969621f1bebea9  usr/share/doc/python3.5/ACKS.gz
+9b043682b77d4ff4b4e770a8878afe81  usr/share/doc/python3.5/NEWS.gz
+22d7104a27e1d3c288eda256241d261b  usr/share/doc/python3.5/README.Debian
+d57d9fdd830eb353a47f88d255ac5c67  usr/share/doc/python3.5/README.gz
+4455e911b751ef6969ed6a1a918d748e  usr/share/doc/python3.5/copyright
+be4bdd400a2fad28dad0013ceb9f662d  usr/share/lintian/overrides/python3.5
+ead36561d11b8dd97408b146d5e3170e  usr/share/man/man1/2to3-3.5.1.gz
+447e56cb22db067550e3600ac92f5eb6  usr/share/man/man1/pdb3.5.1.gz
+e3f90e0b305ebc9653fffb216d5a22f6  usr/share/man/man1/pydoc3.5.1.gz
+90cf8dfcb6b3c2741f64c36c6842a256  usr/share/man/man1/pygettext3.5.1.gz
+9f9c85f23667a9a942aa0de9588e5918  usr/share/man/man1/pysetup3.5.1.gz
+d183cb64badc9865b14c18fb0059b39f  usr/share/pixmaps/python3.5.xpm

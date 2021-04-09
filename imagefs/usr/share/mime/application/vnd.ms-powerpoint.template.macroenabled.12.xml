@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mime-type xmlns="http://www.freedesktop.org/standards/shared-mime-info" type="application/vnd.ms-powerpoint.template.macroEnabled.12">
+  <!--Created automatically by update-mime-database. DO NOT EDIT!-->
+  <comment>PowerPoint presentation template</comment>
+  <generic-icon name="x-office-presentation"/>
+  <glob pattern="*.potm"/>
+  <sub-class-of type="application/vnd.openxmlformats-officedocument.presentationml.template"/>
+</mime-type>

@@ -1,0 +1,124 @@
+/*
+ * Judaic Calendar. Created by calendar.judaic.py.
+ * Collaboratively authored by linux-il@cs.huji.ac.il.
+ *
+ * $Debian GNU\Linux$
+ *
+ */
+
+/*
+ * $Id: calendarJudaic.py,v 29-May-2010$
+ */
+
+#ifndef _calendar_judaic_
+#define _calendar_judaic_
+
+LANG=UTF-8
+
+/*
+ * Jewish calendar for the CE year 2019
+ * 24 Tevet 5779
+ 5779 - 3 Tevet 5780
+ 5780
+ */
+
+
+05/01*	Parshat Vaera
+12/01*	Parshat Bo
+19/01*	Parshat Beshalach
+21/01*	Tu B'Shvat
+26/01*	Parshat Yitro
+02/02*	Parshat Mishpatim
+05/02*	Family Day
+09/02*	Parshat Terumah
+16/02*	Parshat Tetzaveh
+23/02*	Parshat Ki Tisa
+02/03*	Parshat Vayakhel
+09/03*	Parshat Pekudei
+16/03*	Parshat Vayikra
+20/03*	Ta'anit Esther
+21/03*	Purim
+22/03*	Shushan Purim
+23/03*	Parshat Tzav
+30/03*	Parshat Shmini
+06/04*	Parshat Tazria
+13/04*	Parshat Metzora
+20/04*	Pesach
+21/04*	Hol hamoed Pesach
+22/04*	Hol hamoed Pesach
+23/04*	Hol hamoed Pesach
+24/04*	Hol hamoed Pesach
+25/04*	Hol hamoed Pesach
+26/04*	Pesach VII
+27/04*	Parshat Achrei Mot
+02/05*	Yom HaShoah
+04/05*	Parshat Kedoshim
+08/05*	Yom HaZikaron
+09/05*	Yom HaAtzma'ut
+11/05*	Parshat Emor
+18/05*	Parshat Behar
+23/05*	Lag B'Omer
+25/05*	Parshat Bechukotai
+01/06*	Parshat Bamidbar
+02/06*	Yom Yerushalayim
+08/06*	Erev Shavuot
+08/06*	Parshat Nasso
+09/06*	Shavuot
+15/06*	Parshat Beha'alotcha
+22/06*	Parshat Sh'lach
+29/06*	Parshat Korach
+06/07*	Parshat Chukat
+13/07*	Parshat Balak
+20/07*	Parshat Pinchas
+21/07*	Tzom Tammuz
+27/07*	Parshat Matot
+01/08*	Zeev Zhabotinsky day
+03/08*	Parshat Masei
+10/08*	Parshat Devarim
+11/08*	Tish'a B'Av
+16/08*	Tu B'Av
+17/08*	Parshat Vaetchanan
+24/08*	Parshat Eikev
+31/08*	Parshat Re'eh
+07/09*	Parshat Shoftim
+14/09*	Parshat Ki Teitzei
+21/09*	Parshat Ki Tavo
+28/09*	Parshat Nitzavim
+30/09*	Rosh Hashana I
+01/10*	Rosh Hashana II
+02/10*	Tzom Gedaliah
+05/10*	Parshat Vayeilech
+08/10*	Erev Yom Kippur
+09/10*	Yom Kippur
+12/10*	Parshat Ha'Azinu
+14/10*	Sukkot
+15/10*	Hol hamoed Sukkot
+16/10*	Hol hamoed Sukkot
+17/10*	Hol hamoed Sukkot
+18/10*	Hol hamoed Sukkot
+19/10*	Hol hamoed Sukkot
+20/10*	Hoshana raba
+21/10*	Shmini Atzeret
+21/10*	Parshat Vezot Habracha
+26/10*	Parshat Bereshit
+02/11*	Parshat Noach
+09/11*	Parshat Lech-Lecha
+10/11*	Yitzhak Rabin memorial day
+16/11*	Parshat Vayera
+23/11*	Parshat Chayei Sara
+30/11*	Parshat Toldot
+07/12*	Parshat Vayetzei
+14/12*	Parshat Vayishlach
+21/12*	Parshat Vayeshev
+23/12*	Chanukah
+24/12*	Chanukah
+25/12*	Chanukah
+26/12*	Chanukah
+27/12*	Chanukah
+28/12*	Chanukah
+28/12*	Parshat Miketz
+29/12*	Chanukah
+30/12*	Chanukah
+
+
+#endif /* !_calendar_judaic_ */

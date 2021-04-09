@@ -1,0 +1,51 @@
+#! /bin/sh
+### BEGIN INIT INFO
+# Provides:          multipath-tools-boot
+# Required-Start:    checkroot udev
+# Required-Stop:     checkroot udev
+# Should-Start:      module-init-tools
+# Should-Stop:       module-init-tools
+# Default-Start:     S
+# Default-Stop:
+# X-Start-Before:    checkfs mountall
+# X-Stop-After:      umountfs
+# Short-Description: early multipath boot script
+# Description:
+### END INIT INFO
+
+PATH=/sbin:/bin
+DAEMON=/sbin/multipath
+NAME=multipath-tools-boot
+DESC="Discovering and coalescing multipaths"
+
+test -x $DAEMON || exit 0
+
+. /lib/lsb/init-functions
+
+VERBOSITY=0
+if [ -f /etc/default/multipath-tools ] ; then
+	. /etc/default/multipath-tools
+fi
+
+set -e
+
+case "$1" in
+  start)
+	log_action_begin_msg "$DESC"
+	modprobe dm-multipath 2> /dev/null || true
+	$DAEMON -v $VERBOSITY
+	log_action_end_msg $?
+	;;
+  stop)
+	;;
+  restart|force-reload)
+  	$0 start
+	;;
+  *)
+	N=/etc/init.d/$NAME
+	echo "Usage: $N {start|stop|restart|force-reload}" >&2
+	exit 1
+	;;
+esac
+
+exit 0

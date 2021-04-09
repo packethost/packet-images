@@ -1,0 +1,19 @@
+This package was debianized by Philipp Hug <debian@hug.cx> on
+Tue, 07 Mar 2005 01:22:53 +0100.
+
+Based on linux-iscsi debianization from Chad Tindel <chad.tindel@hp.com>
+
+It was downloaded from http://www.open-iscsi.org/
+
+Upstream Authors: Open-iSCSI Developers <http://www.open-iscsi.org>
+Copyright: (C) Dmitry Yusupov <dima@neterion.com> and others.
+
+License:
+
+    You are free to distribute this software under the terms of the GNU General
+    Public License v2 (or at your option) any later version.  On Debian systems,
+    the complete text of the GNU General Public License can be found in the file
+    `/usr/share/common-licenses/GPL-2'.
+
+The Debian packaging is copyright 2009, Ritesh Raj Sarraf <rrs@researchut.com> and
+is licensed under the GPL 2 license, see `/usr/share/common-licenses/GPL-2'.

@@ -1,0 +1,62 @@
+				   EthStatus
+				   =========
+
+Original author: Gabriel Montenegro <johnpetrucci@users.sourceforge.net>
+Code maintainer: Christoph Haas <email@christoph-haas.de>
+
+Copyright (c) 2000-2001 by Gabriel Montenegro.  This program is free software
+which I release under the GNU General Public License.
+Read the COPYRIGHT file for more info.
+
+
+Description
+===========
+
+Ethstatus was developed for Linux users that are usually in console
+mode. It is a simple, easy to use program for displaying commonly
+needed/wanted statistics in real time of incoming and outgoing traffic.  It is
+similar to the famous "iptraf" software but aims to show bandwidth usage and
+packet counters on a realtime quantity basis.
+
+
+Features
+========
+
+-> Simulates RX/TX data LEDs
+-> 76x10 block graphic graph - updated every second
+-> Constant change of speed, for better graphic interaction
+-> Interface selection (eth0, eth1 ...)
+-> Selection beetween two exibition modes: Monochrome, VGA
+-> Log file stores data of all connections
+ 
+
+Requirements
+============
+
+For the instalation of EthStatus, you will need the following
+
+     -ncurses library
+     -GNU make
+
+
+Installation
+============
+
+For creating and installing the binaries from source you can plainly use
+do
+ - make
+ - make install (as root)
+            
+
+Configuration File / Command line options
+=========================================
+
+Please consult the man page that is shipped with Ethstatus.
+
+
+Bug reports
+===========
+
+The current version of Ethstatus is distributed as a native Debian package.
+As the original author is no longer actively supporting this program please
+use the BTS (http://bugs.debian.org) in case you find a bug.

@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mime-type xmlns="http://www.freedesktop.org/standards/shared-mime-info" type="application/x-ms-wim">
+  <!--Created automatically by update-mime-database. DO NOT EDIT!-->
+  <comment>WIM disk Image</comment>
+  <acronym>WIM</acronym>
+  <expanded-acronym>Windows Imaging Format</expanded-acronym>
+  <glob pattern="*.wim"/>
+  <glob pattern="*.swm"/>
+</mime-type>

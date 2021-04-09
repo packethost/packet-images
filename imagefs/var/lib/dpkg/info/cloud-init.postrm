@@ -1,0 +1,42 @@
+#!/bin/sh
+
+set -e
+
+case "$1" in
+   purge)
+      rm -f /etc/cloud/cloud.cfg.d/90_dpkg.cfg
+      rm -f /etc/apt/apt.conf.d/90cloud-init-pipelining
+      ;;
+   remove)
+      dpkg-divert --package cloud-init --remove --rename --divert \
+            /etc/init/ureadahead.conf.disabled /etc/init/ureadahead.conf
+      rm -f /etc/cloud/cloud.cfg.d/90cloud-init-pipelining
+      ;;
+esac
+
+# Automatically added by dh_systemd_start
+if [ -d /run/systemd/system ]; then
+	systemctl --system daemon-reload >/dev/null || true
+fi
+# End automatically added section
+# Automatically added by dh_systemd_enable
+if [ "$1" = "remove" ]; then
+	if [ -x "/usr/bin/deb-systemd-helper" ]; then
+		deb-systemd-helper mask cloud-config.service cloud-final.service cloud-init-local.service cloud-init.service >/dev/null
+	fi
+fi
+
+if [ "$1" = "purge" ]; then
+	if [ -x "/usr/bin/deb-systemd-helper" ]; then
+		deb-systemd-helper purge cloud-config.service cloud-final.service cloud-init-local.service cloud-init.service >/dev/null
+		deb-systemd-helper unmask cloud-config.service cloud-final.service cloud-init-local.service cloud-init.service >/dev/null
+	fi
+fi
+# End automatically added section
+# Automatically added by dh_installdebconf
+if [ "$1" = purge ] && [ -e /usr/share/debconf/confmodule ]; then
+	. /usr/share/debconf/confmodule
+	db_purge
+fi
+# End automatically added section
+

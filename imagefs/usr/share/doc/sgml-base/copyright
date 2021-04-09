@@ -1,0 +1,22 @@
+This the Debian package of sgml-base.  It was assembled by Christian
+Schwarz <schwarz@debian.org>.  It is currently maintained by Ardo van
+Rangelrooij <ardo@debian.org>.
+
+Copyright:
+
+Copyright (C) 1997 Christian Schwarz <schwarz@debian.org>.
+Copyright (C) 2001-2004 Ardo van Rangelrooij <ardo@debian.org>
+Copyright (C) 2012 Helmut Grohne <helmut@subdivi.de>
+
+This is free software; you may redistribute it and/or modify it under
+the terms of the GNU General Public License as published by the Free
+Software Foundation; either version 2, or (at your option) any later
+version.
+
+This is distributed in the hope that it will be useful, but without
+any warranty; without even the implied warranty of merchantability or
+fitness for a particular purpose.  See the GNU General Public License
+for more details.
+
+On a Debian system a copy of the GNU General Public Licence can be
+found in the file '/usr/share/common-licenses/GPL'.

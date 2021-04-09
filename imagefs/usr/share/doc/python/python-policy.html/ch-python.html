@@ -1,0 +1,400 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0//EN">
+
+<html>
+
+<head>
+
+<meta http-equiv="content-type" content="text/html; charset=utf-8">
+
+<title>Debian Python Policy - Python Packaging</title>
+
+<link href="index.html" rel="start">
+<link href="ch-python3.html" rel="prev">
+<link href="ch-module_packages.html" rel="next">
+<link href="index.html#contents" rel="contents">
+<link href="index.html#copyright" rel="copyright">
+<link href="ch-python3.html" rel="chapter" title="1 On the move to Python 3">
+<link href="ch-python.html" rel="chapter" title="2 Python Packaging">
+<link href="ch-module_packages.html" rel="chapter" title="3 Packaged Modules">
+<link href="ch-programs.html" rel="chapter" title="4 Python Programs">
+<link href="ch-embed.html" rel="chapter" title="5 Programs Embedding Python">
+<link href="ch-other.html" rel="chapter" title="6 Interaction with Locally Installed Python Versions">
+<link href="ap-build_dependencies.html" rel="appendix" title="A Build Dependencies">
+<link href="ap-packaging_tools.html" rel="appendix" title="B Packaging Tools">
+<link href="ap-upgrade.html" rel="appendix" title="C Upgrade Procedure">
+<link href="ch-python.html#s-versions" rel="section" title="2.1 Versions">
+<link href="ch-python.html#s-base" rel="section" title="2.2 Main packages">
+<link href="ch-python.html#s-minimal" rel="section" title="2.3 Minimal packages">
+<link href="ch-python.html#s-interpreter" rel="section" title="2.4 Python Interpreter">
+<link href="ch-python.html#s-paths" rel="section" title="2.5 Module Path">
+<link href="ch-python.html#s-runtimes_hooks" rel="section" title="2.6 Hooks for updates to installed runtimes">
+<link href="ch-python.html#s-docs" rel="section" title="2.7 Documentation">
+<link href="ch-module_packages.html#s3.1" rel="section" title="3.1 Types of Python Modules">
+<link href="ch-module_packages.html#s-wheels" rel="section" title="3.2 Wheels">
+<link href="ch-module_packages.html#s-package_names" rel="section" title="3.3 Module Package Names">
+<link href="ch-module_packages.html#s-specifying_versions" rel="section" title="3.4 Specifying Supported Versions">
+<link href="ch-module_packages.html#s-dependencies" rel="section" title="3.5 Dependencies">
+<link href="ch-module_packages.html#s-provides" rel="section" title="3.6 Provides">
+<link href="ch-module_packages.html#s-byte_compilation" rel="section" title="3.7 Modules Byte-Compilation">
+<link href="ch-programs.html#s-version_indep_progs" rel="section" title="4.1 Programs using the default python">
+<link href="ch-programs.html#s-version_dep_progs" rel="section" title="4.2 Programs Using a Particular Python Version">
+<link href="ch-embed.html#s-build_embedded" rel="section" title="5.1 Building Embedded Programs">
+<link href="ch-embed.html#s-embedded_deps" rel="section" title="5.2 Embedded Python Dependencies">
+<link href="ap-packaging_tools.html#s-distutils" rel="section" title="B.1 distutils">
+<link href="ap-packaging_tools.html#s-pysupport" rel="section" title="B.2 python-support (deprecated)">
+<link href="ap-packaging_tools.html#s-pycentral" rel="section" title="B.3 python-central (removed)">
+<link href="ap-packaging_tools.html#s-cdbs" rel="section" title="B.4 CDBS">
+<link href="ap-packaging_tools.html#s-dh_python2_3" rel="section" title="B.5 dh_python2 and dh_python3">
+<link href="ch-python.html#s-interpreter_name" rel="subsection" title="2.4.1 Interpreter Name">
+<link href="ch-python.html#s-interpreter_loc" rel="subsection" title="2.4.2 Interpreter Location">
+<link href="ch-programs.html#s-current_version_progs" rel="subsection" title="4.1.1 Programs Shipping Private Modules">
+
+</head>
+
+<body>
+
+<p><a name="ch-python"></a></p>
+<hr>
+
+<p>
+[ <a href="ch-python3.html">previous</a> ]
+[ <a href="index.html#contents">Contents</a> ]
+[ <a href="ch-python3.html">1</a> ]
+[ 2 ]
+[ <a href="ch-module_packages.html">3</a> ]
+[ <a href="ch-programs.html">4</a> ]
+[ <a href="ch-embed.html">5</a> ]
+[ <a href="ch-other.html">6</a> ]
+[ <a href="ap-build_dependencies.html">A</a> ]
+[ <a href="ap-packaging_tools.html">B</a> ]
+[ <a href="ap-upgrade.html">C</a> ]
+[ <a href="ch-module_packages.html">next</a> ]
+</p>
+
+<hr>
+
+<h1>
+Debian Python Policy
+<br>Chapter 2 - Python Packaging
+</h1>
+
+<hr>
+
+<h2 id="s-versions">2.1 Versions</h2>
+
+<p>
+At any given time, the binary package <code>python</code> will represent the
+current default Debian Python version.  The binary package <code>python3</code>
+will represent the current Debian Python 3 version.  As far as is reasonable,
+python and python3 should be treated as separate runtime systems with minimal
+interdependencies.  In some cases, Python policy explicitly references Python
+helper programs such as python-support and python-central.  None of these
+references apply to Python 3.  It is a design goal to fully specify required
+interfaces and functions in policy for Python 3 and to avoid enshrining
+specific implementation details in policy.  Except as noted, policy for Python
+3 is the same as Python with the addition of the version number as needed to
+distinguish them.
+</p>
+
+<p>
+The default Debian Python version should always be the latest stable upstream
+release that can be fully integrated in the distribution.  There may be newer
+supported or unsupported versions included in the distribution if they are not
+fully integrated for a particular release.
+</p>
+
+<p>
+Apart from the default version, legacy versions of Python or beta versions of
+future releases may be included as well in the distribution, as long as they
+are needed by other packages, or as long as it seems reasonable to provide
+them.  (Note: For the scope of this document, Python versions are synonymous to
+feature releases, i.e.  Python 2.7 and 2.7.1 are sub-minor versions of the same
+Python version 2.7, but Python 2.6 and 2.7 are indeed different versions.)
+</p>
+
+<p>
+For any version, the main binary package must be called
+<code>python<var>X</var>.<var>Y</var></code>.
+</p>
+
+<p>
+The set of currently supported python versions can be found in
+<code>/usr/share/python/debian_defaults</code>, the set of currently supported
+python3 versions can be found in
+<code>/usr/share/python3/debian_defaults</code>.  These files are in Python
+ConfigParser format and defines four variables in its DEFAULT section:
+default-version which is the current default Python runtime, supported-versions
+which is the set of runtimes currently supported and for which modules should
+be built and byte-compiled, old-versions which is the list of runtimes which
+might still be on the system but for which should not be built anymore, and
+unsupported-versions which is the list of runtimes which should not be
+supported at all, that is modules should not be built or byte-compiled for
+these.  The supported interface to this file is
+<code>/usr/bin/pyversions</code>.  The Python 3 interface is through
+<code>/usr/bin/py3versions</code>.
+</p>
+
+<p>
+unsupported-versions is a superset of (includes) old-versions and the
+default-version is always in supported-versions.
+</p>
+
+<p>
+Newer versions might also appear in unsupported-versions before being moved to
+supported-versions.
+</p>
+
+<hr>
+
+<h2 id="s-base">2.2 Main packages</h2>
+
+<p>
+For every Python version provided in the distribution, the binary package
+<code>python<var>X</var>.<var>Y</var></code> shall provide a complete
+distribution for <em>deployment</em> of Python scripts and applications.  The
+package must ensure that the binary
+<code>/usr/bin/python<var>X</var>.<var>Y</var></code> is provided.
+</p>
+
+<p>
+Installation of <code>python<var>X</var>.<var>Y</var></code> shall provide the
+modules of the upstream Python distribution with some exceptions.
+</p>
+
+<p>
+Excluded are modules that cannot be included for licensing reasons (for example
+the profile module), for dependency tracking purposes (for example the
+GPL-licensed gdbm module) or that should not be included for packaging reasons
+(for example the tk module which depends on Xorg).  Some tools and files for
+the <em>development</em> of Python modules are split off in a separate binary
+package <code>python<var>X</var>.<var>Y</var>-dev</code>.  Documentation will
+be provided separately as well.
+</p>
+
+<p>
+At any time, the <code>python</code> binary package must ensure that
+<code>/usr/bin/python</code> is provided as a symlink to the current
+<code>python<var>X</var>.<var>Y</var></code> executable.  The
+<code>python</code> binary package must also depend on the appropriate
+<code>python<var>X</var>.<var>Y</var></code> to ensure this runtime is
+installed.
+</p>
+
+<p>
+The version of the <code>python</code> binary package must be greater than or
+equal to <var>X</var>.<var>Y</var> and smaller than
+<var>X</var>.<var>Y+1</var>.
+</p>
+
+<p>
+Because upstream has started providing it, there will be a symlink for
+<code>/usr/bin/python2</code> for Wheezy and later releases.  See <code><a
+href="http://www.python.org/dev/peps/pep-0394/">PEP-0394</a></code> for
+details.  Packages must be careful to depend on a sufficient version of
+<code>python</code> if they make use of this symlink.
+</p>
+
+<hr>
+
+<h2 id="s-minimal">2.3 Minimal packages</h2>
+
+<p>
+For every Python version provided in the distribution, the binary package
+<code>python<var>X</var>.<var>Y</var></code>-minimal might exist and should not
+be depended upon by other packages except the Python runtime packages
+themselves.
+</p>
+
+<hr>
+
+<h2 id="s-interpreter">2.4 Python Interpreter</h2>
+
+<hr>
+
+<h3 id="s-interpreter_name">2.4.1 Interpreter Name</h3>
+
+<p>
+Python scripts depending on the default Python version (see <a
+href="#s-base">Main packages, Section 2.2</a>) or not depending on a specific
+Python version should use <code>python</code> (without a version) as the
+interpreter name.
+</p>
+
+<p>
+Python scripts that only work with a specific Python version must explicitly
+use the versioned interpreter name
+(<code>python<var>X</var>.<var>Y</var></code>).
+</p>
+
+<hr>
+
+<h3 id="s-interpreter_loc">2.4.2 Interpreter Location</h3>
+
+<p>
+The preferred specification for the Python interpreter is
+<code>/usr/bin/python</code> or
+<code>/usr/bin/python<var>X</var>.<var>Y</var></code>.  This ensures that a
+Debian installation of python is used and all dependencies on additional python
+modules are met.
+</p>
+
+<p>
+Maintainers should not override the Debian Python interpreter using
+<code>/usr/bin/env python</code> or <code>/usr/bin/env
+python<var>X</var>.<var>Y</var></code>.  This is not advisable as it bypasses
+Debian's dependency checking and makes the package vulnerable to incomplete
+local installations of python.
+</p>
+
+<hr>
+
+<h2 id="s-paths">2.5 Module Path</h2>
+
+<p>
+By default, Python modules are searched in the directories listed in the
+PYTHONPATH environment variable and in the sys.path Python variable.  Since
+python2.4 version 2.4.5-3, python2.5 version 2.5.2-7, python2.6 version
+2.6.2-1, and in all python2.7 versions, sys.path does not include a
+/usr/lib/python<var>X</var><var>Y</var>.zip entry anymore.  Directories with
+private Python modules must be absent from the sys.path.  Public Python modules
+not handled by python-central or python-support must be installed in the system
+Python modules directory,
+/usr/lib/python<var>X</var>.<var>Y</var>/dist-packages for python2.6 and later,
+and /usr/lib/python<var>X</var>.<var>Y</var>/site-packages for python2.5 and
+earlier.  Public Python 3 modules must be installed in
+/usr/lib/python3/dist-packages.  Modules managed by python-support are
+installed in another directory which is added to the sys.path using the .pth
+mechanism.  The .pth mechanism is documented in the Python documentation of the
+<samp>site</samp> module.  A special directory is dedicated to public Python
+modules installed by the local administrator, /usr/lib/python3/dist-packages
+for all python3 versions, /usr/local/lib/python2.<var>Y</var>/dist-packages for
+python2.6 and later, and /usr/local/lib/python2.<var>Y</var>/site-packages for
+python2.5 and earlier.  For a local installation by the administrator of
+python2.6 and later, a special directory is reserved to Python modules which
+should only be available to this Python,
+/usr/local/lib/python2.<var>Y</var>/site-packages (and
+/usr/local/lib/python3/site-packages for all python3 versions).  Unfortunately,
+for python2.5 and earlier this directory is also visible to the system Python.
+Additional information on appending site-specific paths to the module search
+path is available in the official documentation of the site module.
+</p>
+
+<p>
+When binary packages ship identical source code for multiple Python versions,
+for instance /usr/lib/python2.6/dist-packages/foo.py and
+/usr/lib/python2.5/site-packages/foo.py, these should point to a common file.
+Version specific directories for identical source code are not required for
+python3 and must not be used for this.  Since python2.7 is the last python2
+version and the only supported version in wheezy and later releases, a common
+location to share arch-independent files across Python versions is no longer
+needed.  Historically the location for this was /usr/share/pyshared.  For
+python2.7, use of /usr/lib/python2.7/dist-packages is sufficient.  For python3,
+a special location is not required, use /usr/lib/python3/dist-packages
+</p>
+
+<hr>
+
+<h2 id="s-runtimes_hooks">2.6 Hooks for updates to installed runtimes</h2>
+
+<p>
+The <code>python</code> binary package has special hooks to allow other
+packages to act upon updates to the installed runtimes.  This mechanism is
+required to handle changes of the default Python runtime in some packages and
+to enable the Python packaging helpers.  There are three supported hook types
+which come in the form of scripts which are invoked from the maintainer scripts
+of the Python runtime packages when specific installations, removals, or
+upgrades occur.
+</p>
+<ol type="1" start="1" >
+<li>
+<p>
+/usr/share/python/runtime.d/*.rtinstall: these are called when a runtime is
+installed or becomes supported.  The first argument is &quot;rtinstall&quot;,
+the second argument is the affected runtime (for example
+python<var>X</var>.<var>Y</var>) and the third and fourth argument are the old
+and new version of this packaged runtime if this runtime was already installed
+but unsupported.
+</p>
+</li>
+</ol>
+<ol type="1" start="2" >
+<li>
+<p>
+/usr/share/python/runtime.d/*.rtremove: these are called when a runtime is
+removed or stops being supported.  The first argument is &quot;rtremove&quot;,
+and the second argument is the affected runtime (for example
+python<var>X</var>.<var>Y</var>).
+</p>
+</li>
+</ol>
+<ol type="1" start="3" >
+<li>
+<p>
+/usr/share/python/runtime.d/*.rtupdate: these are called when the default
+runtime changes.  The first argument is either &quot;pre-rtupdate&quot;, called
+before changing the default runtime, or &quot;rtupdate&quot;, called when
+changing the default runtime, or &quot;post-rtupdate&quot;, called immediately
+afterwards.  The second argument is the old default runtime (for example
+python<var>X</var>.<var>Y</var>), and the third argument is the new default
+runtime (for example python<var>X</var>.<var>Z</var>).
+</p>
+</li>
+</ol>
+
+<hr>
+
+<h2 id="s-docs">2.7 Documentation</h2>
+
+<p>
+Python documentation is split out in separate binary packages
+<code>python<var>X</var>.<var>Y</var>-doc</code>.  The binary package
+<code>python-doc</code> will always provide the documentation for the default
+Debian Python version.
+</p>
+
+<p>
+TODO: Policy for documentation of third party packages.
+</p>
+
+<hr>
+
+<p>
+[ <a href="ch-python3.html">previous</a> ]
+[ <a href="index.html#contents">Contents</a> ]
+[ <a href="ch-python3.html">1</a> ]
+[ 2 ]
+[ <a href="ch-module_packages.html">3</a> ]
+[ <a href="ch-programs.html">4</a> ]
+[ <a href="ch-embed.html">5</a> ]
+[ <a href="ch-other.html">6</a> ]
+[ <a href="ap-build_dependencies.html">A</a> ]
+[ <a href="ap-packaging_tools.html">B</a> ]
+[ <a href="ap-upgrade.html">C</a> ]
+[ <a href="ch-module_packages.html">next</a> ]
+</p>
+
+<hr>
+
+<p>
+Debian Python Policy
+</p>
+
+<address>
+version 0.10.0.2<br>
+<br>
+Neil Schemenauer <code><a href="mailto:nas@debian.org">mailto:nas@debian.org</a></code><br>
+Matthias Klose <code><a href="mailto:doko@debian.org">mailto:doko@debian.org</a></code><br>
+Gregor Hoffleit <code><a href="mailto:flight@debian.org">mailto:flight@debian.org</a></code><br>
+Josselin Mouette <code><a href="mailto:joss@debian.org">mailto:joss@debian.org</a></code><br>
+Joe Wreschnig <code><a href="mailto:piman@debian.org">mailto:piman@debian.org</a></code><br>
+Lo&iuml;c Minier <code><a href="mailto:lool@debian.org">mailto:lool@debian.org</a></code><br>
+Scott Kitterman <code><a href="mailto:scott@kitterman.com">mailto:scott@kitterman.com</a></code><br>
+Barry Warsaw <code><a href="mailto:barry@debian.org">mailto:barry@debian.org</a></code><br>
+<br>
+</address>
+<hr>
+
+</body>
+
+</html>
+

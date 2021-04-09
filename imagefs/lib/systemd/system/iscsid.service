@@ -1,0 +1,19 @@
+[Unit]
+Description=iSCSI initiator daemon (iscsid)
+Documentation=man:iscsid(8)
+Wants=network-online.target remote-fs-pre.target
+Before=remote-fs-pre.target
+After=network.target network-online.target
+DefaultDependencies=no
+Conflicts=shutdown.target
+Before=shutdown.target
+
+[Service]
+Type=forking
+PIDFile=/run/iscsid.pid
+ExecStartPre=/lib/open-iscsi/startup-checks.sh
+ExecStart=/sbin/iscsid
+ExecStop=/sbin/iscsiadm -k 0 2
+
+[Install]
+WantedBy=sysinit.target

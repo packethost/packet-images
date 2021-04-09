@@ -1,0 +1,23 @@
+#!/bin/sh
+
+set -e
+
+LAUNCHER=/usr/lib/dbus-1.0/dbus-daemon-launch-helper
+
+if [ "$1" = upgrade ]; then
+	if dpkg --compare-versions "$2" lt "1.9.4-2~"; then
+		dpkg-divert --add --rename --package dbus.new --divert "$LAUNCHER.new" "$LAUNCHER" >/dev/null
+		if [ ! -x "$LAUNCHER" ]; then
+			cp -a "$LAUNCHER.new" "$LAUNCHER"
+		fi
+	fi
+fi
+
+# Automatically added by dh_installdeb
+dpkg-maintscript-helper rm_conffile /etc/dbus-1/session.conf 1.10.0-4~ dbus -- "$@"
+# End automatically added section
+# Automatically added by dh_installdeb
+dpkg-maintscript-helper rm_conffile /etc/dbus-1/system.conf 1.10.0-4~ dbus -- "$@"
+# End automatically added section
+
+

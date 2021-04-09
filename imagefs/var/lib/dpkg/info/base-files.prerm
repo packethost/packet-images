@@ -1,0 +1,10 @@
+#!/bin/sh
+set -e
+
+# Manually inject expected maintainer script contents based on dh_systemd_*
+if [ -d /run/systemd/system ]; then
+	deb-systemd-invoke stop motd-news.timer >/dev/null
+fi
+if [ -d /run/systemd/system ]; then
+	deb-systemd-invoke stop motd-news.service >/dev/null
+fi

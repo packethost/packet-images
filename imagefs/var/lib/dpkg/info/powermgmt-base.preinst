@@ -1,0 +1,23 @@
+#!/bin/sh -e
+
+
+
+case "${1}" in
+(install|upgrade)
+    if [ -f /etc/modutils/apmd ]; then
+	if [ -f /etc/modutils/apm ]; then
+	    # retire
+	    mv -f /etc/modutils/apmd /etc/modutils/apmd.dpkg-old
+	else
+	    # kidnap
+	    mv -f /etc/modutils/apmd /etc/modutils/apm
+	fi
+    fi
+    ;;
+(abort-upgrade)
+    ;;
+(*)
+    echo "preinst called with unknown argument \`$1'" >&2
+    exit 1
+    ;;
+esac

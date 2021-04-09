@@ -1,0 +1,12 @@
+ae91353462ba5f951d24156d73d2ecd1  sbin/capsh
+48b0eb12fbfcd85239f0eeeb099bdbc6  sbin/getcap
+ae03b50c932b0a15f3dcf2626f57533e  sbin/getpcaps
+989615860bcbb36a65c709ac3ef273c3  sbin/setcap
+7110e116eda96b7a3733f95cbf163308  usr/share/doc/libcap2-bin/README.Debian
+a8d47394c7992d3f63031090af37e47f  usr/share/doc/libcap2-bin/copyright
+8c8f50fb3cc80760922acf2f33892af5  usr/share/man/man1/capsh.1.gz
+251606fa7ed3b6f19bac99d3c2117570  usr/share/man/man1/getpcaps.1.gz
+4625b9865234bdb41fe8ac78a0709904  usr/share/man/man5/capability.conf.5.gz
+c705da05ede4eb2aff50fcbfb690d85c  usr/share/man/man8/getcap.8.gz
+c1410c73484804e517f0e3d1bf8cd707  usr/share/man/man8/pam_cap.8.gz
+781a8216fc8a8b135049846c99d63161  usr/share/man/man8/setcap.8.gz

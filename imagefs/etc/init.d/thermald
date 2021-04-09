@@ -1,0 +1,50 @@
+#!/bin/sh
+### BEGIN INIT INFO
+# Provides:          thermald
+# Required-Start:    $remote_fs $syslog
+# Required-Stop:     $remote_fs $syslog
+# Default-Start:     2 3 4 5
+# Default-Stop:      0 1 6
+# Short-Description: Start the Intel power daemon
+# Description:       Monitors and controls platform
+#                    temperatures.
+### END INIT INFO
+
+set -e
+
+THERMALD="/usr/sbin/thermald"
+
+# Check for daemon presence
+[ -x "$THERMALD" ] || exit 0
+
+OPTIONS=""
+MODULES=""
+
+# Get lsb functions
+. /lib/lsb/init-functions
+
+case "$1" in
+  start)
+    log_begin_msg "Starting thermald..."
+    start-stop-daemon --start --quiet --oknodo --exec "$THERMALD" -- $OPTIONS
+    log_end_msg $?
+    ;;
+  stop)
+    log_begin_msg "Stopping thermald..."
+    start-stop-daemon --stop --quiet --oknodo --retry 2 --exec "$THERMALD"
+    log_end_msg $?
+    ;;
+  restart)
+    $0 stop
+    sleep 1
+    $0 start
+    ;;
+  reload|force-reload) 
+    log_begin_msg "Reloading thermald..."
+    start-stop-daemon --stop --signal 1 --exec "$THERMALD"
+    log_end_msg $?
+    ;;
+  *)
+    log_success_msg "Usage: /etc/init.d/thermald {start|stop|restart|reload|force-reload}"
+    exit 1
+esac

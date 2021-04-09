@@ -1,0 +1,21 @@
+#!/bin/sh
+
+set -e
+rm -f /etc/cron.d/cloudinit-updates
+
+# Automatically added by dh_systemd_start
+if [ -d /run/systemd/system ] && [ "$1" = remove ]; then
+	deb-systemd-invoke stop cloud-config.service cloud-config.target cloud-final.service cloud-init-local.service cloud-init.service cloud-init.target >/dev/null
+fi
+# End automatically added section
+
+# Automatically added by dhpython:
+if which py3clean >/dev/null 2>&1; then
+	py3clean -p cloud-init 
+else
+	dpkg -L cloud-init | perl -ne 's,/([^/]*)\.py$,/__pycache__/\1.*, or next; unlink $_ or die $! foreach glob($_)'
+	find /usr/lib/python3/dist-packages/ -type d -name __pycache__ -empty -print0 | xargs --null --no-run-if-empty rmdir
+fi
+
+# End automatically added section
+

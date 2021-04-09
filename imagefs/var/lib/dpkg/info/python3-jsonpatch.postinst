@@ -1,0 +1,19 @@
+#!/bin/sh
+
+set -e
+
+if [ "$1" = "configure" ] ; then
+	update-alternatives --install /usr/bin/jsondiff jsondiff /usr/bin/python3-jsondiff 200
+	update-alternatives --install /usr/bin/jsonpatch jsonpatch /usr/bin/python3-jsonpatch 200
+fi
+
+
+# Automatically added by dhpython:
+if which py3compile >/dev/null 2>&1; then
+	py3compile -p python3-jsonpatch 
+fi
+
+# End automatically added section
+
+
+exit 0

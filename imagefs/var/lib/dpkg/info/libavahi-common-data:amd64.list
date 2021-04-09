@@ -1,0 +1,15 @@
+/.
+/usr
+/usr/share
+/usr/share/avahi
+/usr/share/avahi/service-types
+/usr/share/doc
+/usr/share/doc/libavahi-common-data
+/usr/share/doc/libavahi-common-data/README
+/usr/share/doc/libavahi-common-data/copyright
+/usr/share/doc/libavahi-common-data/changelog.Debian.gz
+/usr/share/doc/libavahi-common-data/NEWS.gz
+/usr/lib
+/usr/lib/x86_64-linux-gnu
+/usr/lib/x86_64-linux-gnu/avahi
+/usr/lib/x86_64-linux-gnu/avahi/service-types.db

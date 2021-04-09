@@ -1,0 +1,4 @@
+# This is a very small packages, it doesn't need a separate -dev package.
+# Furthermore, in this package there are scripts calling the libeatmydata.so
+# library directly.
+libeatmydata1 binary: non-dev-pkg-with-shlib-symlink

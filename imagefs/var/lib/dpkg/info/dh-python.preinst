@@ -1,0 +1,14 @@
+#!/bin/sh
+set -e
+
+# ugly hack, but dpkg-divert's manpage isn't clear enough to me
+if [ -f /usr/bin/dh_python2.real ]; then
+	rm -f /usr/bin/dh_python2
+	dpkg-divert --remove --rename --divert /usr/bin/dh_python2.real /usr/bin/dh_python2
+fi
+if [ -f /usr/share/man/man1/dh_python2.real.1.gz ]; then
+	rm -f /usr/share/man/man1/dh_python2.1.gz
+	dpkg-divert --remove --rename --divert /usr/share/man/man1/dh_python2.real.1.gz /usr/share/man/man1/dh_python2.1.gz
+fi
+
+

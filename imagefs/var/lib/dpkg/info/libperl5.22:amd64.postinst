@@ -1,0 +1,13 @@
+#!/bin/sh -e
+
+if [ "$1" = "configure" ]
+then
+    ldconfig
+fi
+
+if dpkg-maintscript-helper supports symlink_to_dir; then
+    dpkg-maintscript-helper symlink_to_dir \
+        /usr/share/doc/libperl5.22 perl 5.22.0-4~ -- "$@"
+fi
+
+exit 0

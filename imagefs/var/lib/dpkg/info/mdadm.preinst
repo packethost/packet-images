@@ -1,0 +1,69 @@
+#!/bin/sh
+# Copyright © martin f. krafft <madduck@debian.org>
+# Distributed under the terms of the Artistic Licence 2.0
+#
+set -eu
+
+# based on idea from http://www.dpkg.org/dpkg/ConffileHandling
+rm_conffile() {
+    local conffile md5sum package old_md5sum
+
+    conffile="$1"
+    if [ -e "$conffile" ]; then
+        md5sum=$(md5sum "$conffile" | cut -d' ' -f1)
+        package=$(dpkg -S "$conffile" | cut -d: -f1)
+        old_md5sum=$(dpkg -s $package | sed -rne "s,[[:space:]]+${conffile}[[:space:]]+,,p")
+        if [ "$md5sum" != "$old_md5sum" ]; then
+            echo "Obsolete conffile $conffile has been modified by you."
+            echo "Saving as ${conffile}.dpkg-bak ..."
+            mv -f "$conffile" "$conffile".dpkg-bak
+        else
+            echo "Removing obsolete conffile $conffile ..."
+            rm -f "$conffile"
+        fi
+    fi
+}
+
+case "$1" in
+
+  upgrade|install)
+
+    # migrate old configuration from *way back then*
+    DEBIANCONFIG=/etc/default/mdadm
+    OLDCONFIG=/etc/mdadm/debian.conf
+    if [ -s $OLDCONFIG ] && [ ! -f $DEBIANCONFIG ]; then
+      mv $OLDCONFIG $DEBIANCONFIG
+    fi
+
+    # Remove old rules number
+    if [ -f /etc/udev/rules.d/70-mdadm.rules ]; then
+      rm -f /etc/udev/rules.d/70-mdadm.rules
+    fi
+
+    # Remove old init script
+    if [ -f /etc/init.d/mdadm-raid ]; then
+      rm -f /etc/init.d/mdadm-raid
+    fi
+
+    # save the v1 output of -Es just in case we need it for upgrades
+    MDADM=/sbin/mdadm
+    if [ -x "$MDADM" ] && [ -n "${2:-}" ] && \
+        dpkg --compare-versions $2 lt 2; then
+      echo DEVICE partitions > /var/backups/mdadm-Es_v1.dump
+      $MDADM -Esc /var/backups/mdadm-Es_v1.dump >> /var/backups/mdadm-Es_v1.dump || :
+    fi
+
+    # Used incorrect name s/_/-/, keep all throughout until after jessie is released.
+    rm_conffile /etc/udev/rules.d/65-mdadm.vol_id.rules
+    ;;
+
+  *) :;;
+esac
+
+# See #369953
+set +u
+# Automatically added by dh_installdeb
+dpkg-maintscript-helper rm_conffile /etc/default/grub.d/dmraid2mdadm.cfg 3.3-2ubuntu5~ -- "$@"
+# End automatically added section
+
+set -u

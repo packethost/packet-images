@@ -1,0 +1,374 @@
+#!/bin/sh
+set -e
+
+. /usr/share/debconf/confmodule
+db_version 2.0
+
+action="$1"
+oldversion="$2"
+
+umask 022
+
+
+get_config_option() {
+	option="$1"
+
+	[ -f /etc/ssh/sshd_config ] || return
+
+	# TODO: actually only one '=' allowed after option
+	perl -lne '
+		s/[[:space:]]+/ /g; s/[[:space:]]+$//;
+		print if s/^[[:space:]]*'"$option"'[[:space:]=]+//i' \
+	   /etc/ssh/sshd_config
+}
+
+
+set_config_option() {
+	option="$1"
+	value="$2"
+
+	perl -le '
+		$option = $ARGV[0]; $value = $ARGV[1]; $done = 0;
+		while (<STDIN>) {
+			chomp;
+			(my $match = $_) =~ s/\s+/ /g;
+			if ($match =~ s/^\s*\Q$option\E\s+.*/$option $value/) {
+				$_ = $match;
+				$done = 1;
+			}
+			print;
+		}
+		print "$option $value" unless $done;' \
+		"$option" "$value" \
+		< /etc/ssh/sshd_config > /etc/ssh/sshd_config.dpkg-new
+	chown --reference /etc/ssh/sshd_config /etc/ssh/sshd_config.dpkg-new
+	chmod --reference /etc/ssh/sshd_config /etc/ssh/sshd_config.dpkg-new
+	mv /etc/ssh/sshd_config.dpkg-new /etc/ssh/sshd_config
+}
+
+
+rename_config_option() {
+	oldoption="$1"
+	newoption="$2"
+
+	value="$(get_config_option "$oldoption")"
+	[ "$value" ] || return 0
+
+	perl -le '
+		$oldoption = $ARGV[0]; $newoption = $ARGV[1];
+		while (<STDIN>) {
+			chomp;
+			(my $match = $_) =~ s/\s+/ /g;
+			# TODO: actually only one "=" allowed after option
+			if ($match =~ s/^(\s*)\Q$oldoption\E([[:space:]=]+)/$1$newoption$2/i) {
+				$_ = $match;
+			}
+			print;
+		}' \
+		"$oldoption" "$newoption" \
+		< /etc/ssh/sshd_config > /etc/ssh/sshd_config.dpkg-new
+	chown --reference /etc/ssh/sshd_config /etc/ssh/sshd_config.dpkg-new
+	chmod --reference /etc/ssh/sshd_config /etc/ssh/sshd_config.dpkg-new
+	mv /etc/ssh/sshd_config.dpkg-new /etc/ssh/sshd_config
+}
+
+
+host_keys_required() {
+	hostkeys="$(get_config_option HostKey)"
+	if [ "$hostkeys" ]; then
+		echo "$hostkeys"
+	else
+		# No HostKey directives at all, so the server picks some
+		# defaults.
+		echo /etc/ssh/ssh_host_rsa_key
+		echo /etc/ssh/ssh_host_dsa_key
+		echo /etc/ssh/ssh_host_ecdsa_key
+		echo /etc/ssh/ssh_host_ed25519_key
+	fi
+}
+
+
+create_key() {
+	msg="$1"
+	shift
+	hostkeys="$1"
+	shift
+	file="$1"
+	shift
+
+	if echo "$hostkeys" | grep -x "$file" >/dev/null && \
+	   [ ! -f "$file" ] ; then
+		echo -n $msg
+		ssh-keygen -q -f "$file" -N '' "$@"
+		echo
+		if which restorecon >/dev/null 2>&1; then
+			restorecon "$file" "$file.pub"
+		fi
+		ssh-keygen -l -f "$file.pub"
+	fi
+}
+
+
+create_keys() {
+	hostkeys="$(host_keys_required)"
+
+	create_key "Creating SSH2 RSA key; this may take some time ..." \
+		"$hostkeys" /etc/ssh/ssh_host_rsa_key -t rsa
+	create_key "Creating SSH2 DSA key; this may take some time ..." \
+		"$hostkeys" /etc/ssh/ssh_host_dsa_key -t dsa
+	create_key "Creating SSH2 ECDSA key; this may take some time ..." \
+		"$hostkeys" /etc/ssh/ssh_host_ecdsa_key -t ecdsa
+	create_key "Creating SSH2 ED25519 key; this may take some time ..." \
+		"$hostkeys" /etc/ssh/ssh_host_ed25519_key -t ed25519
+}
+
+
+fix_loglevel_silent() {
+	if [ "$(get_config_option LogLevel)" = SILENT ]; then
+		set_config_option LogLevel QUIET
+	fi
+}
+
+
+update_server_key_bits() {
+	if [ "$(get_config_option ServerKeyBits)" = 768 ]; then
+		set_config_option ServerKeyBits 1024
+	fi
+}
+
+
+create_sshdconfig() {
+	if [ -e /etc/ssh/sshd_config ] ; then
+	    # Upgrade an existing sshd configuration.
+
+	    # This option was renamed in 3.8p1, but we never took care
+	    # of adjusting the configuration file until now.
+	    if dpkg --compare-versions "$oldversion" lt 1:4.7p1-8; then
+		rename_config_option KeepAlive TCPKeepAlive
+	    fi
+
+	    # 'LogLevel SILENT' is now equivalent to QUIET.
+	    if dpkg --compare-versions "$oldversion" lt 1:5.4p1-1; then
+		fix_loglevel_silent
+	    fi
+
+	    # Changed upstream in 5.1p1, but we forgot to update the
+	    # package-generated configuration file until now.
+	    if dpkg --compare-versions "$oldversion" lt 1:6.4p1-2; then
+		update_server_key_bits
+	    fi
+
+	    return 0
+	fi
+
+	cat <<EOF > /etc/ssh/sshd_config
+# Package generated configuration file
+# See the sshd_config(5) manpage for details
+
+# What ports, IPs and protocols we listen for
+Port 22
+# Use these options to restrict which interfaces/protocols sshd will bind to
+#ListenAddress ::
+#ListenAddress 0.0.0.0
+Protocol 2
+# HostKeys for protocol version 2
+HostKey /etc/ssh/ssh_host_rsa_key
+HostKey /etc/ssh/ssh_host_dsa_key
+HostKey /etc/ssh/ssh_host_ecdsa_key
+HostKey /etc/ssh/ssh_host_ed25519_key
+#Privilege Separation is turned on for security
+UsePrivilegeSeparation yes
+
+# Lifetime and size of ephemeral version 1 server key
+KeyRegenerationInterval 3600
+ServerKeyBits 1024
+
+# Logging
+SyslogFacility AUTH
+LogLevel INFO
+
+# Authentication:
+LoginGraceTime 120
+PermitRootLogin prohibit-password
+StrictModes yes
+
+RSAAuthentication yes
+PubkeyAuthentication yes
+#AuthorizedKeysFile	%h/.ssh/authorized_keys
+
+# Don't read the user's ~/.rhosts and ~/.shosts files
+IgnoreRhosts yes
+# For this to work you will also need host keys in /etc/ssh_known_hosts
+RhostsRSAAuthentication no
+# similar for protocol version 2
+HostbasedAuthentication no
+# Uncomment if you don't trust ~/.ssh/known_hosts for RhostsRSAAuthentication
+#IgnoreUserKnownHosts yes
+
+# To enable empty passwords, change to yes (NOT RECOMMENDED)
+PermitEmptyPasswords no
+
+# Change to yes to enable challenge-response passwords (beware issues with
+# some PAM modules and threads)
+ChallengeResponseAuthentication no
+
+# Change to no to disable tunnelled clear text passwords
+#PasswordAuthentication yes
+
+# Kerberos options
+#KerberosAuthentication no
+#KerberosGetAFSToken no
+#KerberosOrLocalPasswd yes
+#KerberosTicketCleanup yes
+
+# GSSAPI options
+#GSSAPIAuthentication no
+#GSSAPICleanupCredentials yes
+
+X11Forwarding yes
+X11DisplayOffset 10
+PrintMotd no
+PrintLastLog yes
+TCPKeepAlive yes
+#UseLogin no
+
+#MaxStartups 10:30:60
+#Banner /etc/issue.net
+
+# Allow client to pass locale environment variables
+AcceptEnv LANG LC_*
+
+Subsystem sftp /usr/lib/openssh/sftp-server
+
+# Set this to 'yes' to enable PAM authentication, account processing,
+# and session processing. If this is enabled, PAM authentication will
+# be allowed through the ChallengeResponseAuthentication and
+# PasswordAuthentication.  Depending on your PAM configuration,
+# PAM authentication via ChallengeResponseAuthentication may bypass
+# the setting of "PermitRootLogin without-password".
+# If you just want the PAM account and session checks to run without
+# PAM authentication, then enable this but set PasswordAuthentication
+# and ChallengeResponseAuthentication to 'no'.
+UsePAM yes
+EOF
+}
+
+fix_statoverride() {
+# Remove an erronous override for sshd (we should have overridden ssh)
+	if dpkg-statoverride --list /usr/sbin/sshd >/dev/null; then
+		dpkg-statoverride --remove /usr/sbin/sshd
+	fi
+}
+
+setup_sshd_user() {
+	if ! getent passwd sshd >/dev/null; then
+		adduser --quiet --system --no-create-home --home /var/run/sshd --shell /usr/sbin/nologin sshd
+	fi
+}
+
+if [ "$action" = configure ]; then
+	create_sshdconfig
+	create_keys
+	fix_statoverride
+	setup_sshd_user
+	# Renamed to /etc/ssh/moduli in 2.9.9 (!)
+	if dpkg --compare-versions "$2" lt-nl 1:4.7p1-1; then
+	    rm -f /etc/ssh/primes
+	fi
+	if dpkg --compare-versions "$2" lt-nl 1:5.5p1-6; then
+	    rm -f /var/run/sshd/.placeholder
+	fi
+	if dpkg --compare-versions "$2" lt-nl 1:6.2p2-3 && \
+	   which initctl >/dev/null && initctl version 2>/dev/null | grep -q upstart && \
+	   ! status ssh 2>/dev/null | grep -q ' start/'; then
+	    # We must stop the sysvinit-controlled sshd before we can
+	    # restart it under Upstart.
+	    start-stop-daemon --stop --quiet --oknodo --pidfile /var/run/sshd.pid || true
+	fi
+	if dpkg --compare-versions "$2" lt-nl 1:6.5p1-2 && \
+	   deb-systemd-helper debian-installed ssh.socket && \
+	   deb-systemd-helper --quiet was-enabled ssh.service && \
+	   deb-systemd-helper --quiet was-enabled ssh.socket; then
+	    # 1:6.5p1-1 mistakenly left both ssh.service and ssh.socket
+	    # enabled.
+	    deb-systemd-helper disable ssh.socket >/dev/null || true
+	fi
+	if dpkg --compare-versions "$2" lt-nl 1:6.5p1-3 && \
+	   [ -d /run/systemd/system ]; then
+	    # We must stop the sysvinit-controlled sshd before we can
+	    # restart it under systemd.
+	    start-stop-daemon --stop --quiet --oknodo --pidfile /var/run/sshd.pid --exec /usr/sbin/sshd || true
+	fi
+	if dpkg --compare-versions "$2" lt-nl 1:6.6p1-1 && \
+	   [ "$(get_config_option PermitRootLogin)" = yes ] &&
+	   db_get openssh-server/permit-root-login && [ "$RET" = true ]; then
+	    set_config_option PermitRootLogin prohibit-password
+	fi
+	if dpkg --compare-versions "$2" lt-nl 1:7.1p1-1 && \
+	   [ "$(get_config_option PermitRootLogin)" = without-password ]; then
+	    set_config_option PermitRootLogin prohibit-password
+	fi
+fi
+
+# Automatically added by dh_systemd_enable
+# This will only remove masks created by d-s-h on package removal.
+deb-systemd-helper unmask ssh.service >/dev/null || true
+
+# was-enabled defaults to true, so new installations run enable.
+if deb-systemd-helper --quiet was-enabled ssh.service; then
+	# Enables the unit on first installation, creates new
+	# symlinks on upgrades if the unit file has changed.
+	deb-systemd-helper enable ssh.service >/dev/null || true
+else
+	# Update the statefile to add new symlinks (if any), which need to be
+	# cleaned up on purge. Also remove old symlinks.
+	deb-systemd-helper update-state ssh.service >/dev/null || true
+fi
+# End automatically added section
+# Automatically added by dh_systemd_enable
+if deb-systemd-helper debian-installed ssh.socket; then
+	# This will only remove masks created by d-s-h on package removal.
+	deb-systemd-helper unmask ssh.socket >/dev/null || true
+
+	if deb-systemd-helper --quiet was-enabled ssh.socket; then
+		# Create new symlinks, if any.
+		deb-systemd-helper enable ssh.socket >/dev/null || true
+	fi
+fi
+
+# Update the statefile to add new symlinks (if any), which need to be cleaned
+# up on purge. Also remove old symlinks.
+deb-systemd-helper update-state ssh.socket >/dev/null || true
+# End automatically added section
+# Automatically added by dh_installinit
+if [ "$1" = "configure" ] || [ "$1" = "abort-upgrade" ]; then
+	# In case this system is running systemd, we need to ensure that all
+	# necessary tmpfiles (if any) are created before starting.
+	if [ -d /run/systemd/system ] ; then
+		systemd-tmpfiles --create /usr/lib/tmpfiles.d/sshd.conf >/dev/null || true
+	fi
+fi
+# End automatically added section
+# Automatically added by dh_installinit
+if [ "$1" = "configure" ] || [ "$1" = "abort-upgrade" ]; then
+	if [ -x "/etc/init.d/ssh" ]; then
+		update-rc.d ssh defaults >/dev/null
+	fi
+	if [ -x "/etc/init.d/ssh" ] || [ -e "/etc/init/ssh.conf" ]; then
+		if [ -n "$2" ]; then
+			_dh_action=restart
+		else
+			_dh_action=start
+		fi
+		invoke-rc.d ssh $_dh_action || exit $?
+	fi
+fi
+# End automatically added section
+# Automatically added by dh_installdeb
+dpkg-maintscript-helper mv_conffile /etc/pam.d/ssh /etc/pam.d/sshd 1:4.7p1-4~ -- "$@"
+# End automatically added section
+
+
+db_stop
+
+exit 0

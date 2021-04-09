@@ -1,0 +1,6 @@
+dbus-glib is a deprecated D-Bus binding for GLib.
+
+dbus-glib receives minimal maintenance and security fixes for the benefit
+of projects like Telepathy and NetworkManager that still rely on it, but
+should not be used in new projects (and existing projects should try
+to move away from it, too). Please use GDBus, part of GLib since 2.26.

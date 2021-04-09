@@ -1,0 +1,11 @@
+/.
+/usr
+/usr/lib
+/usr/lib/x86_64-linux-gnu
+/usr/lib/x86_64-linux-gnu/libgnutls-openssl.so.27.0.2
+/usr/share
+/usr/share/doc
+/usr/share/doc/libgnutls-openssl27
+/usr/share/doc/libgnutls-openssl27/copyright
+/usr/lib/x86_64-linux-gnu/libgnutls-openssl.so.27
+/usr/share/doc/libgnutls-openssl27/changelog.Debian.gz

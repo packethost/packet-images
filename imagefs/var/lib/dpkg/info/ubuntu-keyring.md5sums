@@ -1,0 +1,6 @@
+f3a03ef829a5a14703b49929085af783  usr/share/doc/ubuntu-keyring/copyright
+5213daec5f12192e79e91de0babc88c0  usr/share/doc/ubuntu-keyring/README.gz
+e20818c0441dc45b052537b8bbfd6152  usr/share/doc/ubuntu-keyring/changelog.gz
+d41d8cd98f00b204e9800998ecf8427e  usr/share/keyrings/ubuntu-archive-removed-keys.gpg
+331efe9b20032f3a8a73f291749deb68  usr/share/keyrings/ubuntu-archive-keyring.gpg
+24e5212707e53a6ebdfd2e352280369d  usr/share/keyrings/ubuntu-master-keyring.gpg

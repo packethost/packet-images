@@ -1,0 +1,5 @@
+038c1c68801ef42ad81fa4d00f67fbc1  /etc/default/grub
+80de10a8b9f13365de8cc4bbf8efec5e  /etc/rsyslog.d/50-default.conf
+6f015cbda1bb151c4bcd0ba1b84c2568  /etc/default/sysstat
+1c261d6541420797f8b824d65ac5c197  /etc/apt/apt.conf.d/20auto-upgrades
+404d67afd60e7b8b11f08b1360da219b  /etc/apt/apt.conf.d/50unattended-upgrades

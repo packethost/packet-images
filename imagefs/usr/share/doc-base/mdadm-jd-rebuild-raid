@@ -1,0 +1,9 @@
+Document: mdadm-jd-rebuild-raid
+Title: Rebuilding a RAID array
+Author: David Pashley
+Abstract: The document describes how to replace a failed component in a RAID(1) array
+Section: System/Administration
+
+Format: HTML
+Index: /usr/share/doc/mdadm/rebuilding-raid.html
+Files: /usr/share/doc/mdadm/rebuilding-raid.html

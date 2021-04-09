@@ -1,0 +1,100 @@
+This amd64-microcode release was based on the linux-firmware tree.
+The linux-firmware tree can be found in kernel.org.
+
+commit 7518922bd5b98b137af7aaf3c836f5a498e91609
+Author: Sherry Hurwitz <sherry.hurwitz@amd.com>
+Date:   Thu May 24 20:57:59 2018 -0500
+
+    Update AMD cpu microcode for family 15h
+    
+    * Processor Revision ID 0x00610f01 was accidently not included in the previous
+      submitted microcode container file.
+    * Update the Version for family 15h microcode .bin file
+    
+    Key Name        = AMD Microcode Signing Key (for signing microcode container files only)
+    Key ID          = F328AE73
+    Key Fingerprint = FC7C 6C50 5DAF CC14 7183 57CA E4BE 5339 F328 AE73
+    
+    Signed-off-by: Sherry Hurwitz <sherry.hurwitz@amd.com>
+    Signed-off-by: Josh Boyer <jwboyer@kernel.org>
+
+commit 77101513943ef198e2050667c87abf19e6cbb1d8
+Author: Sherry Hurwitz <sherry.hurwitz@amd.com>
+Date:   Wed May 16 18:10:48 2018 -0500
+
+    linux-firmware: Update AMD cpu microcode
+    
+    * Add AMD cpu microcode for processor family 17h
+    * Update AMD cpu microcode for processor family 15h
+    * Update the AMD cpu microcode license copyright
+    * Add a Version for both microcode family 15h and 17h
+    
+    Key Name        = AMD Microcode Signing Key (for signing microcode container files only)
+    Key ID          = F328AE73
+    Key Fingerprint = FC7C 6C50 5DAF CC14 7183 57CA E4BE 5339 F328 AE73
+    
+    Signed-off-by: Sherry Hurwitz <sherry.hurwitz@amd.com>
+    Signed-off-by: Josh Boyer <jwboyer@kernel.org>
+
+commit 5f8ca0c1db6106a2d6d7e85eee778917ff03c3de
+Author: Sherry Hurwitz <sherry.hurwitz@amd.com>
+Date:   Thu Mar 17 01:56:11 2016 -0500
+
+    linux-firmware: Update AMD microcode patch firmware
+    
+    For AMD Family 15h Processors to fix bugs in prior microcode patch
+    file: amd-ucode/microcode_amd_fam15h.bin
+    md5sum: 2384ef1d8ec8ca3930b62d82ea5a3813
+    
+    Version: 2016_03_16
+    
+    Signed-off-by: Sherry Hurwitz <sherry.hurwitz@amd.com>
+    Signed-off-by: Kyle McMartin <kyle@kernel.org>
+
+commit 8ac569dd3ca3ca685bd47ee86c1eeb6050864db3
+Author: Sherry Hurwitz <sherry.hurwitz@amd.com>
+Date:   Thu Nov 6 19:38:26 2014 -0600
+
+    linux-firmware: Update AMD microcode patch firmware files
+    
+    For AMD Family 15h Processors
+    file:   amd-ucode/microcode_amd_family15h.bin
+    md5sum: ee3f0f46936aa1788dc31ca3487e0ff3
+    
+    For AMD Family 16h Processors
+    file:   amd-ucode/microcode_amd_family16h.bin
+    md5sum: 6a47a6393c52ddfc0b5b044efc076a77
+    
+    Version: 2014_10_28
+    Signed-off-by: Sherry Hurwitz <sherry.hurwitz@amd.com>
+    Signed-off-by: Kyle McMartin <kyle@kernel.org>
+
+commit 31f6b3076bab3c4b65f67fdb232f4579ed828b4f
+Author: Suravee Suthikulpanit <suravee.suthikulpanit@amd.com>
+Date:   Wed Jul 10 19:42:56 2013 -0500
+
+    linux-firmware: Add AMD microcode patch firmware files
+    
+    For AMD Families 10h ~ 14h Processors
+    file:   amd-ucode/microcode_amd.bin
+    md5sum: 55ae79b82cbfddcf7142058be3c9ec2d
+    
+    For AMD Family 15h Processors
+    file:   amd-ucode/microcode_amd_fam15h.bin
+    md5sum: 122ac7e56442c2b7c28eb26978b2d57c
+    
+    Version: 07_10_2013
+    
+    Signed-off-by: Sherry Hurwitz <sherry.hurwitz@amd.com>
+    Signed-off-by: Suravee Suthikulpanit <suravee.suthikulpanit@amd.com>
+    [bwh: Include version in WHENCE and GPG signatures as separate files]
+    Signed-off-by: Ben Hutchings <ben@decadent.org.uk>
+
+The microcode update for family 17h came from SuSE, and depends on specific
+kernel support for family 17h to be applied.  It implements IBPB support
+for family 17h processors (Zen).  Microcode update support for family 17h
+should be present in Linux 4.15, 4.14.13, 4.9.76, 4.4.111, and later.
+
+AMD did not update the relevant microcode documentation (errata fixed,
+microcode patch levels, etc), so there is no documentation for the family 0x16
+microcode patches, and the documentation for family 0x15 might be stale.

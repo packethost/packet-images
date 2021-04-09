@@ -1,0 +1,12 @@
+7ede136db046c403f06c7704ded35a9f  usr/lib/python3/dist-packages/MarkupSafe-0.23.egg-info/PKG-INFO
+68b329da9893e34099c7d8ad5cb9c940  usr/lib/python3/dist-packages/MarkupSafe-0.23.egg-info/dependency_links.txt
+68b329da9893e34099c7d8ad5cb9c940  usr/lib/python3/dist-packages/MarkupSafe-0.23.egg-info/not-zip-safe
+5862354c9fbb5b15204672c79808e25c  usr/lib/python3/dist-packages/MarkupSafe-0.23.egg-info/top_level.txt
+25d1b407fd8bc06b05fe2e05576af586  usr/lib/python3/dist-packages/markupsafe/__init__.py
+c0dfe0b27e175b17d5e35171b31056ff  usr/lib/python3/dist-packages/markupsafe/_compat.py
+b58b1233567f885d78e73de91c95283a  usr/lib/python3/dist-packages/markupsafe/_constants.py
+fd769add6002b38bfaff3996475bacb6  usr/lib/python3/dist-packages/markupsafe/_native.py
+0903acbd6c8da15e28e2e280c326374d  usr/lib/python3/dist-packages/markupsafe/_speedups.cpython-35m-x86_64-linux-gnu.so
+8ecb90ab57a36f7485c693fd8b4f456a  usr/lib/python3/dist-packages/markupsafe/tests.py
+94454c591e3f83e365991d9d559443a7  usr/share/doc/python3-markupsafe/changelog.Debian.gz
+3744af2279f14686bcee9db60e24e75d  usr/share/doc/python3-markupsafe/copyright

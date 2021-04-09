@@ -1,0 +1,6 @@
+55d08ec2b29c35aa00c7659461a902f9  usr/bin/jq
+665da8faf3e394b7de10c1af4a088728  usr/share/doc/jq/AUTHORS
+c918639119eeb23436656ff51dce1c13  usr/share/doc/jq/README
+123f9a48d530261f86e27fcc60fac551  usr/share/doc/jq/changelog.Debian.gz
+b37acee70cf5ea9be197a337fa82614a  usr/share/doc/jq/copyright
+0ac03360d4344fdb4617d1d4d5f0dfb3  usr/share/man/man1/jq.1.gz

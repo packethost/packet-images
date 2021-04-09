@@ -1,0 +1,5 @@
+#!/bin/sh
+set -e
+# Automatically added by dh_installdeb
+dpkg-maintscript-helper dir_to_symlink /usr/share/doc/grub-efi-amd64 grub-common 1.99-1~ -- "$@"
+# End automatically added section

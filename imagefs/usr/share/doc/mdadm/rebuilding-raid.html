@@ -1,0 +1,561 @@
+<?xml version="1.0" standalone="no"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:dc="http://purl.org/dc/elements/1.1/" xml:lang="en" lang="en">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>JD : /linux/rebuilding-raid</title>
+    <link rel="stylesheet" media="screen" type="text/css" href="http://www.davidpashley.com/css/ie.css" />
+    <link rel="stylesheet" media="print" type="text/css" href="http://www.davidpashley.com/css/print.css" />
+    <link xmlns="" rel="alternate" type="application/rss+xml" title="RSS 2.0" href="http://www.davidpashley.com/blog/?flav=rss" />
+    <link xmlns="" rel="alternate" type="text/xml" title="RSS .92" href="http://www.davidpashley.com/blog/?flav=rss" />
+    <link xmlns="" rel="alternate" type="application/atom+xml" title="Atom 0.3" href="http://www.davidpashley.com/blog/?flav=atom" />
+  </head>
+  <body>
+    <script type="text/javascript">
+<!--
+               function addGlobalStyle(css) {
+                  var head, style;
+                  head = document.getElementsByTagName('head')[0];
+                  if (!head) { return; }
+                  style = document.createElement('style');
+                  style.type = 'text/css';
+                  style.innerHTML = css;
+                  head.appendChild(style);
+               }
+               
+               var full_width = 0;
+               
+               function make_max_width() {
+                  if (!full_width) {
+                     full_width = 1;
+                     addGlobalStyle(' #page { max-width:100%; }');
+                  } else {
+                     full_width = 0;
+                     addGlobalStyle(' #page { max-width:70em; }');
+                  }
+               }
+            -->
+    </script>
+    <script src="http://www.google-analytics.com/urchin.js" type="text/javascript"></script>
+    <script type="text/javascript">
+               _uacct = "UA-261983-1";
+               urchinTracker();
+            </script>
+    <div id="page" style="width:                expression(Math.min(parseInt(this.offsetWidth), 70*12 ) +                'px');">
+      <div id="header">
+                  DavidPashley.com
+               </div>
+      <div xmlns="" id="menu">
+        <ul>
+          <li>
+            <a href="/" title="Home">Home</a>
+          </li>
+          <li>
+            <a href="/blog/" title="Blog">Blog</a>
+          </li>
+          <li>
+            <a href="/articles/" title="Articles">Articles</a>
+          </li>
+          <li>
+            <a href="/projects/" title="Projects">Projects</a>
+          </li>
+          <li>
+            <a href="/about/" title="About">About</a>
+          </li>
+          <li class="last">
+            <a href="/contact/" title="Contact">Contact</a>
+          </li>
+        </ul>
+      </div>
+      <div xmlns="" class="advert">
+        <script type="text/javascript">
+<!--
+                     google_ad_client = "pub-3364074587908580";
+                     google_ad_width =  733;
+                     google_ad_height = 95;
+                     google_ad_format = "728x90_as";
+                     google_ad_type = "text_image";
+                     google_ad_channel ="";
+                     google_color_border = "FFFFFF";
+                     google_color_bg = "FFFFFF";
+                     google_color_link = "7788AA";
+                     google_color_url = "556699";
+                     google_color_text = "000000";
+               -->
+        </script>
+        <script type="text/javascript" src="http://pagead2.googlesyndication.com/pagead/show_ads.js"></script>
+      </div>
+      <div id="main">
+        <div xmlns="" id="sidebar">
+          <a href="javascript:make_max_width()">Use full width</a>
+          <div id="about">
+            <h1>About</h1>
+            <p><a href="mailto:david@davidpashley.com">David Pashley</a><br />
+                     Systems Support<br />
+                     Runtime Collective
+                     </p>
+            <p>
+              <a href="http://www.davidpashley.com/blog/?flav=rss">
+                <img class="button" src="/images/rss10.png" width="80" height="15" alt="[RSS 1.0 Feed]" />
+              </a>
+              <a href="http://www.davidpashley.com/blog/?flav=atom">
+                <img class="button" src="/images/atom.png" width="80" height="15" alt="[RSS 2.0 Feed]" />
+              </a>
+              <a href="/foaf.rdf">
+                <img class="button" src="/images/foaf.png" width="80" height="15" alt="[FOAF Subscriptions]" />
+              </a>
+              <a href="http://www.catb.org/hacker-emblem/">
+                <img class="button" src="/images/hacker.png" width="80" height="15" alt="[Hacker]" />
+              </a>
+            </p>
+          </div>
+          <div class="archives">
+            <h1>Archives</h1>
+            <table class="blosxomCalendar">
+              <tr>
+                <td align="left">
+                  <a href="http://www.davidpashley.com/blog/2008/Jun">&lt;</a>
+                </td>
+                <td colspan="5" align="center" class="blosxomCalendarHead">July 2008</td>
+                <td align="right">
+                  <a href="http://www.davidpashley.com/blog/2008/Aug">&gt;</a>
+                </td>
+              </tr>
+              <tr>
+                <td class="blosxomCalendarWeekHeader">Su</td>
+                <td class="blosxomCalendarWeekHeader">Mo</td>
+                <td class="blosxomCalendarWeekHeader">Tu</td>
+                <td class="blosxomCalendarWeekHeader">We</td>
+                <td class="blosxomCalendarWeekHeader">Th</td>
+                <td class="blosxomCalendarWeekHeader">Fr</td>
+                <td class="blosxomCalendarWeekHeader">Sa</td>
+              </tr>
+              <tr>
+                <td class="blosxomCalendarEmpty"> </td>
+                <td class="blosxomCalendarEmpty"> </td>
+                <td class="blosxomCalendarCell"> 1</td>
+                <td class="blosxomCalendarCell"> 2</td>
+                <td class="blosxomCalendarCell"> 3</td>
+                <td class="blosxomCalendarCell"> 4</td>
+                <td class="blosxomCalendarCell"> 5</td>
+              </tr>
+              <tr>
+                <td class="blosxomCalendarCell"> 6</td>
+                <td class="blosxomCalendarCell"> 7</td>
+                <td class="blosxomCalendarCell"> 8</td>
+                <td class="blosxomCalendarCell"> 9</td>
+                <td class="blosxomCalendarCell">10</td>
+                <td class="blosxomCalendarCell">11</td>
+                <td class="blosxomCalendarBlogged">
+                  <a href="http://www.davidpashley.com/blog/2008/Jul/12">12</a>
+                </td>
+              </tr>
+              <tr>
+                <td class="blosxomCalendarCell">13</td>
+                <td class="blosxomCalendarCell">14</td>
+                <td class="blosxomCalendarCell">15</td>
+                <td class="blosxomCalendarCell">16</td>
+                <td class="blosxomCalendarCell">17</td>
+                <td class="blosxomCalendarCell">18</td>
+                <td class="blosxomCalendarCell">19</td>
+              </tr>
+              <tr>
+                <td class="blosxomCalendarCell">20</td>
+                <td class="blosxomCalendarCell">21</td>
+                <td class="blosxomCalendarCell">22</td>
+                <td class="blosxomCalendarCell">23</td>
+                <td class="blosxomCalendarCell">24</td>
+                <td class="blosxomCalendarCell">25</td>
+                <td class="blosxomCalendarCell">26</td>
+              </tr>
+              <tr>
+                <td class="blosxomCalendarCell">27</td>
+                <td class="blosxomCalendarCell">28</td>
+                <td class="blosxomCalendarCell">29</td>
+                <td class="blosxomCalendarCell">30</td>
+                <td class="blosxomCalendarCell">31</td>
+                <td class="blosxomCalendarEmpty"> </td>
+                <td class="blosxomCalendarEmpty"> </td>
+              </tr>
+            </table>
+          </div>
+          <div class="archives">
+            <h1>Tags</h1>
+            <p>
+              <div id="tagcloud">
+                <a href="http://www.davidpashley.com/blog/tags/ data integrity" class="smallTag" alt="There are 2 entries tagged  data integrity"> data integrity</a>
+                <a href="http://www.davidpashley.com/blog/tags/ databases" class="smallTag" alt="There are 2 entries tagged  databases"> databases</a>
+                <a href="http://www.davidpashley.com/blog/tags/ gotchas" class="smallTag" alt="There are 2 entries tagged  gotchas"> gotchas</a>
+                <a href="http://www.davidpashley.com/blog/tags/ java" class="smallestTag" alt="There are 1 entries tagged  java"> java</a>
+                <a href="http://www.davidpashley.com/blog/tags/ jetty" class="smallestTag" alt="There are 1 entries tagged  jetty"> jetty</a>
+                <a href="http://www.davidpashley.com/blog/tags/ maven" class="smallestTag" alt="There are 1 entries tagged  maven"> maven</a>
+                <a href="http://www.davidpashley.com/blog/tags/ netcat" class="smallestTag" alt="There are 1 entries tagged  netcat"> netcat</a>
+                <a href="http://www.davidpashley.com/blog/tags/ rsync" class="smallestTag" alt="There are 1 entries tagged  rsync"> rsync</a>
+                <a href="http://www.davidpashley.com/blog/tags/ servlets" class="smallestTag" alt="There are 1 entries tagged  servlets"> servlets</a>
+                <a href="http://www.davidpashley.com/blog/tags/alpha" class="smallestTag" alt="There are 1 entries tagged alpha">alpha</a>
+                <a href="http://www.davidpashley.com/blog/tags/apache" class="smallestTag" alt="There are 1 entries tagged apache">apache</a>
+                <a href="http://www.davidpashley.com/blog/tags/article" class="mediumTag" alt="There are 7 entries tagged article">article</a>
+                <a href="http://www.davidpashley.com/blog/tags/async routing" class="smallestTag" alt="There are 1 entries tagged async routing">async routing</a>
+                <a href="http://www.davidpashley.com/blog/tags/Atom" class="smallTag" alt="There are 2 entries tagged Atom">Atom</a>
+                <a href="http://www.davidpashley.com/blog/tags/backups" class="smallestTag" alt="There are 1 entries tagged backups">backups</a>
+                <a href="http://www.davidpashley.com/blog/tags/bash" class="mediumTag" alt="There are 6 entries tagged bash">bash</a>
+                <a href="http://www.davidpashley.com/blog/tags/bitlbee" class="smallestTag" alt="There are 1 entries tagged bitlbee">bitlbee</a>
+                <a href="http://www.davidpashley.com/blog/tags/blog" class="smallTag" alt="There are 3 entries tagged blog">blog</a>
+                <a href="http://www.davidpashley.com/blog/tags/bzip2" class="smallestTag" alt="There are 1 entries tagged bzip2">bzip2</a>
+                <a href="http://www.davidpashley.com/blog/tags/C++" class="smallestTag" alt="There are 1 entries tagged C++">C++</a>
+                <a href="http://www.davidpashley.com/blog/tags/certificate authority" class="smallestTag" alt="There are 1 entries tagged certificate authority">certificate authority</a>
+                <a href="http://www.davidpashley.com/blog/tags/comments" class="smallestTag" alt="There are 1 entries tagged comments">comments</a>
+                <a href="http://www.davidpashley.com/blog/tags/conffiles" class="smallestTag" alt="There are 1 entries tagged conffiles">conffiles</a>
+                <a href="http://www.davidpashley.com/blog/tags/d-i" class="smallestTag" alt="There are 1 entries tagged d-i">d-i</a>
+                <a href="http://www.davidpashley.com/blog/tags/database" class="bigTag" alt="There are 9 entries tagged database">database</a>
+                <a href="http://www.davidpashley.com/blog/tags/databases" class="smallestTag" alt="There are 1 entries tagged databases">databases</a>
+                <a href="http://www.davidpashley.com/blog/tags/debconf" class="smallTag" alt="There are 3 entries tagged debconf">debconf</a>
+                <a href="http://www.davidpashley.com/blog/tags/Debian" class="biggestTag" alt="There are 11 entries tagged Debian">Debian</a>
+                <a href="http://www.davidpashley.com/blog/tags/decompression errors" class="smallestTag" alt="There are 1 entries tagged decompression errors">decompression errors</a>
+                <a href="http://www.davidpashley.com/blog/tags/disk" class="smallestTag" alt="There are 1 entries tagged disk">disk</a>
+                <a href="http://www.davidpashley.com/blog/tags/DocBook" class="smallestTag" alt="There are 1 entries tagged DocBook">DocBook</a>
+                <a href="http://www.davidpashley.com/blog/tags/dpkg" class="smallestTag" alt="There are 1 entries tagged dpkg">dpkg</a>
+                <a href="http://www.davidpashley.com/blog/tags/Eddie" class="smallestTag" alt="There are 1 entries tagged Eddie">Eddie</a>
+                <a href="http://www.davidpashley.com/blog/tags/email addresses" class="smallestTag" alt="There are 1 entries tagged email addresses">email addresses</a>
+                <a href="http://www.davidpashley.com/blog/tags/encodings" class="smallestTag" alt="There are 1 entries tagged encodings">encodings</a>
+                <a href="http://www.davidpashley.com/blog/tags/Fedora" class="smallestTag" alt="There are 1 entries tagged Fedora">Fedora</a>
+                <a href="http://www.davidpashley.com/blog/tags/feed parser" class="smallestTag" alt="There are 1 entries tagged feed parser">feed parser</a>
+                <a href="http://www.davidpashley.com/blog/tags/firefox" class="smallestTag" alt="There are 1 entries tagged firefox">firefox</a>
+                <a href="http://www.davidpashley.com/blog/tags/gnome" class="smallestTag" alt="There are 1 entries tagged gnome">gnome</a>
+                <a href="http://www.davidpashley.com/blog/tags/gnome-terminal" class="smallestTag" alt="There are 1 entries tagged gnome-terminal">gnome-terminal</a>
+                <a href="http://www.davidpashley.com/blog/tags/google" class="smallTag" alt="There are 2 entries tagged google">google</a>
+                <a href="http://www.davidpashley.com/blog/tags/google maps" class="smallestTag" alt="There are 1 entries tagged google maps">google maps</a>
+                <a href="http://www.davidpashley.com/blog/tags/gotchas" class="mostHugeTag" alt="There are 20 entries tagged gotchas">gotchas</a>
+                <a href="http://www.davidpashley.com/blog/tags/guadec" class="smallestTag" alt="There are 1 entries tagged guadec">guadec</a>
+                <a href="http://www.davidpashley.com/blog/tags/gzip" class="smallestTag" alt="There are 1 entries tagged gzip">gzip</a>
+                <a href="http://www.davidpashley.com/blog/tags/hardware failure" class="smallestTag" alt="There are 1 entries tagged hardware failure">hardware failure</a>
+                <a href="http://www.davidpashley.com/blog/tags/Hardy" class="smallestTag" alt="There are 1 entries tagged Hardy">Hardy</a>
+                <a href="http://www.davidpashley.com/blog/tags/HCI" class="smallestTag" alt="There are 1 entries tagged HCI">HCI</a>
+                <a href="http://www.davidpashley.com/blog/tags/Helsinki" class="smallTag" alt="There are 3 entries tagged Helsinki">Helsinki</a>
+                <a href="http://www.davidpashley.com/blog/tags/hotbabe" class="smallestTag" alt="There are 1 entries tagged hotbabe">hotbabe</a>
+                <a href="http://www.davidpashley.com/blog/tags/init" class="smallestTag" alt="There are 1 entries tagged init">init</a>
+                <a href="http://www.davidpashley.com/blog/tags/InnoDB" class="smallestTag" alt="There are 1 entries tagged InnoDB">InnoDB</a>
+                <a href="http://www.davidpashley.com/blog/tags/IO::File" class="smallestTag" alt="There are 1 entries tagged IO::File">IO::File</a>
+                <a href="http://www.davidpashley.com/blog/tags/irssi" class="mediumTag" alt="There are 5 entries tagged irssi">irssi</a>
+                <a href="http://www.davidpashley.com/blog/tags/Jonathan Corbet" class="smallestTag" alt="There are 1 entries tagged Jonathan Corbet">Jonathan Corbet</a>
+                <a href="http://www.davidpashley.com/blog/tags/juniper" class="smallestTag" alt="There are 1 entries tagged juniper">juniper</a>
+                <a href="http://www.davidpashley.com/blog/tags/junos" class="smallestTag" alt="There are 1 entries tagged junos">junos</a>
+                <a href="http://www.davidpashley.com/blog/tags/lazyweb" class="smallTag" alt="There are 2 entries tagged lazyweb">lazyweb</a>
+                <a href="http://www.davidpashley.com/blog/tags/ldap" class="smallTag" alt="There are 3 entries tagged ldap">ldap</a>
+                <a href="http://www.davidpashley.com/blog/tags/LDAP" class="smallestTag" alt="There are 1 entries tagged LDAP">LDAP</a>
+                <a href="http://www.davidpashley.com/blog/tags/linux" class="smallTag" alt="There are 3 entries tagged linux">linux</a>
+                <a href="http://www.davidpashley.com/blog/tags/Linux 2.6" class="smallestTag" alt="There are 1 entries tagged Linux 2.6">Linux 2.6</a>
+                <a href="http://www.davidpashley.com/blog/tags/livejournal" class="smallTag" alt="There are 3 entries tagged livejournal">livejournal</a>
+                <a href="http://www.davidpashley.com/blog/tags/lwn.net" class="smallestTag" alt="There are 1 entries tagged lwn.net">lwn.net</a>
+                <a href="http://www.davidpashley.com/blog/tags/mail" class="smallestTag" alt="There are 1 entries tagged mail">mail</a>
+                <a href="http://www.davidpashley.com/blog/tags/mdadm" class="smallestTag" alt="There are 1 entries tagged mdadm">mdadm</a>
+                <a href="http://www.davidpashley.com/blog/tags/MIME" class="smallestTag" alt="There are 1 entries tagged MIME">MIME</a>
+                <a href="http://www.davidpashley.com/blog/tags/mjray" class="smallestTag" alt="There are 1 entries tagged mjray">mjray</a>
+                <a href="http://www.davidpashley.com/blog/tags/mozilla" class="smallestTag" alt="There are 1 entries tagged mozilla">mozilla</a>
+                <a href="http://www.davidpashley.com/blog/tags/mutt" class="smallestTag" alt="There are 1 entries tagged mutt">mutt</a>
+                <a href="http://www.davidpashley.com/blog/tags/MySQL" class="smallTag" alt="There are 4 entries tagged MySQL">MySQL</a>
+                <a href="http://www.davidpashley.com/blog/tags/mysql" class="smallTag" alt="There are 4 entries tagged mysql">mysql</a>
+                <a href="http://www.davidpashley.com/blog/tags/network troubleshooting" class="smallestTag" alt="There are 1 entries tagged network troubleshooting">network troubleshooting</a>
+                <a href="http://www.davidpashley.com/blog/tags/networking" class="smallestTag" alt="There are 1 entries tagged networking">networking</a>
+                <a href="http://www.davidpashley.com/blog/tags/OOP" class="smallTag" alt="There are 3 entries tagged OOP">OOP</a>
+                <a href="http://www.davidpashley.com/blog/tags/OpenSSL" class="smallTag" alt="There are 2 entries tagged OpenSSL">OpenSSL</a>
+                <a href="http://www.davidpashley.com/blog/tags/Oracle" class="smallTag" alt="There are 4 entries tagged Oracle">Oracle</a>
+                <a href="http://www.davidpashley.com/blog/tags/Oracle XE" class="smallestTag" alt="There are 1 entries tagged Oracle XE">Oracle XE</a>
+                <a href="http://www.davidpashley.com/blog/tags/patents" class="smallestTag" alt="There are 1 entries tagged patents">patents</a>
+                <a href="http://www.davidpashley.com/blog/tags/perl" class="mediumTag" alt="There are 5 entries tagged perl">perl</a>
+                <a href="http://www.davidpashley.com/blog/tags/perl DBI" class="smallestTag" alt="There are 1 entries tagged perl DBI">perl DBI</a>
+                <a href="http://www.davidpashley.com/blog/tags/politics" class="smallestTag" alt="There are 1 entries tagged politics">politics</a>
+                <a href="http://www.davidpashley.com/blog/tags/post-inst" class="smallestTag" alt="There are 1 entries tagged post-inst">post-inst</a>
+                <a href="http://www.davidpashley.com/blog/tags/postgresql" class="smallestTag" alt="There are 1 entries tagged postgresql">postgresql</a>
+                <a href="http://www.davidpashley.com/blog/tags/PostgreSQL" class="mediumTag" alt="There are 5 entries tagged PostgreSQL">PostgreSQL</a>
+                <a href="http://www.davidpashley.com/blog/tags/printconf" class="smallestTag" alt="There are 1 entries tagged printconf">printconf</a>
+                <a href="http://www.davidpashley.com/blog/tags/privoxy" class="smallestTag" alt="There are 1 entries tagged privoxy">privoxy</a>
+                <a href="http://www.davidpashley.com/blog/tags/programming" class="smallestTag" alt="There are 1 entries tagged programming">programming</a>
+                <a href="http://www.davidpashley.com/blog/tags/prompt" class="smallestTag" alt="There are 1 entries tagged prompt">prompt</a>
+                <a href="http://www.davidpashley.com/blog/tags/prompts" class="smallestTag" alt="There are 1 entries tagged prompts">prompts</a>
+                <a href="http://www.davidpashley.com/blog/tags/puppet" class="smallestTag" alt="There are 1 entries tagged puppet">puppet</a>
+                <a href="http://www.davidpashley.com/blog/tags/pyblosxom" class="smallestTag" alt="There are 1 entries tagged pyblosxom">pyblosxom</a>
+                <a href="http://www.davidpashley.com/blog/tags/python" class="smallestTag" alt="There are 1 entries tagged python">python</a>
+                <a href="http://www.davidpashley.com/blog/tags/quota" class="smallestTag" alt="There are 1 entries tagged quota">quota</a>
+                <a href="http://www.davidpashley.com/blog/tags/RAID" class="smallestTag" alt="There are 1 entries tagged RAID">RAID</a>
+                <a href="http://www.davidpashley.com/blog/tags/rfc2821" class="smallestTag" alt="There are 1 entries tagged rfc2821">rfc2821</a>
+                <a href="http://www.davidpashley.com/blog/tags/rfc2822" class="smallestTag" alt="There are 1 entries tagged rfc2822">rfc2822</a>
+                <a href="http://www.davidpashley.com/blog/tags/Rome" class="smallestTag" alt="There are 1 entries tagged Rome">Rome</a>
+                <a href="http://www.davidpashley.com/blog/tags/root ca" class="smallestTag" alt="There are 1 entries tagged root ca">root ca</a>
+                <a href="http://www.davidpashley.com/blog/tags/routing" class="smallestTag" alt="There are 1 entries tagged routing">routing</a>
+                <a href="http://www.davidpashley.com/blog/tags/RPM" class="smallTag" alt="There are 2 entries tagged RPM">RPM</a>
+                <a href="http://www.davidpashley.com/blog/tags/RSS" class="smallTag" alt="There are 2 entries tagged RSS">RSS</a>
+                <a href="http://www.davidpashley.com/blog/tags/samba" class="smallestTag" alt="There are 1 entries tagged samba">samba</a>
+                <a href="http://www.davidpashley.com/blog/tags/sambaSID" class="smallestTag" alt="There are 1 entries tagged sambaSID">sambaSID</a>
+                <a href="http://www.davidpashley.com/blog/tags/sane" class="smallestTag" alt="There are 1 entries tagged sane">sane</a>
+                <a href="http://www.davidpashley.com/blog/tags/SAX" class="smallestTag" alt="There are 1 entries tagged SAX">SAX</a>
+                <a href="http://www.davidpashley.com/blog/tags/SCIM" class="smallestTag" alt="There are 1 entries tagged SCIM">SCIM</a>
+                <a href="http://www.davidpashley.com/blog/tags/Scott James Remnant" class="smallestTag" alt="There are 1 entries tagged Scott James Remnant">Scott James Remnant</a>
+                <a href="http://www.davidpashley.com/blog/tags/scp" class="smallestTag" alt="There are 1 entries tagged scp">scp</a>
+                <a href="http://www.davidpashley.com/blog/tags/security" class="smallTag" alt="There are 3 entries tagged security">security</a>
+                <a href="http://www.davidpashley.com/blog/tags/serverfault" class="smallTag" alt="There are 2 entries tagged serverfault">serverfault</a>
+                <a href="http://www.davidpashley.com/blog/tags/shell" class="mediumTag" alt="There are 5 entries tagged shell">shell</a>
+                <a href="http://www.davidpashley.com/blog/tags/Shibboleth" class="smallestTag" alt="There are 1 entries tagged Shibboleth">Shibboleth</a>
+                <a href="http://www.davidpashley.com/blog/tags/sip" class="smallestTag" alt="There are 1 entries tagged sip">sip</a>
+                <a href="http://www.davidpashley.com/blog/tags/slapindex" class="smallestTag" alt="There are 1 entries tagged slapindex">slapindex</a>
+                <a href="http://www.davidpashley.com/blog/tags/software patents" class="smallestTag" alt="There are 1 entries tagged software patents">software patents</a>
+                <a href="http://www.davidpashley.com/blog/tags/Solaris" class="smallestTag" alt="There are 1 entries tagged Solaris">Solaris</a>
+                <a href="http://www.davidpashley.com/blog/tags/spam" class="smallTag" alt="There are 2 entries tagged spam">spam</a>
+                <a href="http://www.davidpashley.com/blog/tags/spamassassin" class="smallestTag" alt="There are 1 entries tagged spamassassin">spamassassin</a>
+                <a href="http://www.davidpashley.com/blog/tags/SQL" class="smallestTag" alt="There are 1 entries tagged SQL">SQL</a>
+                <a href="http://www.davidpashley.com/blog/tags/SQL::Translator" class="smallestTag" alt="There are 1 entries tagged SQL::Translator">SQL::Translator</a>
+                <a href="http://www.davidpashley.com/blog/tags/ssh" class="smallestTag" alt="There are 1 entries tagged ssh">ssh</a>
+                <a href="http://www.davidpashley.com/blog/tags/sshd" class="smallestTag" alt="There are 1 entries tagged sshd">sshd</a>
+                <a href="http://www.davidpashley.com/blog/tags/SSL" class="smallestTag" alt="There are 1 entries tagged SSL">SSL</a>
+                <a href="http://www.davidpashley.com/blog/tags/style" class="smallestTag" alt="There are 1 entries tagged style">style</a>
+                <a href="http://www.davidpashley.com/blog/tags/subversion" class="smallTag" alt="There are 2 entries tagged subversion">subversion</a>
+                <a href="http://www.davidpashley.com/blog/tags/tabs" class="smallestTag" alt="There are 1 entries tagged tabs">tabs</a>
+                <a href="http://www.davidpashley.com/blog/tags/tar" class="smallestTag" alt="There are 1 entries tagged tar">tar</a>
+                <a href="http://www.davidpashley.com/blog/tags/terminal" class="smallestTag" alt="There are 1 entries tagged terminal">terminal</a>
+                <a href="http://www.davidpashley.com/blog/tags/timezone" class="smallestTag" alt="There are 1 entries tagged timezone">timezone</a>
+                <a href="http://www.davidpashley.com/blog/tags/tips" class="smallestTag" alt="There are 1 entries tagged tips">tips</a>
+                <a href="http://www.davidpashley.com/blog/tags/toilet breaks" class="smallestTag" alt="There are 1 entries tagged toilet breaks">toilet breaks</a>
+                <a href="http://www.davidpashley.com/blog/tags/tomcat" class="smallTag" alt="There are 3 entries tagged tomcat">tomcat</a>
+                <a href="http://www.davidpashley.com/blog/tags/travel" class="smallTag" alt="There are 4 entries tagged travel">travel</a>
+                <a href="http://www.davidpashley.com/blog/tags/turing test" class="smallestTag" alt="There are 1 entries tagged turing test">turing test</a>
+                <a href="http://www.davidpashley.com/blog/tags/tuxpaint" class="smallestTag" alt="There are 1 entries tagged tuxpaint">tuxpaint</a>
+                <a href="http://www.davidpashley.com/blog/tags/Ubuntu" class="smallTag" alt="There are 2 entries tagged Ubuntu">Ubuntu</a>
+                <a href="http://www.davidpashley.com/blog/tags/udev" class="smallestTag" alt="There are 1 entries tagged udev">udev</a>
+                <a href="http://www.davidpashley.com/blog/tags/UI" class="smallestTag" alt="There are 1 entries tagged UI">UI</a>
+                <a href="http://www.davidpashley.com/blog/tags/UK" class="smallestTag" alt="There are 1 entries tagged UK">UK</a>
+                <a href="http://www.davidpashley.com/blog/tags/untagged" class="mediumTag" alt="There are 96 entries tagged untagged">untagged</a>
+                <a href="http://www.davidpashley.com/blog/tags/upgrades" class="smallestTag" alt="There are 1 entries tagged upgrades">upgrades</a>
+                <a href="http://www.davidpashley.com/blog/tags/user administration" class="smallestTag" alt="There are 1 entries tagged user administration">user administration</a>
+                <a href="http://www.davidpashley.com/blog/tags/user adminitration" class="smallestTag" alt="There are 1 entries tagged user adminitration">user adminitration</a>
+                <a href="http://www.davidpashley.com/blog/tags/user-friendly" class="smallestTag" alt="There are 1 entries tagged user-friendly">user-friendly</a>
+                <a href="http://www.davidpashley.com/blog/tags/validation" class="smallestTag" alt="There are 1 entries tagged validation">validation</a>
+                <a href="http://www.davidpashley.com/blog/tags/vim" class="smallestTag" alt="There are 1 entries tagged vim">vim</a>
+                <a href="http://www.davidpashley.com/blog/tags/warnquota" class="smallestTag" alt="There are 1 entries tagged warnquota">warnquota</a>
+                <a href="http://www.davidpashley.com/blog/tags/water" class="smallestTag" alt="There are 1 entries tagged water">water</a>
+                <a href="http://www.davidpashley.com/blog/tags/weblogs" class="smallestTag" alt="There are 1 entries tagged weblogs">weblogs</a>
+                <a href="http://www.davidpashley.com/blog/tags/Windows XP" class="smallestTag" alt="There are 1 entries tagged Windows XP">Windows XP</a>
+                <a href="http://www.davidpashley.com/blog/tags/Workrave" class="smallestTag" alt="There are 1 entries tagged Workrave">Workrave</a>
+                <a href="http://www.davidpashley.com/blog/tags/wtf" class="bigTag" alt="There are 8 entries tagged wtf">wtf</a>
+                <a href="http://www.davidpashley.com/blog/tags/XSLT" class="smallTag" alt="There are 2 entries tagged XSLT">XSLT</a>
+                <a href="http://www.davidpashley.com/blog/tags/xss" class="smallestTag" alt="There are 1 entries tagged xss">xss</a>
+                <a href="http://www.davidpashley.com/blog/tags/xterm title" class="smallestTag" alt="There are 1 entries tagged xterm title">xterm title</a>
+                <a href="http://www.davidpashley.com/blog/tags/yum" class="smallestTag" alt="There are 1 entries tagged yum">yum</a>
+              </div>
+              <br />
+            </p>
+          </div>
+          <div class="archives">
+            <h1>Categories</h1>
+            <p><a href="http://www.davidpashley.com/blog/">/</a> (188)<br />  <a href="http://www.davidpashley.com/blog/computing">computing/</a> (49)<br />    <a href="http://www.davidpashley.com/blog/computing/vim">vim/</a> (1)<br />  <a href="http://www.davidpashley.com/blog/databases">databases/</a> (1)<br />    <a href="http://www.davidpashley.com/blog/databases/mysql">mysql/</a> (7)<br />    <a href="http://www.davidpashley.com/blog/databases/oracle">oracle/</a> (1)<br />    <a href="http://www.davidpashley.com/blog/databases/postgresql">postgresql/</a> (4)<br />  <a href="http://www.davidpashley.com/blog/debian">debian/</a> (24)<br />  <a href="http://www.davidpashley.com/blog/films">films/</a> (6)<br />  <a href="http://www.davidpashley.com/blog/general">general/</a> (20)<br />  <a href="http://www.davidpashley.com/blog/life">life/</a> (20)<br />  <a href="http://www.davidpashley.com/blog/linux">linux/</a> (6)<br />  <a href="http://www.davidpashley.com/blog/meta">meta/</a> (6)<br />  <a href="http://www.davidpashley.com/blog/music">music/</a> (12)<br />  <a href="http://www.davidpashley.com/blog/networks">networks/</a> (0)<br />    <a href="http://www.davidpashley.com/blog/networks/juniper">juniper/</a> (1)<br />  <a href="http://www.davidpashley.com/blog/politics">politics/</a> (6)<br />  <a href="http://www.davidpashley.com/blog/programming">programming/</a> (0)<br />    <a href="http://www.davidpashley.com/blog/programming/java">java/</a> (11)<br />    <a href="http://www.davidpashley.com/blog/programming/perl">perl/</a> (8)<br />    <a href="http://www.davidpashley.com/blog/programming/shell">shell/</a> (1)<br />  <a href="http://www.davidpashley.com/blog/spamusements">spamusements/</a> (1)<br />  <a href="http://www.davidpashley.com/blog/systems-administration">systems-administration/</a> (0)<br />    <a href="http://www.davidpashley.com/blog/systems-administration/puppet">puppet/</a> (2)<br />    <a href="http://www.davidpashley.com/blog/systems-administration/tomcat">tomcat/</a> (1)<br />
+                     </p>
+          </div>
+          <div class="donation">
+            <form action="https://www.paypal.com/cgi-bin/webscr" method="post">
+              <input type="hidden" name="cmd" value="_s-xclick" />
+              <input type="image" src="https://www.paypal.com/en_US/i/btn/x-click-but04.gif" border="0" name="submit" alt="Make payments with PayPal - it's fast, free and secure!" />
+              <input type="hidden" name="encrypted" value="-----BEGIN PKCS7-----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-----END PKCS7----- " />
+            </form>
+          </div>
+        </div>
+        <div xmlns="" id="body">
+          <div id="content">
+            <h1>Sat, 12 Jul 2008</h1>
+            <div class="entry"><h2>Rebuilding a RAID array</h2><div><p>I recently had a failed drive in my RAID1 array. I've just installed
+the replacement drive and thought I'd share the method.</p><p>Let's look at the current situation:</p><pre>
+root@ace:~# <b>cat /proc/mdstat</b> 
+Personalities : [linear] [multipath] [raid0] [raid1] [raid6] [raid5] [raid4] [raid10] 
+md1 : active raid1 sda3[1]
+      483403776 blocks [2/1] [_U]
+      
+md0 : active raid1 sda1[1]
+      96256 blocks [2/1] [_U]
+      
+unused devices: &lt;none&gt;
+</pre><p>So we can see we have two mirrored arrays with one drive missing in both.</p><p>Let's see that we've recognised the second drive:</p><pre>
+root@ace:~# <b>dmesg | grep sd</b>
+[   21.465395] Driver 'sd' needs updating - please use bus_type methods
+[   21.465486] sd 2:0:0:0: [sda] 976773168 512-byte hardware sectors (500108 MB)
+[   21.465496] sd 2:0:0:0: [sda] Write Protect is off
+[   21.465498] sd 2:0:0:0: [sda] Mode Sense: 00 3a 00 00
+[   21.465512] sd 2:0:0:0: [sda] Write cache: enabled, read cache: enabled, doesn't support DPO or FUA
+[   21.465562] sd 2:0:0:0: [sda] 976773168 512-byte hardware sectors (500108 MB)
+[   21.465571] sd 2:0:0:0: [sda] Write Protect is off
+[   21.465573] sd 2:0:0:0: [sda] Mode Sense: 00 3a 00 00
+[   21.465587] sd 2:0:0:0: [sda] Write cache: enabled, read cache: enabled, doesn't support DPO or FUA
+[   21.465590]  sda: sda1 sda2 sda3
+[   21.487248] sd 2:0:0:0: [sda] Attached SCSI disk
+[   21.487303] sd 2:0:1:0: [sdb] 976773168 512-byte hardware sectors (500108 MB)
+[   21.487314] sd 2:0:1:0: [sdb] Write Protect is off
+[   21.487317] sd 2:0:1:0: [sdb] Mode Sense: 00 3a 00 00
+[   21.487331] sd 2:0:1:0: [sdb] Write cache: enabled, read cache: enabled, doesn't support DPO or FUA
+[   21.487371] sd 2:0:1:0: [sdb] 976773168 512-byte hardware sectors (500108 MB)
+[   21.487381] sd 2:0:1:0: [sdb] Write Protect is off
+[   21.487382] sd 2:0:1:0: [sdb] Mode Sense: 00 3a 00 00
+[   21.487403] sd 2:0:1:0: [sdb] Write cache: enabled, read cache: enabled, doesn't support DPO or FUA
+[   21.487407]  sdb: unknown partition table
+[   21.502763] sd 2:0:1:0: [sdb] Attached SCSI disk
+[   21.506690] sd 2:0:0:0: Attached scsi generic sg0 type 0
+[   21.506711] sd 2:0:1:0: Attached scsi generic sg1 type 0
+[   21.793835] md: bind&lt;sda1&gt;
+[   21.858027] md: bind&lt;sda3&gt;
+</pre><p>So, sda has three partitions, sda1, sda2 and sda3, and sdb has no partition
+table. Let's give it one the same as sda. The easiest way to do this is using
+<tt>sfdisk</tt>:</p><pre>
+root@ace:~# <b>sfdisk -d /dev/sda | sfdisk /dev/sdb</b>
+Checking that no-one is using this disk right now ...
+OK
+
+Disk /dev/sdb: 60801 cylinders, 255 heads, 63 sectors/track
+
+sfdisk: ERROR: sector 0 does not have an MSDOS signature
+ /dev/sdb: unrecognised partition table type
+Old situation:
+No partitions found
+New situation:
+Units = sectors of 512 bytes, counting from 0
+
+   Device Boot    Start       End   #sectors  Id  System
+/dev/sdb1   *        63    192779     192717  fd  Linux RAID autodetect
+/dev/sdb2        192780   9960299    9767520  82  Linux swap / Solaris
+/dev/sdb3       9960300 976768064  966807765  fd  Linux RAID autodetect
+/dev/sdb4             0         -          0   0  Empty
+Successfully wrote the new partition table
+
+Re-reading the partition table ...
+
+If you created or changed a DOS partition, /dev/foo7, say, then use dd(1)
+to zero the first 512 bytes:  dd if=/dev/zero of=/dev/foo7 bs=512 count=1
+(See fdisk(8).)
+</pre><p>If we check <tt>dmesg</tt> now to check it's worked, we'll see:</p><pre>
+root@ace:~# <b>dmesg | grep sd</b>
+...
+[  224.246102] sd 2:0:1:0: [sdb] 976773168 512-byte hardware sectors (500108 MB)
+[  224.246322] sd 2:0:1:0: [sdb] Write Protect is off
+[  224.246325] sd 2:0:1:0: [sdb] Mode Sense: 00 3a 00 00
+[  224.246547] sd 2:0:1:0: [sdb] Write cache: enabled, read cache: enabled, doesn't support DPO or FUA
+[  224.246686]  sdb: unknown partition table
+[  227.326278] sd 2:0:1:0: [sdb] 976773168 512-byte hardware sectors (500108 MB)
+[  227.326504] sd 2:0:1:0: [sdb] Write Protect is off
+[  227.326507] sd 2:0:1:0: [sdb] Mode Sense: 00 3a 00 00
+[  227.326703] sd 2:0:1:0: [sdb] Write cache: enabled, read cache: enabled, doesn't support DPO or FUA
+[  227.326708]  sdb: sdb1 sdb2 sdb3
+</pre><p>So, now we have identical partition tables. The next thing to do is to add the new partitions to the array:</p><pre>
+root@ace:~# <b>mdadm /dev/md0 --add /dev/sdb1</b>
+mdadm: added /dev/sdb1
+root@ace:~# <b>mdadm /dev/md1 --add /dev/sdb3</b>
+mdadm: added /dev/sdb3
+</pre><p>Everything looks good. Let's check <tt>dmesg</tt>:</p><pre>
+[  323.941542] md: bind&lt;sdb1&gt;
+[  324.038183] RAID1 conf printout:
+[  324.038189]  --- wd:1 rd:2
+[  324.038192]  disk 0, wo:1, o:1, dev:sdb1
+[  324.038195]  disk 1, wo:0, o:1, dev:sda1
+[  324.038300] md: recovery of RAID array md0
+[  324.038303] md: minimum _guaranteed_  speed: 1000 KB/sec/disk.
+[  324.038305] md: using maximum available idle IO bandwidth (but not more than 200000 KB/sec) for recovery.
+[  324.038310] md: using 128k window, over a total of 96256 blocks.
+[  325.417219] md: md0: recovery done.
+[  325.453629] RAID1 conf printout:
+[  325.453632]  --- wd:2 rd:2
+[  325.453634]  disk 0, wo:0, o:1, dev:sdb1
+[  325.453636]  disk 1, wo:0, o:1, dev:sda1
+[  347.970105] md: bind&lt;sdb3&gt;
+[  348.004566] RAID1 conf printout:
+[  348.004571]  --- wd:1 rd:2
+[  348.004573]  disk 0, wo:1, o:1, dev:sdb3
+[  348.004574]  disk 1, wo:0, o:1, dev:sda3
+[  348.004657] md: recovery of RAID array md1
+[  348.004659] md: minimum _guaranteed_  speed: 1000 KB/sec/disk.
+[  348.004660] md: using maximum available idle IO bandwidth (but not more than 200000 KB/sec) for recovery.
+[  348.004664] md: using 128k window, over a total of 483403776 blocks.
+</pre><p>Everything still looks good. Let's sit back and watch it rebuild using the wonderfully useful <tt>watch</tt> command:</p><pre>
+root@ace:~# <b>watch -n 1 cat /proc/mdstat</b>
+Personalities : [linear] [multipath] [raid0] [raid1] [raid6] [raid5] [raid4] [raid10] 
+md1 : active raid1 sdb3[2] sda3[1]
+      483403776 blocks [2/1] [_U]
+      [=====&gt;...............]  recovery = 26.0% (126080960/483403776) finish=96.2min speed=61846K/sec
+      
+md0 : active raid1 sdb1[0] sda1[1]
+      96256 blocks [2/2] [UU]
+      
+unused devices: &lt;none&gt;
+</pre><p>The Ubuntu and Debian installers will allow you create RAID1 arrays
+with less drives than you actually have, so you can use this technique
+if you plan to add an additional drive after you've installed the
+system. Just tell it the eventual number of drives, but only select the
+available partitions during RAID setup.  I used this method when a new machine recent
+didn't have enough SATA power cables and had to wait for an adaptor to
+be delivered.</p><p><small>(Why did no one tell me about <tt>watch</tt> until recently. I wonder
+how many more incredibly useful programs I've not discovered even after 10
+years of using Linux</small>)</p></div>
+   [<a href="http://www.davidpashley.com/blog/tags/linux" rel="tag">linux</a>, <a href="http://www.davidpashley.com/blog/tags/mdadm" rel="tag">mdadm</a>, <a href="http://www.davidpashley.com/blog/tags/RAID" rel="tag">RAID</a>] | <a href="http://www.davidpashley.com/blog/linux/rebuilding-raid" title="Permalink"># Read Comments (3)</a> | 
+   <div class="archives"><div id="relatedstories"><h2>Related Stories</h2><p><a href="http://www.davidpashley.com/blog/linux/copying-files-with-netcat">Copying files with netcat</a><br /><a href="http://www.davidpashley.com/blog/computing/network-troubleshooting">Network Troubleshooting Article</a><br /></p></div></div>
+   <div class="archives">
+      
+   </div>
+
+</div>
+            <h2>Comments</h2>
+            <div class="blosxomComments">
+              <div class="blosxomComment"><!-- Rebuilding a RAID array --><a name="1215931866.99" id="1215931866.99"></a>
+       One extra step that I do is install an MBR on the new disk, to make it bootable:<br />
+<br />
+install-mbr /dev/sdb<br />
+       Posted by <a href="http://gedmin.as">Marius Gedminas</a> at Sun Jul 13 07:51:06 2008
+      </div>
+              <div class="blosxomComment"><!-- Rebuilding a RAID array --><a name="1215971647.83" id="1215971647.83"></a>
+       Great article!<br />
+Maybe it would be even more useful if merged here:<br />
+<a href="http://linux-raid.osdl.org/index.php/Reconstruction">http://linux-raid.osdl.org/index.php/Reconstruction</a><br />
+       Posted by <a href="http://edpeur.blogspot.com/">Eduardo Pérez Ureta</a> at Sun Jul 13 18:54:07 2008
+      </div>
+              <div class="blosxomComment"><!-- Rebuilding a RAID array --><a name="1216035050.47" id="1216035050.47"></a>
+       Semi-Tangential note about performance:  On my home (== partly "play") machine, I made the experience that "mdadm --manage .. --fail"-ing the root partition before doing lots of package upgrades (installing KDE 4/experimental and lots of other updates in my case, on a mostly etch system.  Dual screen support sucks if the screens don't have the same size, btw!) speeds up apt considerably, while the subsequent reconstruct step (--remove and then --add the partition) doesn't slow down the system much during light desktop workload.<br />
+<br />
+My system is a few years old (no SATA, probably not too much cache on the disks, too) and has only 512M RAM, so maybe a better equipped system would make this less noticeable.<br />
+<br />
+(... and no, I probably wouldn't force-fail part of my /home partition for any length of time :-)<br />
+       Posted by <a href="http://fortytwo.ch/">cmot</a> at Mon Jul 14 12:30:50 2008
+      </div>
+              <br />
+              <div class="blosxomCommentForm">
+                <form method="post" action="http://www.davidpashley.com/blog/linux/rebuilding-raid" id="comments_form">
+                  <p><input type="hidden" name="secretToken" value="pleaseDontSpam" /><input name="parent" type="hidden" value="linux/rebuilding-raid" /><input name="title" type="hidden" value="Rebuilding a RAID array" />
+        Name:<br />
+        <input maxlength="50" name="author" size="50" type="text" value="" /><br />
+        <br />
+        E-mail:<br />
+        <input maxlength="75" name="email" size="50" type="text" value="" /><br />
+        <br />
+        URL:<br />
+
+        <input maxlength="100" name="url" size="50" type="text" value="" /><br />
+        <br />
+        Comment:<br />
+        <textarea cols="50" name="body" rows="12"></textarea><br />
+        <br />
+        Please enter "fudge" to prove you are a human
+        <input size="50" type="text" name="human" />
+        <br />
+        <input name="Submit" type="submit" value="Submit" />
+        <!--   <input name="preview" type="submit" value="Preview" /> 
+        <input type="button" onclick="forgetMe(this.form)" value="Clear Info" /> 
+        <input type="checkbox" name="bakecookie" />Remember info?</input> -->
+        </p>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div xmlns="" id="footer">Copyright 2004,2005,2006,2007,2008 David Pashley<br />
+         All Rights Reserved
+      </div>
+      </div>
+    </div>
+  </body>
+</html><!--
+  -* Generated by mod-xslt 1.3.9; http://www.mod-xslt2.com/
+  -* Copyright (C) 2002,2003 Carlo Contavalli - <ccontavalli at masobit.net>
+  -* derived from work by Philipp Dunkel and others (http://www.mod-xslt2.com/main/credits.xml)
+  -* Thanks to http://www.masobit.net/ for paying me while working on mod-xslt
+  -* and for providing resources to the project. -->

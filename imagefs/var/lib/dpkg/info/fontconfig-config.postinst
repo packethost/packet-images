@@ -1,0 +1,40 @@
+#!/bin/sh
+
+set -e
+
+# Remove old ucf stuff
+rm -rf /var/lib/fontconfig
+
+CONFAVAIL=/usr/share/fontconfig/conf.avail
+CONFDIR=/etc/fonts/conf.d
+
+# Remove old defoma stuff
+if [ -x "`which defoma-app 2>/dev/null`" ]; then
+    defoma-app purge fontconfig >/dev/null || true
+fi
+DEFOMA=/var/lib/defoma/fontconfig.d/
+if [ -d $DEFOMA ]; then
+    rm -f $DEFOMA/fonts.conf
+    rmdir --ignore-fail-on-non-empty $DEFOMA
+fi
+rm -f /etc/defoma/fontconfig.subst-rule
+
+# Create /usr/local/share/fonts
+LOCALDIR=/usr/local/share/fonts
+if [ ! -d $LOCALDIR ]; then
+  if mkdir $LOCALDIR 2>/dev/null ; then
+    chmod 2775 $LOCALDIR
+    chown root:staff $LOCALDIR
+  fi
+fi
+
+# Automatically added by dh_installdeb
+dpkg-maintscript-helper rm_conffile /etc/fonts/conf.avail/11-lcd-filter-lcddefault.conf 2.10.1-0ubuntu1 -- "$@"
+# End automatically added section
+# Automatically added by dh_installdeb
+dpkg-maintscript-helper rm_conffile /etc/fonts/conf.avail/20-fix-globaladvance.conf 2.10.1-0ubuntu1 -- "$@"
+# End automatically added section
+# Automatically added by dh_installdeb
+dpkg-maintscript-helper rm_conffile /etc/fonts/fonts.dtd 2.10.1-0ubuntu1 -- "$@"
+# End automatically added section
+

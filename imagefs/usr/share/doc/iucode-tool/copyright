@@ -1,0 +1,21 @@
+This work was packaged for Debian by Henrique de Moraes Holschuh <hmh@debian.org> on Tue, 25 Jan 2011 18:09:24 -0200
+
+Upstream Copyright notice:
+    Copyright (c) 2010-2015 Henrique de Moraes Holschuh <hmh@hmh.eng.br>
+
+    This program is free software; you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation; either version 2 of the License, or
+    (at your option) any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    The full text of the GNU GPL version 2 is available at:
+    /usr/share/common-licenses/GPL-2
+
+Packaging copyright notice:
+    Copyright (c) 2011-2015 Henrique de Moraes Holschuh <hmh@debian.org>
+    The Debian packaging is licensed under the same license as the upstream code.

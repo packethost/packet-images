@@ -1,0 +1,12 @@
+/.
+/lib
+/lib/x86_64-linux-gnu
+/lib/x86_64-linux-gnu/libpopt.so.0.0.0
+/usr
+/usr/share
+/usr/share/doc
+/usr/share/doc/libpopt0
+/usr/share/doc/libpopt0/changelog.Debian.gz
+/usr/share/doc/libpopt0/README
+/usr/share/doc/libpopt0/copyright
+/lib/x86_64-linux-gnu/libpopt.so.0

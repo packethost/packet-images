@@ -1,0 +1,12 @@
+#!/bin/sh
+
+set -e
+
+if [ "$1" = "remove" ] || [ "$1" = "disappear" ]; then
+	update-alternatives --remove jsondiff /usr/bin/python3-jsondiff
+	update-alternatives --remove jsonpatch /usr/bin/python3-jsonpatch
+fi
+
+
+
+exit 0

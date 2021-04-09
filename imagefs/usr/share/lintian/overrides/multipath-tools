@@ -1,0 +1,6 @@
+multipath-tools: systemd-no-service-for-init-rcS-script multipath-tools-boot
+multipath-tools: no-symbols-control-file lib/libmpathpersist.so.0
+multipath-tools: no-symbols-control-file lib/libmultipath.so.0
+multipath-tools: non-dev-pkg-with-shlib-symlink lib/libmpathpersist.so.0 lib/libmpathpersist.so
+multipath-tools: package-name-doesnt-match-sonames libmpathpersist0 libmultipath0
+multipath-tools: systemd-no-service-for-init-script multipath-tools-boot

@@ -1,0 +1,28 @@
+#!/bin/sh
+set -e
+
+vimcur="vim74"
+basedir=/usr/share/vim/$vimcur/doc
+
+rm_diversion() {
+  dpkg-divert --package vim-runtime --rename --remove "$1"
+}
+
+# When upgrading to a new major upstream release, we need to remove the old
+# vim-tiny help(tags) diversions
+major_upgrade() {
+  newver="${1#?:}"
+  newver="vim$(echo ${newver%.*-*} | sed 's/\.//g')"
+  [ "$newver" != "$vimcur" ]
+}
+
+rm -f /usr/share/vim/addons/doc/tags
+if [ "$1" = "remove" -o "$1" = "abort-install" -o "$1" = "disappear" ] \
+    || ([ "$1" = "upgrade" ] && major_upgrade $2); then
+  rm_diversion $basedir/help.txt
+  rm_diversion $basedir/tags
+fi
+
+
+
+exit 0

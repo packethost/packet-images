@@ -1,0 +1,10 @@
+#!/bin/sh
+
+set -e
+
+if [ ! -e /etc/initramfs-tools/modules ]; then
+	sed '/^###/d' /usr/share/initramfs-tools/modules \
+		> /etc/initramfs-tools/modules
+fi
+
+

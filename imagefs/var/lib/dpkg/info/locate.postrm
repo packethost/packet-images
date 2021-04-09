@@ -1,0 +1,12 @@
+#! /bin/sh
+set -e
+
+if [ "$1" = "purge" ]; then
+  if [ -e /var/cache/locate/locatedb ] ; then
+    rm /var/cache/locate/locatedb
+    rmdir /var/cache/locate/ || true
+  fi
+fi
+
+
+# vim:tabstop=2:expandtab:shiftwidth=2

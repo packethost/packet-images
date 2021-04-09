@@ -1,0 +1,6 @@
+2ab55e8a9ba6744d16584eb550d88f56  usr/bin/ndiff
+b05a5857b93bd9dd33e07ba631047608  usr/lib/python2.7/dist-packages/ndiff.py
+2dc1932261c8706f26f917450a34430a  usr/share/doc/ndiff/changelog.Debian.gz
+aed60e54e2b456017cd38a5665ab12da  usr/share/doc/ndiff/copyright
+b397d009d62f4287581d766920af2052  usr/share/lintian/overrides/ndiff
+7287946d2dde6a53e78256b7c60bd892  usr/share/man/man1/ndiff.1.gz

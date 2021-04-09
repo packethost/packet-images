@@ -1,0 +1,31 @@
+#!/bin/sh
+
+set -e
+
+# Regenerate initramfs whenever we go to dpkg state `installed'
+if [ "x$1" != xtriggered ]; then
+	# this activates the trigger, if triggers are working
+	update-initramfs -u
+else
+	# force it to actually happen
+	DPKG_MAINTSCRIPT_PACKAGE='' update-initramfs -u
+fi
+
+# Remove all initrd old dkms files for which there is no
+# corresponding initram image in /boot (LP: #1791959).
+# One shot only:
+# - bug only affected users that were upgrading packages
+# - new users are not affected
+# - LP: #1515513 took care of removing old dkms together with the kernel
+if [ "x$1" = xconfigure ] && [ -n "$2" ] && dpkg --compare-versions "$2" lt "0.122ubuntu8.13"; then
+	for old_dkms_file in /boot/initrd-*.img.old-dkms \
+			     /boot/initramfs-*.img.old-dkms \
+			     /boot/initrd.img-*.old-dkms \
+			     /boot/initrd-*.old-dkms; do
+		if [ ! -e "${old_dkms_file%%.old-dkms}" ]; then
+			rm -fv "${old_dkms_file}"
+		fi
+	done
+fi
+
+

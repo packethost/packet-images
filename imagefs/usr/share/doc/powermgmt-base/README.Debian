@@ -1,0 +1,14 @@
+powermgmt README
+================
+
+powermgmt-base is a package containing utilities and configuration
+files that are common to the packages supporting the APM and ACPI
+power management subsystems.
+
+AUTHORS
+-------
+on_ac_power was written by Rik Faith and Avery Pennarun <apenwarr@debian.org>
+and modified by Thomas Hood <jdthood@yahoo.co.uk>
+
+apm_available and acpi_available were written by Thomas Hood.
+

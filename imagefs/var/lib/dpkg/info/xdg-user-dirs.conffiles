@@ -1,0 +1,3 @@
+/etc/X11/Xsession.d/60xdg-user-dirs-update
+/etc/xdg/user-dirs.conf
+/etc/xdg/user-dirs.defaults

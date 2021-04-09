@@ -1,0 +1,7 @@
+2fb931815fe396d7c4e1317c0adf2241  sbin/ifenslave
+a46595e884c67a5073412f38e77569b8  usr/share/doc/ifenslave/README.Debian.gz
+45e3efa963730a09b4ed8fc1bf8c802d  usr/share/doc/ifenslave/changelog.gz
+6807ba81c0744ab50d735c94628c3f64  usr/share/doc/ifenslave/copyright
+47313c2471ffc567f2df80ab31688b69  usr/share/doc/ifenslave/examples/ethernet+hotplug_wifi
+0f60cf05a4a396c4b3b8b4398d7eab5a  usr/share/doc/ifenslave/examples/two_hotplug_ethernet
+5de7912092c09dea63c0e88b9bfa101b  usr/share/man/man8/ifenslave.8.gz

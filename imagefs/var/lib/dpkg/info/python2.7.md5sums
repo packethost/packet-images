@@ -1,0 +1,15 @@
+203ef1df167cebe475bc790c1e6de2a7  usr/bin/2to3-2.7
+064347e9bb816796a85f35ad96e0aa1e  usr/bin/pydoc2.7
+fa68c9d82692f968c2fa286a3d4de182  usr/bin/pygettext2.7
+2142f158c96650a160a2a51289b272c8  usr/share/applications/python2.7.desktop
+cc8836bda9e5ad8ed7e94aad10a697b7  usr/share/doc/python2.7/ACKS.gz
+bf1d2fb8c8921cad62c487a34afce3cf  usr/share/doc/python2.7/NEWS.gz
+0e5889b6011b6563f778495884666ad6  usr/share/doc/python2.7/README.Debian
+2d83334ae097d6f4e8e039bedff6c37c  usr/share/doc/python2.7/README.gz
+05de1903de6953092e789a7d21d4d0d5  usr/share/doc/python2.7/copyright
+f688d5c7bf6f4999a39698141b058a4a  usr/share/lintian/overrides/python2.7
+51aed8e39ae9b868d78b8463f98ac979  usr/share/man/man1/2to3-2.7.1.gz
+28e9ca4213853f12010469ee7fed3660  usr/share/man/man1/pdb2.7.1.gz
+62438e7ffa0e99bc3e297b83929ca351  usr/share/man/man1/pydoc2.7.1.gz
+90cf8dfcb6b3c2741f64c36c6842a256  usr/share/man/man1/pygettext2.7.1.gz
+d183cb64badc9865b14c18fb0059b39f  usr/share/pixmaps/python2.7.xpm

@@ -1,0 +1,192 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0//EN">
+
+<html>
+
+<head>
+
+<meta http-equiv="content-type" content="text/html; charset=utf-8">
+
+<title>Debian Python Policy - Python Programs</title>
+
+<link href="index.html" rel="start">
+<link href="ch-module_packages.html" rel="prev">
+<link href="ch-embed.html" rel="next">
+<link href="index.html#contents" rel="contents">
+<link href="index.html#copyright" rel="copyright">
+<link href="ch-python3.html" rel="chapter" title="1 On the move to Python 3">
+<link href="ch-python.html" rel="chapter" title="2 Python Packaging">
+<link href="ch-module_packages.html" rel="chapter" title="3 Packaged Modules">
+<link href="ch-programs.html" rel="chapter" title="4 Python Programs">
+<link href="ch-embed.html" rel="chapter" title="5 Programs Embedding Python">
+<link href="ch-other.html" rel="chapter" title="6 Interaction with Locally Installed Python Versions">
+<link href="ap-build_dependencies.html" rel="appendix" title="A Build Dependencies">
+<link href="ap-packaging_tools.html" rel="appendix" title="B Packaging Tools">
+<link href="ap-upgrade.html" rel="appendix" title="C Upgrade Procedure">
+<link href="ch-python.html#s-versions" rel="section" title="2.1 Versions">
+<link href="ch-python.html#s-base" rel="section" title="2.2 Main packages">
+<link href="ch-python.html#s-minimal" rel="section" title="2.3 Minimal packages">
+<link href="ch-python.html#s-interpreter" rel="section" title="2.4 Python Interpreter">
+<link href="ch-python.html#s-paths" rel="section" title="2.5 Module Path">
+<link href="ch-python.html#s-runtimes_hooks" rel="section" title="2.6 Hooks for updates to installed runtimes">
+<link href="ch-python.html#s-docs" rel="section" title="2.7 Documentation">
+<link href="ch-module_packages.html#s3.1" rel="section" title="3.1 Types of Python Modules">
+<link href="ch-module_packages.html#s-wheels" rel="section" title="3.2 Wheels">
+<link href="ch-module_packages.html#s-package_names" rel="section" title="3.3 Module Package Names">
+<link href="ch-module_packages.html#s-specifying_versions" rel="section" title="3.4 Specifying Supported Versions">
+<link href="ch-module_packages.html#s-dependencies" rel="section" title="3.5 Dependencies">
+<link href="ch-module_packages.html#s-provides" rel="section" title="3.6 Provides">
+<link href="ch-module_packages.html#s-byte_compilation" rel="section" title="3.7 Modules Byte-Compilation">
+<link href="ch-programs.html#s-version_indep_progs" rel="section" title="4.1 Programs using the default python">
+<link href="ch-programs.html#s-version_dep_progs" rel="section" title="4.2 Programs Using a Particular Python Version">
+<link href="ch-embed.html#s-build_embedded" rel="section" title="5.1 Building Embedded Programs">
+<link href="ch-embed.html#s-embedded_deps" rel="section" title="5.2 Embedded Python Dependencies">
+<link href="ap-packaging_tools.html#s-distutils" rel="section" title="B.1 distutils">
+<link href="ap-packaging_tools.html#s-pysupport" rel="section" title="B.2 python-support (deprecated)">
+<link href="ap-packaging_tools.html#s-pycentral" rel="section" title="B.3 python-central (removed)">
+<link href="ap-packaging_tools.html#s-cdbs" rel="section" title="B.4 CDBS">
+<link href="ap-packaging_tools.html#s-dh_python2_3" rel="section" title="B.5 dh_python2 and dh_python3">
+<link href="ch-python.html#s-interpreter_name" rel="subsection" title="2.4.1 Interpreter Name">
+<link href="ch-python.html#s-interpreter_loc" rel="subsection" title="2.4.2 Interpreter Location">
+<link href="ch-programs.html#s-current_version_progs" rel="subsection" title="4.1.1 Programs Shipping Private Modules">
+
+</head>
+
+<body>
+
+<p><a name="ch-programs"></a></p>
+<hr>
+
+<p>
+[ <a href="ch-module_packages.html">previous</a> ]
+[ <a href="index.html#contents">Contents</a> ]
+[ <a href="ch-python3.html">1</a> ]
+[ <a href="ch-python.html">2</a> ]
+[ <a href="ch-module_packages.html">3</a> ]
+[ 4 ]
+[ <a href="ch-embed.html">5</a> ]
+[ <a href="ch-other.html">6</a> ]
+[ <a href="ap-build_dependencies.html">A</a> ]
+[ <a href="ap-packaging_tools.html">B</a> ]
+[ <a href="ap-upgrade.html">C</a> ]
+[ <a href="ch-embed.html">next</a> ]
+</p>
+
+<hr>
+
+<h1>
+Debian Python Policy
+<br>Chapter 4 - Python Programs
+</h1>
+
+<hr>
+
+<h2 id="s-version_indep_progs">4.1 Programs using the default python</h2>
+
+<p>
+Programs that can run with any version of Python must begin with
+<samp>#!/usr/bin/python</samp> or <samp>#!/usr/bin/env python</samp> (the
+former is strongly preferred).  They must also specify a dependency on
+<code>python</code>, with a versioned dependency if necessary.
+</p>
+
+<p>
+If the program needs the python module <samp>foo</samp>, it must depend on the
+real package providing this module, usually <code>python-foo</code> but this
+name might vary when the package ships multiple modules.
+</p>
+
+<hr>
+
+<h3 id="s-current_version_progs">4.1.1 Programs Shipping Private Modules</h3>
+
+<p>
+A program using <code>/usr/bin/python</code> as interpreter can come up with
+private Python modules.  These modules should be installed in
+<samp>/usr/share/<var>module</var></samp>, or
+<samp>/usr/lib/<var>module</var></samp> if the modules are
+architecture-dependent (e.g.  extensions).
+</p>
+
+<p>
+The rules explained in <a
+href="ch-module_packages.html#s-byte_compilation">Modules Byte-Compilation,
+Section 3.7</a> apply to those private modules: the byte-compiled modules must
+not be shipped with the binary package, they should be generated in the
+package's postinst, using the current default Python version, and removed in
+the prerm.  Modules should be byte-compiled using the current default Python
+version.
+</p>
+
+<p>
+Programs that have private compiled extensions must either handle multiple
+version support themselves, or declare a tight dependency on the current Python
+version (e.g.  <samp>Depends: python (&gt;= 2.6), python (&lt;&lt; 2.7)</samp>.
+No tools currently exist to alleviate this situation.
+</p>
+
+<hr>
+
+<h2 id="s-version_dep_progs">4.2 Programs Using a Particular Python Version</h2>
+
+<p>
+A program which requires a specific version of Python must begin with
+<samp>#!/usr/bin/python<var>X</var>.<var>Y</var></samp> (or
+<samp>#!/usr/bin/env python<var>X</var>.<var>Y</var></samp>).  It must also
+specify a dependency on <code>python<var>X</var>.<var>Y</var></code> and on any
+<code>python<var>X</var>.<var>Y</var>-foo</code> package providing necessary
+modules.  It should not depend on any <code>python-foo</code> package, unless
+it requires a specific version of the package (since virtual packages cannot be
+versioned).  If this is the case, it should depend on both the virtual package
+and the main package (e.g.  <samp>Depends: python2.7-foo, python-foo (&gt;=
+1.0)</samp>).
+</p>
+
+<p>
+The notes on installation directories and byte-compilation for programs that
+support any version of Python also apply to programs supporting only a single
+Python version.  Modules to be byte-compiled should use the same Python version
+as the package itself.
+</p>
+
+<hr>
+
+<p>
+[ <a href="ch-module_packages.html">previous</a> ]
+[ <a href="index.html#contents">Contents</a> ]
+[ <a href="ch-python3.html">1</a> ]
+[ <a href="ch-python.html">2</a> ]
+[ <a href="ch-module_packages.html">3</a> ]
+[ 4 ]
+[ <a href="ch-embed.html">5</a> ]
+[ <a href="ch-other.html">6</a> ]
+[ <a href="ap-build_dependencies.html">A</a> ]
+[ <a href="ap-packaging_tools.html">B</a> ]
+[ <a href="ap-upgrade.html">C</a> ]
+[ <a href="ch-embed.html">next</a> ]
+</p>
+
+<hr>
+
+<p>
+Debian Python Policy
+</p>
+
+<address>
+version 0.10.0.2<br>
+<br>
+Neil Schemenauer <code><a href="mailto:nas@debian.org">mailto:nas@debian.org</a></code><br>
+Matthias Klose <code><a href="mailto:doko@debian.org">mailto:doko@debian.org</a></code><br>
+Gregor Hoffleit <code><a href="mailto:flight@debian.org">mailto:flight@debian.org</a></code><br>
+Josselin Mouette <code><a href="mailto:joss@debian.org">mailto:joss@debian.org</a></code><br>
+Joe Wreschnig <code><a href="mailto:piman@debian.org">mailto:piman@debian.org</a></code><br>
+Lo&iuml;c Minier <code><a href="mailto:lool@debian.org">mailto:lool@debian.org</a></code><br>
+Scott Kitterman <code><a href="mailto:scott@kitterman.com">mailto:scott@kitterman.com</a></code><br>
+Barry Warsaw <code><a href="mailto:barry@debian.org">mailto:barry@debian.org</a></code><br>
+<br>
+</address>
+<hr>
+
+</body>
+
+</html>
+

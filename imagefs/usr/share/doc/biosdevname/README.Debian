@@ -1,0 +1,1 @@
+When necessary remove /etc/udev/rules.d/z25_persistent-net.rules after installing the package.

@@ -1,0 +1,14 @@
+/.
+/usr
+/usr/share
+/usr/share/doc
+/usr/share/doc/gcc-5-base
+/usr/share/doc/gcc-5-base/copyright
+/usr/share/doc/gcc-5-base/README.Debian.amd64.gz
+/usr/share/doc/gcc-5-base/TODO.Debian
+/usr/share/doc/gcc-5-base/changelog.Debian.gz
+/usr/lib
+/usr/lib/gcc
+/usr/lib/gcc/x86_64-linux-gnu
+/usr/lib/gcc/x86_64-linux-gnu/5
+/usr/lib/gcc/x86_64-linux-gnu/5.4.0

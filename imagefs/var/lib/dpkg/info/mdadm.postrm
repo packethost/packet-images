@@ -1,0 +1,64 @@
+#! /bin/sh
+# Copyright © 2001,2002 Mario Jou/3en <joussen@debian.org>
+# Copyright © 2006-2008 Martin F. Krafft <madduck@debian.org>
+# Distributable under the terms of the GNU GPL version 2.
+#
+set -eu
+
+case "${1:-}" in
+  remove)
+    if command -v update-initramfs >/dev/null 2>&1; then
+        update-initramfs -u
+    fi
+    ;;
+
+  purge)
+    GEN_SENTINEL=/var/lib/mdadm/mdadm.conf-generated
+    if [ -r $GEN_SENTINEL ]; then
+      rm -f "$(sed -rne 's,[[:xdigit:]]+  ,,p' $GEN_SENTINEL)"
+    fi
+    rm -f /etc/default/mdadm /etc/mdadm.conf /etc/mdadm/mdadm.conf
+    rm -rf /var/lib/mdadm
+    ;;
+
+  *) :;;
+esac
+
+# just in case somebody actually purges mdadm, we need this to make debconf
+# (added by dh_installdebconf) behave. See #369953
+set +u
+# Automatically added by dh_installdeb
+dpkg-maintscript-helper rm_conffile /etc/default/grub.d/dmraid2mdadm.cfg 3.3-2ubuntu5~ -- "$@"
+# End automatically added section
+# Automatically added by dh_installinit
+if [ "$1" = "purge" ] ; then
+	update-rc.d mdadm-waitidle remove >/dev/null
+fi
+
+
+# In case this system is running systemd, we make systemd reload the unit files
+# to pick up changes.
+if [ -d /run/systemd/system ] ; then
+	systemctl --system daemon-reload >/dev/null || true
+fi
+# End automatically added section
+# Automatically added by dh_installinit
+if [ "$1" = "purge" ] ; then
+	update-rc.d mdadm remove >/dev/null
+fi
+
+
+# In case this system is running systemd, we make systemd reload the unit files
+# to pick up changes.
+if [ -d /run/systemd/system ] ; then
+	systemctl --system daemon-reload >/dev/null || true
+fi
+# End automatically added section
+# Automatically added by dh_installdebconf
+if [ "$1" = purge ] && [ -e /usr/share/debconf/confmodule ]; then
+	. /usr/share/debconf/confmodule
+	db_purge
+fi
+# End automatically added section
+
+set -u

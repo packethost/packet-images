@@ -1,0 +1,7 @@
+#!/bin/sh
+# Prevent fstrim to run inside a container environment (LP: #1589289)
+if /usr/bin/systemd-detect-virt -q -c; then
+exit 0
+fi
+# trim all mounted file systems which support it
+/sbin/fstrim --all || true
