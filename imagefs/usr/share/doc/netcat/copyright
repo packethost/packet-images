@@ -1,0 +1,17 @@
+Netcat was created in the year 1995 and was developed until first 
+months of the 1996, when it reached version 1.10, released by Avian 
+Research (avian.org).
+
+This is the traditional netcat, 
+    Copyright: © 1995-1996, Avian Research
+
+The following permission statement is excerpted from `netcat.blurb':
+
+  Netcat and the associated package is a product of Avian Research,
+  and is freely available in full source form with no restrictions
+  save an obligation to give credit where due.
+
+There is also a development branch (called "GNU Netcat") available. It 
+was started by Giovanni Giacobbi <giovanni@giacobbi.net>, to improve 
+portability, usability and features design. Official project homepage: 
+http://netcat.sourceforge.net.

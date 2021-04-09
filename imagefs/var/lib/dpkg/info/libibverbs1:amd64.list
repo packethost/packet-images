@@ -1,0 +1,12 @@
+/.
+/usr
+/usr/lib
+/usr/lib/x86_64-linux-gnu
+/usr/lib/x86_64-linux-gnu/libibverbs.so.1.1.17.1
+/usr/share
+/usr/share/doc
+/usr/share/doc/libibverbs1
+/usr/share/doc/libibverbs1/changelog.Debian.gz
+/usr/share/doc/libibverbs1/copyright
+/usr/share/doc/libibverbs1/libibverbs.md
+/usr/lib/x86_64-linux-gnu/libibverbs.so.1

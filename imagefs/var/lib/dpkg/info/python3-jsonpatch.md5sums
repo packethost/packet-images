@@ -1,0 +1,10 @@
+38079cc1fdb8869beccbf2c86dd8d8b1  usr/bin/python3-jsondiff
+3d2f74efde11903f70b381defbf0f61e  usr/bin/python3-jsonpatch
+08bef60456074cc899d1e1d30502ec07  usr/lib/python3/dist-packages/jsonpatch-1.16.egg-info/PKG-INFO
+68b329da9893e34099c7d8ad5cb9c940  usr/lib/python3/dist-packages/jsonpatch-1.16.egg-info/dependency_links.txt
+d41d8cd98f00b204e9800998ecf8427e  usr/lib/python3/dist-packages/jsonpatch-1.16.egg-info/requires.txt
+5f8a82da2c12f78668501f3f77f64c27  usr/lib/python3/dist-packages/jsonpatch-1.16.egg-info/top_level.txt
+c2794587f05b9f9badc19149de8bfa2e  usr/lib/python3/dist-packages/jsonpatch.py
+76efd31ebdd398b3285da67e5bc37ad5  usr/share/doc/python3-jsonpatch/README.md
+a188a1a3fbae3891ed60500a69c0d603  usr/share/doc/python3-jsonpatch/changelog.Debian.gz
+7176a0eb7a669d70bfb18eb3d9926b08  usr/share/doc/python3-jsonpatch/copyright

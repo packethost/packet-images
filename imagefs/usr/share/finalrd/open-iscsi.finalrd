@@ -1,0 +1,40 @@
+#!/bin/sh
+# SPDX-License-Identifier: GPL-3.0-only
+
+set -e
+
+if [ "$1" = "setup" ]
+then
+    . /usr/share/initramfs-tools/hook-functions
+    copy_exec /bin/grep
+    copy_exec /bin/sleep
+    copy_exec /sbin/iscsiadm
+    copy_exec /sbin/iscsid
+    # hm, not sure why expr is copied
+    copy_exec /usr/bin/expr
+    copy_file config /etc/iscsi/iscsid.conf
+    copy_file config /etc/iscsi/initiatorname.iscsi
+    exit 0
+fi
+
+# re-establish connection and logout during shutdown
+# if initramfs did bring up open-iscsi on boot
+[ -f /open-iscsi.interface ] || exit 0
+
+iscsid
+
+# After restarting iscsid, wait for an active connection.
+# Limit the wait time in case of unexpected failure of iscsid.
+MAX_RETRIES=30
+RETRY=0
+while ! iscsiadm -m session -P 1 | grep -q "iSCSI Connection State: LOGGED IN"; do
+    RETRY=$(($RETRY + 1))
+    if [ $RETRY -gt $MAX_RETRIES ]; then
+        echo "Unexpected iSCSI Connection State, forcing iSCSI logout."
+        break
+    fi
+    sleep 1
+done
+
+# Issue an iSCSI logout.
+iscsiadm -m node -u

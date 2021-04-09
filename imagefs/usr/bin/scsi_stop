@@ -1,0 +1,58 @@
+#!/bin/bash
+
+################################################
+#
+#  Spin down the given SCS disk(s).
+#
+#  SCSI disks (or disks that understand SCSI commands)
+#  are assumed. By default, the immediate bit is set so the
+#  command should return immediately. The disk however will
+#  take 10 seconds or more to spin down. The '-w' option
+#  causes each stop to wait until the disk reports that it
+#  has stopped.
+#
+#  This script assumes the sg3_utils package is installed.
+#
+###############################################
+
+verbose=""
+immediate="-i"
+
+usage()
+{
+  echo "Usage: scsi_stop [-h] [-v] [-w] <device>+"
+  echo "  where:"
+  echo "    -h, --help           print usage message"
+  echo "    -v, --verbose        more verbose output"
+  echo "    -w, --wait           wait for each stop to complete"
+  echo ""
+  echo "Send SCSI START STOP UNIT command to stop each <device>"
+}
+
+opt="$1"
+while test ! -z "$opt" -a -z "${opt##-*}"; do
+  opt=${opt#-}
+  case "$opt" in
+    h|-help) usage ; exit 0 ;;
+    v|-verbose) verbose="-v" ;;
+    w|-wait) immediate="" ;;
+    *) echo "Unknown option: -$opt " ; exit 1 ;;
+  esac
+  shift
+  opt="$1"
+done
+
+if [ $# -lt 1 ]
+  then
+    usage
+    exit 1
+fi
+
+for i
+do
+# Use '-r' (read-only) otherwise using a block device node
+# (e.g. 'sg_start 0 /dev/sdb') can result in a change of state
+# event causing the disk to spin up again immediately.
+        echo "sg_start -r $immediate 0 $verbose $i"
+        sg_start -r $immediate 0 $verbose $i
+done

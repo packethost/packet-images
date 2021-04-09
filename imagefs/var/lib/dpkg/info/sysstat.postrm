@@ -1,0 +1,51 @@
+#!/bin/sh
+# vim:ts=4:et
+# $Id: sysstat.postrm 1524 2011-06-15 05:30:00Z robert $
+
+PACKAGE="sysstat"
+DEFAULT="/etc/default/$PACKAGE"
+
+set -e
+# remove logfiles and default file when package is purged
+if [ "$1" =  "purge" ] ; then
+    rm -rf /var/log/sysstat
+    rm -f "$DEFAULT"
+    which ucf >/dev/null && ucf --purge "$DEFAULT"
+    which ucfr >/dev/null && ucfr --purge "$PACKAGE" "$DEFAULT"
+fi
+
+# Automatically added by dh_installinit/11.1.6ubuntu1
+if [ "$1" = "purge" ] ; then
+	update-rc.d sysstat remove >/dev/null
+fi
+
+
+# In case this system is running systemd, we make systemd reload the unit files
+# to pick up changes.
+if [ -d /run/systemd/system ] ; then
+	systemctl --system daemon-reload >/dev/null || true
+fi
+# End automatically added section
+# Automatically added by dh_systemd_enable/11.1.6ubuntu1
+if [ "$1" = "remove" ]; then
+	if [ -x "/usr/bin/deb-systemd-helper" ]; then
+		deb-systemd-helper mask 'sysstat.service' >/dev/null || true
+	fi
+fi
+
+if [ "$1" = "purge" ]; then
+	if [ -x "/usr/bin/deb-systemd-helper" ]; then
+		deb-systemd-helper purge 'sysstat.service' >/dev/null || true
+		deb-systemd-helper unmask 'sysstat.service' >/dev/null || true
+	fi
+fi
+# End automatically added section
+# Automatically added by dh_installdebconf/11.1.6ubuntu1
+if [ "$1" = purge ] && [ -e /usr/share/debconf/confmodule ]; then
+	. /usr/share/debconf/confmodule
+	db_purge
+fi
+# End automatically added section
+
+
+exit 0

@@ -1,0 +1,17 @@
+6efa0c41a702e39891a196896c97c80a  usr/lib/x86_64-linux-gnu/libibverbs/libbnxt_re-rdmav17.so
+04d84b766b8e7e6916c53dabe5cab3a0  usr/lib/x86_64-linux-gnu/libibverbs/libcxgb3-rdmav17.so
+eff5f8c00ca2e5f83fcf8f4aee36f250  usr/lib/x86_64-linux-gnu/libibverbs/libcxgb4-rdmav17.so
+445eb467adbcd0351b7bd1e806abb7b4  usr/lib/x86_64-linux-gnu/libibverbs/libhfi1verbs-rdmav17.so
+5dae44d8c17011fa443a8cad5f41b1db  usr/lib/x86_64-linux-gnu/libibverbs/libhns-rdmav17.so
+753200cc572718d14b2f489d5f35ac63  usr/lib/x86_64-linux-gnu/libibverbs/libi40iw-rdmav17.so
+df9173885b3633e7aeb348ba9d13bb48  usr/lib/x86_64-linux-gnu/libibverbs/libipathverbs-rdmav17.so
+9eec10dabc24397390992bcdc392ac01  usr/lib/x86_64-linux-gnu/libibverbs/libmthca-rdmav17.so
+6c37940e7d75e3cf5bd673bd25224d47  usr/lib/x86_64-linux-gnu/libibverbs/libnes-rdmav17.so
+7e8a1fe97fad2bf5d602ab2821999662  usr/lib/x86_64-linux-gnu/libibverbs/libocrdma-rdmav17.so
+d46a35b912b17988834548ef28b73e4a  usr/lib/x86_64-linux-gnu/libibverbs/libqedr-rdmav17.so
+0e0b0360e6fdfbefce286a8a336477f0  usr/lib/x86_64-linux-gnu/libibverbs/librxe-rdmav17.so
+ad5f67a8495e6df78c0f6dfc78e0db82  usr/lib/x86_64-linux-gnu/libibverbs/libvmw_pvrdma-rdmav17.so
+1a46618b94b6812446d2b87ad1f6d402  usr/lib/x86_64-linux-gnu/libmlx4.so.1.0.17.1
+b4322ffd6db7f6720eb67d177d35d8b8  usr/lib/x86_64-linux-gnu/libmlx5.so.1.4.17.1
+8b058aea1c157dce932ab4c33ef34e2f  usr/share/doc/ibverbs-providers/copyright
+5b704f8f5cb250e938e456142f1f6f8e  usr/share/lintian/overrides/ibverbs-providers

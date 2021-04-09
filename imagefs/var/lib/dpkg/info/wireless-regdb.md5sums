@@ -1,0 +1,6 @@
+3817e401047c7d5a09f7620f26463ac0  lib/crda/regulatory.bin
+060c6dd5ae294821a7cdc7d4835f6f15  lib/firmware/regulatory.db
+aa31717ccc9a80f8c516e58b3f7f9504  lib/firmware/regulatory.db.p7s
+65ba43edd4f618f04e496c1af723e5b9  usr/share/doc/wireless-regdb/changelog.Debian.gz
+2333451fba05cdc5e11d337be9070fb0  usr/share/doc/wireless-regdb/copyright
+abb91d959affc5a8d9dbbf62c5e16fe5  usr/share/man/man5/regulatory.bin.5.gz

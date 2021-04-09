@@ -1,0 +1,7 @@
+43c53593d985a76d75fc8f31beef1367  sbin/cfdisk
+8982d5432213f1521769ef88a2c9768e  sbin/fdisk
+6f57b89d0450191bc7f51b8e6f7c2afe  sbin/sfdisk
+bb44d726cc7e859bb8769ae21807f86b  usr/share/doc/fdisk/copyright
+2a02373ab2360ae0685ac972b2604c5b  usr/share/man/man8/cfdisk.8.gz
+c6d2c5b663d3ebe6a5ea6232b2b08444  usr/share/man/man8/fdisk.8.gz
+aa1afffd81d9a01e87e6ca1e31c229e9  usr/share/man/man8/sfdisk.8.gz

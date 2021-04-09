@@ -1,0 +1,18 @@
+#!/bin/sh
+
+set -e
+
+if [ "$1" = "configure" ] ; then
+	update-alternatives --install /usr/bin/jsonschema jsonschema /usr/bin/python3-jsonschema 200
+fi
+
+
+# Automatically added by dh_python3:
+if which py3compile >/dev/null 2>&1; then
+	py3compile -p python3-jsonschema 
+fi
+
+# End automatically added section
+
+
+exit 0

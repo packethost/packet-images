@@ -1,0 +1,22 @@
+#!/bin/sh
+
+set -e
+
+if [ "$1" = upgrade ]; then
+  if dpkg --compare-versions "$2" lt-nl 4.0.3-7 && \
+     dpkg --compare-versions "$2" gt 4.0.3-3; then
+    if ! test -L /tmp/.screen && test -d /tmp/.screen && test -n "`find /tmp/.screen -type p 2>/dev/null`"; then
+      ln -s /tmp/.screen /run/screen
+    fi
+  fi
+  perms="`stat -c%a /usr/bin/screen`"
+  override=/etc/tmpfiles.d/screen-cleanup.conf
+  if [ $perms -eq 2755 ]; then
+    chmod 1777 /run/screen
+    if [ ! -f $override ]; then
+       echo 'd /run/screen 1777 root utmp' > $override
+    fi
+  fi
+fi
+
+

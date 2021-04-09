@@ -1,0 +1,10 @@
+e41402c550a850c11ffa6c6c3ec23bf2  usr/bin/mosh
+f3616c397caca47dff124ab5cfb08963  usr/bin/mosh-client
+254584dd714325675c3e569843ed9073  usr/bin/mosh-server
+e6af9a662a453e65c3e7a3e359c262a9  usr/share/bash-completion/completions/mosh
+6990bd334e6735c5540c40c5c39d5da8  usr/share/doc/mosh/README.md.gz
+7cf4439131b08b7ba53bb46a50f3b9b9  usr/share/doc/mosh/changelog.Debian.gz
+26a28039505a6ee62fad18ab4ab4b920  usr/share/doc/mosh/copyright
+40ee2c40bcaa7b5590503194b48e6e01  usr/share/man/man1/mosh-client.1.gz
+f2df92f5336096a45d10a08bfc4f0817  usr/share/man/man1/mosh-server.1.gz
+74a23d0ede97183ca1cc895635144c0a  usr/share/man/man1/mosh.1.gz

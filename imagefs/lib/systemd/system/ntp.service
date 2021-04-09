@@ -1,0 +1,15 @@
+[Unit]
+Description=Network Time Service
+Documentation=man:ntpd(8)
+After=network.target
+Conflicts=systemd-timesyncd.service
+
+[Service]
+Type=forking
+# Debian uses a shell wrapper to process /etc/default/ntp
+# and select DHCP-provided NTP servers if available
+ExecStart=/usr/lib/ntp/ntp-systemd-wrapper
+PrivateTmp=true
+
+[Install]
+WantedBy=multi-user.target

@@ -1,0 +1,27 @@
+#!/bin/sh
+set -e
+
+vimcur="vim80"
+basedir=/usr/share/vim/$vimcur/doc
+
+add_diversion() {
+  dpkg-divert --package vim-runtime --add --rename \
+    --divert "$1.vim-tiny" "$1"
+}
+
+major_upgrade() {
+  oldver="${1#?:}"
+  oldver="vim$(echo ${oldver%.*-*} | sed 's/\.//g')"
+  [ "$oldver" != "$vimcur" ]
+}
+
+# Add diversions for any non-upgrade operation or when upgrading across major
+# upstream versions.
+if [ "$1" != "upgrade" ] || major_upgrade $2; then
+  add_diversion $basedir/help.txt
+  add_diversion $basedir/tags
+fi
+
+
+
+exit 0

@@ -1,0 +1,12 @@
+/.
+/usr
+/usr/lib
+/usr/lib/x86_64-linux-gnu
+/usr/lib/x86_64-linux-gnu/blas
+/usr/lib/x86_64-linux-gnu/blas/libblas.so.3.7.1
+/usr/share
+/usr/share/doc
+/usr/share/doc/libblas3
+/usr/share/doc/libblas3/changelog.Debian.gz
+/usr/share/doc/libblas3/copyright
+/usr/lib/x86_64-linux-gnu/blas/libblas.so.3

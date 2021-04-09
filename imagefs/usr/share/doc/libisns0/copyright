@@ -1,0 +1,77 @@
+Format: http://www.debian.org/doc/packaging-manuals/copyright-format/1.0/
+Upstream-Name: open-isns
+Source: https://github.com/open-iscsi/open-isns
+
+Files: *
+Copyright: 2003-2010 Olaf Kirch <olaf.kirch@oracle.com>
+           2010-2014 Mike Christie <michaelc@cs.wisc.edu>
+           2015-2016 Lee Duncan <leeman.duncan@gmail.com>
+License: LGPL-2.1+
+
+Files: compat/*
+Copyright: 1997-2002 Benjamin Sittler
+License: Expat
+
+Files: debian/*
+Copyright: 2016 Ritesh Raj Sarraf <rrs@researchut.com>
+           2016 Christian Seiler <christian@iwakd.de>
+License: LGPL-2.1+
+
+Files: debian/po/nl.po
+Copyright: 2016 Frans Spiesschaert <Frans.Spiesschaert@yucom.be>
+License: LGPL-2.1+
+
+Files: debian/po/de.po
+Copyright: 2016 Chris Leick <c.leick@vollbio.de>
+License: LGPL-2.1+
+
+Files: debian/po/fr.po
+Copyright: 2016 French l10n team <debian-l10n-french@lists.debian.org>
+License: LGPL-2.1+
+
+Files: debian/po/pt_BR.po
+Copyright: 2016 Adriano Rafael Gomes <adrianorg@debian.org>
+License: LGPL-2.1+
+
+Files: debian/po/pt.po
+Copyright: 2017 Rui Branco <ruipb@debianpt.org>
+License: LGPL-2.1+
+
+License: LGPL-2.1+
+ This library is free software; you can redistribute it and/or
+ modify it under the terms of the GNU Lesser General Public
+ License as published by the Free Software Foundation; either
+ version 2.1 of the License, or (at your option) any later version.
+ .
+ This library is distributed in the hope that it will be useful,
+ but WITHOUT ANY WARRANTY; without even the implied warranty of
+ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+ Lesser General Public License for more details.
+ .
+ You should have received a copy of the GNU General Public License
+ along with this program. If not, see <http://www.gnu.org/licenses/>
+ .
+ On Debian systems, the complete text of the GNU Lesser General
+ Public License version 2.1 can be found in
+ "/usr/share/common-licenses/LGPL-2.1".
+
+License: Expat
+ Permission is hereby granted, free of charge, to any person
+ obtaining a copy of this software and associated documentation
+ files (the "Software"), to deal in the Software without
+ restriction, including without limitation the rights to use, copy,
+ modify, merge, publish, distribute, sublicense, and/or sell copies
+ of the Software, and to permit persons to whom the Software is
+ furnished to do so, subject to the following conditions:
+ .
+ The above copyright notice and this permission notice shall be
+ included in all copies or substantial portions of the Software.
+ .
+ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
+ EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
+ MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
+ NONINFRINGEMENT.  IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT
+ HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY,
+ WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
+ DEALINGS IN THE SOFTWARE.

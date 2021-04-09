@@ -1,0 +1,10 @@
+fcbabc199ec990a8c91ca3f8e20b4879  usr/bin/iperf
+95390a7ba782a33612f7592f0b68b784  usr/share/doc-base/iperf
+a5816b733fdec148178acb99664dadbc  usr/share/doc/iperf/AUTHORS
+f24166869d801b6d97da689f2f94351b  usr/share/doc/iperf/README
+2a3a53f520ace7060eff8a9268352365  usr/share/doc/iperf/changelog.Debian.gz
+ec6de2e55d7d4c70c6266de5d0c64603  usr/share/doc/iperf/copyright
+cb702cca6d729fbfef5d59a3dc502e2c  usr/share/doc/iperf/html/dast.gif
+de0bbfbe2c1a7614032f3069055fe68e  usr/share/doc/iperf/html/index.html
+e0efa18abb900f8560971385fe4b09da  usr/share/doc/iperf/html/ui_license.html
+fd255d044f4d185a12cfd73c06a3d957  usr/share/man/man1/iperf.1.gz

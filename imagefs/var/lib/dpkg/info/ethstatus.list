@@ -1,0 +1,12 @@
+/.
+/usr
+/usr/bin
+/usr/bin/ethstatus
+/usr/share
+/usr/share/doc
+/usr/share/doc/ethstatus
+/usr/share/doc/ethstatus/changelog.gz
+/usr/share/doc/ethstatus/copyright
+/usr/share/man
+/usr/share/man/man1
+/usr/share/man/man1/ethstatus.1.gz

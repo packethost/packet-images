@@ -1,0 +1,115 @@
+#! /bin/sh
+# vim:ts=4:et
+
+set -e
+
+S_VERSION="10.3.1-1~"
+PACKAGE="sysstat"
+DEFAULT="/etc/default/$PACKAGE"
+ENABLED="false"
+
+### manage_default_file: manages $DEFAULT file with ucf ###
+manage_default_file() {
+    ENABLED="$1"
+
+    if [ "$ENABLED" != "true" ] && [ "$ENABLED" != "false" ] ; then
+        echo "Internal error in the sysstat's postinst: \$ENABLED=$ENABLED" 1>&2;
+        exit 1;
+    fi
+
+    # Generate temporary files
+    def_file=`tempfile -p sstat -s .def`
+
+    # Fill new temporary default file
+    cat > "$def_file" << EOF
+#
+# Default settings for /etc/init.d/sysstat, /etc/cron.d/sysstat
+# and /etc/cron.daily/sysstat files
+#
+
+# Should sadc collect system activity informations? Valid values
+# are "true" and "false". Please do not put other values, they
+# will be overwritten by debconf!
+ENABLED="$ENABLED"
+
+EOF
+
+    # Finally, run ucf
+    ucf --three-way \
+        --debconf-ok \
+        "$def_file" "$DEFAULT"
+    ucfr "$PACKAGE" "$DEFAULT"
+
+    [ -e "$DEFAULT" ] && chmod 644 "$DEFAULT"
+    rm -f "$def_file"
+}
+
+### Main ###
+
+. /usr/share/debconf/confmodule
+
+if [ "$1" = "configure" ] ; then
+    if dpkg --compare-versions "$2" lt-nl "$S_VERSION"; then
+        RET=""
+        db_get sysstat/remove_files || true
+
+        if [ "$RET" = "true" ]; then
+            echo "Removing old statistics from /var/log/sysstat." 1>&2
+            find  /var/log/sysstat -maxdepth 2 \( -name 'sa[0-9][0-9]' -o -name 'sa[0-9][0-9].gz' \
+                                                  -o -name 'sa[0-9][0-9].bz2' \) -exec rm -f {} \;
+        fi
+    fi
+
+    # show the question next time
+    db_reset sysstat/remove_files || true
+
+    db_get sysstat/enable || true
+    ENABLED="$RET"
+
+    manage_default_file "$ENABLED"
+
+    # must be called *after* manage_default_file, which uses ucf --debconf-ok
+    db_stop || true
+
+
+    if ! update-alternatives --display sar 2>/dev/null | grep -q '^/usr/bin/sar\.sysstat'; then
+        update-alternatives --install /usr/bin/sar sar /usr/bin/sar.sysstat 0 \
+                            --slave /usr/share/man/man1/sar.1.gz sar.1.gz \
+                            /usr/share/man/man1/sar.sysstat.1.gz
+    fi
+
+
+    # execute sa1 in a subshell not to clobber the postinst script with potentially
+    # unsafe values from "$DEFAULT"
+    if [ "$ENABLED" = "true" ] && [ -x /usr/lib/sysstat/sa1 ] ; then
+        ( set +e ; /usr/lib/sysstat/sa1 1 1 )&
+    fi
+fi
+
+# Automatically added by dh_systemd_enable/11.1.6ubuntu1
+if [ "$1" = "configure" ] || [ "$1" = "abort-upgrade" ] || [ "$1" = "abort-deconfigure" ] || [ "$1" = "abort-remove" ] ; then
+	# This will only remove masks created by d-s-h on package removal.
+	deb-systemd-helper unmask 'sysstat.service' >/dev/null || true
+
+	# was-enabled defaults to true, so new installations run enable.
+	if deb-systemd-helper --quiet was-enabled 'sysstat.service'; then
+		# Enables the unit on first installation, creates new
+		# symlinks on upgrades if the unit file has changed.
+		deb-systemd-helper enable 'sysstat.service' >/dev/null || true
+	else
+		# Update the statefile to add new symlinks (if any), which need to be
+		# cleaned up on purge. Also remove old symlinks.
+		deb-systemd-helper update-state 'sysstat.service' >/dev/null || true
+	fi
+fi
+# End automatically added section
+# Automatically added by dh_installinit/11.1.6ubuntu1
+if [ "$1" = "configure" ] || [ "$1" = "abort-upgrade" ] || [ "$1" = "abort-deconfigure" ] || [ "$1" = "abort-remove" ] ; then
+	if [ -x "/etc/init.d/sysstat" ]; then
+		update-rc.d sysstat defaults >/dev/null || exit 1
+	fi
+fi
+# End automatically added section
+
+
+exit 0

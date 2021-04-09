@@ -1,0 +1,16 @@
+/.
+/usr
+/usr/lib
+/usr/lib/x86_64-linux-gnu
+/usr/lib/x86_64-linux-gnu/librdmacm.so.1.1.17.1
+/usr/lib/x86_64-linux-gnu/rsocket
+/usr/lib/x86_64-linux-gnu/rsocket/librspreload.so
+/usr/share
+/usr/share/doc
+/usr/share/doc/librdmacm1
+/usr/share/doc/librdmacm1/copyright
+/usr/share/doc/librdmacm1/librdmacm.md
+/usr/lib/x86_64-linux-gnu/librdmacm.so.1
+/usr/lib/x86_64-linux-gnu/rsocket/librspreload.so.1
+/usr/lib/x86_64-linux-gnu/rsocket/librspreload.so.1.0.0
+/usr/share/doc/librdmacm1/changelog.Debian.gz

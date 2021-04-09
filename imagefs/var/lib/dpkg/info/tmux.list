@@ -1,0 +1,16 @@
+/.
+/usr
+/usr/bin
+/usr/bin/tmux
+/usr/share
+/usr/share/doc
+/usr/share/doc/tmux
+/usr/share/doc/tmux/NEWS.Debian.gz
+/usr/share/doc/tmux/README
+/usr/share/doc/tmux/TODO.gz
+/usr/share/doc/tmux/changelog.Debian.gz
+/usr/share/doc/tmux/copyright
+/usr/share/doc/tmux/example_tmux.conf
+/usr/share/man
+/usr/share/man/man1
+/usr/share/man/man1/tmux.1.gz

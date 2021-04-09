@@ -1,0 +1,5 @@
+3f3ea3273b2a3def48450e9f0dad4537  lib/x86_64-linux-gnu/libaio.so.1.0.1
+8fb1f62db3b723660468f70260efb454  usr/share/doc/libaio1/TODO
+9b69f9a5fcb95c3843b4adeefe3487a3  usr/share/doc/libaio1/changelog.Debian.gz
+cb94098abe5388fba481e30337bbd9cb  usr/share/doc/libaio1/copyright
+a051e6b9464637c4dbf0a5fa55ab781f  usr/share/lintian/overrides/libaio1

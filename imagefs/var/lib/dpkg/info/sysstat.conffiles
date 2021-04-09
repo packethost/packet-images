@@ -1,0 +1,6 @@
+/etc/cron.d/sysstat
+/etc/cron.daily/sysstat
+/etc/init.d/sysstat
+/etc/profile.d/sysstat.sh
+/etc/sysstat/sysstat
+/etc/sysstat/sysstat.ioconf

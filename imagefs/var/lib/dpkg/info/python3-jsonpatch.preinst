@@ -1,0 +1,16 @@
+#!/bin/sh
+
+set -e
+
+if [ "${1}" = "upgrade" ] ; then
+	if [ ! -h /usr/bin/jsondiff ] && [ -e /usr/bin/jsondiff ] ; then
+		rm /usr/bin/jsondiff
+	fi
+	if [ ! -h /usr/bin/jsonpatch ] && [ -e /usr/bin/jsonpatch ] ; then
+		rm /usr/bin/jsonpatch
+	fi
+fi
+
+
+
+exit 0

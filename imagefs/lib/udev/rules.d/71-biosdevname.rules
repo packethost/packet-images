@@ -1,0 +1,23 @@
+SUBSYSTEM!="net", GOTO="netdevicename_end"
+KERNEL!="eth*",   GOTO="netdevicename_end"
+ACTION!="add",    GOTO="netdevicename_end"
+NAME=="?*",       GOTO="netdevicename_end"
+
+# kernel command line "biosdevname={0|1}" can turn off/on biosdevname
+IMPORT{cmdline}="biosdevname"
+ENV{biosdevname}=="?*", ENV{UDEV_BIOSDEVNAME}="$env{biosdevname}"
+# ENV{UDEV_BIOSDEVNAME} can be used for blacklist/whitelist
+# but will be overwritten by the kernel command line argument
+ENV{UDEV_BIOSDEVNAME}=="0", GOTO="netdevicename_end"
+ENV{UDEV_BIOSDEVNAME}=="1", GOTO="netdevicename_start"
+
+# uncomment the next line for biosdevname to be off by default
+# GOTO="netdevicename_end"
+
+LABEL="netdevicename_start"
+
+# using NAME= instead of setting INTERFACE_NAME, so that persistent
+# names aren't generated for these devices, they are "named" on each boot.
+PROGRAM="/sbin/biosdevname --smbios 2.6 --nopirq --policy physical -i %k", NAME="%c",  OPTIONS+="string_escape=replace"
+
+LABEL="netdevicename_end"

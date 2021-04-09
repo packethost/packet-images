@@ -1,0 +1,4 @@
+libisns-nocrypto 0 libisns0
+libisns 0 libisns0
+udeb: libisns-nocrypto 0 libisns-nocrypto0-udeb
+udeb: libisns 0 libisns-nocrypto0-udeb

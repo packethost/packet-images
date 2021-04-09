@@ -1,0 +1,8 @@
+[Unit]
+DefaultDependencies=no
+
+[Path]
+PathChanged=/run/systemd/netif/leases
+
+[Install]
+WantedBy=network-pre.target
