@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="16" height="16" xmlns="http://www.w3.org/2000/svg">
+ <g fill="#2e3436">
+  <path d="M3 1a1 1 0 00-1 1v2a1 1 0 102 0V3h5.586L12 5.414V10a1 1 0 102 0V5a1 1 0 00-.293-.707l-3-3A1 1 0 0010 1zm0 13a1 1 0 100 2h10a1 1 0 100-2zM2 5.734V13h12.11zm2 3.532L6.89 11H4z" fill-rule="evenodd" font-family="sans-serif" font-weight="400" overflow="visible" style="font-feature-settings:normal;font-variant-alternates:normal;font-variant-caps:normal;font-variant-ligatures:normal;font-variant-numeric:normal;font-variant-position:normal;isolation:auto;mix-blend-mode:normal;shape-padding:0;text-decoration-color:#000;text-decoration-line:none;text-decoration-style:solid;text-indent:0;text-orientation:mixed;text-transform:none;white-space:normal"/>
+  <path d="M2 14h1v1H2zm11 0h1v1h-1z"/>
+ </g>
+</svg>

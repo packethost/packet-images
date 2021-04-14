@@ -1,0 +1,16 @@
+# Crontab sample for root or adm
+#
+# 8am-7pm activity reports every 20 minutes during weekdays.
+# 0 8-18 * * 1-5 /usr/lib/sysstat/sa1 1200 3
+# activity reports every 10 minutes everyday.
+0 * * * * /usr/lib/sysstat/sa1 600 6
+#
+# Activity reports every an hour on Saturday and Sunday.
+# 0 * * * 0,6 /usr/lib/sysstat/sa1
+#
+# 7pm-8am activity reports every an hour during weekdays.
+# 0 19-7 * * 1-5 /usr/lib/sysstat/sa1
+#
+# Previous day summary prepared at 00:07.
+# 7 0 * * 1-5 /usr/lib/sysstat/sa2 -A
+7 0 * * * /usr/lib/sysstat/sa2 -A

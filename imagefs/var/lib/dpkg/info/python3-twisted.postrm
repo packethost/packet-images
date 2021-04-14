@@ -1,0 +1,17 @@
+#! /bin/sh
+
+set -e
+
+case "$1" in
+    remove|purge)
+	find /usr/lib/python3/dist-packages/twisted/plugins \
+	    -name dropin.cache 2>/dev/null | xargs -r rm -f
+	for d in /usr/lib/python3/dist-packages/twisted/plugins; do
+	    rmdir $d 2>/dev/null || true
+	done 
+	;;
+esac
+
+
+
+exit 0

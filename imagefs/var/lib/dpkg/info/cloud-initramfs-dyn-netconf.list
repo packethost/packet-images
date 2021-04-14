@@ -1,0 +1,15 @@
+/.
+/usr
+/usr/share
+/usr/share/doc
+/usr/share/doc/cloud-initramfs-dyn-netconf
+/usr/share/doc/cloud-initramfs-dyn-netconf/changelog.gz
+/usr/share/doc/cloud-initramfs-dyn-netconf/copyright
+/usr/share/initramfs-tools
+/usr/share/initramfs-tools/hooks
+/usr/share/initramfs-tools/hooks/cloud-initramfs-dyn-netconf
+/usr/share/initramfs-tools/scripts
+/usr/share/initramfs-tools/scripts/init-bottom
+/usr/share/initramfs-tools/scripts/init-bottom/cloud-initramfs-dyn-netconf
+/usr/share/initramfs-tools/scripts/init-premount
+/usr/share/initramfs-tools/scripts/init-premount/cloud-initramfs-dyn-netconf

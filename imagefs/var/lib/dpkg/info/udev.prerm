@@ -1,0 +1,37 @@
+#!/bin/sh
+
+set -e
+
+# adapted from postinst
+chrooted() {
+  if [ "$(stat -c %d/%i /)" = "$(stat -Lc %d/%i /proc/1/root 2>/dev/null)" ];
+  then
+    return 1
+  fi
+  return 0
+}
+
+kill_udevd() {
+  if [ -d /run/systemd/system ]; then
+    systemctl stop systemd-udevd-control.socket systemd-udevd-kernel.socket
+    systemctl stop systemd-udevd.service
+  else
+    invoke-rc.d udev stop
+  fi
+}
+
+case "$1" in
+    remove)
+    if ! chrooted; then
+      kill_udevd
+    fi
+    ;;
+esac
+
+# Automatically added by dh_installdeb/12.10ubuntu1
+dpkg-maintscript-helper rm_conffile /etc/init/udev.conf 233-1\~ -- "$@"
+dpkg-maintscript-helper rm_conffile /etc/init/udevmonitor.conf 233-1\~ -- "$@"
+dpkg-maintscript-helper rm_conffile /etc/init/udevtrigger.conf 233-1\~ -- "$@"
+# End automatically added section
+
+

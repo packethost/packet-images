@@ -1,0 +1,29 @@
+TL;DL:
+
+  setfont /usr/share/consolefonts/UbuntuMono-R-8x16.psf
+  setfont /usr/share/consolefonts/UbuntuMono-B-8x16.psf
+
+
+About these Ubuntu Mono console PSF fonts:
+
+These are early bitmap snapshots of the Ubuntu Mono fonts built
+with a very limited charater set.  Please feel free to experiment
+and give feedback to improve the state of the hinting:
+
+  https://launchpad.net/ubuntu-font-family/+filebug?field.title=Mono:+Hinting:...
+
+Warning about the italics (RI, BI):
+
+A note that italics will *not* work on the console very well.  This is
+because the diagonal slant of the characters takes the glyphs beyond
+the edges of the cell.  When being rendered for console use these end
+up being cropped at the edges.  For the moment the italics are only
+included for completeness.
+
+Good luck, and happy experimenting.  For more details, see the:
+
+  debian/console/
+
+directory in the package source code.
+
+  -Paul Sladen, 2011-09-27

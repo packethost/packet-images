@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="16" height="16" xmlns="http://www.w3.org/2000/svg">
+ <g fill="#2e3436">
+  <path d="M7 1v7.563L5.719 7.28A1.015 1.015 0 005 7H4v1c0 .265.093.53.281.719l3 3 .282.281h.875l.28-.281 3-3A1.01 1.01 0 0012 8V7h-1c-.265 0-.53.093-.719.281L9 8.563V1z" font-family="Bitstream Vera Sans" font-weight="400" overflow="visible" style="text-decoration-line:none;text-indent:0;text-transform:none"/>
+  <path d="M1.994 13L2 15h12l-.006-2z" fill-rule="evenodd" overflow="visible"/>
+ </g>
+</svg>

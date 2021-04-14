@@ -1,0 +1,23 @@
+Template: byobu/launch-by-default
+Type: boolean
+Default: false
+Description: Do you want to launch Byobu at shell login for all users?
+ Byobu can launch automatically at login (e.g. console, ssh), providing
+ an attachable/detachable window manager on the command line.
+ .
+ If you select this option, Byobu will install a symlink in /etc/profile.d.
+ This setting is system-wide, for all users logging into the system.
+ Individual users can disable this by touching
+ ~/.byobu/disable-autolaunch, or configuring with 'byobu-config'.
+Description-de.UTF-8: Soll Byobu bei allen Benutzern beim Anmelden in der Shell gestartet werden?
+ Byobu kann beim Anmelden automatisch gestartet werden (z.B. Konsole, SSH), um einen anfügbaren/ablösbaren Fenstermanager in der Kommandozeile zu bieten.
+ .
+ Wird diese Option gewählt, wird Byobu einen Symlink in /etc/profile.d erstellen. Diese Einstellung ist Systemweit und gilt für jeden Benutzer, der sich an dieses System anmeldet. Die einzelnen Benutzer können dies abschalten, indem sie die Datei ~/.byobu/disable-autolaunch anlegen oder Byobu mit 'byobu-config' konfigurieren.
+Description-en_GB.UTF-8: Do you want to launch Byobu at shell login for all users?
+ Byobu can launch automatically at login (e.g. console, ssh), providing an attachable/detachable window manager on the command line.
+ .
+ If you select this option, Byobu will install a symlink in /etc/profile.d. This setting is system-wide, for all users logging into the system. Individual users can disable this by touching ~/.byobu/disable-autolaunch, or configuring with 'byobu-config'.
+Description-es.UTF-8: ¿Quiere lanzar Byobu cuando cualquier usuario inicie sesión por terminal?
+ Byobu puede lanzarse automáticamente al iniciar sesión (por ejemplo, consola, ssh), proporcionando un gestor de ventanas acoplable/desacoplable en la línea de órdenes.
+ .
+ Si selecciona esta opción, Byobu instalará un enlace simbólico en /etc/profile.d. Esta opción es global al sistema, para todos los usuarios que se registren en el sistema. Los usuarios individuales pueden deshabilitar esta opción tocando ~/.byobu/disable-autolaunch o accediendo a la configuración con «byobu-config».

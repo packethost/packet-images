@@ -1,0 +1,64 @@
+  Copyright (C) 1992, 1995, 1998, 2001, 2006, 2007, 2010, 2011, 2015, 2019
+  Free Software Foundation, Inc.
+  
+  Copying and distribution of this file, with or without modification,
+  are permitted in any medium without royalty provided the copyright
+  notice and this notice are preserved.
+--------------------------------------------------------------------------
+Sun Apr 21 14:27:19 IDT 2019
+============================
+This file documents several things related to the 2008 POSIX standard
+that I noted after reviewing it.
+
+1. POSIX leaves undefined what happens for something like
+
+	awk '{ print ; exit }' if=42 /etc/passwd
+
+   Mawk diagnoses this.  Gawk and BWK awk do not. This doesn't seem to be
+   worth the effort to add the code, but at least I'm aware of it.
+
+2. The 2001-2004 standards accidentally required support for hexadecimal
+   floating point constants and for Infinity and Not-A-Number (NaN) values.
+
+   The 2008 standard now explicitly allows, but does not require, such
+   support.
+
+   More discussion is provided in the node `POSIX Floating Point Problems'
+   in gawk.texi.
+
+3. String comparison with <, <= etc is supposed to take the locale's collating
+   sequence into account.  By default gawk doesn't do this. Rather, gawk
+   will do this only if --posix is in effect.
+
+4. According to POSIX, the function parameters of one function may not have
+   the same name as another function, making this invalid:
+
+	function foo() { ... }
+	function bar(foo) { ...}
+
+   Or even:
+
+	function bar(foo) { ...}
+	function foo() { ... }
+
+   Gawk enforces this only with --posix.
+
+5. According to POSIX (following the A, K, & W book), when RS = "", then
+   newline is also a separator, "no matter what the value of FS is", implying
+   that this is true even if FS is a regexp.
+
+   In fact, UNIX awk has never behaved that, way; it adds \n to the list
+   for FS = " " or any other single character, and gawk does too. This is
+   essentially a bug in POSIX.
+
+The following things aren't described by POSIX but ought to be:
+
+1. The value of $0 in an END rule
+
+2. The return value of a function that either does return with no value
+   or that falls off the end of the function body.
+
+3. What happens with substr() if start is <= 0, or greater than the length
+   of the string, or if length is <= 0.
+
+4. Whether "next" can be invoked from a function body.

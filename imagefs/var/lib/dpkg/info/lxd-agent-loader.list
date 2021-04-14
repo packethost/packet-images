@@ -1,0 +1,15 @@
+/.
+/lib
+/lib/systemd
+/lib/systemd/system
+/lib/systemd/system/lxd-agent-9p.service
+/lib/systemd/system/lxd-agent.service
+/usr
+/usr/share
+/usr/share/doc
+/usr/share/doc/lxd-agent-loader
+/usr/share/doc/lxd-agent-loader/changelog.gz
+/usr/share/doc/lxd-agent-loader/copyright
+/usr/share/lintian
+/usr/share/lintian/overrides
+/usr/share/lintian/overrides/lxd-agent-loader

@@ -1,0 +1,9 @@
+#!/bin/sh
+set -e
+# Automatically added by dh_installdeb/12.10ubuntu1
+dpkg-maintscript-helper rm_conffile /etc/init.d/mdadm-raid 3.4-2\~ -- "$@"
+dpkg-maintscript-helper rm_conffile /etc/init.d/mdadm 4.1-2ubuntu2\~ -- "$@"
+dpkg-maintscript-helper rm_conffile /etc/init.d/mdadm-waitidle 4.1-2ubuntu2\~ -- "$@"
+dpkg-maintscript-helper rm_conffile /etc/cron.d/mdadm 4.1-2ubuntu3\~ -- "$@"
+dpkg-maintscript-helper rm_conffile /etc/cron.daily/mdadm 4.1-2ubuntu3\~ -- "$@"
+# End automatically added section

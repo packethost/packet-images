@@ -1,0 +1,16 @@
+#!/bin/sh
+set -e
+
+PKG="pollinate"
+
+# Clean up after moving [Install] from network.target to multi-user.target
+# LP: #1576333, keep until after 18.04 LTS
+if [ -L /etc/systemd/system/network.target.wants/pollinate.service ]; then
+    deb-systemd-helper disable pollinate.service
+    deb-systemd-helper purge pollinate.service
+fi
+
+# Automatically added by dh_installdeb/12.10ubuntu1
+dpkg-maintscript-helper rm_conffile /etc/init/pollinate.conf 4.27-0ubuntu1\~ pollinate -- "$@"
+# End automatically added section
+

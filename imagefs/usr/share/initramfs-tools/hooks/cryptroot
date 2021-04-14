@@ -1,0 +1,446 @@
+#!/bin/sh
+
+PREREQ=""
+
+prereqs()
+{
+    echo "$PREREQ"
+}
+
+case "$1" in
+    prereqs)
+        prereqs
+        exit 0
+        ;;
+esac
+
+. /usr/share/initramfs-tools/hook-functions
+. /lib/cryptsetup/functions
+TABFILE="/etc/crypttab"
+
+
+# device_uuid($device)
+#   Print the UUID attribute of given block special $device.  Return 0
+#   on success, 1 on error.
+device_uuid() {
+    local device="$1" uuid
+    if uuid="$(blkid -s UUID -o value -- "$device")" && [ -n "$uuid" ]; then
+        printf '%s\n' "$uuid"
+    else
+        return 1
+    fi
+}
+
+# resolve_device({$device | $spec})
+#   Take a path to (or spec for) a block special device, and set DEV to
+#   the (symlink to block) device, and MAJ (resp. MIN) to its major-ID
+#   (resp. minor ID) decimal value.  On error these variables are not
+#   changed and 1 is returned.
+resolve_device() {
+    local spec="$1" dev devno maj min
+    if dev="$(resolve_device_spec "$spec")" &&
+            devno="$(stat -L -c"%t:%T" -- "$dev" 2>/dev/null)" &&
+            maj="${devno%:*}" && min="${devno#*:}" &&
+            [ "$devno" = "$maj:$min" ] && [ -n "$maj" ] && [ -n "$min" ] &&
+            maj=$(( 0x$maj )) && min=$(( 0x$min )) && [ $maj -gt 0 ]; then
+        DEV="$dev"
+        MAJ="$maj"
+        MIN="$min"
+        return 0
+    else
+        cryptsetup_message "ERROR: Couldn't resolve device $spec"
+    fi
+    return 1
+}
+
+# get_mnt_devno($mountpoint)
+#   Print the major:minor device ID(s) holding the file system currently
+#   mounted currenty mounted on $mountpoint.
+#   Return 0 on success, 1 on error (if $mountpoint is not a mountpoint).
+get_mnt_devno() {
+    local wantmount="$1" devnos="" uuid dev IFS
+    local spec mountpoint fstype _ DEV MAJ MIN
+
+    while IFS=" 	" read -r spec mountpoint fstype _; do
+        # treat lines starting with '#' as comments; /proc/mounts
+        # doesn't seem to contain these but per procfs(5) the format of
+        # that file is analogous to fstab(5)'s
+        if [ "${spec#\#}" = "$spec" ] && [ -n "$spec" ] &&
+                [ "$(printf '%b' "$mountpoint")" = "$wantmount" ]; then
+            # take the last mountpoint if used several times (shadowed)
+            unset -v devnos
+            spec="$(printf '%b' "$spec")"
+            resolve_device "$spec" || continue # resolve_device() already warns on error
+            fstype="$(printf '%b' "$fstype")"
+            if [ "$fstype" = "btrfs" ]; then
+                # btrfs can span over multiple devices
+                if uuid="$(device_uuid "$DEV")"; then
+                    for dev in "/sys/fs/$fstype/$uuid/devices"/*/dev; do
+                        devnos="${devnos:+$devnos }$(cat "$dev")"
+                    done
+                else
+                    cryptsetup_message "ERROR: $spec: Couldn't determine UUID"
+                fi
+            elif [ -n "$fstype" ]; then
+                devnos="$MAJ:$MIN"
+            fi
+        fi
+    done </proc/mounts
+
+    if [ -z "${devnos:+x}" ]; then
+        return 1 # not found
+    else
+        printf '%s' "$devnos"
+    fi
+}
+
+# get_dmcrypt_slaves({/sys/dev/block/$maj:$min | /sys/devices/...})
+#   Recursively print the crypttab(5) entries to FD nr. 3, for each
+#   dm-crypt device holding $maj:$min (typically corresponding to an md,
+#   lv, or dm-crypt device).  Slaves that aren't dm-crypt devices are
+#   NOT printed.
+get_dmcrypt_slaves() {
+    local d="$1" devno maj min name slave
+    [ -d "$d/slaves" ] || return 0
+    if [ -d "$d/dm" ] && devno="$(cat "$d/dev")" &&
+            maj="${devno%:*}" && min="${devno#*:}" &&
+            [ "$devno" = "$maj:$min" ] && [ -n "$maj" ] && [ -n "$min" ] &&
+            [ "$(dmsetup info -c --noheadings -o subsystem -j "$maj" -m "$min")" = "CRYPT" ] &&
+            name="$(dmsetup info -c --noheadings -o unmangled_name -j "$maj" -m "$min")"; then
+        # search for a crypttab entry with the given unmangled name
+        crypttab_find_and_print_entry "$name"
+    fi
+    for slave in "$d/slaves"/*; do
+        if [ -d "$slave" ] && slave="$(realpath -e -- "$slave")"; then
+            get_dmcrypt_slaves "$slave"
+        fi
+    done
+}
+
+# crypttab_find_and_print_entry($target)
+#   Find the crypttab(5) entry for the given (unmangled) $target and
+#   print it - preserving the mangling - to FD nr. 3; but only if the
+#   target has not already been processed during an earlier function
+#   call.  (Processed target names are stored in
+#   $DESTDIR/cryptroot/targets.)
+#   Return 0 on success, 1 on error.
+crypttab_find_and_print_entry() {
+    local target="$1"
+    local _CRYPTTAB_NAME _CRYPTTAB_SOURCE _CRYPTTAB_KEY _CRYPTTAB_OPTIONS
+    if ! grep -Fxqz -e "$target" -- "$DESTDIR/cryptroot/targets"; then
+        printf '%s\0' "$target" >>"$DESTDIR/cryptroot/targets"
+        crypttab_find_entry "$target" || return 1
+        crypttab_parse_options --missing-path=warn || return 1
+        crypttab_print_entry
+    fi
+}
+
+# crypttab_print_entry()
+#   Print an unmangled crypttab(5) entry to FD nr. 3, using CRYPTTAB_*
+#   and _CRYPTTAB_* values.
+#   _CRYPTTAB_SOURCE is replaced with /dev/mapper/$sourcename for mapped
+#   sources, otherwise by UUID=<uuid> if possible (eg, for LUKS).  If
+#   the entry uses the 'decrypt_derived' keyscript, the other
+#   crypttab(5) entries it depends on are (recursively) printed before
+#   hand.
+#   Various checks are performed on the key and crypttab options, but no
+#   parsing is done so it's the responsibility of the caller to call
+#   crypttab_parse_options().
+#   Return 0 on success, 1 on error.
+crypttab_print_entry() {
+    local DEV MAJ MIN sourcename uuid keyfile
+    if resolve_device "$CRYPTTAB_SOURCE"; then
+        if [ "$(dmsetup info -c --noheadings -o devnos_used -- "$CRYPTTAB_NAME" 2>/dev/null)" != "$MAJ:$MIN" ]; then
+            cryptsetup_message "ERROR: $CRYPTTAB_NAME: Source mismatch"
+        elif sourcename="$(dmsetup info -c --noheadings -o mangled_name -j "$MAJ" -m "$MIN" 2>/dev/null)" &&
+               [ -b "/dev/mapper/$sourcename" ]; then
+            # for mapped sources, use the dm name as the lvm
+            # local-block script doesn't work with UUIDs (#902943)
+            _CRYPTTAB_SOURCE="/dev/mapper/$sourcename"
+        elif uuid="$(device_uuid "$DEV")"; then
+            # otherwise, use its UUID if possible (eg. for LUKS)
+            _CRYPTTAB_SOURCE="UUID=$uuid"
+        fi
+        # on failure resolve_device() prints a warning and we try our
+        # luck with the unchanged _CRYPTTAB_SOURCE value
+    fi
+
+    # if keyscript is set, the "key" is just an argument to the script
+    if [ -z "${CRYPTTAB_OPTION_keyscript+x}" ] && [ "$CRYPTTAB_KEY" != "none" ]; then
+        crypttab_key_check || return 1
+        case "$CRYPTTAB_KEY" in
+            $KEYFILE_PATTERN)
+                mkdir -pm0700 -- "$DESTDIR/cryptroot/keyfiles"
+                # $CRYPTTAB_NAME can't contain '/' (even after unmangling)
+                keyfile="/cryptroot/keyfiles/$CRYPTTAB_NAME.key"
+                if [ ! -f "$DESTDIR$keyfile" ] && ! copy_file keyfile "$CRYPTTAB_KEY" "$keyfile"; then
+                    cryptsetup_message "WARNING: couldn't copy keyfile $CRYPTTAB_KEY"
+                fi
+                _CRYPTTAB_KEY="/cryptroot/keyfiles/$_CRYPTTAB_NAME.key" # preserve mangled name
+                ;;
+            *)
+                if [ "$usage" = rootfs ]; then
+                    cryptsetup_message "WARNING: Skipping root target $CRYPTTAB_NAME: uses a key file"
+                    return 1
+                elif [ "$usage" = resume ]; then
+                    cryptsetup_message "WARNING: Resume target $CRYPTTAB_NAME uses a key file"
+                fi
+                if [ -L "$CRYPTTAB_KEY" ] && keyfile="$(readlink -- "$CRYPTTAB_KEY")" &&
+                        [ "${keyfile#/}" != "$keyfile" ]; then
+                    cryptsetup_message "WARNING: Skipping target $CRYPTTAB_NAME: key file is a symlink with absolute target"
+                    return 1
+                elif [ -f "$CRYPTTAB_KEY" ] && [ "$(stat -L -c"%m" -- "$CRYPTTAB_KEY" 2>/dev/null)" != "/" ]; then
+                    cryptsetup_message "WARNING: Skipping target $CRYPTTAB_NAME: key file is not on the root FS"
+                    return 1
+                fi
+                if [ ! -e "$CRYPTTAB_KEY" ]; then
+                    cryptsetup_message "WARNING: Target $CRYPTTAB_NAME has a non-existing key file $CRYPTTAB_KEY"
+                else
+                    _CRYPTTAB_KEY="/FIXME-initramfs-rootmnt$_CRYPTTAB_KEY" # preserve mangled name
+                fi
+        esac
+    fi
+
+    if [ -n "${CRYPTTAB_OPTION_keyscript+x}" ]; then
+        copy_exec "$CRYPTTAB_OPTION_keyscript"
+    fi
+    if [ "${CRYPTTAB_OPTION_keyscript-}" = "/lib/cryptsetup/scripts/decrypt_derived" ]; then
+        # (recursively) list first the device to derive the key from (so
+        # the boot scripts unlock it first); since _CRYPTTAB_* are local
+        # to crypttab_find_and_print_entry() the new value won't
+        # override the new ones
+        crypttab_find_and_print_entry "$CRYPTTAB_KEY"
+    fi
+    printf '%s %s %s %s\n' \
+        "$_CRYPTTAB_NAME" "$_CRYPTTAB_SOURCE" "$_CRYPTTAB_KEY" "$_CRYPTTAB_OPTIONS" >&3
+}
+
+# get_cryptdevs($maj:$min, [$maj:$min ..])
+#   Print the list of crypttab(5) entries to FD nr. 3, for dm-crypt
+#   devices holding any of the given devices (which can be an md, a lv,
+#   a mapped device, or a regular block device).
+get_cryptdevs() {
+    local devno base
+    for devno in "$@"; do
+        base="/sys/dev/block/$devno"
+        if [ ! -d "$base" ]; then
+            cryptsetup_message "ERROR: Couldn't find sysfs directory for $devno"
+            return 1
+        fi
+        get_dmcrypt_slaves "$base"
+    done
+}
+
+# get_resume_devno()
+#   Return the device ID(s) used for system suspend/hibernate.
+get_resume_devno() {
+    local dev filename
+
+    # uswsusp
+    for filename in /etc/uswsusp.conf /etc/suspend.conf; do
+        [ -e "$filename" ] || continue
+        dev="$(sed -nr '/^resume device\s*[:=]\s*/ {s///p;q}' "$filename")"
+        if [ -n "$dev" ] && [ "$dev" != "<path_to_resume_device_file>" ]; then
+            # trim quotes
+            dev="$(printf '%s' "$dev" | sed -re 's/^"(.*)"\s*$/\1/' -e "s/^'(.*)'\\s*$/\\1/")"
+            print_devno "$(printf '%b' "$dev")" # unmangle
+        fi
+    done
+
+    # regular swsusp
+    dev="$(sed -nr 's,^(.*\s)?resume=(\S+)(\s.*)?$,\2,p' /proc/cmdline)"
+    dev="$(printf '%b' "$dev")" # unmangle
+    print_devno "$(printf '%b' "$dev")" # unmangle
+
+    # initramfs-tools >=0.129
+    dev="${RESUME:-auto}"
+    if [ "$dev" != none ]; then
+        if [ "$dev" = auto ]; then
+            # next line from /usr/share/initramfs-tools/hooks/resume
+            dev="$(grep ^/dev/ /proc/swaps | sort -rnk3 | head -n 1 | cut -d " " -f 1)"
+        fi
+        print_devno "$(printf '%b' "$dev")" # unmangle
+    fi
+}
+print_devno() {
+    local DEV MAJ MIN # locally scope the 3 variables resolve_device() sets
+    if [ -n "$1" ] && resolve_device "$1"; then
+        printf '%d:%d\n' "$MAJ" "$MIN"
+    fi
+}
+
+# crypttab_print_initramfs_entry()
+#   Print a crypttab(5) entry - unless it was already processed - if it
+#   has the 'initramfs' option set.
+crypttab_print_initramfs_entry() {
+    local usage=
+    if ! grep -Fxqz -e "$CRYPTTAB_NAME" -- "$DESTDIR/cryptroot/targets" &&
+            crypttab_parse_options --quiet &&
+            [ "${CRYPTTAB_OPTION_initramfs-no}" = "yes" ]; then
+        printf '%s\0' "$CRYPTTAB_NAME" >>"$DESTDIR/cryptroot/targets"
+        crypttab_print_entry
+    fi
+}
+
+# generate_initrd_crypttab()
+#   Generate the crypttab(5) snippet that is relevant at initramfs
+#   stage.  (Devices that aren't required at initramfs stage are
+#   ignored.)
+generate_initrd_crypttab() {
+    local devnos usage IFS="$(printf '\t\n ')"
+    mkdir -- "$DESTDIR/cryptroot"
+    true >"$DESTDIR/cryptroot/targets"
+
+    {
+        if devnos="$(get_mnt_devno /)"; then
+            usage=rootfs get_cryptdevs $devnos
+        else
+            cryptsetup_message "WARNING: Couldn't determine root device"
+        fi
+
+        if devnos="$(get_resume_devno)"; then
+            usage=resume get_cryptdevs $devnos
+        fi
+
+        if devnos="$(get_mnt_devno /usr)"; then
+            usage="" get_cryptdevs $devnos
+        fi
+
+        # add crypttab entries with the 'initramfs' option set
+        crypttab_foreach_entry crypttab_print_initramfs_entry
+    } 3>"$DESTDIR/cryptroot/crypttab"
+    rm -f "$DESTDIR/cryptroot/targets"
+}
+
+# populate_CRYPTO_MODULES()
+#   Find out which crypto modules are required for a crypttab(5) entry,
+#   and append them to the CRYPTO_MODULES variable.
+populate_CRYPTO_MODULES() {
+    local cipher iv
+
+    # cf. dmsetup(8) and https://gitlab.com/cryptsetup/cryptsetup/wikis/DMCrypt
+    cipher="$(dmsetup table --target crypt -- "$CRYPTTAB_NAME" | cut -d' ' -f4)"
+    if [ -z "$cipher" ]; then
+        cryptsetup_message "WARNING: Couldn't determine cipher modules to load for $CRYPTTAB_NAME"
+    elif [ "${cipher#capi:}" = "$cipher" ]; then
+        # direct specification "cipher[:keycount]-chainmode-ivmode[:ivopts]"
+        CRYPTO_MODULES="${CRYPTO_MODULES:+$CRYPTO_MODULES }${cipher%%[-:]*}" # cipher
+        cipher="${cipher#"${cipher%%-*}-"}" # chainmode-ivmode[:ivopts]"
+        CRYPTO_MODULES="${CRYPTO_MODULES:+$CRYPTO_MODULES }${cipher%-*}" # chainmode
+        iv="${cipher##*-}" # ivmode[:ivopts]"
+        CRYPTO_MODULES="${CRYPTO_MODULES:+$CRYPTO_MODULES }${iv%%:*}" # ivmode
+        if [ "${iv#*:}" != "$iv" ]; then
+            CRYPTO_MODULES="${CRYPTO_MODULES:+$CRYPTO_MODULES }${iv#*:}" # ivopts
+        fi
+    else
+        # kernel crypto API format "capi:cipher_api_spec-ivmode[:ivopts]", since linux 4.12
+        cipher="${cipher#capi:}"
+        cryptsetup_message "WARNING: Couldn't determine cipher modules to load for $CRYPTTAB_NAME" \
+            "(kernel crypto API format isn't supported yet)"
+    fi
+}
+
+# add_modules($glob, $moduledir, [$moduledir ..])
+#   Add modules matching under the given $moduledir(s), the name of
+#   which matching $glob.
+#   Return 0 if any module was found found, 1 if not.
+add_modules() {
+    local glob="$1" found=n
+    shift
+    for mod in $(find -H "$@" -name "$glob.ko" -type f -printf '%f\n'); do
+        manual_add_modules "${mod%.ko}"
+        found=y
+    done
+    [ "$found" = y ] && return 0 || return 1
+}
+
+# add_crypto_modules($name, [$name ..])
+#   Determine kernel module name and add to initramfs.
+add_crypto_modules() {
+    local mod
+    for mod in "$@"; do
+        # We have several potential sources of modules (in order of preference):
+        #
+        #   a) /lib/modules/$VERSION/kernel/arch/$ARCH/crypto/$mod-$specific.ko
+        #   b) /lib/modules/$VERSION/kernel/crypto/$mod_generic.ko
+        #   c) /lib/modules/$VERSION/kernel/crypto/$mod.ko
+        #
+        # and (currently ignored):
+        #
+        #   d) /lib/modules/$VERSION/kernel/drivers/crypto/$specific-$mod.ko
+        add_modules "$mod-*" "$MODULESDIR"/kernel/arch/*/crypto || true
+        add_modules "${mod}_generic" "$MODULESDIR/kernel/crypto" \
+            || add_modules "$mod" "$MODULESDIR/kernel/crypto" \
+            || true
+    done
+}
+
+
+#######################################################################
+# Begin real processing
+
+unset -v KEYFILE_PATTERN
+KEYFILE_PATTERN=
+
+# Load the hook config
+if [ -f "/etc/cryptsetup-initramfs/conf-hook" ]; then
+    . /etc/cryptsetup-initramfs/conf-hook
+fi
+
+if [ -n "$KEYFILE_PATTERN" ]; then
+    case "${UMASK:-$(umask)}" in
+        0[0-7]77) ;;
+        *) cryptsetup_message "WARNING: Permissive UMASK (${UMASK:-$(umask)})." \
+                "Private key material within the initrd might be left unprotected."
+        ;;
+    esac
+fi
+
+CRYPTO_MODULES=
+if [ -r "$TABFILE" ]; then
+    generate_initrd_crypttab
+    TABFILE="$DESTDIR/cryptroot/crypttab"
+    crypttab_foreach_entry populate_CRYPTO_MODULES
+fi
+
+# add required components
+manual_add_modules dm_mod
+manual_add_modules dm_crypt
+
+copy_exec /sbin/cryptsetup
+copy_exec /sbin/dmsetup
+copy_exec /lib/cryptsetup/askpass
+
+# libargon2 uses pthread_cancel
+LIBC_DIR="$(ldd /sbin/cryptsetup | sed -nr 's#.* => (/lib.*)/libc\.so\.[0-9.-]+ \(0x[[:xdigit:]]+\)$#\1#p')"
+for so in $(ldconfig -p | sed -nr 's/^\s*libgcc_s\.so.*=>\s*//p'); do
+    copy_exec "$so"
+done
+
+# We need sed. Either via busybox or as standalone binary.
+if [ "$BUSYBOX" = n ] || [ ! -e "$BUSYBOXDIR/busybox" ]; then
+    copy_exec /bin/sed
+fi
+
+# detect whether the host CPU has AES-NI support
+if grep -Eq '^flags\s*:(.*\s)?aes(\s.*)?$' /proc/cpuinfo; then
+    CRYPTO_MODULES="${CRYPTO_MODULES:+$CRYPTO_MODULES }aesni"
+fi
+
+# add userspace crypto module (only required for opening LUKS2 devices
+# we add the module unconditionally as it's the default format)
+CRYPTO_MODULES="${CRYPTO_MODULES:+$CRYPTO_MODULES }algif_skcipher"
+
+if [ "$MODULES" = most ]; then
+    for d in "$MODULESDIR"/kernel/arch/*/crypto; do
+        copy_modules_dir "${d#"$MODULESDIR/"}"
+    done
+    copy_modules_dir "kernel/crypto"
+else
+    if [ "$MODULES" != "dep" ]; then
+        # with large initramfs, we always add a basic subset of modules
+        add_crypto_modules aes cbc chainiv cryptomgr krng sha256 xts
+    fi
+    add_crypto_modules $(printf '%s' "${CRYPTO_MODULES-}" | tr ' ' '\n' | sort -u)
+fi
+copy_file library /lib/cryptsetup/functions /lib/cryptsetup/functions

@@ -1,0 +1,25 @@
+# Only the fixup to migrate away from old /tmp/.screen
+screen: possibly-insecure-handling-of-tmp-files-in-maintainer-script preinst:8
+
+# There is no status, it's just for cleaning up.
+screen: init.d-script-does-not-implement-status-option etc/init.d/screen-cleanup
+
+# It doesn't need redirection to systemctl. There is
+# /etc/tmpfiles.d/screen-cleanup.conf and
+# /lib/systemd/system/screen-cleanup.service for that.
+screen: init.d-script-does-not-source-init-functions etc/init.d/screen-cleanup
+
+# hyphen-used-as-minus-sign false positives
+# "'$'-character"
+screen: hyphen-used-as-minus-sign usr/share/man/man1/screen.1.gz:679
+# "`%'-character"
+screen: hyphen-used-as-minus-sign usr/share/man/man1/screen.1.gz:833
+
+# False positive, handled by debian/tmpfile, debian/postinst and
+# debian/postrm. See https://bugs.debian.org/740301 and
+# https://bugs.launchpad.net/bugs/1462692 for the context of this
+# implementation.
+screen: missing-systemd-service-for-init.d-rcS-script screen-cleanup
+
+# False positive, it's user and group
+screen: spelling-error-in-readme-debian root root (duplicate word) root

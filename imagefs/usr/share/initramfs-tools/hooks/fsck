@@ -1,0 +1,98 @@
+#!/bin/sh
+
+PREREQ=""
+
+prereqs()
+{
+	echo "$PREREQ"
+}
+
+# Find a specific fstab entry
+# $1=mountpoint
+# $2=fstype (optional)
+_read_fstab_entry () {
+	# Not found by default.
+	echo "MNT_FSNAME="
+	echo "MNT_DIR="
+	echo "MNT_TYPE="
+
+	for file in /etc/fstab /etc/fstab.d/*.fstab; do
+		if [ -f "$file" ]; then
+			# shellcheck disable=SC2034
+			while read -r MNT_FSNAME MNT_DIR MNT_TYPE MNT_OPTS MNT_FREQ MNT_PASS MNT_JUNK; do
+				case "$MNT_FSNAME" in
+				  ""|\#*)
+					continue;
+					;;
+				esac
+				if [ "$MNT_DIR" = "$1" ]; then
+					if [ -n "$2" ]; then
+						[ "$MNT_TYPE" = "$2" ] || continue;
+					fi
+					echo "MNT_FSNAME=$MNT_FSNAME"
+					echo "MNT_DIR=$MNT_DIR"
+					echo "MNT_TYPE=$MNT_TYPE"
+					echo "MNT_PASS=$MNT_PASS"
+					break 2
+				fi
+				MNT_DIR=""
+			done < "$file"
+		fi
+	done
+}
+
+# Find a specific fstab entry and print its type (if found, and pass != 0)
+# $1=mountpoint
+get_fsck_type_fstab () {
+	eval "$(_read_fstab_entry "$1")"
+
+	# Not found by default.
+	if [ "$1" = "$MNT_DIR" ] && [ "$MNT_PASS" != 0 ]; then
+		# Ignore filesystem type for /, as it is not available and
+		# therefore never used at boot time
+		if [ "${MNT_DIR}" = "/" ] || [ "${MNT_TYPE}" = "auto" ]; then
+			MNT_FSNAME="$(resolve_device "${MNT_FSNAME}")"
+			if ! get_fstype "${MNT_FSNAME}"; then
+				echo "W: Couldn't identify type of $2 file system for fsck hook" >&2
+			fi
+		else
+			echo "${MNT_TYPE}"
+		fi
+	fi
+}
+
+get_fsck_types() {
+	get_fsck_type_fstab /    root
+	get_fsck_type_fstab /usr /usr
+}
+
+case $1 in
+prereqs)
+	prereqs
+	exit 0
+	;;
+esac
+
+if [ ! -x /sbin/fsck ]; then
+	exit 0
+fi
+
+. /usr/share/initramfs-tools/scripts/functions
+. /usr/share/initramfs-tools/hook-functions
+
+fsck_types="$(get_fsck_types | sort | uniq)"
+
+if [ -z "$fsck_types" ]; then
+	exit 0
+fi
+
+copy_exec /sbin/fsck
+copy_exec /sbin/logsave
+
+for type in $fsck_types; do
+	if prog="$(command -v "fsck.${type}")"; then
+		copy_exec "$prog"
+	else
+		echo "W: /sbin/fsck.${type} doesn't exist, can't install to initramfs" >&2
+	fi
+done

@@ -1,0 +1,6 @@
+# VMWare Virtual Sockets permissions
+#
+# after loading the vsock module, a block device /dev/vsock will be created with permission 0600
+# This rule changes permission to 0666 to allow users access to the virtual sockets
+
+KERNEL=="vsock", MODE="0666"

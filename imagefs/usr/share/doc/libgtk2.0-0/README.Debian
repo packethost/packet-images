@@ -1,0 +1,35 @@
+GTK 2 for Debian
+----------------
+
+Static libraries
+================
+
+Statically linking GTK into a program is no longer supported.
+
+
+Key binding
+===========
+gnome-settings-daemon overrides gtk-key-theme-name in your gtkrc. so if you
+use GNOME 2, it won't work, and it's not a bug.
+Please use gnome-keybinding-properties instead of gtk-key-theme-name in your
+gtkrc.
+
+
+Emacs-style key bindings
+========================
+Gtk provides a way of configuring key bindings in Gtk Widgets, especially
+to move the cursor in text fields.  The default behavior in older Gtk versions
+was similar to Emacs, and still available for users to configure.  You can
+configure the Emacs-style key binding theme in your ~/.gtkrc-2.0 file as
+follows:
+    gtk-key-theme-name = "Emacs"
+
+Please note that applications can still override this configuration, and this
+is the case of the GNOME Desktop: gnome-settings-daemon loads the key theme
+from the "/desktop/gnome/interface/gtk_key_theme" GConf entry.  This can be
+modified with gconf-editor.
+
+
+This file is the initial work of Akira TAGOH <tagoh@debian.org> and was updated
+by Loic Minier <lool@dooz.org>.
+

@@ -1,0 +1,9 @@
+#!/bin/sh
+set -e
+# Automatically added by dh_installinitramfs/12.9ubuntu1
+if [ "$1" = "remove" ]; then
+	if [ -x /usr/sbin/update-initramfs ] && [ -e /etc/initramfs-tools/initramfs.conf ]; then
+		update-initramfs -u
+	fi
+fi
+# End automatically added section

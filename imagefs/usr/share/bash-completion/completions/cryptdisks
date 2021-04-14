@@ -1,0 +1,42 @@
+# cryptdisks_{start,stop} completion by first column of crypttab
+#
+# Copyright 2013 Claudius Hubig <cl_crds@chubig.net>, 2-clause BSD
+
+_cryptdisks() {
+    local action="$1" t
+    for t in $( mawk -vt="${COMP_WORDS[COMP_CWORD]}" \
+                '($1 !~ /^#/ && index($1,t) == 1) {print $1}' \
+                "${TABFILE-"/etc/crypttab"}" ); do
+        if [ "$action" = start -a ! -e "/dev/mapper/$t" ] ||
+           [ "$action" = stop  -a   -e "/dev/mapper/$t" ]; then
+           COMPREPLY+=( "$t" )
+        fi
+    done
+    return 0;
+}
+
+_cryptdisks_start() {
+    local i include_options=y
+    COMPREPLY=()
+    for (( i=0; i < COMP_CWORD-1; i++ )); do
+        if [ "${COMP_WORDS[i]}" = "--" ] || [[ "${COMP_WORDS[i]}" != -* ]]; then
+            include_options=n
+            break
+        fi
+    done
+    if [ "$include_options" = "y" ]; then
+        for i in "-r" "--readonly" "--"; do
+            if [[ "$i" == "${COMP_WORDS[COMP_CWORD]}"* ]]; then
+                COMPREPLY+=( "$i" )
+            fi
+        done
+    fi
+    _cryptdisks start "$@"
+}
+_cryptdisks_stop()  {
+    COMPREPLY=()
+    _cryptdisks stop  "$@";
+}
+
+complete -F _cryptdisks_start cryptdisks_start
+complete -F _cryptdisks_stop cryptdisks_stop

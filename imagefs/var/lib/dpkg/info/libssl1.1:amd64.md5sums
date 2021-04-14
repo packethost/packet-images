@@ -1,0 +1,8 @@
+4c744eac0805877f94723981d6935465  usr/lib/x86_64-linux-gnu/engines-1.1/afalg.so
+de182ddb8d7b9b531543221eabc6ff45  usr/lib/x86_64-linux-gnu/engines-1.1/capi.so
+cb632ec676f3c8eaa6c37d12111d3064  usr/lib/x86_64-linux-gnu/engines-1.1/padlock.so
+daf9c4a55636d750846765e68e117d18  usr/lib/x86_64-linux-gnu/libcrypto.so.1.1
+92a3d5dc325430cdff4c35c9e6e7c224  usr/lib/x86_64-linux-gnu/libssl.so.1.1
+3f763fa79305e9e3ef1e1c1cb76483db  usr/share/doc/libssl1.1/NEWS.Debian.gz
+33592bd660048c1cfdd6037be06ed8fe  usr/share/doc/libssl1.1/changelog.Debian.gz
+6ca25957fe201dc234ff25bc24f98e0a  usr/share/doc/libssl1.1/copyright

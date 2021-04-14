@@ -1,0 +1,6 @@
+Template: cpufrequtils/enable
+Type: boolean
+Default: true
+Description: Enable cpufreq governor at install time?
+ This is an internal (hidden) debconf question.  It should not be translated.
+

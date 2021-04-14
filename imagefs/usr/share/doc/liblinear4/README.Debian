@@ -1,0 +1,7 @@
+liblinear for Debian
+--------------------
+
+For more information (including formulations) about LIBLINEAR, you are strongly
+advised to read upstream's README file in /usr/share/doc/liblinear4/README.
+
+ -- Christian Kastner <ckk@debian.org>  Mon, 21 Oct 2019 23:50:40 +0200

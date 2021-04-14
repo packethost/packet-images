@@ -1,0 +1,13 @@
+/.
+/usr
+/usr/bin
+/usr/bin/lxc
+/usr/bin/lxd
+/usr/share
+/usr/share/doc
+/usr/share/doc/lxd
+/usr/share/doc/lxd/changelog.gz
+/usr/share/doc/lxd/copyright
+/usr/share/lintian
+/usr/share/lintian/overrides
+/usr/share/lintian/overrides/lxd

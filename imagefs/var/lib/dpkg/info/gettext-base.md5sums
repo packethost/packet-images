@@ -1,0 +1,17 @@
+14bde36e07657d7d3b16ab5d71be3ae9  usr/bin/envsubst
+8f65a4fd4db54806ab50d9140cb7b947  usr/bin/gettext
+28dff0842af457c7b59cc650a6e965fa  usr/bin/gettext.sh
+56d4bfd75f0044f6318b77b61f6b0501  usr/bin/ngettext
+760b25c6dcb582fea27076f52adfec61  usr/share/doc/gettext-base/ABOUT-NLS
+48a63035877027da681afe4b8b256027  usr/share/doc/gettext-base/changelog.Debian.gz
+fc000b15e1f89fa7fb6d16378757146f  usr/share/doc/gettext-base/copyright
+1b4a8f4bf8d1cb427dcea8d921e4ea18  usr/share/java/libintl.jar
+5c9f679395a99342791bcd09a747be7b  usr/share/lintian/overrides/gettext-base
+50c94c4165ad30044b221fa55f5d2a09  usr/share/man/man1/envsubst.1.gz
+0564b6bc199e3856e707799e934aca2c  usr/share/man/man1/gettext.1.gz
+33d7b9365616b8edb759aabf945ba246  usr/share/man/man1/ngettext.1.gz
+5e92c18d7a6f8f12d77cf788a005c77b  usr/share/man/man3/bind_textdomain_codeset.3.gz
+fa76f968870fc69c20185718f3f71f24  usr/share/man/man3/bindtextdomain.3.gz
+92a13fe40ed1cba3fe6fa117fb724d3e  usr/share/man/man3/gettext.3.gz
+59a1b56b34e7c32dd221b92a0c3b4ce8  usr/share/man/man3/ngettext.3.gz
+307394404485c17f59c4fc3f2ad4f43c  usr/share/man/man3/textdomain.3.gz

@@ -1,0 +1,17 @@
+46d0e34affc01b40d8a2ad40cd6f316e  usr/lib/python3/dist-packages/softwareproperties/AptAuth.py
+38194faef9ae3053387ef8f94d9c3ad5  usr/lib/python3/dist-packages/softwareproperties/CountryInformation.py
+b7e8fe5be342f7c4688b957139e18515  usr/lib/python3/dist-packages/softwareproperties/GoaAuth.py
+5e3cd4dfc37b482238576c5c7e045b91  usr/lib/python3/dist-packages/softwareproperties/LivepatchService.py
+2551ebc7f9152063fdc74159b0524464  usr/lib/python3/dist-packages/softwareproperties/LivepatchSnap.py
+9bba997517ecc4c1f5d5a7a12ae74974  usr/lib/python3/dist-packages/softwareproperties/MirrorTest.py
+70950d679b3080ee0e787af61948aaae  usr/lib/python3/dist-packages/softwareproperties/SoftwareProperties.py
+5334d9a1ccd771cc4e7bb08f1529284c  usr/lib/python3/dist-packages/softwareproperties/__init__.py
+55deacb400db65591017aed5bf7188fa  usr/lib/python3/dist-packages/softwareproperties/cloudarchive.py
+57ec682fcfc99fa04913fc118e9d2262  usr/lib/python3/dist-packages/softwareproperties/distro.py
+d2652cba662ac9d46457a81f65585c98  usr/lib/python3/dist-packages/softwareproperties/ppa.py
+2995076b5bd2c2f763f01cb4d226722f  usr/lib/python3/dist-packages/softwareproperties/shortcuts.py
+d452acfcbbca9f831a00db7deb82bbab  usr/share/doc/python3-software-properties/AUTHORS
+6ff0bedc540baa621b8ef9ccc212039b  usr/share/doc/python3-software-properties/README
+dd5bbca91225f9394188adfce26242ba  usr/share/doc/python3-software-properties/TODO
+3a5304bd22758d0d48e742714cadaac7  usr/share/doc/python3-software-properties/changelog.gz
+1de030797e7b8d1ca0a0deaca557ae76  usr/share/doc/python3-software-properties/copyright

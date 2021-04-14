@@ -1,0 +1,34 @@
+* Analyze the BUG reports
+** Analyze the patchs
+** Analyze the requests for new features
+*** 763859
+Tricky request.  In a superficial analyze it may have security
+implications with shell shock.
+
+*** 792040
+Does at supports seconds?
+
+*** 638256
+Analyze with care.  It is a race condition and it cames from my job.
+
+*** 624506
+Problem with time.  Currently uses a clock that is suspendable.  Check
+if the patch works well when the time jumps because a Sysadmin
+needs to setup the correct time.
+
+*** 559886
+
+Parallel builds is a nice to have.  Need to check if the patches are
+correct.
+
+*** 528671
+Tricky problem with a easy fix
+
+*** 364975
+TLDR
+
+** Analyze the requests for changes in the Debian package
+** Close old bugs
+** Document the old bugs on manpage
+
+* Read about autotools and create Makefile.am

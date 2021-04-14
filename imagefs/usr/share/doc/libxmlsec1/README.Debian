@@ -1,0 +1,37 @@
+xmlsec and libxmlsec for Debian
+-------------------------------
+
+The upstream documentation is included with the libxmlsec1-dev package and
+located at /usr/share/doc/libxmlsec1-dev.
+
+When developing with the xmlsec library, you have a choice of openssl,
+gnutls, or nss crypto engines.  By using "pkg-config xmlsec1-<engine>" or
+"xmlsec1-config --crypto=<engine>", you can get the necessary compiler
+command-line switches for enabling a certain engine.
+
+If you want to license your application that uses the xmlsec library under
+the GNU GPL, or want your library that uses the xmlsec library to be GPL-
+compatible, I suggest using the gnutls engine.  Use of the nss crypto engine
+may also be compatible with the GPL, but see bugs #207024 and #207026.
+Regarding openssl, there is a bit of controversy about whether it can be
+considered part of the OS and therefore make use of a loophole in the GPL.
+(See the xmlsec FAQ in the documentation.)  More specifically, debian-legal
+takes a hard line and does not allow GPL'd packages that link to openssl to
+exist in main.  In the future, support for PGP key types may be added, which
+would become another reason to go with the gnutls engine.
+
+Note that the library has a dynamic crypto engine loading feature, but I
+have not yet enabled it.
+
+Note that a number of the examples included with the -dev package will
+not compile successfully under the gnutls engine (due to lack of features
+compared to openssl), and will fail under both the gnutls and nss engines
+(due to lack of pem file support, etc.).
+
+Upstream has promised that they will increment the number in the library name
+(for example, xmlsec1 -> xmlsec2) whenever a binary incompatibility is
+introduced, and that it will always match the soname number.  For this
+reason I chose to omit the soname number from package names.
+
+
+ -- John V. Belmonte <jbelmonte@debian.org>

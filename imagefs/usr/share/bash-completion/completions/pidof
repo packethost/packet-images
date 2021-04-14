@@ -1,0 +1,27 @@
+# pidof(8) completion                                      -*- shell-script -*-
+
+_pidof()
+{
+    local cur prev words cword
+    _init_completion || return
+
+    case $prev in
+        --help|-V|--version|-!(-*)[hV]*)
+            return
+            ;;
+        --omit-pid|-!(-*)o)
+            _pids
+            return
+            ;;
+    esac
+
+    if [[ $cur == -* ]]; then
+        COMPREPLY=( $(compgen -W '$(_parse_help "$1")' -- "$cur") )
+        return
+    fi
+
+    _pnames
+} &&
+complete -F _pidof pidof
+
+# ex: filetype=sh

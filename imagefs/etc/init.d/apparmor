@@ -1,0 +1,156 @@
+#!/bin/sh
+# ----------------------------------------------------------------------
+#    Copyright (c) 1999, 2000, 2001, 2002, 2003, 2004, 2005, 2006, 2007
+#     NOVELL (All rights reserved)
+#    Copyright (c) 2008, 2009 Canonical, Ltd.
+#
+#    This program is free software; you can redistribute it and/or
+#    modify it under the terms of version 2 of the GNU General Public
+#    License published by the Free Software Foundation.
+#
+#    This program is distributed in the hope that it will be useful,
+#    but WITHOUT ANY WARRANTY; without even the implied warranty of
+#    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+#    GNU General Public License for more details.
+#
+#    You should have received a copy of the GNU General Public License
+#    along with this program; if not, contact Novell, Inc.
+# ----------------------------------------------------------------------
+# Authors:
+#  Steve Beattie <steve.beattie@canonical.com>
+#  Kees Cook <kees@ubuntu.com>
+#
+# /etc/init.d/apparmor
+#
+# Note: "Required-Start: $local_fs" implies that the cache may not be available
+# yet when /var is on a remote filesystem. The worst consequence this should
+# have is slowing down the boot.
+#
+### BEGIN INIT INFO
+# Provides: apparmor
+# Required-Start: $local_fs
+# Required-Stop: umountfs
+# Default-Start: S
+# Default-Stop:
+# Short-Description: AppArmor initialization
+# Description: AppArmor init script. This script loads all AppArmor profiles.
+### END INIT INFO
+
+APPARMOR_FUNCTIONS=/lib/apparmor/rc.apparmor.functions
+
+# Functions needed by rc.apparmor.functions
+
+. /lib/lsb/init-functions
+
+aa_action() {
+	STRING=$1
+	shift
+	$*
+	rc=$?
+	if [ $rc -eq 0 ] ; then
+		aa_log_success_msg $"$STRING "
+	else
+		aa_log_failure_msg $"$STRING "
+	fi
+	return $rc
+}
+
+aa_log_action_start() {
+	log_action_begin_msg $@
+}
+
+aa_log_action_end() {
+	log_action_end_msg $@
+}
+
+aa_log_success_msg() {
+	log_success_msg $@
+}
+
+aa_log_warning_msg() {
+	log_warning_msg $@
+}
+
+aa_log_failure_msg() {
+	log_failure_msg $@
+}
+
+aa_log_skipped_msg() {
+	if [ -n "$1" ]; then
+		log_warning_msg "${1}: Skipped."
+	fi
+}
+
+aa_log_daemon_msg() {
+	log_daemon_msg $@
+}
+
+aa_log_end_msg() {
+	log_end_msg $@
+}
+
+# Source AppArmor function library
+if [ -f "${APPARMOR_FUNCTIONS}" ]; then
+	. ${APPARMOR_FUNCTIONS}
+else
+	aa_log_failure_msg "Unable to find AppArmor initscript functions"
+	exit 1
+fi
+
+usage() {
+    echo "Usage: $0 {start|stop|restart|reload|force-reload|status}"
+}
+
+test -x ${PARSER} || exit 0 # by debian policy
+# LSM is built-in, so it is either there or not enabled for this boot
+test -d /sys/module/apparmor || exit 0
+
+# do not perform start/stop/reload actions when running from liveCD
+test -d /rofs/etc/apparmor.d && exit 0
+
+rc=255
+case "$1" in
+	start)
+		if [ -x /usr/bin/systemd-detect-virt ] && \
+		   systemd-detect-virt --quiet --container && \
+		   ! is_container_with_internal_policy; then
+			aa_log_daemon_msg "Not starting AppArmor in container"
+			aa_log_end_msg 0
+			exit 0
+		fi
+		apparmor_start
+		rc=$?
+		;;
+	restart|reload|force-reload)
+		if [ -x /usr/bin/systemd-detect-virt ] && \
+		   systemd-detect-virt --quiet --container && \
+		   ! is_container_with_internal_policy; then
+			aa_log_daemon_msg "Not starting AppArmor in container"
+			aa_log_end_msg 0
+			exit 0
+		fi
+		apparmor_restart
+		rc=$?
+		;;
+	stop)
+		aa_log_daemon_msg "Leaving AppArmor profiles loaded"
+		cat >&2 <<EOM
+No profiles have been unloaded.
+
+Unloading profiles will leave already running processes permanently
+unconfined, which can lead to unexpected situations.
+
+To set a process to complain mode, use the command line tool
+'aa-complain'. To really tear down all profiles, run 'aa-teardown'."
+EOM
+		;;
+	status)
+		apparmor_status
+		rc=$?
+		;;
+	*)
+		usage
+		rc=1
+		;;
+	esac
+exit $rc

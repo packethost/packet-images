@@ -1,0 +1,4 @@
+d0afcead05e2c04c9b3bd6ccbcd0fe1b  usr/lib/gnupg/gpg-wks-client
+611841fd2504d910d4b8ea4007edbf14  usr/share/doc/gpg-wks-client/copyright
+4ba4a7274a56f9d079e70146df89805f  usr/share/lintian/overrides/gpg-wks-client
+82ea24ebe4381e545cb714133ef53be4  usr/share/man/man1/gpg-wks-client.1.gz

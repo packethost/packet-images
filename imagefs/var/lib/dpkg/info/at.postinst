@@ -1,0 +1,38 @@
+#!/bin/sh
+set -e
+
+if [ "$1" = "configure" ]; then
+    SEQFILE=/var/spool/cron/atjobs/.SEQ
+    if [ ! -f $SEQFILE ]; then
+	echo 0 > $SEQFILE
+	chmod 600 $SEQFILE
+	chown daemon:daemon $SEQFILE
+    fi
+fi
+
+# Automatically added by dh_systemd_enable/11.5.3ubuntu1
+if [ "$1" = "configure" ] || [ "$1" = "abort-upgrade" ] || [ "$1" = "abort-deconfigure" ] || [ "$1" = "abort-remove" ] ; then
+	# This will only remove masks created by d-s-h on package removal.
+	deb-systemd-helper unmask 'atd.service' >/dev/null || true
+
+	# was-enabled defaults to true, so new installations run enable.
+	if deb-systemd-helper --quiet was-enabled 'atd.service'; then
+		# Enables the unit on first installation, creates new
+		# symlinks on upgrades if the unit file has changed.
+		deb-systemd-helper enable 'atd.service' >/dev/null || true
+	else
+		# Update the statefile to add new symlinks (if any), which need to be
+		# cleaned up on purge. Also remove old symlinks.
+		deb-systemd-helper update-state 'atd.service' >/dev/null || true
+	fi
+fi
+# End automatically added section
+# Automatically added by dh_installinit/11.5.3ubuntu1
+if [ "$1" = "configure" ] || [ "$1" = "abort-upgrade" ] || [ "$1" = "abort-deconfigure" ] || [ "$1" = "abort-remove" ] ; then
+	if [ -x "/etc/init.d/atd" ]; then
+		update-rc.d atd defaults 89 11 >/dev/null
+		invoke-rc.d atd start || exit 1
+	fi
+fi
+# End automatically added section
+

@@ -1,0 +1,6 @@
+Name: gnome-icon-theme
+Description: A collection of icons used as the basis for GNOME themes
+Version: 3.36.1
+Requires:
+Libs:
+Cflags:

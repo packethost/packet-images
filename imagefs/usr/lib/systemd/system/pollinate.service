@@ -1,0 +1,17 @@
+[Unit]
+Description=Pollinate to seed the pseudo random number generator
+Before=ssh.service
+After=network-online.target
+ConditionVirtualization=!container
+ConditionPathExists=!/var/cache/pollinate/seeded
+Documentation=https://launchpad.net/pollinate
+
+[Service]
+User=pollinate
+ExecStart=/usr/bin/pollinate
+CacheDirectory=pollinate
+CacheDirectoryMode=0750
+Type=oneshot
+
+[Install]
+WantedBy=multi-user.target

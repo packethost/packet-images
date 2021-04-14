@@ -1,0 +1,10 @@
+Metadata-Version: 1.2
+Name: python-debian
+Version: 0.1.36ubuntu1
+Summary: Debian package related modules
+Home-page: https://salsa.debian.org/python-debian-team/python-debian
+Maintainer: Debian python-debian Maintainers
+Maintainer-email: pkg-python-debian-maint@lists.alioth.debian.org
+License: UNKNOWN
+Description: UNKNOWN
+Platform: UNKNOWN

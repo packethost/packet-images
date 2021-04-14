@@ -1,0 +1,91 @@
+#!/bin/bash
+# N.B.: Use bash for $RANDOM
+#
+#    mondrian: randomly generate some Modrian art in tmux
+#
+#    Copyright (C) 2011-2014 Dustin Kirkland
+#
+#    Authors: Dustin Kirkland <kirkland@byobu.org>
+#
+#    This program is free software: you can redistribute it and/or modify
+#    it under the terms of the GNU General Public License as published by
+#    the Free Software Foundation, version 3 of the License.
+#
+#    This program is distributed in the hope that it will be useful,
+#    but WITHOUT ANY WARRANTY; without even the implied warranty of
+#    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+#    GNU General Public License for more details.
+#
+#    You should have received a copy of the GNU General Public License
+#    along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
+trap "tput reset" EXIT HUP INT QUIT TERM KILL ILL TRAP ABRT BUS FPE USR1 SEGV USR2 PIPE ALRM
+
+# Special mode, argv[1]="color", paint the screen
+if [ "$1" = "color" ] && [ -n "$2" ]; then
+	i=0
+	out=
+	sleep 0.2
+	count=$(stty size | awk '{print $1*$2}')
+	perl -e "print color 'reset'; printf \"\x1b[48;5;${2}m%${count}s\", \" \";";
+	head -n1
+	tmux kill-window -t mondrian
+	exit 0
+fi
+
+get_random_direction() {
+	if [ $((RANDOM % 2)) -eq 0 ]; then
+		echo "-v"
+	else
+		echo "-h"
+	fi
+}
+
+get_random_numbers() {
+	local max="$1" R=0 B=0 Y=0
+	R=$((RANDOM % max + 1))
+	B=$((RANDOM % max + 1))
+	Y=$((RANDOM % max + 1))
+	while [ "$B" = "$R" ] || [ "$B" = "$Y" ]; do
+		B=$((RANDOM % max + 1))
+	done
+	while [ "$Y" = "$R" ] || [ "$Y" = "$B" ]; do
+		Y=$((RANDOM % max + 1))
+	done
+	_RET="$R $B $Y"
+}
+
+red_color=196
+yellow_color=226
+blue_color=57
+white_color=231
+
+tmux kill-window -t mondrian
+tmux new-window -n mondrian "$BYOBU_PREFIX/lib/byobu/include/mondrian color $white_color" \; \
+	set-option -g pane-active-border-style bg=colour231 \; \
+	set-option -g pane-active-border-style fg=black \; \
+	set-option -g pane-border-style bg=colour231 \; \
+	set-option -g pane-border-style fg=black \; \
+	split-window $(get_random_direction) "$BYOBU_PREFIX/lib/byobu/include/mondrian color $white_color" \; \
+	split-window $(get_random_direction) -t $((RANDOM % 2)) "$BYOBU_PREFIX/lib/byobu/include/mondrian color $white_color" \; \
+	split-window $(get_random_direction) -t $((RANDOM % 3)) "$BYOBU_PREFIX/lib/byobu/include/mondrian color $white_color" \; \
+	split-window $(get_random_direction) -t $((RANDOM % 4)) "$BYOBU_PREFIX/lib/byobu/include/mondrian color $red_color" \; \
+	split-window $(get_random_direction) -t $((RANDOM % 5)) "$BYOBU_PREFIX/lib/byobu/include/mondrian color $white_color" \; \
+	split-window $(get_random_direction) -t $((RANDOM % 6)) "$BYOBU_PREFIX/lib/byobu/include/mondrian color $yellow_color" \; \
+	split-window $(get_random_direction) -t $((RANDOM % 7)) "$BYOBU_PREFIX/lib/byobu/include/mondrian color $white_color" \; \
+	split-window $(get_random_direction) -t $((RANDOM % 8)) "$BYOBU_PREFIX/lib/byobu/include/mondrian color $blue_color" \; \
+	split-window $(get_random_direction) -t $((RANDOM % 9)) "$BYOBU_PREFIX/lib/byobu/include/mondrian color $white_color" \; \
+	split-window $(get_random_direction) -t $((RANDOM % 9)) "$BYOBU_PREFIX/lib/byobu/include/mondrian color $white_color" \; \
+	split-window $(get_random_direction) -t $((RANDOM % 10)) "$BYOBU_PREFIX/lib/byobu/include/mondrian color $white_color" \; \
+	split-window $(get_random_direction) -t $((RANDOM % 11)) "$BYOBU_PREFIX/lib/byobu/include/mondrian color $white_color" \; \
+	split-window $(get_random_direction) -t $((RANDOM % 12)) "$BYOBU_PREFIX/lib/byobu/include/mondrian color $white_color" \; \
+	split-window $(get_random_direction) -t $((RANDOM % 13)) "$BYOBU_PREFIX/lib/byobu/include/mondrian color $white_color" \; \
+	split-window $(get_random_direction) -t $((RANDOM % 14)) "$BYOBU_PREFIX/lib/byobu/include/mondrian color $white_color" \; \
+	split-window $(get_random_direction) -t $((RANDOM % 15)) "$BYOBU_PREFIX/lib/byobu/include/mondrian color $white_color" \; \
+	split-window $(get_random_direction) -t $((RANDOM % 16)) "$BYOBU_PREFIX/lib/byobu/include/mondrian color $white_color" \; \
+	split-window $(get_random_direction) -t $((RANDOM % 17)) "$BYOBU_PREFIX/lib/byobu/include/mondrian color $white_color" \; \
+	split-window $(get_random_direction) -t $((RANDOM % 18)) "$BYOBU_PREFIX/lib/byobu/include/mondrian color $white_color" \; \
+	split-window $(get_random_direction) -t $((RANDOM % 19)) "$BYOBU_PREFIX/lib/byobu/include/mondrian color $white_color" \; \
+	split-window $(get_random_direction) -t $((RANDOM % 20)) "$BYOBU_PREFIX/lib/byobu/include/mondrian color $white_color" \; \
+
+exit 0

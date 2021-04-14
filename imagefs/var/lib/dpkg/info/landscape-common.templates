@@ -1,0 +1,14 @@
+Template: landscape-common/sysinfo
+Type: select
+Choices: Do not display sysinfo on login, Cache sysinfo in /etc/motd, Run sysinfo on every login
+Default: Cache sysinfo in /etc/motd
+Description: landscape-sysinfo configuration:
+ Landscape includes a tool and a set of modules that can display
+ system status, information, and statistics on login.
+ .
+ This information can be gathered periodically (every 10 minutes)
+ and automatically written to /etc/motd.  The data could be a few
+ minutes out-of-date.
+ .
+ Or, this information can be gathered at login.  The data will be
+ more current, but might introduce a small delay at login.

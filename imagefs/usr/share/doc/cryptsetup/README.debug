@@ -1,0 +1,72 @@
+Debugging Cryptsetup issues
+===========================
+
+Cryptsetup is responsible for unlocking dm-crypt devices. The cryptsetup Debian
+provide a whole slew of helper scripts that integrate cryptsetup into the
+Debian operating system. The most important ones are the `cryptdisks` init
+script and the `cryptroot` initramfs scripts, both implementing support for the
+`/etc/crypttab` configuration file and for automatic unlocking of encrypted
+devices during the boot process.
+
+This page collects information on debugging different features of the Debian
+cryptsetup packages in case of problems.
+
+Debug cryptroot initramfs script
+--------------------------------
+
+In order to debug the cryptroot initramfs script during initramfs stage, the
+following steps are required:
+
+* Boot into the initramfs rescue shell by adding `break=premount` as kernel
+  option during boot
+
+  In grub, this can be done interactively from the grub boot menu: `<E>` to
+  edit, and `<Ctrl>+<X>` to boot once you've edited the kernel line.
+
+  See <https://help.ubuntu.com/community/Grub2/Troubleshooting#Editing_the_GRUB_2_Menu_During_Boot>
+  for details.
+
+* Append `-x` to the shebang (first line) of cryptroot initramfs script:
+
+      sed -i -e '1s,^#!/bin/sh,& -x,' /scripts/local-top/cryptroot
+
+* Run the cryptroot initramfs script manually, redirecting output to a log file:
+
+      /scripts/local-top/cryptroot 2>&1 | tee /run/initramfs/cryptroot.debug
+
+  **Please note:** if the boot process is broken, you might need to mount an
+  external storage device (e.g. a USB flash drive) inside the initramfs and
+  redirect the output to a log files on this external device.
+
+* Continue the boot process (by pressing `<Ctrl>+<D>`) and save a copy of the
+  debug log file to `/run/initramfs/cryptroot.debug`. The content of `/run/`
+  will be lost after reboot.
+
+Sometimes, debugging the initramfs directly can be helpful as well. See
+<https://wiki.debian.org/InitramfsDebug#Saving_debug_information> for details.
+
+Gather debugging information in the initramfs rescue shell
+----------------------------------------------------------
+
+Useful commands to gather information from initramfs rescue shell:
+
+* Check for device-mapper support (these directories/symlinks exist only if
+  kernel has device-mapper support):
+
+      ls -l /sys/class/misc/device-mapper /sys/devices/virtual/misc/device-mapper
+
+* Check whether dm-crypt kernel module is loaded:
+
+      lsmod | grep dm-crypt
+
+* Display cryptroot configuration and list loaded kernel modules:
+
+      cat /cryptroot/crypttab
+      lsmod
+
+* Gather information about the available block devices:
+
+      blkid
+      ls -l /dev/disk/by-*/
+
+ -- Jonas Meurer <jonas@freesources.org>, Wed 25 Dec 2019 02:58:00 PM CET

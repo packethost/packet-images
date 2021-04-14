@@ -1,0 +1,7 @@
+libicudata 66 libicu66 (>= 66.1-1~)
+libicui18n 66 libicu66 (>= 66.1-1~)
+libicuio 66 libicu66 (>= 66.1-1~)
+libicutest 66 libicu66 (>= 66.1-1~)
+libicutu 66 libicu66 (>= 66.1-1~)
+libicuuc 66 libicu66 (>= 66.1-1~)
+#libiculx 66 libicu66 (>= 66.1-1~)

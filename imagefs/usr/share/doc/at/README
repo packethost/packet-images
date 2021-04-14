@@ -1,0 +1,46 @@
+This is version of 3.1.x of at, for running commands at a
+specified time.  To install, do a
+
+$ ./configure
+
+You might want to change the default maximum load at which batch
+jobs are still started by specifying --with-loadavg_mx=... as
+argument to configure.  The default is 0.8, so that, normally, no
+batch job will be started when there's still activity going on.
+For an SMP system, you will want to increase this.
+
+Then, do
+
+$ make
+
+and, as root,
+
+# make install
+
+at jobs are run by the atd daemon, which is normally started at boot
+time.
+
+Bug reports to:
+	http://bugs.debian.org/ (Debian bug tracking system)
+	or
+	at@packages.debian.org (Debian at package maintainers)
+
+If at all possible, I'd appreciate you telling me which version you
+found a bug in; run at -V to find out which one.
+
+The Homepage and place for news is at:
+        http://blog.calhariz.com/tag/at
+
+The latest source code and old relases are available at the git repository:
+        https://anonscm.debian.org/git/collab-maint/at.git/
+
+If you need to contact the developer of the software please use:
+        jose (at) calhariz.com
+
+If you try to use at(1) on a system which does not support setreuid(2),
+i.e. if you get an error whch looks vaguely like
+
+undefined symbol _setreuid referenced from text segment
+
+DO NOT try to install at on your system by removing all that strange
+PRIV stuff.  You will install a rather glaring security hole that way.

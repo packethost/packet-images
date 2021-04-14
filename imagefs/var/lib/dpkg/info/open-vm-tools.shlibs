@@ -1,0 +1,5 @@
+libDeployPkg 0 open-vm-tools (>= 2:11.2.5)
+libguestlib 0 open-vm-tools (>= 2:11.2.5)
+libhgfs 0 open-vm-tools (>= 2:11.2.5)
+libvgauth 0 open-vm-tools (>= 2:11.2.5)
+libvmtools 0 open-vm-tools (>= 2:11.2.5)

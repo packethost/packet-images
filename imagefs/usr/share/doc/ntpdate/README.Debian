@@ -1,0 +1,9 @@
+ntpdate doesn't parse the /etc/ntp.conf file.  The program
+ntpdate-debian is provided that reads its server list from
+/etc/default/ntpdate or alternatively from /etc/ntp.conf.
+
+Note that ntpdate is *not* really intended to be used by hosts with
+good network connectivity.  The "ntp" package, which provides a
+persistent daemon that does a better job of keeping system time than
+even a cron'ed invocation of ntpdate, is a better choice for systems
+with good network connectivity.

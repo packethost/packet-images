@@ -1,0 +1,19 @@
+apparmor binary: init.d-script-missing-dependency-on-remote_fs
+
+# Upstream does not ship a changelog.
+apparmor binary: no-upstream-changelog
+
+# Does not matter on Debian that never had these packages
+apparmor binary: breaks-without-version media-hub
+apparmor binary: breaks-without-version mediascanner2.0
+apparmor binary: breaks-without-version messaging-app
+apparmor binary: breaks-without-version webbrowser-app
+
+# This script is meant to be sourced and not run directly
+apparmor binary: script-not-executable lib/apparmor/rc.apparmor.functions
+
+# False positive
+apparmor binary: missing-depends-on-sensible-utils etc/apparmor.d/abstractions/ubuntu-browsers
+
+# False positive
+apparmor binary: uses-dpkg-database-directly etc/apparmor.d/lsb_release

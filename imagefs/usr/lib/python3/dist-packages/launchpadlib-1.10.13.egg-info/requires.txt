@@ -1,0 +1,16 @@
+httplib2
+keyring
+lazr.restfulclient>=0.9.19
+lazr.uri
+setuptools
+six
+testresources
+wadllib
+
+[docs]
+Sphinx
+
+[test]
+
+[test:python_version < "3"]
+mock

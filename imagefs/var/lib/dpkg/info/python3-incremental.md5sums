@@ -1,0 +1,14 @@
+8d3d91dacfe2221bacf629a8081c0a5c  usr/lib/python3/dist-packages/incremental-16.10.1.egg-info/PKG-INFO
+68b329da9893e34099c7d8ad5cb9c940  usr/lib/python3/dist-packages/incremental-16.10.1.egg-info/dependency_links.txt
+c66536063e3bff3f789f7efadef856ed  usr/lib/python3/dist-packages/incremental-16.10.1.egg-info/entry_points.txt
+68b329da9893e34099c7d8ad5cb9c940  usr/lib/python3/dist-packages/incremental-16.10.1.egg-info/not-zip-safe
+c062e8a70f8bd14bb6bc03dc86b123a4  usr/lib/python3/dist-packages/incremental-16.10.1.egg-info/requires.txt
+8128f05a3df6080cf24069d33e22353d  usr/lib/python3/dist-packages/incremental-16.10.1.egg-info/top_level.txt
+b201443f43e304a860391bd324037a49  usr/lib/python3/dist-packages/incremental/__init__.py
+99036c50a0ea304a628b071a5745b61c  usr/lib/python3/dist-packages/incremental/_version.py
+d41d8cd98f00b204e9800998ecf8427e  usr/lib/python3/dist-packages/incremental/tests/__init__.py
+468a5267c6b37104f92ee7617a2d220a  usr/lib/python3/dist-packages/incremental/tests/test_update.py
+a1cb0cf122a235098853a47ca5ff7b76  usr/lib/python3/dist-packages/incremental/tests/test_version.py
+2bb50314ad7e6dc4c2896160e5044298  usr/lib/python3/dist-packages/incremental/update.py
+408cb216b1c00f4f26e464b094aa123f  usr/share/doc/python3-incremental/changelog.Debian.gz
+bcfac86eb6d86e22258890b919faa69e  usr/share/doc/python3-incremental/copyright

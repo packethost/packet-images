@@ -1,0 +1,24 @@
+#!/bin/sh -e
+
+PKG="byobu"
+
+# Clean-up obsolete config file
+rm -f /etc/byobu/statusrc || true
+
+# Clean-up linked desktop file
+rm -rf /usr/share/applications/$PKG.desktop
+
+# Automatically added by dh_icons/12.9ubuntu1
+if which update-icon-caches >/dev/null 2>&1 ; then
+	update-icon-caches /usr/share/icons/HighContrast
+fi
+# End automatically added section
+# Automatically added by dh_installdebconf/12.9ubuntu1
+if [ "$1" = purge ] && [ -e /usr/share/debconf/confmodule ]; then
+	. /usr/share/debconf/confmodule
+	db_purge
+fi
+# End automatically added section
+
+
+# vi: syntax=sh ts=4 noexpandtab

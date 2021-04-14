@@ -1,0 +1,24 @@
+[Unit]
+Description=Firmware update daemon
+Documentation=https://fwupd.org/
+After=dbus.service
+Before=display-manager.service
+
+[Service]
+Type=dbus
+RuntimeDirectory=motd.d
+RuntimeDirectoryPreserve=yes
+BusName=org.freedesktop.fwupd
+ExecStart=/usr/libexec/fwupd/fwupd
+StateDirectory=fwupd
+CacheDirectory=fwupd
+ConfigurationDirectory=fwupd
+PrivateTmp=yes
+ProtectHome=yes
+ProtectSystem=full
+RestrictAddressFamilies=AF_NETLINK AF_UNIX
+SystemCallFilter=~@mount
+ProtectControlGroups=yes
+ProtectKernelModules=yes
+RestrictRealtime=yes
+ReadWritePaths=-/boot/efi -/efi/EFI -/boot/EFI

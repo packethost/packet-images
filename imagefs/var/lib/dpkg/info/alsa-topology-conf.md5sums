@@ -1,0 +1,5 @@
+98ce453ab79b7a11492407f3e3f94e90  usr/share/alsa/topology/broadwell/broadwell.conf
+26ef45a8c3cb6d21f96f76d7c21afc5a  usr/share/alsa/topology/bxtrt298/bxt_i2s.conf
+9eb8a2aa40e497b690b99a94982e0820  usr/share/alsa/topology/sklrt286/skl_i2s.conf
+721d2ed2bbd17d47006f98e0b7641967  usr/share/doc/alsa-topology-conf/changelog.Debian.gz
+8051dedbe28143dcceb833f2281b70dc  usr/share/doc/alsa-topology-conf/copyright

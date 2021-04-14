@@ -1,0 +1,4 @@
+31600d6c0a91d7132647f883c4cbcc36  usr/share/doc/cloud-initramfs-copymods/changelog.gz
+00ffd865fe8dfd10ca79e911d9e123f1  usr/share/doc/cloud-initramfs-copymods/copyright
+ef114f2b649514d4f31c01f49e435f73  usr/share/initramfs-tools/hooks/copymods
+edb7f7c72533225bcc9ab73a19327702  usr/share/initramfs-tools/scripts/init-bottom/copymods

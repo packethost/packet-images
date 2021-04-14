@@ -1,0 +1,64 @@
+#!/bin/sh
+
+### BEGIN INIT INFO
+# Provides:		open-vm-tools
+# Required-Start:	$local_fs $remote_fs
+# Required-Stop:	$local_fs $remote_fs
+# X-Start-Before:
+# X-Stop-After:
+# Default-Start:	2 3 4 5
+# Default-Stop:		0 1 6
+# Description:		Runs the open-vm-tools services
+# Short-Description:	Runs the open-vm-tools services
+### END INIT INFO
+
+. /lib/lsb/init-functions
+
+exit_if_not_in_vm () {
+    if which systemd-detect-virt 1>/dev/null; then
+        checktool='systemd-detect-virt'
+    else
+        checktool='vmware-checkvm'
+    fi
+
+    if ! ${checktool} | grep -iq vmware; then
+        echo "open-vm-tools: not starting as this is not a VMware VM"
+        exit 0
+    fi
+}
+
+case "${1}" in
+    start)
+        # Check if we're running inside VMWare
+        exit_if_not_in_vm
+
+        log_daemon_msg "Starting open-vm daemon" "vmtoolsd"
+        start-stop-daemon --start --quiet --pidfile /var/run/vmtoolsd.pid --exec /usr/bin/vmtoolsd --test > /dev/null || exit 1
+        start-stop-daemon --start --quiet --pidfile /var/run/vmtoolsd.pid --exec /usr/bin/vmtoolsd -- --background /var/run/vmtoolsd.pid || exit 2
+        log_end_msg 0
+        ;;
+
+    stop)
+        log_daemon_msg "Stopping open-vm guest daemon" "vmtoolsd"
+        start-stop-daemon --stop --quiet --retry=TERM/30/KILL/5 --pidfile /var/run/vmtoolsd.pid --exec /usr/bin/vmtoolsd
+        RETURN="${?}"
+        [ "${RETURN}" = 2 ] && exit 2
+        # Many daemons don't delete their pidfiles when they exit.
+        rm -f /var/run/vmtoolsd.pid
+        log_end_msg 0
+        ;;
+
+    force-reload|restart)
+        ${0} stop
+        ${0} start
+        ;;
+
+    status)
+        status_of_proc -p /var/run/vmtoolsd.pid /usr/bin/vmtoolsd vmtoolsd && exit 0 || exit $?
+        ;;
+
+    *)
+        log_success_msg "Usage: ${0} {start|stop|restart|force-reload|status}"
+        exit 1
+        ;;
+esac

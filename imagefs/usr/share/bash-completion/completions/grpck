@@ -1,0 +1,25 @@
+# grpck(8) completion                                      -*- shell-script -*-
+
+_grpck()
+{
+    local cur prev words cword
+    _init_completion || return
+
+    case $prev in
+        --root|-!(-*)R)
+            _filedir
+            return
+            ;;
+    esac
+
+    if [[ "$cur" == -* ]]; then
+        local opts=$(_parse_help "$1")
+        COMPREPLY=( $(compgen -W '${opts:-$(_parse_usage "$1")}' -- "$cur") )
+        return
+    fi
+
+    _filedir
+} &&
+complete -F _grpck grpck
+
+# ex: filetype=sh

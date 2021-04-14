@@ -1,0 +1,82 @@
+#!/bin/sh
+#
+#    icons: some icon characters for status scripts
+#
+#    Copyright (C) 2011-2014 Dustin Kirkland
+#
+#    Authors: Dustin Kirkland <kirkland@byobu.org>
+#
+#    This program is free software: you can redistribute it and/or modify
+#    it under the terms of the GNU General Public License as published by
+#    the Free Software Foundation, version 3 of the License.
+#
+#    This program is distributed in the hope that it will be useful,
+#    but WITHOUT ANY WARRANTY; without even the implied warranty of
+#    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+#    GNU General Public License for more details.
+#
+#    You should have received a copy of the GNU General Public License
+#    along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
+PKG="byobu"
+
+# UTF-8 support in the hardstatus is coming one day in Screen
+if [ "$BYOBU_BACKEND" = "tmux" ] && [ "$BYOBU_CHARMAP" = "UTF-8" ]; then
+	#ICON_C="℃"
+	#ICON_F="℉"
+	ICON_C="C"
+	ICON_F="F"
+	ICON_RD="◂"
+	ICON_WR="▸"
+	ICON_MAIL="⍌"
+	ICON_UP="▴"
+	ICON_DN="▾"
+	ICON_TRASH="♸"
+	ICON_WIFI=
+	ICON_REBOOT="⟳"
+	ICON_UPDATES="!"
+	ICON_UPGRADE="⚠"
+	ICON_SECURITY="‼"
+	#ICON_KB="㎅"
+	#ICON_MB="㎆"
+	#ICON_GB="㎇"
+	ICON_KB="K"
+	ICON_MB="M"
+	ICON_GB="G"
+	ICON_TB="T"
+	#ICON_KHz="㎑"
+	#ICON_MHz="㎒"
+	#ICON_GHz="㎓"
+	ICON_KHz="KHz"
+	ICON_MHz="MHz"
+	ICON_GHz="GHz"
+	#ICON_MBPS="㏔㎰"
+	ICON_MBPS="Mb"
+	ICON_SESSION="〣"
+	ICON_LIVEPATCHED="🗹 "
+else
+	# Only use 0-127 ANSI: http://ascii-table.com/ascii.php
+	ICON_C="C"
+	ICON_F="F"
+	ICON_RD="<"
+	ICON_WR=">"
+	ICON_MAIL="[M]"
+	ICON_UP="^"
+	ICON_DN="v"
+	ICON_TRASH="T"
+	ICON_WIFI=
+	ICON_REBOOT="(R)"
+	ICON_UPDATES="!"
+	ICON_UPGRADE="/!\\\\\\"
+	ICON_SECURITY="!!"
+	ICON_KB="KB"
+	ICON_MB="MB"
+	ICON_GB="GB"
+	ICON_TB="TB"
+	ICON_KHz="kHz"
+	ICON_MHz="MHz"
+	ICON_GHz="GHz"
+	ICON_MBPS="Mbps"
+	ICON_SESSION="|"
+	ICON_LIVEPATCHED="[/]"
+fi

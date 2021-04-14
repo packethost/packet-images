@@ -1,0 +1,46 @@
+#!/bin/sh -e
+#
+#    whoami: report current logged in user
+#
+#    Copyright (C) 2008 Canonical Ltd.
+#    Copyright (C) 2011-2014 Dustin Kirkland
+#
+#    Authors: Dustin Kirkland <kirkland@byobu.org>
+#
+#    This program is free software: you can redistribute it and/or modify
+#    it under the terms of the GNU General Public License as published by
+#    the Free Software Foundation, version 3 of the License.
+#
+#    This program is distributed in the hope that it will be useful,
+#    but WITHOUT ANY WARRANTY; without even the implied warranty of
+#    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+#    GNU General Public License for more details.
+#
+#    You should have received a copy of the GNU General Public License
+#    along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
+___get_user() {
+	if eval $BYOBU_TEST whoami >/dev/null 2>&1; then
+		whoami
+	elif eval $BYOBU_TEST id >/dev/null 2>&1; then
+		id -un
+	fi
+}
+
+__whoami_detail() {
+	local user=$(___get_user)
+	[ -n "$user" ] || return
+	if eval $BYOBU_TEST getent >/dev/null 2>&1; then
+		getent -- passwd "$user"
+	else
+		grep "^$user:" /etc/passwd
+	fi
+}
+
+__whoami() {
+	local user=$(___get_user)
+	[ -n "$user" ] || return
+	color bold2; printf "%s@" "$user"; color -
+}
+
+# vi: syntax=sh ts=4 noexpandtab

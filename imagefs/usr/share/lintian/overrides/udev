@@ -1,0 +1,3 @@
+# False positive: SUBSYSTEM is tested at the beginning of the rules file.
+# See https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=945934
+udev: udev-rule-missing-subsystem lib/udev/rules.d/60-autosuspend-chromiumos.rules:*

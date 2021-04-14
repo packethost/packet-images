@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Copyright 2018 Richard Hughes <richard@hughsie.com> -->
+<component type="source">
+  <id>org.freedesktop.fwupd.remotes.lvfs</id>
+  <name>Linux Vendor Firmware Service (stable firmware)</name>
+  <name xml:lang="zh_TW">Linux 廠商韌體服務（穩定版韌體）</name>
+  <name xml:lang="zh_CN">Linux 供应商固件服务（稳定固件）</name>
+  <name xml:lang="uk">Служба надання мікропрограм для Linux від виробника (стабільна мікропрограма)</name>
+  <name xml:lang="tr">Linux Tedarikçi Ürün Yazılımı Hizmeti (kararlı ürün yazılımı)</name>
+  <name xml:lang="sv">Linux Vendor Firmware Service (stabil fastprogramvara)</name>
+  <name xml:lang="ru">Linux Vendor Firmware Service (стабильная прошивка)</name>
+  <name xml:lang="pt_BR">Linux Vendor Firmware Service (firmware estável)</name>
+  <name xml:lang="pl">Linux Vendor Firmware Service (stabilne oprogramowanie sprzętowe)</name>
+  <name xml:lang="lt">Linux tiekėjų programinės aparatinės įrangos paslauga (stabili programinė aparatinė įranga)</name>
+  <name xml:lang="ko">리눅스 제조사 펌웨어 서비스(안정 버전 펌웨어)</name>
+  <name xml:lang="it">Linux Vendor Firmware Service (firmware stabile)</name>
+  <name xml:lang="hu">Linux gyártói firmware szolgáltatás (stabil firmware)</name>
+  <name xml:lang="hr">Frimver Usluga Linux Proizvođača (LVFS) (stabilni frimver).</name>
+  <name xml:lang="fur">Servizi Firmware dal vendidôr di Linux (firmware stabil)</name>
+  <name xml:lang="fi">Linux-toimittajan laiteohjelmisto (vakaa firmware)</name>
+  <name xml:lang="en_GB">Linux Vendor Firmware Service (stable firmware)</name>
+  <name xml:lang="de">Linux Vendor Firmware Service (stabile Firmware)</name>
+  <name xml:lang="da">Linux Vendor Firmware Service (stabilt firmware)</name>
+  <name xml:lang="cs">Linux Vendor Firmware Service (stabilní firmware)</name>
+  <name xml:lang="ca">Servei de microprogramari del proveïdor Linux (microprogramari estable)</name>
+  <metadata_license>CC0-1.0</metadata_license>
+  <agreement version_id="1.0">
+    <agreement_section>
+      <description>
+        <!-- TRANSLATORS: do not translate the variables marked using $ -->
+        <p>
+          The LVFS is a free service that operates as an independent legal
+          entity and has no connection with $OS_RELEASE:NAME$.
+          Your distributor may not have verified any of the firmware updates for
+          compatibility with your system or connected devices.
+          All firmware is provided only by the original equipment manufacturer.
+        </p>
+        <p xml:lang="zh_TW">LVFS（Linux 廠商韌體服務，Linux Vendor Firmware Service）是由獨立法人運作的免費服務，而與 $OS_RELEASE:NAME$ 沒有關聯。您的系統散布商可能尚未驗證過任何韌體更新與您系統間或連接裝置上的相容性。所有本服務中的韌體僅由原始設備製造商提供。</p>
+        <p xml:lang="zh_CN">LVFS 是个免费服务，以独立法律实体运作，与 $OS_RELEASE:NAME$ 无关。你的发行商可能未对固件更新与你的系统或连接的设备兼容性做过任何验证。所有固件都由原始设备制造商提供。</p>
+        <p xml:lang="uk">LVFS є безкоштовною службою, яка працює як незалежна юридична одиниця і не має зв'язку з $OS_RELEASE:NAME$. Розробники вашої операційної системи, можливо, не перевіряли жодні з цих оновлень на сумісність із системою або з'єднаними із комп'ютером пристроями. Усі мікропрограми надаються лише самими виробниками обладнання.</p>
+        <p xml:lang="sv">LVFS är en fri tjänst som fungerar som en oberoende juridisk person och har ingen koppling till $OS_RELEASE:NAME$. Din distributör kanske inte har bekräftat att någon av de fasta programvaruuppdateringarna är kompatibla med ditt system eller anslutna enheter. All fast programvara tillhandahålls endast av den ursprungliga tillverkaren av utrustning.</p>
+        <p xml:lang="ru">LVFS — это бесплатный сервис, действующий как независимое юридическое лицо, которое не имеет связи с системой $OS_RELEASE:NAME$. Ваш распространитель системы может не проверять какие-либо обновления прошивки на совместимость с системой или подключенными устройствами. Каждая прошивка поставляется только производителем оригинального оборудования.</p>
+        <p xml:lang="pt_BR">O LVFS é um serviço livre que opera como uma entidade legal independente e tem nenhuma conexão com $OS_RELEASE:NAME$. Seu distribuidor pode não ter verificado alguma das atualizações de firmware por compatibilidade com seu sistema ou dispositivos conectados. Todo firmware é fornecido apenas pelo fabricante do equipamento original.</p>
+        <p xml:lang="pl">LVFS to wolny serwis działający jako niezależny podmiot prawny niemający związków z systemem $OS_RELEASE:NAME$. Dystrybutor używanego systemu mógł nie zweryfikować żadnych aktualizacji oprogramowania sprzętowego pod kątem zgodności z używanym komputerem lub podłączonymi urządzeniami. Każde oprogramowanie sprzętowe jest dostarczane wyłącznie przez oryginalnego producenta sprzętu.</p>
+        <p xml:lang="ko">LVFS는 $OS_RELEASE:NAME$와(과) 별개로 운영되는 독립된 법적 단체에서 운영하는 무료 서비스입니다. 배포판 개발사에서 펌웨어 업데이트와 시스템 및 연결한 장치의 호환성을 검증한다는 보장이 없습니다. 모든 펌웨어는 장치 제조사(OEM)에서 직접 제공합니다.</p>
+        <p xml:lang="it">LVFS è un servizio gratuito che opera come entità legale indipendente e non ha alcun legame con $OS_RELEASE:NAME$. Il distributore potrebbe non aver verificato la compatibilità degli aggiornamenti firmware col proprio sistema o con i propri dispositivi collegati. Il firmware viene fornito solamente dall'OEM.</p>
+        <p xml:lang="hu">Az LVFS egy ingyenes szolgáltatás, amely független jogi entitásként működik, és nincs kapcsolata a $OS_RELEASE:NAME$ operációs rendszerrel. A disztribúció szállítója nem biztos, hogy ellenőrízte kompatibilitási szempontból a firmware frissítést. Mindent firmware-t csak az eredeti termék gyártója biztosít.</p>
+        <p xml:lang="hr">LVFS (Frimver Usluga Linux Proizvođača) je besplatna usluga koja djeluje kao neovisna pravna osoba i nema veze sa $OS_RELEASE:NAME$. Vaš distributer možda nije provjerio nadopune frimvera za kompatibilnost s vašim sustavom ili priključenim uređajima. Svi frimveri su pružani od strane izvornih proizvođača opreme.</p>
+        <p xml:lang="fur">Il LVFS — Servizi firmware dal vendidôr di linux — al è un servizi gratuit che al opere come entitât legâl indipendente e no à conession cun $OS_RELEASE:NAME$. Il to distributôr al podarès no vê verificât la compatibilitât di nissun dai inzornaments firmware cul vuestri sisteme o cui dispositîfs tacâts. Ducj i firmware a son furnîts dome dal produtôr origjinâl dal imprest.</p>
+        <p xml:lang="fi">LVFS on ilmainen palvelu, joka toimii itsenäisenä oikeushenkilönä eikä sillä ole yhteyttä $OS_RELEASE:NAME$. Jakelijasi ei ehkä ole tarkistanut mitään laiteohjelmistopäivityksiä, jotka ovat yhteensopivia järjestelmän tai liitettyjen laitteiden kanssa. Kaikki laiteohjelmistot on tarkoitettu vain alkuperäisen laitteen valmistajalle.</p>
+        <p xml:lang="en_GB">The LVFS is a free service that operates as an independent legal entity and has no connection with $OS_RELEASE:NAME$. Your distributor may not have verified any of the firmware updates for compatibility with your system or connected devices. All firmware is provided only by the original equipment manufacturer.</p>
+        <p xml:lang="de">Der LVFS ist ein kostenloser Dienst, der als unabhängige juristische Person arbeitet und keine Verbindung zu $OS_RELEASE:NAME$ hat. Möglicherweise hat Ihr Lieferant eine der Firmware-Aktualisierungen nicht auf Kompatibilität mit Ihrem System oder angeschlossenen Geräten überprüft. Die gesamte Firmware wird nur vom Originalhersteller zur Verfügung gestellt.</p>
+        <p xml:lang="da">LVFS'en er en gratis tjeneste der opererer som en selvstændig juridisk enhed og har ingen forbindelse med $OS_RELEASE:NAME$. Din distributør har måske ikke bekræftet nogen af firmwareopdateringerne for kompatibilitet med dit system eller tilsluttede enheder. Al firmware leveres kun af den oprindelige udstyrsproducent.</p>
+        <p xml:lang="cs">LVFS je svobodná služba, které funguje jako nezávislý právní subjekt a nemá žádné vazby na systém $OS_RELEASE:NAME$. Váš distributor nemusí některé z aktualizací firmwaru schválit kvůli kompatibilitě s vaším systémem nebo připojenými zařízeními. Veškerý firmware je poskytován pouze přímo výrobci daných zařízení.</p>
+        <p xml:lang="ca">El LVFS és un servei gratuït que funciona com una entitat legal independent i no té cap vincle amb la $OS_RELEASE:NAME$. És possible que el vostre distribuïdor no hagi verificat cap de les actualitzacions del microprogramari per a la compatibilitat amb el vostre sistema o els dispositius connectats. Tot el microprogramari només és proporcionat pel fabricant original dels equips.</p>
+        <p>
+          Enabling this functionality is done at your own risk, which means you
+          have to contact your original equipment manufacturer regarding any
+          problems caused by these updates.
+          Only problems with the update process itself should be filed at
+          $OS_RELEASE:BUG_REPORT_URL$.
+        </p>
+        <p xml:lang="zh_TW">啟用此功能必須自負風險。這代表若您遭遇到這些更新導致的任何問題，您必須向原始設備供應商聯絡並反應。只有在您遇到更新過程本身的問題時，才是向 $OS_RELEASE:BUG_REPORT_URL$ 回報。</p>
+        <p xml:lang="zh_CN">启用此功能的风险自负，这意味着你必须就这些更新引起的任何问题与原始设备制造商联系。只有更新过程本身的问题可以提交到 $OS_RELEASE:BUG_REPORT_URL$。</p>
+        <p xml:lang="uk">Наслідки вмикання цієї можливості покладаються на вас. Це означає, що усі проблеми, пов'язані із цими оновленнями, ви маєте вирішувати із виробником обладнання. Повідомляти розробникам дистрибутива за адресою  $OS_RELEASE:BUG_REPORT_URL$ слід лише про помилки у процесі оновлення.</p>
+        <p xml:lang="sv">Att aktivera denna funktionalitet görs på egen risk, vilket betyder att du måste kontakta den ursprungliga tillverkaren av din utrustning om problem som orsakas av dessa uppdateringar. Endast problem med själva uppdateringsprocessen ska rapporteras på $OS_RELEASE:BUG_REPORT_URL$.</p>
+        <p xml:lang="ru">Активирование этого функционала осуществляется на ваш страх и риск. Это означает, что вам следует обратиться к производителю оборудования относительно любых проблем, вызванных этими обновлениями. Только проблемы с фактическим процессом обновления следует сообщать в $OS_RELEASE:BUG_REPORT_URL$.</p>
+        <p xml:lang="pt_BR">A habilitação dessa funcionalidade é feita por sua conta e risco, o que significa que você precisa entrar em contato com o fabricante do equipamento original sobre quaisquer problemas causados por essas atualizações. Somente problemas com o processo de atualização devem ser relatados em $OS_RELEASE:BUG_REPORT_URL$.</p>
+        <p xml:lang="pl">Włączenie tej funkcjonalności jest wykonywane na własne ryzyko, co oznacza, że należy skontaktować się z oryginalnym producentem sprzętu w sprawie ewentualnych problemów spowodowanych przez te aktualizacje. Tylko problemy z samym procesem aktualizacji powinny być zgłaszane pod adresem $OS_RELEASE:BUG_REPORT_URL$.</p>
+        <p xml:lang="ko">이 기능의 사용은 본인의 책임이며, 업데이트로 인해서 생긴 문제는 원 장치 제조사에 직접 보고해야 합니다. 업데이트 진행 과정 자체의 문제는 $OS_RELEASE:BUG_REPORT_URL$(으)로 보고해 주십시오.</p>
+        <p xml:lang="it">Abilitare questa funzionalità a proprio rischio: in caso di problemi con gli aggiornamenti sarà necessario contattare l'OEM. Solamente i problemi legati al processo di aggiornamento possono essere inviati a $OS_RELEASE:BUG_REPORT_URL$.</p>
+        <p xml:lang="hu">Csak a saját felelősségére engedélyezze ezt a funkciót, amely azt jelenti, hogy az eredeti termék gyártójával kell kapcsolatba lépnie, ha problémát okoz a frissítés. Csak a frissítési folyamattal kapcsolatos problémákat jelentse itt be: $OS_RELEASE:BUG_REPORT_URL$.</p>
+        <p xml:lang="hr">Omogućujete ovu funkcionalnost na vlastiti rizik, što znači da morate kontaktirati svog izvornog proizvođača opreme u vezi problema uzrokovanih tim nadopunama. Samo probleme sa samim postupkom nadopune treba prijaviti na $OS_RELEASE:BUG_REPORT_URL$.</p>
+        <p xml:lang="fur">Si abilite cheste funzionalitât a propri pericul, che al significhe che, par ogni probleme causât di chescj inzornaments, si à di contatâ il produtôr origjinâl dal imprest. Dome i problemis che si àn cul sôl procès di inzornament a àn di sei inviâts a $OS_RELEASE:BUG_REPORT_URL$.</p>
+        <p xml:lang="fi">Tämän toiminnon käyttöönotto tapahtuu omalla vastuullasi, joten sinun on otettava yhteyttä alkuperäiseen laitevalmistajaan näiden päivitysten aiheuttamista ongelmista. Vain päivitysprosessiin liittyvät ongelmat pitäisi jättää osoitteeseen $OS_RELEASE:BUG_REPORT_URL$.</p>
+        <p xml:lang="en_GB">Enabling this functionality is done at your own risk, which means you have to contact your original equipment manufacturer regarding any problems caused by these updates. Only problems with the update process itself should be filed at $OS_RELEASE:BUG_REPORT_URL$.</p>
+        <p xml:lang="de">Die Aktivierung dieser Funktionalität erfolgt auf eigene Gefahr, d.h. Sie müssen sich bei Problemen, die durch diese Aktualisierungen verursacht werden, an Ihren Erstausrüster wenden. Nur Probleme mit dem Aktualisierungsprozess selbst sollten unter $OS_RELEASE:BUG_REPORT_URL$ eingereicht werden.</p>
+        <p xml:lang="da">Aktivering af funktionen sker på egen risiko. Det betydet at du skal kontakte din oprindelige udstyrsproducent vedrørende eventuelle problemer forårsaget af opdateringerne. Det er kun problemer med selv opdateringsprocessen som skal indsende på $OS_RELEASE:BUG_REPORT_URL$.</p>
+        <p xml:lang="cs">Zapnutí této funkcionality je na vaše vlastní riziko, což znamená, že v případě problémů způsobených aktualizací musíte kontaktovat přímo výrobce zařízení. Pouze problémy s aktualizačním procesem jako takovým by měly být hlášeny na $OS_RELEASE:BUG_REPORT_URL$.</p>
+        <p xml:lang="ca">Si habiliteu aquesta funcionalitat, ho fareu sota el vostre propi risc, el qual significa que haureu de posar-vos en contacte amb el fabricant original de l'equip quant a qualsevol problema causat per aquestes actualitzacions. A $OS_RELEASE:BUG_REPORT_URL$, només s'han de presentar els problemes amb el procés d'actualització.</p>
+      </description>
+    </agreement_section>
+  </agreement>
+</component>

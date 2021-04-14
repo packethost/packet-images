@@ -1,0 +1,6 @@
+ab1e1fb23ab05ce479c4a71be4f6bd13  usr/bin/python3.8
+a3a94d16365b4872c6ded204a40052e8  usr/share/binfmts/python3.8
+dfd068f365d43b971f71a14728fa21bc  usr/share/doc/python3.8-minimal/README.Debian.gz
+d8c47e21fcd8f5a22f90828d568b0084  usr/share/doc/python3.8-minimal/copyright
+b057e335640f5c7806438ec9fa2f1320  usr/share/lintian/overrides/python3.8-minimal
+508083c4c9e77eceef30d913aa2af24a  usr/share/man/man1/python3.8.1.gz

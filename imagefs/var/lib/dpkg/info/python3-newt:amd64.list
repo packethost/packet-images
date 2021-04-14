@@ -1,0 +1,12 @@
+/.
+/usr
+/usr/lib
+/usr/lib/python3
+/usr/lib/python3/dist-packages
+/usr/lib/python3/dist-packages/_snack.cpython-38-x86_64-linux-gnu.so
+/usr/lib/python3/dist-packages/snack.py
+/usr/share
+/usr/share/doc
+/usr/share/doc/python3-newt
+/usr/share/doc/python3-newt/copyright
+/usr/share/doc/python3-newt/changelog.Debian.gz

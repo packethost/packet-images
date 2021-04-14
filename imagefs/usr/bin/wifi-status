@@ -1,0 +1,52 @@
+#!/bin/sh
+#
+#    wifi-status - monitor a wireless network connection
+#
+#    Copyright (C) 2003-2014 Dustin Kirkland <kirkland@ubuntu.com>
+#
+#    Authors:
+#        Dustin Kirkland <kirkland@ubuntu.com>
+#
+#    This program is free software: you can redistribute it and/or modify
+#    it under the terms of the GNU General Public License as published by
+#    the Free Software Foundation, version 3 of the License.
+#
+#    This program is distributed in the hope that it will be useful,
+#    but WITHOUT ANY WARRANTY; without even the implied warranty of
+#    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+#    GNU General Public License for more details.
+#
+#    You should have received a copy of the GNU General Public License
+#    along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
+trap "pkill -f -9 wifi-status >/dev/null 2>&1; exit 0" EXIT HUP INT QUIT TERM
+
+if [ -z "$1" ]; then
+	dev=$(iw dev|grep Interface|awk '{print $2}')
+else
+	dev="$1"
+fi
+
+router=$(ip route show|head -n 1|awk '{print $3}')
+
+if [ -z "$TMUX" ]; then
+	watch -n1 "iw $dev info; ip addr show $dev; ip route; echo; (journalctl -b --no-pager -q | grep -i $dev | tail -n 10 | sort -r); echo; ping -I $dev -c 1 8.8.8.8"
+else
+	# Note that the speedometer item will silently fail, if the speedometer command is not found;  I don't want byobu to depend on speedometer, but it can suggest it
+	tmux new-window -n wifi-status "watch -c iw $dev info \| ccze -A" \; \
+		split-window -t wifi-status -v "watch -c ip addr show $dev \| ccze -A" \; \
+		split-window -t wifi-status -v "watch -c ip route \| ccze -A" \; \
+		split-window -t wifi-status -h "ping -I $dev $router" \; \
+		split-window -t wifi-status -v "watch -c journalctl -b --no-pager -q \| grep -i $dev \| tail -n 10 \| sort -r \| ccze -A" \; \
+		split-window -t wifi-status -h "ping -I $dev 8.8.8.8" \; \
+		split-window -t wifi-status -v "speedometer -t $dev -r $dev" \; \
+		select-layout -t wifi-status tiled
+fi
+
+while true; do
+	if [ $(tmux list-panes -t wifi-status | wc -l) -lt 5 ]; then
+		tmux kill-window -t wifi-status
+		exit 0
+	fi
+	sleep 1
+done

@@ -1,0 +1,25 @@
+#! /bin/sh
+
+set -e
+
+. /usr/share/debconf/confmodule
+
+case "$1" in
+    remove)
+	if grep -q '^dm_mod\s' /proc/modules; then
+		cryptmap="$(dmsetup table --target crypt | sed -n 's/:.*//p' | tr '\n' ' ')"
+		if [ -n "$cryptmap" ]; then
+				db_fset cryptsetup/prerm_active_mappings seen false
+				db_subst cryptsetup/prerm_active_mappings cryptmap "$cryptmap"
+				db_input high cryptsetup/prerm_active_mappings || true
+				db_go || true
+				db_get cryptsetup/prerm_active_mappings
+				if [ "$RET" = "false" ]; then
+					exit 1
+				fi
+		fi
+	fi
+    ;;
+esac
+
+

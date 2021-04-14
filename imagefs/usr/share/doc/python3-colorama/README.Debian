@@ -1,0 +1,10 @@
+python-colorama for Debian
+--------------------------
+
+It is possible to find more documentation at
+
+http://pypi.python.org/pypi/colorama
+
+Demo script are installed under /usr/share/doc/python-colorama/examples/.
+
+ -- Khalid El Fathi <khalid@elfathi.fr>  Tue, 06 Mar 2012 09:27:44 +0100

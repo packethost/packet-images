@@ -1,0 +1,10 @@
+1b204e5896dc0ab7a94ff596e7f5dd73  lib/udev/dmsetup_env
+459aa27033b78f4dd7d87c706b55c90c  lib/udev/kpartx_id
+8792b261415d07cf9b82349e88572956  lib/udev/rules.d/56-dm-parts.rules
+4e3f9a835698473ec8a67c75c2c21266  lib/udev/rules.d/68-del-part-nodes.rules
+8d4e9ddd59a8341269f10f72410e0163  lib/udev/rules.d/95-kpartx.rules
+c6e417dd6f31bab1c023ccc6815ae5dd  sbin/kpartx
+c99f0b98ae8b58138eb7b37417c884fa  usr/share/doc/kpartx/NEWS.Debian.gz
+e2820ab13b77700def9cb6f9ebeb4b0f  usr/share/doc/kpartx/changelog.Debian.gz
+c9c7af4df90b0d3397bb50c4dbb2882c  usr/share/doc/kpartx/copyright
+96182c6e0ddaea18b3a8cb48591f80bc  usr/share/man/man8/kpartx.8.gz

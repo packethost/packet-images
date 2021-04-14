@@ -1,0 +1,56 @@
+#!/usr/bin/python3
+
+import fnmatch
+import logging
+import os
+import sys
+
+import apt
+import UbuntuDrivers.detect
+from gi.repository import GLib
+
+import apt_pkg
+
+STAMP_FILE = os.path.join(GLib.get_user_runtime_dir(), "ubuntu-drivers-oem.package-list")
+
+
+def any_oem_metapackages_installed(cache):
+    installed_oem_packages = (
+        pkg
+        for pkg in cache
+        if fnmatch.fnmatch(pkg.name, "oem-*-meta") and pkg.is_installed
+    )
+
+    # Empty if there are no installed OEM packages
+    return any((True for _ in installed_oem_packages))
+
+
+def write_oem_metapackage_list(cache, filename):
+    packages = UbuntuDrivers.detect.system_device_specific_metapackages(
+        apt_cache=cache
+    )
+
+    if not packages:
+        return
+
+    with open(STAMP_FILE, "w") as f:
+        f.write("\n".join(packages))
+
+
+if __name__ == "__main__":
+    if os.path.exists(STAMP_FILE):
+        sys.exit(0)
+
+    try:
+        cache = apt.Cache()
+    except apt_pkg.Error:  # broken things in sources.list, or corrupted list files
+        print(
+            "ERROR: Can't look into APT cache. Check your sources.list file(s), run `apt update` and try again",
+            file=sys.stderr,
+        )
+        sys.exit(0)
+
+    if any_oem_metapackages_installed(cache):
+        sys.exit(0)
+
+    write_oem_metapackage_list(cache, STAMP_FILE)

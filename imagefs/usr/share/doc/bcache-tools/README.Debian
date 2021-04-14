@@ -1,0 +1,42 @@
+bcache-tools for Debian
+=======================
+
+Notes:
+* Always back important data up first!
+* Don't put /boot onto a bcache device (grub doesn't understand the disk
+  format), but it does work fine for the root device if you use a separate
+  (uncached) /boot partition.
+* A separate /boot may not be necessary on UEFI systems (untested)
+* You can use lvm for the backing and the caching devices, but currently the
+  initrd will not automatically activate the vg. This is an issue if you plan
+  on caching your root device.
+
+A basic setup guide:
+--------------------
+
+Create a backing device:
+This formats the partition HDD1 and creates /dev/bcache0.
+
+$ make-bcache -B /dev/HDD1
+
+Create a caching device, copy the `Set UUID' for later.
+
+$ make-bcache -C /dev/SSD1
+
+Connect the two; this only needs to be done once:
+
+$ echo "Set UUID" > /sys/block/bcache0/bcache/attach
+
+You probably want write-back caching, otherwise only reads will be sped up.
+Note that this means a dead SSD could result in data loss.
+
+$ echo writeback > /sys/block/bcache0/bcache/cache_mode
+
+Find the UUID of the device:
+
+$ ls /dev/disk/by-uuid -l | grep bcache0
+
+Use this UUID in /etc/fstab since the /dev/bcacheX number may change when a
+second bcache device is created.
+
+ -- David Mohr <david@mcbf.net>  Wed, 26 Mar 2014 00:09:49 -0600

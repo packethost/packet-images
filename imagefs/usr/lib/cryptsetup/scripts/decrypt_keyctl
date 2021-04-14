@@ -1,0 +1,55 @@
+#!/bin/sh
+# decrypt_keyctl - to use in /etc/crypttab as keyscript
+#  Allows to cache passwords for cryptdevices for 60s
+#  The same password is used for for cryptdevices with the same identifier.
+#  The keyfile parameter, which is the third field from /etc/crypttab, is
+#  used as identifier in this keyscript.
+#
+# sample crypttab entries:
+# test1   /dev/sda1    test_pw         luks,keyscript=decrypt_keyctl
+# test2   /dev/sda2    test_pw         luks,keyscript=decrypt_keyctl
+# test3   /dev/sda3    test_other_pw   luks,keyscript=decrypt_keyctl
+#
+#  test1 and test2 have the same identifier thus test2 does not need a password
+#  typed in manually
+
+die()
+{
+    echo "$@" >&2
+    exit 1
+}
+
+if [ -z "${CRYPTTAB_KEY:-}" ] || [ "$CRYPTTAB_KEY" = "none" ]; then
+    # store the passphrase in the key name used by systemd-ask-password
+    ID_="cryptsetup"
+else
+    # the keyfile given from crypttab is used as identifier in the keyring
+    # including the prefix "cryptsetup:"
+    ID_="cryptsetup:$CRYPTTAB_KEY"
+fi
+TIMEOUT_='60'
+ASKPASS_='/lib/cryptsetup/askpass'
+PROMPT_="Caching passphrase for ${CRYPTTAB_NAME}: "
+
+
+if ! KID_="$(keyctl search @u user "$ID_" 2>/dev/null)" || \
+        [ -z "$KID_" ] || [ "$CRYPTTAB_TRIED" -gt 0 ]; then
+    # key not found or wrong, ask the user
+    KEY_="$($ASKPASS_ "$PROMPT_")" || die "Error executing $ASKPASS_"
+    if [ -n "$KID_" ]; then
+        # I have cached wrong password and now i may use either `keyctl update`
+        # to update $KID_ or just unlink old key, and add new. With `update` i
+        # may hit "Key has expired", though. So i'll go "unlink and add" way.
+        keyctl unlink "$KID_" @u
+        KID_=""
+    fi
+    KID_="$(printf "%s" "$KEY_" | keyctl padd user "$ID_" @u)"
+    [ -n "$KID_" ] || die "Error adding passphrase to kernel keyring"
+    if ! keyctl timeout "$KID_" "$TIMEOUT_"; then
+        keyctl unlink "$KID_" @u
+        die "Error setting timeout on key ($KID_), removing"
+    fi
+else
+    echo "Using cached passphrase for ${CRYPTTAB_NAME}." >&2
+fi
+keyctl pipe "$KID_"

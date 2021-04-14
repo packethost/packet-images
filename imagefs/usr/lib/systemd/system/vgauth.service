@@ -1,0 +1,15 @@
+[Unit]
+Description=Authentication service for virtual machines hosted on VMware
+Documentation=http://github.com/vmware/open-vm-tools
+ConditionVirtualization=vmware
+DefaultDependencies=no
+After=systemd-remount-fs.service systemd-tmpfiles-setup.service
+After=apparmor.service
+PartOf=open-vm-tools.service
+
+[Service]
+ExecStart=/usr/bin/VGAuthService
+TimeoutStopSec=5
+
+[Install]
+RequiredBy=open-vm-tools.service

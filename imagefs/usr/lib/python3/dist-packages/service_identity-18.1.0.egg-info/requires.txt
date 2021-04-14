@@ -1,0 +1,20 @@
+
+[:python_version < "3.3"]
+ipaddress
+
+[dev]
+coverage>=4.2.0
+idna
+pyOpenSSL
+pytest
+sphinx
+
+[docs]
+sphinx
+
+[idna]
+idna
+
+[tests]
+coverage>=4.2.0
+pytest

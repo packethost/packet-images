@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mime-type xmlns="http://www.freedesktop.org/standards/shared-mime-info" type="image/vnd.ms-modi">
+  <!--Created automatically by update-mime-database. DO NOT EDIT!-->
+  <comment>MDI image</comment>
+  <comment xml:lang="ca">imatge MDI</comment>
+  <comment xml:lang="da">MDI-billede</comment>
+  <comment xml:lang="de">MDI-Bild</comment>
+  <comment xml:lang="eu">MDI irudia</comment>
+  <comment xml:lang="fi">MDI kuva</comment>
+  <comment xml:lang="fr">image MDI</comment>
+  <comment xml:lang="hr">MDI slika</comment>
+  <comment xml:lang="it">Immagine MDI</comment>
+  <comment xml:lang="ko">MDI 그림</comment>
+  <comment xml:lang="pl">Obraz MDI</comment>
+  <comment xml:lang="pt-BR">Imagem MDI</comment>
+  <comment xml:lang="uk">зображення MDI</comment>
+  <acronym>MDI</acronym>
+  <expanded-acronym>Microsoft Document Imaging</expanded-acronym>
+  <glob pattern="*.mdi"/>
+</mime-type>

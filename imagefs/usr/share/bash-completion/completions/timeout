@@ -1,0 +1,39 @@
+# timeout(1) completion                                    -*- shell-script -*-
+
+_timeout()
+{
+    local cur prev words cword split i found=false
+    _init_completion -s || return
+
+    for (( i=1; i <= COMP_CWORD; i++ )); do
+        if [[ ${COMP_WORDS[i]} != -* && ${COMP_WORDS[i-1]} != = ]]; then
+            if $found; then
+                _command_offset $i
+                return
+            fi
+            found=true
+        fi
+        [[ ${COMP_WORDS[i]} == -@(-kill-after|-signal|!(-*)[ks]) ]] && ((i++))
+    done
+
+    case $prev in
+        --help|--version|--kill-after|-!(-*)k)
+            return
+            ;;
+        --signal|-!(-*)s)
+            _signals
+            return
+            ;;
+    esac
+
+    $split && return
+
+    if [[ $cur == -* ]]; then
+        local opts=$(_parse_help "$1")
+        COMPREPLY=( $(compgen -W '${opts:-$(_parse_usage "$1")}' -- "$cur") )
+        [[ $COMPREPLY == *= ]] && compopt -o nospace
+    fi
+} &&
+complete -F _timeout timeout
+
+# ex: filetype=sh

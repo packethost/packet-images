@@ -1,0 +1,256 @@
+#
+# This file is for inclusion with
+#    . /lib/cryptsetup/cryptdisks-functions
+# and should not be executed directly.
+
+PATH="/usr/sbin:/usr/bin:/sbin:/bin"
+CRYPTDISKS_ENABLE="Yes"
+
+#set -x
+
+# Sanity check #1
+[ -x /sbin/cryptsetup ] || exit 0
+
+. /lib/lsb/init-functions
+. /lib/cryptsetup/functions
+
+if [ -r /etc/default/cryptdisks ]; then
+    . /etc/default/cryptdisks
+fi
+
+MOUNT="$CRYPTDISKS_MOUNT"
+
+
+# do_start()
+#   Unlock all devices in the crypttab(5)
+do_start() {
+    [ -s "$TABFILE" ] || return 0
+
+    # Create locking directory before invoking cryptsetup(8) to avoid warnings
+    mkdir -pm0700 /run/cryptsetup
+    modprobe -qb dm-mod || true
+    modprobe -qb dm-crypt || true
+    dmsetup mknodes >/dev/null 2>&1 || true
+
+    if [ "$INITSTATE" != "init" ]; then
+        log_action_begin_msg "Starting $INITSTATE crypto disks"
+    fi
+    mount_fs
+
+    crypttab_foreach_entry _do_start_callback
+
+    umount_fs
+    log_action_end_msg 0
+}
+_do_start_callback() {
+    setup_mapping || log_action_end_msg $?
+}
+
+# mount_fs()
+#   Premounts file systems
+mount_fs() {
+    local point
+    MOUNTED=""
+
+    for point in $MOUNT; do
+        if mount "$point" >/dev/null; then
+            MOUNTED="$MOUNTED $point"
+        fi
+    done
+}
+
+# Postunmounts file systems
+umount_fs() {
+    local point
+
+    for point in $MOUNTED; do
+        umount "$point" >/dev/null
+    done
+}
+
+# setup_mapping()
+#   Set up a crypttab(5) mapping defined by $CRYPTTAB_NAME,
+#   $CRYPTTAB_SOURCE, $CRYPTTAB_KEY, $CRYPTTAB_OPTIONS.
+setup_mapping() {
+    if dm_blkdevname "$CRYPTTAB_NAME" >/dev/null; then
+        device_msg "running"
+        return 0
+    fi
+
+    local loud="${DEFAULT_LOUD:-}"
+    crypttab_parse_options --export --missing-path=fail || return 1
+    if [ -n "${CRYPTTAB_OPTION_quiet+x}" ]; then
+        loud="no"
+    elif [ -n "${CRYPTTAB_OPTION_loud+x}" ]; then
+        loud="yes"
+    fi
+
+    if [ -n "${CRYPTTAB_OPTION_noearly+x}" ] && [ "$INITSTATE" = "early" ]; then
+        [ -z "${FORCE_START-}" ] || device_msg "ignored"
+        return 0
+    fi
+    if [ -n "${CRYPTTAB_OPTION_noauto+x}" ] && [ "$INITSTATE" != "manual" ]; then
+        [ -z "${FORCE_START-}" ] || device_msg "ignored"
+        return 0
+    fi
+
+    if [ -z "${CRYPTTAB_OPTION_keyscript+x}" ] && [ "$CRYPTTAB_KEY" != "none" ]; then
+        if ! crypttab_key_check; then
+            device_msg "invalid key"
+            return 1
+        fi
+        CRYPTTAB_OPTION_tries=1
+    fi
+
+    if ! crypttab_resolve_source; then
+        if [ "$loud" = "yes" ]; then
+            device_msg "skipped, device $CRYPTTAB_SOURCE does not exist"
+        fi
+        return 1
+    fi
+    device_msg "starting"
+
+    local out tmpdev
+    get_crypt_type # set CRYPTTAB_TYPE to the type of crypt device
+    if [ "$CRYPTTAB_TYPE" != "luks" ]; then
+        if ! out="$(/lib/cryptsetup/checks/un_blkid "$CRYPTTAB_SOURCE" 2>/dev/null)" &&
+                ! /lib/cryptsetup/checks/blkid "$CRYPTTAB_SOURCE" swap >/dev/null; then
+            # fail if the device has a filesystem; unless it's swap,
+            # otherwise people can't easily convert an existing
+            # plainttext swap partition to an encrypted one
+            log_warning_msg "$CRYPTTAB_NAME: the precheck for '$CRYPTTAB_SOURCE' failed: $out"
+            return 1
+        fi
+    fi
+
+    local count=0 maxtries="${CRYPTTAB_OPTION_tries:-3}" fstype rv
+    local target="$CRYPTTAB_NAME"
+    CRYPTTAB_NAME="${CRYPTTAB_NAME}_unformatted" # XXX potential conflict
+    while [ $maxtries -le 0 ] || [ $count -lt $maxtries ]; do
+        if [ -z "${CRYPTTAB_OPTION_keyscript+x}" ] && [ "$CRYPTTAB_KEY" != "none" ]; then
+            # unlock via keyfile
+            unlock_mapping "$CRYPTTAB_KEY"
+        else
+            # unlock interactively or via keyscript
+            CRYPTTAB_NAME="$target" run_keyscript "$CRYPTTAB_KEY" "$count" | unlock_mapping
+        fi
+        rv=$?
+        count=$(( $count + 1 ))
+
+        if [ $rv -ne 0 ] || ! tmpdev="$(dm_blkdevname "$CRYPTTAB_NAME")"; then
+            continue
+        fi
+        if [ -n "${CRYPTTAB_OPTION_check+x}" ] && \
+                ! "$CRYPTTAB_OPTION_check" "$tmpdev" $CRYPTTAB_OPTION_checkargs ; then
+            log_warning_msg "$target: the check for '$CRYPTTAB_NAME' failed"
+            cryptsetup remove -- "$CRYPTTAB_NAME"
+            continue
+        fi
+        if [ "${CRYPTTAB_OPTION_swap+x}" ]; then
+            if out="$(/lib/cryptsetup/checks/un_blkid "$tmpdev" 2>/dev/null)" ||
+                    /lib/cryptsetup/checks/blkid "$tmpdev" swap >/dev/null 2>&1; then
+                mkswap "$tmpdev" >/dev/null 2>&1
+            else
+                log_warning_msg "$target: the check for '$CRYPTTAB_NAME' failed. $CRYPTTAB_NAME contains data: $out"
+                cryptsetup remove -- "$CRYPTTAB_NAME"
+                return 1
+            fi
+        elif [ "${CRYPTTAB_OPTION_tmp+x}" ]; then
+            local tmpdir="$(mktemp --tmpdir="/run/cryptsetup" --directory)" rv=0
+            if ! mkfs -t "$CRYPTTAB_OPTION_tmp" -q "$tmpdev" >/dev/null 2>&1 ||
+                    ! mount -t "$CRYPTTAB_OPTION_tmp" "$tmpdev" "$tmpdir" ||
+                    ! chmod 1777 "$tmpdir"; then
+                rv=1
+            fi
+            umount "$tmpdir" || true
+            rmdir "$tmpdir" || true
+            [ $rv -eq 0 ] || return $rv
+        fi
+        if command -v udevadm >/dev/null 2>&1; then
+            udevadm settle
+        fi
+        dmsetup rename -- "$CRYPTTAB_NAME" "$target"
+        device_msg "$target" "started"
+        return 0
+    done
+    device_msg "$target" "failed"
+    return 1
+}
+
+# Removes all mappings in crypttab
+do_stop() {
+    dmsetup mknodes
+    log_action_begin_msg "Stopping $INITSTATE crypto disks"
+
+    crypttab_foreach_entry _do_stop_callback
+    log_action_end_msg 0
+}
+_do_stop_callback() {
+    local i rv=0
+    for i in 1 2 4 8 16 32; do
+        remove_mapping "$CRYPTTAB_NAME" 3<&- && break || rv=$?
+        if [ $rv -eq 1 ] || [ $rv -eq 2 -a $i -gt 16 ]; then
+            log_action_end_msg $rv
+            break
+        fi
+        log_action_cont_msg "$CRYPTTAB_NAME busy..."
+        sleep $i
+    done
+}
+
+# device_msg([$name], $message)
+#   Convenience function to handle $VERBOSE
+device_msg() {
+    local name message
+    if [ $# -eq 1 ]; then
+        name="$CRYPTTAB_NAME"
+        message="$1"
+    else
+        name="$1"
+        message="$2"
+    fi
+
+    if [ "$VERBOSE" != "no" ]; then
+        log_action_cont_msg "$name ($message)"
+    fi
+}
+
+# remove_mapping($target)
+#   Remove mapping $target
+remove_mapping() {
+    local CRYPTTAB_NAME="$1"
+
+    if ! dm_blkdevname "$CRYPTTAB_NAME" >/dev/null; then
+        device_msg "stopped"
+        return 0
+    fi
+
+    if [ "$(dmsetup info --noheadings -c -o subsystem -- "$CRYPTTAB_NAME")" != "CRYPT" ]; then
+        device_msg "error"
+        return 1
+    fi
+
+    local opencount="$(dmsetup info -c --noheadings -o open -- "$CRYPTTAB_NAME" 2>/dev/null || true)"
+    if [ -z "$opencount" ]; then
+        device_msg "error"
+        return 1
+    elif [ "$opencount" != "0" ]; then
+        device_msg "busy"
+        if [ "$INITSTATE" = "early" ] || [ "$INITSTATE" = "manual" ]; then
+            return 1
+        elif [ "$INITSTATE" = "remaining" ]; then
+            return 2
+        fi
+        return 0
+    fi
+
+    if cryptsetup remove -- "$CRYPTTAB_NAME"; then
+        device_msg "stopping"
+        return 0
+    else
+        device_msg "error"
+        return 1
+    fi
+}
+
+# vim: set filetype=sh :

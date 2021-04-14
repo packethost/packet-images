@@ -1,0 +1,13 @@
+/.
+/usr
+/usr/lib
+/usr/lib/x86_64-linux-gnu
+/usr/lib/x86_64-linux-gnu/libjson-c.so.4.0.0
+/usr/share
+/usr/share/doc
+/usr/share/doc/libjson-c4
+/usr/share/doc/libjson-c4/README
+/usr/share/doc/libjson-c4/README.html
+/usr/share/doc/libjson-c4/changelog.Debian.gz
+/usr/share/doc/libjson-c4/copyright
+/usr/lib/x86_64-linux-gnu/libjson-c.so.4

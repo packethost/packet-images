@@ -1,0 +1,4 @@
+at: non-standard-file-perm etc/at.deny 0640 != 0644
+at: setuid-gid-binary usr/bin/at 6755 daemon/daemon
+at: non-standard-dir-perm var/spool/cron/atjobs/ 1770 != 0755
+at: non-standard-dir-perm var/spool/cron/atspool/ 1770 != 0755

@@ -1,0 +1,168 @@
+#!/usr/bin/python
+#
+# Copyright (C) 2007  Enrico Zini <enrico@debian.org>
+#
+# This program is free software: you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation, either version 3 of the License, or
+# (at your option) any later version.
+#
+# This program is distributed in the hope that it will be useful, but
+# WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+# General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
+# Given a file, search Debian packages that can somehow handle it
+
+from __future__ import print_function
+
+import sys
+
+# Requires python-extractor, python-magic and python-debtags
+import extractor
+import magic
+from debian import debtags
+import re
+from optparse import OptionParser
+import apt
+
+
+VERSION="0.1"
+
+mime_map = (
+        ( r'text/html\b', ("works-with::text","works-with-format::html") ),
+        ( r'text/plain\b', ("works-with::text","works-with-format::plaintext") ),
+        ( r'text/troff\b', ("works-with::text", "works-with-format::man") ),
+        ( r'image/', ("works-with::image",) ),
+        ( r'image/jpeg\b', ("works-with::image:raster","works-with-format::jpg") ),
+        ( r'image/png\b', ("works-with::image:raster","works-with-format::png") ),
+        ( r'application/pdf\b', ("works-with::text","works-with-format::pdf")),
+        ( r'application/postscript\b', ("works-with::text","works-with-format::postscript")),
+        ( r'application/x-iso9660\b', ('works-with-format::iso9660',)),
+        ( r'application/zip\b', ('works-with::archive', 'works-with-format::zip')),
+        ( r'application/x-tar\b', ('works-with::archive', 'works-with-format::tar')),
+        ( r'audio/', ("works-with::audio",) ),
+        ( r'audio/mpeg\b', ("works-with-format::mp3",) ),
+        ( r'audio/x-wav\b', ("works-with-format::wav",) ),
+        ( r'message/rfc822\b', ("works-with::mail",) ),
+        ( r'video/', ("works-with::video",)),
+        ( r'application/x-debian-package\b', ("works-with::software:package",)),
+        ( r'application/vnd.oasis.opendocument.text\b', ("works-with::text",)),
+        ( r'application/vnd.oasis.opendocument.graphics\b', ("works-with::image:vector",)),
+        ( r'application/vnd.oasis.opendocument.spreadsheet\b', ("works-with::spreadsheet",)),
+        ( r'application/vnd.sun.xml.base\b', ("works-with::db",)),
+        ( r'application/rtf\b', ("works-with::text",)),
+        ( r'application/x-dbm\b', ("works-with::db",)),
+
+    # How do we tell these two apart?
+    #   ( 'application/ogg', ('works-with-format::oggvorbis',)),
+    #   ( 'application/ogg', ('works-with-format::oggtheora',)),
+
+    # Missing tags
+    #   ( 'application/vnd.oasis.opendocument.presentation', ),
+
+    # Still unhandled/unhandlable:
+    # works-with::3dmodel - 3D Model
+    # works-with::dictionary - Dictionaries
+    # works-with::dtp - Desktop Publishing (DTP)
+    # works-with::fax - Faxes
+    # works-with::file - Files
+    # works-with::font - Fonts
+    # works-with::logfile - System Logs
+    # works-with::music-notation - Music Notation
+    # works-with::people - People
+    # works-with::pim - Personal Information
+    # works-with::software:source - Source code
+    # works-with::spreadsheet - Spreadsheet
+    # works-with::text - Text
+    # works-with::unicode - Unicode
+    # works-with-format::docbook - Docbook
+    # works-with-format::info - Documentation in Info format
+    # works-with-format::ldif - LDIF
+    # works-with-format::sgml - SGML, Standard Generalized Markup Language
+    # works-with-format::svg - SVG, Scalable Vector Graphics
+    # works-with-format::tex - TeX, LaTeX and DVI
+    # works-with-format::vrml - VRML 3D Model
+    # works-with-format::xml - XML
+    # works-with-format::xml:rss - RSS Rich Site Summary
+    # works-with-format::xml:xslt - XSL Transformations (XSLT)
+)
+
+extractor = extractor.Extractor()
+magic = magic.open(magic.MAGIC_MIME)
+magic.load()
+
+def mimetype(fname):
+    keys = extractor.extract(fname)
+    xkeys = {}
+    for k, v in keys:
+        if k in xkeys:
+            xkeys[k].append(v)
+        else:
+            xkeys[k] = [v]
+    namemagic =  magic.file(fname)
+    contentmagic = magic.buffer(open(fname, "r").read(4096))
+    return "mimetype" in xkeys and xkeys['mimetype'][0] or contentmagic or namemagic
+
+
+class Parser(OptionParser):
+    def __init__(self, *args, **kwargs):
+        OptionParser.__init__(self, *args, **kwargs)
+
+    def error(self, msg):
+        sys.stderr.write("%s: error: %s\n\n" % (self._get_prog_name(), msg))
+        self.print_help(sys.stderr)
+        sys.exit(2)
+
+if __name__ == '__main__':
+    parser = Parser(usage="usage: %prog [options] filename",
+            version="%prog "+ VERSION,
+            description="search Debian packages that can handle a given file")
+    parser.add_option("--tagdb", default="/var/lib/debtags/package-tags", help="Tag database to use (default: %default)")
+    parser.add_option("--action", default=None, help="Show the packages that allow the given action on the file (default: %default)")
+
+    (options, args) = parser.parse_args()
+
+    if len(args) == 0:
+        parser.error("Please provide the name of a file to scan")
+
+    # Read full database 
+    fullcoll = debtags.DB()
+    tag_filter = re.compile(r"^special::.+$|^.+::TODO$")
+    fullcoll.read(open(options.tagdb, "r"), lambda x: not tag_filter.match(x))
+
+    type = mimetype(args[0])
+    #print("Mime type:", type, file=sys.stderr)
+    found = set()
+    for match, tags in mime_map:
+        match = re.compile(match)
+        if match.match(type):
+            for t in tags:
+                found.add(t)
+    if len(found) == 0:
+        print("Unhandled mime type:", type, file=sys.stderr)
+    else:
+        if options.action != None:
+            apt_cache = apt.Cache()
+            query = found.copy()
+            query.add("role::program")
+            query.add("use::"+options.action)
+            print("Debtags query:", " && ".join(query))
+            subcoll = fullcoll.filter_packages_tags(lambda pt: query.issubset(pt[1]))
+            for i in subcoll.iter_packages():
+                aptpkg = apt_cache[i]
+                desc = aptpkg.raw_description.split("\n")[0]
+                print(i, "-", desc)
+        else:
+            print("Debtags query:", " && ".join(found))
+
+            query = found.copy()
+            query.add("role::program")
+            subcoll = fullcoll.filter_packages_tags(lambda pt: query.issubset(pt[1]))
+            uses = map(lambda x:x[5:], filter(lambda x:x.startswith("use::"), subcoll.iter_tags()))
+            print("Available actions:", ", ".join(uses))
+
+# vim:set ts=4 sw=4:

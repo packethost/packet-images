@@ -1,0 +1,86 @@
+Format: https://www.debian.org/doc/packaging-manuals/copyright-format/1.0/
+Upstream-Contact: kmo@daterainc.com
+                  linux-bcache@vger.kernel.org
+Source: http://evilpiepirate.org/git/bcache-tools.git
+
+Files: *
+Copyright: 2013 Kent Overstreet <kmo@daterainc.com>
+License: GPL-2
+
+Files: bcache-super-show.c
+Copyright: 2013 Gabriel de Perthuis <g2p.code@gmail.com>
+License: GPL-2
+
+Files: bcache.c
+Copyright: 1996-2001, PostgreSQL Global Development Group
+License: PostgreSQL
+
+Files: debian/*
+Copyright: 2014 Tom Strickx <tstrickx@rootcu.be>,
+           2014 David Mohr <david@mcbf.net>
+License: GPL-2+
+
+License: GPL-2
+ This program is free software; you can redistribute it
+ and/or modify it under the terms of the GNU General Public
+ License as published by the Free Software Foundation;
+ version 2 of the License.
+ .
+ This program is distributed in the hope that it will be
+ useful, but WITHOUT ANY WARRANTY; without even the implied
+ warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR
+ PURPOSE.  See the GNU General Public License for more
+ details.
+ .
+ You should have received a copy of the GNU General Public
+ License along with this package; if not, write to the Free
+ Software Foundation, Inc., 51 Franklin St, Fifth Floor,
+ Boston, MA  02110-1301 USA
+ .
+ On Debian systems, the full text of the GNU General Public
+ License version 2 can be found in the file
+ `/usr/share/common-licenses/GPL-2'.
+
+License: GPL-2+
+ This program is free software; you can redistribute it
+ and/or modify it under the terms of the GNU General Public
+ License as published by the Free Software Foundation; either
+ version 2 of the License, or (at your option) any later
+ version.
+ .
+ This program is distributed in the hope that it will be
+ useful, but WITHOUT ANY WARRANTY; without even the implied
+ warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR
+ PURPOSE.  See the GNU General Public License for more
+ details.
+ .
+ You should have received a copy of the GNU General Public
+ License along with this package; if not, write to the Free
+ Software Foundation, Inc., 51 Franklin St, Fifth Floor,
+ Boston, MA  02110-1301 USA
+ .
+ On Debian systems, the full text of the GNU General Public
+ License version 2 can be found in the file
+ `/usr/share/common-licenses/GPL-2'.
+
+License: PostgreSQL
+ Permission to use, copy, modify, and distribute this
+ software and its documentation for any purpose, without fee,
+ and without a written agreement is hereby granted, provided
+ that the above copyright notice and this paragraph and the
+ following two paragraphs appear in all copies.
+ .
+ IN NO EVENT SHALL THE UNIVERSITY OF CALIFORNIA BE LIABLE TO
+ ANY PARTY FOR DIRECT, INDIRECT, SPECIAL, INCIDENTAL, OR
+ CONSEQUENTIAL DAMAGES, INCLUDING LOST PROFITS, ARISING OUT
+ OF THE USE OF THIS SOFTWARE AND ITS DOCUMENTATION, EVEN IF
+ THE UNIVERSITY OF CALIFORNIA HAS BEEN ADVISED OF THE
+ POSSIBILITY OF SUCH DAMAGE.
+ .
+ THE UNIVERSITY OF CALIFORNIA SPECIFICALLY DISCLAIMS ANY
+ WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
+ WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR
+ PURPOSE. THE SOFTWARE PROVIDED HEREUNDER IS ON AN "AS IS"
+ BASIS, AND THE UNIVERSITY OF CALIFORNIA HAS NO OBLIGATIONS
+ TO PROVIDE MAINTENANCE, SUPPORT, UPDATES, ENHANCEMENTS, OR
+ MODIFICATIONS.

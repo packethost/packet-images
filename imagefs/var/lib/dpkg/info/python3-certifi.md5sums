@@ -1,0 +1,11 @@
+af16c894f5e166e402de485ead8d2821  usr/lib/python3/dist-packages/certifi-2019.11.28.egg-info/PKG-INFO
+68b329da9893e34099c7d8ad5cb9c940  usr/lib/python3/dist-packages/certifi-2019.11.28.egg-info/dependency_links.txt
+68b329da9893e34099c7d8ad5cb9c940  usr/lib/python3/dist-packages/certifi-2019.11.28.egg-info/not-zip-safe
+5ebd7f7c387ebb31c14e3c701023ac97  usr/lib/python3/dist-packages/certifi-2019.11.28.egg-info/top_level.txt
+4fc73d3388f42a5db9acb7148d09b2a7  usr/lib/python3/dist-packages/certifi/__init__.py
+0602925953f793522a8f653fb6cb556d  usr/lib/python3/dist-packages/certifi/__main__.py
+77eef70800962694031e78c7352738d7  usr/lib/python3/dist-packages/certifi/cacert.pem
+b389a5f415f039110ed6eed2267b2069  usr/lib/python3/dist-packages/certifi/core.py
+2fc499d61fd91bc4858ee6353cca95a4  usr/share/doc/python3-certifi/changelog.Debian.gz
+b00540dbd9bcede3a56f23bd5253e56a  usr/share/doc/python3-certifi/copyright
+996e0ec459ffbef9e8388f88145f7ff7  usr/share/lintian/overrides/python3-certifi

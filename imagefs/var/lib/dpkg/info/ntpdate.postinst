@@ -1,0 +1,5 @@
+#!/bin/sh
+set -e
+# Automatically added by dh_installdeb/12.10ubuntu1
+dpkg-maintscript-helper rm_conffile /etc/network/if-up.d/ntpdate 1:4.2.8p12\+dfsg-2\~ -- "$@"
+# End automatically added section

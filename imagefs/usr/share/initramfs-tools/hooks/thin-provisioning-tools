@@ -1,0 +1,25 @@
+#!/bin/sh
+
+PREREQ=""
+
+prereqs()
+{
+	echo "$PREREQ"
+}
+
+case $1 in
+prereqs)
+	prereqs
+	exit 0
+	;;
+esac
+
+. /usr/share/initramfs-tools/hook-functions
+
+copy_exec /usr/sbin/pdata_tools
+ln -s pdata_tools ${DESTDIR}/usr/sbin/cache_check
+ln -s pdata_tools ${DESTDIR}/usr/sbin/thin_check
+
+manual_add_modules dm-cache
+manual_add_modules dm-cache-smq
+manual_add_modules dm-thin-pool

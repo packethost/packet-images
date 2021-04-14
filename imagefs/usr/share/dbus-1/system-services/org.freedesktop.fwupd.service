@@ -1,0 +1,7 @@
+[D-BUS Service]
+Name=org.freedesktop.fwupd
+Documentation=https://fwupd.org/
+Exec=/usr/libexec/fwupd/fwupd
+User=root
+SystemdService=fwupd.service
+AssumedAppArmorLabel=unconfined

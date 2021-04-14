@@ -1,0 +1,13 @@
+e5638bc8f12cba9a4d55082856e9eb1d  usr/lib/python3/dist-packages/service_identity-18.1.0.egg-info/PKG-INFO
+68b329da9893e34099c7d8ad5cb9c940  usr/lib/python3/dist-packages/service_identity-18.1.0.egg-info/dependency_links.txt
+68b329da9893e34099c7d8ad5cb9c940  usr/lib/python3/dist-packages/service_identity-18.1.0.egg-info/not-zip-safe
+138a3792f999c05ebf704e9fbead2bcb  usr/lib/python3/dist-packages/service_identity-18.1.0.egg-info/requires.txt
+a067f0608ae7072c787692097270587e  usr/lib/python3/dist-packages/service_identity-18.1.0.egg-info/top_level.txt
+e2cb779a0578e4471682dcdfcfe6b328  usr/lib/python3/dist-packages/service_identity/__init__.py
+3d851da0bae1908063e1c3f407330af5  usr/lib/python3/dist-packages/service_identity/_common.py
+f96336d238d041ee03c30aa0e57c2dbe  usr/lib/python3/dist-packages/service_identity/_compat.py
+bc17a1520c5faa01644099f1f715b62a  usr/lib/python3/dist-packages/service_identity/cryptography.py
+1dfb697675829045c7a49512fd297c41  usr/lib/python3/dist-packages/service_identity/exceptions.py
+5e7d5a89fc2cfb9df9a40a318f1343ad  usr/lib/python3/dist-packages/service_identity/pyopenssl.py
+d18a89a6b057939c3cd4b795d82f2e9c  usr/share/doc/python3-service-identity/changelog.Debian.gz
+327b1ca2d3628c552a0a081a84f54590  usr/share/doc/python3-service-identity/copyright

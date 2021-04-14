@@ -1,0 +1,19 @@
+#!/bin/sh
+
+# we do not include ". gettext.sh" here because:
+# a) it breaks if its not available
+# b) the string we have here does not need it (because it has no vars)
+eval_gettext() {
+    if [ -x /usr/bin/gettext ]; then
+        echo $(gettext "$1")
+    else
+        echo "$1"
+    fi
+}
+export TEXTDOMAIN=update-notifier
+export TEXTDOMAINDIR=/usr/share/locale
+
+# Print the message
+echo ""
+eval_gettext "The list of available updates is more than a week old."
+eval_gettext "To check for new updates run: sudo apt update"

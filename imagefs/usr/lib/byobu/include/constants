@@ -1,0 +1,73 @@
+#!/bin/sh
+#
+#    constants: some constant values needed by all library status scripts
+#
+#    Copyright (C) 2011-2014 Dustin Kirkland
+#
+#    Authors: Dustin Kirkland <kirkland@byobu.org>
+#
+#    This program is free software: you can redistribute it and/or modify
+#    it under the terms of the GNU General Public License as published by
+#    the Free Software Foundation, version 3 of the License.
+#
+#    This program is distributed in the hope that it will be useful,
+#    but WITHOUT ANY WARRANTY; without even the implied warranty of
+#    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+#    GNU General Public License for more details.
+#
+#    You should have received a copy of the GNU General Public License
+#    along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
+PKG="byobu"
+
+. "${BYOBU_PREFIX}/lib/${PKG}/include/icons"
+. "${BYOBU_PREFIX}/lib/${PKG}/include/colors"
+
+PCT="%"
+
+# Support two different backends (screen/tmux)
+if [ -z "$BYOBU_BACKEND" ]; then
+	[ -r "/etc/byobu/backend" ] && . "/etc/byobu/backend"
+	[ -r "$BYOBU_CONFIG_DIR/backend" ] && . "$BYOBU_CONFIG_DIR/backend"
+fi
+case "$BYOBU_BACKEND" in
+	tmux)
+		export BYOBU_BACKEND
+		BYOBU_ARG_VERSION="-V"
+		ESC=
+	;;
+	screen)
+		export BYOBU_BACKEND
+		BYOBU_ARG_VERSION="-v"
+		ESC="\005"
+	;;
+esac
+
+# MacOS Support
+eval $BYOBU_TEST gsed >/dev/null 2>&1 && export BYOBU_SED="gsed" || export BYOBU_SED="sed"
+eval $BYOBU_TEST greadlink >/dev/null 2>&1 && export BYOBU_READLINK="greadlink" || export BYOBU_READLINK="readlink"
+eval $BYOBU_TEST sensible-pager >/dev/null 2>&1 && export BYOBU_PAGER="sensible-pager" || export BYOBU_PAGER="less"
+eval $BYOBU_TEST sensible-editor >/dev/null 2>&1 && export BYOBU_EDITOR="sensible-editor" || export BYOBU_EDITOR="$EDITOR"
+eval $BYOBU_TEST "$BYOBU_EDITOR" >/dev/null 2>&1 || export BYOBU_EDITOR="vim"
+
+
+# Check sed's follow-symlinks feature
+$BYOBU_SED --follow-symlinks "s///" /dev/null 2>/dev/null && BYOBU_SED_INLINE="$BYOBU_SED -i --follow-symlinks" || BYOBU_SED_INLINE="$BYOBU_SED -i"
+
+# Determine if we have ulimit support
+eval $BYOBU_TEST ulimit >/dev/null 2>&1 && export BYOBU_ULIMIT="ulimit" || export BYOBU_ULIMIT="false"
+
+# Find a suitable python interpreter, if undefined
+if [ -z "$BYOBU_PYTHON" ]; then
+	if python3 -c "import snack" >/dev/null 2>&1; then
+		export BYOBU_PYTHON="python3"
+	elif python2 -c "import snack" >/dev/null 2>&1; then
+		export BYOBU_PYTHON="python2"
+	elif python -c "import snack" >/dev/null 2>&1; then
+		export BYOBU_PYTHON="python"
+	fi
+fi
+
+export BYOBU_WINDOW_NAME="-"
+export BYOBU_DATE="%Y-%m-%d "
+export BYOBU_TIME="%H:%M:%S"

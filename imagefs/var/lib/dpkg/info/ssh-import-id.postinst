@@ -1,0 +1,28 @@
+#!/bin/sh
+
+set -e
+
+if [ "$1" = "configure" ]; then
+    # Migrate from shell syntax configuration file to JSON to
+    # smooth migration from ssh-import-id < 3.0. Though this was
+    # never in Debian, let's still provide this incase some had
+    # installed the package from Ubuntu.
+    _sii_file="/etc/ssh/ssh_import_id"
+    if [ -f "$_sii_file" ] && dpkg --compare-versions "$2" le 3.0; then
+        echo "Attempting to convert $_sii_file" 1>&2
+        sed -i -e "/^#/d" -e "s/^URL=\"\(.*\)\"/{\"URL\": \"\1\"}/" \
+            "$_sii_file" || :
+    fi
+fi
+
+
+# Automatically added by dh_python3:
+if which py3compile >/dev/null 2>&1; then
+	py3compile -p ssh-import-id 
+fi
+if which pypy3compile >/dev/null 2>&1; then
+	pypy3compile -p ssh-import-id  || true
+fi
+
+# End automatically added section
+

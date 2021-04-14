@@ -1,0 +1,566 @@
+#!/usr/bin/python3
+
+import apt
+import argparse
+import distro_info
+import os
+import sys
+import gettext
+import subprocess
+
+from UpdateManager.Core.utils import get_dist
+
+from datetime import datetime
+from textwrap import wrap
+from urllib.error import URLError, HTTPError
+from urllib.request import urlopen
+
+# TODO make DEBUG an environmental variable
+DEBUG = False
+
+
+class PatchStats:
+    """Tracks overall patch status
+
+    The relationship between archives enabled and whether a patch is eligible
+    for receiving updates is non-trivial. We track here all the important
+    buckets a package can be in:
+
+        - Whether it is set to expire with no ESM coverage
+        - Whether it is in an archive covered by ESM
+        - Whether it received LTS patches
+        - whether it received ESM patches
+
+    We also track the total packages covered and uncovered, and for the
+    uncovered packages, we track where they originate from.
+
+    The Ubuntu main archive receives patches for 5 years.
+    Canonical-owned archives (excluding partner) receive patches for 10 years.
+        patches for 10 years.
+    """
+    def __init__(self):
+        # TODO no-update FIPS is never patched
+        self.pkgs_uncovered_fips = set()
+
+        # list of package names available in ESM
+        self.pkgs_updated_in_esmi = set()
+        self.pkgs_updated_in_esma = set()
+
+        self.pkgs_mr = set()
+        self.pkgs_um = set()
+        self.pkgs_unavailable = set()
+        self.pkgs_thirdparty = set()
+        # the bin of unknowns
+        self.pkgs_uncategorized = set()
+
+
+def print_debug(s):
+    if DEBUG:
+        print(s)
+
+
+def whats_in_esm(url):
+    pkgs = set()
+    # return a set of package names in an esm archive
+    try:
+        response = urlopen(url)
+    except (URLError, HTTPError):
+        print_debug('failed to load: %s' % url)
+        return pkgs
+    try:
+        content = response.read().decode('utf-8')
+    except IOError:
+        print('failed to read data at: %s' % url)
+        sys.exit(1)
+    for line in content.split('\n'):
+        if not line.startswith('Package:'):
+            continue
+        else:
+            pkg = line.split(': ')[1]
+            pkgs.add(pkg)
+    return pkgs
+
+
+def livepatch_is_enabled():
+    """ Check to see if livepatch is enabled on the system"""
+    try:
+        c_livepatch = subprocess.run(["/snap/bin/canonical-livepatch",
+                                      "status"],
+                                     stdout=subprocess.PIPE,
+                                     stderr=subprocess.PIPE)
+    # it can't be enabled if it isn't installed
+    except FileNotFoundError:
+        return False
+    if c_livepatch.returncode == 0:
+        return True
+    elif c_livepatch.returncode == 1:
+        return False
+
+
+def esm_is_enabled():
+    """ Check to see if esm is an available source"""
+    acp = subprocess.Popen(["apt-cache", "policy"],
+                           stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+    grep = subprocess.run(["grep", "-F", "-q", "https://%s" % esm_site],
+                          stdin=acp.stdout, stdout=subprocess.PIPE)
+    if grep.returncode == 0:
+        return True
+    elif grep.returncode == -1:
+        return False
+
+
+def trim_archive(archive):
+    return archive.split("-")[-1]
+
+
+def trim_site(host):
+    # *.ec2.archive.ubuntu.com -> archive.ubuntu.com
+    if host.endswith("archive.ubuntu.com"):
+        return "archive.ubuntu.com"
+    return host
+
+
+def mirror_list():
+    m_file = '/usr/share/ubuntu-release-upgrader/mirrors.cfg'
+    if not os.path.exists(m_file):
+        print("Official mirror list not found.")
+    with open(m_file) as f:
+        items = [x.strip() for x in f]
+    mirrors = [s.split('//')[1].split('/')[0] for s in items
+               if not s.startswith("#") and not s == ""]
+    # ddebs.ubuntu.com isn't in mirrors.cfg for every release
+    mirrors.append('ddebs.ubuntu.com')
+    return mirrors
+
+
+def origins_for(ver: apt.package.Version) -> str:
+    s = []
+    for origin in ver.origins:
+        if not origin.site:
+            # When the package is installed, site is empty, archive/component
+            # are "now/now"
+            continue
+        site = trim_site(origin.site)
+        s.append("%s %s/%s" % (site, origin.archive, origin.component))
+    return ",".join(s)
+
+
+def print_wrapped(str):
+    print("\n".join(wrap(str, break_on_hyphens=False)))
+
+
+def print_thirdparty_count():
+    print(gettext.dngettext("update-manager",
+                            "%s package is from a third party",
+                            "%s packages are from third parties",
+                            len(pkgstats.pkgs_thirdparty)) %
+          "{:>{width}}".format(len(pkgstats.pkgs_thirdparty), width=width))
+
+
+def print_unavailable_count():
+    print(gettext.dngettext("update-manager",
+                            "%s package is no longer available for "
+                            "download",
+                            "%s packages are no longer available for "
+                            "download",
+                            len(pkgstats.pkgs_unavailable)) %
+          "{:>{width}}".format(len(pkgstats.pkgs_unavailable), width=width))
+
+
+def parse_options():
+    '''Parse command line arguments.
+
+    Return parser
+    '''
+    parser = argparse.ArgumentParser(
+        description='Return information about security support for packages')
+    parser.add_argument('--thirdparty', action='store_true')
+    parser.add_argument('--unavailable', action='store_true')
+    return parser
+
+
+if __name__ == "__main__":
+    # gettext
+    APP = "update-manager"
+    DIR = "/usr/share/locale"
+    gettext.bindtextdomain(APP, DIR)
+    gettext.textdomain(APP)
+
+    parser = parse_options()
+    args = parser.parse_args()
+
+    esm_site = "esm.ubuntu.com"
+
+    try:
+        dpkg = subprocess.check_output(['dpkg', '--print-architecture'])
+        arch = dpkg.decode().strip()
+    except subprocess.CalledProcessError:
+        print("failed getting dpkg architecture")
+        sys.exit(1)
+
+    cache = apt.Cache()
+    pkgstats = PatchStats()
+    codename = get_dist()
+    di = distro_info.UbuntuDistroInfo()
+    lts = di.is_lts(codename)
+    release_expired = True
+    if codename in di.supported():
+        release_expired = False
+    # distro-info-data in Ubuntu 16.04 LTS does not have eol-esm data
+    if codename != 'xenial':
+        eol_data = [(r.eol, r.eol_esm)
+                    for r in di._releases if r.series == codename][0]
+    elif codename == 'xenial':
+        eol_data = (datetime.strptime('2021-04-21', '%Y-%m-%d'),
+                    datetime.strptime('2024-04-21', '%Y-%m-%d'))
+    eol = eol_data[0]
+    eol_esm = eol_data[1]
+
+    all_origins = set()
+    origins_by_package = {}
+    official_mirrors = mirror_list()
+
+    # N.B. only the security pocket is checked because this tool displays
+    # information about security updates
+    esm_url = \
+        'https://%s/%s/ubuntu/dists/%s-%s-%s/main/binary-%s/Packages'
+    pkgs_in_esma = whats_in_esm(esm_url %
+                                (esm_site, 'apps', codename, 'apps',
+                                 'security', arch))
+    pkgs_in_esmi = whats_in_esm(esm_url %
+                                (esm_site, 'infra', codename, 'infra',
+                                 'security', arch))
+
+    for pkg in cache:
+        pkgname = pkg.name
+
+        downloadable = True
+        if not pkg.is_installed:
+            continue
+        if not pkg.candidate or not pkg.candidate.downloadable:
+            downloadable = False
+        pkg_sites = []
+        origins_by_package[pkgname] = set()
+
+        for ver in pkg.versions:
+            # Loop through origins and store all of them. The idea here is that
+            # we don't care where the installed package comes from, provided
+            # there is at least one repository we identify as being
+            # security-assured under either LTS or ESM.
+            for origin in ver.origins:
+                # TODO: in order to handle FIPS and other archives which have
+                # root-level path names, we'll need to loop over ver.uris
+                # instead
+                if not origin.site:
+                    continue
+                site = trim_site(origin.site)
+                archive = origin.archive
+                component = origin.component
+                origin = origin.origin
+                official_mirror = False
+                thirdparty = True
+                # thirdparty providers like dl.google.com don't set "Origin"
+                if origin != "Ubuntu":
+                    thirdparty = False
+                if site in official_mirrors:
+                    site = "official_mirror"
+                if "MY_MIRROR" in os.environ:
+                    if site in os.environ["MY_MIRROR"]:
+                        site = "official_mirror"
+                t = (site, archive, component, thirdparty)
+                if not site:
+                    continue
+                all_origins.add(t)
+                origins_by_package[pkgname].add(t)
+
+            if DEBUG:
+                pkg_sites.append("%s %s/%s" %
+                                 (site, archive, component))
+
+        print_debug("available versions for %s" % pkgname)
+        print_debug(",".join(pkg_sites))
+
+    # This tracks suites we care about. Sadly, it appears that the way apt
+    # stores origins truncates away the path that comes after the
+    # domainname in the site portion, or maybe I am just clueless, but
+    # there's no way to tell FIPS apart from ESM, for instance.
+    # See 00REPOS.txt for examples
+
+    # 2020-03-18 ver.filename has the path so why is that no good?
+
+    # TODO Need to handle:
+    #   MAAS, lxd, juju PPAs
+    #   other PPAs
+    #   other repos
+
+    # TODO handle partner.c.c
+
+    # main and restricted from release, -updates, -proposed, or -security
+    # pockets
+    suite_main = ("official_mirror", codename, "main", True)
+    suite_main_updates = ("official_mirror", codename + "-updates",
+                          "main", True)
+    suite_main_security = ("official_mirror", codename + "-security",
+                           "main", True)
+    suite_main_proposed = ("official_mirror", codename + "-proposed",
+                           "main", True)
+
+    suite_restricted = ("official_mirror", codename, "restricted",
+                        True)
+    suite_restricted_updates = ("official_mirror",
+                                codename + "-updates",
+                                "restricted", True)
+    suite_restricted_security = ("official_mirror",
+                                 codename + "-security",
+                                 "restricted", True)
+    suite_restricted_proposed = ("official_mirror",
+                                 codename + "-proposed",
+                                 "restricted", True)
+
+    # universe and multiverse from release, -updates, -proposed, or -security
+    # pockets
+    suite_universe = ("official_mirror", codename, "universe", True)
+    suite_universe_updates = ("official_mirror", codename + "-updates",
+                              "universe", True)
+    suite_universe_security = ("official_mirror",
+                               codename + "-security",
+                               "universe", True)
+    suite_universe_proposed = ("official_mirror",
+                               codename + "-proposed",
+                               "universe", True)
+
+    suite_multiverse = ("official_mirror", codename, "multiverse",
+                        True)
+    suite_multiverse_updates = ("official_mirror",
+                                codename + "-updates",
+                                "multiverse", True)
+    suite_multiverse_security = ("official_mirror",
+                                 codename + "-security",
+                                 "multiverse", True)
+    suite_multiverse_proposed = ("official_mirror",
+                                 codename + "-proposed",
+                                 "multiverse", True)
+
+    # packages from the esm respositories
+    # N.B. Origin: Ubuntu is not set for esm
+    suite_esm_main = (esm_site, "%s-infra-updates" % codename,
+                      "main")
+    suite_esm_main_security = (esm_site,
+                               "%s-infra-security" % codename, "main")
+    suite_esm_universe = (esm_site,
+                          "%s-apps-updates" % codename, "main")
+    suite_esm_universe_security = (esm_site,
+                                   "%s-apps-security" % codename,
+                                   "main")
+
+    livepatch_enabled = livepatch_is_enabled()
+    esm_enabled = esm_is_enabled()
+    is_esm_infra_used = (suite_esm_main in all_origins) or \
+                        (suite_esm_main_security in all_origins)
+    is_esm_apps_used = (suite_esm_universe in all_origins) or \
+                       (suite_esm_universe_security in all_origins)
+
+    # Now do the final loop through
+    for pkg in cache:
+        if not pkg.is_installed:
+            continue
+        if not pkg.candidate or not pkg.candidate.downloadable:
+            pkgstats.pkgs_unavailable.add(pkg.name)
+            continue
+        pkgname = pkg.name
+        pkg_origins = origins_by_package[pkgname]
+
+        # This set of is_* booleans tracks specific situations we care about in
+        # the logic below; for instance, if the package has a main origin, or
+        # if the esm repos are enabled.
+
+        # Some packages get added in -updates and don't exist in the release
+        # pocket e.g. ubuntu-advantage-tools and libdrm-updates. To be safe all
+        # pockets are allowed.
+        is_mr_pkg_origin = (suite_main in pkg_origins) or \
+                           (suite_main_updates in pkg_origins) or \
+                           (suite_main_security in pkg_origins) or \
+                           (suite_main_proposed in pkg_origins) or \
+                           (suite_restricted in pkg_origins) or \
+                           (suite_restricted_updates in pkg_origins) or \
+                           (suite_restricted_security in pkg_origins) or \
+                           (suite_restricted_proposed in pkg_origins)
+        is_um_pkg_origin = (suite_universe in pkg_origins) or \
+                           (suite_universe_updates in pkg_origins) or \
+                           (suite_universe_security in pkg_origins) or \
+                           (suite_universe_proposed in pkg_origins) or \
+                           (suite_multiverse in pkg_origins) or \
+                           (suite_multiverse_updates in pkg_origins) or \
+                           (suite_multiverse_security in pkg_origins) or \
+                           (suite_multiverse_proposed in pkg_origins)
+
+        is_esm_infra_pkg_origin = (suite_esm_main in pkg_origins) or \
+                                  (suite_esm_main_security in pkg_origins)
+        is_esm_apps_pkg_origin = (suite_esm_universe in pkg_origins) or \
+                                 (suite_esm_universe_security in pkg_origins)
+
+        # A third party one won't appear in any of the above origins
+        if not is_mr_pkg_origin and not is_um_pkg_origin \
+                and not is_esm_infra_pkg_origin and not is_esm_apps_pkg_origin:
+            pkgstats.pkgs_thirdparty.add(pkgname)
+
+        if False:  # TODO package has ESM fips origin
+            # TODO package has ESM fips-updates origin: OK
+            # If user has enabled FIPS, but not updates, BAD, but need some
+            # thought on how to display it, as it can't be patched at all
+            pass
+        elif is_mr_pkg_origin:
+            pkgstats.pkgs_mr.add(pkgname)
+        elif is_um_pkg_origin:
+            pkgstats.pkgs_um.add(pkgname)
+        else:
+            # TODO print information about packages in this category if in
+            # debugging mode
+            pkgstats.pkgs_uncategorized.add(pkgname)
+
+        # Check to see if the package is available in esm-infra or esm-apps
+        # and add it to the right pkgstats category
+        # NB: apps is ordered first for testing the hello package which is both
+        # in esmi and esma
+        if pkgname in pkgs_in_esma:
+            pkgstats.pkgs_updated_in_esma.add(pkgname)
+        elif pkgname in pkgs_in_esmi:
+            pkgstats.pkgs_updated_in_esmi.add(pkgname)
+
+    total_packages = (len(pkgstats.pkgs_mr) +
+                      len(pkgstats.pkgs_um) +
+                      len(pkgstats.pkgs_thirdparty) +
+                      len(pkgstats.pkgs_unavailable))
+    width = len(str(total_packages))
+    print("%s packages installed, of which:" %
+          "{:>{width}}".format(total_packages, width=width))
+
+    # filters first as they provide less information
+    if args.thirdparty:
+        if pkgstats.pkgs_thirdparty:
+            pkgs_thirdparty = sorted(p for p in pkgstats.pkgs_thirdparty)
+            print_thirdparty_count()
+            print_wrapped(' '.join(pkgs_thirdparty))
+            msg = ("Packages from third parties are not provided by the "
+                   "official Ubuntu archive, for example packages from "
+                   "Personal Package Archives in Launchpad.")
+            print("")
+            print_wrapped(msg)
+            print("")
+            print_wrapped("Run 'apt-cache policy %s' to learn more about "
+                          "that package." % pkgs_thirdparty[0])
+            sys.exit(0)
+        else:
+            print_wrapped("You have no packages installed from a third party.")
+            sys.exit(0)
+    if args.unavailable:
+        if pkgstats.pkgs_unavailable:
+            pkgs_unavailable = sorted(p for p in pkgstats.pkgs_unavailable)
+            print_unavailable_count()
+            print_wrapped(' '.join(pkgs_unavailable))
+            msg = ("Packages that are not available for download "
+                   "may be left over from a previous release of "
+                   "Ubuntu, may have been installed directly from "
+                   "a .deb file, or are from a source which has "
+                   "been disabled.")
+            print("")
+            print_wrapped(msg)
+            print("")
+            print_wrapped("Run 'apt-cache show %s' to learn more about "
+                          "that package." % pkgs_unavailable[0])
+            sys.exit(0)
+        else:
+            print_wrapped("You have no packages installed that are no longer "
+                          "available.")
+            sys.exit(0)
+    # Only show LTS patches and expiration notices if the release is not
+    # yet expired; showing LTS patches would give a false sense of
+    # security.
+    if not release_expired:
+        print("%s receive package updates%s until %d/%d" %
+              ("{:>{width}}".format(len(pkgstats.pkgs_mr),
+                                    width=width),
+               " with LTS" if lts else "",
+               eol.month, eol.year))
+    elif release_expired and lts:
+        print("%s %s security updates with ESM Infra "
+              "until %d/%d" %
+              ("{:>{width}}".format(len(pkgstats.pkgs_mr),
+                                    width=width),
+               "are receiving" if esm_enabled else "could receive",
+               eol_esm.month, eol_esm.year))
+    if lts and pkgstats.pkgs_um:
+        print("%s %s security updates with ESM Apps "
+              "until %d/%d" %
+              ("{:>{width}}".format(len(pkgstats.pkgs_um),
+                                    width=width),
+               "are receiving" if esm_enabled else "could receive",
+               eol_esm.month, eol_esm.year))
+    if pkgstats.pkgs_thirdparty:
+        print_thirdparty_count()
+    if pkgstats.pkgs_unavailable:
+        print_unavailable_count()
+    # print the detail messages after the count of packages
+    if pkgstats.pkgs_thirdparty:
+        msg = ("Packages from third parties are not provided by the "
+               "official Ubuntu archive, for example packages from "
+               "Personal Package Archives in Launchpad.")
+        print("")
+        print_wrapped(msg)
+        action = ("For more information on the packages, run "
+                  "'ubuntu-security-status --thirdparty'.")
+        print_wrapped(action)
+    if pkgstats.pkgs_unavailable:
+        msg = ("Packages that are not available for download "
+               "may be left over from a previous release of "
+               "Ubuntu, may have been installed directly from "
+               "a .deb file, or are from a source which has "
+               "been disabled.")
+        print("")
+        print_wrapped(msg)
+        action = ("For more information on the packages, run "
+                  "'ubuntu-security-status --unavailable'.")
+        print_wrapped(action)
+    # print the ESM calls to action last
+    if lts and not esm_enabled:
+        if release_expired and pkgstats.pkgs_mr:
+            pkgs_updated_in_esmi = pkgstats.pkgs_updated_in_esmi
+            print("")
+            print_wrapped(gettext.dngettext("update-manager",
+                                            "Enable Extended Security "
+                                            "Maintenance (ESM Infra) to "
+                                            "get %i security update (so far) "
+                                            "and enable coverage of %i "
+                                            "packages.",
+                                            "Enable Extended Security "
+                                            "Maintenance (ESM Infra) to "
+                                            "get %i security updates (so far) "
+                                            "and enable coverage of %i "
+                                            "packages.",
+                                            len(pkgs_updated_in_esmi)) %
+                          (len(pkgs_updated_in_esmi),
+                           len(pkgstats.pkgs_mr)))
+            if livepatch_enabled:
+                print("\nEnable ESM Infra with: ua enable esm-infra")
+        if pkgstats.pkgs_um:
+            pkgs_updated_in_esma = pkgstats.pkgs_updated_in_esma
+            print("")
+            print_wrapped(gettext.dngettext("update-manager",
+                                            "Enable Extended Security "
+                                            "Maintenance (ESM Apps) to "
+                                            "get %i security update (so far) "
+                                            "and enable coverage of %i "
+                                            "packages.",
+                                            "Enable Extended Security "
+                                            "Maintenance (ESM Apps) to "
+                                            "get %i security updates (so far) "
+                                            "and enable coverage of %i "
+                                            "packages.",
+                                            len(pkgs_updated_in_esma)) %
+                          (len(pkgs_updated_in_esma),
+                           len(pkgstats.pkgs_um)))
+            if livepatch_enabled:
+                print("\nEnable ESM Apps with: ua enable esm-apps")
+    if lts and not livepatch_enabled:
+        print("\nThis machine is not attached to an Ubuntu Advantage "
+              "subscription.\nSee https://ubuntu.com/advantage")

@@ -1,0 +1,14 @@
+/.
+/usr
+/usr/bin
+/usr/bin/ec2metadata
+/usr/bin/growpart
+/usr/bin/vcs-run
+/usr/share
+/usr/share/doc
+/usr/share/doc/cloud-guest-utils
+/usr/share/doc/cloud-guest-utils/changelog.Debian.gz
+/usr/share/doc/cloud-guest-utils/copyright
+/usr/share/man
+/usr/share/man/man1
+/usr/share/man/man1/growpart.1.gz

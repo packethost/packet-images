@@ -1,0 +1,36 @@
+#! /bin/sh
+
+set -e
+
+versions="3.8 3.9"
+
+case "$1" in
+  configure)
+    for v in $versions; do
+      python=python$v
+      [ -x /usr/bin/$python ] || continue
+      files=$(dpkg -L python3-distutils | sed -n '/^\/usr\/lib\/'$python'\/.*\.py$/p')
+      if [ -n "$files" ]; then
+	/usr/bin/$python -E -S /usr/lib/$python/py_compile.py $files
+	if grep -sq '^byte-compile[^#]*optimize' /etc/python/debian_config; then
+	  /usr/bin/$python -E -S -O /usr/lib/$python/py_compile.py $files
+	fi
+      else
+	echo >&2 "$python: can't get files for byte-compilation"
+      fi
+    done
+    if [ -n "$2" ] && dpkg --compare-versions $2 lt 3.7.2-3~; then
+	find /usr/lib/python3.6/distutils -name __pycache__ | xargs -r rm -rf
+	find /usr/lib/python3.6/distutils -empty -type d -delete || true
+	find /usr/lib/python3.6 -maxdepth 0 -empty -type d -delete || true
+    fi
+    if [ -n "$2" ] && dpkg --compare-versions $2 lt 3.8.3-2~; then
+	find /usr/lib/python3.7/distutils -name __pycache__ | xargs -r rm -rf
+	find /usr/lib/python3.7/distutils -empty -type d -delete || true
+	find /usr/lib/python3.7 -maxdepth 0 -empty -type d -delete || true
+    fi
+esac
+
+
+
+exit 0

@@ -1,0 +1,80 @@
+#!/bin/sh -e
+# suppress configuration of network interface used
+# by iSCSI root device
+#
+# If the root filesystem is on iSCSI, then we must take care to avoid
+# changing the state of its network interface. To this end, the initramfs
+# leaves a note for us which interface was used, and we mangle
+# /run/network/ifstate manually to stop it being brought up or down
+# automatically. This is a slight layering violation, but, unfortunately,
+# ifupdown appears to have no way to do this without also running
+# /etc/network/*.d/ scripts.
+
+assert_interface() {
+    # udev sets INTERFACE to the name of the currently-processed nic.
+    [ -n "$INTERFACE" ] && return 0
+    echo "environment variable INTERFACE not set." 1>&2;
+    return 1
+}
+
+start() {
+    CR="
+"
+    assert_interface || return
+    ifile=/run/initramfs/open-iscsi.interface
+
+    [ -f "$ifile" ] && read iface < "$ifile" || return 0
+    [ "$INTERFACE" = "$iface" ] || return
+
+    if ! grep -qs "^$iface=" /run/network/ifstate; then
+        mkdir -p /run/network
+        echo "$iface=$iface" >>/run/network/ifstate
+
+        if [ -f /run/net-$iface.conf ]; then
+            conf=/run/net-$iface.conf
+        elif [ -f /run/net6-$iface.conf ]; then
+            conf=/run/net6-$iface.conf
+        else
+            conf=""
+        fi
+        if command -v resolvconf >/dev/null &&
+           [ -n "$conf" ]; then
+            . "$conf"
+            R=""
+            [ -n "$DOMAINSEARCH" ] && R="$R${CR}search $DOMAINSEARCH"
+            [ -n "$IPV6DOMAINSEARCH" ] && R="$R${CR}search $IPV6DOMAINSEARCH"
+            for ns in "$IPV4DNS0" "$IPV4DNS1" "$IPV6DNS0" "$IPV6DNS1"; do
+                [ -n "$ns" -a "$ns" != "0.0.0.0" ] && R="$R${CR}nameserver $ns"
+            done
+            if [ -n "$R" ]; then
+                # create the dir in case resolvconf did not start yet
+                mkdir -p /run/resolvconf/interface
+                resolvconf -a $iface.iscsi-network <<EOF
+${R#${CR}}
+EOF
+            fi
+        fi
+    fi
+}
+
+stop() {
+    assert_interface || return
+    ifile=/run/initramfs/open-iscsi.interface
+    [ -f "$ifile" ] && read iface < "$ifile" || return 0
+    [ "$INTERFACE" = "$iface" ] || return
+
+    if grep -qs "^$iface=" /run/network/ifstate; then
+        grep -v "^$iface=" /run/network/ifstate >/run/network/.ifstate.tmp || true
+        mv /run/network/.ifstate.tmp /run/network/ifstate
+
+        if command -v resolvconf >/dev/null; then
+            resolvconf -d $iface.iscsi-network
+        fi
+    fi
+}
+
+case "$1" in
+    start) start ;;
+    stop) stop ;;
+    *) echo "ERROR: must be called with 'start' or 'stop'" >&2; exit 1 ;;
+esac

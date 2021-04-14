@@ -1,0 +1,5 @@
+Debian uses ncurses/terminfo, not curses/termcap, so you really shouldn't need
+the screencap file in this directory.
+
+The screeninfo.src file is installed by the `ncurses-term' package
+-- it's here for reference, and to recover from stupid errors (like?).

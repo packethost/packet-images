@@ -1,0 +1,2 @@
+# We are not going to change this unless/until the SONAME breaks
+librsvg2-2: package-name-doesnt-match-sonames librsvg-2-2

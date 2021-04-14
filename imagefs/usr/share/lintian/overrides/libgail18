@@ -1,0 +1,5 @@
+# Historical weirdness, not going to be changed now
+libgail18: package-name-doesnt-match-sonames libgailutil18
+# Intentionally done: packages that use GAIL need both, but an
+# interdependency would be circular, so we do this instead
+libgail18: symbols-declares-dependency-on-other-package libgail-common

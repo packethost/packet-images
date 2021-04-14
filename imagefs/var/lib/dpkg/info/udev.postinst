@@ -1,0 +1,120 @@
+#!/bin/sh
+
+set -e
+
+chrooted() {
+  if [ "$(stat -c %d/%i /)" = "$(stat -Lc %d/%i /proc/1/root 2>/dev/null)" ];
+  then
+    # the devicenumber/inode pair of / is the same as that of /sbin/init's
+    # root, so we're *not* in a chroot and hence return false.
+    return 1
+  fi
+  echo "A chroot environment has been detected, udev not started."
+  return 0
+}
+
+in_debootstrap() {
+  # debootstrap --second-stage may be run in an emulator instead of a chroot,
+  # we need to check for this special case because start-stop-daemon would
+  # not be available. (#520742)
+  if [ -d /debootstrap/ ]; then
+    echo "Being installed by debootstrap, udev not started."
+    return 0
+  fi
+  return 1
+}
+
+can_start_udevd() {
+  if [ ! -d /sys/class/ ]; then
+    echo "udev requires a mounted sysfs, not started."
+    return 1
+  fi
+  return 0
+}
+
+enable_udev() {
+  can_start_udevd || return 0
+  invoke-rc.d udev start
+}
+
+update_initramfs() {
+  [ -x /usr/sbin/update-initramfs -a -e /etc/initramfs-tools/initramfs.conf ] \
+    || return 0
+  update-initramfs -u
+}
+
+upgrade_fixes() {
+  # new Default-Stop (see #791944)
+  if dpkg --compare-versions "$2" lt-nl "239-8"; then
+    update-rc.d -f udev remove
+  fi
+}
+
+update_hwdb() {
+  systemd-hwdb --usr update || true
+}
+
+case "$1" in
+    configure)
+    # update/create hwdb before we (re)start udev
+    update_hwdb
+
+    # Add new system group used by udev rules
+    addgroup --quiet --system input
+
+    # Make /dev/kvm accessible to kvm group
+    # The || getenv ... part can be dropped in 21.04 to give users a cycle
+    # to act on error message.
+    addgroup --quiet --system kvm || getent group kvm > /dev/null
+
+    # Make /dev/dri/renderD* accessible to render group
+    addgroup --quiet --system render
+
+    if [ -z "$2" ]; then # first install
+      if ! chrooted && ! in_debootstrap; then
+	enable_udev
+      fi
+    else # upgrades
+      upgrade_fixes "$@"
+      if ! chrooted; then
+	if can_start_udevd; then
+	  if [ -d /run/systemd/system ] ; then
+	    systemctl daemon-reload || true
+	  fi
+	  invoke-rc.d udev restart
+	fi
+      fi
+    fi
+
+    update_initramfs
+    ;;
+
+    triggered)
+    update_hwdb
+    exit 0
+    ;;
+esac
+
+# Automatically added by dh_installinit/12.10ubuntu1
+if [ "$1" = "configure" ] || [ "$1" = "abort-upgrade" ] || [ "$1" = "abort-deconfigure" ] || [ "$1" = "abort-remove" ] ; then
+	# In case this system is running systemd, we need to ensure that all
+	# necessary tmpfiles (if any) are created before starting.
+	if [ -d /run/systemd/system ] ; then
+		systemd-tmpfiles --create static-nodes-permissions.conf >/dev/null || true
+	fi
+fi
+# End automatically added section
+# Automatically added by dh_installdeb/12.10ubuntu1
+dpkg-maintscript-helper rm_conffile /etc/init/udev.conf 233-1\~ -- "$@"
+dpkg-maintscript-helper rm_conffile /etc/init/udevmonitor.conf 233-1\~ -- "$@"
+dpkg-maintscript-helper rm_conffile /etc/init/udevtrigger.conf 233-1\~ -- "$@"
+# End automatically added section
+# Automatically added by dh_installinit/12.10ubuntu1
+if [ "$1" = "configure" ] || [ "$1" = "abort-upgrade" ] || [ "$1" = "abort-deconfigure" ] || [ "$1" = "abort-remove" ] ; then
+	if [ -x "/etc/init.d/udev" ]; then
+		update-rc.d udev defaults >/dev/null || exit 1
+	fi
+fi
+# End automatically added section
+
+

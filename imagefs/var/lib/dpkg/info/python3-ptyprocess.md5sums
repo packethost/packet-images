@@ -1,0 +1,6 @@
+1f59022cb8b8e6d956f9bc78ccb37866  usr/lib/python3/dist-packages/ptyprocess/__init__.py
+8fbffd90315ff4ee77286737367a1cec  usr/lib/python3/dist-packages/ptyprocess/_fork_pty.py
+5f63221b14cd352b2b5e91697fc3a264  usr/lib/python3/dist-packages/ptyprocess/ptyprocess.py
+ff98667d699be3a3345c702f1a9c8960  usr/lib/python3/dist-packages/ptyprocess/util.py
+e8c6acf093b1f926ab003bbb1027034e  usr/share/doc/python3-ptyprocess/changelog.Debian.gz
+c961478532b47fe0384050545f028172  usr/share/doc/python3-ptyprocess/copyright

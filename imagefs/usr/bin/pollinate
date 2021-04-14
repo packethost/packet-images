@@ -1,0 +1,350 @@
+#!/bin/sh
+#
+# pollinate: an Entropy-as-a-Service client
+#
+#  Copyright (C) 2012-2016 Dustin Kirkland <dustin.kirkland@gmail.com>
+#
+#  This program is free software: you can redistribute it and/or modify
+#  it under the terms of the GNU General Public License as published by
+#  the Free Software Foundation, version 3 of the License.
+#
+#  This program is distributed in the hope that it will be useful,
+#  but WITHOUT ANY WARRANTY; without even the implied warranty of
+#  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+#  GNU General Public License for more details.
+#
+#  You should have received a copy of the GNU General Public License
+#  along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
+set -e
+set -f
+
+PKG="pollinate"
+TMPDIR=$(mktemp -d -t "${PKG}.XXXXXXXXXXXX")
+trap "rm -rf ${TMPDIR} 2>/dev/null || true" EXIT HUP INT QUIT TERM
+CACHEDIR="/var/cache/${PKG}"
+FLAG="${CACHEDIR}/seeded"
+LOG="${CACHEDIR}/log"
+HOSTNAME=$(hostname)
+STRICT=0
+
+# Only recent logger version supports --id=[ID]
+logger_ver=$(logger -V 2>&1 | awk '{print $4}')
+dpkg --compare-versions $logger_ver ge 2.26.2 && LOGGER="logger --id=$$" || LOGGER="logger"
+# Log to both syslog, and stderr, if we're on an interactive terminal
+[ -t 0 ] && LOGGER="$LOGGER -s"
+
+error() {
+	$LOGGER -t ${PKG} "ERROR: $@"
+	exit 1
+}
+
+warning() {
+	if [ "$STRICT" = "1" ]; then
+		$LOGGER -t ${PKG} "ERROR: $@"
+		exit 1
+	else
+		$LOGGER -t ${PKG} "WARNING: $@"
+		exit 0
+	fi
+}
+
+log() {
+	if [ "${QUIET}" = "1" ]; then
+		# quiet mode, don't log to stderr
+		if [ -w "$CACHEDIR" ]; then
+			# log to file, if we can
+			$LOGGER -t ${PKG} "$@" >>"${LOG}" 2>&1
+		else
+			# log to syslog, if its up
+			$LOGGER -t ${PKG} "$@"
+		fi
+	else
+		# log to both stderr and syslog
+		$LOGGER -t ${PKG} "$@"
+	fi
+}
+
+random_hash() {
+	# Read and print urandom bytes
+	head -c "${BYTES}" /dev/urandom | sha512sum | awk '{print $1}'
+}
+
+hash_and_write() {
+	# Whiten input with a hash, and write to device
+	local hex=$(cat "${TMPDIR}/out" "${TMPDIR}/err" | sha512sum | awk '{print $1}')
+	if [ "${BINARY}" = "1" ]; then
+		if [ "${DEVICE}" = "-" ]; then
+			printf "${hex}" | xxd -r -p
+		else
+			printf "${hex}" | xxd -r -p > "${DEVICE}"
+		fi
+	else
+		if [ "${DEVICE}" = "-" ]; then
+			printf "%s" "${hex}"
+		else
+			printf "%s" "${hex}" > "${DEVICE}"
+		fi
+	fi
+	log "client hashed response from [${1}]"
+}
+
+read_build_info() {
+	# ubuntu images place build information in /etc/cloud/build.info
+	# format of file is '<key>: <value>' put these under img/<key>/<value>
+	local bifile="${1:-/etc/cloud/build.info}" ret=""
+	_RET=""
+	[ -s "$bifile" ] || return 0
+	ret=$(awk '{
+		gsub(/#.*/, ""); gsub(/\s+$/, "");
+		if ($0 == "" || $0 !~ /:/) next;
+		gsub(/:\s*/, "/");
+		printf("img/%s ", $0) }' "$bifile") || return
+	_RET="${ret% }"
+}
+
+read_addl_info() {
+	# allow additinal info file to contain entries one per line.  lines must
+	# have a '/' in them. remove trailing space and '#' as comment. example:
+	#   key/value
+	#   fookey/foovalue # written by foo
+	local aifile="${1:-/etc/pollinate/add-user-agent}" ret=""
+	_RET=""
+	[ -s "$aifile" ] || return 0
+	ret=$(awk '{
+		gsub(/#.*/, ""); gsub(/\s+$/, "");
+		if ($0 == "" || $0 !~ /\//) next;
+		printf("%s ", $0); }' "$aifile") || return
+	_RET=${ret% }
+}
+
+read_virt() {
+	# return virt/<value> where value is the virtualization platform the
+	# system is running on.
+	local ret=""
+	_RET=""
+	if command -v systemd-detect-virt >/dev/null; then
+		ret=$(systemd-detect-virt)
+		# systemd-detect-virt returns 1 for 'none'
+		[ $? -eq 0 -o "$ret" = "none" ] || ret=""
+	else
+		# trusty would take this path.
+		if [ -d /dev/xen ]; then
+			ret="xen"
+		elif [ -d /dev/lxd ]; then
+			# call this 'lxc' for consistency with systemd-detect-virt.
+			ret="lxc"
+		elif dmesg | grep --quiet " kvm-clock:"; then
+			ret="kvm"
+		fi
+	fi
+	[ -n "$ret" ] || return
+	_RET="virt/$ret"
+}
+
+read_package_versions() {
+	local pkgs="pollinate curl cloud-init" data="" p=""
+	data=$(dpkg-query \
+		-W --showformat='${Package}/${Version} ' $pkgs 2>/dev/null) || :
+	# fill in 'package/' for any package not installed.
+	for p in ${pkgs}; do
+		[ "${data#*$p/}" = "$data" ] && data="${data} $p/"
+	done
+	if [ -n "$TESTING" ]; then
+		p="pollinate"
+		data="${data%%$p/*}$p${TESTING}/${data#*$p/}"
+	fi
+	set -- $data
+	_RET="$*"
+}
+
+read_uname_info() {
+	# taken from cloud-init ds-identify.
+	# run uname, and parse output.
+	# uname is tricky to parse as it outputs always in a given order
+	# independent of option order. kernel-version is known to have spaces.
+	# 1   -s kernel-name
+	# 2   -n nodename
+	# 3   -r kernel-release
+	# 4.. -v kernel-version(whitespace)
+	# N-2 -m machine
+	# N-1 -o operating-system
+	local out="" krel="" machine="" os=""
+	out=$(uname -snrvmo) || { _RET=""; return; }
+	set -- $out
+	krel="$3"
+	shift 3
+	while [ $# -gt 2 ]; do
+		shift
+	done
+	machine=$1
+	os=$2
+	_RET="$os/$krel/$machine"
+	return 0
+}
+
+user_agent() {
+	# Construct a user agent, with useful debug information
+	# Very similar to Firefox and Chrome
+	
+	. /etc/lsb-release
+
+	local pkg_info="" lsb="" platform="" cpu="" up="NA" idle="NA" uptime
+	read_package_versions && pkg_info="$_RET"
+	read_uname_info && platform="$_RET"
+
+	lsb=$(echo "${DISTRIB_DESCRIPTION}" | sed -e "s/ /\//g")
+	cpu="$(grep -m1 "^model name" /proc/cpuinfo | sed -e "s/.*: //" -e "s:\s\+:/:g")"
+	{ read up idle < /proc/uptime ; } >/dev/null 2>&1 || :
+	uptime="uptime/$up/$idle"
+
+	local addl_data="" build_info="" virt=""
+	read_build_info && build_info="${_RET}"
+	read_addl_info && addl_data="${_RET}"
+	read_virt && virt="${_RET}"
+
+	USER_AGENT="${pkg_info} ${lsb} ${platform} ${cpu} ${uptime}${virt:+ ${virt}}${build_info:+ ${build_info}}${addl_data:+ ${addl_data}}"
+}
+
+exchange() {
+	local server="${1}"
+	local f1="${TMPDIR}/challenge"
+	case "${server}" in
+		"http://"*|"https://"*)
+			# looks good
+			true
+		;;
+		*)
+			# otherwise, default to https://
+			server="https://${server}"
+		;;
+	esac
+	if [ "${NO_CHALLENGE}" != "1" ]; then
+		# Create and enforce a challenge/response, to ensure personal communication
+		local challenge=$(random_hash)
+		local challenge_response=$(printf "${challenge}" | sha512sum | awk '{print $1}')
+		printf "challenge=%s" "$challenge" > "${f1}"
+		log "client sent challenge to [${1}]"
+	else
+		f1="/dev/null"
+	fi
+	local out="${TMPDIR}/out"
+	local err="${TMPDIR}/err"
+	user_agent
+	if curl --connect-timeout "${WAIT}" --max-time "${WAIT}" -A "${USER_AGENT}" -o- -v --trace-time --data @${f1} ${CURL_OPTS} ${server} >"${out}" 2>"${err}"; then
+		if [ "${NO_CHALLENGE}" != "1" ]; then
+			if [ "${challenge_response}" = $(head -n1 "${out}") ]; then
+				log "client verified challenge/response with [${server}]"
+			else
+				error "Server failed challenge/response [expected=${challenge_response}] != [got=$(head -n1 ${out})]"
+			fi
+		fi
+		hash_and_write "${server}"
+		log "client successfully seeded [${DEVICE}]"
+	else
+		case $? in
+			124)
+				warning "Network communication failed [$?], timeout after [${WAIT}s] $(cat ${out} ${err})"
+			;;
+			*)
+				warning "Network communication failed [$?] $(cat ${out} ${err})"
+			;;
+		esac
+	fi
+}
+
+# Source configuration
+[ -r "/etc/default/${PKG}" ] && . "/etc/default/${PKG}"
+while [ ! -z "$1" ]; do
+	case "${1}" in
+		-b|--binary)
+			BINARY=1
+			shift
+		;;
+		-c|--curl-opts)
+			CURL_OPTS="${CURL_OPTS} $2"
+			shift 2
+		;;
+		-d|--device)
+			DEVICE="$2"
+			shift 2
+		;;
+		-i|--insecure)
+			CURL_OPTS="${CURL_OPTS} --insecure"
+			shift 1
+		;;
+		-n|--no-challenge)
+			NO_CHALLENGE=1
+			shift 1
+		;;
+		-r|--reseed)
+			RESEED=1
+			shift 1
+		;;
+		-s|--server)
+			SERVER="$2"
+			shift 2
+		;;
+		-p|--pool)
+			POOL="${POOL} $2"
+			shift 2
+		;;
+		-q|--quiet)
+			QUIET=1
+			shift
+		;;
+		--strict)
+			STRICT=1
+			shift
+		;;
+		-t|--testing)
+			TESTING="-testing"
+			shift 1
+		;;
+		-w|--wait)
+			WAIT="$2"
+			shift 2
+		;;
+		--print-user-agent)
+			user_agent || error "Failed to get user-agent."
+			echo "${USER_AGENT}"
+			exit
+		;;
+		*)
+			error "Unknown options [$1]"
+		;;
+	esac
+done
+
+# Pollinate prefers to run as a privileged user unless --testing communications
+if [ -z "${TESTING}" ]; then
+	if [ ! -w "${CACHEDIR}" ]; then
+		error "should execute as the [${PKG}] user"
+	fi
+	if [ -e "${FLAG}" ]; then
+		timestamp=$(stat -c "%y" "${FLAG}")
+		log "system was previously seeded at [${timestamp}]"
+		if [ "${RESEED}" != "1" ]; then
+			log "To re-seed this system again, use the -r|--reseed option"
+			exit 0
+		fi
+	fi
+else
+	# Output device must be stdout if we're in testing mode
+	DEVICE="-"
+fi
+[ -n "${DEVICE}" ] || DEVICE="/dev/urandom"
+[ -n "${BYTES}" ] || BYTES=64
+[ -n "${WAIT}" ] || WAIT="10"
+if [ -n "${SERVER}" ]; then
+	POOL="${SERVER}"
+fi
+if [ -z "${POOL}" ]; then
+	error "No servers configured in pool"
+fi
+for i in ${POOL}; do
+	exchange "${i}"
+done
+if [ -z "${TESTING}" ]; then
+	touch "${FLAG}"
+fi

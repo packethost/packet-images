@@ -1,0 +1,75 @@
+#!/bin/sh -e
+
+. /usr/share/debconf/confmodule
+db_version 2.0
+
+PKG="byobu"
+
+db_get byobu/launch-by-default || true
+if [ "$RET" = true ]; then
+	touch /etc/$PKG/autolaunch
+else
+	rm -f /etc/$PKG/autolaunch
+fi
+
+# Install correct .desktop file
+if [ -x /usr/lib/gnome-terminal/gnome-terminal-server ]; then
+	ln -sf /usr/share/$PKG/desktop/$PKG.desktop /usr/share/applications/$PKG.desktop
+else
+	ln -sf /usr/share/$PKG/desktop/$PKG.desktop.old /usr/share/applications/$PKG.desktop
+fi
+
+# Clean up any old-school screen-profiles diversions of /usr/bin/screen
+if [ -f /usr/bin/screen ] && [ -f /usr/bin/screen.real ]; then
+	divertpkg=$(dpkg-divert --listpackage /usr/bin/screen || true)
+	if [ "$divertpkg" = "screen-profiles" ]; then
+		rm -f /usr/bin/screen
+		dpkg-divert --package screen-profiles --rename --remove /usr/bin/screen
+	fi
+fi
+
+# Remove the short-lived MOTD message
+rm -f /etc/update-motd.d/55-window-manager
+
+# Attempt to notify users that they should reload their profile
+touch_flag() {
+	touch "$1" || true
+	chown --reference $(dirname "$1") "$1" || true
+	chmod 700 "$1" || true
+}
+[ -r "/etc/$PKG/socketdir" ] && . "/etc/$PKG/socketdir"
+if [ -d "$SOCKETDIR" ]; then
+	for d in "$SOCKETDIR"/S-*; do
+		if [ -d "$d/$PKG" ]; then
+			# New location of the reload flag
+			touch_flag "$d/$PKG/reload-required"
+		elif [ -d "$d" ]; then
+			# Old location of the reload flag
+			touch_flag "$d/$PKG.reload-required"
+		fi
+	done
+fi
+
+# Clean-up obsolete config file
+rm -f /etc/byobu/statusrc || true
+
+
+# Automatically added by dh_python3:
+if which py3compile >/dev/null 2>&1; then
+	py3compile -p byobu /usr/lib/byobu
+fi
+if which pypy3compile >/dev/null 2>&1; then
+	pypy3compile -p byobu /usr/lib/byobu || true
+fi
+
+# End automatically added section
+# Automatically added by dh_icons/12.9ubuntu1
+if [ "$1" = "configure" ] || [ "$1" = "abort-upgrade" ] || [ "$1" = "abort-deconfigure" ] || [ "$1" = "abort-remove" ] ; then
+	if which update-icon-caches >/dev/null 2>&1 ; then
+		update-icon-caches /usr/share/icons/HighContrast
+	fi
+fi
+# End automatically added section
+
+
+# vi: syntax=sh ts=4 noexpandtab

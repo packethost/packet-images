@@ -1,0 +1,12 @@
+/.
+/usr
+/usr/libexec
+/usr/libexec/fwupd
+/usr/libexec/fwupd/efi
+/usr/libexec/fwupd/efi/fwupdx64.efi.signed
+/usr/libexec/fwupd/efi/version
+/usr/share
+/usr/share/doc
+/usr/share/doc/fwupd-signed
+/usr/share/doc/fwupd-signed/changelog.Debian.gz
+/usr/share/doc/fwupd-signed/copyright

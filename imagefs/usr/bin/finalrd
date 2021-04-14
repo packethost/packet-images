@@ -1,0 +1,70 @@
+#!/bin/sh
+# SPDX-License-Identifier: GPL-3.0-only
+
+set -e
+
+# for initramfs-tools hook-functions
+export DESTDIR=/run/initramfs
+# for /usr/lib/dracut/dracut-install
+export DESTROOTDIR=$DESTDIR
+# initramfs-tools now requires this to be set
+export verbose=n
+
+# something already created shutdown initramfs
+# same check is done by e.g. dracut-shutdown
+# it is expected that any shutdown initramfs is good enough
+[ ! -x $DESTDIR/bin/sh ] || exit 0
+
+# /run may be mounted noexec,nosuid => fix it
+# it should be a more normal/default filesystem post-pivot
+# systemd-shutdownd pivot does not currently remount /run with these
+# options
+mount -o remount,exec /run
+
+### SHUTDOWN SUPPORT ###
+# our shutdown sequence is to be controled by systemd-shutdown which
+# will unmount all the things, and run our hooks
+
+LD=`grep -Eow '/.*ld-.*.so' /proc/self/maps | head -1`
+for bin in /bin/sh /lib/systemd/systemd-shutdown
+do
+    rm -f /run/finalrd-libs.conf
+    touch /run/finalrd-libs.conf
+    for lib in `$LD --list $bin | grep -Eow "/.* "`
+    do
+        if [ "$lib" = '=>' ]
+        then
+            continue
+        fi
+        if grep -q $lib /run/finalrd-libs.conf
+        then
+            continue
+        fi
+        echo "d $(dirname $DESTDIR$lib)" >> /run/finalrd-libs.conf
+        if [ -L $lib ]
+        then
+            target=$(realpath -e $lib)
+            echo "C $DESTDIR$target - - - - $target" >> /run/finalrd-libs.conf
+            echo "L $DESTDIR$lib - - - - $(readlink $lib)" >> /run/finalrd-libs.conf
+        else
+            echo "C $DESTDIR$lib - - - - $lib" >> /run/finalrd-libs.conf
+        fi
+    done
+done
+systemd-tmpfiles --create /usr/lib/finalrd/finalrd-static.conf /run/finalrd-libs.conf
+
+### HOOKS SUPPORT ###
+# Without initramfs-tools, hooks are not supported
+[ -e /usr/share/initramfs-tools/hook-functions ] || exit 0
+. /usr/share/initramfs-tools/hook-functions
+
+for d in /usr/share/finalrd /etc/finalrd /run/finalrd
+do
+    if [ -d $d ]
+    then
+	run-parts -v --regex='^.*\.finalrd$' --arg=setup -- $d || :
+	find $d -executable -name '*.finalrd' -exec cp -- "{}" $DESTDIR/lib/systemd/system-shutdown \;
+    fi
+done
+
+ldconfig -r $DESTDIR

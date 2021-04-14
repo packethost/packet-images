@@ -1,0 +1,18 @@
+              README for Debian package of Cpufrequtils
+              =========================================
+
+This package provides very useful tools to get information about the CPUFreq
+Linux kernel features (with cpufreq-info) and set values for it (with cpufreq-set).
+This package provides the ability to set a chosen governor (different from
+the one configured at kernel compile time) at boot time by setting the governor
+name in /etc/default/cpufrequtils. By editing that file you can also set limits
+to which the CPU must run.
+Additionally loadcpufreq is a boot-time script that tries to detect and load the most
+appropriate cpu driver. You can override its behaviour by creating a
+/etc/default/loadcpufreq file.
+See the examples/ directory for sample configurations.
+
+This package can be preseeded using a hidden debconf question.  This
+is the preseed value to use:
+
+  cpufrequtils    cpufrequtils/enable     boolean true

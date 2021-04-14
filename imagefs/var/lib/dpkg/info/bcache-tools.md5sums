@@ -1,0 +1,15 @@
+01011a335304032a4846d5fe4c12300e  lib/udev/bcache-export-cached
+5fcfe5d2db02fa92598399cb9e16b493  lib/udev/bcache-register
+ea991fa4b8dd97915d8d013f1de9798a  lib/udev/probe-bcache
+32271cd3ff038974e47b5187295ab938  lib/udev/rules.d/69-bcache.rules
+37a8c1b0dc758feecde277e00eb60fde  usr/lib/dracut/modules.d/90bcache/module-setup.sh
+81c38ce602ce733cce872d5dfa52d5c3  usr/lib/initcpio/install/bcache
+caafb4a3ace8f80ff75cd1aad776590d  usr/sbin/bcache-super-show
+5a89448767b717056ee419dbe2a7868e  usr/sbin/make-bcache
+4105d1fd3842bb201f7486e744a04e2b  usr/share/doc/bcache-tools/README.Debian
+5656de5338999d2a6d65eaa70f1f52a1  usr/share/doc/bcache-tools/changelog.Debian.gz
+a4d062f2e6733771b1ee635be9c3e4ce  usr/share/doc/bcache-tools/copyright
+d276ca98bb20caf3fba92be65341a422  usr/share/initramfs-tools/hooks/bcache
+420e110bb7b6d9b530a60876a7cc4855  usr/share/man/man8/bcache-super-show.8.gz
+bafe773391d4cb71df6ad433e41b3196  usr/share/man/man8/make-bcache.8.gz
+e03905de59ba888ea91b4cf0fa7b7c81  usr/share/man/man8/probe-bcache.8.gz

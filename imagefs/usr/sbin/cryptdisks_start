@@ -1,0 +1,63 @@
+#!/bin/sh
+
+# cryptdisks_start - wrapper around cryptsetup which parses
+# /etc/crypttab, just like mount parses /etc/fstab.
+
+# Initial code and (c) 2007 Jon Dowland <jon@alcopop.org>
+# License: GNU General Public License, v2 or any later
+# (https://www.gnu.org/copyleft/gpl.html)
+
+set -e
+
+. /lib/cryptsetup/cryptdisks-functions
+
+INITSTATE="manual"
+DEFAULT_LOUD="yes"
+FORCE_START="yes"
+
+usage() {
+    local rv="${1:-1}"
+    echo "Usage: $0 [-r|--readonly] <name> [.. <name>]" >&2
+    echo >&2
+    echo "reads $TABFILE and starts the mapping corresponding to <name>" >&2
+    exit $rv
+}
+
+CRYPTTAB_EXTRA_OPTIONS=
+while [ $# -gt 0 ]; do
+    case "$1" in
+        -r|--readonly) CRYPTTAB_EXTRA_OPTIONS="${CRYPTTAB_EXTRA_OPTIONS:+$CRYPTTAB_EXTRA_OPTIONS,}readonly";;
+        -h|--help|-\?) usage 0;;
+        --) shift; break;;
+        -*) echo "Error: unknown option '$1'" >&2; usage 1;;
+        *) break;;
+    esac
+    shift
+done
+[ $# -gt 0 ] || usage 1
+
+if [ $(id -u) -ne 0 ]; then
+    log_warning_msg "$0 needs root privileges"
+    exit 1
+fi
+
+log_action_begin_msg "Starting crypto disk"
+mount_fs
+
+rv=0
+for name in "$@"; do
+    if ! crypttab_find_entry --quiet "$name"; then
+        device_msg "$name" "failed, not found in crypttab"
+        rv=1
+    else
+        if [ -n "$CRYPTTAB_EXTRA_OPTIONS" ]; then
+            CRYPTTAB_OPTIONS="$CRYPTTAB_OPTIONS,$CRYPTTAB_EXTRA_OPTIONS"
+            _CRYPTTAB_OPTIONS="$_CRYPTTAB_OPTIONS,$CRYPTTAB_EXTRA_OPTIONS"
+        fi
+        setup_mapping || rv=$?
+    fi
+done
+umount_fs
+
+log_action_end_msg $rv
+exit $rv

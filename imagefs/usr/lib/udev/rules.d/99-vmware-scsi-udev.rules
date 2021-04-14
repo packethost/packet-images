@@ -1,0 +1,7 @@
+# Copyright (C) 2016,2019 VMware, Inc.  All rights reserved.
+#
+# This file is part of open-vm-tools
+
+ACTION=="add", SUBSYSTEMS=="scsi", ENV{DEVTYPE}=="scsi_device", ATTRS{vendor}=="VMware*" , ATTRS{model}=="Virtual disk*", ATTRS{timeout}=="?*", ATTR{timeout}="180"
+ACTION=="add", SUBSYSTEMS=="scsi", ENV{DEVTYPE}=="scsi_device", ATTRS{vendor}=="VMware*" , ATTRS{model}=="VMware Virtual S", ATTRS{timeout}=="?*", ATTR{timeout}="180"
+

@@ -1,0 +1,15 @@
+
+[:python_version < "3"]
+configparser
+contextlib2
+pathlib2
+
+[docs]
+rst.linker
+sphinx
+
+[testing]
+packaging
+
+[testing:python_version < "3.7"]
+importlib_resources

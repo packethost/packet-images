@@ -1,0 +1,15 @@
+/.
+/usr
+/usr/share
+/usr/share/alsa
+/usr/share/alsa/topology
+/usr/share/alsa/topology/broadwell
+/usr/share/alsa/topology/broadwell/broadwell.conf
+/usr/share/alsa/topology/bxtrt298
+/usr/share/alsa/topology/bxtrt298/bxt_i2s.conf
+/usr/share/alsa/topology/sklrt286
+/usr/share/alsa/topology/sklrt286/skl_i2s.conf
+/usr/share/doc
+/usr/share/doc/alsa-topology-conf
+/usr/share/doc/alsa-topology-conf/changelog.Debian.gz
+/usr/share/doc/alsa-topology-conf/copyright

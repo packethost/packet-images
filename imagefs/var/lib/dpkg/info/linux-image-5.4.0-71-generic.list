@@ -1,0 +1,9 @@
+/.
+/boot
+/boot/vmlinuz-5.4.0-71-generic
+/usr
+/usr/share
+/usr/share/doc
+/usr/share/doc/linux-image-5.4.0-71-generic
+/usr/share/doc/linux-image-5.4.0-71-generic/changelog.Debian.gz
+/usr/share/doc/linux-image-5.4.0-71-generic/copyright

@@ -1,0 +1,1 @@
+/etc/systemd/system/open-vm-tools.service.requires/vgauth.service

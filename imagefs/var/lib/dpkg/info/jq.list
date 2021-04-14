@@ -1,0 +1,14 @@
+/.
+/usr
+/usr/bin
+/usr/bin/jq
+/usr/share
+/usr/share/doc
+/usr/share/doc/jq
+/usr/share/doc/jq/AUTHORS.gz
+/usr/share/doc/jq/copyright
+/usr/share/man
+/usr/share/man/man1
+/usr/share/man/man1/jq.1.gz
+/usr/share/doc/jq/README
+/usr/share/doc/jq/changelog.Debian.gz

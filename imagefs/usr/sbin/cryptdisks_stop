@@ -1,0 +1,38 @@
+#!/bin/sh
+
+# cryptdisks_stop - wrapper around cryptsetup which parses
+# /etc/crypttab, just like mount parses /etc/fstab.
+
+# Initial code stolen from cryptdisks_start by Jon Dowland <jon@alcopop.org>
+# Copyright (C) 2008 by Jonas Meurer <jonas@freesources.org>
+# License: GNU General Public License, v2 or any later
+# (https://www.gnu.org/copyleft/gpl.html)
+
+set -e
+
+if [ $# -lt 1 ]; then
+    echo "usage: $0 <name>" >&2
+    echo >&2
+    echo "reads /etc/crypttab and stops the mapping corresponding to <name>" >&2
+    exit 1
+fi
+
+. /lib/cryptsetup/cryptdisks-functions
+
+INITSTATE="manual"
+DEFAULT_LOUD="yes"
+
+if [ $(id -u) -ne 0 ]; then
+    log_warning_msg "$0 needs root privileges"
+    exit 1
+fi
+
+log_action_begin_msg "Stopping crypto disk"
+
+rv=0
+for name in "$@"; do
+    remove_mapping "$name" || rv=$?
+done
+
+log_action_end_msg $rv
+exit $rv

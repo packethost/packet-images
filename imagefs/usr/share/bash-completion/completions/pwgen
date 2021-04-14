@@ -1,0 +1,28 @@
+# pwgen(1) completion                                      -*- shell-script -*-
+
+_pwgen()
+{
+    local cur prev words cword split
+    _init_completion -s || return
+
+    case $prev in
+        --num-passwords|--help|-!(-*)[Nh])
+            return
+            ;;
+        --sha1|-!(-*)H)
+            _filedir
+            return
+            ;;
+    esac
+
+    $split && return
+
+    if [[ $cur == -* ]]; then
+        COMPREPLY=( $(compgen -W '$(_parse_help "$1")' -- "$cur") )
+        [[ $COMPREPLY == *= ]] && compopt -o nospace
+        return
+    fi
+} &&
+complete -F _pwgen pwgen
+
+# ex: filetype=sh

@@ -1,0 +1,55 @@
+rUing OpenPGP smartcard for LUKS dm-crypt devices in Debian
+===========================================================
+
+The Debian cryptsetup package provides the keyscript `decrypt_gnupg-sc`
+for setups with a keyfile that is encrypted using an OpenPGP smartcard.
+
+The following example assumes that you store the encrypted keyfile in
+`/etc/keys/cryptkey.gpg`. LUKS device is `/dev/<luks_device>`.
+
+First, you'll have to create the keyfile and encrypt it with your key
+0xDEADBEEF:
+
+    dd if=/dev/random bs=1 count=256 | gpg --recipient 0xDEADBEEF \
+            --output /etc/keys/cryptkey.gpg --encrypt
+
+Next the LUKS device needs to be formated with the key. For that, the
+`decrypt_gnupg-sc` keyscript can be used:
+
+    /lib/cryptsetup/scripts/decrypt_gnupg-sc /etc/keys/cryptkey.gpg | \
+            cryptsetup --key-file=- luksFormat /dev/<luks_device>
+
+In order to unlock the encrypted LUKS device automatically during boot process,
+add the following to `/etc/crypttab`:
+
+    cdev1   /dev/<luks_device>      /etc/keys/cryptkey.gpg luks,keyscript=decrypt_gnupg-sc
+
+In order to avoid data loss if the smartcard is damaged or lost, you may
+want to decrypt `/etc/keys/cryptkey.gpg` and store the plaintext in a safe
+place.  Or alternatively, use another slot with your backup key:
+
+    cryptsetup luksAddKey /dev/<luks_device> /path/to/backup.key
+
+
+Decrypting the keyfile at initramfs stage
+-----------------------------------------
+
+If the device is to be unlocked at initramfs stage (such as for the root
+FS or the resume device), you need to copy the public part of the
+encryption key to `/etc/cryptsetup-initramfs/pubring.gpg`:
+
+    gpg --export 0xDEADBEEF >/etc/cryptsetup-initramfs/pubring.gpg
+
+Then the provided initramfs hooks should do all additionally required
+work for you when the initramfs is created or updated.
+
+Be warned though, that for such devices the OpenPGP encrypted key is copied
+to the initramfs by the initramfs cryptgnupg-sc hook. If you don't want this,
+you should take a look at the initramfs cryptgnupg-sc hook, which is located
+at `/usr/share/initramfs-tools/hooks/cryptgnupg-sc`.
+
+Moreover, note that unlocking at initramfs stage is currently not compatible
+with plymouth or other bootsplash, as a curses-based prompt is used for PIN
+entry.
+
+ -- Guilhem Moulin <guilhem@guilhem.org>  Sun, 23 Sep 2018 03:28:31 +0200

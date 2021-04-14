@@ -1,0 +1,2 @@
+/etc/systemd/system/multi-user.target.wants/open-vm-tools.service
+/etc/systemd/system/vmtoolsd.service

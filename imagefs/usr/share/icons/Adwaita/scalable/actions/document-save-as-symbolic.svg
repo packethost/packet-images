@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="16" height="16" xmlns="http://www.w3.org/2000/svg">
+ <g fill="#2e3436">
+  <path d="M4 7.028v1c0 .265.093.53.281.718l3 3 .282.282h.875l.28-.282 3-3A1.01 1.01 0 0012 8.028v-1h-1c-.265 0-.53.093-.719.281L8 9.59 5.719 7.31A1.015 1.015 0 005 7.028z" font-family="Bitstream Vera Sans" font-weight="400" overflow="visible" style="text-decoration-line:none;text-indent:0;text-transform:none"/>
+  <path d="m7 3.027v7h2v-7z" font-family="sans-serif" font-weight="400" overflow="visible" style="font-feature-settings:normal;font-variant-alternates:normal;font-variant-caps:normal;font-variant-ligatures:normal;font-variant-numeric:normal;font-variant-position:normal;isolation:auto;mix-blend-mode:normal;shape-padding:0;text-decoration-color:#000;text-decoration-line:none;text-decoration-style:solid;text-indent:0;text-orientation:mixed;text-transform:none"/>
+  <path d="m2 13v2h12v-2z" fill-rule="evenodd" overflow="visible"/>
+  <path d="M5.994 1a1 1 0 01-1 1 1 1 0 01-1-1 1 1 0 011-1 1 1 0 011 1zm3 0a1 1 0 01-1 1 1 1 0 01-1-1 1 1 0 011-1 1 1 0 011 1zm3 0a1 1 0 01-1 1 1 1 0 01-1-1 1 1 0 011-1 1 1 0 011 1z"/>
+ </g>
+</svg>

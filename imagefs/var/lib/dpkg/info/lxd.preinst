@@ -1,0 +1,174 @@
+#!/bin/sh
+set -e
+
+skip_unusable_snapd() {
+    if [ -e "/run/snapd.socket" ]; then
+        # Snapd is present, run the upgrade
+        return 1
+    fi
+
+    if [ ! -e "/var/lib/lxd/server.crt" ]; then
+        # LXD was never used, safe to skip
+        return 0
+    fi
+
+    for path in containers images networks storage-pools; do
+        if [ ! -e "/var/lib/lxd/${path}" ]; then
+            # Path doesn't exist, continue to next one
+            continue
+        fi
+
+        if [ -n "$(ls -A "/var/lib/lxd/${path}")" ]; then
+            # Detected some data, unsafe to skip automatically
+            return 1
+        fi
+    done
+
+    return 0
+}
+
+case "$1" in
+    install|upgrade)
+        . /usr/share/debconf/confmodule
+
+        # Early check for systems that were already switched
+        if ([ ! -e "/var/lib/lxd/server.crt" ] || [ ! -e "/var/lib/lxd" ]) && [ -e "/var/snap/lxd" ]; then
+            exit 0
+        fi
+
+        echo "=> Installing the LXD snap"
+
+        # Warn about downtime
+        if [ -e "/var/lib/lxd/server.crt" ]; then
+            db_input high lxd/snap-upgrade-warning || true
+            db_go
+        fi
+
+        # Check store connectivity
+        echo "==> Checking connectivity with the snap store"
+        COUNT=0
+        SKIP=false
+        while :; do
+            if skip_unusable_snapd; then
+                echo "===> System doesn't have a working snapd and LXD was never used, skipping"
+                SKIP=true
+                break
+            fi
+
+            snap info lxd >/dev/null 2>&1 && break
+
+            db_fset lxd/snap-no-connectivity seen false
+            if ! db_input critical lxd/snap-no-connectivity; then
+                db_go
+
+                if [ "${COUNT}" = "0" ]; then
+                    echo "===> Unable to contact the store, trying every minute for the next 30 minutes"
+                elif [ "${COUNT}" = "10" ]; then
+                    echo "===> Still unable to contact the store, trying for another 20 minutes"
+                elif [ "${COUNT}" = "20" ]; then
+                    echo "===> Still unable to contact the store, trying for another 10 minutes"
+                elif [ "${COUNT}" = "30" ]; then
+                    echo "===> Still unable to contact the store, aborting"
+                    exit 1
+                fi
+
+                sleep 1m
+            else
+                db_go
+                db_get lxd/snap-no-connectivity
+                if [ "${RET}" = "Abort" ]; then
+                    echo "===> Aborting at user request"
+                    exit 1
+                elif [ "${RET}" = "Skip" ]; then
+                    if ! [ -e "/var/lib/lxd/server.crt" ]; then
+                        echo "===> Skipping at user request"
+                        SKIP=true
+                        break
+                    else
+                        db_fset lxd/snap-install-cant-be-skipped seen false
+                        db_input critical lxd/snap-install-cant-be-skipped || true
+                        db_go
+                    fi
+                fi
+
+                if [ "${COUNT}" = "0" ]; then
+                    echo "===> Unable to contact the store"
+                fi
+            fi
+
+            COUNT=$((COUNT+1))
+        done
+
+        if ! ${SKIP}; then
+            # Set the default track
+            db_get lxd/snap-track
+            if [ -z "${RET}" ]; then
+                if [ -e "/etc/os-release" ] && grep -q " LTS " /etc/os-release; then
+                    db_set lxd/snap-track "4.0"
+                fi
+
+                db_fset lxd/snap-track seen false
+            fi
+
+            # Prompt about track
+            db_input high lxd/snap-track || true
+            db_go
+
+            # Get the track
+            db_get lxd/snap-track
+            track=${RET}
+
+            # Workaround for broken systems
+            mkdir -p /lib/modules
+
+            # Extract the OS release
+            RELEASE="19.04"
+            if [ -e "/etc/os-release" ]; then
+                RELEASE=$(. /etc/os-release && echo "${VERSION_ID}")
+            fi
+
+            # Install the snap
+            echo "==> Installing the LXD snap from the ${track} track for ubuntu-${RELEASE}"
+            if [ "${track}" = "latest" ]; then
+                snap install lxd --channel="stable/ubuntu-${RELEASE}"
+            else
+                snap install lxd --channel="${track}/stable/ubuntu-${RELEASE}"
+            fi
+
+            if [ -e "/var/lib/lxd/server.crt" ]; then
+                echo "==> Waiting for LXD to be online (10min timeout)"
+                /snap/bin/lxd waitready --timeout=600
+
+                echo "==> Running migration from Deb to Snap"
+                export LXD_PREINST=1
+                /snap/bin/lxd.migrate --yes
+            fi
+
+            echo "=> Snap installation complete"
+        fi
+
+        echo "==> Cleaning up leftovers"
+        deb-systemd-invoke stop lxd.socket lxd.service lxd-containers.service || true
+        deb-systemd-invoke disable lxd.socket lxd.service lxd-containers.service || true
+        update-rc.d lxd remove || true
+        rm -rf --one-file-system /etc/dnsmasq.d-available/lxd
+        rm -rf --one-file-system /etc/init.d/lxd
+        rm -rf --one-file-system /etc/logrotate.d/lxd
+        rm -rf --one-file-system /etc/sysctl.d/10-lxd-inotify.conf
+        rm -rf --one-file-system /var/lib/lxd
+        rm -rf --one-file-system /var/log/lxd
+
+    ;;
+
+    abort-upgrade|abort-remove|abort-deconfigure)
+    ;;
+
+    *)
+        echo "postinst called with unknown argument \`$1'" >&2
+        exit 1
+    ;;
+esac
+
+
+
+exit 0

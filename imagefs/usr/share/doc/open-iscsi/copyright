@@ -1,0 +1,382 @@
+Format: https://www.debian.org/doc/packaging-manuals/copyright-format/1.0/
+Upstream-Name: Open-iSCSI
+Source: http://www.open-iscsi.com/
+
+Files: *
+Copyright: 2004-2005 Dmitry Yusupov <dima@neterion.com>
+           2004-2005 Alex Aizman <itn780@yahoo.com>
+           2006-2016 Red Hat, Inc.
+           2004-2016 Mike Christie <michaelc@cs.wisc.edu>
+           2016 Chris Leech <cleech@redhat.com>
+           2016 Lee Duncan <lduncan@suse.com>
+License: GPL-2+
+
+Files: include/fw_context.h
+       utils/fwparam_ibft/*
+Copyright: 2006-2007 IBM Corporation
+           Author: Doug Maxey <dwm@austin.ibm.com>
+License: GPL-2+
+
+Files: include/sysdeps.h
+       usr/sysfs.c
+       usr/sysfs.h
+       utils/sysdeps/*
+Copyright: 2003-2006 Kay Sievers <kay.sievers@vrfy.org>
+           2003 Greg Kroah-Hartman <greg@kroah.com>
+Comment: These files are based on the udev source code.
+License: GPL-2
+
+Files: iscsiuio/*
+Copyright: 2009-2011 Broadcom Corporation
+           2014-2015 QLogic Corporation
+Comment: iscsiuio is a separate binary that does not link against other
+         code in the package, so its license does not need to be
+         compatible with the GPL.
+License: BSD-4-clause
+
+Files: iscsiuio/src/apps/dhcpc/dhcpc.c
+       iscsiuio/src/apps/dhcpc/dhcpc.h
+       iscsiuio/src/uip/lc-addrlabels.h
+       iscsiuio/src/uip/uip-neighbor.c
+       iscsiuio/src/uip/lc-switch.h
+       iscsiuio/src/uip/timer.c
+       iscsiuio/src/uip/pt.h
+       iscsiuio/src/uip/timer.h
+       iscsiuio/src/uip/lc.h
+       iscsiuio/src/uip/clock.h
+       iscsiuio/src/uip/uip-neighbor.h
+       iscsiuio/src/uip/psock.c
+       iscsiuio/src/uip/ipv6_ndpc.c
+       iscsiuio/src/uip/psock.h
+       iscsiuio/src/unix/clock-arch.c
+       iscsiuio/src/unix/clock-arch.h
+       iscsiuio/src/unix/uip-conf.h
+Copyright: 2004-2006 Swedish Institute of Computer Science
+License: BSD-3-clause-1
+
+Files: iscsiuio/src/uip/uip.c
+       iscsiuio/src/uip/uip.h
+       iscsiuio/src/uip/uip_arch.h
+       iscsiuio/src/uip/uip_arp.c
+       iscsiuio/src/uip/uip_arp.h
+       iscsiuio/src/uip/uipopt.h
+Copyright: 2001-2003 Adam Dunkels
+License: BSD-3-clause-2
+
+Files: iscsiuio/src/unix/main.c
+Copyright: 2001 Adam Dunkels
+License: BSD-4-clause
+
+Files: kernel/scsi_transport_iscsi.c
+       kernel/scsi_transport_iscsi.h
+Copyright: 2004 IBM Corporation
+           2004-2005 Dmitry Yusupov <dima@neterion.com>
+           2004-2005 Alex Aizman <itn780@yahoo.com>
+           2004-2006 Mike Christie <michaelc@cs.wisc.edu>
+License: GPL-2+
+
+Files: usr/auth.c
+       usr/auth.h
+       usr/config.h
+       usr/discovery.c
+       usr/io.c
+       usr/iscsi_timer.c
+       usr/iscsi_timer.h
+       usr/strings.c
+       usr/strings.h
+Copyright: 2001-2002 Cisco Systems, Inc
+License: GPL-2+
+
+Files: usr/ethtool-copy.h
+Copyright: 1998 David S. Miller <davem@redhat.com>
+           2001 Jeff Garzik <jgarzik@pobox.com>
+           2001 Sun Microsystems <thockin@sun.com>
+           2002 Intel <eli.kupermann@intel.com>
+           2001 Sun Microsystems <thockin@sun.com>
+           2002 Intel <scott.feldman@intel.com>
+Comment: This file is based on the ethtool source code.
+License: GPL-2
+
+Files: usr/event_poll.c
+       usr/mgmt_ipc.c
+Copyright: 2004 FUJITA Tomonori <tomof@acm.org>
+           2004 Dmitry Yusupov <dima@neterion.com>
+           2004 Alex Aizman <itn780@yahoo.com>
+           2006 Mike Christie <michaelc@cs.wisc.edu>
+           2006 Red Hat Inc.
+License: GPL-2+
+
+Files: usr/flashnode.c
+       usr/flashnode.h
+Copyright: 2013 QLogic Corporation
+License: GPL-2+
+
+Files: usr/iscsiadm.c
+Copyright: 2004 Dmitry Yusupov <dima@neterion.com>
+           2004 Alex Aizman <itn780@yahoo.com>
+           2006 Red Hat, Inc.
+           2006 Mike Christie <michaelc@cs.wisc.edu>
+           2011 Dell, Inc.
+License: GPL-2+
+
+Files: usr/kern_err_table.c
+       usr/kern_err_table.h
+Copyright: 2011 Aastha Mehta <aasthakm@gmail.com>
+           2011 Mike Christie <michaelc@cs.wisc.edu>
+License: GPL-2+
+
+Files: usr/log.c
+       usr/log.h
+       usr/types.h
+Copyright: 2002-2003 Ardis Technolgies <roman@ardistech.com>
+           2004 Dmitry Yusupov <dima@neterion.com>
+           2004-2005 Alex Aizman <itn780@yahoo.com>
+License: GPL-2
+
+Files: usr/login.c
+Copyright: 2001 Cisco Systems, Inc.
+           2004 Dmitry Yusupov <dima@neterion.com>
+           2004 Alex Aizman <itn780@yahoo.com>
+License: GPL-2+
+
+Files: usr/md5.c
+       usr/md5.h
+Copyright: Author: 1993 Colin Plumb
+License: public-domain
+ This is the header file for the MD5 message-digest algorithm.
+ The algorithm is due to Ron Rivest.  This code was
+ written by Colin Plumb in 1993, no copyright is claimed.
+ This code is in the public domain; do with it what you wish.
+ .
+ Equivalent code is available from RSA Data Security, Inc.
+ This code has been tested against that, and is equivalent,
+ except that you don't need to include two pages of legalese
+ with every copy.
+ .
+ To compute the message digest of a chunk of bytes, declare an
+ MD5Context structure, pass it to MD5Init, call MD5Update as
+ needed on buffers full of bytes, and then call MD5Final, which
+ will fill a supplied 16-byte array with the digest.
+ .
+ Changed so as no longer to depend on Colin Plumb's `usual.h'
+ header definitions; now uses stuff from dpkg's config.h
+  - Ian Jackson <ijackson@nyx.cs.du.edu>.
+ Still in the public domain.
+
+Files: include/list.h
+       usr/scsi.c
+       usr/scsi.h
+Copyright: 1991-2012 Linus Torvalds and many others
+           1997 Eric Youngdale
+Comment: These files are based on the Linux Kernel source code.
+License: GPL-2
+
+Files: usr/session_mgmt.c
+Copyright: 2010 Mike Christie <michaelc@cs.wisc.edu>
+           2010 Red Hat, Inc.
+           2011 Dell, Inc.
+License: GPL-2+
+
+Files: usr/sha1.c
+Copyright: Alan Smithee
+           Andrew McDonald <andrew@mcdonald.org.uk>
+           Jean-Francois Dive <jef@linuxbe.org>
+License: GPL-2+
+
+Files: usr/sha1.h
+Copyright: 2004 Xiranet Communications GmbH <arne.redlich@xiranet.com>
+License: GPL-2
+
+Files: utils/fwparam_ibft/fwparam_ibft.c
+Copyright: 2006 IBM Corporation
+           Author: Patrick Mansfield <patmans@us.ibm.com>
+License: GPL-2+
+
+Files: utils/fwparam_ibft/fwparam_ibft_sysfs.c
+       utils/fwparam_ibft/fwparam_sysfs.c
+Copyright: 2007 IBM Corporation
+           2008-2010 Red Hat, Inc.
+           2008-2010 Mike Christie <michaelc@cs.wisc.edu>
+License: GPL-2+
+
+Files: utils/fwparam_ibft/prom_parse.tab.c
+       utils/fwparam_ibft/prom_parse.tab.h
+Copyright: 1984-2006, Free Software Foundation, Inc.
+License: GPL-2+ with Bison exception
+
+Files: utils/iscsi-gen-initiatorname
+       utils/iscsi_offload
+Copyright: 2011 Hannes Reinecke, SUSE Labs
+License: GPL-2
+
+Files: utils/iscsi-iname.c
+Copyright: 2001-2002 Cisco Systems, Inc
+License: GPL-2+
+
+Files: utils/iscsi_discovery
+Copyright: 2006 Voltaire Ltd.
+License: GPL-2+
+
+Files: debian/*
+Copyright: 2006-2008 Philipp Hug <debian@hug.cx>
+           2010 Guido Günther <agx@sigxcpu.org>
+           2010-2016 Ritesh Raj Sarraf <rrs@researchut.com>
+           2016 Christian Seiler <christian@iwakd.de>
+License: GPL-2+
+
+Files: debian/patches/*
+Copyright: 2016 Christian Seiler <christian@iwakd.de>
+           2016 Ritesh Raj Sarraf <rrs@researchut.com>
+License: Patches-GPL-2+-or-BSD-4-clause
+
+Files: debian/patches/debian/var-run-lock.patch
+Copyright: 2016 Stéphane Graber <stgraber@ubuntu.com>
+License: Patches-GPL-2+-or-BSD-4-clause
+
+License: BSD-3-clause-1
+ Redistribution and use in source and binary forms, with or without
+ modification, are permitted provided that the following conditions
+ are met:
+ 1. Redistributions of source code must retain the above copyright
+    notice, this list of conditions and the following disclaimer.
+ 2. Redistributions in binary form must reproduce the above copyright
+    notice, this list of conditions and the following disclaimer in the
+    documentation and/or other materials provided with the distribution.
+ 3. Neither the name of the Institute nor the names of its contributors
+    may be used to endorse or promote products derived from this software
+    without specific prior written permission.
+ .
+ THIS SOFTWARE IS PROVIDED BY THE INSTITUTE AND CONTRIBUTORS ``AS IS'' AND
+ ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+ IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
+ ARE DISCLAIMED.  IN NO EVENT SHALL THE INSTITUTE OR CONTRIBUTORS BE LIABLE
+ FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
+ DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS
+ OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION)
+ HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT
+ LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY
+ OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
+ SUCH DAMAGE.
+
+License: BSD-3-clause-2
+ Redistribution and use in source and binary forms, with or without
+ modification, are permitted provided that the following conditions
+ are met:
+ 1. Redistributions of source code must retain the above copyright
+    notice, this list of conditions and the following disclaimer.
+ 2. Redistributions in binary form must reproduce the above copyright
+    notice, this list of conditions and the following disclaimer in the
+    documentation and/or other materials provided with the distribution.
+ 3. The name of the author may not be used to endorse or promote
+    products derived from this software without specific prior
+    written permission.
+ .
+ THIS SOFTWARE IS PROVIDED BY THE AUTHOR ``AS IS'' AND ANY EXPRESS
+ OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
+ WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
+ ARE DISCLAIMED.  IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR ANY
+ DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
+ DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE
+ GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS
+ INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY,
+ WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
+ NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
+ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+
+License: BSD-4-clause
+ Redistribution and use in source and binary forms, with or without
+ modification, are permitted provided that the following conditions
+ are met:
+ 1. Redistributions of source code must retain the above copyright
+    notice, this list of conditions and the following disclaimer.
+ 2. Redistributions in binary form must reproduce the above copyright
+    notice, this list of conditions and the following disclaimer in the
+    documentation and/or other materials provided with the distribution.
+ 3. All advertising materials mentioning features or use of this software
+    must display the following acknowledgement:
+      This product includes software developed by Adam Dunkels.
+ 4. The name of the author may not be used to endorse or promote
+    products derived from this software without specific prior
+    written permission.
+ .
+ THIS SOFTWARE IS PROVIDED BY THE AUTHOR ``AS IS'' AND ANY EXPRESS
+ OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
+ WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
+ ARE DISCLAIMED.  IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR ANY
+ DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
+ DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE
+ GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS
+ INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY,
+ WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
+ NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
+ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+
+License: GPL-2+
+ This package is free software; you can redistribute it and/or modify
+ it under the terms of the GNU General Public License as published by
+ the Free Software Foundation; either version 2 of the License, or
+ (at your option) any later version.
+ .
+ This package is distributed in the hope that it will be useful,
+ but WITHOUT ANY WARRANTY; without even the implied warranty of
+ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ GNU General Public License for more details.
+ .
+ You should have received a copy of the GNU General Public License
+ along with this program. If not, see <https://www.gnu.org/licenses/>
+ .
+ On Debian systems, the complete text of the GNU General
+ Public License version 2 can be found in "/usr/share/common-licenses/GPL-2".
+
+License: GPL-2
+ This package is free software; you can redistribute it and/or modify
+ it under the terms of the GNU General Public License version 2 as
+ published by the Free Software Foundation.
+ .
+ This package is distributed in the hope that it will be useful,
+ but WITHOUT ANY WARRANTY; without even the implied warranty of
+ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ GNU General Public License for more details.
+ .
+ You should have received a copy of the GNU General Public License
+ along with this program. If not, see <https://www.gnu.org/licenses/>
+ .
+ On Debian systems, the complete text of the GNU General Public License
+ version 2 can be found in `/usr/share/common-licenses/GPL-2'.
+
+License: GPL-2+ with Bison exception
+ This package is free software; you can redistribute it and/or modify
+ it under the terms of the GNU General Public License as published by
+ the Free Software Foundation; either version 2 of the License, or
+ (at your option) any later version.
+ .
+ This package is distributed in the hope that it will be useful,
+ but WITHOUT ANY WARRANTY; without even the implied warranty of
+ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ GNU General Public License for more details.
+ .
+ You should have received a copy of the GNU General Public License
+ along with this program. If not, see <https://www.gnu.org/licenses/>
+ .
+ On Debian systems, the complete text of the GNU General
+ Public License version 2 can be found in "/usr/share/common-licenses/GPL-2".
+ .
+ As a special exception, you may create a larger work that contains
+ part or all of the Bison parser skeleton and distribute that work
+ under terms of your choice, so long as that work isn't itself a
+ parser generator using the skeleton or a modified version thereof
+ as a parser skeleton.  Alternatively, if you modify or redistribute
+ the parser skeleton itself, you may (at your option) remove this
+ special exception, which will cause the skeleton and the resulting
+ Bison output files to be licensed under the GNU General Public
+ License without this special exception.
+ .
+ This special exception was added by the Free Software Foundation in
+ version 2.2 of Bison.
+
+License: Patches-GPL-2+-or-BSD-4-clause
+ Changes to files under the iscsiuio/ directory are licensed under the
+ 4-clause BSD license. Changes to files under any other directory are
+ licensed under the GNU General Public license version 2, or (at your
+ option) any later version. See the GPL-2+ and BSD-4-clause license
+ paragraphs for further details.

@@ -1,0 +1,5 @@
+c4ea37fec8ce4b74cd091591a6b8ef5e  lib/systemd/system/lxd-agent-9p.service
+d9df4e294a93a5fd1a9e2eac8809c72f  lib/systemd/system/lxd-agent.service
+79508dc49e3fb6c47b2acc95944668bb  usr/share/doc/lxd-agent-loader/changelog.gz
+ed72a7c11e43be85318bf09fd52ebb5a  usr/share/doc/lxd-agent-loader/copyright
+e41fb84f43d8bd94743e65896fbaf14d  usr/share/lintian/overrides/lxd-agent-loader

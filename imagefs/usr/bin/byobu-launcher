@@ -1,0 +1,54 @@
+#!/bin/sh -e
+#
+#    byobu-launcher - conditionally launch byobu
+#    Copyright (C) 2010 Canonical Ltd.
+#
+#    Authors: Dustin Kirkland <kirkland@byobu.org>
+#
+#    This program is free software: you can redistribute it and/or modify
+#    it under the terms of the GNU General Public License as published by
+#    the Free Software Foundation, version 3 of the License.
+#
+#    This program is distributed in the hope that it will be useful,
+#    but WITHOUT ANY WARRANTY; without even the implied warranty of
+#    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+#    GNU General Public License for more details.
+#
+#    You should have received a copy of the GNU General Public License
+#    along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
+PKG="byobu"
+# Bad things happen if you run byobu, but you don't own your $HOME
+# ie, rather than "sudo byobu", you must run "sudo -H byobu"
+if [ -O "$HOME" ]; then
+	[ -r "$HOME/.byoburc" ] && . "$HOME/.byoburc"
+	[ -z "${BYOBU_PREFIX}" ] && export BYOBU_PREFIX="/usr" || export BYOBU_PREFIX
+	. "${BYOBU_PREFIX}/lib/${PKG}/include/common"
+	if [ -e "$BYOBU_CONFIG_DIR/disable-autolaunch" ]; then
+		false
+	else
+		case "$TERM" in
+			*screen*)
+				# Handle nesting
+				if [ -n "$SSH_CONNECTION" ] && [ "$(printf "$SSH_CONNECTION" | awk '{print $1}')" != "$(printf "$SSH_CONNECTION" | awk '{print $3}')" ]; then
+					# Safeguard against ssh-ing into ourself, which causes an infinite loop
+					exec $BYOBU_PREFIX/bin/byobu "$@"
+				else
+					echo "INFO: Disabling auto-launch of Byobu in this SSH connection, to avoid a potential infinite loop" 1>&2
+					echo "INFO: You can still run 'byobu' manually at the command line, if you know what you're doing" 1>&2
+					true
+				fi
+			;;
+			dumb)
+				# Dumb terminal, don't launch
+				false
+			;;
+			*)
+				exec $BYOBU_PREFIX/bin/byobu "$@"
+			;;
+		esac
+	fi
+fi
+false
+
+# vi: syntax=sh ts=4 noexpandtab

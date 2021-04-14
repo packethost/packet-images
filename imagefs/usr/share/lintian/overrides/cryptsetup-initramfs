@@ -1,0 +1,3 @@
+# `cryptroot-unlock` is meant to be run from the initramfs image, using busybox's /bin/ash
+unusual-interpreter usr/share/cryptsetup/initramfs/bin/cryptroot-unlock #!/bin/busybox
+no-debconf-config

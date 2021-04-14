@@ -1,0 +1,5 @@
+975792dfc78b5fe2ea75fdb4088cc03d  usr/bin/lxc
+6967bf40f96deb0c29d4455e5057c44b  usr/bin/lxd
+d11f1ee6a78a5f26b4e3e515bb413f7c  usr/share/doc/lxd/changelog.gz
+8789d4b9f5c63634f844e099e377bca2  usr/share/doc/lxd/copyright
+88c4be1fa0c4f2569fc3a98539670ab7  usr/share/lintian/overrides/lxd

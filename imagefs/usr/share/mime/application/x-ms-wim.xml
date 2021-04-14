@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mime-type xmlns="http://www.freedesktop.org/standards/shared-mime-info" type="application/x-ms-wim">
+  <!--Created automatically by update-mime-database. DO NOT EDIT!-->
+  <comment>WIM disk image</comment>
+  <comment xml:lang="ca">imatge de disc WIM</comment>
+  <comment xml:lang="da">WIM-diskaftryk</comment>
+  <comment xml:lang="de">WIM-Datenträgerabbild</comment>
+  <comment xml:lang="eu">WIM disko irudia</comment>
+  <comment xml:lang="fi">WIM levykuva</comment>
+  <comment xml:lang="fr">image disque WIM</comment>
+  <comment xml:lang="hr">WIM slika diska</comment>
+  <comment xml:lang="it">Immagine disco WIM</comment>
+  <comment xml:lang="ko">WIM 디스크 이미지</comment>
+  <comment xml:lang="pl">Obraz dysku WIM</comment>
+  <comment xml:lang="pt-BR">Imagem de disco WIM</comment>
+  <comment xml:lang="uk">образ диска WIM</comment>
+  <acronym>WIM</acronym>
+  <expanded-acronym>Windows Imaging Format</expanded-acronym>
+  <glob pattern="*.wim"/>
+  <glob pattern="*.swm"/>
+</mime-type>

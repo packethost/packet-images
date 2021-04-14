@@ -1,0 +1,12 @@
+/.
+/usr
+/usr/sbin
+/usr/sbin/zerofree
+/usr/share
+/usr/share/doc
+/usr/share/doc/zerofree
+/usr/share/doc/zerofree/changelog.Debian.gz
+/usr/share/doc/zerofree/copyright
+/usr/share/man
+/usr/share/man/man8
+/usr/share/man/man8/zerofree.8.gz

@@ -1,0 +1,3 @@
+# manpages
+lxd: binary-without-manpage usr/bin/lxc
+lxd: binary-without-manpage usr/bin/lxd

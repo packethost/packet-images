@@ -1,0 +1,49 @@
+#!/bin/sh
+
+set -e
+
+CONFFILE=/etc/cryptsetup-initramfs/conf-hook
+CONF_HOOK_CONTENTS="$(cat <<EOF
+#
+# Configuration file for the cryptroot initramfs hook.
+#
+
+#
+# KEYFILE_PATTERN: ...
+#
+# The value of this variable is interpreted as a shell pattern.
+# Matching key files from the crypttab(5) are included in the initramfs
+# image.  The associated devices can then be unlocked without manual
+# intervention.  (For instance if /etc/crypttab lists two key files
+# /etc/keys/{root,swap}.key, you can set KEYFILE_PATTERN="/etc/keys/*.key"
+# to add them to the initrd.)
+#
+# If KEYFILE_PATTERN if null or unset (default) then no key file is
+# copied to the initramfs image.
+#
+# Note that the glob(7) is not expanded for crypttab(5) entries with a
+# 'keyscript=' option.  In that case, the field is not treated as a file
+# name but given as argument to the keyscript.
+#
+# WARNING: If the initramfs image is to include private key material,
+# you'll want to create it with a restrictive umask in order to keep
+# non-privileged users at bay.  For instance, set UMASK=0077 in
+# /etc/initramfs-tools/initramfs.conf
+#
+
+#KEYFILE_PATTERN=
+EOF
+)"
+if [ "$1" = "install" -o "$1" = "upgrade" ] &&
+    [ -f "$CONFFILE" ] &&
+    dpkg --compare-versions -- "${2-}" le '2:2.0.3-1~'; then
+    md5sum="$(md5sum "$CONFFILE" | sed -e 's/ .*//')"
+    old_md5sum="$(dpkg-query -W -f='${Conffiles}' cryptsetup | \
+        sed -n -e "\'^ $CONFFILE ' { s/ obsolete$//; s/.* //; p }")"
+    if [ "$md5sum" = "$old_md5sum" ]; then
+        printf '%s\n' "$CONF_HOOK_CONTENTS" >"$CONFFILE.dpkg-new"
+        mv -f "$CONFFILE.dpkg-new" "$CONFFILE"
+    fi
+fi
+
+

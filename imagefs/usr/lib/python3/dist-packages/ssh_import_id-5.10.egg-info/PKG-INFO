@@ -1,0 +1,12 @@
+Metadata-Version: 2.1
+Name: ssh-import-id
+Version: 5.10
+Summary: Authorize SSH public keys from trusted online identities
+Home-page: https://launchpad.net/ssh-import-id
+Author: Dustin Kirkland, Casey Marshall
+Author-email: dustin.kirkland@gmail.com, casey.marshall@gmail.com
+License: GPLv3
+Description: UNKNOWN
+Keywords: ssh public key
+Platform: any
+Description-Content-Type: markdown

@@ -1,0 +1,77 @@
+#!/bin/sh
+
+set -e
+
+PREREQ="cryptroot"
+
+prereqs()
+{
+	echo "$PREREQ"
+}
+
+case "$1" in
+    prereqs)
+        prereqs
+        exit 0
+        ;;
+esac
+
+. /usr/share/initramfs-tools/hook-functions
+. /lib/cryptsetup/functions
+
+if [ ! -x "$DESTDIR/lib/cryptsetup/scripts/decrypt_gnupg-sc" ] || [ ! -f "$TABFILE" ]; then
+    exit 0
+fi
+
+# Hooks for loading gnupg software and encrypted key into the initramfs
+copy_keys() {
+    crypttab_parse_options
+    if [ "${CRYPTTAB_OPTION_keyscript-}" = "/lib/cryptsetup/scripts/decrypt_gnupg-sc" ]; then
+        if [ -f "$CRYPTTAB_KEY" ]; then
+            [ -f "$DESTDIR$CRYPTTAB_KEY" ] || copy_file keyfile "$CRYPTTAB_KEY" || RV=$?
+        else
+            cryptsetup_message "ERROR: Target $CRYPTTAB_NAME has a non-existing key file $CRYPTTAB_KEY"
+            RV=1
+        fi
+    fi
+}
+
+RV=0
+crypttab_foreach_entry copy_keys
+
+PUBRING="/etc/cryptsetup-initramfs/pubring.gpg"
+if [ ! -f "$PUBRING" ]; then
+    cryptsetup_message "WARNING: $PUBRING: No such file"
+else
+    [ -d "$DESTDIR/cryptroot/gnupghome" ] || mkdir -pm0700 "$DESTDIR/cryptroot/gnupghome"
+    # let gpg(1) create the keyring on the fly; we're not relying on its
+    # internals since it's the very same binary we're copying to the
+    # initramfs
+    /usr/bin/gpg --no-options --no-autostart --trust-model=always \
+        --quiet --batch --no-tty --logger-file=/dev/null \
+        --homedir="$DESTDIR/cryptroot/gnupghome" --import <"$PUBRING"
+    # make sure not to clutter the initramfs with backup keyrings
+    find "$DESTDIR/cryptroot" -name "*~" -type f -delete
+fi
+
+copy_exec /usr/bin/gpg
+copy_exec /usr/bin/gpg-agent
+copy_exec /usr/lib/gnupg/scdaemon
+copy_exec /usr/bin/gpgconf
+copy_exec /usr/bin/gpg-connect-agent
+
+if [ ! -x "$DESTDIR/usr/bin/pinentry" ]; then
+    if [ -x "/usr/bin/pinentry-curses" ]; then
+        pinentry="/usr/bin/pinentry-curses"
+    elif [ -x "/usr/bin/pinentry-tty" ]; then
+        pinentry="/usr/bin/pinentry-tty"
+    else
+        cryptsetup_message "ERROR: missing required binary pinentry-curses or pinentry-tty"
+        RV=1
+    fi
+    copy_exec "$pinentry"
+    ln -s "$pinentry" "$DESTDIR/usr/bin/pinentry"
+fi
+[ -f "$DESTDIR/lib/terminfo/l/linux" ] || copy_file terminfo /lib/terminfo/l/linux || RV=$?
+
+exit $RV

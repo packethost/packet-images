@@ -1,0 +1,51 @@
+# match all devices with this udev subsystem
+[DeviceInstanceId=DRM_DP_AUX_DEV]
+Plugin = synaptics_mst
+
+# GUID generation for Synaptics MST plugin
+#
+# SynapticsMSTBoardID is the 16 bit board ID which contains:
+# * Customer ID in first byte
+# * Board ID in the second byte
+#
+# DeviceKind = system
+#  * Will map to a GUID containing HwID product SKU
+#  * These GUIDs will look like MST-${PRODUCTSKU}-${BOARDID}
+# DeviceKind != system
+#  * Will map to a GUID containing each comma delimited substring
+#  * These GUIDs will look like MST-${DEVICEKIND}-${CHIPID}-${BOARDID}
+#
+# By default the Synaptics MST device will restart after update
+# To override this behavior add the custom flag "skip-restart"
+#
+
+[SynapticsMSTBoardID=272]
+Name = Dell X6 Platform
+DeviceKind = system
+
+[SynapticsMSTBoardID=273]
+Name = Dell X7 Platform
+DeviceKind = system
+
+[SynapticsMSTBoardID=274]
+Name = Dell WD15/TB16/TB18 wired Dock
+DeviceKind = wd15,tb16,tb18
+
+[SynapticsMSTBoardID=275]
+Name = Dell WLD15 Wireless Dock
+DeviceKind = wld15
+
+[SynapticsMSTBoardID=277]
+Name = Dell Rugged Platform
+DeviceKind = system
+
+# ThinkPad Workstation Dock
+[DeviceInstanceId=MST-tesla-vmm2322-513]
+ParentGuid = USB\VID_17EF&PID_305A
+
+# ThinkPad Thunderbolt 3 Workstation Dock
+[DeviceInstanceId=MST-panamera-vmm5322-595]
+ParentGuid = TBT-01081720
+
+[SynapticsMSTBoardID=596]
+Name = ThinkPad USB-C Dock Gen2

@@ -1,0 +1,32 @@
+#!/bin/sh
+
+set -e
+
+PREREQ=""
+
+prereqs()
+{
+    echo "$PREREQ"
+}
+
+case $1 in
+    prereqs)
+        prereqs
+        exit 0
+        ;;
+esac
+
+# Hook for stopping smartcard reading software
+
+if [ ! -x /usr/sbin/pcscd ]; then
+    exit 0
+fi
+
+. /scripts/functions
+
+if PID="$(cat /run/pcscd.pid)" 2>/dev/null &&
+        [ "$(readlink -f "/proc/$PID/exe")" = "/usr/sbin/pcscd" ]; then
+    log_begin_msg "Stopping pcscd"
+    kill -TERM "$PID"
+    log_end_msg
+fi

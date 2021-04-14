@@ -1,0 +1,16 @@
+26acf727226e7625a11ee2f3789842cf  usr/lib/python3/dist-packages/hyperlink-19.0.0.egg-info/PKG-INFO
+68b329da9893e34099c7d8ad5cb9c940  usr/lib/python3/dist-packages/hyperlink-19.0.0.egg-info/dependency_links.txt
+68b329da9893e34099c7d8ad5cb9c940  usr/lib/python3/dist-packages/hyperlink-19.0.0.egg-info/not-zip-safe
+d41d8cd98f00b204e9800998ecf8427e  usr/lib/python3/dist-packages/hyperlink-19.0.0.egg-info/requires.txt
+1e1e57c4440c5ba49de40d0d7da3cccd  usr/lib/python3/dist-packages/hyperlink-19.0.0.egg-info/top_level.txt
+8d65cb4742096f73eba8107e0a3842b9  usr/lib/python3/dist-packages/hyperlink/__init__.py
+64cb28fba5c7c38249e1671d409f5288  usr/lib/python3/dist-packages/hyperlink/_url.py
+d41d8cd98f00b204e9800998ecf8427e  usr/lib/python3/dist-packages/hyperlink/test/__init__.py
+dc3226f94ae62c665b6d1f5335030984  usr/lib/python3/dist-packages/hyperlink/test/common.py
+9b6360b81591d88c44c769a8fc37d7ac  usr/lib/python3/dist-packages/hyperlink/test/test_common.py
+5759ec4fd702da383b39f560e9f55c50  usr/lib/python3/dist-packages/hyperlink/test/test_decoded_url.py
+ad3b30c4d9cd41e5b3d6b9ee02e69a51  usr/lib/python3/dist-packages/hyperlink/test/test_parse.py
+255836c977c90325261501596858c53a  usr/lib/python3/dist-packages/hyperlink/test/test_scheme_registration.py
+20762ed71ea42e08adf9685bb1308d50  usr/lib/python3/dist-packages/hyperlink/test/test_url.py
+8a679c4be9efc47123175341565de31f  usr/share/doc/python3-hyperlink/changelog.Debian.gz
+5fb839736bb304ba717fe8723d5e3dc2  usr/share/doc/python3-hyperlink/copyright

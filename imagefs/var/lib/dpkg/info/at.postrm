@@ -1,0 +1,27 @@
+#!/bin/sh
+set -e
+if [ "$1" = purge ]
+then
+	rm -rf /var/spool/cron/atjobs /var/spool/cron/atspool
+fi
+
+# Automatically added by dh_installinit/11.5.3ubuntu1
+if [ "$1" = "purge" ] ; then
+	update-rc.d atd remove >/dev/null
+fi
+# End automatically added section
+# Automatically added by dh_systemd_enable/11.5.3ubuntu1
+if [ "$1" = "remove" ]; then
+	if [ -x "/usr/bin/deb-systemd-helper" ]; then
+		deb-systemd-helper mask 'atd.service' >/dev/null || true
+	fi
+fi
+
+if [ "$1" = "purge" ]; then
+	if [ -x "/usr/bin/deb-systemd-helper" ]; then
+		deb-systemd-helper purge 'atd.service' >/dev/null || true
+		deb-systemd-helper unmask 'atd.service' >/dev/null || true
+	fi
+fi
+# End automatically added section
+

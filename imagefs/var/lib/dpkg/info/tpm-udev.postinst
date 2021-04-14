@@ -1,0 +1,43 @@
+#!/bin/sh
+
+set -e
+
+case "$1" in
+    configure)
+	# creating tss group if he isn't already there
+	if ! getent group tss >/dev/null; then
+            addgroup --system tss
+	fi
+
+	# creating tss user if he isn't already there
+	if ! getent passwd tss >/dev/null; then
+            adduser --system --ingroup tss --shell /bin/false \
+                    --home /var/lib/tpm --no-create-home \
+                    --gecos "TPM software stack" \
+                    tss
+	fi
+
+	# Setting owner
+	if [ -d /var/lib/tpm ] && getent passwd tss >/dev/null; then
+	    chown tss:tss /var/lib/tpm
+	fi
+
+	# ask udev to check for new udev rules (and fix device permissions)
+	if udevadm --version > /dev/null; then
+	    udevadm control --reload-rules ||:
+	    udevadm trigger --sysname-match="tpm[0-9]*" ||:
+	    udevadm trigger --action=add --subsystem-match=tpm ||:
+	    udevadm trigger --action=add --subsystem-match=tpmrm ||:
+	fi
+    ;;
+
+    abort-upgrade|abort-remove|abort-deconfigure)
+    ;;
+
+    *)
+        echo "postinst called with unknown argument \`$1'" >&2
+        exit 1
+    ;;
+esac
+
+

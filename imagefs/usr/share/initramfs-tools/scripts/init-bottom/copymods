@@ -1,0 +1,69 @@
+#!/bin/sh
+#  Copyright, 2014 Scott Moser <smoser@ubuntu.com>
+#
+#  This program is free software: you can redistribute it and/or modify
+#  it under the terms of the GNU General Public License as published by
+#  the Free Software Foundation, either version 3 of the License, or
+#  (at your option) any later version.
+#
+#  This program is distributed in the hope that it will be useful,
+#  but WITHOUT ANY WARRANTY; without even the implied warranty of
+#  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+#  GNU General Public License for more details.
+#
+#    You should have received a copy of the GNU General Public License
+#    along with this program.  If not, see
+#    <http://www.gnu.org/licenses/>.
+
+prereqs() {
+	local o="/scripts/init-bottom/overlayroot"  p=""
+	# basically we run after overlayroot but do not depend on it
+	for p in "$DESTDIR/" ""; do
+		[ -e "$p$o" ] && echo "overlayroot" && return 0
+	done
+}
+
+[ "$1" != "prereqs" ] || { prereqs; exit; }
+
+. /scripts/functions
+
+set -f
+PATH=/usr/sbin:/usr/bin:/sbin:/bin
+
+cmdline=""
+myopts=""
+if [ -f /proc/cmdline ]; then
+	read cmdline < /proc/cmdline
+	for tok in $cmdline; do
+		[ "${tok#copymods=}" != "$tok" ] || continue
+		myopts="${tok#copymods=}"
+	done
+fi
+myver=$(uname -r)
+
+if [ ! -d "/lib/modules/$myver" ]; then
+	log_warning_msg "Something odd, no /lib/modules/$myver in initramfs."
+	exit 0
+fi
+
+[ -d "$rootmnt/lib/modules" ] || mkdir -p "$rootmnt/lib/modules" ||
+	{ log_warning_msg "No /lib/modules in target. cannot help."; exit 0; }
+
+if [ -d "$rootmnt/lib/modules/$myver" ]; then
+	if [ "${myopts#*force}" = "$myopts" ]; then
+		exit 0
+	else
+		log_warning_msg "copying over existing modules! due to copymods=force"
+	fi
+fi
+
+mount -t tmpfs copymods "$rootmnt/lib/modules" ||
+	{ log_failure_msg "failed mount of tmpfs"; exit 0; }
+
+mv "/lib/modules/$myver" "$rootmnt/lib/modules" ||
+	{ log_failure_msg "failed to copy modules to target root"; exit 0; }
+
+ln -s "$rootmnt/lib/modules/$myver" "/lib/modules/$myver" ||
+	{ log_failure_msg "failed to link to modules"; exit 0; }
+
+# vi: ts=4 noexpandtab

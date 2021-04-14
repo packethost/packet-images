@@ -1,0 +1,14 @@
+#!/bin/sh
+set -e
+
+case "$1" in
+	remove|purge)
+		dpkg-trigger update-initramfs;;
+	*) exit 0;;
+esac
+
+
+exit 0
+
+# vi: ts=4 noexpandtab
+

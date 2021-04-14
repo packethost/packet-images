@@ -1,0 +1,61 @@
+#    byobu's bashrc -- colorize the prompt
+#    Copyright (C) 2014 Dustin Kirkland
+#
+#    Authors: Dustin Kirkland <kirkland@byobu.org>
+#
+#    This program is free software: you can redistribute it and/or modify
+#    it under the terms of the GNU General Public License as published by
+#    the Free Software Foundation, version 3 of the License.
+#
+#    This program is distributed in the hope that it will be useful,
+#    but WITHOUT ANY WARRANTY; without even the implied warranty of
+#    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+#    GNU General Public License for more details.
+#
+#    You should have received a copy of the GNU General Public License
+#    along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
+# Ensure that we're in a tmux or screen session
+case "$TERM" in
+	xterm)
+		# Try to ensure we have 256 colors
+		export TERM="xterm-256color"
+	;;
+esac
+if [ -n "$TMUX" ] || [ "${TERMCAP#*screen}" != "${TERMCAP}" ]; then
+	# Ensure that we're in bash, in a byobu environment
+	if [ -n "$BYOBU_BACKEND" ] && [ -n "$BASH" ]; then
+		byobu_prompt_status() { local e=$?; [ $e != 0 ] && echo -e "$e "; }
+		[ -n "$BYOBU_CHARMAP" ] || BYOBU_CHARMAP=$(locale charmap 2>/dev/null || echo)
+		byobu_prompt_symbol() {
+			if [ "$USER" = "root" ]; then
+				printf "%s" "#";
+			else
+				printf "%s" "\$"
+			fi
+		}
+		case "$BYOBU_DISTRO" in
+			"Ubuntu")
+				# Use Ubuntu colors (grey / orange / aubergine)
+				PS1="${debian_chroot:+($debian_chroot)}\[\e[38;5;202m\]\$(byobu_prompt_status)\[\e[38;5;245m\]\u\[\e[00m\]@\[\e[38;5;172m\]\h\[\e[00m\]:\[\e[38;5;5m\]\w\[\e[00m\]\$(byobu_prompt_symbol) "
+				export GREP_COLORS="ms=01;38;5;202:mc=01;31:sl=:cx=:fn=01;38;5;132:ln=32:bn=32:se=00;38;5;242"
+				export LESS_TERMCAP_mb=$(printf '\e[01;31m')       # enter blinking mode – red
+				export LESS_TERMCAP_md=$(printf '\e[01;38;5;180m') # enter double-bright mode – bold light orange
+				export LESS_TERMCAP_me=$(printf '\e[0m')           # turn off all appearance modes (mb, md, so, us)
+				export LESS_TERMCAP_se=$(printf '\e[0m')           # leave standout mode
+				export LESS_TERMCAP_so=$(printf '\e[03;38;5;202m') # enter standout mode – orange background highlight (or italics)
+				export LESS_TERMCAP_ue=$(printf '\e[0m')           # leave underline mode
+				export LESS_TERMCAP_us=$(printf '\e[04;38;5;139m') # enter underline mode – underline aubergine
+				# Use Ubuntu themed dircolors
+				if [ -e "${BYOBU_PREFIX}/share/byobu/profiles/dircolors" ]; then
+					dircolors "${BYOBU_PREFIX}/share/byobu/profiles/dircolors" > "$BYOBU_RUN_DIR/dircolors"
+					. "$BYOBU_RUN_DIR/dircolors"
+				fi
+			;;
+			*)
+				# Use Googley colors (blue / red / yellow / blue / green / red )
+                                PS1="${debian_chroot:+($debian_chroot)}\[\e[31m\]\$(byobu_prompt_status)\[\e[38;5;69m\]\u\[\e[38;5;214m\]@\[\e[38;5;167m\]\h\[\e[38;5;214m\]:\[\e[38;5;71m\]\w\[\e[38;5;214m\]\$(byobu_prompt_symbol)\[\e[00m\] "
+			;;
+		esac
+	fi
+fi

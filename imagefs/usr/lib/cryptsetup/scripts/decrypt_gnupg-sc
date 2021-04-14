@@ -1,0 +1,44 @@
+#!/bin/sh
+
+if [ -d "/cryptroot/gnupghome" ]; then
+    export GNUPGHOME="/cryptroot/gnupghome"
+fi
+
+run_gpg() {
+    gpg --no-options --trust-model=always "$@"
+}
+decrypt_gpg () {
+    local console _
+    if ! GPG_TTY="$(tty)"; then
+        read console _ </proc/consoles
+        GPG_TTY="/dev/$console"
+    fi
+    export GPG_TTY
+
+    if ! run_gpg --decrypt -- "$1"; then
+        return 1
+    fi
+    return 0
+}
+
+# `gpg-connect-agent LEARN /bye` is another (lighter) way, but it's
+# harder to retrieve the return code
+if ! run_gpg --batch --quiet --no-tty --card-status >/dev/null; then
+    echo "Please insert OpenPGP SmartCard..." >&2
+    until run_gpg --batch --quiet --no-tty --card-status; do
+        sleep 1
+    done >/dev/null 2>&1
+fi
+
+if [ ! -x /usr/bin/gpg ]; then
+    echo "$0: /usr/bin/gpg is not available" >&2
+    exit 1
+fi
+
+if [ -z "$1" ] || [ ! -f "$1" ]; then
+    echo "$0: missing key as argument" >&2
+    exit 1
+fi
+
+decrypt_gpg "$1"
+exit $?

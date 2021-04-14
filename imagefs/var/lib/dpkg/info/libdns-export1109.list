@@ -1,0 +1,11 @@
+/.
+/lib
+/lib/x86_64-linux-gnu
+/lib/x86_64-linux-gnu/libdns-export.so.1109.0.1
+/usr
+/usr/share
+/usr/share/doc
+/usr/share/doc/libdns-export1109
+/usr/share/doc/libdns-export1109/copyright
+/lib/x86_64-linux-gnu/libdns-export.so.1109
+/usr/share/doc/libdns-export1109/changelog.Debian.gz

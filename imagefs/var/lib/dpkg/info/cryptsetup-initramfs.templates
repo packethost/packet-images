@@ -1,0 +1,9 @@
+Template: cryptsetup-initramfs/prerm_active_mappings
+Type: boolean
+Default: true
+Description: Continue with cryptsetup-initramfs removal?
+ This system has unlocked dm-crypt devices: ${cryptmap}
+ .
+ If these devices are managed with cryptsetup and need to be present at
+ initramfs stage, then you might be unable to boot your system after the
+ package removal.

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mime-type xmlns="http://www.freedesktop.org/standards/shared-mime-info" type="x-content/ostree-repository">
+  <!--Created automatically by update-mime-database. DO NOT EDIT!-->
+  <comment>OSTree software updates</comment>
+  <comment xml:lang="ca">actualitzacions de programari OSTree</comment>
+  <comment xml:lang="da">OSTree-softwareopdateringer</comment>
+  <comment xml:lang="de">OSTree-Softwareaktualisierungen</comment>
+  <comment xml:lang="eu">OSTree software eguneraketak</comment>
+  <comment xml:lang="fi">OSTree ohjelmiston päivitykset</comment>
+  <comment xml:lang="fr">mises à jour logicielles OSTree</comment>
+  <comment xml:lang="hr">OSTree nadopune softvera</comment>
+  <comment xml:lang="it">Aggiornamenti software OSTree</comment>
+  <comment xml:lang="ko">OSTree 소프트웨어 업데이트</comment>
+  <comment xml:lang="pl">Aktualizacje oprogramowania OSTree</comment>
+  <comment xml:lang="pt-BR">Atualizações de software OSTree</comment>
+  <comment xml:lang="uk">оновлення програмного забезпечення OSTree</comment>
+</mime-type>

@@ -1,0 +1,17 @@
+rsync for Debian
+----------------
+
+If you still have an init.d based system, you need to edit /etc/default/rsync
+by hand to set
+RSYNC_ENABLE=true
+so that the init.d script will try to start the daemon.
+
+Note that this is not necessary for systemd-based systems; i.e. the default
+in jessie! To override options for the rsync daemon on these systems, copy
+/lib/systemd/system/rsync.service to /etc/systemd/system/rsync.service and
+modify the copy; add required options to the ExecStart line.
+
+You will need an /etc/rsyncd.conf file as described by the rsyncd.conf
+manpage for rsync to do anything useful as a daemon (the daemon won't
+start otherwise); you can look at
+/usr/share/doc/rsync/examples/rsyncd.conf as an example.

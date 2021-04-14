@@ -1,0 +1,46 @@
+#!/usr/bin/python
+# changelog_to_file -- An example of outputting to changelog to a file.
+# Copyright (C) 2007 James Westby <jw+debian@jameswestby.net>
+#
+# This program is free software; you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation; either version 2 of the License, or
+# (at your option) any later version.
+#
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with this program; if not, write to the Free Software
+# Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA
+
+from __future__ import print_function
+
+from debian.changelog import Changelog, Version
+import sys
+
+changelog = Changelog()
+
+changelog.new_block(package='python-debian',
+                    version=Version('0.1'),
+                    distributions='unstable',
+                    urgency='low',
+                    author='James Westby <jw+debian@jameswestby.net>',
+                    date='Thu,  3 Aug 2006 19:16:22 +0100',
+                    )
+
+changelog.add_change('');
+changelog.add_change('  * Welcome to changelog.py');
+changelog.add_change('');
+
+try:
+  filename = sys.argv[1]
+except IndexError:
+  print("Usage: "+sys.argv[0]+" filename")
+  sys.exit(1)
+
+with open(filename, 'w') as f:
+  changelog.write_to_open_file(f)
+

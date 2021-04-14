@@ -1,0 +1,11 @@
+Metadata-Version: 1.1
+Name: sos
+Version: 4.1
+Summary: A set of tools to gather troubleshooting information from a system.
+Home-page: https://github.com/sosreport/sos
+Author: Jake Hunsaker
+Author-email: jhunsake@redhat.com
+License: GPLv2+
+Description: UNKNOWN
+Platform: UNKNOWN
+Requires: pexpect

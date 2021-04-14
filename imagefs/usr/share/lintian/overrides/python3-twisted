@@ -1,0 +1,6 @@
+# Override this error as the Google Analytics is part of a layout template
+# that is only used internally by the Twisted project to generate online
+# API documentation.
+python3-twisted: privacy-breach-google-adsense usr/lib/python3/dist-packages/twisted/python/_pydoctortemplates/common.html
+python3-twisted: privacy-breach-google-adsense usr/lib/python3/dist-packages/twisted/python/_pydoctortemplates/index.html
+python3-twisted: privacy-breach-google-adsense usr/lib/python3/dist-packages/twisted/python/_pydoctortemplates/summary.html

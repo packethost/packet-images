@@ -1,0 +1,18 @@
+#!/bin/sh
+
+set -e
+
+case "$1" in
+    upgrade)
+        if dpkg --compare-versions "$2" le "551-1"; then
+            update-alternatives --quiet --install /usr/bin/pager pager \
+              /usr/bin/less 77 --slave /usr/share/man/man1/pager.1.gz \
+              pager.1.gz /usr/share/man/man1/less.1.gz
+            update-alternatives --quiet --remove pager /bin/less            
+        fi
+        ;;
+esac
+
+
+
+exit 0

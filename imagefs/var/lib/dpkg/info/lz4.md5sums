@@ -1,0 +1,6 @@
+20709e3ca34e6eb9f164ab63d684fd8e  usr/bin/lz4
+fa3639e4a99076bd03ad655a64d9662c  usr/share/doc/lz4/copyright
+c6cc1c3bad74cea695e939476549c2c8  usr/share/man/man1/lz4.1.gz
+c6cc1c3bad74cea695e939476549c2c8  usr/share/man/man1/lz4c.1.gz
+c6cc1c3bad74cea695e939476549c2c8  usr/share/man/man1/lz4cat.1.gz
+c6cc1c3bad74cea695e939476549c2c8  usr/share/man/man1/unlz4.1.gz

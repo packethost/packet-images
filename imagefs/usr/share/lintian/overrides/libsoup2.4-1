@@ -1,0 +1,2 @@
+# Historical quirk. We'd rename it if the SONAME gets bumped, but it isn't worth changing now
+libsoup2.4-1: package-name-doesnt-match-sonames libsoup-2.4-1

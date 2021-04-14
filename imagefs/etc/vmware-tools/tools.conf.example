@@ -1,0 +1,381 @@
+# Copyright (c) 2019-2020 VMware, Inc.  All rights reserved.
+
+# "CAUTION: tools.conf is highly syntax sensitive file. Use extreme caution
+# while editing it. If modified, it is automatically re-loaded by
+# VMware Tools services every 5 seconds."
+#
+# Lines must not end with trailing white space.
+
+[unsetenvironment]
+# Defines environment variables to be removed from the service reading
+# the configuration file. Supported formats are:
+#
+# 1. <variableName>=
+# 2. <serviceName>.<variableName>=
+#
+# Where <serviceName> refers to the 'vmsvc' and 'vmusr',
+# <variableName> refers to the name of the environment
+# variable to be removed. '=' sign after <variableName>
+# is mandatory to maintain the configuration file syntax.
+# However, anything after '=' is ignored.
+#
+# Case-sensitive behavior is defined by the operating system.
+#
+# Note: unsetenvironment group is processed before setenvironment group.
+# As the service environment is setup at start up time, any changes
+# in this group require service to be restarted in order to take effect.
+#
+# Unsetting PATH for all services:
+# PATH=
+#
+# Unsetting PATH for vmsvc only:
+# vmsvc.PATH=
+#
+# Unsetting PATH for vmusr only:
+# vmusr.PATH=
+
+[setenvironment]
+# Defines environment variables to be set for the service reading
+# the configuration file. Supported formats are:
+#
+# 1. <variableName>=<variableValue>
+# 2. <serviceName>.<variableName>=<variableValue>
+#
+# Where <serviceName> refers to the 'vmsvc' and 'vmusr',
+# <variableName> refers to the name of the environment
+# variable to be set, and <variableValue> refers to the
+# value to be assigned to the environment variable.
+#
+# Case-sensitive behavior is defined by the operating system.
+#
+# Note: setenvironment group is processed after unsetenvironment group.
+# As the service environment is setup at start up time, any changes
+# in this group require service to be restarted in order to take effect.
+#
+# Setting TMPDIR for all services:
+# TMPDIR=/vmware/temp
+#
+# Setting TMPDIR for vmsvc only:
+# vmsvc.TMPDIR=/vmware/vmsvc/temp
+#
+# Setting TMPDIR for vmusr only:
+# vmusr.TMPDIR=/vmware/vmusr/temp
+
+[logging]
+# set to false to disable logging
+#log = true
+
+# Log destinations for various services
+# By default, logs go to
+# %windir%/temp/vmware-<servicename>.log
+# for Windows, and
+# /var/log/vmware-<servicename>-<username>.log
+# for Linux, MacOS and Solaris.
+
+# Possible values for handler are:
+# file: logs to a file. Set *.data to the file name
+# file+: same as 'file', but appends to the file
+#  All file paths used in *.data value need to be in Unix
+#  format (forward slashes) and in utf-8, for all operating
+#  systems.
+# vmx: logs to the host (ESXi, Workstation, Fusion)
+# std: Logs to stdout for level >= 'message',
+# and to stderr for more severe than 'message'.
+# syslog: logs to syslog
+# outputdebugstring: uses OutputDebugString (Windows only)
+
+# If handler is 'syslog' and the OS is Linux, the facility
+# can be set with <domain>.facility. The facility value can be one of
+# 'local0'..'local7', 'daemon' or 'user'. The default is 'user'.
+#vmtoolsd.facility = user
+
+# possible values for level are:
+# debug, info, message, warning, critical, error
+# Note that "debug" level logs generate huge amounts of logs and may also
+# include sensitive data required for diagnosis. Therefore, this level should
+# be used only for the duration of diagnosis of an issue and reverted back to
+# default setting post diagnosis.
+
+# Enable tools service logging to a file.
+#vmtoolsd.level = debug
+#vmtoolsd.handler = file
+#vmtoolsd.data = c:/tmp/vmtoolsd-${USER}.log
+
+# Enable 'vmsvc' service logging to a file.
+#vmsvc.level = debug
+#vmsvc.handler = file
+#vmsvc.data = c:/tmp/vmsvc.log
+
+# Enable VMwareResolutionSet.exe logging to a file.
+# Comment this for Linux guest, sometimes vmusr logs are not generated due
+# to this being uncommented
+#vmresset.level = debug
+#vmresset.handler = file+
+#vmresset.data = c:/tmp/vmresset.log
+
+# Enable new "vmusr" service logging to a file.
+#vmusr.level = debug
+#vmusr.handler = file
+#vmusr.data = c:/tmp/vmusr.${USER}.log
+
+# Set the following configuration if you want to collect the logs for
+# vmware-toolbox-cmd utility
+#toolboxcmd.level = debug
+#toolboxcmd.handler = file
+#toolboxcmd.data = c:/tmp/vmtoolboxcmd-${USER}.log
+
+# Enable old VMwareUser/vmware-user logging to file.
+#log.file = c:/tmp/vmtools.log
+
+# Enable "hgfsServer" request handling logging to the appropriate service file.
+#hgfsServer.level = debug
+
+# Enable  "hgfs" manager and transport logging to the appropriate service file.
+#hgfsd.level = debug
+
+#vmbackup.level = debug
+#vmbackup.handler = vmx
+
+#vmvss.level = debug
+#vmvss.handler = vmx
+
+# Default 4096, 0=> disable log caching
+#maxCacheEntries=4096
+
+[powerops]
+# Custom scripts for power operations
+# This can be an absolute path, or a path relative to the tools
+# install path (/etc/vmware-tools/ for Linux).
+# For more information on configuring and querying custom scripts with
+# VMware Tools, see the "Use Custom VMware Tools Scripts" section of the
+# "VMware Tools Configuration Utility User's Guide".
+
+# Runs when the virtual machine is being powered on rather than resumed.
+# Also runs after virtual machine restarts.
+# The default script has no effect on networking for the virtual machine.
+#poweron-script=poweron-vm-default
+
+# Runs when the virtual machine is being powered off or reset.
+# The default script has no effect on networking for the virtual machine.
+#poweroff-script=poweroff-vm-default
+
+# Runs when the virtual machine is resumed after it was suspended.
+# On Windows guest operating systems, if the virtual machine is configured to
+# use DHCP, the default script renews the IP address of the virtual machine.
+# On Linux, Mac OS X, Solaris, and FreeBSD guest operating systems,
+# this script starts networking for the virtual machine.
+#resume-script=resume-vm-default
+
+# Runs when the virtual machine is being suspended.
+# On Windows guest operating systems, if the virtual machine is configured
+# to use DHCP, the default script releases the IP address of the virtual
+# machine.
+# On Linux, Mac OS X, Solaris, and FreeBSD, this script stops networking for
+# the virtual machine.
+#suspend-script=suspend-vm-default
+
+[guestinfo]
+
+# Set to true to disable the perf monitor.
+#disable-perf-mon=false
+
+# Set to true to disable DiskInfo.
+#disable-query-diskinfo=false
+
+# User-defined poll interval in seconds. Set to 0 to disable polling.
+#poll-interval=30
+
+# User-defined stats interval in seconds. Set to 0 to disable stats collection.
+#stats-interval=20
+
+# Whether stat results should be written to the log.
+#enable-stat-logging=false
+
+# Set a comma separated list of network interface names that can be the
+# primary ones. These will be sorted to the top. Interface names can use
+# wildcards like '*' and '?'. Default is no value.
+#primary-nics=
+
+# Set a comma separated list of network interface names that have low priority
+# (so they will be sorted to the end). Interface names can use wildcards like
+# '*' and '?'. Default is no value.
+#low-priority-nics=
+
+# Set a comma separated list of network interface names that shall be ignored.
+# Interface names can use wildcards like '*' and '?'.
+# Default for Linux and all non-Windows:
+#exclude-nics=veth*,docker*,virbr*
+# Default for Windows:
+#exclude-nics=vEthernet*
+
+# max umber of IPv4 routes to gather.
+#max-ipv4-routes=100
+
+# max umber of IPv6 routes to gather.
+#max-ipv6-routes=100
+
+# whether to include reserved space in diskInfo space metrics on Linux
+#diskinfo-include-reserved=false
+
+[appinfo]
+
+# This plugin collects info about running applications in guest OS.
+
+# Set to true to disable the appinfo plugin.
+#disabled=false
+
+# User-defined poll interval in seconds. Set to 0 to disable the plugin.
+#poll-interval=21600
+
+# For Windows guest, set to true to use WMI for getting the application
+# version info, otherwise native Win32 API is used.
+#useWMI=false
+
+[servicediscovery]
+
+# This plugin provides admins with additional info for better VM management.
+
+# Set to true to disable the servicediscovery plugin.
+#disabled=false
+
+[unity]
+#
+# Unity is available for Windows only.
+#
+
+# Set to true to override system decisions about whether unity should be available.
+#forceEnable=false
+
+# Override the desktop background color when in Unity mode.
+#desktop.backgroundColor=
+
+# The socket type can be 'ipsocket' or 'vsocket':
+#pbrpc.socketType
+
+[resolutionKMS]
+
+# Default is true if tools finds an xf86-video-vmware driver with
+# version >= 13.2.0. If you don't have X installed, set this to true manually.
+# This only affects tools for Linux.
+#enable=true
+
+[guestosinfo]
+
+# Override the short OS name sent by tools.
+#short-name=
+
+# Override the long OS name sent by tools.
+#long-name=
+
+[vmbackup]
+
+# enableSyncDriver is not available for Windows:
+#enableSyncDriver=true
+
+# enableVSS is Windows only:
+#enableVSS=true
+
+# See https://kb.vmware.com/s/article/2146204
+# can be used to fallback to FS quiescing forcely when there are app quiescing
+# problems for specific Windows systems
+#vss.disableAppQuiescing=false
+
+#execScripts=true
+#scriptArg=
+
+# Linux:
+# The value of excludedFileSystems is a comma-separated list of glob-style
+# patterns specifying the file systems to be excluded from quiesced snapshots.
+# The patterns may use '*' (wildcard) to represent any string of characters
+# and '?" (joker) to represent any single character. Note that the characters
+# represented by these patters, '*' and '?" may include any characters,
+# including '/'
+#
+# Windows:
+# The value of excludedFileSystems is a comma-separated list of mount points
+# specifying the volumes to be excluded from quiesced snapshots.
+# Each mount point must be a full path separated and ended with "\\".
+# to exclude volumes with drive letter E and mount point F:\mount\, set below
+# excludedFileSystems= E:\\,F:\\mount\\
+# This option only applies when app quiescing doesn't take effect.
+
+#excludedFileSystems=
+
+# Whether to execute scripts on quiescing.
+# Scripts are executed from /etc/vmware-tools/backupScripts.d on Linux and
+# %installpath%\backupScripts.d on Windows, and the legacy scripts
+# "c:\windows\pre-freeze-script.bat"
+# "c:\windows\post-thaw-script.bat"
+#
+# Linux:
+# "/usr/sbin/pre-freeze-script"
+# "/usr/sbin/post-thaw-script"
+#
+# Scripts will be called with "freeze", "freezeFail" or "thaw" as their first
+# arguments.
+
+#execScripts=true
+
+# additional argument to be passed to scripts
+#scriptArg=
+
+[guestoperations]
+
+# to disable all guest ops
+#disabled=false
+
+# Whether to use vgauth for guest op authentication
+#useVGAuth=true
+
+[autoupgrade]
+
+# The autoupgrade plugin is only available for Windows.
+
+# The "allow-upgrade" option controls whether automatic upgrades (or reinstalls)
+# are allowed. The two options "allow-add-feature" and "allow-remove-feature"
+# control whether adding or removing a feature will be allowed. The two latter
+# ones only affect Windows tools.
+
+#allow-upgrade=true
+#allow-add-feature=true
+#allow-remove-feature=true
+
+[deployPkg]
+
+# to disable guest customization
+#enable-customization=false
+
+[cbhelper]
+
+# The carbonblack helper plugin is only available for Windows.
+
+# User-defined poll interval in seconds. Set to 0 to disable polling.
+#poll-interval=60
+
+[gueststoreupgrade]
+
+# The guestStoreUpgrade plugin is only available for Windows.
+
+# The policy value is one of the settings listed below.
+# off         = no VMware Tools upgrade from GuestStore. Feature is
+#               disabled.
+# manual      = (Default) VMware Tools upgrade from GuestStore is
+#               manually started.
+# powercycle  = VMware Tools upgrade from GuestStore on system
+#               power on.
+
+#policy=manual
+
+# Time interval for periodically checking available VMware Tools package
+# version in the GuestStore.
+# User-defined poll interval in seconds. Set to 0 to disable polling.
+# Minimum valid value is 900 seconds (15 minutes)
+# Default value is 3600 seconds (60 minutes)
+#poll-interval=3600
+
+# VMware Tools package version metadata key to specify a VMware Tools
+# package version in the GuestStore.
+# User-defined key for VMware Tools package version.
+# Default value is "vmtools" which points to the latest version of
+# VMware Tools package in the GuestStore.
+#vmtools-version-key=vmtools

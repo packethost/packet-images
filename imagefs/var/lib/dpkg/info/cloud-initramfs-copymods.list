@@ -1,0 +1,15 @@
+/.
+/lib
+/lib/modules
+/usr
+/usr/share
+/usr/share/doc
+/usr/share/doc/cloud-initramfs-copymods
+/usr/share/doc/cloud-initramfs-copymods/changelog.gz
+/usr/share/doc/cloud-initramfs-copymods/copyright
+/usr/share/initramfs-tools
+/usr/share/initramfs-tools/hooks
+/usr/share/initramfs-tools/hooks/copymods
+/usr/share/initramfs-tools/scripts
+/usr/share/initramfs-tools/scripts/init-bottom
+/usr/share/initramfs-tools/scripts/init-bottom/copymods

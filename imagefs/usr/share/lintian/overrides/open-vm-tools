@@ -1,0 +1,4 @@
+# only kernel module source are under GPL.
+open-vm-tools: possible-gpl-code-linked-with-openssl
+# not used directly, better not executable
+open-vm-tools: script-not-executable etc/vmware-tools/statechange.subr

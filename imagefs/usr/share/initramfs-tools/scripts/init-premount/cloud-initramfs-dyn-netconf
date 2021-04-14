@@ -1,0 +1,133 @@
+#!/bin/sh
+set -e
+set -f
+
+PREREQS="udev"
+case $1 in
+	prereqs) echo "${PREREQS}"; exit 0;;
+esac
+
+. /scripts/functions
+
+PATH=/usr/sbin:/usr/bin:/sbin:/bin
+
+error() { echo "${0##*/}:" "$@" 1>&2; }
+fail() { [ $# -eq 0 ] || error "$@"; exit 0; }
+## this function ins taken and cleaned from configure_networking
+find_nic_by_mac() {
+		# look for devices with matching mac address, and set RET if found.
+		local mac="$1" curmac="" device="" found=""
+		case "$mac" in
+			*[A-Z]*) mac=$(echo "$mac" | awk '{print(tolower($0))}')
+		esac
+		set +f
+		for device in /sys/class/net/* ; do
+			[ -f "$device/address" ] || continue
+			read curmac < "$device/address" || continue
+			[ "$curmac" = "$mac" ] && found="${device##*/}" && break
+		done
+		set -f
+		[ -n "$found" ] && _RET=$found && return 0
+		return 1
+}
+
+bootif2macaddr() {
+	# bootif is specified as BOOTIF=01-${mac_address} with '-' rather than ':'
+	local input="$1" tok oifs="$IFS"
+	input=${input#??-}
+	IFS="-"
+	_RET=""
+	for tok in $input; do
+		_RET="${_RET}:${tok}"
+	done
+	IFS="$oifs"
+	_RET=${_RET#:}
+}
+
+nic2bootif() {
+	local nic="$1" macaddr="" tok="" oifs="$IFS"
+	[ -f "/sys/class/net/$nic/address" ] || return 1
+	read macaddr < "/sys/class/net/$nic/address"
+	IFS=":"
+	_RET="01"
+	for tok in $macaddr; do
+		_RET="${_RET}-${tok}"
+	done
+	IFS="$oifs"
+}
+
+read CMDLINE < /proc/cmdline
+
+# if BOOTIF_DEFAULT was present on the kernel cmdline, but no BOOTIF was
+# provided then we set BOOTIF based on the network device *name* in
+# BOOTIF_DEFAULT (BOOTIF_DEFAULT=eth0).  This allows a pxe boot implementation
+# without the ability or knowledge to specify IPAPPEND to function.
+bootif_new=""
+if [ -z "$BOOTIF" ]; then
+	for tok in $CMDLINE; do
+		case "$tok" in
+			BOOTIF_DEFAULT=*)
+				wait_for_udev 10
+				nic2bootif "${tok#BOOTIF_DEFAULT=}" || {
+					echo "WARNING: ${0##*/}: no device $tok"
+					continue
+				}
+				BOOTIF=${_RET}
+				bootif_new=${BOOTIF}
+				;;
+		esac
+	done
+fi
+
+# if hostname= is on the cmdline and IP=="dhcp", then change IP to
+#    ::::$hostname:BOOTIF:dhcp
+# This allows old code that specified 'ip=dhcp' to still convince ipconfig to
+# use a given hostname in dhcp request without requiring '::::$hostname:'.
+# The '::::$hostname:' without a device name means "wait for all network
+# devices".  If some are not plugged in, then it will hang for quite some time.
+#
+# This is really a specific kludge to deal with newer maas needing to operating
+# with existing original images from 12.04.  Those images were not able to
+# accept 'ip::::$hostname:BOOTIF' as they did not have this package installed.
+if [ -n "$BOOTIF" -a "$IP" = "dhcp" ]; then
+	for tok in $CMDLINE; do
+		case "$tok" in
+			hostname=*) IP="::::${tok#hostname=}:BOOTIF:dhcp"
+		esac
+	done
+fi
+
+# no IP or IP not containing BOOTIF means nothing to do
+case $IP in
+	*BOOTIF*) :;;
+	*) exit 0
+esac
+
+[ -n "$BOOTIF" ] || fail "WARNING: IP='$IP' but no BOOTIF set!"
+
+## we need to "fix" an IP= string that contains 'BOOTIF'
+## to instead reference the actual interface.
+wait_for_udev 10
+
+bootif2macaddr "$BOOTIF" && [ -n "$_RET" ] ||
+	fail "failed to convert BOOTIF='$BOOTIF'";
+macaddr=${_RET}
+
+find_nic_by_mac "$macaddr" && [ -n "$_RET" ] ||
+	fail "did no find a nic with $macaddr"
+devname=${_RET}
+
+# now replace occurences of BOOTIF in $IP with $devname
+cur="$IP"
+while [ "${cur#*BOOTIF}" != "$cur" ]; do
+   cur="${cur%%BOOTIF*}$devname${cur#*BOOTIF}"
+done
+new=$cur
+
+# get the global variables IP and BOOTIF reset with updated values
+{
+	echo "IP='$new'"
+	[ -z "$bootif_new" ] || echo "BOOTIF='${bootif_new}'"
+} > /conf/param.conf
+
+# vi: ts=4 noexpandtab

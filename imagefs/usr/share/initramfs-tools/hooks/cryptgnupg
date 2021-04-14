@@ -1,0 +1,45 @@
+#!/bin/sh
+
+set -e
+
+PREREQ="cryptroot"
+
+prereqs()
+{
+	echo "$PREREQ"
+}
+
+case "$1" in
+    prereqs)
+        prereqs
+        exit 0
+        ;;
+esac
+
+. /usr/share/initramfs-tools/hook-functions
+. /lib/cryptsetup/functions
+
+if [ ! -x "$DESTDIR/lib/cryptsetup/scripts/decrypt_gnupg" ] || [ ! -f "$TABFILE" ]; then
+    exit 0
+fi
+
+# Hooks for loading gnupg software and symmetrically encrypted key into
+# the initramfs
+copy_keys() {
+    crypttab_parse_options
+    if [ "${CRYPTTAB_OPTION_keyscript-}" = "/lib/cryptsetup/scripts/decrypt_gnupg" ]; then
+        if [ -f "$CRYPTTAB_KEY" ]; then
+            [ -f "$DESTDIR$CRYPTTAB_KEY" ] || copy_file keyfile "$CRYPTTAB_KEY" || RV=$?
+        else
+            cryptsetup_message "ERROR: Target $CRYPTTAB_NAME has a non-existing key file $CRYPTTAB_KEY"
+            RV=1
+        fi
+    fi
+}
+
+RV=0
+crypttab_foreach_entry copy_keys
+
+# Install gnupg software
+copy_exec /usr/bin/gpg
+exit $RV

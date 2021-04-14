@@ -1,0 +1,15 @@
+/.
+/usr
+/usr/lib
+/usr/lib/x86_64-linux-gnu
+/usr/lib/x86_64-linux-gnu/libeatmydata.so.1.1.2
+/usr/share
+/usr/share/doc
+/usr/share/doc/libeatmydata1
+/usr/share/doc/libeatmydata1/changelog.Debian.gz
+/usr/share/doc/libeatmydata1/copyright
+/usr/share/lintian
+/usr/share/lintian/overrides
+/usr/share/lintian/overrides/libeatmydata1
+/usr/lib/x86_64-linux-gnu/libeatmydata.so
+/usr/lib/x86_64-linux-gnu/libeatmydata.so.1

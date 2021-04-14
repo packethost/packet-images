@@ -1,0 +1,34 @@
+#!/bin/sh
+
+set -e
+
+_systemctl() {
+    if [ -d /run/systemd/system ]; then
+        systemctl "$@"
+    fi
+}
+
+# Automatically added by dh_installdeb/12.10ubuntu1
+dpkg-maintscript-helper rm_conffile /etc/dbus-1/system.d/org.freedesktop.hostname1.conf 233-3\~ -- "$@"
+dpkg-maintscript-helper rm_conffile /etc/dbus-1/system.d/org.freedesktop.locale1.conf 233-3\~ -- "$@"
+dpkg-maintscript-helper rm_conffile /etc/dbus-1/system.d/org.freedesktop.login1.conf 233-3\~ -- "$@"
+dpkg-maintscript-helper rm_conffile /etc/dbus-1/system.d/org.freedesktop.machine1.conf 228-5\~ -- "$@"
+dpkg-maintscript-helper rm_conffile /etc/dbus-1/system.d/org.freedesktop.network1.conf 233-3\~ -- "$@"
+dpkg-maintscript-helper rm_conffile /etc/dbus-1/system.d/org.freedesktop.resolve1.conf 233-3\~ -- "$@"
+dpkg-maintscript-helper rm_conffile /etc/dbus-1/system.d/org.freedesktop.systemd1.conf 233-3\~ -- "$@"
+dpkg-maintscript-helper rm_conffile /etc/dbus-1/system.d/org.freedesktop.timedate1.conf 233-3\~ -- "$@"
+dpkg-maintscript-helper rm_conffile /etc/dbus-1/system.d/org.freedesktop.systemd-shim.conf 239-15\~ systemd-shim -- "$@"
+dpkg-maintscript-helper rm_conffile /etc/dhcp/dhclient-exit-hooks.d/timesyncd 245.4-2\~ -- "$@"
+dpkg-maintscript-helper rm_conffile /etc/systemd/timesyncd.conf 245.4-2\~ -- "$@"
+# End automatically added section
+
+
+# Clean up after package split. If the new systemd-timesyncd package is
+# installed, it will enable and start the service again.
+if [ "$1" = "upgrade" ] && dpkg --compare-versions "$2" lt-nl "245.4-2~"; then
+    if _systemctl -q is-active systemd-timesyncd.service; then
+        _systemctl stop systemd-timesyncd.service || true
+    fi
+    rm -f /etc/systemd/system/sysinit.target.wants/systemd-timesyncd.service
+    # Don't bother with cleaning up the systemd-timesync group
+fi

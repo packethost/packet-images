@@ -1,0 +1,12 @@
+/.
+/usr
+/usr/lib
+/usr/lib/python3
+/usr/lib/python3/dist-packages
+/usr/lib/python3/dist-packages/entrypoints.egg-info
+/usr/lib/python3/dist-packages/entrypoints.py
+/usr/share
+/usr/share/doc
+/usr/share/doc/python3-entrypoints
+/usr/share/doc/python3-entrypoints/changelog.Debian.gz
+/usr/share/doc/python3-entrypoints/copyright

@@ -1,0 +1,28 @@
+{
+    "seeded": {
+        "core18": {
+            "from_channel": "stable",
+            "to_channel": "stable"
+        },
+        "gnome-3-34-1804": {
+        },
+        "gtk-common-themes": {
+        },
+        "snap-store": {
+            "deb": "gnome-software"
+        }
+    },
+    "unseeded": {
+        "gnome-3-28-1804": {
+        },
+        "gnome-calculator": {
+            "deb": "gnome-calculator"
+        },
+        "gnome-characters": {
+            "deb": "gnome-characters"
+        },
+        "gnome-logs": {
+            "deb": "gnome-logs"
+        }
+    }
+}

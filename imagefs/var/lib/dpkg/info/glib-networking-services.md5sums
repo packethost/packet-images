@@ -1,0 +1,5 @@
+200f366c3970e517cde6e16817c68b64  usr/lib/systemd/user/glib-pacrunner.service
+028aebfc607f108849b26546f40fe228  usr/libexec/glib-pacrunner
+e287b64d67cda05cf98d42adebfa9d12  usr/share/dbus-1/services/org.gtk.GLib.PACRunner.service
+13530bdde2277bbe383c590311986c1c  usr/share/doc/glib-networking-services/changelog.Debian.gz
+4ac25f170bb2c367dc28f8db6d2e50ed  usr/share/doc/glib-networking-services/copyright

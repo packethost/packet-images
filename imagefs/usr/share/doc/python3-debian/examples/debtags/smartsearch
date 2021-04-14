@@ -1,0 +1,199 @@
+#!/usr/bin/python
+
+# debtags - Implement package tags support for Debian
+#
+# Copyright (C) 2003--2006  Enrico Zini <enrico@debian.org>
+#
+# This program is free software: you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation, either version 3 of the License, or
+# (at your option) any later version.
+#
+# This program is distributed in the hope that it will be useful, but
+# WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+# General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
+from __future__ import print_function
+
+import sys
+import re
+import subprocess
+from debian import debtags
+import apt
+
+class SmartSearcher:
+    def __init__(self, fullcoll, query):
+        self.apt_cache = apt.Cache()
+
+        self.wanted = set()
+        self.unwanted = set()
+        self.ignored = set()
+        self.interesting = []
+
+        self.tags_in_menu = []
+
+        self.fullcoll = fullcoll
+
+        self.subcoll = fullcoll
+
+        # Initialise the search
+        self.compute_interesting(query)
+
+    def compute_interesting(self, query):
+        input = subprocess.Popen("apt-cache search " + query, shell=True, stdout = subprocess.PIPE, close_fds = True)
+
+        # Read the package list and create the subcollection
+        pkgs = []
+        for pkg in input.stdout:
+            pkg, none = pkg.rstrip("\n").split(' - ', 1)
+            #print(pkg)
+            pkgs.append(pkg)
+
+        subcoll = self.fullcoll.choose_packages(pkgs)
+
+        rel_index = debtags.relevance_index_function(self.fullcoll, subcoll)
+
+        # Get all the tags sorted by increasing relevance
+        self.interesting = sorted(self.subcoll.iter_tags(), lambda b, a: cmp(rel_index(a), rel_index(b)))
+
+    def tag_match(self, pkg):
+        tags = self.fullcoll.tags_of_package(pkg)
+        if len(self.wanted) > 0 and not self.wanted.issubset(tags):
+            return False
+        if len(self.unwanted) > 0 and len(tags.intersection(self.unwanted)) > 0:
+            return False
+        return True
+
+    def refilter(self):
+        # Regenerate subcoll
+        self.subcoll = self.fullcoll.filter_packages(self.tag_match)
+
+    def show_set(self, tags, type):
+        for tag in tags:
+            self.tags_in_menu.append(tag)
+            print("%d) %s (%s)" % (len(self.tags_in_menu), tag, type))
+
+    def show_choice_sequence(self, seq, max = 7):
+        for tag in seq:
+            if tag in self.wanted or tag in self.unwanted or tag in self.ignored:
+                continue
+            self.tags_in_menu.append(tag)
+            print("%d) %s (%d/%d)" % \
+                (len(self.tags_in_menu), tag, self.subcoll.card(tag), self.subcoll.package_count()))
+            max = max - 1
+            if max == 0: break
+
+    def show_tags(self):
+        self.tags_in_menu = []
+        self.show_set(self.wanted, "wanted")
+        self.show_set(self.unwanted, "unwanted")
+        self.show_set(self.ignored, "ignored")
+        print
+        self.show_choice_sequence(self.interesting)
+        print
+        # Compute the most interesting tags by discriminance
+        discr = sorted(self.subcoll.iter_tags(), \
+                  lambda a, b: cmp(self.subcoll.discriminance(a), self.subcoll.discriminance(b)))
+        self.show_choice_sequence(discr)
+
+    def output_packages(self):
+        for pkg in self.subcoll.iter_packages():
+            aptpkg = self.apt_cache[pkg]
+            desc = aptpkg.raw_description.split("\n")[0]
+            print(pkg, "-", desc)
+
+    def interact(self):
+        done = False
+        while not done:
+            print("Tag selection:")
+            self.show_tags()
+            print(self.subcoll.package_count(), " packages selected so far.")
+
+            changed = False
+
+            sys.stdout.write("Your choice (+#, -#, =#, K word, View, Done, Quit, ?): ")
+            ans = sys.stdin.readline()
+            if ans == None:
+                break
+            ans = ans.strip(" \t\n")
+
+            # If we're setting a new keyword search, process now and skip
+            # processing as a list
+            if ans == "?":
+                print("+ number  select the tag with the given number as a tag you want")
+                print("- number  select the tag with the given number as a tag you do not want")
+                print("= number  select the tag with the given number as a tag you don't care about")
+                print("K word    recompute the set of interesting tags from a full-text search using the given word")
+                print("V         view the packages selected so far")
+                print("D         print the packages selected so far and exit")
+                print("Q         quit debtags smart search")
+                print("?         print this help information")
+            elif ans[0] == 'k' or ans[0] == 'K':
+                # Strip initial command and empty spaces
+                ans = ans[1:].strip();
+                if len(ans) == 0:
+                    print("The 'k' command needs a keyword to use for finding new interesting tags.")
+                else:
+                    self.compute_interesting(ans)
+                ans = ''
+            else:
+                # Split the answer by spaces
+                for cmd in ans.split():
+                    if cmd[0] == '+' or cmd[0] == '-' or cmd[0] == '=':
+                        try:
+                            idx = int(cmd[1:])
+                        except ValueError:
+                            print(cmd, "should have a number after +, - or =")
+                            continue
+                        if idx > len(self.tags_in_menu):
+                            print("Tag", idx, "was not on the menu.")
+                        else:
+                            tag = self.tags_in_menu[idx - 1]
+                            # cout << "Understood " << ans << " as " << ans[0] << tag.fullname() << endl;
+
+                            if cmd[0] == '+':
+                                self.wanted.add(tag)
+                                if tag in self.unwanted: self.unwanted.remove(tag)
+                                if tag in self.ignored: self.ignored.remove(tag)
+                            if cmd[0] == '-':
+                                if tag in self.wanted: self.wanted.remove(tag)
+                                self.unwanted.add(tag)
+                                if tag in self.ignored: self.ignored.remove(tag)
+                            if cmd[0] == '=':
+                                if tag in self.wanted: self.wanted.remove(tag)
+                                if tag in self.unwanted: self.unwanted.remove(tag)
+                                self.ignored.add(tag)
+                            changed = True
+                    elif cmd == "V" or cmd == "v":
+                        self.output_packages()
+                    elif cmd == "D" or cmd == "d":
+                        self.output_packages()
+                        done = True;
+                    elif cmd == "Q" or cmd == "q":
+                        done = True;
+                    else:
+                        print("Ignoring command \"%s\"" % (cmd))
+            if changed:
+                self.refilter()
+
+
+if len(sys.argv) < 3:
+    print("Usage: %s tagdb keywords..." % (sys.argv[0]), file=sys.stderr)
+    sys.exit(1)
+
+
+# Main starts
+
+fullcoll = debtags.DB()
+# Read full database 
+tag_filter = re.compile(r"^special::.+$|^.+::TODO$")
+fullcoll.read(open(sys.argv[1], "r"), lambda x: not tag_filter.match(x))
+
+searcher = SmartSearcher(fullcoll, " ".join(sys.argv[2:]))
+searcher.interact()
+
+# vim:set ts=4 sw=4 expandtab:

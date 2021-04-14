@@ -1,0 +1,10 @@
+/.
+/etc
+/etc/default
+/etc/default/motd-news
+/usr
+/usr/share
+/usr/share/doc
+/usr/share/doc/motd-news-config
+/usr/share/doc/motd-news-config/changelog.gz
+/usr/share/doc/motd-news-config/copyright

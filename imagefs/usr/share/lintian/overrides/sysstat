@@ -1,0 +1,4 @@
+# These man pages document intenral programs shipped in /usr/lib/sysstat
+sysstat: manpage-without-executable usr/share/man/man8/sa1.8.gz
+sysstat: manpage-without-executable usr/share/man/man8/sa2.8.gz
+sysstat: manpage-without-executable usr/share/man/man8/sadc.8.gz

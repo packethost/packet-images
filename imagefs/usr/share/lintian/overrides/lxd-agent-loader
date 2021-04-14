@@ -1,0 +1,3 @@
+# This logic is systemd-specific, we don't want to risk slowing down systems.
+lxd-agent-loader: package-supports-alternative-init-but-no-init.d-script lib/systemd/system/lxd-agent-9p.service
+lxd-agent-loader: package-supports-alternative-init-but-no-init.d-script lib/systemd/system/lxd-agent.service

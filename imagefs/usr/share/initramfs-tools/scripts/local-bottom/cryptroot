@@ -1,0 +1,23 @@
+#!/bin/sh
+set +x
+PREREQ=""
+
+prereqs()
+{
+	echo "$PREREQ"
+}
+
+case $1 in
+prereqs)
+	prereqs
+	exit 0
+	;;
+esac
+
+# If we reached this stage, we do have a rootfs mounted
+# so let's clean-up cryptroot setup mess...
+[ -f /lib/cryptsetup/functions ] || return 0
+. /lib/cryptsetup/functions
+
+rm -f ${CRYPTR_LOCAL_BLOCK}
+rm -f ${CRYPTR_CNT_FILE}

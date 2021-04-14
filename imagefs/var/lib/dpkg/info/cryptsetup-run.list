@@ -1,0 +1,10 @@
+/.
+/usr
+/usr/share
+/usr/share/bug
+/usr/share/bug/cryptsetup-run
+/usr/share/doc
+/usr/share/doc/cryptsetup-run
+/usr/share/doc/cryptsetup-run/NEWS.Debian.gz
+/usr/share/doc/cryptsetup-run/changelog.Debian.gz
+/usr/share/doc/cryptsetup-run/copyright

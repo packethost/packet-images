@@ -1,0 +1,18 @@
+[Unit]
+Description=Service for virtual machines hosted on VMware
+Documentation=http://open-vm-tools.sourceforge.net/about.php
+ConditionVirtualization=vmware
+DefaultDependencies=no
+Before=cloud-init-local.service
+After=vgauth.service
+After=apparmor.service
+RequiresMountsFor=/tmp
+After=systemd-remount-fs.service systemd-tmpfiles-setup.service systemd-modules-load.service
+
+[Service]
+ExecStart=/usr/bin/vmtoolsd
+TimeoutStopSec=5
+
+[Install]
+WantedBy=multi-user.target
+Alias=vmtoolsd.service

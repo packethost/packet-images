@@ -1,0 +1,16 @@
+/.
+/usr
+/usr/lib
+/usr/lib/x86_64-linux-gnu
+/usr/lib/x86_64-linux-gnu/liblinear.so.4.2.
+/usr/share
+/usr/share/doc
+/usr/share/doc/liblinear4
+/usr/share/doc/liblinear4/README.Debian
+/usr/share/doc/liblinear4/README.gz
+/usr/share/doc/liblinear4/changelog.Debian.gz
+/usr/share/doc/liblinear4/copyright
+/usr/share/lintian
+/usr/share/lintian/overrides
+/usr/share/lintian/overrides/liblinear4
+/usr/lib/x86_64-linux-gnu/liblinear.so.4

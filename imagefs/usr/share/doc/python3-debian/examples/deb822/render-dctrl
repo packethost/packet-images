@@ -1,0 +1,182 @@
+#!/usr/bin/python
+
+# render-dctrl
+# Copyright (C) 2009 Stefano Zacchiroli <zack@debian.org>
+#
+# This program is free software: you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation, either version 3 of the License, or
+# (at your option) any later version.
+
+# Requirements (Debian packages): python-debian python-markdown
+
+from __future__ import print_function
+
+usage = """Usage: render-dctrl [OPTION ...] [FILE ...]
+
+Render a 822-like listing of Debian packages (AKA "Packages" file) to
+XHTML, rendering (long) descriptions as Markdown text.  Render text
+coming from FILEs, if given, or from standard input otherwise. Typical
+usage is within a dctrl-tools pipeline, example:
+
+  grep-available -s Package,Depends,Description ocaml | render-dctrl > foo.html
+
+Warning: beware of #525525 and thus avoid using "-s Description" alone."""
+
+import re
+import string
+import sys
+from debian import deb822
+from markdown import markdown
+from optparse import OptionParser
+
+options = None		# global, for cmdline options
+
+css = """
+body { font-family: sans-serif; }
+dt {
+  font-weight: bold;
+}
+dd {
+  margin-bottom: 5pt;
+}
+div.package {
+  border: solid 1pt;
+  margin-top: 10pt;
+  padding-left: 2pt;
+  padding-right: 2pt;
+}
+.raw {
+  font-family: monospace;
+  background: #ddd;
+  padding-left: 2pt;
+  padding-right: 2pt;
+}
+.shortdesc {
+  text-decoration: underline;
+  margin-bottom: 5pt;
+  display: block;
+}
+.longdesc {
+  background: #eee;
+}
+span.package {
+  font-family: monospace;
+  font-size: 110%;
+}
+.uid {
+  float: right;
+  font-size: x-small;
+  padding-right: 10pt;
+}
+"""
+html_header = """<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+ "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <style type="text/css">%s</style>
+  </head>
+  <body>
+""" % css
+html_trailer = """  </body>
+</html>
+"""
+
+mdwn_list_line = re.compile(r'^(\s*)[\*\+\-]')	# Markdown list item line
+# mdwn_head_line = re.compile(r'^(\s*)#')	# Markdown header
+padding = re.compile(r'^(\s*)')
+
+def get_indent(s):
+    m = padding.match(s)
+    if m:
+        return len(m.group(1))
+    else:
+        return 0
+
+def render_longdesc(lines):
+    print('<div class="longdesc">')
+    lines = map(lambda s: s[1:], lines)	# strip 822 heading space
+    curpara, paragraphs = [], []
+    inlist, listindent = False, 0
+    store_para = lambda: paragraphs.append(string.join(curpara, '\n') + '\n')
+    add_indent = lambda n, s: string.expandtabs('\t', n) + s
+
+    for l in lines:	# recognize Markdown paragraphs
+        if l.rstrip() == '.':	# RULE 1: split paragraphs at Debian's "."
+            store_para()            
+            curpara, inlist, listindent = [], False, 0
+        else:
+            if inlist:	# currently in a list
+                if get_indent(l) <= listindent:	# RULE 3: leave list on underflow
+                    store_para()
+                    curpara, inlinst, linstindent = [l], False, 0
+                else:	# the list goes on ...
+                    curpara.append(l)
+            else:	# currently not in a list
+                if mdwn_list_line.match(l):	# new list start
+                    if curpara:	# RULE 2: handle list item *not* at para start
+                        store_para()
+                    curpara, inlist, listindent = [l], True, get_indent(l)
+                elif get_indent(l) >= 1:	# RULE 4: hande non-list verbatim
+                    if curpara and get_indent(curpara[-1]) < 4:
+                        store_para()
+                        curpara = []
+                    curpara.append(add_indent(3, l))
+                else:
+                    curpara.append(l)
+    if curpara:
+        store_para()
+
+    for p in paragraphs:	# render paragraphs
+        print(markdown(p))
+    print('</div>')
+
+def render_field(field, val):
+    field = field.lower()
+    print('<dt>%s</dt>' % field)
+    print('<dd class="%s">' % field)
+    if field == 'description':
+        lines = val.split('\n')
+        print('<span class="shortdesc">%s</span>' % lines[0])
+        render_longdesc(lines[1:])
+    elif field == 'package':
+        print('<a href="#%s" class="uid">id</a>' % val)
+        print('<span id="%s" class="package">%s</span>' % (val, val))
+    elif field in []:	# fields not to be typeset as "raw"
+        print('<span class="%s">%s</span>' % (field, val))
+    else:
+        print('<span class="raw">%s</span>' % val)
+    print('</dd>')
+
+def render_file(f):
+    global options, html_header, html_trailer
+
+    if options.print_header:
+        print(html_header)
+    for pkg in deb822.Packages.iter_paragraphs(f):
+        print('<div class="package">')
+        print('<dl class="fields">')
+        for (field, val) in pkg.items():
+            render_field(field, val)
+        print('</dl>')
+        print('</div>\n')
+    if options.print_header:
+        print(html_trailer)
+
+def main():
+    global options, usage
+
+    parser = OptionParser(usage=usage)
+    parser.add_option("-n", "--no-headers",
+                      action="store_false", dest="print_header", default=True,
+                      help="suppress printing of HTML header/trailer")
+    (options, args) = parser.parse_args()
+    if len(args):
+        for fname in args:
+            render_file(open(fname))
+    else:
+        render_file(sys.stdin)
+
+if __name__ == '__main__':
+    main()

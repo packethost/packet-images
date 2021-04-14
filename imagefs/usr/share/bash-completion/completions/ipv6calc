@@ -1,0 +1,38 @@
+# ipv6calc completion                                      -*- shell-script -*-
+
+_ipv6calc()
+{
+    local cur prev words cword split
+    _init_completion -s || return
+
+    case "$prev" in
+        --debug|-!(-*)d)
+            return
+            ;;
+        --in|--out|--action|-!(-*)[IOA])
+            # With ipv6calc < 0.73.0, -m does nothing here, so use sed instead.
+            COMPREPLY=( $(compgen -W "$($1 "$prev" -h 2>&1 | \
+                command sed -ne 's/^[[:space:]]\{1,\}\([^[:space:]:]\{1,\}\)[[:space:]]*:.*/\1/p')" \
+                -- "$cur") )
+            return
+            ;;
+        --db-geoip|--db-ip2location-ipv4|--db-ip2location-ipv6)
+            _filedir
+            return
+            ;;
+        --printstart|--printend)
+            return
+            ;;
+    esac
+
+    $split && return
+
+    if [[ "$cur" == -* ]]; then
+        COMPREPLY=( $(compgen -W '$("$1" -h 2>&1 |
+            command sed -e "s/[][]//g" | _parse_help -)' -- "$cur") )
+    fi
+
+} &&
+complete -F _ipv6calc ipv6calc
+
+# ex: filetype=sh

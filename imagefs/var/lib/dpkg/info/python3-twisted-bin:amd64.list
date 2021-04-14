@@ -1,0 +1,13 @@
+/.
+/usr
+/usr/lib
+/usr/lib/python3
+/usr/lib/python3/dist-packages
+/usr/lib/python3/dist-packages/twisted
+/usr/lib/python3/dist-packages/twisted/test
+/usr/lib/python3/dist-packages/twisted/test/raiser.cpython-38-x86_64-linux-gnu.so
+/usr/share
+/usr/share/doc
+/usr/share/doc/python3-twisted-bin
+/usr/share/doc/python3-twisted-bin/changelog.Debian.gz
+/usr/share/doc/python3-twisted-bin/copyright

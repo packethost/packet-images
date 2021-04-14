@@ -1,0 +1,14 @@
+addon: matchit
+description: "extended matching with '%' (e.g. if ... then ... else)"
+files:
+  - plugin/matchit.vim
+---
+addon: editexisting
+description: "edit the file with an existing Vim, if possible"
+files:
+  - plugin/editexisting.vim
+---
+addon: justify
+description: "left and right align text by filling in with extra spaces"
+files:
+  - plugin/justify.vim

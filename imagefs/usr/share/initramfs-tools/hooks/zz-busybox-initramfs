@@ -1,0 +1,70 @@
+#!/bin/sh
+
+# This hook copies busybox binary into the initramfs directory
+# and creates all necessary links to it.
+# It should be placed last into the hooks directory, in order to
+# not overwrite commands which are provided by other means.
+
+set -e
+
+case "${1:-}" in
+  prereqs)  echo ""; exit 0;;
+esac
+
+BB_BIN=/usr/lib/initramfs-tools/bin/busybox
+
+[ n = "$BUSYBOX" ] && exit 0
+
+[ -r /usr/share/initramfs-tools/hook-functions ] || exit 0
+. /usr/share/initramfs-tools/hook-functions
+
+if [ -f $DESTDIR/bin/sh ] && cmp -s $DESTDIR/bin/sh $BB_BIN ; then
+  # initramfs copies busybox into /bin/sh, undo this
+  rm -f $DESTDIR/bin/sh
+fi
+rm -f $DESTDIR/bin/busybox	# for compatibility with old initramfs
+copy_exec $BB_BIN /bin/busybox
+
+for alias in $($BB_BIN --list-long); do
+  alias="${alias#/}"
+  case "$alias" in
+    # strip leading /usr, we don't use it
+    usr/*) alias="${alias#usr/}" ;;
+    */*) ;;
+    *) alias="bin/$alias" ;;  # make it into /bin
+  esac
+
+  # Busybox is configured to prefer its own applets, so remove
+  # duplication from klibc.
+  name="${alias##*/}"
+  if [ -e "$DESTDIR/$alias" ] && cmp -s "/usr/lib/klibc/bin/$name" "$DESTDIR/$alias"; then
+    rm -f "$DESTDIR/$alias"
+    [ "${verbose}" = "y" ] && echo "Preferring busybox $alias over klibc" || true
+  fi
+
+  [ -e "$DESTDIR/$alias" ] || \
+    ln "$DESTDIR/bin/busybox" "$DESTDIR/$alias"
+done
+
+# Casper wants to have access to https, let busybox invoke openssl to
+# achieve that.
+# TODO: maybe have another variable like BUSYBOX_OPENSSL to include
+# openssl if wanted? maybe like cloud-initramfs wants it?
+if [ "$CASPER_GENERATE_UUID" ]; then
+    mkdir -p $DESTDIR/etc/ssl/certs $DESTDIR/usr/lib/ssl/
+    copy_exec /usr/bin/openssl
+    copy_file config /etc/ssl/openssl.cnf
+    update-ca-certificates --fresh --etccertsdir $DESTDIR/etc/ssl/certs --hooksdir /no-hooks
+    # Only use by-hash certs
+    rm -f $DESTDIR/etc/ssl/certs/ca-certificates.crt
+    for cert in $DESTDIR/etc/ssl/certs/* ; do
+        target=$(readlink $cert)
+        case $target in
+            /*)
+                copy_file cert $target
+                ;;
+        esac
+    done
+    ln -s /etc/ssl/certs $DESTDIR/usr/lib/ssl/certs
+    ln -s /etc/ssl/openssl.cnf $DESTDIR/usr/lib/ssl/openssl.cnf
+fi

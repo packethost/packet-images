@@ -1,0 +1,7 @@
+libtss2-esys 0 libtss2-esys0
+libtss2-mu 0 libtss2-esys0
+libtss2-rc 0 libtss2-esys0
+libtss2-sys 0 libtss2-esys0
+libtss2-tcti-device 0 libtss2-esys0
+libtss2-tcti-mssim 0 libtss2-esys0
+libtss2-tctildr 0 libtss2-esys0

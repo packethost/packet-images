@@ -1,0 +1,2 @@
+?package(mtr):needs="x11" section="Applications/Network/Monitoring" \
+	title="Mtr" command="mtr"

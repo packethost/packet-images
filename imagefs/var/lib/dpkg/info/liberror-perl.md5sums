@@ -1,0 +1,13 @@
+304220ea7ef8fc3d4e91ae0d1fdb7e1c  usr/share/doc/liberror-perl/changelog.Debian.gz
+3eca8ac34126d4a5ac60544691396e65  usr/share/doc/liberror-perl/copyright
+1ad1cbc3b1453c704dc74ce370e00c1d  usr/share/doc/liberror-perl/examples/example.pl
+a297852201bea339cf5fe6d16ba6f712  usr/share/doc/liberror-perl/examples/next-in-loop/Error.pm-eval.pl
+2170ab0ce826657f1968b94b06fe29d8  usr/share/doc/liberror-perl/examples/next-in-loop/Error.pm-next-label.pl
+bae39cb5f52ec47b4153adf002d57d01  usr/share/doc/liberror-perl/examples/next-in-loop/Error.pm-next-out-of-catch.pl
+f73cfd4dc0d4032497a880e605433116  usr/share/doc/liberror-perl/examples/next-in-loop/Error.pm-next.pl
+cd4f19d7e23007d0bcc95567bcb25c39  usr/share/doc/liberror-perl/examples/next-in-loop/README
+3058d62bc2023b53c66f72ccd16f8d6b  usr/share/doc/liberror-perl/examples/warndie.pl
+a3da855b13e7ca4fd1fdfcbb8f57fe98  usr/share/man/man3/Error.3pm.gz
+75b544bb2115c0f294977cbf279dfde3  usr/share/man/man3/Error::Simple.3pm.gz
+eb33753030cbcf3adcadee3b7bfd47e1  usr/share/perl5/Error.pm
+506d95c19ef6eff64a867c6e7f2b35d5  usr/share/perl5/Error/Simple.pm

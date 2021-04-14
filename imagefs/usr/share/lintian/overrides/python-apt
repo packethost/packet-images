@@ -1,0 +1,2 @@
+# it sets the location of the dpkg database when changing root
+python-apt: uses-dpkg-database-directly usr/lib/python2.7/dist-packages/apt/cache.py

@@ -1,0 +1,484 @@
+Template: grub-efi/install_devices
+Type: multiselect
+Choices-C: ${RAW_CHOICES}
+Choices: ${CHOICES}
+Description: GRUB EFI system partitions:
+ The grub-efi package is being upgraded. This menu allows you to select which
+ EFI system partions you'd like grub-install to be automatically run for, if any.
+ .
+ Running grub-install automatically is recommended in most situations, to
+ prevent the installed GRUB core image from getting out of sync with GRUB
+ modules or grub.cfg.
+
+Template: grub-efi/install_devices_disks_changed
+Type: multiselect
+Choices-C: ${RAW_CHOICES}
+Choices: ${CHOICES}
+Description: GRUB install devices:
+ The GRUB boot loader was previously installed to a disk that is no longer
+ present, or whose unique identifier has changed for some reason. It is
+ important to make sure that the installed GRUB core image stays in sync
+ with GRUB modules and grub.cfg. Please check again to make sure that GRUB
+ is written to the appropriate boot devices.
+Description-ast.UTF-8: GRUB falló al instalar nos siguientes preseos:
+ El xestor d'arranque GRUB instalóse nun discu que nun ta presente, o que cambió d'identificador únicu por dalguna razón. Ye importante asegurase de que la imaxe del motor de GRUB sigui sincronizada colos módulos de GRUB y grub.cfg. Por favor prueba otra vuelta p'asegurate de que GRUB ta escritu nel preséu d'arranque correutu.
+Description-be.UTF-8: Прылады, на якія ўсталёўваць GRUB:
+ Пачатковы запускальнік GRUB раней быў усталяваны на дыск, які зараз адсутнічае, альбо чый унікальны ідэнтыфікатар па нейкай прычыне змяніўся. Важна, каб усталяваны асноўны вобраз GRUB адпавядаў модулям GRUB і grub.cfg. Калі ласка, праверце яшчэ раз, каб упэўніцца, што GRUB запісаны ў адпаведныя загрузкавыя прылады.
+Description-bg.UTF-8: Инсталиране на GRUB на следните устройства:
+ Програмата за начално зареждане на GRUB е била инсталирана на диск, който вече не е достъпен или  чийто уникален идентификатор е бил променен. Много е важно инсталираният образ винаги да е отговаря на модулите на GRUB и файла grub.cfg на файловата система. Проверете и се убедете, че GRUB се инсталира на правилните устройства.
+Description-ca.UTF-8: Dispositius d'instaŀlació del GRUB:
+ El carregador GRUB estava instaŀlat a un disc que ja no és present, o per al qual ha canviat el seu identificador únic per alguna raó. És important assegurar-se que la imatge del nucli del GRUB roman sincronitzada amb els mòduls del GRUB i el grub.cfg. Comproveu de nou que el GRUB s'escriu als dispositius d'arrencada apropiats.
+Description-cs.UTF-8: Zařízení pro instalaci GRUBu:
+ Zavaděč GRUB byl dříve nainstalován na disk, který již není dostupný, nebo jehož unikátní identifikátor se z nějakého důvodu změnil. Je důležité, aby nainstalovaný obraz jádra GRUBu odpovídal GRUB modulům a souboru grub.cfg. Ještě jednou se prosím ujistěte, že je GRUB zapsán na příslušných zaváděcích zařízeních.
+Description-cy.UTF-8: Dyfeisiau sefydlu GRUB:
+ Roedd y llwythwr ymgychwyn GRUB wedi ei osod yn flaenorol i ddisg sydd ddim yn bresennol bellach, neu fod ei rif unigryw wedi newid am rhyw reswm. Mae'n bwysig i wneud yn siwr fod y ddelwedd craidd GRUB a osodwyd yn gyson gyda modiwlau GRUB a grub.cfg. Gwiriwch eto i wneud yn siwr fod GRUB yn ysgrifennu i'r dyfeisiau ymgychwyn addas.
+Description-da.UTF-8: GRUBs installationsenheder:
+ GRUB-opstartsindlæseren blev tidligere installeret til en disk, som ikke længere er tilgængelig, eller hvis unikke identifikation er blevet ændret. Det er vigtigt at sikre sig, at det installerede GRUB-kerneaftryk forbliver i synkronisering med GRUB-moduler og grub-cfg. Kontroller venligst en ekstra gang så du er sikker på, at GRUB skrives til de relevante opstartsenheder.
+Description-de.UTF-8: Geräte für die GRUB-Installation:
+ Der GRUB-Bootloader wurde zuvor auf einem Datenträger, der nicht mehr im System vorhanden ist oder dessen eindeutige Kennung aus irgendeinem Grund geändert wurde, installiert. Es ist wichtig, sicherzustellen, dass das installierte GRUB-Core-Image synchron mit den GRUB-Modulen und grub.cfg bleibt. Bitte prüfen Sie erneut, um sicherzustellen, dass GRUB auf die entsprechenden Boot-Geräte geschrieben wird.
+Description-dz.UTF-8: GRUB གཞི་བཙུགས་ ཐབས་འཕྲུལ་ཚུ :
+ GRUB བུཊི་ མངོན་གསལ་པ་འདི་ ཧེ་མ་ལས་ ཌིཀསི་མེད་མི་ ཡང་ན་ མཐུན་མོང་མ་ཡིན་པའི་ངོས་འཛིན་པ་འདི་ དོན་དག་གང་རུང་ལུ་བརྟེན་ བསྒྱུར་བཅོས་སོང་ཡོད་མི་ལུ་གཞི་བཙུགས་འབད་ནུག། གཞི་བཙུགས་འབད་ཡོད་པའི་ GRUB core གཟུགས་བརྙན་འདི་ GRUB མོ་ཌུལསི་ དང་ grub.cfg དང་ མཉམ་འབྱུང་སྦེ་སྡོད་བཏུབ་ ངེས་བདེན་བཟོ་དགོ། GRUB འདི་ བུཊི་ཐབས་འཕྲུལ་ འོས་ལྡན་ལུ་འབྲི་ཡོདཔ་ངེས་བདེན་་སྦེ་ཤེས་ཚུགས་ནིའི་དོལུ་  ལོག་ཞིབ་དཔྱད་འབད་གནང་།
+Description-el.UTF-8: Συσκευές εγκατάστασης του GRUB:
+ Ο φορτωτής εκκίνησης GRUB είχε εγκατασταθεί προηγουμένως σε έναν δίσκο που δεν είναι πλέον παρών στο σύστημα ή που ο μοναδικός κωδικός αναγνώρισής του έχει για κάποιο λόγο αλλάξει. Είναι σημαντικό να βεβαιωθείτε ότι το κύριο εγκατεστημένο αντίγραφο του GRUB παραμένει συγχρονισμένο με τιςενότητεςτου GRUB στο αρχείο grub.cfg. Παρακαλώ ελέγξτε ξανά για νασιγουρευτείτε ότι το GRUB έχει εγγραφεί στις κατάλληλες εκκινήσιμες συσκευές.
+Description-eo.UTF-8: Aparatoj instalataj de GRUB:
+ La ekŝargilo GRUB estis antaŭe instalita al disko kiu ne plu ekzistas, aŭ kies unika identigilo ŝanĝis ial ajn. Estas grave certigi ke la instalita kerna bildo GRUB teniĝu sinkrona kun la moduloj GRUB kaj grub.cfg. Bonvolu rekontroli por certigi ke GRUB estas skribota al taŭgaj ekŝargaj aparatoj.
+Description-es.UTF-8: Dispositivos donde puede instalar GRUB:
+ El gestor de inicio GRUB se instaló previamente en un disco que ya no está presente o cuyo identificador único ha cambiado por alguna razón. Es importante asegurarse de que la imagen del núcleo de GRUB instalada se mantiene sincronizada con los módulos de GRUB y el fichero «grub.cfg». Asegúrese que GRUB se instala en los dispositivos de inicio adecuados.
+Description-eu.UTF-8: GRUB instalatzeko gailuak:
+ Lehenago GRUB abioko kargatzailea agertzen ez den disko batean instalatu zen, edo edozer arrazoirengatik identifikatzaile esklusiboa aldatuta dauka. Garrantzitsua da instalatutako GRUBaren bihotzaren irudia sinkronizatuta egotea GRUBaren modulu eta grub.cfg fitxategiarekin. Egiaztatu ezazu berriro GRUB abioko gailu egokian idatzi dela.
+Description-fa.UTF-8: دستگاه‌های نصب گراب:
+ بارگذار بوت گراب قبلاً در دیسکی نصب شده است که دیگر در دسترس نیست، یا unique identifier آن بنا به دلیلی تغییر کرده است. مهم است که اطمینان حاصل کنید که نصویر هستهٔ گراب نصب شده در sync با ماژول‌های گراب و grub.cfg باقی بماند. لطفاً دوباره بررسی کنید تا مطمئن گردید که گراب در دستگاه‌های بوت مناسب نوشته شده است.
+Description-fi.UTF-8: Laitteet joille GRUB asennetaan:
+ GRUB-käynnistyslatain oli aiemmin asennettuna levylle, jota ei ole enää käytössä tai jonka yksilöllinen tunniste on muuttunut jostain syystä. On tärkeää varmistaa, että asennettu GRUB-ydinkuva pysyy ajan tasalla GRUB-moduulien ja grub-cfg:n kanssa. Tarkista vielä uudelleen varmistaaksesi, että GRUB kirjoitetaan oikeille käynnistyslaitteille.
+Description-fr.UTF-8: Périphériques où installer GRUB :
+ Le chargeur d'amorçage GRUB était précédemment installé sur un disque qui n'est plus présent ou dont l'identifiant unique a changé pour une raison ou une autre. Il est important de vous assurer que l'image de GRUB qui est installée reste synchronisée avec les modules de GRUB ou grub.cfg. Veuillez vérifier à nouveau que GRUB sera bien installé sur les périphériques d'amorçage pertinents.
+Description-gl.UTF-8: Dispositivos onde instalar GRUB:
+ O cargador de arranque GRUB foi anteriormente instalado en un disco que xa non está presente, ou que mudou o seu identificador único por algunha razón. É importante asegurarse de que a imaxe do núcleo de GRUB se manteña sincronizada cos módulos de GRUB e co ficheiro «grub.cfg». Comprobe de novo para asegurarse de que GRUB se escribiu no dispositivo de arranque apropiado.
+Description-gu.UTF-8: GRUB સ્થાપન ઉપકરણો:
+ ડિસ્ક પર પહેલાં સ્થાપન કરેલ GRUB બૂટ લોડર હવે હાજર નથી, અથવા તેની ઐક્ય ઓળખ કોઈ કારણોસર બદલાઈ ગઈ છે. એ મહત્વનું છે કે સ્થાપિત GRUB મુખ્ય ઈમેજ GRUB મોડ્યુલ્સ અને grub.cfg જોડે સંગત રહે તેની ખાતરી કરાઈ હોય. મહેરબાની કરી ફરીથી ખાતરી કરી ચકાસો કે GRUB એ યોગ્ય બૂટ ઉપકરણોમાં લખાયેલ છે.
+Description-he.UTF-8: התקנים להתקנת GRUB:
+ המאתחל של GRUB הותקן מקודם בדיסק שכבר אינו קיים, או שהמזהה הייחודי שלו השתנה מסיבה כלשהי. חשוב לוודא שקוד האתחול של ליבת GRUB נשאר מתואם עם מודולי GRUB ו-grub.cfg. אנא בדוק שוב כדי לוודא ש-GRUB נכתב להתקני האתחול המתאימים.
+Description-hr.UTF-8: GRUB uređaji za instalaciju:
+ GRUB boot učitavač je prethodno instaliran na disk koji više nije prisutan, ili se njegov jedinstveni identifikator iz nekog razloga promijenio. Važno je osigurati da instalirana GRUB osnovna slika ostane sikronizirana s GRUB modulima i grub.cfg. Molim ponovo provjerite je li GRUB instaliran na odgovarajuće boot uređaje.
+Description-hu.UTF-8: GRUB telepítési eszközök:
+ A GRUB rendszerbetöltő korábban egy olyan lemezre volt telepítve, amely hiányzik vagy amelynek megváltozott az egyedi azonosítója. Fontos, hogy biztosítsuk, hogy a GRUB töltőkép ugyanolyan verziójú legyen, mint a GRUB modulok és a grub.cfg. Kérlek ellenőrizd még egyszer hogy biztosan a megfelelő eszközre írjuk a GRUB-ot.
+Description-id.UTF-8: Piranti pemasangan GRUB:
+ Pemuat boot GRUB sebelumnya telah dipasang di harddisk yang sekarang sudah lenyap atau identifikasi unik telah berubah karena suatu hal. Sangat penting memastikan citra inti GRUB yang terpasang selalu sesuai dengan modul GRUB dan grub.cfg. Mohon periksa kembali untuk memastikan GRUB ditulis di piranti boot yang sesuai.
+Description-is.UTF-8: GRUB uppsetningartæki:
+ GRUB ræsistjórinn vað áður uppsettur á disk sem ekki er lengur til staðar eða sem hefur af einhverjum ástæðum fengið nýtt auðkenni/tilvísun. Það er mikilvægt að ganga úr skugga um að uppsetta GRUB aðalmyndin sé samstillt við GRUB-einingar og grub.cfg stilliskrána.. Athugaðu aftur hvort GRUB sé skrifað á viðeigandi ræsitæki.
+Description-it.UTF-8: Installare GRUB sui device:
+ In precedenza il boot loader GRUB era installato su un disco non più presente o che per qualche motivo ha cambiato identificatore univoco. È importante assicurare che l'immagine principale di GRUB rimanga in sincronia con i moduli di GRUB e con grub.cfg. Controllare nuovamente per essere sicuri che GRUB sia scritto sui corretti device di avvio.
+Description-ja.UTF-8: GRUB をインストールするデバイス:
+ 以前、GRUB ブートローダーは、すでに存在しない、あるいは何らかの理由で固有の識別子が変更されたディスクにインストールされていました。インストールされている GRUB コアイメージが GRUB モジュールや grub.cfg と一致しているのを確認するのは重要です。もう一度、GRUB が適切な起動デバイスに書き込まれているか確かめてください。
+Description-kk.UTF-8: GRUB орнатылатын құрылғылар:
+ GRUB жүктеушісі қазір жоқ болып тұрған, немесе қандай да бір себептермен уникалды идентификаторы өзгерген дискіге бұрын орнатулы болған. Орнатылған GRUB өзегі және модульдер мен grub.cfg-мен үйлесімді болуын тексеру маңызды. GRUB дұрыс жүктелу құрылғыларына жазылғанын тағы да бір рет тексеріңіз.
+Description-km.UTF-8: GRUB ដំឡើង​ឧបករណ៍ ៖
+ កម្មវិធី​ចាប់ផ្ដើម​ប្រព័ន្ធ GRUB ត្រូវ​បាន​ដំឡើង​ពី​មុន ទៅ​ថាស​ដែល​លែង​ប្រើ ឬ​អត្តសញ្ញាណ​តែ​មួយ​គត់​របស់​វា​បាន​ផ្លាស់ប្ដូរ​ដោយ​​មូលហេតុ​មួយ​ចំនួន ។ វា​មាន​សារៈ​សំខាន់​ត្រូវ​​ប្រាកដថា រូបភាព​ GRUB ដែល​បាន​ដំឡើង​ធ្វើ​សមកាលកម្ម​ជា​មួយ​ម៉ូឌុល GRUB និង grub.cfg ។ សូម​ពិនិត្យ​មើល​ម្ដង​ទៀត ដើម្បី​ប្រាកដថា  GRUB ត្រូវ​បាន​សរសេរ​ទៅ​កាន់​ឧបករណ៍​ចាប់ផ្ដើម​ដែល​ត្រឹមត្រូវ ។
+Description-ko.UTF-8: GRUB 설치 장치:
+ 이전에 GRUB 부트로더를 설치했던 디스크가 이제 컴퓨터에 없거나, 어떤 이유에서든 고유 아이디가 바뀌었습니다. GRUB 코어 이미지가 GRUB 모듈 및 grub.cfg와 동기화하는 게 중요합니다. GRUB이 올바른 부팅 장치에 설치되도록 다시 확인하십시오.
+Description-lt.UTF-8: Įrenginiai „GRUB“ diegimui:
+ Anksčiau „GRUB“ paleidyklė buvo įdiegta į diską, kuris dabar nebeprieinamas arba kurio identifikatorius dėl kokių nors priežasčių pakeistas. Svarbu užtikrinti pagrindinio „GRUB“ atvaizdžio, „GRUB“ modulių ir „grub.cfg“ failo suderinamumą. Patikrinkite pasirinkimus dar kartą ir įsitikinkite, jog „GRUB“ paleidyklė bus įrašyta į reikiamus paleidimo įrenginius.
+Description-lv.UTF-8: GRUB instalēšanas ierīces:
+ GRUB palaidējs iepriekš bija uzinstalēts uz diska, kas vairs nav šeit, vai kaut kāda iemesla dēļ tika mainīts tā unikālais identifikators. Ir svarīgi nodrošināt, ka instalētais GRUB pamata attēls ir sinhrons ar GRUB moduļiem un grub.cfg. Lūdzu, vēlreiz pārliecinieties, ka GRUB ir uzrakstīts uz atbilstošām palaišanas ierīcēm.
+Description-mr.UTF-8: ग्रब अधिष्ठापना उपकरणे:
+ ग्रब आरंभ सूचक पूर्वी ज्या डिस्कवर अधिष्ठापित केला होता ती आता अस्तित्वात नाही, वा काही कारणास्तव तिचे विशिष्ट ओळखचिन्ह बदलले गेले आहे. अधिष्ठापित केलेली ग्रब गाभा प्रतिमा ग्रब मोड्यूल्स व grub.cfg यांच्याशी सुसंवादी राहणे महत्वाचे आहे. कृपया ग्रब सुयोग्य आरंभ उपकरणांवर लिहिला जात आहे याची पुन्हा खातरजमा करा.
+Description-nb.UTF-8: GRUB installasjonsenheter:
+ GRUB oppstartslasteren var tidligere installert på en disk som ikke lenger fins eller på en disk hvor den unike identifikatoren er endret av eller annen grunn. Det er viktig å være sikker på at det installerte GRUB-kjernebildet forblir i synk med GRUB-moduler og grub.cfg. Sjekk igjen at GRUB skrive til passende oppstartsenhet.
+Description-nl.UTF-8: Apparaten waarop GRUB moet komen:
+ Het GRUB opstartprogramma was voorheen geïnstalleerd op een schijf die niet langer aanwezig is, of waarvan de unieke identificatie om een of andere reden is veranderd. Het is belangrijk om ervoor te zorgen dat het geïnstalleerde image van de GRUB-kern gesynchroniseerd blijft met GRUB modules en grub.cfg. Controleer of GRUB wel naar de juiste opstartapparaten wordt geschreven.
+Description-no.UTF-8: GRUB installasjonsenheter:
+ GRUB oppstartslasteren var tidligere installert på en disk som ikke lenger fins eller på en disk hvor den unike identifikatoren er endret av eller annen grunn. Det er viktig å være sikker på at det installerte GRUB-kjernebildet forblir i synk med GRUB-moduler og grub.cfg. Sjekk igjen at GRUB skrive til passende oppstartsenhet.
+Description-pl.UTF-8: Urządzenia do instalacji GRUB-a:
+ Program rozruchowy GRUB był zainstalowany wcześniej na dysku który jest teraz nieobecny lub którego unikalny identyfikator zmienił się z jakiegoś powodu. Jest istotne, aby upewnić się, że główny obraz GRUB-a jest zsynchronizowany z modułami GRUB-a w grub.cfg. Proszę sprawdzić ponownie, czy GRUB jest zapisywany na właściwe urządzenia rozruchowe.
+Description-pt.UTF-8: dispositivos de instalação GRUB:
+ O boot loader do GRUB foi instalado num disco que não se encontra presente, ou então o seu identificador único foi alterado por alguma razão. É importante ter a certeza que a imagem core do GRUB se mantêm sincronizada com os módulos do GRUB e grub.cfg. Por favor verifique de novo para ter a certeza de que o GRUB é escrito nos dispositivos apropriados de arranque.
+Description-pt_BR.UTF-8: Instalar o GRUB nos dispositivos:
+ O carregador de inicialização GRUB foi instalado anteriormente em um disco que não está mais presente, ou seu identificador único foi modificado por alguma razão. É importante certificar-se de que a imagem principal do GRUB instalada está em sincronia com os módulos do GRUB e com o grub.cfg. Por favor, verifique novamente e esteja certo de que o GRUB está gravado nos dispositivos de inicialização apropriados.
+Description-ro.UTF-8: Dispozitive pentru a instala GRUB:
+ Încărcătorul de sistem GRUB a fost instalat pe un disc care nu mai este prezent, sau al cărui identificator unic a fost modificat dintr-un motiv oarecare. Este important să vă asigurați că imaginea GRUB rămâne sincronizată cu modulele GRUB și grub.cfg. Vă rugăm verificați din nou, pentru a vă asigura că GRUB este scris pe dispozitivul boot corect.
+Description-ru.UTF-8: Устройства, на которые устанавливается GRUB:
+ Системный загрузчик GRUB был установлен на диск, которого больше нет в системе, или по какой-то причине был изменён уникальный идентификатор. Важно убедиться, что установленный основной образ GRUB синхронизирован с модулями GRUB и grub.cfg. Проверьте ещё раз, что GRUB записан на правильные загрузочные устройства.
+Description-si.UTF-8: GRUB ස්ථාපන උපකරණ:
+ GRUB ආරම්භක පූරකය දැනට නොපවතින තැටියට ස්ථාපනය කර තිබී ඇත. හෝ එහි අනන්‍ය හැඳින්වීම කිසියම් හේතුවක් නිසා වෙනස් වී ඇත. ස්ථාපිත GRUB මූල පිළිබිඹුව GRUB මොඩියුල හා grub.cfg සමඟ සම්මුහුර්ත බව තහවුරු කරගැනීම වැදගත්වේ. කරුණාකර සුදුසු ආරම්භක උපකරණයන් හි GRUB ලියැවී ඇතිදැයි නැවත පිරික්සන්න.
+Description-sk.UTF-8: Zariadenia na inštaláciu GRUB:
+ Zavádzač GRUB bol predtým nainštalovaný na disk, ktorý sa už v systéme nenachádza alebo ktorého unikátny identifikátor bol z nejakého dôvodu zmenený. Je dôležité zaistiť, aby nainštalovaný základný obraz GRUB mal rovnakú verziu ako moduly GRUB a grub.cfg. Prosím pre istotu znova skontrolujte, že je GRUB zapisovaný do správnych zavádzacích zariadení.
+Description-sl.UTF-8: Namestitvene naprave za GRUB:
+ Zagonski nalagalnik GRUB je bil nameščen na disku, ki ni več prisoten ali se mu je spremenil enolični identifikator. Važno je, da so jedro GRUBa in moduli ter grub.cfg skladni. Preverite prosim, da je GRUB zapisan na pravilno zagonsko napravo.
+Description-sq.UTF-8: Paisjet GRUB install:
+ Ngarkuesi i ndezjes GRUB ishte më parë i instaluar në një disk që nuk është më i pranishëm, ose identifikuesi unik i të cilit ka ndryshuar për ndonjë arsye. Është e rëndësishme që të sigurohesh që imazhi i instaluar i GRUB core të qëndoroj në sinkronizim me modulet GRUB dhe grub.cfg. Të lutem kontollo përsëri që GRUB të shkruhet në paisjet e duhura të ndezjes.
+Description-sr.UTF-8: Уређаји за инсталирање GRUB-а:
+ GRUB је претходно био инсталиран на диску који не постоји, или чији се јединствени идентификациони број променио из неког разлога. Битно је да подаци GRUB-а буду синхронизовани са модулима и фајлом grub.cfg. Проверите да ли је GRUB инсталиран на одговарајућем уређају.
+Description-sr@latin.UTF-8: Uređaji za instaliranje GRUB-a:
+ GRUB je prethodno bio instaliran na disku koji ne postoji, ili čiji se jedinstveni identifikacioni broj promenio iz nekog razloga. Bitno je da podaci GRUB-a budu sinhronizovani sa modulima i fajlom grub.cfg. Proverite da li je GRUB instaliran na odgovarajućem uređaju.
+Description-sv.UTF-8: GRUB installationsenheter:
+ Uppstartshanteraren GRUB var tidigare installerad på en disk som inte längre finns tillgänglig eller vars unika identifikation har ändrats av någon anledning. Det är viktigt att säkerställa att den installerade GRUB-huvudavbildningen är korrekt i förhållande till GRUB-moduler och grub.cfg. Kontrollera återigen att GRUB är tillgänglig på rätt uppstartsenhet.
+Description-ta.UTF-8: க்ரப் நிறுவல் சாதனங்கள்: 
+ க்ரப் பூட் ஏற்றி முன்பு ஒரு வட்டில் பதியப்பட்டது; அந்த வட்டு இப்போது இல்லை அல்லது ஏனோ அதன் பிரத்யேக அடையாளம்காணி மாறிவிட்டது. க்ரப் கரு பிம்பம் க்ரப் மாட்யூல்கள் அல்லது grub.cfg உடன் ஒத்திசைவு இருப்பது அவசியம். பொருத்தமான பூட் சாதனங்களில் க்ரப் எழுதப்பட்டுள்ளது என மீண்டும் சோதித்து உறுதி செய்து கொள்க.
+Description-th.UTF-8: อุปกรณ์ที่จะติดตั้ง GRUB:
+ มีการติดตั้งบูตโหลดเดอร์ GRUB ก่อนหน้านี้ในดิสก์ที่ขณะนี้ไม่มีแล้ว หรือมี แต่หมายเลขประจำดิสก์ได้เปลี่ยนไปด้วยสาเหตุบางอย่าง จึงจำเป็นต้องทำให้แน่ใจว่าอิมเมจแกนกลางของ GRUB ที่ติดตั้งไว้นั้นยังมีข้อมูลตรงกับมอดูล GRUB ต่างๆ และกับ grub.cfg อยู่ กรุณาตรวจสอบอีกครั้งให้แน่ใจว่าจะเขียนข้อมูล GRUB ลงในอุปกรณ์บูตที่เหมาะสม
+Description-tr.UTF-8: GRUB kurulum aygıtları:
+ GRUB önyükleyici şu anda var olmayan ya da benzersiz tanımlayıcısı bir şekilde değişmiş olan bir diske kurulmuş durumda. Kurulu olan GRUB çekirdek görüntüsünün GRUB modülleri ve grub.cfg ile uyum içinde olduğundan emin olmak önemlidir. Bu nedenle GRUB'un doğru önyükleme aygıtlarına yazılmış olduğundan emin olun.
+Description-ug.UTF-8: GRUB ئورنىتىش ئۈسكۈنىسى:
+ GRUB قوزغىتىش يېتەكلىگۈچ يوقالغان دىسكىدىن بىرىگە ئورنىتىلغان ياكى ئۇنىڭ بىردىنبىر بەلگىسى مەلۇم سەۋەبلەردىن ئۆزگەرگەن. ئورنىتىلغان GRUB نىڭ يادرولۇق تەسۋىرى ۋە GRUB بۆلىكى شۇنداقلا grub.cfg نى قەدەمداشلاش  ناھايىتى مۇھىم. قايتا بىر قېتىم تەكشۈرۈپ GRUB نىڭ مۇۋاپىق قوزغىتىش ئۈسكۈنىسىگە ئورنىتىلغانلىقىغا كاپالەتلىك قىلىڭ.
+Description-uk.UTF-8: Дискові пристрої для встановлення GRUB:
+ Завантажувач GRUB раніше було встановлено на дисковий пристрій, що наразі відсутній, або його унікальний ідентифікатор з якихось причин було змінено. Важливо переконатися, що встановлене базове ядро GRUB відповідає наявним модулям та grub.cfg. Будь ласка, перевірте знову чи GRUB записано на відповідні завантажувальні дискові розділи.
+Description-vi.UTF-8: Những thiết bị cài đặt GRUB:
+ Trình nạp khởi động GRUB trước đây đã được cài đặt trên một đĩa không còn tồn tại, hay số định danh duy nhất của đĩa đó đã thay đổi vì lý do nào đó. Quan trọng là phải chắc chắn rằng ảnh lõi GRUB đã được cài còn đồng bộ với các mô-đun GRUB và grub.cfg. Vui lòng kiểm tra lại để chắc chắn rằng GRUB được ghi vào các thiết bị khởi động phù hợp.
+Description-zh_CN.UTF-8: GRUB 安装设备：
+ GRUB 引导器先前安装到了一个消失了的磁盘上，或者它的唯一标识符由于某些原因变化了。确保安装的 GRUB 核心映像和 GRUB 模块及 grub.cfg 的同步非常重要。请再次检查以确保 GRUB 安装到了适当的引导设备。
+Description-zh_TW.UTF-8: GRUB 安裝裝置：
+ GRUB 的開機程式先前安裝到一個消失的磁碟上，或者它的唯一標識符因某種原因改變。確保安裝的 GRUB 核心映像和 GRUB 模組及 grub.cfg 的同步是非常重要的。請再次檢查以確保 GRUB 安裝到適當的開機裝置。
+
+Template: grub-efi/partition_description
+Type: text
+Description: ${DEVICE} (${SIZE} MB; ${PATH}) on ${DISK_SIZE} MB ${DISK_MODEL}
+
+Template: grub-efi/install_devices_failed
+Type: boolean
+Default: false
+Description: Writing GRUB to boot device failed - continue?
+ GRUB failed to install to the following devices:
+ .
+ ${FAILED_DEVICES}
+ .
+ Do you want to continue anyway? If you do, your computer may not start up
+ properly.
+Description-ast.UTF-8: Fallu al escribir GRUB al preséu d'arranque - ¿siguir?
+ Falló GRUB al instalar nos siguientes preseos:
+ .
+ ${FAILED_DEVICES}
+ .
+ ¿Quies siguir igualmente? Si quies, el to ordenador podría nun arrancar bien.
+Description-be.UTF-8: Запіс GRUB на загрузкавую прыладу не ўдаўся - працягваць?
+ Не атрымалася ўсталяваць GRUB на наступныя прылады:
+ .
+ ${FAILED_DEVICES}
+ .
+ Вы жадаеце працягваць, не зважаючы на гэта? Калі працягнеце, ваш кампутар можа не запусціцца.
+Description-bg.UTF-8: Записването на GRUB върху устройството за начално зареждане не успя. Продължаване?
+ Опитът за инсталиране на GRUB на следните устройства беше неуспешен:
+ .
+ ${FAILED_DEVICES}
+ .
+ Желаете ли да продължите въпреки това? Ако го направите е възможно компютърът да не може да зареди операционна система.
+Description-ca.UTF-8: Ha fallat l'escriptura del GRUB al dispositiu. Voleu continuar?
+ El GRUB no s'ha pogut instaŀlar als dispositius següents:
+ .
+ ${FAILED_DEVICES}
+ .
+ Voleu continuar tot i això? Si ho feu, és possible que l'ordinador no arrenque correctament.
+Description-cs.UTF-8: Zápis GRUBu na zaváděcí zařízení selhal - pokračovat?
+ GRUB se nepodařilo nainstalovat na následující zařízení:
+ .
+ ${FAILED_DEVICES}
+ .
+ Chcete přesto pokračovat? Pokud ano, je možné, že počítač nemusí korektně nastartovat.
+Description-cy.UTF-8: Methwyd ysgrifennu GRUB i'r ddyfais ymgychwyn - parhau?
+ Methwyd sefydlu GRUB i'r dyfeisiau canlynol:
+ .
+ ${FAILED_DEVICES}
+ .
+ Ydych am barhau beth bynnag? Os ydych, mae'n bosib na fydd eich cyfrifiadur yn dechrau'n gywir.
+Description-da.UTF-8: Skrivning af GRUB til opstartsenhed fejlede - vil du fortsætte?
+ Kunne ikke installere GRUB på de følgende enheder:
+ .
+ ${FAILED_DEVICES}
+ .
+ Ønsker du at fortsætte alligevel? Hvis du fortsætter, kan din computer måske ikke starte korrekt op.
+Description-de.UTF-8: GRUB konnte nicht auf das Boot-Gerät geschrieben werden - fortfahren?
+ GRUB konnte nicht auf den folgenden Geräten installiert werden:
+ .
+ ${FAILED_DEVICES}
+ .
+ Wollen Sie trotzdem fortfahren? Falls ja, wird Ihr Rechner vielleicht nicht problemlos hochfahren.
+Description-dz.UTF-8:  GRUB བུཊི་ ཐབས་འཕྲུལ་ལུ་འབྲི་ནི་ འཐུས་ཤོར་འབྱུང་ཡོདཔ - འཕྲོ་མཐུད་དེ་འབད་ནི་ཨིན་ན?
+ GRUB འདི་ འོག་གི་ཐབས་འཕྲུལ་ཚུ་ནང་གཞི་བཙུགས་འབད་མ་ཚུགས་པས:
+ .
+ ${FAILED_DEVICES}
+ .
+ ག་དེ་འབད་རུང་ འཕྲོ་མཐུད་འབད་ནི་ཨིན་ན? འཕྲོ་མཐུད་འབད་བ་ཅིན་ ཁྱོད་ཀྱི་གློག་རིག་འདི་ལེགས་ཤོམ་སྦེ་འགོ་བཙུགས་མི་ཚུགས།
+Description-el.UTF-8: Η εγκατάσταση του GRUB στην συσκευή εκκίνησης απέτυχε - Συνέχεια;
+ Η εγκατάσταση του GRUB απέτυχε στις ακόλουθες συσκευές:
+ .
+ ${FAILED_DEVICES}
+ .
+ Θέλετε να συνεχίσετε παρόλα αυτά; Αν ναι, είναι πιθανόν ο υπολογιστής σας να μην μπορεί να εκκινήσει κανονικά.
+Description-eo.UTF-8: Skribado de GRUB al ekŝarga aparato malsukcesis - ĉu daŭrigi?
+ GRUB malsukcesis instali al la jenaj aparatoj:
+ .
+ ${FAILED_DEVICES}
+ .
+ Ĉu vi volas daŭrigi iel ajn? Se jes, eble via komputilo ne ekŝargiĝu ĝuste.
+Description-es.UTF-8: La instalación de GRUB en el dispositivo de inicio ha fallado, ¿desea continuar?
+ No se pudo instalar GRUB en los siguientes dispositivos:
+ .
+ ${FAILED_DEVICES}
+ .
+ ¿Desea continuar de todos modos? Si lo hace, puede que su equipo no se inicie apropiadamente.
+Description-eu.UTF-8: Huts egin du GRUB abioko gailuan idaztean - jarraitu?
+ GRUBek huts egin du honako gailuetan instalatzean:
+ .
+ ${FAILED_DEVICES}
+ .
+ Jarraitzea nahi duzu dena den? Jarraituz gero, baliteke ordenagailua ongi ez abiaraztea.
+Description-fa.UTF-8: نصب GRUB روی ابزار بوت با شکست مواجه شد - ادامه می‌دهید؟
+ GRUB نتوانست که تجهیزات مورد نظر را نصب کند.
+ .
+ ${FAILED_DEVICES}
+ .
+ آیا شما می‌خواهید در هر حال ادامه دهید ؟ اگر ادامه دهید، ممکن است که کامپیوتر شما به طور مناسب باید بالا نیاید.
+Description-fi.UTF-8: GRUBin kirjoittaminen käynnistyslaitteelle epäonnistui. Jatketaanko?
+ GRUBia ei voitu asentaa seuraaville laitteille:
+ .
+ ${FAILED_DEVICES}
+ .
+ Valitse haluatko jatkaa tästä huolimatta. Jos jatkat, järjestelmä ei välttämättä käynnisty kunnolla.
+Description-fr.UTF-8: Échec de l'installation de GRUB sur le périphérique d'amorçage. Continuer ?
+ GRUB n'a pas pu être installé sur les périphériques suivants :
+ .
+ ${FAILED_DEVICES}
+ .
+ Veuillez confirmer si vous souhaitez continuer malgré le risque d'un démarrage incorrect de la machine.
+Description-gl.UTF-8: Produciuse un erro ao escribir GRUB no dispositivo de arranque. Quere continuar?
+ Non se puido instalar GRUB nos seguintes dispositivos:
+ .
+ ${FAILED_DEVICES}
+ .
+ Quere continuar de todas maneiras? Se o fai, pode que a súa computadora non poida iniciar correctamente.
+Description-gu.UTF-8: GRUB ને બૂટ ઉપકરણમાં લખવાનું નિષ્ફળ ગયું - ચાલુ રાખશો?
+ GRUB નીચેના ઉપકરણોમાં સ્થાપિત થવામાં નિષ્ફળ ગયું:
+ .
+ ${FAILED_DEVICES}
+ .
+ તમે તેમ છતાં આગળ વધવા માંગો છો? જો તમે તેમ કરશો તો, તમારું કોમ્પ્યુટર કદાચ યોગ્ય રીતે શરુથશે નહી.
+Description-he.UTF-8: כשלון בכתיבת GRUB להתקן האתחול - להמשיך?
+ כשלון בהתקנת GRUB בהתקנים הבאים:
+ .
+ ${FAILED_DEVICES}
+ .
+ האם ברצונך להמשיך בכל זאת? אם כן, מחשבך עלול לא לאתחל כהלכה.
+Description-hr.UTF-8: Instalacija GRUB-a nije uspjela - želite li nastaviti?
+ GRUB nije uspio instalaciju na sljedeće uređaje:
+ .
+ ${FAILED_DEVICES}
+ .
+ Želite li ipak nastaviti? Ako to napravite, vaše računalo se možda neće moći uredno pokrenuti.
+Description-hu.UTF-8: Nem sikerül a GRUB-ot a rendszerlemezre írni - folytassuk?
+ Nem sikerült a GRUB-ot a következő eszközökre telepíteni:
+ .
+ ${FAILED_DEVICES}
+ .
+ Ennek ellenére folytatni akarod? Ha folytatod, lehet, hogy a számítógéped nem fog elindulni.
+Description-id.UTF-8: Gagal menulis GRUB ke piranti boot -- lanjutkan?
+ Gagal memasang GRUB pada piranti berikut ini:
+ .
+ ${FAILED_DEVICES}
+ .
+ Anda yakin akan lanjut terus? Jika ya, komputer Anda mungkin tidak dapat beroperasi.
+Description-is.UTF-8: Uppsetning GRUB á ræsitæki mistókst. Halda áfram?
+ Uppsetning GRUB mistókst á eftirfarandi tækjum:
+ .
+ ${FAILED_DEVICES}
+ .
+ Viltu samt halda áfram? Ef þú gerir það er ekki víst að tölvan þín ræsist aftur eðlilega.
+Description-it.UTF-8: Scrittura di GRUB sul device di avvio non riuscita. Continuare?
+ L'installazione di GRUB sui seguenti device non è riuscita:
+ .
+ ${FAILED_DEVICES}
+ .
+ Si vuole continuare? Continuando, il computer potrebbe non avviarsi più correttamente.
+Description-ja.UTF-8: 起動デバイスへの GRUB の書き込みが失敗しました - 続行しますか?
+ GRUB は以下のデバイスへのインストールに失敗しました:
+ .
+ ${FAILED_DEVICES}
+ .
+ とにかく続行しますか? その場合、コンピュータが正常に起動しないかもしれません。
+Description-kk.UTF-8: GRUB-ты жүктелу құрылғысына жазу сәтсіз - жалғастыру керек пе?
+ GRUB келесі құрылғыларға орнату сәтсіз аяқталды:
+ .
+ ${FAILED_DEVICES}
+ .
+ Бәрібір жалғастыруды қалайсыз ба? Нәтижесінде компьютеріңіз дұрыс жүктелмеуі мүмкін.
+Description-km.UTF-8: បាន​បរាជ័យ​ក្នុង​ការ​សរសេរ​ GRUB ទៅ​​ឧបករណ៍​ចាប់ផ្ដើម បន្ត ?
+ GRUB បាន​បរាជ័យ​ក្នុង​ការ​ដំឡើង​ឧបករណ៍​ដូ​ចខាង​ក្រោម ៖
+ .
+ ${FAILED_DEVICES}
+ .
+ អញ្ចឹង តើ​អ្នក​ចង់​បន្ត​ដែរ​ឬទេ ? ប្រសិន​បើ​អ្នក​បន្ត កុំព្យូទ័រ​របស់​អ្នក​មិន​អាច​ចាប់ផ្ដើម​បាន​ត្រឹមត្រូវ​ទេ ។
+Description-ko.UTF-8: GRUB을 부팅 장치에 쓰는데 실패했습니다. 계속 하시겠습니까?
+ 다음 장치에 대해 GRUB 설치가 실패했습니다:
+ .
+ ${FAILED_DEVICES}
+ .
+ 그래도 계속 하시겠습니까? 계속 하면 컴퓨터가 제대로 시작하지 않을 수도 있습니다.
+Description-lt.UTF-8: „GRUB“ įrašyti į paleidimo įrenginį nepavyko. Ar tęsti?
+ Nepavyko „GRUB“ įdiegti į šiuos įrenginius:
+ .
+ ${FAILED_DEVICES}
+ .
+ Ar tęsti, nepaisant problemos? Jos neišsprendus, kompiuteris gali tinkamai nepasileisti.
+Description-lv.UTF-8: Neizdevās ierakstīt GRUB uz palaišanas ierīces — turpināt?
+ Neizdevās uzinstalēt GRUB uz šīm ierīcēm:
+ .
+ ${FAILED_DEVICES}
+ .
+ Vai tomēr vēlaties turpināt? Ja tā, dators varētu nespēt pareizi palaisties.
+Description-mr.UTF-8: आरंभ उपकरणावर ग्रब लिहिणे फसले - सुरू ठेवायचे?
+ खालील उपकरणांवर ग्रब अधिष्ठापित करणे असफल झाले:
+ .
+ ${FAILED_DEVICES}
+ .
+ तुम्हाला तरीही पुढे जायचेय? असे केल्यास, तुमचा संगणक कदाचित व्यवस्थित सुरू होऊ शकणार नाही.
+Description-nb.UTF-8: Klarte ikke skrive GRUB til oppstartsenhet - fortsette?
+ Klarte ikke installere GRUB på følgende enheter:
+ .
+ ${FAILED_DEVICES}
+ .
+ Ønsker du å fortsette likevel? Hvis du fortsetter, vil kanskje ikke din datamaskin starte opp skikkelig.
+Description-nl.UTF-8: Schrijven van GRUB naar opstartapparaat mislukt. Doorgaan?
+ Het installeren van GRUB op de volgende apparaten is mislukt: 
+ .
+ ${FAILED_DEVICES}
+ .
+ Wilt u desondanks verder gaan? Verder gaan kan ervoor zorgen dat uw computer niet meer goed opstart.
+Description-no.UTF-8: Klarte ikke skrive GRUB til oppstartsenhet - fortsette?
+ Klarte ikke installere GRUB på følgende enheter:
+ .
+ ${FAILED_DEVICES}
+ .
+ Ønsker du å fortsette likevel? Hvis du fortsetter, vil kanskje ikke din datamaskin starte opp skikkelig.
+Description-pl.UTF-8: Zapisywanie GRUB-a na urządzenia rozruchowe nie powiodło się - kontynuować?
+ Nie powiodło się zainstalowanie GRUB-a na następujących urządzeniach:
+ .
+ ${FAILED_DEVICES}
+ .
+ Czy kontynuować mimo to? Jeśli tak, ten komputer może nie uruchomić się poprawnie.
+Description-pt.UTF-8: A escrita do GRUB para o dispositivo de arranque falhou - continuar?
+ A instalação do GRUB falhou nos seguintes dispositivos:
+ .
+ ${FAILED_DEVICES}
+ .
+ Pretende continuar de qualquer modo? Em caso afirmativo, o seu computador pode não arrancar em condições.
+Description-pt_BR.UTF-8: A gravação do GRUB no dispositivo de inicialização falhou - continuar?
+ Falha ao instalar o GRUB nos seguintes dispositivos:
+ .
+ ${FAILED_DEVICES}
+ .
+ Você deseja continuar de qualquer maneira? Se você continuar, seu computador talvez não inicialize corretamente.
+Description-ro.UTF-8: Scrierea GRUB pe dispozitivul boot a eșuat. Se continuă?
+ Instalarea GRUB pe următoarele dispozitive a eșuat:
+ .
+ ${FAILED_DEVICES}
+ .
+ Doriți să continuați oricum? Dacă da, este posibil ca sistemul să nu pornească corespunzător.
+Description-ru.UTF-8: Не удалось записать GRUB на загрузочное устройство -- продолжить?
+ Не удалось установить GRUB на следующие устройства:
+ .
+ ${FAILED_DEVICES}
+ .
+ Продолжить, не смотря на это? Возможно, не удастся загрузить компьютер.
+Description-si.UTF-8: GRUB ආරම්භක උපකරණය ලිවීම අසාර්ථකයි - ඉදිරියට?
+ GRUB පහත උපකරණ ස්ථාපනයෙහි අසාර්ථක විය:
+ .
+ ${FAILED_DEVICES}
+ .
+ ඔබට කෙසේ හෝ ඉදිරියට යෑමට ඇවැසිද? එසේ නම් ඔබේ පරිගණකය නිසිපරිදි ආරම්භ නොවනු ඇත.
+Description-sk.UTF-8: Zápis GRUBu do zavádzacieho zariadenia zlyhal – pokračovať?
+ Inštalácia GRUB zlyhala na týchto zariadeniach:
+ .
+ ${FAILED_DEVICES}
+ .
+ Chcete napriek tomu pokračovať? Ak áno, môže sa stať, že váš počítač nenaštartuje správne.
+Description-sl.UTF-8: Napaka pri pisanju na zagonsko napravo za GRUB. Želite nadaljevati?
+ Napaka pri nameščanju GRUBa na sledeče naprave:
+ .
+ ${FAILED_DEVICES}
+ .
+ Želite vseeno nadaljevati? V primeru, da boste nadaljevali se računalnik mogoče ne bo pravilno zagnal.
+Description-sq.UTF-8: Shkrimi i GRUP për të ndezur paisjen dvshtoi - do të vazhdoni?
+ GRUB nuk arriti të instaloj paisjet në vijim:
+ .
+ ${FAILED_DEVICES}
+ .
+ Dëshironi të vazhdoni gjithsesi? Nëse po, kompjuteri juaj nuk do të filloj siç duhet.
+Description-sr.UTF-8: Инсталација GRUB-а није успела - наставити?
+ Инсталација GRUB-а није успела на следећим уређајима:
+ .
+ ${FAILED_DEVICES}
+ .
+ Да ли желите да наставите у сваком случају?  Ако наставите, ваш рачунар се можда неће добро покренути.
+Description-sr@latin.UTF-8: Instalacija GRUB-a nije uspela - nastaviti?
+ Instalacija GRUB-a nije uspela na sledećim uređajima:
+ .
+ ${FAILED_DEVICES}
+ .
+ Da li želite da nastavite u svakom slučaju?  Ako nastavite, vaš računar se možda neće dobro pokrenuti.
+Description-sv.UTF-8: Skriva GRUB till uppstartsenhet misslyckades - fortsätta?
+ GRUB kunde inte installeras på följande enheter:
+ .
+ ${FAILED_DEVICES}
+ .
+ Vill du fortsätta i alla fall? Det kan innebära att systemet inte kan starta korrekt.
+Description-ta.UTF-8: பூட் சாதனத்துக்கு க்ரப் ஐ எழுதுவது தோவியடைந்தது - தொடரலாமா?
+ பின் வரும் சாதனங்களில் க்ரப் நிறுவுதல் தோல்வியடைந்தது:
+ .
+ ${FAILED_DEVICES}
+ .
+ எப்படியும் தொடர வேண்டுமா? தொடர்ந்தால் உங்கள் கணினி சரியாக துவங்க முடியாமல் போகலாம்.
+Description-th.UTF-8: เขียน GRUB ลงในอุปกรณ์บูตไม่สำเร็จ - ดำเนินการต่อไปหรือไม่?
+ ติดตั้ง GRUB ลงในอุปกรณ์ต่อไปนี้ไม่สำเร็จ:
+ .
+ ${FAILED_DEVICES}
+ .
+ คุณยังคงต้องการดำเนินการต่อไปหรือไม่? ถ้าทำต่อ เครื่องของคุณอาจบูตไม่ขึ้นได้
+Description-tr.UTF-8: GRUB'u önyükleme aygıtına yazma işlemi başarısız oldu. Yine de devam edilsin mi?
+ Aşağıdaki aygıtlara GRUB kurulumu yapılamadı:
+ .
+ ${FAILED_DEVICES}
+ .
+ Yine de devam edilsin mi? Devam edilirse bilgisayarınız düzgün başlayamayabilir.
+Description-ug.UTF-8: GRUB نى قوزغىتىش ئۈسكۈنىسىگە يازالمىدى - داۋاملاشتۇرامدۇ؟
+ GRUB نى تۆۋەندىكى ئۈسكۈنىگە ئورنىتالمىدى:
+ .
+ ${FAILED_DEVICES}
+ .
+ داۋاملاشتۇرۇۋېرەمسىز؟ ئەگەر مۇشۇنداق قىلسىڭىز، كومپيۇتېرىڭىز توغرا قوزغىلالماسلىقى مۇمكىن.
+Description-uk.UTF-8: Не вдалося записати GRUB до завантажувального пристрою. Продовжити?
+ Не вдалося встановити GRUB до наступних дискових пристроїв:
+ .
+ ${FAILED_DEVICES}
+ .
+ Ви всеодно бажаєте продовжити? Не виключено, що ваш комп'ютер не зможе завантажитися нормально.
+Description-vi.UTF-8: Việc ghi GRUB vào thiết bị khởi động bị lỗi - tiếp tục không?
+ GRUB gặp lỗi khi cài đặt vào những thiết bị sau đây:
+ .
+ ${FAILED_DEVICES}
+ .
+ Bạn vẫn muốn tiếp tục không? Nếu có thì máy tính có thể không khởi động được.
+Description-zh_CN.UTF-8: 将 GRUB 写入引导设备失败 - 要继续吗？
+ GRUB 安装到如下设备时失败。
+ .
+ ${FAILED_DEVICES}
+ .
+ 仍然想要继续？如果这样，您的计算机可能不能正常启动。
+Description-zh_TW.UTF-8: 將 GRUB 寫入開機裝置失敗了。是否繼續？
+ 在將 GRUB 安裝至以下裝置時失敗了：
+ .
+ ${FAILED_DEVICES}
+ .
+ 是否無論如何仍然繼續？但這樣話，您的電腦可能會無法正常開機。
+
+Template: grub-efi/install_devices_empty
+Type: boolean
+Default: false
+Description: Continue without installing GRUB?
+ You chose not to install GRUB to any devices. If you continue, the boot
+ loader may not be properly configured, and when this computer next starts
+ up it will use whatever was previously configured. If there is an
+ earlier version of GRUB 2 in the EFI system partition, it may be unable to load
+ modules or handle the current configuration file.
+ .
+ If you are already using a different boot loader and want to carry on
+ doing so, or if this is a special environment where you do not need a boot
+ loader, then you should continue anyway. Otherwise, you should install
+ GRUB somewhere.

@@ -1,0 +1,28 @@
+#!/bin/sh
+
+exec 1>&3
+exec 2>&3
+
+echo File Existence and Permissions
+echo ------------------------------
+echo ''
+
+ls -ldU \
+   /run \
+   /var/run \
+   /usr/bin/screen \
+   /etc/tmpfiles.d/screen-cleanup.conf \
+   /lib/systemd/system/screen-cleanup.service \
+   /etc/init.d/screen-cleanup \
+   /etc/rc?.d/*screen-cleanup
+
+echo ''
+echo File contents
+echo -------------
+echo ''
+if [ -e /etc/tmpfiles.d/screen-cleanup.conf ]; then
+    echo '### /etc/tmpfiles.d/screen-cleanup.conf'
+    echo ______________________________________________________________________
+    cat /etc/tmpfiles.d/screen-cleanup.conf
+    echo ______________________________________________________________________
+fi

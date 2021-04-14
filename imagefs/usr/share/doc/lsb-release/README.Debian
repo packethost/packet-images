@@ -1,0 +1,33 @@
+lsb-release for Debian
+----------------------
+
+NB: These notes are intended for anyone building a derived distribution using
+this package.  They are not likely to be helpful to end-users.
+
+This is Debian's implementation of the lsb_release command.
+Distribution-specific information should be *separately provided* in
+/usr/lib/os-release; it is provided by the base-files package.
+
+The file should be formatted as a series of quoted shell variable assignments.
+You should not assume this file is actually parsed by a Bourne shell (i.e., no
+fancy stuff).  Example:
+
+PRETTY_NAME="(A human-readable description of the release)"
+NAME="(The standard name of the distribution)"
+VERSION_ID="(The release number)"
+VERSION="(The release number + codename)"
+ID="(distributor id)"
+
+Any other variable assignments will be silently ignored.  For Debian
+10.0 (buster), it might have read:
+
+PRETTY_NAME="Debian GNU/Linux 10 (buster)"
+NAME="Debian GNU/Linux"
+VERSION_ID="10"
+VERSION="10 (buster)"
+ID=debian
+HOME_URL="https://www.debian.org/"
+SUPPORT_URL="https://www.debian.org/support"
+BUG_REPORT_URL="https://bugs.debian.org/"
+
+ -- Didier Raboud <odyx@debian.org>  Wed, 28 Nov 2018 20:21:37 +0100

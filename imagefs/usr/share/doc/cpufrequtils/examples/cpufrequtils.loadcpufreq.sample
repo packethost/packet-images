@@ -1,0 +1,7 @@
+# /etc/default/loadcpufreq sample file
+#
+# Use this file to override the CPUFreq kernel module to 
+# be loaded or disable loading at all
+
+ENABLE=true
+FREQDRIVER=acpi-cpufreq

@@ -1,0 +1,705 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE policyconfig PUBLIC "-//freedesktop//DTD PolicyKit Policy Configuration 1.0//EN" "http://www.freedesktop.org/standards/PolicyKit/1.0/policyconfig.dtd">
+<policyconfig>
+  <!--
+    Policy definitions for fwupd actions.
+    Copyright (c) 2015 Richard Hughes <richard@hughsie.com>
+  -->
+  <vendor>System firmware update</vendor>
+  <vendor_url>https://github.com/fwupd/fwupd</vendor_url>
+  <icon_name>application-x-firmware</icon_name>
+  <action id="org.freedesktop.fwupd.update-internal-trusted">
+    <description>Install signed system firmware</description>
+    <description xml:lang="zh_TW">安裝已簽署的系統韌體</description>
+    <description xml:lang="zh_CN">安装已签名的系统固件</description>
+    <description xml:lang="uk">Встановити підписану мікропрограму системи</description>
+    <description xml:lang="tr">İmzalı sistem ürün yazılımını yükle</description>
+    <description xml:lang="sv">Installera signerad fast programvara för systemet</description>
+    <description xml:lang="sr">Инсталирајте потписани системски фирмвер</description>
+    <description xml:lang="sk">Nainštaluje podpísaný firmvér systému</description>
+    <description xml:lang="ru">Установить подписанную системную прошивку</description>
+    <description xml:lang="pt_BR">Instalar firmware assinado no sistema</description>
+    <description xml:lang="pl">Instalacja podpisanego oprogramowania sprzętowego komputera</description>
+    <description xml:lang="nl">Ondertekende systeemfirmware installeren</description>
+    <description xml:lang="lt">Įdiegti pasirašytą sistemos programinę aparatinę įrangą</description>
+    <description xml:lang="ko">서명된 시스템 펌웨어 설치</description>
+    <description xml:lang="it">Installa firmware firmato di sistema</description>
+    <description xml:lang="id">Pasang firmware sistem yang ditandatangani</description>
+    <description xml:lang="hu">Aláírt rendszer firmware telepítése</description>
+    <description xml:lang="hr">Instaliraj frimver potpisan sustavom</description>
+    <description xml:lang="fur">Instale firmware di sisteme firmât</description>
+    <description xml:lang="fi">Asenna allekirjoitettu järjestelmän firmware</description>
+    <description xml:lang="en_GB">Install signed system firmware</description>
+    <description xml:lang="de">Signierte System-Firmware installieren</description>
+    <description xml:lang="da">Installer systemfirmware der er underskrevet</description>
+    <description xml:lang="cs">Instalace podepsaného systémového firmwaru</description>
+    <description xml:lang="ca">Instal·la microprogramari signat per al sistema</description>
+    <!-- TRANSLATORS: this is the PolicyKit modal dialog -->
+    <message>Authentication is required to update the firmware on this machine</message>
+    <message xml:lang="zh_TW">必須先通過身份核對才能更新這臺機器上的韌體</message>
+    <message xml:lang="zh_CN">需要认证：在此机器上升级固件</message>
+    <message xml:lang="uk">Щоб отримати доступ до оновлення мікропрограми цього комп’ютера, вам слід пройти розпізнавання</message>
+    <message xml:lang="tr">Bu makine üzerindeki ürün yazılımını güncellemek için kimlik doğrulama gerekir</message>
+    <message xml:lang="sv">Autentisering krävs för att uppdatera den fasta programvaran för denna maskin</message>
+    <message xml:lang="sr">Потребна је пријава за ажурирање фирмвера на овој машини</message>
+    <message xml:lang="sk">Na aktualizovanie firmvéru v tomto počítači je potrebné overenie totožnosti</message>
+    <message xml:lang="ru">Для обновления прошивки на этой машине требуется аутентификация</message>
+    <message xml:lang="pt_BR">Autenticação é necessária para atualizar o firmware nesta máquina</message>
+    <message xml:lang="pl">Wymagane jest uwierzytelnienie, aby zaktualizować oprogramowanie sprzętowe tego komputera</message>
+    <message xml:lang="nl">Om de firmware op deze computer bij te werken moet u toestemming verlenen</message>
+    <message xml:lang="lt">Norint šiame kompiuteryje atnaujinti programinę aparatinę įrangą, reikalingas tapatybės nustatymas</message>
+    <message xml:lang="ko">이 머신의 펌웨어를 업데이트하려면 인증해야 합니다</message>
+    <message xml:lang="it">È richiesto autenticarsi per aggiornare il firmware su questa macchina</message>
+    <message xml:lang="id">Otentikasi diperlukan untuk memutakhirkan firmware pada mesin ini</message>
+    <message xml:lang="hu">Hitelesítés szükséges a firmware frissítéséhez ezen a gépen</message>
+    <message xml:lang="hr">Potrebna je ovjera za nadopunu frimvera na ovom računalu</message>
+    <message xml:lang="hi">फर्मवेयर अपडेट के लिए प्रमाणीकरण चाहिए </message>
+    <message xml:lang="he">אימות משתמש נדרש לעדכון קושחה מערכת זו</message>
+    <message xml:lang="fur">La autenticazion e je necessarie par inzornâ il firmware su cheste machine</message>
+    <message xml:lang="fr">Une authentification est nécessaire pour mettre à jour le micrologiciel sur cette machine</message>
+    <message xml:lang="fi">Tämän laitteen firmwaren päivittäminen vaatii tunnistautumisen</message>
+    <message xml:lang="en_GB">Authentication is required to update the firmware on this machine</message>
+    <message xml:lang="de">Für die Aktualisierung der Firmware auf diesem System ist eine Authentifizierung erforderlich</message>
+    <message xml:lang="da">Der kræves autentifikation for at opdatere firmwaren på maskinen</message>
+    <message xml:lang="cs">K aktualizaci firmwaru na tomto počítači je vyžadováno ověření</message>
+    <message xml:lang="ca">Es requereix autenticació per actualitzar el microprogramari en aquesta màquina</message>
+    <defaults>
+      <allow_any>auth_admin</allow_any>
+      <allow_inactive>no</allow_inactive>
+      <allow_active>yes</allow_active>
+    </defaults>
+  </action>
+  <action id="org.freedesktop.fwupd.update-internal">
+    <description>Install unsigned system firmware</description>
+    <description xml:lang="zh_TW">安裝未簽署的系統韌體</description>
+    <description xml:lang="zh_CN">安装未签名的系统固件</description>
+    <description xml:lang="uk">Встановити непідписану мікропрограму системи</description>
+    <description xml:lang="tr">İmzasız sistem ürün yazılımını yükle</description>
+    <description xml:lang="sv">Installera osignerad fast programvara för systemet</description>
+    <description xml:lang="sr">Инсталирајте непотписани системски фирмвер</description>
+    <description xml:lang="sk">Nainštaluje nepodpísaný firmvér systému</description>
+    <description xml:lang="ru">Установить неподписанную системную прошивку</description>
+    <description xml:lang="pt_BR">Instalar firmware não assinado no sistema</description>
+    <description xml:lang="pl">Instalacja niepodpisanego oprogramowania sprzętowego komputera</description>
+    <description xml:lang="nl">Niet-ondertekende systeemfirmware installeren</description>
+    <description xml:lang="lt">Įdiegti nepasirašytą sistemos programinę aparatinę įrangą</description>
+    <description xml:lang="ko">서명되지 않은 시스템 펌웨어 설치</description>
+    <description xml:lang="it">Installa firmware non firmato di sistema</description>
+    <description xml:lang="id">Pasang firmware sistem yang tak ditandatangani</description>
+    <description xml:lang="hu">Nem aláírt rendszer firmware telepítése</description>
+    <description xml:lang="hr">Instaliraj frimver nepotpisan sustavom</description>
+    <description xml:lang="fur">Instale firmware di sisteme cence firme</description>
+    <description xml:lang="fi">Asenna allekirjoittamaton järjestelmän firmware</description>
+    <description xml:lang="en_GB">Install unsigned system firmware</description>
+    <description xml:lang="de">Nicht-signierte System-Firmware installieren</description>
+    <description xml:lang="da">Installer systemfirmware der ikke er underskrevet</description>
+    <description xml:lang="cs">Instalace nepodepsaného systémového firmwaru</description>
+    <description xml:lang="ca">Instal·la microprogramari sense signar per al sistema</description>
+    <!-- TRANSLATORS: this is the PolicyKit modal dialog -->
+    <message>Authentication is required to update the firmware on this machine</message>
+    <message xml:lang="zh_TW">必須先通過身份核對才能更新這臺機器上的韌體</message>
+    <message xml:lang="zh_CN">需要认证：在此机器上升级固件</message>
+    <message xml:lang="uk">Щоб отримати доступ до оновлення мікропрограми цього комп’ютера, вам слід пройти розпізнавання</message>
+    <message xml:lang="tr">Bu makine üzerindeki ürün yazılımını güncellemek için kimlik doğrulama gerekir</message>
+    <message xml:lang="sv">Autentisering krävs för att uppdatera den fasta programvaran för denna maskin</message>
+    <message xml:lang="sr">Потребна је пријава за ажурирање фирмвера на овој машини</message>
+    <message xml:lang="sk">Na aktualizovanie firmvéru v tomto počítači je potrebné overenie totožnosti</message>
+    <message xml:lang="ru">Для обновления прошивки на этой машине требуется аутентификация</message>
+    <message xml:lang="pt_BR">Autenticação é necessária para atualizar o firmware nesta máquina</message>
+    <message xml:lang="pl">Wymagane jest uwierzytelnienie, aby zaktualizować oprogramowanie sprzętowe tego komputera</message>
+    <message xml:lang="nl">Om de firmware op deze computer bij te werken moet u toestemming verlenen</message>
+    <message xml:lang="lt">Norint šiame kompiuteryje atnaujinti programinę aparatinę įrangą, reikalingas tapatybės nustatymas</message>
+    <message xml:lang="ko">이 머신의 펌웨어를 업데이트하려면 인증해야 합니다</message>
+    <message xml:lang="it">È richiesto autenticarsi per aggiornare il firmware su questa macchina</message>
+    <message xml:lang="id">Otentikasi diperlukan untuk memutakhirkan firmware pada mesin ini</message>
+    <message xml:lang="hu">Hitelesítés szükséges a firmware frissítéséhez ezen a gépen</message>
+    <message xml:lang="hr">Potrebna je ovjera za nadopunu frimvera na ovom računalu</message>
+    <message xml:lang="hi">फर्मवेयर अपडेट के लिए प्रमाणीकरण चाहिए </message>
+    <message xml:lang="he">אימות משתמש נדרש לעדכון קושחה מערכת זו</message>
+    <message xml:lang="fur">La autenticazion e je necessarie par inzornâ il firmware su cheste machine</message>
+    <message xml:lang="fr">Une authentification est nécessaire pour mettre à jour le micrologiciel sur cette machine</message>
+    <message xml:lang="fi">Tämän laitteen firmwaren päivittäminen vaatii tunnistautumisen</message>
+    <message xml:lang="en_GB">Authentication is required to update the firmware on this machine</message>
+    <message xml:lang="de">Für die Aktualisierung der Firmware auf diesem System ist eine Authentifizierung erforderlich</message>
+    <message xml:lang="da">Der kræves autentifikation for at opdatere firmwaren på maskinen</message>
+    <message xml:lang="cs">K aktualizaci firmwaru na tomto počítači je vyžadováno ověření</message>
+    <message xml:lang="ca">Es requereix autenticació per actualitzar el microprogramari en aquesta màquina</message>
+    <defaults>
+      <allow_any>auth_admin</allow_any>
+      <allow_inactive>no</allow_inactive>
+      <allow_active>auth_admin_keep</allow_active>
+    </defaults>
+  </action>
+  <action id="org.freedesktop.fwupd.downgrade-internal">
+    <description>Install old version of system firmware</description>
+    <description xml:lang="zh_TW">安裝舊版本的系統韌體</description>
+    <description xml:lang="zh_CN">安装旧版本的系统固件</description>
+    <description xml:lang="uk">Встановити стару версію мікропрограми системи</description>
+    <description xml:lang="tr">Eski sürüm sistem ürün yazılımını yükle</description>
+    <description xml:lang="sv">Installera en gammal version av fast programvara för systemet</description>
+    <description xml:lang="sr">Инсталирајте старо издање системског фирмвера</description>
+    <description xml:lang="sk">Nainštaluje staršiu verziu firmvéru systému</description>
+    <description xml:lang="ru">Установить старую версию системной прошивки</description>
+    <description xml:lang="pt_BR">Instalar versão antiga do firmware no sistema</description>
+    <description xml:lang="pl">Instalacja poprzedniej wersji oprogramowania sprzętowego komputera</description>
+    <description xml:lang="nl">Oude versie van systeemfirmware installeren</description>
+    <description xml:lang="lt">Įdiegti senąją sistemos programinės aparatinės įrangos versiją</description>
+    <description xml:lang="ko">이전 버전 시스템 펌웨어 설치</description>
+    <description xml:lang="it">Installa una vecchia versione del firmware di sistema</description>
+    <description xml:lang="id">Pasang versi lama dari firmware sistem</description>
+    <description xml:lang="hu">A rendszer firmware régi verziójának telepítése</description>
+    <description xml:lang="hr">Instaliraj stariju inačicu frimvera sustava</description>
+    <description xml:lang="fur">Instale une version vecje dal firmware di sisteme</description>
+    <description xml:lang="fi">Asenna vanha firmware versio</description>
+    <description xml:lang="en_GB">Install old version of system firmware</description>
+    <description xml:lang="de">Alte Version der System-Firmware installieren</description>
+    <description xml:lang="da">Installer gammel version af systemfirmware</description>
+    <description xml:lang="cs">Instalace starší verze systémového firmwaru</description>
+    <description xml:lang="ca">Instal·la la versió antiga del microprogramari per al sistema</description>
+    <!-- TRANSLATORS: this is the PolicyKit modal dialog -->
+    <message>Authentication is required to downgrade the firmware on this machine</message>
+    <message xml:lang="zh_TW">必須先通過身份核對才能降級這臺機器上的韌體</message>
+    <message xml:lang="zh_CN">需要认证：在此机器上降级固件</message>
+    <message xml:lang="uk">Для встановлення застарілої версії мікропрограми на цей комп’ютер слід пройти розпізнавання</message>
+    <message xml:lang="tr">Bu makine üzerindeki ürün yazılımının sürümünü indirmek için kimlik doğrulama gerekir</message>
+    <message xml:lang="sv">Autentisering krävs för att nedgradera den fasta programvaran på denna maskin</message>
+    <message xml:lang="sr">Потребна је пријава за уназађивање фирмвера на овој машини</message>
+    <message xml:lang="sk">Vyžaduje sa overenie totožnosti na prechod na staršiu verziu firmvéru v tomto počítači</message>
+    <message xml:lang="ru">Для понижения версии прошивки на этой машине требуется аутентификация</message>
+    <message xml:lang="pt_BR">Autenticação é necessária para fazer downgrade da versão do firmware nesta máquina</message>
+    <message xml:lang="pl">Wymagane jest uwierzytelnienie, aby zainstalować poprzednią wersję oprogramowania sprzętowego tego komputera</message>
+    <message xml:lang="nl">Om de firmware op deze computer te downgraden moet u toestemming verlenen</message>
+    <message xml:lang="lt">Norint šiame kompiuteryje sendinti programinę aparatinę įrangą, reikalingas tapatybės nustatymas</message>
+    <message xml:lang="ko">이 머신에 이전 버전의 펌웨어를 설치하려면 인증해야 합니다</message>
+    <message xml:lang="it">È richiesto autenticarsi tornare al precedente firmware su questa macchina</message>
+    <message xml:lang="id">Otentikasi diperlukan untuk menuruntingkatkan firmware pada mesin ini</message>
+    <message xml:lang="hu">Hitelesítés szükséges a firmware visszafejlesztéséhez ezen a gépen</message>
+    <message xml:lang="hr">Potrebna je ovjera za vraćanje starije inačicu frimvera na ovom računalu</message>
+    <message xml:lang="fur">La autenticazion e je necessarie par tornâ indaûr ae version precedente dal firmware su cheste machine</message>
+    <message xml:lang="fi">Todennus on tarpeen tämän laitteen firmwaren alentamiseksi</message>
+    <message xml:lang="en_GB">Authentication is required to downgrade the firmware on this machine</message>
+    <message xml:lang="de">Für eine Herabstufung der Firmware auf diesem System ist eine Authentifizierung erforderlich</message>
+    <message xml:lang="da">Der kræves autentifikation for at nedgradere firmwaren på maskinen</message>
+    <message xml:lang="cs">K přechodu na nižší verzi firmwaru na tomto počítači je vyžadováno ověření</message>
+    <message xml:lang="ca">Es requereix autenticació per a desactualitzar el microprogramari en aquesta màquina</message>
+    <defaults>
+      <allow_any>auth_admin</allow_any>
+      <allow_inactive>no</allow_inactive>
+      <allow_active>auth_admin_keep</allow_active>
+    </defaults>
+  </action>
+  <action id="org.freedesktop.fwupd.update-hotplug-trusted">
+    <description>Install signed device firmware</description>
+    <description xml:lang="zh_TW">安裝已簽署的裝置韌體</description>
+    <description xml:lang="zh_CN">安装已签名的设备固件</description>
+    <description xml:lang="uk">Встановити підписану мікропрограму пристрою</description>
+    <description xml:lang="tr">İmzalı aygıt ürün yazılımını yükle</description>
+    <description xml:lang="sv">Installera signerad fast programvara för enhet</description>
+    <description xml:lang="sr">Инсталирајте потписани фирмвер за уређаје</description>
+    <description xml:lang="sk">Nainštaluje podpísaný firmvér zariadenia</description>
+    <description xml:lang="ru">Установить подписанную прошивку устройства</description>
+    <description xml:lang="pt_BR">Instalar firmware assinado no dispositivo</description>
+    <description xml:lang="pl">Instalacja podpisanego oprogramowania sprzętowego urządzenia</description>
+    <description xml:lang="nl">Ondertekende apparaatfirmware installeren</description>
+    <description xml:lang="lt">Įdiegti pasirašytą įrenginio programinę aparatinę įrangą</description>
+    <description xml:lang="ko">서명된 장치 펌웨어 설치</description>
+    <description xml:lang="it">Installa firmware firmato del dispositivo</description>
+    <description xml:lang="id">Pasang firmware perangkat yang ditandatangani</description>
+    <description xml:lang="hu">Aláírt eszköz firmware telepítése</description>
+    <description xml:lang="hr">Instaliraj frimver potpisan uređajem</description>
+    <description xml:lang="fur">Instasle firmware di dispositîf firmât</description>
+    <description xml:lang="fi">Asenna allekirjoitettu laitteen firmware</description>
+    <description xml:lang="en_GB">Install signed device firmware</description>
+    <description xml:lang="de">Signierte Geräte-Firmware installieren</description>
+    <description xml:lang="da">Installer enhedsfirmware der er underskrevet</description>
+    <description xml:lang="cs">Instalace podepsaného firmwaru zařízení</description>
+    <description xml:lang="ca">Instal·la microprogramari signat per al dispositiu</description>
+    <!-- TRANSLATORS: this is the PolicyKit modal dialog -->
+    <message>Authentication is required to update the firmware on a removable device</message>
+    <message xml:lang="zh_TW">必須先通過身份核對才能更新可移除裝置上的韌體</message>
+    <message xml:lang="zh_CN">需要认证：在可移动设备上升级固件</message>
+    <message xml:lang="uk">Для оновлення мікропрограми на портативному пристрої слід пройти розпізнавання</message>
+    <message xml:lang="tr">Çıkarılabilir aygıt üzerindeki ürün yazılımını güncellemek için kimlik doğrulama gerekir</message>
+    <message xml:lang="sv">Autentisering krävs för att uppdatera den fasta programvaran på en flyttbar enhet</message>
+    <message xml:lang="sr">Потребна је пријава за ажурирање фирмвера на преносивом уређају</message>
+    <message xml:lang="sk">Vyžaduje sa overenie totožnosti na aktualizovanie firmvéru vymeniteľného zariadenia </message>
+    <message xml:lang="ru">Для обновления прошивки на съёмном устройстве требуется аутентификация</message>
+    <message xml:lang="pt_BR">Autenticação é necessária para atualizar o firmware em dispositivo removível</message>
+    <message xml:lang="pl">Wymagane jest uwierzytelnienie, aby zaktualizować oprogramowanie sprzętowe wymiennego urządzenia</message>
+    <message xml:lang="nl">Om de firmware op een verwijderbaar apparaat bij te werken moet u toestemming verlenen</message>
+    <message xml:lang="lt">Norint keičiamajame įrenginyje atnaujinti programinę aparatinę įrangą, reikalingas tapatybės nustatymas</message>
+    <message xml:lang="ko">이동식 장치의 펌웨어를 업데이트하려면 인증해야 합니다</message>
+    <message xml:lang="it">È richiesto autenticarsi per aggiornare il firmware su un dispositivo rimovibile</message>
+    <message xml:lang="id">Otentikasi diperlukan untuk memutakhirkan firmware pada perangkat lepas pasang</message>
+    <message xml:lang="hu">Hitelesítés szükséges a firmware frissítéséhez egy cserélhető eszközön</message>
+    <message xml:lang="hr">Potrebna je ovjera za nadopunu frimvera na uklonjivom uređaju</message>
+    <message xml:lang="fur">La autenticazion e je necessarie par inzornâ il firmware suntun dispositîf estraibil</message>
+    <message xml:lang="fi">Erillisen laitteen firmwaren päivittäminen vaatii tunnistautumisen</message>
+    <message xml:lang="en_GB">Authentication is required to update the firmware on a removable device</message>
+    <message xml:lang="de">Für die Aktualisierung der Firmware auf einem entfernbaren Gerät ist eine Authentifizierung erforderlich</message>
+    <message xml:lang="da">Der kræves autentifikation for at opdatere firmwaren på en flytbar enhed</message>
+    <message xml:lang="cs">K aktualizaci firmwaru na výměnném zařízení je vyžadováno ověření</message>
+    <message xml:lang="ca">Es requereix autenticació per actualitzar el microprogramari en un dispositiu extraible</message>
+    <defaults>
+      <allow_any>auth_admin</allow_any>
+      <allow_inactive>no</allow_inactive>
+      <allow_active>yes</allow_active>
+    </defaults>
+  </action>
+  <action id="org.freedesktop.fwupd.update-hotplug">
+    <description>Install unsigned device firmware</description>
+    <description xml:lang="zh_TW">安裝未簽署的裝置韌體</description>
+    <description xml:lang="zh_CN">安装未签名的设备固件</description>
+    <description xml:lang="uk">Встановити непідписану мікропрограму пристрою</description>
+    <description xml:lang="tr">İmzasız aygıt ürün yazılımını yükle</description>
+    <description xml:lang="sv">Installera osignerad fast programvara för enhet</description>
+    <description xml:lang="sr">Инсталирајте непотписани фирмвер за уређаје</description>
+    <description xml:lang="sk">Nainštaluje nepodpísaný firmvér zariadenia</description>
+    <description xml:lang="ru">Установить неподписанную прошивку устройства</description>
+    <description xml:lang="pt_BR">Instalar firmware não assinado no dispositivo</description>
+    <description xml:lang="pl">Instalacja niepodpisanego oprogramowania sprzętowego urządzenia</description>
+    <description xml:lang="nl">Niet-ondertekende apparaatfirmware installeren</description>
+    <description xml:lang="lt">Įdiegti nepasirašytą įrenginio programinę aparatinę įrangą</description>
+    <description xml:lang="ko">서명되지 않은 장치 펌웨어 설치</description>
+    <description xml:lang="it">Installa firmware non firmato del dispositivo</description>
+    <description xml:lang="id">Pasang firmware perangkat yang tak ditandatangani</description>
+    <description xml:lang="hu">Nem aláírt eszköz firmware telepítése</description>
+    <description xml:lang="hr">Instaliraj frimver nepotpisan uređajem</description>
+    <description xml:lang="fur">Instale firmware di dispositîf cence firme</description>
+    <description xml:lang="fi">Asenna allekirjoittamattoman laitteen firmware</description>
+    <description xml:lang="en_GB">Install unsigned device firmware</description>
+    <description xml:lang="de">Nicht-signierte Geräte-Firmware installieren</description>
+    <description xml:lang="da">Installer enhedsfirmware der ikke er underskrevet</description>
+    <description xml:lang="cs">Instalace nepodepsaného firmwaru zařízení</description>
+    <description xml:lang="ca">Instal·la microprogramari sense signar per al dispositiu</description>
+    <!-- TRANSLATORS: this is the PolicyKit modal dialog -->
+    <message>Authentication is required to update the firmware on a removable device</message>
+    <message xml:lang="zh_TW">必須先通過身份核對才能更新可移除裝置上的韌體</message>
+    <message xml:lang="zh_CN">需要认证：在可移动设备上升级固件</message>
+    <message xml:lang="uk">Для оновлення мікропрограми на портативному пристрої слід пройти розпізнавання</message>
+    <message xml:lang="tr">Çıkarılabilir aygıt üzerindeki ürün yazılımını güncellemek için kimlik doğrulama gerekir</message>
+    <message xml:lang="sv">Autentisering krävs för att uppdatera den fasta programvaran på en flyttbar enhet</message>
+    <message xml:lang="sr">Потребна је пријава за ажурирање фирмвера на преносивом уређају</message>
+    <message xml:lang="sk">Vyžaduje sa overenie totožnosti na aktualizovanie firmvéru vymeniteľného zariadenia </message>
+    <message xml:lang="ru">Для обновления прошивки на съёмном устройстве требуется аутентификация</message>
+    <message xml:lang="pt_BR">Autenticação é necessária para atualizar o firmware em dispositivo removível</message>
+    <message xml:lang="pl">Wymagane jest uwierzytelnienie, aby zaktualizować oprogramowanie sprzętowe wymiennego urządzenia</message>
+    <message xml:lang="nl">Om de firmware op een verwijderbaar apparaat bij te werken moet u toestemming verlenen</message>
+    <message xml:lang="lt">Norint keičiamajame įrenginyje atnaujinti programinę aparatinę įrangą, reikalingas tapatybės nustatymas</message>
+    <message xml:lang="ko">이동식 장치의 펌웨어를 업데이트하려면 인증해야 합니다</message>
+    <message xml:lang="it">È richiesto autenticarsi per aggiornare il firmware su un dispositivo rimovibile</message>
+    <message xml:lang="id">Otentikasi diperlukan untuk memutakhirkan firmware pada perangkat lepas pasang</message>
+    <message xml:lang="hu">Hitelesítés szükséges a firmware frissítéséhez egy cserélhető eszközön</message>
+    <message xml:lang="hr">Potrebna je ovjera za nadopunu frimvera na uklonjivom uređaju</message>
+    <message xml:lang="fur">La autenticazion e je necessarie par inzornâ il firmware suntun dispositîf estraibil</message>
+    <message xml:lang="fi">Erillisen laitteen firmwaren päivittäminen vaatii tunnistautumisen</message>
+    <message xml:lang="en_GB">Authentication is required to update the firmware on a removable device</message>
+    <message xml:lang="de">Für die Aktualisierung der Firmware auf einem entfernbaren Gerät ist eine Authentifizierung erforderlich</message>
+    <message xml:lang="da">Der kræves autentifikation for at opdatere firmwaren på en flytbar enhed</message>
+    <message xml:lang="cs">K aktualizaci firmwaru na výměnném zařízení je vyžadováno ověření</message>
+    <message xml:lang="ca">Es requereix autenticació per actualitzar el microprogramari en un dispositiu extraible</message>
+    <defaults>
+      <allow_any>auth_admin</allow_any>
+      <allow_inactive>no</allow_inactive>
+      <allow_active>auth_admin_keep</allow_active>
+    </defaults>
+  </action>
+  <action id="org.freedesktop.fwupd.downgrade-hotplug">
+    <description>Install unsigned device firmware</description>
+    <description xml:lang="zh_TW">安裝未簽署的裝置韌體</description>
+    <description xml:lang="zh_CN">安装未签名的设备固件</description>
+    <description xml:lang="uk">Встановити непідписану мікропрограму пристрою</description>
+    <description xml:lang="tr">İmzasız aygıt ürün yazılımını yükle</description>
+    <description xml:lang="sv">Installera osignerad fast programvara för enhet</description>
+    <description xml:lang="sr">Инсталирајте непотписани фирмвер за уређаје</description>
+    <description xml:lang="sk">Nainštaluje nepodpísaný firmvér zariadenia</description>
+    <description xml:lang="ru">Установить неподписанную прошивку устройства</description>
+    <description xml:lang="pt_BR">Instalar firmware não assinado no dispositivo</description>
+    <description xml:lang="pl">Instalacja niepodpisanego oprogramowania sprzętowego urządzenia</description>
+    <description xml:lang="nl">Niet-ondertekende apparaatfirmware installeren</description>
+    <description xml:lang="lt">Įdiegti nepasirašytą įrenginio programinę aparatinę įrangą</description>
+    <description xml:lang="ko">서명되지 않은 장치 펌웨어 설치</description>
+    <description xml:lang="it">Installa firmware non firmato del dispositivo</description>
+    <description xml:lang="id">Pasang firmware perangkat yang tak ditandatangani</description>
+    <description xml:lang="hu">Nem aláírt eszköz firmware telepítése</description>
+    <description xml:lang="hr">Instaliraj frimver nepotpisan uređajem</description>
+    <description xml:lang="fur">Instale firmware di dispositîf cence firme</description>
+    <description xml:lang="fi">Asenna allekirjoittamattoman laitteen firmware</description>
+    <description xml:lang="en_GB">Install unsigned device firmware</description>
+    <description xml:lang="de">Nicht-signierte Geräte-Firmware installieren</description>
+    <description xml:lang="da">Installer enhedsfirmware der ikke er underskrevet</description>
+    <description xml:lang="cs">Instalace nepodepsaného firmwaru zařízení</description>
+    <description xml:lang="ca">Instal·la microprogramari sense signar per al dispositiu</description>
+    <!-- TRANSLATORS: this is the PolicyKit modal dialog -->
+    <message>Authentication is required to downgrade the firmware on a removable device</message>
+    <message xml:lang="zh_TW">必須先通過身份核對才能降級可移除裝置上的韌體</message>
+    <message xml:lang="zh_CN">需要认证：在可移动设备上降级固件</message>
+    <message xml:lang="uk">Для встановлення застарілої версії мікропрограми на портативний пристрій слід пройти розпізнавання</message>
+    <message xml:lang="tr">Çıkarılabilir aygıt üzerindeki ürün yazılımının sürümünü düşürmek için kimlik doğrulama gerekir</message>
+    <message xml:lang="sv">Autentisering krävs för att nedgradera den fasta programvaran för en flyttbar enhet</message>
+    <message xml:lang="sr">Потребна је пријава за уназађивање фирмвера на преносивом уређају</message>
+    <message xml:lang="sk">Vyžaduje sa overenie totožnosti na prechod na staršiu verziu firmvéru vymeniteľného zariadenia</message>
+    <message xml:lang="ru">Для понижения версии прошивки на съёмном устройстве требуется аутентификация</message>
+    <message xml:lang="pt_BR">Autenticação é necessária para fazer downgrade da versão do firmware em um dispositivo removível</message>
+    <message xml:lang="pl">Wymagane jest uwierzytelnienie, aby zainstalować poprzednią wersję oprogramowania sprzętowego urządzenia wymiennego</message>
+    <message xml:lang="nl">Om de firmware op een verwijderbaar apparaat te downgraden moet u toestemming verlenen</message>
+    <message xml:lang="lt">Norint keičiamajame įrenginyje sendinti programinę aparatinę įrangą, reikalingas tapatybės nustatymas</message>
+    <message xml:lang="ko">이동식 장치의 펌웨어를 이전 버전으로 되돌리려면 인증해야 합니다</message>
+    <message xml:lang="it">È richiesto autenticarsi per tornare al precedente firmware su un dispositivo rimovibile</message>
+    <message xml:lang="id">Otentikasi diperlukan untuk menuruntingkatkan firmware pada perangkat lepas pasang</message>
+    <message xml:lang="hu">Hitelesítés szükséges a firmware visszafejlesztéséhez egy cserélhető eszközön</message>
+    <message xml:lang="hr">Potrebna je ovjera za vraćanje starije inačicu frimvera na uklonjivom uređaju</message>
+    <message xml:lang="fur">La autenticazion e je necessarie par tornâ indaûr ae version precedente dal firmware suntun dispositîf estraibil </message>
+    <message xml:lang="fi">Todennus on tarpeen, jotta firmware voidaan alentaa siirrettävällä laitteelta</message>
+    <message xml:lang="en_GB">Authentication is required to downgrade the firmware on a removable device</message>
+    <message xml:lang="de">Für eine Herabstufung der Firmware auf einem entfernbaren Gerät ist eine Authentifizierung erforderlich</message>
+    <message xml:lang="da">Der kræves autentifikation for at nedgradere firmwaren på en flytbar enhed</message>
+    <message xml:lang="cs">K přechodu na nižší verzi firmwaru na výměnném zařízení je vyžadováno ověření</message>
+    <message xml:lang="ca">Es requereix autenticació per a desactualitzar el microprogramari en un dispositiu extraible</message>
+    <defaults>
+      <allow_any>auth_admin</allow_any>
+      <allow_inactive>no</allow_inactive>
+      <allow_active>auth_admin_keep</allow_active>
+    </defaults>
+  </action>
+  <action id="org.freedesktop.fwupd.device-unlock">
+    <description>Unlock the device to allow access</description>
+    <description xml:lang="zh_TW">解鎖裝置以允許存取</description>
+    <description xml:lang="zh_CN">解锁设备以允许访问</description>
+    <description xml:lang="uk">Розблокування пристрою для отримання доступу</description>
+    <description xml:lang="tr">Erişime izin vermek için aygıtın kilidini açın</description>
+    <description xml:lang="sv">Lås upp enheten för att tillåta åtkomst</description>
+    <description xml:lang="sr">Откључајте уређај да бисте дозволили приступ</description>
+    <description xml:lang="sk">Odomknúť zariadenie na umožnenie prístupu</description>
+    <description xml:lang="ru">Разблокировать устройство для получения доступа</description>
+    <description xml:lang="pt_BR">Desbloquear o dispositivo para permitir acesso</description>
+    <description xml:lang="pl">Odblokowanie urządzenia</description>
+    <description xml:lang="nl">Ontgrendel het apparaat om toegang te verlenen</description>
+    <description xml:lang="lt">Atrakinti įrenginį, kad būtų leista prieiga</description>
+    <description xml:lang="ko">접근을 허용하려면 장치 잠금을 해제하십시오</description>
+    <description xml:lang="it">Sblocco del dispositivo per consentire l'accesso</description>
+    <description xml:lang="id">Buka kunci perangkat untuk mengizinkan akses</description>
+    <description xml:lang="hu">Eszköz feloldása hozzáférés engedélyezéséhez</description>
+    <description xml:lang="hr">Otključaj uređaj za dopuštenje pristupa</description>
+    <description xml:lang="fur">Sbloche il dispositîf par permeti l'acès</description>
+    <description xml:lang="fi">Sallia pääsy laitteeseen</description>
+    <description xml:lang="en_GB">Unlock the device to allow access</description>
+    <description xml:lang="de">Das Gerät entsperren, um Zugriff zu ermöglichen</description>
+    <description xml:lang="da">Lås enheden op for at tillade adgang</description>
+    <description xml:lang="cs">Odemknutí zařízení pro umožnění přístupu</description>
+    <description xml:lang="ca">Desbloqueja el dispositiu per a permetre l'accés</description>
+    <!-- TRANSLATORS: this is the PolicyKit modal dialog -->
+    <message>Authentication is required to unlock a device</message>
+    <message xml:lang="zh_TW">必須先通過身份核對才能解鎖裝置</message>
+    <message xml:lang="zh_CN">需要认证：解锁设备</message>
+    <message xml:lang="uk">Щоб розблокувати пристрій, слід пройти розпізнавання</message>
+    <message xml:lang="tr">Bir aygıtın kilidini açmak için kimlik doğrulama gerekir</message>
+    <message xml:lang="sv">Autentisering krävs för att låsa upp en enhet</message>
+    <message xml:lang="sr">Потребна је пријава за откључавање уређаја</message>
+    <message xml:lang="sk">Na odomknutie zariadenia sa vyžaduje overenie totožnosti</message>
+    <message xml:lang="ru">Для разблокировки устройства требуется аутентификация</message>
+    <message xml:lang="pt_BR">Autenticação é necessária para desbloquear um dispositivo</message>
+    <message xml:lang="pl">Wymagane jest uwierzytelnienie, aby odblokować urządzenie</message>
+    <message xml:lang="nl">Om een apparaat te ontgrendelen moet u toestemming verlenen</message>
+    <message xml:lang="lt">Norint atrakinti įrenginį, reikalingas tapatybės nustatymas</message>
+    <message xml:lang="ko">장치 잠금을 해제하려면 인증해야 합니다</message>
+    <message xml:lang="it">È richiesto autenticarsi per sbloccare un dispositivo</message>
+    <message xml:lang="id">Otentikasi diperlukan untuk membuka kunci suatu perangkat</message>
+    <message xml:lang="hu">Hitelesítés szükséges az eszköz feloldásához</message>
+    <message xml:lang="hr">Potrebna je ovjera za otključavanje uređaja</message>
+    <message xml:lang="fur">La autenticazion e je necessarie par sblocâ un dispositîf</message>
+    <message xml:lang="fi">Laitteen lukituksen avaaminen vaatii tunnistautumisen</message>
+    <message xml:lang="en_GB">Authentication is required to unlock a device</message>
+    <message xml:lang="de">Legitimation ist zum Entsperren eines Geräts erforderlich</message>
+    <message xml:lang="da">Der kræves autentifikation for at låse enhed op</message>
+    <message xml:lang="cs">Pro odemknutí zařízení je požadováno ověření</message>
+    <message xml:lang="ca">Es requereix autenticació per a desbloquejar un dispositiu</message>
+    <defaults>
+      <allow_any>auth_admin</allow_any>
+      <allow_inactive>no</allow_inactive>
+      <allow_active>auth_admin_keep</allow_active>
+    </defaults>
+  </action>
+  <action id="org.freedesktop.fwupd.modify-config">
+    <description>Modify daemon configuration</description>
+    <description xml:lang="zh_CN">修改守护进程配置</description>
+    <description xml:lang="uk">Зміна налаштувань фонової служби</description>
+    <description xml:lang="tr">Arka plan yapılandırmasını değiştir</description>
+    <description xml:lang="sv">Modifiera demonkonfiguration</description>
+    <description xml:lang="ru">Изменить настройки фоновой службы</description>
+    <description xml:lang="pt_BR">Modificar a configuração do daemon</description>
+    <description xml:lang="pl">Modyfikacja konfiguracji usługi</description>
+    <description xml:lang="ko">데몬 설정 수정</description>
+    <description xml:lang="it">Modifica la configurazione del demone</description>
+    <description xml:lang="hu">Démon konfigurációjának módosítása</description>
+    <description xml:lang="hr">Prilagodi podešavanje pozadinskog programa</description>
+    <description xml:lang="fur">Modifiche la configurazion dal demoni</description>
+    <description xml:lang="fi">Muokkaa taustaprosessin kokoonpanoa</description>
+    <description xml:lang="en_GB">Modify daemon configuration</description>
+    <description xml:lang="da">Rediger dæmonkonfiguration</description>
+    <description xml:lang="ca">Modifica la configuració del dimoni</description>
+    <!-- TRANSLATORS: this is the PolicyKit modal dialog -->
+    <message>Authentication is required to modify daemon configuration</message>
+    <message xml:lang="zh_CN">需要认证：修改守护进程配置</message>
+    <message xml:lang="uk">Для внесення змін до налаштувань фонової служби слід пройти розпізнавання</message>
+    <message xml:lang="tr">Arka plan yapılandırmasını değiştirmek için kimlik doğrulaması gerekiyor</message>
+    <message xml:lang="sv">Autentisering krävs för att modifiera demonkonfiguration</message>
+    <message xml:lang="ru">Для изменения настроек фоновой службы требуется аутентификация</message>
+    <message xml:lang="pt_BR">Autenticação é necessária para modificar uma configuração de daemon</message>
+    <message xml:lang="pl">Wymagane jest uwierzytelnienie, aby zmodyfikować konfigurację usługi</message>
+    <message xml:lang="ko">데몬 설정을 수정하려면 인증해야 합니다</message>
+    <message xml:lang="it">È richiesto autenticarsi per modificare la configurazione del demone</message>
+    <message xml:lang="hu">Hitelesítés szükséges a démon konfigurációjának módosításához</message>
+    <message xml:lang="hr">Potrebna je ovjera za promjenu podešavanja pozadinskog programa</message>
+    <message xml:lang="fur">La autenticazion e je necessarie par modificâ la configurazion dal demoni</message>
+    <message xml:lang="fi">Todennusta tarvitaan taustaprosessin asetusten muokkaamiseen</message>
+    <message xml:lang="en_GB">Authentication is required to modify daemon configuration</message>
+    <message xml:lang="da">Der kræves autentifikation for at redigere dæmonkonfiguration</message>
+    <message xml:lang="ca">Es requereix autenticació per a modificar la configuració del dimoni</message>
+    <defaults>
+      <allow_any>auth_admin</allow_any>
+      <allow_inactive>no</allow_inactive>
+      <allow_active>auth_admin_keep</allow_active>
+    </defaults>
+  </action>
+  <action id="org.freedesktop.fwupd.device-activate">
+    <description>Activate the new firmware on the device</description>
+    <description xml:lang="zh_CN">激活设备上的新固件</description>
+    <description xml:lang="uk">Активація нової мікропрограми на пристрої</description>
+    <description xml:lang="tr">Aygıttaki yeni ürün yazılımını etkinleştirin</description>
+    <description xml:lang="sv">Aktiverar den nya fasta programvaran på enheten</description>
+    <description xml:lang="ru">Активировать новую прошивку на устройстве</description>
+    <description xml:lang="pt_BR">Ativar o novo firmware no dispositivo</description>
+    <description xml:lang="pl">Aktywacja nowego oprogramowania sprzętowego na urządzeniu</description>
+    <description xml:lang="lt">Aktyvuoti naują programinę aparatinę įrangą įrenginyje</description>
+    <description xml:lang="ko">장치에 새 펌웨어 활성화</description>
+    <description xml:lang="it">Attiva il nuovo firmware sul dispositivo</description>
+    <description xml:lang="hu">Az új firmware aktiválása az eszközön</description>
+    <description xml:lang="hr">Aktiviraj novi frimver na uređaju</description>
+    <description xml:lang="fur">Ative il gnûf firmware sul dispositîf</description>
+    <description xml:lang="fi">Aktivoi laitteessa oleva uusi laiteohjelmisto 'firmware'</description>
+    <description xml:lang="en_GB">Activate the new firmware on the device</description>
+    <description xml:lang="da">Aktivér den nye firmware på enheden</description>
+    <description xml:lang="ca">Activa el microprogramari nou al dispositiu</description>
+    <!-- TRANSLATORS: this is the PolicyKit modal dialog -->
+    <message>Authentication is required to switch to the new firmware version</message>
+    <message xml:lang="zh_CN">需要认证：切换到新固件版本</message>
+    <message xml:lang="uk">Щоб перемкнутися на нову версію мікропрограми, вам слід пройти розпізнавання</message>
+    <message xml:lang="tr">Bu makine üzerindeki ürün yazılımını güncellemek için kimlik doğrulaması gerekir</message>
+    <message xml:lang="sv">Authentisering krävs för att växla till den nya fasta programvaruversionen</message>
+    <message xml:lang="ru">Для переключения на новую версию прошивки требуется аутентификация</message>
+    <message xml:lang="pt_BR">Autenticação é necessária para alternar para nova versão de firmware</message>
+    <message xml:lang="pl">Wymagane jest uwierzytelnienie, aby przełączyć na nową wersję oprogramowania sprzętowego</message>
+    <message xml:lang="lt">Norint perjungti į naują programinės aparatinės įrangos versiją, reikalingas tapatybės nustatymas</message>
+    <message xml:lang="ko">새 펌웨어 버전으로 전환하려면 인증해야 합니다</message>
+    <message xml:lang="it">È richiesto autenticarsi per passare alla nuova versione del firmware </message>
+    <message xml:lang="hu">Hitelesítés szükséges az új firmware verzióra váltáshoz</message>
+    <message xml:lang="hr">Potrebna je ovjera za prebacivanje na novu inačicu frimvera</message>
+    <message xml:lang="fur">La autenticazion e je necessarie par passâ ae gnove version dal firmware</message>
+    <message xml:lang="fi">Uuden firmware-version käyttöönottoon tarvitaan todennus</message>
+    <message xml:lang="en_GB">Authentication is required to switch to the new firmware version</message>
+    <message xml:lang="da">Der kræves autentifikation for at skifte til den nye firmwareversion</message>
+    <message xml:lang="ca">Es requereix autenticació per a canviar a la nova versió del micropogramari</message>
+    <defaults>
+      <allow_any>auth_admin</allow_any>
+      <allow_inactive>no</allow_inactive>
+      <allow_active>auth_admin_keep</allow_active>
+    </defaults>
+  </action>
+  <action id="org.freedesktop.fwupd.verify-update">
+    <description>Update the stored device verification information</description>
+    <description xml:lang="zh_TW">更新儲存的裝置核驗資訊</description>
+    <description xml:lang="zh_CN">更新存储的设备验证信息</description>
+    <description xml:lang="uk">Оновлення збережених даних щодо верифікації пристрою</description>
+    <description xml:lang="tr">Saklanan aygıt doğrulama bilgilerini güncelle</description>
+    <description xml:lang="sv">Uppdatera den lagrade enhetens verifikationsinformation</description>
+    <description xml:lang="sr">Ажурирајте причуване податке потврђивања уређаја</description>
+    <description xml:lang="ru">Обновить хранимую проверочную информацию устройства</description>
+    <description xml:lang="pt_BR">Atualizar as informações de verificação armazenadas do dispositivo</description>
+    <description xml:lang="pl">Aktualizacja przechowywanych informacji o poprawności urządzenia</description>
+    <description xml:lang="nl">Opgeslagen apparaatverificatie-informatie bijwerken</description>
+    <description xml:lang="lt">Atnaujinti saugomo įrenginio patikrinimo informaciją</description>
+    <description xml:lang="ko">저장된 장치 검증 정보 업데이트</description>
+    <description xml:lang="it">Aggiornamento delle informazioni di verifica del dispositivo salvate</description>
+    <description xml:lang="id">Mutakhirkan informasi verifikasi perangkat yang tersimpan</description>
+    <description xml:lang="hu">A tárolt eszközellenőrzési információk frissítése</description>
+    <description xml:lang="hr">Nadopuni spremljenu informaciju provjere uređaja</description>
+    <description xml:lang="fur">Inzorne lis informazions di verifiche dal dispositîf archiviadis</description>
+    <description xml:lang="fi">Päivitä laitteen tallennetut vahvistustiedot</description>
+    <description xml:lang="en_GB">Update the stored device verification information</description>
+    <description xml:lang="de">Gespeicherte Geräteverifizierungsinformationen aktualisieren</description>
+    <description xml:lang="da">Opdaterer de gemte informationer om enhedsverifikation</description>
+    <description xml:lang="cs">Aktualizace uložené informace o ověření zařízení</description>
+    <description xml:lang="ca">Actualitza la informació de verificació dels dispositius emmagatzemats</description>
+    <!-- TRANSLATORS: this is the PolicyKit modal dialog -->
+    <message>Authentication is required to update the stored checksums for the device</message>
+    <message xml:lang="zh_TW">必須先通過身份核對才能更新裝置的儲存校驗計算碼</message>
+    <message xml:lang="zh_CN">需要认证：为设备更新存储的校验和</message>
+    <message xml:lang="uk">Щоб отримати доступ до оновлення збережених контрольних сум для пристрою, вам слід пройти розпізнавання</message>
+    <message xml:lang="tr">Aygıtın saklanan sağlama toplamlarını güncellemek için kimlik doğrulama gerekiyor</message>
+    <message xml:lang="sv">Autentisering krävs för att uppdatera den lagrade kontrollsumman för enheten</message>
+    <message xml:lang="sr">Потребна је пријава за ажурирање причуваних сума провере за уређај</message>
+    <message xml:lang="ru">Для обновления хранимых контрольных сумм устройства требуется аутентификация</message>
+    <message xml:lang="pt_BR">Autenticação é necessária para atualizar as somas de verificação armazenadas para o dispositivo</message>
+    <message xml:lang="pl">Wymagane jest uwierzytelnienie, aby zaktualizować przechowywane sumy kontrolne dla urządzenia</message>
+    <message xml:lang="nl">Om de opgeslagen controlesommen op het apparaat bij te werken moet u toestemming verlenen</message>
+    <message xml:lang="lt">Norint atnaujinti įrenginiui saugomas kontrolines sumas, reikalingas tapatybės nustatymas</message>
+    <message xml:lang="ko">저장된 체크섬을 업데이트하려면 인증해야 합니다</message>
+    <message xml:lang="it">È richiesto autenticarsi per aggiornare il codice di controllo del dispositivo salvato</message>
+    <message xml:lang="id">Otentikasi diperlukan untuk memutakhirkan checksum tersimpan bagi perangkat</message>
+    <message xml:lang="hu">Hitelesítés szükséges az eszköz tárolt ellenőrzőösszegeinek frissítéséhez</message>
+    <message xml:lang="hr">Potrebna je ovjera za nadopunu spremljenog kontrolnog zbroja uređaja</message>
+    <message xml:lang="fur">La autenticazion e je necessarie par inzornâ i checksum archiviâts pal dispositîf</message>
+    <message xml:lang="fi">Todennus edellyttää laitteen tallennettujen tarkistussummien päivittämistä</message>
+    <message xml:lang="en_GB">Authentication is required to update the stored checksums for the device</message>
+    <message xml:lang="de">Eine Authentifizierung ist erforderlich, um die gespeicherten Prüfsummen für das Gerät zu aktualisieren</message>
+    <message xml:lang="da">Der kræves autentifikation for at opdatere de gemte checksumme for enheden</message>
+    <message xml:lang="cs">K aktualizaci uložených kontrolních součtů zařízení je vyžadováno ověření</message>
+    <message xml:lang="ca">Es requereix autenticació per actualitzar les sumes de verificació emmagatzemades pels dispositius</message>
+    <defaults>
+      <allow_any>auth_admin</allow_any>
+      <allow_inactive>no</allow_inactive>
+      <allow_active>auth_admin_keep</allow_active>
+    </defaults>
+  </action>
+  <action id="org.freedesktop.fwupd.modify-remote">
+    <description>Modify a configured remote</description>
+    <description xml:lang="zh_TW">修改設定的遠端站點</description>
+    <description xml:lang="zh_CN">修改已配置的远程源</description>
+    <description xml:lang="uk">Зміна налаштованих віддалених пристроїв</description>
+    <description xml:lang="tr">Uzak yapılandırmayı değiştir</description>
+    <description xml:lang="sv">Modifiera en konfigurerad fjärrkälla</description>
+    <description xml:lang="sr">Измени подешени удаљени сервер</description>
+    <description xml:lang="ru">Изменить настроенный репозиторий</description>
+    <description xml:lang="pt_BR">Modificar um remoto configurado</description>
+    <description xml:lang="pl">Modyfikacja skonfigurowanego repozytorium</description>
+    <description xml:lang="lt">Modifikuoti sukonfigūruotą nuotolinę saugyklą</description>
+    <description xml:lang="ko">원격 설정 수정</description>
+    <description xml:lang="it">Modifica un remoto configurato</description>
+    <description xml:lang="id">Ubah suatu remote yang ditata</description>
+    <description xml:lang="hu">A beállított távoli tároló módosítása</description>
+    <description xml:lang="hr">Promijeni zadanu udaljenu lokaciju</description>
+    <description xml:lang="fur">Modifiche un rimot configurât</description>
+    <description xml:lang="fi">Muokkaa määritettyä etänä</description>
+    <description xml:lang="en_GB">Modify a configured remote</description>
+    <description xml:lang="da">Rediger en konfigureret fjern</description>
+    <description xml:lang="cs">Upravit nastavený vzdálený zdroj</description>
+    <description xml:lang="ca">Modifica un remot configurat</description>
+    <!-- TRANSLATORS: this is the PolicyKit modal dialog -->
+    <message>Authentication is required to modify a configured remote used for firmware updates</message>
+    <message xml:lang="zh_TW">必須通過身份核對才能修改設定作韌體更新的遠端站點</message>
+    <message xml:lang="zh_CN">需要认证：修改用于固件更新的已配置远程源</message>
+    <message xml:lang="uk">Для внесення змін до записів налаштованих віддалених пристроїв, які використовуються для оновлення мікропрограм, слід пройти розпізнавання</message>
+    <message xml:lang="tr">Ürün yazılımı güncellemeleri için kullanılan uzak yapılandırmayı değiştirmek için kimlik doğrulama gerekir</message>
+    <message xml:lang="sv">Autenticering krävs för att få ändra en konfigurerad fjärrkälla som används för fast programvaru-uppdateringar.</message>
+    <message xml:lang="sr">Идентификовање је потребно за измену подешеног удаљеног сервера који се користи за ажурирања фирмвера</message>
+    <message xml:lang="ru">Для модификации настроенного репозитория, используемого для обновления прошивки, требуется аутентификация</message>
+    <message xml:lang="pt_BR">Autenticação é necessária para modificar um remoto configurado usado para atualizações de firmware</message>
+    <message xml:lang="pl">Wymagane jest uwierzytelnienie, aby zmodyfikować skonfigurowane repozytorium używane do aktualizacji oprogramowania sprzętowego</message>
+    <message xml:lang="lt">Norint modifikuoti programinės aparatinės įrangos atnaujinimams naudojamą sukonfigūruotą saugyklą, reikalingas tapatybės nustatymas</message>
+    <message xml:lang="ko">펌웨어 업데이트에 사용할 원격 설정을 수정하려면 인증해야 합니다</message>
+    <message xml:lang="it">È richiesto autenticarsi per modificare un remoto configurato utilizzato per aggiornamenti firmware</message>
+    <message xml:lang="id">Otentikasi diperlukan untuk mengubah sebuah remote yang ditata yang dipakai untuk pembaruan firmware</message>
+    <message xml:lang="hu">Hitelesítés szükséges a firmware frissítéshez beállított távoli tároló módosításához.</message>
+    <message xml:lang="hr">Potrebna je ovjera za promjenu udaljene lokacije koja se koristi za nadopunu frimvera</message>
+    <message xml:lang="fur">La autenticazion e je necessarie par modificâ un rimot configurât, doprât pai inzornaments dal firmware</message>
+    <message xml:lang="fi">Todennusta tarvitaan firmware-päivityksiin käytettävän konfiguroidun etä-ohjaimen muokkaamisessa</message>
+    <message xml:lang="en_GB">Authentication is required to modify a configured remote used for firmware updates</message>
+    <message xml:lang="da">Der kræves autentifikation for at redigere en konfigureret fjern som bruges til firmwareopdateringer</message>
+    <message xml:lang="cs">Ke změně nastaveného vzdáleného zdroje, který se používá pro aktualizace firmwaru, je vyžadováno ověření</message>
+    <message xml:lang="ca">Es necessita l'autenticació per a modificar un remot configurat emprat per a les actualitzacions del microprogramari</message>
+    <defaults>
+      <allow_any>auth_admin</allow_any>
+      <allow_inactive>no</allow_inactive>
+      <allow_active>auth_admin_keep</allow_active>
+    </defaults>
+  </action>
+  <action id="org.freedesktop.fwupd.set-approved-firmware">
+    <description>Sets the list of approved firmware</description>
+    <description xml:lang="zh_CN">设定批准固件的列表</description>
+    <description xml:lang="uk">Встановлення списку схвалених мікропрограм</description>
+    <description xml:lang="tr">Onaylanan ürün yazılımı listesini ayarlar</description>
+    <description xml:lang="sv">Sätter listan av godkända fasta programvaror</description>
+    <description xml:lang="ru">Установить список одобренных прошивок</description>
+    <description xml:lang="pt_BR">Define a lista de firmwares aprovados</description>
+    <description xml:lang="pl">Ustawienie listy zatwierdzonego oprogramowania sprzętowego</description>
+    <description xml:lang="lt">Nustato patvirtintą programinės aparatinės įrangos sąrašą</description>
+    <description xml:lang="ko">허용된 펌웨어 목록 설정</description>
+    <description xml:lang="it">Imposta l'elenco dei firmware approvati</description>
+    <description xml:lang="hu">Beállítja a jóváhagyott firmwarek listáját</description>
+    <description xml:lang="hr">Postavlja popis odobrenih frimvera</description>
+    <description xml:lang="fur">Al stabilìs la liste dai firmware aprovâts</description>
+    <description xml:lang="fi">Asettaa listan hyväksytyjä 'firmware' laiteohjelmistoja </description>
+    <description xml:lang="en_GB">Sets the list of approved firmware</description>
+    <description xml:lang="da">Indstiller listen over godkendt firmware</description>
+    <description xml:lang="ca">Estableix la llista de microprogramari aprovat</description>
+    <!-- TRANSLATORS: this is the PolicyKit modal dialog -->
+    <message>Authentication is required to set the list of approved firmware</message>
+    <message xml:lang="zh_CN">需要认证：设定批准固件的列表</message>
+    <message xml:lang="uk">Щоб встановити список схвалених мікропрограм, вам слід пройти розпізнавання</message>
+    <message xml:lang="tr">Onaylanan ürün yazılımı listesini ayarlamak için kimlik doğrulaması gerekiyor</message>
+    <message xml:lang="sv">Autentisering krävs för att sätta listan över godkända fasta progrmvaror</message>
+    <message xml:lang="ru">Для установки списка одобренных прошивок требуется аутентификация</message>
+    <message xml:lang="pt_BR">Autenticação é necessária para definir a lista de firmwares aprovados</message>
+    <message xml:lang="pl">Wymagane jest uwierzytelnienie, aby ustawić listę zatwierdzonego oprogramowania sprzętowego</message>
+    <message xml:lang="lt">Norint nustatyti patvirtintos programinės aparatinės įrangos sąrašą, reikalingas tapatybės nustatymas</message>
+    <message xml:lang="ko">허용된 펌웨어 목록을 설정하려면 인증해야 합니다</message>
+    <message xml:lang="it">È richiesto autenticarsi per impostare l'elenco dei firmware approvati</message>
+    <message xml:lang="hu">Hitelesítés szükséges a jóváhagyott firmwarek listájának beállításához</message>
+    <message xml:lang="hr">Potrebna je ovjera za postavljanje popisa odobrenih frimvera</message>
+    <message xml:lang="fur">La autenticazion e je necessarie par stabilî la liste dai firmware aprovâts</message>
+    <message xml:lang="fi">Vahvistus on tarpeen hyväksyttyjen laiteohjelmien listan määrittämiseksi</message>
+    <message xml:lang="en_GB">Authentication is required to set the list of approved firmware</message>
+    <message xml:lang="da">Der kræves autentifikation for at indstille listen over godkendt firmware</message>
+    <message xml:lang="ca">Es requereix autenticació per a establir la llista de microprogramari aprovat</message>
+    <defaults>
+      <allow_any>auth_admin</allow_any>
+      <allow_inactive>no</allow_inactive>
+      <allow_active>auth_admin_keep</allow_active>
+    </defaults>
+  </action>
+  <action id="org.freedesktop.fwupd.self-sign">
+    <description>Sign data using the client certificate</description>
+    <description xml:lang="zh_CN">使用客户端证书签名数据</description>
+    <description xml:lang="uk">Підписування даних клієнтським сертифікатом</description>
+    <description xml:lang="tr">İstemci sertifikasını kullanarak veri imzala</description>
+    <description xml:lang="sv">Signera data med klientcertifikatet</description>
+    <description xml:lang="ru">Подписать данные с использованием сертификата клиента</description>
+    <description xml:lang="pt_BR">Assina dados usando o certificado cliente</description>
+    <description xml:lang="pl">Podpisanie danych za pomocą certyfikatu klienta</description>
+    <description xml:lang="lt">Pasirašyti duomenis, naudojant kliento liudijimą</description>
+    <description xml:lang="ko">클라이언트 인증서로 데이터 서명</description>
+    <description xml:lang="it">Firma i dati col certificato del client</description>
+    <description xml:lang="hu">Adatok aláírása az ügyféltanúsítvánnyal</description>
+    <description xml:lang="hr">Potpiši podatke koristeći vjerodajnicu klijenta</description>
+    <description xml:lang="fur">Firme i dâts doprant il certificât dal client</description>
+    <description xml:lang="fi">Allekirjoita tietoja käyttämällä asiakkaan sertifikaattia</description>
+    <description xml:lang="en_GB">Sign data using the client certificate</description>
+    <description xml:lang="da">Underskriv data med klientcertifikat</description>
+    <description xml:lang="ca">Signa les dades emprant el certificat del client</description>
+    <!-- TRANSLATORS: this is the PolicyKit modal dialog -->
+    <message>Authentication is required to sign data using the client certificate</message>
+    <message xml:lang="zh_CN">需要认证：使用客户端证书签名数据</message>
+    <message xml:lang="uk">Щоб підписати дані за допомогою клієнтського сертифіката, вам слід пройти розпізнавання</message>
+    <message xml:lang="tr">İstemci sertifikasını kullanarak veri imzası için kimlik doğrulaması gerekli</message>
+    <message xml:lang="sv">Autentisering krävs för att signera data med klientcertifikatet</message>
+    <message xml:lang="ru">Для подписи данных с использованием сертификата клиента требуется аутентификация</message>
+    <message xml:lang="pt_BR">Autenticação é necessária para assinar dados usando o certificado do cliente</message>
+    <message xml:lang="pl">Wymagane jest uwierzytelnienie, aby podpisać dane za pomocą certyfikatu klienta</message>
+    <message xml:lang="lt">Norint pasirašyti duomenis naudojant kliento liudijimą, reikalingas tapatybės nustatymas</message>
+    <message xml:lang="ko">클라이언트 인증서로 데이터를 서명하려면 인증해야 합니다</message>
+    <message xml:lang="it">È richiesto autenticarsi per firmare i dati utilizzando il certificato del client</message>
+    <message xml:lang="hu">Hitelesítés szükséges az adatok ügyféltanúsítvánnyal történő aláírásához</message>
+    <message xml:lang="hr">Potrebna je ovjera za potpisivanje podataka vjerodajnicom klijenta</message>
+    <message xml:lang="fur">La autenticazion e je necessarie par firmâ i dâts doprant il certificât dal client</message>
+    <message xml:lang="fi">Autentikointi edellyttää tietojen allekirjoittamista asiakaan sertifikaatin avulla</message>
+    <message xml:lang="en_GB">Authentication is required to sign data using the client certificate</message>
+    <message xml:lang="da">Der kræves autentifikation for at underskrive data med klientcertifikatet</message>
+    <message xml:lang="ca">Es requereix autenticació per a signar les dades emprant el certificat del client</message>
+    <defaults>
+      <allow_any>auth_admin</allow_any>
+      <allow_inactive>no</allow_inactive>
+      <allow_active>auth_admin_keep</allow_active>
+    </defaults>
+  </action>
+</policyconfig>

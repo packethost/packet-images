@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mime-type xmlns="http://www.freedesktop.org/standards/shared-mime-info" type="image/cgm">
+  <!--Created automatically by update-mime-database. DO NOT EDIT!-->
+  <comment>CGM image</comment>
+  <comment xml:lang="ca">imatge CGM</comment>
+  <comment xml:lang="da">CGM-billede</comment>
+  <comment xml:lang="de">CGM-Bild</comment>
+  <comment xml:lang="eu">CGM irudia</comment>
+  <comment xml:lang="fi">CGM kuva</comment>
+  <comment xml:lang="fr">image CGM</comment>
+  <comment xml:lang="hr">CGM slika</comment>
+  <comment xml:lang="it">Immagine CGM</comment>
+  <comment xml:lang="ko">CGM 이미지</comment>
+  <comment xml:lang="pl">Obraz CGM</comment>
+  <comment xml:lang="pt-BR">Imagem CGM</comment>
+  <comment xml:lang="uk">зображення CGM</comment>
+  <acronym>CGM</acronym>
+  <expanded-acronym>Computer Graphics Metafile</expanded-acronym>
+  <glob pattern="*.cgm"/>
+</mime-type>

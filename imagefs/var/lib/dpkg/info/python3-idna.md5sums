@@ -1,0 +1,13 @@
+10ba437972330c9ca4d4dfc50485d674  usr/lib/python3/dist-packages/idna-2.8.egg-info/PKG-INFO
+68b329da9893e34099c7d8ad5cb9c940  usr/lib/python3/dist-packages/idna-2.8.egg-info/dependency_links.txt
+1929d9f7c81f25c32830ebfe29fec2b2  usr/lib/python3/dist-packages/idna-2.8.egg-info/top_level.txt
+8acff87ead0244330c22125c16fcaadb  usr/lib/python3/dist-packages/idna/__init__.py
+a36c9a662f4dd0e6d8d4a48dbe68ade5  usr/lib/python3/dist-packages/idna/codec.py
+2f0d04609da1142c3a3f74c336ea5744  usr/lib/python3/dist-packages/idna/compat.py
+f0b461c706bf0ee6eb79378fbf14d409  usr/lib/python3/dist-packages/idna/core.py
+bd67e3103047d6ee6618158a1c405940  usr/lib/python3/dist-packages/idna/idnadata.py
+5d37b041d01aefd92ccac0bff286a7c9  usr/lib/python3/dist-packages/idna/intranges.py
+2e245a437c3ef37b71b8fe4e629998a9  usr/lib/python3/dist-packages/idna/package_data.py
+899e741434de2a1608c1fbe3ff9fb2e4  usr/lib/python3/dist-packages/idna/uts46data.py
+818feff49f96c45948212c3d5bfc9102  usr/share/doc/python3-idna/changelog.Debian.gz
+f0d87ce5737b3f09ca2312b31fd24379  usr/share/doc/python3-idna/copyright

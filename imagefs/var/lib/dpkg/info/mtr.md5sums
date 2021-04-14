@@ -1,0 +1,13 @@
+9b6b2300253c315ed5b2841dffa1ae4d  usr/bin/mtr
+28c71f4615fc76b55772c4b82aba819f  usr/bin/mtr-packet
+ab0e2bb8416e79e1a5217042006b1f4d  usr/share/bash-completion/completions/mtr
+3018e00f4281c8d0f338216390081bb4  usr/share/doc/mtr/AUTHORS
+72e2cc9fe12de0ce6b1e3a8032bb1b2a  usr/share/doc/mtr/FORMATS
+d42e3eed5a775e4e1156881efc01e80b  usr/share/doc/mtr/README.md
+80bf39f156b00542decaa64d316905e9  usr/share/doc/mtr/SECURITY
+811236204bc9530ff18ebe74ff1f9f99  usr/share/doc/mtr/TODO.gz
+be4c59b44302585f341ba5278e2071d1  usr/share/doc/mtr/changelog.Debian.gz
+a2fbad05d4c805243f7e43fb96a680e5  usr/share/doc/mtr/copyright
+79c5ec4d5211d69140722c1e81084f5f  usr/share/man/man8/mtr-packet.8.gz
+51cb74aad9f515c49d0e521e6975073c  usr/share/man/man8/mtr.8.gz
+e259f9f1642ce29de71ce7232679f4fb  usr/share/menu/mtr

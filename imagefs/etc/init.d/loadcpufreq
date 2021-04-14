@@ -1,0 +1,234 @@
+#!/bin/sh
+### BEGIN INIT INFO
+# Provides:          loadcpufreq
+# Required-Start:    $remote_fs $syslog
+# Required-Stop:
+# Default-Start:     2 3 4 5
+# Default-Stop:
+# Short-Description: Load kernel modules needed to enable cpufreq scaling
+# Description:       Make it possible to save power by reducing
+#                    the CPU speed when there is little to do.
+### END INIT INFO
+# License: GNU General Public License.
+#
+# Based on scripts found in the powernowd package version
+# 0.97-1ubuntu6 on Ubuntu.
+#
+# This script is an interim solution until the default Debian packages
+# will load the proper kernel modules at boot time.  Track #396117,
+# #342014 and #367307 to see status on this.
+# <URL:http://0pointer.de/blog/projects/dmi-based-module-autoloading.html>
+# claim the later kernels support autoloading of these modules, so I
+# guess In the future this script can be dropped. [pere 2007-05-12]
+
+PATH=/sbin:/bin:/usr/sbin:/usr/bin
+NAME=loadcpufreq
+
+# Get lsb functions
+. /lib/lsb/init-functions
+[ -f /etc/default/rcS ] && . /etc/default/rcS
+
+# Set a default value
+ENABLE="true"
+[ -f /etc/default/loadcpufreq ] && . /etc/default/loadcpufreq
+
+set -e
+
+# if not enabled then exit gracefully
+[ "$ENABLE" = "true" ] || exit 0
+
+MODPROBE="modprobe -b"
+
+load_detected_cpufreq_modules() {
+    #if /usr/sbin/laptop-detect; then LAPTOP=1; fi
+    CPUINFO=/proc/cpuinfo
+    IOPORTS=/proc/ioports
+
+    if [ ! -f $CPUINFO ] ; then
+	echo "$CPUINFO not detected..." >&2
+	return
+    fi
+
+    MODEL_NAME=$(grep '^model name' "$CPUINFO" | head -1 | sed -e 's/^.*: //;')
+    MODEL_ID=$(grep -E '^model[[:space:]]+:' "$CPUINFO" | head -1 | sed -e 's/^.*: //;')
+    CPU=$(grep -E '^cpud[^:]+:' "$CPUINFO" | head -1 | sed -e 's/^.*: //;')
+    VENDOR_ID=$(grep -E '^vendor_id[^:]+:' "$CPUINFO" | head -1 | sed -e 's/^.*: //;')
+    CPU_FAMILY=$(sed -e '/^cpu family/ {s/.*: //;p;Q};d' $CPUINFO)
+
+    MODULE=
+    MODULE_FALLBACK=acpi-cpufreq
+
+    # Two modules for PIII-M depending the chipset.
+    # modprobe speedstep-ich$EXT || modprobe speestep-smi$EXT
+    # would be another way
+    if [ -f $IOPORTS ] && grep -q 'Intel .*ICH' $IOPORTS ; then
+	PIII_MODULE=speedstep-ich
+    else
+	PIII_MODULE=speedstep-smi
+    fi
+
+    case "$VENDOR_ID" in
+        GenuineIntel*)
+            # If the CPU has the est flag, it supports enhanced
+            # speedstep and should use the acpi-cpufreq driver
+            if [ "$(grep est $CPUINFO)" ]; then
+		MODULE=acpi-cpufreq
+            elif [ $CPU_FAMILY = 15 ]; then
+            # Right. Check if it's a P4 without est.
+                # Could be speedstep-ich, or could be p4-clockmod. 
+                MODULE=speedstep-ich;
+                # Disabled for now - the latency tends to be bad
+                # enough to make it fairly pointless.
+                # echo "FREQDRIVER=p4-clockmod" >/etc/default/powernowd
+                # to override this
+#               if [ $LAPTOP = "1" ]; then
+#                   MODULE_FALLBACK=p4-clockmod;
+#               fi
+            else
+        # So it doesn't have Enhanced Speedstep, and it's not a
+        # P4. It could be a Speedstep PIII, or it may be
+        # unsupported. There's no terribly good programmatic way
+        # of telling.
+                case "$MODEL_NAME" in
+                    Intel\(R\)\ Pentium\(R\)\ III\ Mobile\ CPU*)
+                        MODULE=$PIII_MODULE
+                        ;;
+        
+        # JD: says this works with cpufreq_userspace
+
+                    Mobile\ Intel\(R\)\ Pentium\(R\)\ III\ CPU\ -\ M*)
+                        MODULE=$PIII_MODULE
+                        ;;
+        
+        # https://bugzilla.ubuntu.com/show_bug.cgi?id=4262
+        # UNCONFIRMED
+                    Pentium\ III\ \(Coppermine\)*)
+                        MODULE=$PIII_MODULE
+                        ;;
+                esac
+            fi
+            ;;
+        AuthenticAMD*)
+# Hurrah. This is nice and easy.
+            case $CPU_FAMILY in
+                5)
+                    # K6
+                    MODULE=powernow-k6
+                    ;;
+                6)
+                    # K7
+                    MODULE=powernow-k7
+                    ;;
+                15|16|17|18|20|21)
+                    # K8
+                    MODULE=powernow-k8
+                    ;;
+            esac
+            ;;
+        CentaurHauls*)
+        # VIA
+            if [ $CPU_FAMILY = 6 ]; then
+					case $MODEL_ID in
+						10) # VIA C7 VIA Esther
+							# try acpi_cpufreq as
+							# suggested in the kernel
+							# configuration help
+							MODULE=acpi_cpufreq
+						;;
+						*)
+							MODULE=longhaul
+						;;
+					esac
+            fi
+            ;;    
+        GenuineTMx86*)
+        # Transmeta
+            if [ "$(grep longrun $CPUINFO)" ]; then
+                MODULE=longrun
+            fi
+            ;;
+    esac
+}
+
+load_modules() {
+        #build a list of current modules so we don't load a module twice
+        LIST=$(/sbin/lsmod|awk '!/Module/ {print $1}')
+
+        #get list of available modules (governors and helpers)
+        LOC="/lib/modules/$(uname -r)/kernel/drivers/cpufreq"
+        if [ -d $LOC ]; then
+          MODAVAIL=$( ( find $LOC -type f -name "cpufreq_*.o" -printf "basename %f .o\n"; \
+	      find $LOC -type f -name "cpufreq_*.ko" -printf "basename %f .ko\n" ) | /bin/sh)
+        else
+          MODAVAIL=""
+        fi
+
+        #echo "Loading cpufreq modules:"
+        for mod in $MODAVAIL; do
+        #        echo "     $mod"
+                echo $LIST| grep -q -w "$mod" || $MODPROBE $mod >/dev/null || /bin/true
+        done
+
+        #cpufreq is built in on powerpc; just return
+        if [ "$(uname -m)" = "ppc" ]; then
+                return 0
+        fi
+
+        #new style detection system
+        if [ ! "$FREQDRIVER" = "" ]; then 
+		# user overridden value in /etc/default/loadcpufreq
+                $MODPROBE "$FREQDRIVER"
+		MODULE="$FREQDRIVER"
+        else
+	        load_detected_cpufreq_modules
+		if [ ! -z "$MODULE" ] || [ ! -z "$MODULE_FALLBACK" ] ; then
+		    if [ ! -z "$MODULE" ] && $MODPROBE "$MODULE" 2>/dev/null ; then
+			:
+		    elif $MODPROBE "$MODULE_FALLBACK" 2>/dev/null ; then
+			MODULE="$MODULE_FALLBACK"
+		    else
+			unset MODULE
+		    fi
+		fi
+        fi
+}
+
+check_kernel() {
+	CPUFREQ=/sys/devices/system/cpu/cpu0/cpufreq
+
+	if [ -z "$MODULE" ] || ([ -f "$CPUFREQ/scaling_governor" ] && \
+		[ -f "$CPUFREQ/scaling_available_governors" ])
+	then
+		return 0
+	else
+		return 1
+	fi
+}
+
+case "$1" in
+  start)
+       	log_action_begin_msg "Loading cpufreq kernel modules"
+        [ -f /proc/modules ] && load_modules
+	if check_kernel ; then
+	    [ -z "$MODULE" ] && MODULE="none"
+	    log_action_end_msg 0 "$MODULE"
+	else
+	    log_action_end_msg 1
+	fi
+	;;
+  stop)
+	;;
+  restart|force-reload)
+        $0 stop
+	sleep 1
+	$0 start
+	#echo "$NAME."
+	;;
+  *)
+	N=/etc/init.d/$NAME
+	log_success_msg "Usage: $N {start|stop|restart|force-reload}" >&2
+	exit 1
+	;;
+esac
+
+exit 0

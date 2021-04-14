@@ -1,0 +1,10 @@
+/.
+/lib
+/lib/x86_64-linux-gnu
+/lib/x86_64-linux-gnu/liblvm2cmd.so.2.03
+/usr
+/usr/share
+/usr/share/doc
+/usr/share/doc/liblvm2cmd2.03
+/usr/share/doc/liblvm2cmd2.03/copyright
+/usr/share/doc/liblvm2cmd2.03/changelog.Debian.gz

@@ -1,0 +1,11 @@
+#!/bin/sh
+if ! [ -x /snap/bin/lxd ]; then
+    echo "" >&2
+    echo "Command '$0' requires the lxd snap to be installed." >&2
+    echo "Please install it with:" >&2
+    echo "" >&2
+    echo "snap install lxd" >&2
+    echo "" >&2
+    exit 1
+fi
+exec /snap/bin/lxd "$@"

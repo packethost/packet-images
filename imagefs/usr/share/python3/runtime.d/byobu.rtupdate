@@ -1,0 +1,7 @@
+#! /bin/sh
+set -e
+
+if [ "$1" = rtupdate ]; then
+	py3clean -p byobu /usr/lib/byobu
+	py3compile -p byobu  /usr/lib/byobu
+fi

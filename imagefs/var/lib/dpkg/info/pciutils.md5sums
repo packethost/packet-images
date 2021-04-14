@@ -1,0 +1,9 @@
+602ecf5544be4677110ad90a95961d54  usr/bin/lspci
+e7568779b4cf85944c11447a64910848  usr/bin/setpci
+b230caadfb6835e9ea1ca5c794f3dd08  usr/sbin/update-pciids
+45a2191f3e8f378cf978235e823b87d2  usr/share/doc/pciutils/README.gz
+db83d389aed8281e404cb7f8595ff62a  usr/share/doc/pciutils/copyright
+b81b32f63c852d897d097ff7c2f388bd  usr/share/man/man7/pcilib.7.gz
+866762262ffea2087c380c2f62801927  usr/share/man/man8/lspci.8.gz
+0b9af2b197e09a63224c5f0d340b1313  usr/share/man/man8/setpci.8.gz
+6e22c089146e176949ccccc780caf9c4  usr/share/man/man8/update-pciids.8.gz

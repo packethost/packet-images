@@ -1,0 +1,62 @@
+#!/bin/sh
+
+set -e
+
+PREREQ="cryptroot"
+
+prereqs()
+{
+    echo "$PREREQ"
+}
+
+case "$1" in
+    prereqs)
+        prereqs
+        exit 0
+        ;;
+esac
+
+. /usr/share/initramfs-tools/hook-functions
+. /lib/cryptsetup/functions
+
+if [ ! -x "$DESTDIR/lib/cryptsetup/scripts/decrypt_opensc" ] || [ ! -f "$TABFILE" ]; then
+    exit 0
+fi
+
+# Hooks for loading smartcard reading software into the initramfs
+copy_keys() {
+    crypttab_parse_options
+    if [ "${CRYPTTAB_OPTION_keyscript-}" = "/lib/cryptsetup/scripts/decrypt_opensc" ]; then
+        if [ -f "$CRYPTTAB_KEY" ]; then
+            [ -f "$DESTDIR$CRYPTTAB_KEY" ] || copy_file keyfile "$CRYPTTAB_KEY" || RV=$?
+        else
+            cryptsetup_message "ERROR: Target $CRYPTTAB_NAME has a non-existing key file $CRYPTTAB_KEY"
+            RV=1
+        fi
+    fi
+}
+
+RV=0
+crypttab_foreach_entry copy_keys
+
+# Install directories needed by smartcard reading daemon, command, and
+# key-script
+mkdir -p -- "$DESTDIR/etc/opensc" "$DESTDIR/usr/lib/pcsc" "$DESTDIR/var/run" "$DESTDIR/tmp"
+
+# Install pcscd daemon, drivers, conf file
+copy_exec /usr/sbin/pcscd
+LIBC_DIR="$(ldd /usr/sbin/pcscd | sed -nr 's#.* => (/lib.*)/libc\.so\.[0-9.-]+ \(0x[[:xdigit:]]+\)$#\1#p')"
+find -L "$LIBC_DIR" "/usr$LIBC_DIR" -maxdepth 1 \( -name 'libgcc_s.*' -o -name 'libusb-*.so*' -o -name 'libpcsclite.so*' \) -type f | while read so; do
+    copy_exec "$so"
+done
+
+cp -rt "$DESTDIR/usr/lib" /usr/lib/pcsc
+cp -t "$DESTDIR/etc" /etc/reader.conf || true
+cp -t "$DESTDIR/etc" /etc/libccid_Info.plist
+
+# Install opensc commands and conf file
+copy_exec /usr/bin/opensc-tool
+copy_exec /usr/bin/pkcs15-crypt
+cp -t "$DESTDIR/etc/opensc" /etc/opensc/opensc.conf
+
+exit $RV

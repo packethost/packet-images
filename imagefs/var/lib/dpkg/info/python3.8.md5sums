@@ -1,0 +1,14 @@
+e2efb64544570d42ac533d21cbe8603c  usr/bin/pydoc3.8
+74a338fd971a0f13b66c6a28c50cba89  usr/bin/pygettext3.8
+d8fcb5ec6c1f23f566d4c29c5be545bd  usr/share/applications/python3.8.desktop
+b4e742c5b61799ade8cac204bb89914d  usr/share/doc/python3.8/ACKS.gz
+6617e268b525fea674e1a244c4091331  usr/share/doc/python3.8/NEWS.gz
+831bb5f094aa000242bb2236736d5fe5  usr/share/doc/python3.8/README.Debian
+c28b5f712747d51b0953f54f730ff759  usr/share/doc/python3.8/README.rst.gz
+d8c47e21fcd8f5a22f90828d568b0084  usr/share/doc/python3.8/copyright
+28aca52a346704a3f2a533fe6d96dda4  usr/share/lintian/overrides/python3.8
+efa30329ba07737072798729584a83e0  usr/share/man/man1/pdb3.8.1.gz
+2f81b9ee91b430738aa00da00e88a354  usr/share/man/man1/pydoc3.8.1.gz
+90cf8dfcb6b3c2741f64c36c6842a256  usr/share/man/man1/pygettext3.8.1.gz
+9f9c85f23667a9a942aa0de9588e5918  usr/share/man/man1/pysetup3.8.1.gz
+d183cb64badc9865b14c18fb0059b39f  usr/share/pixmaps/python3.8.xpm

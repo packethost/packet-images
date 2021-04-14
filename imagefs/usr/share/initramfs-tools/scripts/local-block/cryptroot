@@ -1,0 +1,24 @@
+#!/bin/sh
+
+PREREQ=""
+
+prereqs()
+{
+	echo $PREREQ
+}
+
+case $1 in
+# get pre-requisites
+prereqs)
+	prereqs
+	exit 0
+	;;
+esac
+
+[ -f /lib/cryptsetup/functions ] || return 0
+. /lib/cryptsetup/functions
+
+if [ -x /scripts/local-top/cryptroot ]; then
+	touch ${CRYPTR_LOCAL_BLOCK}
+	exec /scripts/local-top/cryptroot
+fi

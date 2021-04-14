@@ -1,0 +1,16 @@
+/.
+/usr
+/usr/lib
+/usr/lib/python3
+/usr/lib/python3/dist-packages
+/usr/lib/python3/dist-packages/distro-1.4.0.egg-info
+/usr/lib/python3/dist-packages/distro-1.4.0.egg-info/PKG-INFO
+/usr/lib/python3/dist-packages/distro-1.4.0.egg-info/dependency_links.txt
+/usr/lib/python3/dist-packages/distro-1.4.0.egg-info/entry_points.txt
+/usr/lib/python3/dist-packages/distro-1.4.0.egg-info/top_level.txt
+/usr/lib/python3/dist-packages/distro.py
+/usr/share
+/usr/share/doc
+/usr/share/doc/python3-distro
+/usr/share/doc/python3-distro/changelog.Debian.gz
+/usr/share/doc/python3-distro/copyright

@@ -1,0 +1,14 @@
+/.
+/lib
+/lib/udev
+/lib/udev/rules.d
+/lib/udev/rules.d/60-tpm-udev.rules
+/usr
+/usr/share
+/usr/share/doc
+/usr/share/doc/tpm-udev
+/usr/share/doc/tpm-udev/changelog.gz
+/usr/share/doc/tpm-udev/copyright
+/var
+/var/lib
+/var/lib/tpm

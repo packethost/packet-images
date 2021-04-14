@@ -1,0 +1,10 @@
+72c6fec5202c183eab88e5dcac0e1a38  usr/lib/x86_64-linux-gnu/libtss2-esys.so.0.0.0
+0945a8da63b6374fdaa34a5e6020f92a  usr/lib/x86_64-linux-gnu/libtss2-mu.so.0.0.0
+6018782d08cc7408359c008ba7844a20  usr/lib/x86_64-linux-gnu/libtss2-rc.so.0.0.0
+5708e63ece43dd66674718a519eebbcb  usr/lib/x86_64-linux-gnu/libtss2-sys.so.0.0.0
+e5e47ccd0e8f9026b0e44585f8df64e5  usr/lib/x86_64-linux-gnu/libtss2-tcti-device.so.0.0.0
+0250d1706358159f50fd65ae944c14e2  usr/lib/x86_64-linux-gnu/libtss2-tcti-mssim.so.0.0.0
+671d8d3c8ed86b18e8f71cea5bf1b367  usr/lib/x86_64-linux-gnu/libtss2-tctildr.so.0.0.0
+415a114a7fe4505274c483c5632a7541  usr/share/doc/libtss2-esys0/changelog.Debian.gz
+ed58d4c53b3c3c96d95954bce517362a  usr/share/doc/libtss2-esys0/copyright
+60ce6e3673fa8c9a254c73324aa6635e  usr/share/lintian/overrides/libtss2-esys0

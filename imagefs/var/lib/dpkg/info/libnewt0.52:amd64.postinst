@@ -1,0 +1,23 @@
+#!/bin/sh
+
+set -e
+
+
+
+case "$1" in
+    configure|abort-remove|abort-deconfigure)
+	# Install alternatives
+	# update-alternatives --install /etc/newt/palette newt-palette /etc/newt/palette.original 20
+	update-alternatives --install /etc/newt/palette newt-palette /etc/newt/palette.ubuntu 50
+        update-alternatives --install /etc/newt/palette newt-palette /etc/newt/palette.original 20 
+        ;;
+    abort-upgrade)
+        # Nothing to undo
+        :;
+        ;;
+
+    *)
+        echo "$0: Undocumented call: \"$@\"" >&2
+        exit 1
+        ;;
+esac

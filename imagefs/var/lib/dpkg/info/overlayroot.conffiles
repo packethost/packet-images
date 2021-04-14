@@ -1,0 +1,2 @@
+/etc/overlayroot.conf
+/etc/update-motd.d/97-overlayroot

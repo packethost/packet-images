@@ -1,0 +1,6 @@
+libdevmapper-event-lvm2mirror 2.03 dmeventd (>= 2.03.07)
+libdevmapper-event-lvm2raid 2.03 dmeventd (>= 2.03.07)
+libdevmapper-event-lvm2snapshot 2.03 dmeventd (>= 2.03.07)
+libdevmapper-event-lvm2thin 2.03 dmeventd (>= 2.03.07)
+libdevmapper-event-lvm2vdo 2.03 dmeventd (>= 2.03.07)
+libdevmapper-event-lvm2 2.03 dmeventd (>= 2.03.07)

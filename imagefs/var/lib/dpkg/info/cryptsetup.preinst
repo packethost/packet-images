@@ -1,0 +1,13 @@
+#!/bin/sh
+
+set -e
+
+if [ "$1" = install ] && [ ! -f "/etc/crypttab" ]; then
+	cat <<-EOC >/etc/crypttab
+	# <target name>	<source device>		<key file>	<options>
+	EOC
+fi
+
+
+
+exit 0
