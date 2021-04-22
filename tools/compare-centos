@@ -1,0 +1,70 @@
+#!/bin/bash
+
+# ./script <old image sha>
+
+IMAGEOLD=$1
+TMP=/tmp
+
+dirold=$TMP/compare-old
+dirnew=$TMP/compare-new
+mkdir -p $dirold $dirnew
+
+#echo "Getting old image $IMAGEOLD"
+git -C $dirold init &>/dev/null
+git -C $dirold remote add origin https://github.com/packethost/packet-images.git &>/dev/null
+git -C $dirold fetch origin &>/dev/null
+git -C $dirold checkout "$IMAGEOLD" &>/dev/null
+
+if [ ! -f $dirold/image.tar.gz ]; then
+	echo "WARNING: Image does not exist yet. Maybe this is the first image?" >&2
+	exit 0
+fi
+
+echo "======================================================================"
+echo "Overview:"
+echo "======================================================================"
+echo "Image Size"
+echo "   Current: $(du -sh ./image.tar.gz | awk {'print $1'})"
+echo "   Previous:: $(du -sh $dirold/image.tar.gz | awk {'print $1'})"
+
+mkdir -p $dirold/imagefs $dirnew/imagefs
+tar -zxf $dirold/image.tar.gz -C $dirold/imagefs
+tar -zxf ./image.tar.gz -C $dirnew/imagefs
+chroot $dirold/imagefs /bin/bash -c 'rpm -qa --qf "%{NAME}\n" | sort > /tmp/pkglist.out'
+chroot $dirnew/imagefs /bin/bash -c 'rpm -qa --qf "%{NAME}\n" | sort > /tmp/pkglist.out'
+chroot $dirold/imagefs /bin/bash -c 'rpm -qa | sort > /tmp/pkglist-versions.out'
+chroot $dirnew/imagefs /bin/bash -c 'rpm -qa | sort > /tmp/pkglist-versions.out'
+
+echo "Filesystem Size"
+echo "   Current: $(du -sh $dirnew/imagefs | awk {'print $1'})"
+echo "   Previous: $(du -sh $dirold/imagefs | awk {'print $1'})"
+
+echo "Packages"
+echo "   Current: $(chroot $dirnew/imagefs /bin/bash -c "rpm -qa | wc -l")"
+echo "   Previous: $(chroot $dirold/imagefs /bin/bash -c "rpm -qa | wc -l")"
+
+echo "Kernel(s)"
+#echo -e "   Current: $(grep kernel $dirnew/imagefs/tmp/pkglist-versions.out | grep -v tools | grep -v libs) \n"
+#echo "Previous: $(grep kernel $dirold/imagefs/tmp/pkglist-versions.out | grep -v tools | grep -v libs)"
+KERNELS=$(grep kernel $dirnew/imagefs/tmp/pkglist-versions.out | grep -v tools | grep -v libs)
+echo  "   Current:"
+for kernel in $KERNELS; do
+	echo "      $kernel";
+done
+echo "   Previous:"
+KERNELS=$(grep kernel $dirold/imagefs/tmp/pkglist-versions.out | grep -v tools | grep -v libs)
+for kernel in $KERNELS; do
+        echo "      $kernel";
+done
+
+echo "======================================================================"
+echo "New Packages:"
+echo "======================================================================"
+diff $dirold/imagefs/tmp/pkglist.out $dirnew/imagefs/tmp/pkglist.out | grep ">" | sed 's/> //g'
+
+echo "======================================================================"
+echo "Updated Packages:"
+echo "======================================================================"
+sdiff -s $dirold/imagefs/tmp/pkglist-versions.out $dirnew/imagefs/tmp/pkglist-versions.out | grep -v ">"
+
+rm -rf $dirold $dirnew
