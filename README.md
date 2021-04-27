@@ -7,26 +7,26 @@ This repository contains Dockerfiles that we use as the basis for the OSes that 
 This repository is [Maintained](https://github.com/packethost/standards/blob/master/maintained-statement.md) meaning that this software is supported by Equinix Metal and its community - available to use in production environments.
 
 ### Official Images
-- [CentOS 7] ([branches](https://github.com/packethost/packet-images/branches/all?query=centos7-))
-- [Debian 8] ([branches](https://github.com/packethost/packet-images/branches/all?query=debian8-))
-- [Debian 9] ([branches](https://github.com/packethost/packet-images/branches/all?query=debian9-))
-- [Debian 10] ([branches](https://github.com/packethost/packet-images/branches/all?query=debian10-))
-- [FreeBSD] (not present, [archived branches](https://github.com/packethost/packet-images/branches/all?query=freebsd))
-- [OpenSUSE 42.3] ([branches](https://github.com/packethost/packet-images/branches/all?query=opensuse))
-- [Scientific Linux 6] ([branches](https://github.com/packethost/packet-images/branches/all?query=scientific))
-- [SUSE SLES12 SP3] ([branches](https://github.com/packethost/packet-images/branches/all?query=suse_sles))
-- [Ubuntu 14.04] ([branches](https://github.com/packethost/packet-images/branches/all?query=ubuntu_14_04))
-- [Ubuntu 16.04] ([branches](https://github.com/packethost/packet-images/branches/all?query=ubuntu_16_04))
-- [Ubuntu 18.04] ([branches](https://github.com/packethost/packet-images/branches/all?query=ubuntu_18_04))
-- [Ubuntu 19.04 (deprecated)] ([branches](https://github.com/packethost/packet-images/branches/all?query=ubuntu_19_04))
+- CentOS 7 ([branches](https://github.com/packethost/packet-images/branches/all?query=centos7-))
+- Debian 8 ([branches](https://github.com/packethost/packet-images/branches/all?query=debian8-))
+- Debian 9 ([branches](https://github.com/packethost/packet-images/branches/all?query=debian9-))
+- Debian 10 ([branches](https://github.com/packethost/packet-images/branches/all?query=debian10-))
+- FreeBSD (not present, [archived branches](https://github.com/packethost/packet-images/branches/all?query=freebsd))
+- OpenSUSE 42.3 ([branches](https://github.com/packethost/packet-images/branches/all?query=opensuse))
+- Scientific Linux 6 ([branches](https://github.com/packethost/packet-images/branches/all?query=scientific))
+- SUSE SLES12 SP3 ([branches](https://github.com/packethost/packet-images/branches/all?query=suse_sles))
+- Ubuntu 14.04 ([branches](https://github.com/packethost/packet-images/branches/all?query=ubuntu_14_04))
+- Ubuntu 16.04 ([branches](https://github.com/packethost/packet-images/branches/all?query=ubuntu_16_04))
+- Ubuntu 18.04 ([branches](https://github.com/packethost/packet-images/branches/all?query=ubuntu_18_04))
+- Ubuntu 19.04 (deprecated)] ([branches](https://github.com/packethost/packet-images/branches/all?query=ubuntu_19_04))
 - Virtuozzo (not present)
 - VMWare (not present)
 - Windows (not present, [archived branches](https://github.com/packethost/packet-images/branches/all?query=windows))
 
 ### Semi Official Images
-- RancherOS - maintained by [Rancher](https://github.com/rancher)
-- Container Linux - maintained by [CoreOS](https://github.com/coreos)
 - NixOS - maintained by [@grahamc](https://github.com/grahamc) [NixOS](https://github.com/grahamc/packet-provision-nixos-ipxe)
+- RancherOS - maintained by [Rancher](https://github.com/rancher) (deprecated)
+- Container Linux - maintained by [CoreOS](https://github.com/coreos) (deprecated)
 
 
 Within this repo you will find a collection of tools, examples and docs for building OS images to be used on Equinix Metal baremetal servers.
