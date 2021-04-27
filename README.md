@@ -4,24 +4,24 @@
 
 This repository contains Dockerfiles that we use as the basis for the OSes that we provision. The Dockerfiles contained here are the source for the official Equinix Metal managed images, other semi-official images are managed by the community.
 
-This repository is [Maintained](https://github.com/packethost/standards/blob/master/maintained-statement.md) meaning that this software is supported by Packet and its community - available to use in production environments.
+This repository is [Maintained](https://github.com/packethost/standards/blob/master/maintained-statement.md) meaning that this software is supported by Equinix Metal and its community - available to use in production environments.
 
 ### Official Images
-- CentOS 7
-- Debian 8
-- Debian 9
-- Debian 10
-- FreeBSD (not present)
-- OpenSUSE 42.3
-- Scientific Linux 6
-- SUSE SLES12 SP3
-- Ubuntu 14.04
-- Ubuntu 16.04
-- Ubuntu 18.04
-- Ubuntu 19.04 (deprecated)
+- [CentOS 7] ([branches](https://github.com/packethost/packet-images/branches/all?query=centos7-))
+- [Debian 8] ([branches](https://github.com/packethost/packet-images/branches/all?query=debian8-))
+- [Debian 9] ([branches](https://github.com/packethost/packet-images/branches/all?query=debian9-))
+- [Debian 10] ([branches](https://github.com/packethost/packet-images/branches/all?query=debian10-))
+- [FreeBSD] (not present, [archived branches](https://github.com/packethost/packet-images/branches/all?query=freebsd))
+- [OpenSUSE 42.3] ([branches](https://github.com/packethost/packet-images/branches/all?query=opensuse))
+- [Scientific Linux 6] ([branches](https://github.com/packethost/packet-images/branches/all?query=scientific))
+- [SUSE SLES12 SP3] ([branches](https://github.com/packethost/packet-images/branches/all?query=suse_sles))
+- [Ubuntu 14.04] ([branches](https://github.com/packethost/packet-images/branches/all?query=ubuntu_14_04))
+- [Ubuntu 16.04] ([branches](https://github.com/packethost/packet-images/branches/all?query=ubuntu_16_04))
+- [Ubuntu 18.04] ([branches](https://github.com/packethost/packet-images/branches/all?query=ubuntu_18_04))
+- [Ubuntu 19.04 (deprecated)] ([branches](https://github.com/packethost/packet-images/branches/all?query=ubuntu_19_04))
 - Virtuozzo (not present)
 - VMWare (not present)
-- Windows (not present)
+- Windows (not present, [archived branches](https://github.com/packethost/packet-images/branches/all?query=windows))
 
 ### Semi Official Images
 - RancherOS - maintained by [Rancher](https://github.com/rancher)
@@ -38,7 +38,7 @@ TLDR:  Build docker image, save docker image to archive and convert the archive 
 image. The image can be used on a baremetal physical server with or without docker.
 
 ### Overview
-Branch layout consists of a primacy "base" branch for each supported operating system distro. See centos\_7-base, ubuntu\_17\_10-base, etc. The base branch contains a Dockerfile (per supported architecture) with a sufficient level of customization (stage 1) to produce a standardized operating system experience across Equinix Metal's hardware offering. If any hardware specific changes are to be included in a particular image, a separate branch is created for the hardware type / plan the image is customized. Any such hardware specific image is formed by using the base image as the template. For example, if we want to create a new image for ubuntu_17_10-supermachine1, the Dockerfile for this branch will use "FROM ubuntu_17_10-base" as to complete a multi-stage (stage 2) build based off the official Equinix Metal base image.
+Branch layout consists of a primary "base" branch for each supported operating system distro. See [centos\_7-base](https://github.com/packethost/packet-images/blob/centos_7-base/x86_64/Dockerfile), [ubuntu\_17\_10-base](https://github.com/packethost/packet-images/blob/ubuntu_17_10-base/x86_64/Dockerfile), etc. The base branch contains a Dockerfile (per supported architecture) with a sufficient level of customization (stage 1) to produce a standardized operating system experience across Equinix Metal's hardware offering. If any hardware specific changes are to be included in a particular image, a separate branch is created for the hardware type / plan the image is customized. Any such hardware specific image is formed by using the base image as the template. For example, if we want to create a new image for ubuntu_17_10-supermachine1, the Dockerfile for this branch will use "FROM ubuntu_17_10-base" as to complete a multi-stage (stage 2) build based off the official Equinix Metal base image.
 
 ### Dependencies
 There is only a small list of deps required to run image builds, but we recommend a dedicated
@@ -149,6 +149,6 @@ Archiving the kernel:
     -rw-r--r-- 1 root root   4036476 May 15 22:24 kernel.tar.gz
     -rw-r--r-- 1 root root  50173835 May 15 22:24 modules.tar.gz
 
-### Deploying your custom image on Packet
+### Deploying your custom image on Equinix Metal
 You have a working image built, so now what?
-Run it using our custom_image feature, or use it via iPXE/Custom OS.
+Run it using our [custom_image feature](https://metal.equinix.com/developers/docs/operating-systems/custom-images/#deploying-a-custom-image), or use it via [iPXE/Custom OS](https://metal.equinix.com/developers/docs/operating-systems/custom-ipxe/).
